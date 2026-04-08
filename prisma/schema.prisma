@@ -1,0 +1,1700 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum VisibilityStatus {
+  PRIVATE @map("private")
+  REVIEW  @map("review")
+  PUBLIC  @map("public")
+}
+
+enum RecordType {
+  HISTORICAL   @map("historical")
+  ORAL_HISTORY @map("oral_history")
+  INFERRED     @map("inferred")
+  FICTIONAL    @map("fictional")
+  HYBRID       @map("hybrid")
+}
+
+enum SourceType {
+  PDF   @map("pdf")
+  DOCX  @map("doc")
+  NOTE  @map("note")
+  IMAGE @map("image")
+  AUDIO @map("audio")
+  VIDEO @map("video")
+  WEB   @map("web")
+  OTHER @map("source_other")
+}
+
+enum PlaceType {
+  TOWN     @map("town")
+  LAKE     @map("lake")
+  CHURCH   @map("church")
+  REGION   @map("region")
+  CEMETERY @map("cemetery")
+  HOME     @map("home")
+  FIELD    @map("field")
+  RIVER    @map("river")
+  OTHER    @map("place_other")
+}
+
+enum EventType {
+  BIRTH     @map("birth")
+  DEATH     @map("death")
+  MARRIAGE  @map("marriage")
+  MIGRATION @map("migration")
+  LAND      @map("land")
+  CHURCH    @map("church_event")
+  WAR       @map("war")
+  FAMILY    @map("family")
+  POLITICAL @map("political")
+  CULTURAL  @map("cultural")
+  OTHER     @map("event_other")
+}
+
+enum SymbolCategory {
+  ELEMENTAL @map("element")
+  CULINARY  @map("food")
+  LANDSCAPE @map("plant")
+  RELIGIOUS @map("religious")
+  FAMILY    @map("family_sym")
+  RITUAL    @map("ritual")
+  OTHER     @map("symbol_other")
+}
+
+enum WritingMode {
+  STRUCTURED
+  NARRATIVE
+  HYBRID
+}
+
+/// Story-system personality law (default; author may override in CharacterProfile fields).
+enum EnneagramType {
+  ONE
+  TWO
+  THREE
+  FOUR
+  FIVE
+  SIX
+  SEVEN
+  EIGHT
+  NINE
+}
+
+enum FragmentType {
+  CREATIVE_FRAGMENT
+  SCENE_SEED
+  CHAPTER_SEED
+  MEMORY
+  EMOTIONAL_BEAT
+  CHARACTER_INSIGHT
+  SYMBOLIC_NOTE
+  MOTIF_RULE
+  STRUCTURAL_OUTLINE
+  HISTORICAL_ANCHOR
+  ORAL_HISTORY
+  RESEARCH_NOTE
+  NARRATOR_VOICE
+  CONTINUITY_CONSTRAINT
+  QUESTION_SEED
+  THEME_STATEMENT
+  IMAGE_OR_SENSORY
+  DIALOGUE_SNIPPET
+  OTHER
+}
+
+model Source {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  visibility       VisibilityStatus
+  recordType       RecordType
+  title            String
+  sourceType       SourceType       @map("type")
+  filePath         String?
+  summary          String?
+  originalFilename String?
+  notes            String?
+  sourceDate       String?
+  sourceYear       Int?
+  authorOrOrigin   String?
+  archiveStatus    String?
+  ingestionReady   Boolean          @default(false)
+
+  ingestionStatus    String?
+  lastIngestionRunId String? @unique
+  processingNotes    String?
+  extractedSummary   String?
+  reviewedSummary    String?
+
+  claims        Claim[]
+  persons       Person[]
+  places        Place[]
+  events        Event[]
+  chapters      Chapter[]
+  scenes        Scene[]
+  openQuestions OpenQuestion[]
+
+  sourceText        SourceText?
+  ingestionRuns     IngestionRun[]     @relation("SourceIngestionRuns")
+  lastIngestionRun  IngestionRun?      @relation("SourceLastIngestionRun", fields: [lastIngestionRunId], references: [id], onDelete: SetNull)
+  extractionPackets ExtractionPacket[]
+  extractionResults ExtractionResult[]
+  extractedEntities ExtractedEntity[]
+  sourceChunks      SourceChunk[]
+  fragments         Fragment[]
+  brainMemos        BrainMemo[]
+
+  narrativeRules      NarrativeRule[]
+  narrativeThemes     Theme[]
+  motifs              Motif[]
+  literaryDevices     LiteraryDevice[]
+  narrativePatterns   NarrativePattern[]
+  narrativeDnaSymbols Symbol[]
+
+  @@index([visibility])
+  @@index([recordType])
+  @@index([sourceType])
+  @@index([ingestionStatus])
+  @@index([archiveStatus])
+}
+
+model SourceChunk {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sourceId String
+  source   Source @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+
+  sourceTextId String?
+  sourceText   SourceText? @relation(fields: [sourceTextId], references: [id], onDelete: SetNull)
+
+  chunkIndex     Int
+  startOffset    Int?
+  endOffset      Int?
+  charCount      Int?
+  tokenEstimate  Int?
+  headingHint    String?
+  chunkLabel     String?
+  rawText        String? @db.Text
+  normalizedText String? @db.Text
+  textStatus     String?
+  notes          String?
+
+  chunkExtractionRuns ChunkExtractionRun[]
+  fragments           Fragment[]
+
+  @@index([sourceId])
+  @@index([chunkIndex])
+}
+
+model SourceText {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sourceId       String  @unique
+  source         Source  @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+  rawText        String? @db.Text
+  normalizedText String? @db.Text
+  textStatus     String?
+  textNotes      String?
+
+  sourceChunks SourceChunk[]
+  fragments      Fragment[]
+}
+
+model Fragment {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title            String?
+  fragmentType     FragmentType
+  /// When set, treated as the primary narrative identity; otherwise `fragmentType` is primary.
+  primaryFragmentType FragmentType?
+  /// Additional FragmentType values (JSON array of enum strings).
+  secondaryFragmentTypes Json?
+  surfaceMeaning         String? @db.Text
+  hiddenMeaning          String? @db.Text
+  symbolicUse            String? @db.Text
+  emotionalUse           String? @db.Text
+  narrativeUse           String? @db.Text
+  /// Cached deterministic or AI-enhanced interpretation summary (author remains source of truth on raw fields).
+  generatedInterpretationSummary String? @db.Text
+  decompositionPressure  String?
+  sceneReadinessScore    Int?
+  clusterHint            String?
+
+  visibility       VisibilityStatus @default(PRIVATE)
+  recordType       RecordType?
+  sourceId         String?
+  source           Source?          @relation(fields: [sourceId], references: [id], onDelete: SetNull)
+  sourceChunkId    String?
+  sourceChunk      SourceChunk?     @relation(fields: [sourceChunkId], references: [id], onDelete: SetNull)
+  sourceTextId     String?
+  sourceText       SourceText?      @relation(fields: [sourceTextId], references: [id], onDelete: SetNull)
+  parentFragmentId String?
+  parentFragment   Fragment?        @relation("FragmentTree", fields: [parentFragmentId], references: [id], onDelete: SetNull)
+  childFragments   Fragment[]       @relation("FragmentTree")
+
+  text                 String  @db.Text
+  excerpt              String? @db.Text
+  summary              String?
+  emotionalTone        String?
+  narrativeFunction    String?
+  timeHint             String?
+  confidence           Int?
+  ambiguityLevel       Int?
+  placementStatus      String?
+  reviewStatus         String?
+  notes                String?
+  decompositionVersion String?
+  aiGenerated          Boolean @default(false)
+  generatedByRunId     String?
+  sourceTraceNote      String?
+
+  placementCandidates FragmentPlacementCandidate[]
+  links               FragmentLink[]
+  insights            FragmentInsight[]
+  brainMemos          BrainMemo[]
+  characterMemories   CharacterMemory[]
+  clusterLinks        FragmentClusterLink[]
+
+  @@index([fragmentType])
+  @@index([sourceId])
+  @@index([placementStatus])
+  @@index([reviewStatus])
+  @@index([parentFragmentId])
+  @@index([decompositionPressure])
+}
+
+/// Narrative constellation of related fragments (theme, symbol, emotional arc, etc.).
+model FragmentCluster {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title             String
+  clusterType       String
+  summary           String?
+  emotionalTone     String?
+  dominantFunction  String?
+  confidence        Int?
+  notes             String?
+  /// Cached synthesis (template or AI); author `summary` remains primary record field.
+  generatedClusterSynthesis String? @db.Text
+
+  chapterId   String?
+  chapter     Chapter?   @relation(fields: [chapterId], references: [id], onDelete: SetNull)
+  sceneId     String?
+  scene       Scene?     @relation(fields: [sceneId], references: [id], onDelete: SetNull)
+  metaSceneId String?
+  metaScene   MetaScene? @relation(fields: [metaSceneId], references: [id], onDelete: SetNull)
+  personId    String?
+  person      Person?    @relation(fields: [personId], references: [id], onDelete: SetNull)
+  placeId     String?
+  place       Place?     @relation(fields: [placeId], references: [id], onDelete: SetNull)
+  symbolId    String?
+  symbol      Symbol?    @relation(fields: [symbolId], references: [id], onDelete: SetNull)
+
+  fragmentLinks FragmentClusterLink[]
+
+  @@index([clusterType])
+  @@index([chapterId])
+  @@index([sceneId])
+  @@index([metaSceneId])
+  @@index([personId])
+  @@index([placeId])
+  @@index([symbolId])
+}
+
+model FragmentClusterLink {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  fragmentId String
+  fragment   Fragment @relation(fields: [fragmentId], references: [id], onDelete: Cascade)
+  clusterId  String
+  cluster    FragmentCluster @relation(fields: [clusterId], references: [id], onDelete: Cascade)
+
+  role  String?
+  notes String?
+
+  @@index([fragmentId])
+  @@index([clusterId])
+}
+
+/// Reviewable scene-building suggestions from the intelligence engine.
+model SceneConstructionSuggestion {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  metaSceneId String?
+  metaScene   MetaScene? @relation(fields: [metaSceneId], references: [id], onDelete: SetNull)
+  sceneId     String?
+  scene       Scene?     @relation(fields: [sceneId], references: [id], onDelete: SetNull)
+
+  title            String
+  suggestionType   String
+  summary          String  @db.Text
+  confidence       Int?
+  status           String
+  supportingFragmentIds Json?
+  notes            String?
+
+  @@index([metaSceneId])
+  @@index([sceneId])
+  @@index([status])
+  @@index([suggestionType])
+}
+
+model FragmentPlacementCandidate {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  fragmentId   String
+  fragment     Fragment @relation(fields: [fragmentId], references: [id], onDelete: Cascade)
+  targetType   String
+  targetId     String?
+  targetLabel  String?
+  confidence   Int?
+  rationale    String?
+  status       String
+  notes        String?
+
+  @@index([fragmentId])
+  @@index([targetType])
+  @@index([status])
+}
+
+model FragmentLink {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  fragmentId String
+  fragment   Fragment @relation(fields: [fragmentId], references: [id], onDelete: Cascade)
+  linkedType String
+  linkedId   String
+  linkRole   String?
+  notes      String?
+
+  @@index([fragmentId])
+  @@index([linkedType])
+}
+
+model FragmentInsight {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  fragmentId  String
+  fragment    Fragment @relation(fields: [fragmentId], references: [id], onDelete: Cascade)
+  insightType String
+  content     String   @db.Text
+  confidence  Int?
+  notes       String?
+
+  @@index([fragmentId])
+  @@index([insightType])
+}
+
+model BrainMemo {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title    String
+  content  String @db.Text
+  memoType String
+
+  linkedSourceId   String?
+  linkedSource     Source?   @relation(fields: [linkedSourceId], references: [id], onDelete: SetNull)
+  linkedFragmentId String?
+  linkedFragment   Fragment? @relation(fields: [linkedFragmentId], references: [id], onDelete: SetNull)
+  linkedChapterId  String?
+  linkedChapter    Chapter?  @relation(fields: [linkedChapterId], references: [id], onDelete: SetNull)
+  linkedSceneId    String?
+  linkedScene      Scene?    @relation(fields: [linkedSceneId], references: [id], onDelete: SetNull)
+
+  @@index([memoType])
+  @@index([linkedSourceId])
+  @@index([linkedFragmentId])
+}
+
+model IngestionRun {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sourceId String
+  source   Source @relation("SourceIngestionRuns", fields: [sourceId], references: [id], onDelete: Cascade)
+
+  status        String
+  modelName     String?
+  promptVersion String?
+  runType       String?
+  rawTextLength Int?
+  tokenEstimate Int?
+  notes         String?
+  errorMessage  String?
+  extractedAt   DateTime?
+  reviewedAt    DateTime?
+
+  chunkingMode         String?
+  chunkCount           Int?
+  aggregatedFromChunks Boolean @default(false)
+  aggregationNotes     String?
+
+  lastRunForSource Source? @relation("SourceLastIngestionRun")
+
+  extractionPacket    ExtractionPacket?
+  extractionResult    ExtractionResult?
+  extractedEntities   ExtractedEntity[]
+  chunkExtractionRuns ChunkExtractionRun[]
+
+  @@index([sourceId])
+  @@index([status])
+}
+
+model ChunkExtractionRun {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sourceChunkId String
+  sourceChunk   SourceChunk @relation(fields: [sourceChunkId], references: [id], onDelete: Cascade)
+
+  ingestionRunId String
+  ingestionRun   IngestionRun @relation(fields: [ingestionRunId], references: [id], onDelete: Cascade)
+
+  status          String
+  modelName       String?
+  promptVersion   String?
+  rawTextLength   Int?
+  tokenEstimate   Int?
+  notes           String?
+  errorMessage    String?
+  extractedAt     DateTime?
+  chunkResultJson Json?
+  rawModelOutput  Json?
+
+  @@index([sourceChunkId])
+  @@index([ingestionRunId])
+  @@index([status])
+}
+
+model ExtractionPacket {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ingestionRunId String       @unique
+  ingestionRun   IngestionRun @relation(fields: [ingestionRunId], references: [id], onDelete: Cascade)
+
+  sourceId String
+  source   Source @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+
+  sourceTitle         String
+  sourceType          SourceType?
+  recordType          RecordType?
+  visibility          VisibilityStatus?
+  sourceSummary       String?
+  sourceNotes         String?
+  sourceDate          String?
+  sourceYear          Int?
+  authorOrOrigin      String?
+  rawText             String            @db.Text
+  normalizedText      String?           @db.Text
+  instructionsVersion String?
+  packetJson          Json?
+  readyForAI          Boolean           @default(false)
+
+  @@index([sourceId])
+}
+
+model ExtractionResult {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ingestionRunId String       @unique
+  ingestionRun   IngestionRun @relation(fields: [ingestionRunId], references: [id], onDelete: Cascade)
+
+  sourceId String
+  source   Source @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+
+  status          String
+  summaryDraft    String?
+  peopleDraft     Json?
+  placesDraft     Json?
+  eventsDraft     Json?
+  symbolsDraft    Json?
+  claimsDraft     Json?
+  chaptersDraft   Json?
+  scenesDraft     Json?
+  questionsDraft  Json?
+  continuityDraft Json?
+  resultJson      Json?
+  reviewerNotes   String?
+  /**
+   * Parsed model payload (or wrapper) for debugging normalization issues.
+   */
+  rawModelOutput  Json?
+
+  @@index([sourceId])
+  @@index([status])
+}
+
+model ExtractedEntity {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ingestionRunId String
+  ingestionRun   IngestionRun @relation(fields: [ingestionRunId], references: [id], onDelete: Cascade)
+
+  sourceId String
+  source   Source @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+
+  entityType        String
+  proposedName      String?
+  proposedTitle     String?
+  proposedData      Json?
+  confidence        Int?
+  reviewStatus      String
+  /**
+   * Legacy link fields used by existing UI/actions.
+   * Kept for backward compatibility; newer linking uses canonicalRecord* below.
+   */
+  matchedRecordId   String?
+  matchedRecordType String?
+  reviewerNotes     String?
+
+  /**
+   * Phase 5A merge/link tracking. These fields record exactly what happened
+   * to each extracted row during human review.
+   */
+  matchMethod         String? // manual_exact, manual_selected, heuristic_name, heuristic_title, promoted_new
+  mergeDecision       String? // none, linked_only, merged_into_existing, promoted_new, rejected
+  mergeSnapshot       Json? // what fields were merged / chosen
+  reviewedByNote      String?
+  canonicalRecordId   String?
+  canonicalRecordType String?
+
+  links EntityLink[]
+
+  @@index([sourceId])
+  @@index([ingestionRunId])
+  @@index([entityType])
+  @@index([reviewStatus])
+  @@index([canonicalRecordType, canonicalRecordId])
+  @@index([mergeDecision])
+}
+
+model EntityLink {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  extractedEntityId String
+  extractedEntity   ExtractedEntity @relation(fields: [extractedEntityId], references: [id], onDelete: Cascade)
+
+  canonicalEntityType String
+  canonicalEntityId   String
+  linkType            String // matched, linked_only, merged_into, promoted_new
+  confidence          Int?
+  notes               String?
+
+  @@index([extractedEntityId])
+  @@index([canonicalEntityType, canonicalEntityId])
+  @@index([linkType])
+}
+
+model Alias {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  label      String
+  aliasType  String? // alternate_name, spelling_variant, nickname, title_variant
+  entityType String // person, place, event, symbol, chapter
+  entityId   String
+  notes      String?
+
+  @@index([entityType, entityId])
+  @@index([label])
+}
+
+model Claim {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  visibility   VisibilityStatus
+  recordType   RecordType
+  description  String
+  confidence   Int              @default(3)
+  quoteExcerpt String?
+  notes        String?
+  needsReview  Boolean          @default(true)
+
+  sourceId String
+  source   Source @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+
+  @@index([sourceId])
+  @@index([needsReview])
+  @@index([confidence])
+}
+
+model Person {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  visibility      VisibilityStatus
+  recordType      RecordType
+  name            String
+  description     String?
+  enneagram       Int?
+  birthYear       Int?
+  deathYear       Int?
+  sourceTraceNote String?
+
+  places          Place[]
+  events          Event[]
+  chapters        Chapter[]
+  scenes          Scene[]
+  sources         Source[]
+  openQuestions   OpenQuestion[]
+  continuityNotes ContinuityNote[]
+
+  characterProfile  CharacterProfile?
+  characterMemories CharacterMemory[]
+  characterStates   CharacterState[]
+  metaScenesAsPov   MetaScene[]
+  fragmentClusters    FragmentCluster[]
+  relationshipsAsA   CharacterRelationship[] @relation("CharacterRelationshipPersonA")
+  relationshipsAsB   CharacterRelationship[] @relation("CharacterRelationshipPersonB")
+  voicePasses        VoicePass[]
+  characterVoiceAssets CharacterVoiceAsset[]
+}
+
+model Place {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  visibility      VisibilityStatus
+  recordType      RecordType
+  name            String
+  description     String?
+  placeType       PlaceType        @map("type")
+  latitude        Float?
+  longitude       Float?
+  sourceTraceNote String?
+
+  /// Sacred-place / emotional return phrase for readers (optional author line).
+  publicReturnPhrase String?
+
+  persons       Person[]
+  chapters      Chapter[]
+  events        Event[]
+  scenes        Scene[]
+  sources       Source[]
+  openQuestions OpenQuestion[]
+
+  settingProfile SettingProfile?
+  settingStates  SettingState[]
+  metaScenes     MetaScene[]
+  fragmentClusters FragmentCluster[]
+
+  @@index([visibility])
+  @@index([placeType])
+}
+
+/// First-class narrative voice behavior (scope = narrator, character, scene mode, etc.).
+model NarrativeVoiceProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name      String
+  scopeType String // narrator, character, scene_mode, lineage, place, custom
+  scopeId   String? // personId, metaSceneId, etc.
+
+  voiceLabel        String?
+  sentenceRhythm    String?
+  dictionStyle      String?
+  emotionalRegister String?
+  metaphorDensity   String?
+  sensoryBias       String?
+  interiorityStyle  String?
+  silenceStyle      String?
+  memoryStyle       String?
+  spiritualRegister String?
+  notes             String?
+  isDefault         Boolean @default(false)
+
+  voicePasses VoicePass[]
+
+  @@index([scopeType])
+  @@index([scopeId])
+}
+
+/// Alternate consciousness / voice renders and audio-ready text (reviewable).
+model VoicePass {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  metaSceneId String?
+  metaScene   MetaScene? @relation(fields: [metaSceneId], references: [id], onDelete: Cascade)
+
+  personId String?
+  person   Person? @relation(fields: [personId], references: [id], onDelete: SetNull)
+
+  narrativePassId String?
+  narrativePass   MetaSceneNarrativePass? @relation(fields: [narrativePassId], references: [id], onDelete: SetNull)
+
+  voiceProfileId String?
+  voiceProfile   NarrativeVoiceProfile? @relation(fields: [voiceProfileId], references: [id], onDelete: SetNull)
+
+  passType String // pov_render, character_voice, narrator_voice, alternate_perspective, emotional_gravity, audio_script
+  content  String  @db.Text
+  summary  String?
+  status   String // generated, accepted, revised, rejected, archived
+  confidence Int?
+  notes    String?
+
+  @@index([metaSceneId])
+  @@index([personId])
+  @@index([narrativePassId])
+  @@index([voiceProfileId])
+  @@index([passType])
+  @@index([status])
+}
+
+/// Durable character audio layer (samples, monologues, narration teasers).
+model CharacterVoiceAsset {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  assetType String // sample, monologue, narration, teaser
+  title     String
+  audioUrl  String?
+  transcript String? @db.Text
+  status    String // draft, ready, published
+  notes     String?
+
+  @@index([personId])
+  @@index([assetType])
+  @@index([status])
+}
+
+/// Scene-scoped audio (narration, mixes, immersive excerpts).
+model SceneAudioAsset {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sceneId String?
+  scene   Scene? @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+
+  metaSceneId String?
+  metaScene   MetaScene? @relation(fields: [metaSceneId], references: [id], onDelete: Cascade)
+
+  assetType String // narration, ambient_mix, immersive_mix, excerpt
+  title     String
+  audioUrl  String?
+  transcript String? @db.Text
+  durationSeconds Int?
+  status    String
+  notes     String?
+
+  audioSyncSegments AudioSyncSegment[]
+
+  @@index([sceneId])
+  @@index([metaSceneId])
+  @@index([assetType])
+  @@index([status])
+}
+
+/// Prose-level cinematic outputs (multiple passes; author-reviewed; optional public publish).
+model CinematicNarrativePass {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  metaSceneId String?
+  metaScene   MetaScene? @relation(fields: [metaSceneId], references: [id], onDelete: Cascade)
+
+  sceneId String?
+  scene   Scene? @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+
+  /// Optional loose link to MetaSceneNarrativePass.id or VoicePass.id (polymorphic; not enforced FK).
+  sourcePassId String?
+
+  passType      String
+  styleMode     String?
+  content       String  @db.Text
+  summary       String?
+  sequenceOrder Int?
+  status        String
+  confidence    Int?
+  notes         String?
+
+  audioSyncSegments AudioSyncSegment[]
+
+  @@index([metaSceneId])
+  @@index([sceneId])
+  @@index([passType])
+  @@index([status])
+}
+
+/// Literary–cinematic beat row for inspection / tuning (optional persistence).
+model SceneBeat {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  metaSceneId String
+  metaScene   MetaScene @relation(fields: [metaSceneId], references: [id], onDelete: Cascade)
+
+  beatType         String
+  orderIndex       Int
+  summary          String  @db.Text
+  emotionalCharge  String?
+  symbolicCharge   String?
+  pacingHint       String?
+  notes            String?
+
+  @@index([metaSceneId])
+  @@index([beatType])
+  @@index([orderIndex])
+}
+
+/// Segment-level audio ↔ text sync (not word-level).
+model AudioSyncSegment {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sceneAudioAssetId String?
+  sceneAudioAsset   SceneAudioAsset? @relation(fields: [sceneAudioAssetId], references: [id], onDelete: Cascade)
+
+  cinematicNarrativePassId String?
+  cinematicNarrativePass   CinematicNarrativePass? @relation(fields: [cinematicNarrativePassId], references: [id], onDelete: SetNull)
+
+  segmentOrder Int
+  startTimeMs  Int?
+  endTimeMs    Int?
+  textExcerpt  String? @db.Text
+  cueType      String?
+  notes        String?
+
+  @@index([sceneAudioAssetId])
+  @@index([cinematicNarrativePassId])
+  @@index([segmentOrder])
+}
+
+/// Psychographic / narrative mind model for a Person (1:1).
+model CharacterProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String @unique
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  worldview          String?
+  coreBeliefs        String?
+  fears              String?
+  desires            String?
+  internalConflicts  String?
+  socialPosition     String?
+  educationLevel     String?
+  religiousContext   String?
+  emotionalBaseline  String?
+  behavioralPatterns String?
+  speechPatterns     String?
+  memoryBias         String?
+  sensoryBias        String?
+  moralFramework     String?
+  contradictions     String?
+  notes              String?
+
+  enneagramType          EnneagramType?
+  enneagramWing          String?
+  enneagramConfidence    Int?
+  enneagramSource        String?
+  stressPattern          String?
+  growthPattern          String?
+  defensiveStyle         String?
+  coreLonging            String?
+  coreFear               String?
+  attentionBias          String?
+  relationalStyle        String?
+  conflictStyle          String?
+  attachmentPattern      String?
+  shameTrigger           String?
+  angerPattern           String?
+  griefPattern           String?
+  controlPattern         String?
+  notesOnTypeUse         String?
+}
+
+/// Internal memory entries for a character; may optionally tie to a source Fragment.
+model CharacterMemory {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  fragmentId String?
+  fragment   Fragment? @relation(fields: [fragmentId], references: [id], onDelete: SetNull)
+
+  description     String  @db.Text
+  emotionalWeight Int?
+  timePeriod      String?
+  reliability     String? // factual, inferred, emotional, uncertain
+  notes           String?
+
+  @@index([personId])
+  @@index([fragmentId])
+}
+
+/// Interpretive relationship row between two people (symmetric IDs; canonical order enforced in app).
+model CharacterRelationship {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personAId String
+  personA   Person @relation("CharacterRelationshipPersonA", fields: [personAId], references: [id], onDelete: Cascade)
+  personBId String
+  personB   Person @relation("CharacterRelationshipPersonB", fields: [personBId], references: [id], onDelete: Cascade)
+
+  relationshipType       String
+  relationshipSummary    String? @db.Text
+  emotionalPattern       String? @db.Text
+  conflictPattern          String? @db.Text
+  attachmentPattern      String? @db.Text
+  powerDynamic           String? @db.Text
+  enneagramDynamic       String? @db.Text
+  confidence             Int?
+  notes                  String? @db.Text
+  /// Cached rich dyad synthesis (does not replace authored relationship fields).
+  generatedDynamicSummary String? @db.Text
+
+  @@unique([personAId, personBId])
+  @@index([personAId])
+  @@index([personBId])
+}
+
+/// Scene-scoped character state (optional Scene link).
+model CharacterState {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  sceneId String?
+  scene   Scene? @relation(fields: [sceneId], references: [id], onDelete: SetNull)
+
+  emotionalState   String?
+  motivation       String?
+  fearState        String?
+  knowledgeState   String?
+  physicalState    String?
+  socialConstraint String?
+  notes            String?
+
+  @@index([personId])
+  @@index([sceneId])
+}
+
+/// Rich environment model for a Place (1:1).
+model SettingProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  placeId String @unique
+  place   Place @relation(fields: [placeId], references: [id], onDelete: Cascade)
+
+  physicalDescription String? @db.Text
+  environmentType     String?
+  climateDescription  String?
+  typicalWeather      String?
+  sounds              String?
+  smells              String?
+  textures            String?
+  lightingConditions  String?
+  dominantActivities  String?
+  socialRules         String?
+  classDynamics       String?
+  racialDynamics      String?
+  religiousPresence   String?
+  economicContext     String?
+  materialsPresent    String?
+  notes               String?
+}
+
+/// Time- or season-specific setting conditions.
+model SettingState {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  placeId String
+  place   Place @relation(fields: [placeId], references: [id], onDelete: Cascade)
+
+  timePeriod        String?
+  season            String?
+  weather           String?
+  populationType    String?
+  activityLevel     String?
+  notableConditions String?
+  notes             String?
+
+  @@index([placeId])
+}
+
+/// Meta-layer scene: world state, constraints, POV — optionally linked to a draft Scene.
+model MetaScene {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sceneId String?
+  scene   Scene? @relation(fields: [sceneId], references: [id], onDelete: SetNull)
+
+  title String
+
+  timePeriod   String?
+  dateEstimate String?
+
+  placeId String
+  place   Place @relation(fields: [placeId], references: [id], onDelete: Restrict)
+
+  povPersonId String
+  povPerson   Person @relation(fields: [povPersonId], references: [id], onDelete: Restrict)
+
+  participants String[] @default([])
+
+  environmentDescription String? @db.Text
+  sensoryField           String? @db.Text
+  historicalConstraints  String? @db.Text
+  socialConstraints      String? @db.Text
+  characterStatesSummary String? @db.Text
+  emotionalVoltage       String?
+  centralConflict        String?
+  symbolicElements       String?
+  narrativePurpose       String?
+  continuityDependencies String?
+  sourceSupportLevel     String?
+  notes                  String?
+  /// Cached template or AI-enhanced world-state prose (author fields above remain canonical).
+  generatedWorldSummary         String? @db.Text
+  generatedPerspectiveSummary   String? @db.Text
+
+  fragmentClusters FragmentCluster[]
+  sceneConstructionSuggestions SceneConstructionSuggestion[]
+  sceneSoulSuggestions        SceneSoulSuggestion[]
+  narrativePasses               MetaSceneNarrativePass[]
+  voicePasses                   VoicePass[]
+  sceneAudioAssets              SceneAudioAsset[]
+  cinematicNarrativePasses      CinematicNarrativePass[]
+  sceneBeats                    SceneBeat[]
+
+  @@index([sceneId])
+  @@index([placeId])
+  @@index([povPersonId])
+}
+
+/// Structured literary scene passes for a meta scene (multiple versions over time; reviewable).
+model MetaSceneNarrativePass {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  metaSceneId String
+  metaScene   MetaScene @relation(fields: [metaSceneId], references: [id], onDelete: Cascade)
+
+  passType  String // opening, interior, environment, relationship_pressure, symbolic, embodied, full_structured, ...
+  styleMode String?
+  content   String  @db.Text
+  summary   String?
+  confidence Int?
+  status    String // generated, accepted, revised, rejected, archived
+  notes     String?
+
+  voicePasses VoicePass[]
+
+  @@index([metaSceneId])
+  @@index([passType])
+  @@index([status])
+}
+
+/// Inner-life / embodiment suggestions for a meta scene (parallel to SceneConstructionSuggestion).
+model SceneSoulSuggestion {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  metaSceneId String
+  metaScene   MetaScene @relation(fields: [metaSceneId], references: [id], onDelete: Cascade)
+
+  title           String
+  suggestionType  String
+  summary         String  @db.Text
+  confidence      Int?
+  status          String
+  notes           String?
+
+  @@index([metaSceneId])
+  @@index([status])
+  @@index([suggestionType])
+}
+
+model Event {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  visibility      VisibilityStatus
+  recordType      RecordType
+  title           String
+  description     String?
+  startYear       Int?
+  endYear         Int?
+  eventType       EventType        @default(OTHER)
+  sourceTraceNote String?
+
+  persons         Person[]
+  scenes          Scene[]
+  chapters        Chapter[]
+  places          Place[]
+  sources         Source[]
+  openQuestions   OpenQuestion[]
+  continuityNotes ContinuityNote[]
+
+  @@index([visibility])
+  @@index([eventType])
+}
+
+model Chapter {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  visibility       VisibilityStatus
+  recordType       RecordType
+  title            String
+  summary          String?
+  timePeriod       String?
+  chapterNumber    Int?
+  status           String?
+  pov              String?
+  historicalAnchor String?
+  privateNotes     String?
+  publicNotes      String?
+  sourceTraceNote  String?
+
+  scenes          Scene[]
+  persons         Person[]
+  places          Place[]
+  events          Event[]
+  sources         Source[]
+  continuityNotes ContinuityNote[]
+  brainMemos      BrainMemo[]
+  fragmentClusters FragmentCluster[]
+
+  @@index([chapterNumber])
+  @@index([visibility])
+}
+
+model Scene {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  visibility       VisibilityStatus
+  recordType       RecordType
+  description      String
+  chapterId        String
+  chapter          Chapter          @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  historicalAnchor String?
+  sceneNumber      Int?
+  locationNote     String?
+  pov              String?
+  summary          String?
+  privateNotes     String?
+  orderInChapter   Int?
+
+  writingMode WritingMode @default(HYBRID)
+
+  draftText       String? @db.Text
+  narrativeIntent String?
+  emotionalTone   String?
+
+  historicalConfidence Int?
+  structuredDataJson   Json?
+  sourceTraceSummary   String?
+  continuitySummary    String?
+  sceneStatus          String?
+
+  /// Author-facing overrides for public return / continuation copy (optional).
+  publicReturnHookOverride          String?
+  publicPremiumInvitationLine       String?
+  publicContinuationInvitationLine  String?
+
+  /**
+   * AI assist metadata (lightweight pointers/summaries only).
+   * Full traceability lives on SceneAssistRun rows.
+   */
+  lastAssistRunId              String?
+  aiAssistNotes                String?
+  lastGroundingScore           Int?
+  lastContinuityCheckSummary   String?
+
+  persons         Person[]
+  places          Place[]
+  events          Event[]
+  symbols         Symbol[]
+  sources         Source[]
+  openQuestions   OpenQuestion[]
+  continuityNotes ContinuityNote[]
+  sceneNotes      SceneNote[]
+  assistRuns      SceneAssistRun[]
+  draftVersions   SceneDraftVersion[]
+  brainMemos      BrainMemo[]
+  characterStates CharacterState[]
+  metaScenes      MetaScene[]
+  fragmentClusters FragmentCluster[]
+  sceneConstructionSuggestions SceneConstructionSuggestion[]
+  sceneAudioAssets SceneAudioAsset[]
+  cinematicNarrativePasses     CinematicNarrativePass[]
+
+  @@index([chapterId])
+  @@index([orderInChapter])
+  @@index([writingMode])
+  @@index([sceneStatus])
+  @@index([lastAssistRunId])
+}
+
+model SceneAssistRun {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sceneId String
+  scene   Scene  @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+
+  assistType String // prompt, draft, expand, continue, link_suggest, continuity_check, grounding_check, summarize
+  status     String // queued, completed, failed, applied, dismissed
+
+  modelName      String?
+  promptVersion  String?
+  writingMode    WritingMode?
+
+  inputSnapshot Json?
+  outputText    String? @db.Text
+  outputJson    Json?
+  warnings      Json?
+
+  errorMessage String?
+  appliedAt    DateTime?
+  dismissedAt  DateTime?
+
+  @@index([sceneId])
+  @@index([assistType])
+  @@index([status])
+}
+
+/**
+ * Optional lightweight draft snapshots (deferred if too heavy to use broadly).
+ * Used to record explicit manual saves and AI-applied changes (insert/append/replace).
+ */
+model SceneDraftVersion {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  sceneId String
+  scene   Scene   @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+
+  source    String // manual_save, ai_insert, ai_replace, ai_append
+  draftText String @db.Text
+  notes     String?
+
+  @@index([sceneId])
+  @@index([source])
+}
+
+model Symbol {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  visibility      VisibilityStatus
+  recordType      RecordType
+  name            String
+  meaning         String?
+  category        SymbolCategory?
+  sourceTraceNote String?
+
+  /// Layered meaning (DNA); legacy `meaning` remains for older rows.
+  meaningPrimary   String? @db.Text
+  meaningSecondary String? @db.Text
+  emotionalTone    String?
+  usageContext     String?  @db.Text
+  /// e.g. high, medium, low, interpretive, contested
+  certainty String?
+  /// Multi-layer tags from extraction: theme, symbol, rule, motif, etc.
+  layers    Json?
+
+  sourceId String?
+  source   Source? @relation(fields: [sourceId], references: [id], onDelete: SetNull)
+
+  scenes             Scene[]
+  fragmentClusters   FragmentCluster[]
+
+  @@index([sourceId])
+}
+
+/// Atomic narrative logic extracted from documents (editable; strength guides generation).
+model NarrativeRule {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title       String
+  description String @db.Text
+
+  category String // structure, character, memory, symbolism, relationship, narration
+  strength Int? // 1–5
+  scope    String? // global, scene, character, lineage
+
+  sourceId String?
+  source   Source? @relation(fields: [sourceId], references: [id], onDelete: SetNull)
+
+  notes  String?
+  layers Json?
+
+  @@index([sourceId])
+  @@index([category])
+}
+
+model Theme {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name        String
+  description String @db.Text
+
+  intensity Int? // 1–5
+  category  String? // core, subtheme
+
+  sourceId String?
+  source   Source? @relation(fields: [sourceId], references: [id], onDelete: SetNull)
+
+  notes  String?
+  layers Json?
+
+  @@index([sourceId])
+}
+
+model Motif {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name        String
+  description String @db.Text
+  usagePattern String?
+
+  sourceId String?
+  source   Source? @relation(fields: [sourceId], references: [id], onDelete: SetNull)
+
+  notes  String?
+  layers Json?
+
+  @@index([sourceId])
+}
+
+model LiteraryDevice {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name          String
+  description   String @db.Text
+  systemEffect  String @db.Text
+
+  sourceId String?
+  source   Source? @relation(fields: [sourceId], references: [id], onDelete: SetNull)
+
+  notes  String?
+  layers Json?
+
+  @@index([sourceId])
+}
+
+model NarrativePattern {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title       String
+  description String @db.Text
+
+  patternType String // generational, emotional, relational, identity
+  strength    Int?
+
+  sourceId String?
+  source   Source? @relation(fields: [sourceId], references: [id], onDelete: SetNull)
+
+  notes  String?
+  layers Json?
+
+  @@index([sourceId])
+  @@index([patternType])
+}
+
+/// Polymorphic cross-links between narrative DNA entities and world-model objects.
+model NarrativeBinding {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sourceType   String
+  sourceId     String
+  targetType   String
+  targetId     String
+  relationship String // influences, expresses, contradicts, emerges_from
+
+  strength Int?
+  notes    String?
+
+  @@index([sourceType, sourceId])
+  @@index([targetType, targetId])
+  @@index([relationship])
+}
+
+model OpenQuestion {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title           String
+  description     String?
+  status          String
+  priority        Int?
+  sourceTraceNote String?
+
+  linkedPersonId String?
+  linkedPerson   Person? @relation(fields: [linkedPersonId], references: [id], onDelete: SetNull)
+  linkedPlaceId  String?
+  linkedPlace    Place?  @relation(fields: [linkedPlaceId], references: [id], onDelete: SetNull)
+  linkedEventId  String?
+  linkedEvent    Event?  @relation(fields: [linkedEventId], references: [id], onDelete: SetNull)
+  linkedSourceId String?
+  linkedSource   Source? @relation(fields: [linkedSourceId], references: [id], onDelete: SetNull)
+
+  scenes Scene[]
+
+  @@index([status])
+  @@index([priority])
+}
+
+model ContinuityNote {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title           String
+  description     String?
+  severity        String
+  status          String
+  sourceTraceNote String?
+
+  linkedChapterId String?
+  linkedChapter   Chapter? @relation(fields: [linkedChapterId], references: [id], onDelete: SetNull)
+  linkedSceneId   String?
+  linkedScene     Scene?   @relation(fields: [linkedSceneId], references: [id], onDelete: SetNull)
+  linkedPersonId  String?
+  linkedPerson    Person?  @relation(fields: [linkedPersonId], references: [id], onDelete: SetNull)
+  linkedEventId   String?
+  linkedEvent     Event?   @relation(fields: [linkedEventId], references: [id], onDelete: SetNull)
+
+  @@index([severity])
+  @@index([status])
+}
+
+model SceneNote {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sceneId String
+  scene   Scene  @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+
+  noteType String
+  content  String @db.Text
+
+  @@index([sceneId])
+  @@index([noteType])
+}
+
+/// Last mode in public reader: Read / Feel / Guided / Listen (maps to UI labels).
+enum ReaderLastMode {
+  reading
+  immersive
+  guided
+  listen
+}
+
+enum ReaderImprintEntityType {
+  scene
+  character
+  place
+  symbol
+  chapter
+  audio
+}
+
+enum ReaderImprintKind {
+  lingered
+  revisited
+  paused
+  replayed
+  completed
+  emotional_peak
+  listened
+  returned
+  expanded_depth
+}
+
+/// Per-browser (or logged-in user) reading cursor + soft emotional memory.
+model ReaderState {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId    String?
+  sessionId String @unique
+
+  lastSceneId     String?
+  lastMetaSceneId String?
+  lastCharacterId String?
+  lastPlaceId     String?
+  lastSymbolId    String?
+
+  lastMode         ReaderLastMode?
+  emotionalTrace   String?
+  returnHook       String?
+  /** Author- or server-composed invitation to continue the narrative thread. */
+  continuationHeadline String?
+  /** Opaque client key for scroll/segment resume (e.g. hash of scene + segment). */
+  lastScrollKey  String?
+  lastInteractionAt DateTime @default(now())
+  notes          String?
+
+  /// Client-restored scroll anchor (main column).
+  scrollAnchorY Int?
+  /// Guided / immersive rhythm: true = follow perception cadence when available.
+  rhythmAuto    Boolean? @default(true)
+
+  threads ReaderThread[]
+
+  @@index([userId])
+  @@index([lastInteractionAt])
+}
+
+/// What the reader lingered on — not just clicks.
+model ReaderImprint {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sessionId String
+  userId    String?
+
+  entityType  ReaderImprintEntityType
+  entityId    String
+  imprintType ReaderImprintKind
+  weight      Int
+  notes       String?
+
+  @@index([sessionId])
+  @@index([userId])
+  @@index([entityType, entityId])
+  @@index([createdAt])
+  @@index([imprintType])
+}
+
+/// Optional persisted thread anchors (derived rows may also exist only in app logic).
+model ReaderThread {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId    String?
+  sessionId String?
+
+  threadType       String
+  anchorEntityType String?
+  anchorEntityId   String?
+  label            String
+  strength         Int?
+  isActive         Boolean @default(true)
+  notes            String?
+
+  readerStateId String?
+  readerState   ReaderState? @relation(fields: [readerStateId], references: [id], onDelete: SetNull)
+
+  @@index([sessionId])
+  @@index([userId])
+  @@index([threadType])
+  @@index([isActive])
+}
+
+/// Listening time toward a character (attachment signal for audio / premium hooks).
+model ReaderVoiceListen {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sessionId String
+  userId    String?
+  personId  String
+
+  totalListenSeconds Int      @default(0)
+  lastListenAt       DateTime @default(now())
+
+  @@unique([sessionId, personId])
+  @@index([personId])
+  @@index([totalListenSeconds])
+}
