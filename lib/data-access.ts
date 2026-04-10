@@ -4,12 +4,29 @@ import {
   FragmentType,
   PlaceType,
   RecordType,
+  RuleType,
   SourceType,
   VisibilityStatus,
 } from "@prisma/client";
+import type { OntologyAdminFilters, RegistryValueAdminFilters } from "@/lib/ontology-types";
+import {
+  getConfidenceProfiles,
+  getNarrativePermissionProfiles,
+  getOntologyTypes,
+  getRegistryValues,
+  getSceneReadinessProfiles,
+} from "@/lib/ontology";
 import { prisma } from "@/lib/prisma";
 import { findCandidateMatchesForExtractedEntity } from "@/lib/entity-matching";
 import type { CandidateMatch } from "@/lib/entity-matching";
+import type { CharacterSimulationBundle } from "@/lib/character-types";
+import { warnIfCharacterStateMissingWorldContext } from "@/lib/world-context-validation";
+import type {
+  EnvironmentAdminFilters,
+  EnvironmentNodeAdminFilters,
+  NodeConnectionAdminFilters,
+  PlaceFullEnvironmentBundle,
+} from "@/lib/environment-types";
 
 async function safe<T>(fn: () => Promise<T>, fallback: T): Promise<T> {
   try {
@@ -236,6 +253,62 @@ export async function getNarrativeRuleById(id: string) {
       }),
     null,
   );
+}
+
+export async function getConstitutionalRulesList(ruleType?: RuleType) {
+  return safe(
+    () =>
+      prisma.constitutionalRule.findMany({
+        where: ruleType ? { ruleType } : undefined,
+        orderBy: [{ ruleType: "asc" }, { key: "asc" }],
+      }),
+    [],
+  );
+}
+
+export async function getConstitutionalRuleById(id: string) {
+  return safe(() => prisma.constitutionalRule.findUnique({ where: { id } }), null);
+}
+
+/** Stage 2 ontology spine — delegates to lib/ontology.ts with safe DB behavior. */
+export async function getOntologyTypesForAdmin(filters?: OntologyAdminFilters) {
+  return getOntologyTypes(filters);
+}
+
+export async function getOntologyTypeByIdForAdmin(id: string) {
+  return safe(() => prisma.ontologyType.findUnique({ where: { id } }), null);
+}
+
+export async function getRegistryValuesForAdmin(filters?: RegistryValueAdminFilters) {
+  return getRegistryValues(filters);
+}
+
+export async function getRegistryValueByIdForAdmin(id: string) {
+  return safe(() => prisma.registryValue.findUnique({ where: { id } }), null);
+}
+
+export async function getNarrativePermissionProfilesForAdmin() {
+  return getNarrativePermissionProfiles();
+}
+
+export async function getNarrativePermissionProfileByIdForAdmin(id: string) {
+  return safe(() => prisma.narrativePermissionProfile.findUnique({ where: { id } }), null);
+}
+
+export async function getConfidenceProfilesForAdmin() {
+  return getConfidenceProfiles();
+}
+
+export async function getConfidenceProfileByIdForAdmin(id: string) {
+  return safe(() => prisma.confidenceProfile.findUnique({ where: { id } }), null);
+}
+
+export async function getSceneReadinessProfilesForAdmin() {
+  return getSceneReadinessProfiles();
+}
+
+export async function getSceneReadinessProfileByIdForAdmin(id: string) {
+  return safe(() => prisma.sceneReadinessProfile.findUnique({ where: { id } }), null);
 }
 
 export async function getThemesList() {
@@ -1455,6 +1528,12 @@ export type BrainDashboardData = {
     metaSceneId: string;
     updatedAt: Date;
   }[];
+  /** Brain 2 — narrative DNA layer */
+  narrativeRulesCount: number;
+  narrativeBindingsCount: number;
+  brainMemosCount: number;
+  /** % of meta scenes meeting “world anchor ready” heuristic (0–100). */
+  worldAnchorCoveragePct: number;
 };
 
 export async function getBrainDashboardData(): Promise<BrainDashboardData> {
@@ -1469,6 +1548,9 @@ export async function getBrainDashboardData(): Promise<BrainDashboardData> {
         fragmentsLinkedToChapters,
         openQuestionsCount,
         continuityNotesCount,
+        narrativeRulesCount,
+        narrativeBindingsCount,
+        brainMemosCount,
       ] = await Promise.all([
         prisma.source.count(),
         prisma.fragment.count(),
@@ -1482,6 +1564,9 @@ export async function getBrainDashboardData(): Promise<BrainDashboardData> {
         prisma.fragmentLink.count({ where: { linkedType: "chapter" } }),
         prisma.openQuestion.count(),
         prisma.continuityNote.count(),
+        prisma.narrativeRule.count(),
+        prisma.narrativeBinding.count(),
+        prisma.brainMemo.count(),
       ]);
 
       const suggestedGroups = await prisma.fragmentPlacementCandidate.groupBy({
@@ -1876,6 +1961,9 @@ export async function getBrainDashboardData(): Promise<BrainDashboardData> {
         }),
       ]);
 
+      const worldAnchorCoveragePct =
+        metaScenesCount > 0 ? Math.round((worldAnchorsReady / metaScenesCount) * 100) : 0;
+
       return {
         totalSources,
         totalFragments,
@@ -1942,6 +2030,10 @@ export async function getBrainDashboardData(): Promise<BrainDashboardData> {
         narrativePassCount,
         metaScenesMissingDescriptiveCache,
         recentNarrativePasses,
+        narrativeRulesCount,
+        narrativeBindingsCount,
+        brainMemosCount,
+        worldAnchorCoveragePct,
       };
     },
     {
@@ -2006,6 +2098,10 @@ export async function getBrainDashboardData(): Promise<BrainDashboardData> {
       narrativePassCount: 0,
       metaScenesMissingDescriptiveCache: 0,
       recentNarrativePasses: [],
+      narrativeRulesCount: 0,
+      narrativeBindingsCount: 0,
+      brainMemosCount: 0,
+      worldAnchorCoveragePct: 0,
     },
   );
 }
@@ -2018,7 +2114,18 @@ export async function getCharacterMindBundle(personId: string) {
         include: {
           characterProfile: true,
           characterMemories: { orderBy: { updatedAt: "desc" } },
-          characterStates: { orderBy: { updatedAt: "desc" }, include: { scene: { select: { id: true, description: true } } } },
+          characterStates: {
+            orderBy: { updatedAt: "desc" },
+            include: {
+              scene: { select: { id: true, description: true } },
+              worldState: true,
+            },
+          },
+          characterConstraints: { orderBy: { updatedAt: "desc" } },
+          characterTriggers: { orderBy: { updatedAt: "desc" } },
+          characterPerceptionProfile: true,
+          characterVoiceProfile: true,
+          characterChoiceProfile: true,
           relationshipsAsA: {
             include: { personB: { select: { id: true, name: true } } },
             orderBy: { updatedAt: "desc" },
@@ -2029,6 +2136,64 @@ export async function getCharacterMindBundle(personId: string) {
           },
         },
       }),
+    null,
+  );
+}
+
+/** Identity + 1:1 simulation profile rows (no list relations). */
+export async function getCharacterFullProfile(personId: string) {
+  return safe(
+    () =>
+      prisma.person.findUnique({
+        where: { id: personId },
+        include: {
+          characterProfile: true,
+          characterPerceptionProfile: true,
+          characterVoiceProfile: true,
+          characterChoiceProfile: true,
+        },
+      }),
+    null,
+  );
+}
+
+/**
+ * Bounded simulation bundle: profile, latest state slice, constraints, triggers, perception, voice, choice.
+ * Scene engine will combine CharacterState + CharacterChoiceProfile; branch engine uses constraints + triggers;
+ * voice / perception engines consume the respective profiles; ConstitutionalRule validates allowed actions.
+ */
+export async function getCharacterSimulationBundle(personId: string): Promise<CharacterSimulationBundle | null> {
+  return safe(
+    async () => {
+      const person = await prisma.person.findUnique({
+        where: { id: personId },
+        include: {
+          characterProfile: true,
+          characterStates: { orderBy: { updatedAt: "desc" }, include: { worldState: true } },
+          characterConstraints: { orderBy: { updatedAt: "desc" } },
+          characterTriggers: { orderBy: { updatedAt: "desc" } },
+          characterPerceptionProfile: true,
+          characterVoiceProfile: true,
+          characterChoiceProfile: true,
+        },
+      });
+      if (!person) return null;
+      const states = person.characterStates;
+      for (const s of states) {
+        warnIfCharacterStateMissingWorldContext(s, `simulationBundle:${personId}`);
+      }
+      return {
+        personId: person.id,
+        profile: person.characterProfile,
+        currentState: states[0] ?? null,
+        states,
+        constraints: person.characterConstraints,
+        triggers: person.characterTriggers,
+        perception: person.characterPerceptionProfile,
+        voice: person.characterVoiceProfile,
+        choice: person.characterChoiceProfile,
+      };
+    },
     null,
   );
 }
@@ -2097,6 +2262,198 @@ export async function getSettingEnvironmentBundle(placeId: string) {
       }),
     null,
   );
+}
+
+export async function getWorldStateReferences() {
+  return safe(
+    () =>
+      prisma.worldStateReference.findMany({
+        orderBy: { eraId: "asc" },
+      }),
+    [],
+  );
+}
+
+/** Simulation + environment layers for a place (Place + profile + states + nodes + memory + connections touching those nodes). */
+export async function getPlaceFullEnvironmentBundle(placeId: string): Promise<PlaceFullEnvironmentBundle | null> {
+  return safe(
+    async () => {
+      const place = await prisma.place.findUnique({
+        where: { id: placeId },
+        include: {
+          settingProfile: true,
+          settingStates: { orderBy: { updatedAt: "desc" } },
+          environmentProfile: true,
+          placeStates: { orderBy: { updatedAt: "desc" }, include: { worldState: true } },
+          environmentNodes: { orderBy: { key: "asc" } },
+          placeMemoryProfiles: { orderBy: { updatedAt: "desc" }, include: { worldState: true } },
+        },
+      });
+      if (!place) return null;
+
+      const nodeIds = place.environmentNodes.map((n) => n.id);
+      const connections =
+        nodeIds.length === 0
+          ? []
+          : await prisma.nodeConnection.findMany({
+              where: {
+                OR: [{ fromNodeId: { in: nodeIds } }, { toNodeId: { in: nodeIds } }],
+              },
+              include: {
+                fromNode: { select: { id: true, key: true, label: true } },
+                toNode: { select: { id: true, key: true, label: true } },
+                worldState: true,
+              },
+            });
+
+      return {
+        place,
+        environmentProfile: place.environmentProfile,
+        placeStates: place.placeStates,
+        nodes: place.environmentNodes,
+        memoryProfiles: place.placeMemoryProfiles,
+        connections,
+      };
+    },
+    null,
+  );
+}
+
+export async function getPlacesForEnvironmentAdmin(filters?: EnvironmentAdminFilters) {
+  const where: Prisma.PlaceWhereInput = {};
+  if (filters?.visibility) where.visibility = filters.visibility;
+  if (filters?.recordType) where.recordType = filters.recordType;
+  if (filters?.search?.trim()) {
+    where.name = { contains: filters.search.trim(), mode: "insensitive" };
+  }
+  return safe(
+    () =>
+      prisma.place.findMany({
+        where,
+        orderBy: { name: "asc" },
+        take: 500,
+        include: {
+          environmentProfile: { select: { id: true } },
+          _count: { select: { environmentNodes: true, placeStates: true } },
+        },
+      }),
+    [],
+  );
+}
+
+export async function getEnvironmentNodesForAdmin(filters?: EnvironmentNodeAdminFilters) {
+  const where: Prisma.EnvironmentNodeWhereInput = {};
+  if (filters?.visibility) where.visibility = filters.visibility;
+  if (filters?.recordType) where.recordType = filters.recordType;
+  if (filters?.nodeType?.trim()) where.nodeType = filters.nodeType.trim();
+  if (filters?.regionLabel?.trim()) where.regionLabel = { contains: filters.regionLabel.trim(), mode: "insensitive" };
+  if (filters?.coreOnly) where.isCoreNode = true;
+  if (filters?.search?.trim()) {
+    where.OR = [
+      { key: { contains: filters.search.trim(), mode: "insensitive" } },
+      { label: { contains: filters.search.trim(), mode: "insensitive" } },
+    ];
+  }
+  return safe(
+    () =>
+      prisma.environmentNode.findMany({
+        where,
+        orderBy: [{ placeId: "asc" }, { key: "asc" }],
+        take: 500,
+        include: { place: { select: { id: true, name: true } } },
+      }),
+    [],
+  );
+}
+
+export async function getNodeConnectionsForAdmin(filters?: NodeConnectionAdminFilters) {
+  const where: Prisma.NodeConnectionWhereInput = {};
+  if (filters?.visibility) where.visibility = filters.visibility;
+  if (filters?.recordType) where.recordType = filters.recordType;
+  if (filters?.connectionType) where.connectionType = filters.connectionType;
+  if (filters?.worldStateId) where.worldStateId = filters.worldStateId;
+  if (filters?.search?.trim()) {
+    where.notes = { contains: filters.search.trim(), mode: "insensitive" };
+  }
+  return safe(
+    () =>
+      prisma.nodeConnection.findMany({
+        where,
+        orderBy: { updatedAt: "desc" },
+        take: 500,
+        include: {
+          fromNode: { select: { id: true, key: true, label: true, placeId: true } },
+          toNode: { select: { id: true, key: true, label: true, placeId: true } },
+          worldState: true,
+        },
+      }),
+    [],
+  );
+}
+
+export async function getRiskRegimesForAdmin(filters?: EnvironmentAdminFilters) {
+  const where: Prisma.RiskRegimeWhereInput = {};
+  if (filters?.visibility) where.visibility = filters.visibility;
+  if (filters?.recordType) where.recordType = filters.recordType;
+  if (filters?.search?.trim()) {
+    where.OR = [
+      { key: { contains: filters.search.trim(), mode: "insensitive" } },
+      { label: { contains: filters.search.trim(), mode: "insensitive" } },
+    ];
+  }
+  return safe(
+    () =>
+      prisma.riskRegime.findMany({
+        where,
+        orderBy: { key: "asc" },
+        take: 500,
+      }),
+    [],
+  );
+}
+
+export async function getPlaceMemoryProfilesForAdmin(placeId: string) {
+  return safe(
+    () =>
+      prisma.placeMemoryProfile.findMany({
+        where: { placeId },
+        orderBy: { updatedAt: "desc" },
+        include: { worldState: true },
+      }),
+    [],
+  );
+}
+
+export async function getEnvironmentNodeByIdForAdmin(id: string) {
+  return safe(
+    () =>
+      prisma.environmentNode.findUnique({
+        where: { id },
+        include: {
+          place: { select: { id: true, name: true } },
+        },
+      }),
+    null,
+  );
+}
+
+export async function getNodeConnectionByIdForAdmin(id: string) {
+  return safe(
+    () =>
+      prisma.nodeConnection.findUnique({
+        where: { id },
+        include: {
+          fromNode: { select: { id: true, key: true, label: true, placeId: true } },
+          toNode: { select: { id: true, key: true, label: true, placeId: true } },
+          worldState: true,
+        },
+      }),
+    null,
+  );
+}
+
+export async function getRiskRegimeByIdForAdmin(id: string) {
+  return safe(() => prisma.riskRegime.findUnique({ where: { id } }), null);
 }
 
 export async function getMetaScenesForAdmin() {

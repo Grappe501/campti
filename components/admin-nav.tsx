@@ -1,8 +1,16 @@
 import Link from "next/link";
+import { AdminSignOutButton } from "@/components/admin-sign-out-button";
 
 const links = [
   { href: "/admin/dashboard", label: "Dashboard" },
   { href: "/admin/brain", label: "Brain" },
+  { href: "/admin/registries", label: "Registries" },
+  { href: "/admin/ontology", label: "Ontology" },
+  { href: "/admin/registries/values", label: "Registry values" },
+  { href: "/admin/permissions", label: "Permissions" },
+  { href: "/admin/confidence", label: "Confidence" },
+  { href: "/admin/readiness", label: "Readiness" },
+  { href: "/admin/build-sequence", label: "Build sequence" },
   { href: "/admin/sources", label: "Sources" },
   { href: "/admin/fragments", label: "Fragments" },
   { href: "/admin/clusters", label: "Clusters" },
@@ -12,6 +20,9 @@ const links = [
   { href: "/admin/people", label: "People" },
   { href: "/admin/relationships", label: "Relationships" },
   { href: "/admin/places", label: "Places" },
+  { href: "/admin/nodes", label: "Env nodes" },
+  { href: "/admin/connections", label: "Connections" },
+  { href: "/admin/risks", label: "Risk regimes" },
   { href: "/admin/events", label: "Events" },
   { href: "/admin/chapters", label: "Chapters" },
   { href: "/admin/scenes", label: "Scenes" },
@@ -28,7 +39,7 @@ const links = [
   { href: "/admin/attachment", label: "Attachment" },
 ];
 
-export function AdminNav() {
+export function AdminNav({ showSignOut = false }: { showSignOut?: boolean }) {
   return (
     <aside className="w-full shrink-0 border-b border-stone-200 bg-white md:w-56 md:border-b-0 md:border-r">
       <div className="flex flex-col gap-1 p-4">
@@ -50,6 +61,11 @@ export function AdminNav() {
             {l.label}
           </Link>
         ))}
+        {showSignOut ? (
+          <div className="mt-4 border-t border-stone-100 pt-3">
+            <AdminSignOutButton />
+          </div>
+        ) : null}
       </div>
     </aside>
   );

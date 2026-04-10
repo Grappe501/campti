@@ -14,6 +14,7 @@ import {
   deriveEmotionalHook,
 } from "@/lib/emotional-gravity";
 import { prisma } from "@/lib/prisma";
+import { profileJsonFieldToInferenceText } from "@/lib/profile-json";
 
 const SYSTEM_STRICT = [
   "You improve literary expressiveness using ONLY the user-provided context.",
@@ -105,13 +106,13 @@ export async function enhanceCharacterExperience(personId: string): Promise<stri
   const cp = person.characterProfile;
   const blob = [
     cp.worldview,
-    cp.coreBeliefs,
-    cp.desires,
-    cp.fears,
+    profileJsonFieldToInferenceText(cp.coreBeliefs),
+    profileJsonFieldToInferenceText(cp.desires),
+    profileJsonFieldToInferenceText(cp.fears),
     cp.relationalStyle,
     cp.speechPatterns,
   ]
-    .map((x) => x?.trim())
+    .map((x) => (typeof x === "string" ? x.trim() : x))
     .filter(Boolean)
     .join("\n");
   if (!blob) return null;

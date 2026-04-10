@@ -11,6 +11,7 @@ import {
   summarizeEmbodiedPerspective,
 } from "@/lib/perspective-engine";
 import { buildRelationshipContext, deriveLikelyConflictLoop } from "@/lib/relationship-dynamics";
+import { profileJsonFieldToString } from "@/lib/profile-json";
 import { deriveHeartDeficits } from "@/lib/scene-heart";
 import {
   formatNarrativeDnaForScenePass,
@@ -144,7 +145,7 @@ export async function composeStructuredScenePass(metaSceneId: string): Promise<S
   return {
     openingPerception: deriveWhatThisCharacterNoticesFirst(emb),
     dominantEmotion: m.emotionalVoltage?.trim() || prof?.emotionalBaseline?.trim() || "—",
-    hiddenEmotion: prof?.internalConflicts?.trim() || "—",
+    hiddenEmotion: profileJsonFieldToString(prof?.internalConflicts) || "—",
     bodilyFeeling: prof?.sensoryBias?.trim() || emb.salience.sensory.join(", ") || "—",
     noticesFirst: deriveWhatThisCharacterNoticesFirst(emb),
     misinterpretation: `Likely blind spot: ${deriveWhatThisCharacterMisses(emb)}`,

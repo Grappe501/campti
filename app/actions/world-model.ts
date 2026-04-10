@@ -4,9 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { fragmentLinkCreateSchema, fragmentLinkDeleteSchema } from "@/lib/fragment-validation";
-import type { EnneagramType } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { ENNEAGRAM_TYPE_VALUES } from "@/lib/scene-soul-validation";
 
 function str(v: FormDataEntryValue | null): string | undefined {
   const s = typeof v === "string" ? v.trim() : "";
@@ -33,41 +31,6 @@ function participantsFromTextarea(v: FormDataEntryValue | null): string[] {
     .filter(Boolean);
 }
 
-const PROFILE_FIELDS = [
-  "worldview",
-  "coreBeliefs",
-  "fears",
-  "desires",
-  "internalConflicts",
-  "socialPosition",
-  "educationLevel",
-  "religiousContext",
-  "emotionalBaseline",
-  "behavioralPatterns",
-  "speechPatterns",
-  "memoryBias",
-  "sensoryBias",
-  "moralFramework",
-  "contradictions",
-  "notes",
-  "enneagramWing",
-  "enneagramSource",
-  "stressPattern",
-  "growthPattern",
-  "defensiveStyle",
-  "coreLonging",
-  "coreFear",
-  "attentionBias",
-  "relationalStyle",
-  "conflictStyle",
-  "attachmentPattern",
-  "shameTrigger",
-  "angerPattern",
-  "griefPattern",
-  "controlPattern",
-  "notesOnTypeUse",
-] as const;
-
 const SETTING_FIELDS = [
   "physicalDescription",
   "environmentType",
@@ -86,54 +49,6 @@ const SETTING_FIELDS = [
   "materialsPresent",
   "notes",
 ] as const;
-
-export async function upsertCharacterProfileAction(formData: FormData) {
-  const personId = str(formData.get("personId"));
-  if (!personId) redirect("/admin/people?error=validation");
-
-  const data: Record<string, string | number | null | undefined> = {};
-  for (const k of PROFILE_FIELDS) {
-    data[k] = strNull(formData.get(k));
-  }
-
-  const etEntry = formData.get("enneagramType");
-  const etRaw = typeof etEntry === "string" ? etEntry.trim() : "";
-  const enneagramType: EnneagramType | null =
-    etRaw === "" || etRaw === "__none__" || !(ENNEAGRAM_TYPE_VALUES as readonly string[]).includes(etRaw)
-      ? null
-      : (etRaw as EnneagramType);
-
-  const ecRaw = strNull(formData.get("enneagramConfidence"));
-  let enneagramConfidence: number | null = null;
-  if (ecRaw != null && ecRaw !== "") {
-    const n = Number.parseInt(ecRaw, 10);
-    if (Number.isFinite(n)) enneagramConfidence = Math.min(5, Math.max(1, n));
-  }
-
-  try {
-    await prisma.characterProfile.upsert({
-      where: { personId },
-      create: {
-        personId,
-        ...data,
-        enneagramType,
-        enneagramConfidence,
-      },
-      update: {
-        ...data,
-        enneagramType,
-        enneagramConfidence,
-      },
-    });
-  } catch {
-    redirect(`/admin/characters/${personId}/mind?error=db`);
-  }
-
-  revalidatePath(`/admin/characters/${personId}/mind`);
-  revalidatePath(`/admin/people/${personId}`);
-  revalidatePath("/admin/brain");
-  redirect(`/admin/characters/${personId}/mind?saved=1`);
-}
 
 export async function addCharacterMemoryAction(formData: FormData) {
   const personId = str(formData.get("personId"));
@@ -170,47 +85,6 @@ export async function deleteCharacterMemoryAction(formData: FormData) {
 
   try {
     await prisma.characterMemory.delete({ where: { id } });
-  } catch {
-    redirect(`/admin/characters/${personId}/mind?error=db`);
-  }
-
-  revalidatePath(`/admin/characters/${personId}/mind`);
-  redirect(`/admin/characters/${personId}/mind?saved=del`);
-}
-
-export async function addCharacterStateAction(formData: FormData) {
-  const personId = str(formData.get("personId"));
-  if (!personId) redirect("/admin/people?error=validation");
-
-  try {
-    await prisma.characterState.create({
-      data: {
-        personId,
-        sceneId: str(formData.get("sceneId")) ?? null,
-        emotionalState: strNull(formData.get("emotionalState")),
-        motivation: strNull(formData.get("motivation")),
-        fearState: strNull(formData.get("fearState")),
-        knowledgeState: strNull(formData.get("knowledgeState")),
-        physicalState: strNull(formData.get("physicalState")),
-        socialConstraint: strNull(formData.get("socialConstraint")),
-        notes: strNull(formData.get("notes")),
-      },
-    });
-  } catch {
-    redirect(`/admin/characters/${personId}/mind?error=db`);
-  }
-
-  revalidatePath(`/admin/characters/${personId}/mind`);
-  redirect(`/admin/characters/${personId}/mind?saved=state`);
-}
-
-export async function deleteCharacterStateAction(formData: FormData) {
-  const id = str(formData.get("id"));
-  const personId = str(formData.get("personId"));
-  if (!id || !personId) redirect("/admin/people?error=validation");
-
-  try {
-    await prisma.characterState.delete({ where: { id } });
   } catch {
     redirect(`/admin/characters/${personId}/mind?error=db`);
   }
@@ -746,3 +620,18 @@ export async function unlinkFragmentFromMetaSceneAction(formData: FormData) {
   redirect(`/admin/meta-scenes/${metaSceneId}/compose?saved=unlink`);
 }
 
+export {
+  addCharacterStateAction,
+  assignWorldStateToCharacterState,
+  createCharacterChoiceProfile,
+  createCharacterConstraint,
+  createCharacterPerceptionProfile,
+  createCharacterProfile,
+  createCharacterTrigger,
+  createCharacterVoiceProfile,
+  deleteCharacterStateAction,
+  updateCharacterProfile,
+  updateCharacterState,
+  updateCharacterWorldContext,
+  upsertCharacterProfileAction,
+} from "./character-engine";

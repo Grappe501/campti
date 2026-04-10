@@ -24,6 +24,7 @@ import { fragmentInterpretationPreview } from "@/lib/scene-intelligence";
 import type { FragmentLike } from "@/lib/fragment-interpretation";
 import { DEFAULT_SUGGESTION_STYLE, DEFAULT_WORLD_PREVIEW_STYLE, NARRATIVE_STYLE_PRESETS } from "@/lib/narrative-style";
 import type { NarrativeStylePreset } from "@/lib/descriptive-validation";
+import { profileJsonFieldToSlice } from "@/lib/profile-json";
 
 function styleHint(preset: NarrativeStylePreset): string {
   return NARRATIVE_STYLE_PRESETS[preset]?.guidance ?? "";
@@ -237,10 +238,10 @@ export async function describePovInterpretiveAxes(metaSceneId: string): Promise<
     return "Without a character profile, the POV’s habits of interpretation stay implicit — the scene may read as observed rather than filtered.";
   }
   return [
-    `Danger: ${p.fears?.trim() ? `named fear patterns: ${p.fears.trim().slice(0, 400)}` : "fear field not authored — threat may read generic."}`,
+    `Danger: ${profileJsonFieldToSlice(p.fears, 400) ? `named fear patterns: ${profileJsonFieldToSlice(p.fears, 400)}` : "fear field not authored — threat may read generic."}`,
     `Intimacy / attachment: ${p.relationalStyle?.trim() || p.attachmentPattern?.trim() || "relational style not specified"}.`,
-    `Obligation / duty: ${p.moralFramework?.trim() || p.coreBeliefs?.trim() || "moral framework thin"}.`,
-    `Change: ${p.internalConflicts?.trim() ? `internal conflict around change: ${p.internalConflicts.trim().slice(0, 400)}` : "—"}.`,
+    `Obligation / duty: ${p.moralFramework?.trim() || profileJsonFieldToSlice(p.coreBeliefs, 400) || "moral framework thin"}.`,
+    `Change: ${profileJsonFieldToSlice(p.internalConflicts, 400) ? `internal conflict around change: ${profileJsonFieldToSlice(p.internalConflicts, 400)}` : "—"}.`,
     `Silence: ${p.speechPatterns?.trim() ? `speech habits: ${p.speechPatterns.trim().slice(0, 300)}` : "how silence functions is not yet written."}`,
     `Disruption: ${p.stressPattern?.trim() || p.defensiveStyle?.trim() || "stress/defense not specified"}.`,
   ].join("\n\n");
@@ -402,10 +403,11 @@ export async function describeCharacterMindRichly(personId: string, style: Narra
       "Not yet specified — movement habits, ritual, and avoidance patterns are still tacit.",
     ``,
     `## What they protect first`,
-    p?.coreBeliefs?.trim() || p?.moralFramework?.trim() || "Protection hierarchy not named — add core beliefs or moral framework.",
+    profileJsonFieldToSlice(p?.coreBeliefs, 400) || p?.moralFramework?.trim() || "Protection hierarchy not named — add core beliefs or moral framework.",
     ``,
     `## What destabilizes them`,
-    [p?.fears, p?.shameTrigger, p?.stressPattern].filter(Boolean).join(" · ") || "Destabilizers not recorded.",
+    [profileJsonFieldToSlice(p?.fears, 300), p?.shameTrigger, p?.stressPattern].filter(Boolean).join(" · ") ||
+      "Destabilizers not recorded.",
     ``,
     `## How they interpret silence, danger, need, and attachment`,
     [
@@ -418,7 +420,7 @@ export async function describeCharacterMindRichly(personId: string, style: Narra
       .join("\n") || "Interpretive habits thin — add relational and conflict notes.",
     ``,
     `## What they are likely to hide even from themselves`,
-    [p?.internalConflicts, p?.contradictions, p?.defensiveStyle].filter(Boolean).join(" · ") ||
+    [profileJsonFieldToSlice(p?.internalConflicts, 300), p?.contradictions, p?.defensiveStyle].filter(Boolean).join(" · ") ||
       (et ? `Enneagram ${et} — use defensive style and contradictions fields to shadow what stays unnamed.` : "Add internal conflicts or contradictions for shadow material."),
     ``,
     `## Memory weather (recent)`,

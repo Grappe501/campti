@@ -22,6 +22,7 @@ import {
 import { buildSceneSoulContext } from "@/lib/scene-composition";
 import { fragmentTypeLabel, FRAGMENT_LINK_ROLES } from "@/lib/fragment-types";
 import { getMetaSceneComposerData } from "@/lib/meta-scene-composer";
+import { profileJsonFieldToString } from "@/lib/profile-json";
 import {
   buildComposerSynthesisBundle,
   describePerspectiveRichly,
@@ -285,15 +286,15 @@ export default async function MetaSceneComposePage({ params, searchParams }: Pro
             </div>
             <div>
               <dt className="text-xs font-medium text-stone-500">Fears</dt>
-              <dd className="mt-1 whitespace-pre-wrap">{data.profile?.fears ?? "—"}</dd>
+              <dd className="mt-1 whitespace-pre-wrap">{profileJsonFieldToString(data.profile?.fears) || "—"}</dd>
             </div>
             <div>
               <dt className="text-xs font-medium text-stone-500">Desires</dt>
-              <dd className="mt-1 whitespace-pre-wrap">{data.profile?.desires ?? "—"}</dd>
+              <dd className="mt-1 whitespace-pre-wrap">{profileJsonFieldToString(data.profile?.desires) || "—"}</dd>
             </div>
             <div>
               <dt className="text-xs font-medium text-stone-500">Internal conflicts</dt>
-              <dd className="mt-1 whitespace-pre-wrap">{data.profile?.internalConflicts ?? "—"}</dd>
+              <dd className="mt-1 whitespace-pre-wrap">{profileJsonFieldToString(data.profile?.internalConflicts) || "—"}</dd>
             </div>
             <div className="sm:col-span-2">
               <dt className="text-xs font-medium text-stone-500">Emotional baseline</dt>

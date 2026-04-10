@@ -23,6 +23,7 @@ import type { ReaderThreadHint } from "@/lib/reader-threads";
 import { deriveThreadHintsForSession } from "@/lib/reader-threads";
 import { derivePremiumDepthOffers } from "@/lib/premium-depth-offers";
 import { deriveEmotionalTrace, deriveReturnHook } from "@/lib/reader-memory";
+import { profileJsonFieldToString } from "@/lib/profile-json";
 
 const PUBLIC = VisibilityStatus.PUBLIC;
 
@@ -586,10 +587,16 @@ function buildReadingBodyFromScene(scene: {
 }
 
 function mergeProfileParagraphs(
-  fields: (string | null | undefined)[],
+  fields: (string | null | undefined | unknown)[],
   max = 6,
 ): string | null {
-  const cleaned = fields.map((f) => f?.trim()).filter(Boolean) as string[];
+  const cleaned = fields
+    .map((f) => {
+      if (f == null) return "";
+      if (typeof f === "string") return f.trim();
+      return profileJsonFieldToString(f).trim();
+    })
+    .filter(Boolean) as string[];
   if (!cleaned.length) return null;
   return cleaned.slice(0, max).join("\n\n");
 }

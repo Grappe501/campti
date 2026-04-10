@@ -1,4 +1,5 @@
 import type { NarrativeConsciousnessContext } from "@/lib/narrative-consciousness";
+import { profileJsonFieldToString } from "@/lib/profile-json";
 import { buildNarrativeConsciousnessContext } from "@/lib/narrative-consciousness";
 import { VisibilityStatus } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
@@ -91,7 +92,7 @@ export function deriveRevealBeat(ctx: NarrativeConsciousnessContext): SceneBeatR
   const pass = ctx.narrativePasses.find((p) =>
     ["symbolic", "relationship_pressure", "interior"].includes(p.passType),
   );
-  const inner = ctx.povPerson.profile?.internalConflicts?.trim();
+  const inner = profileJsonFieldToString(ctx.povPerson.profile?.internalConflicts).trim();
   return {
     beatType: "reveal",
     orderIndex: 3,

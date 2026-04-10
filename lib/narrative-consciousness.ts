@@ -1,5 +1,7 @@
+import type { Prisma } from "@prisma/client";
 import { VisibilityStatus } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
+import { profileJsonFieldToString } from "@/lib/profile-json";
 
 const PUBLIC_PASS_STATUSES = ["accepted", "revised"] as const;
 
@@ -40,7 +42,7 @@ export type NarrativeConsciousnessContext = {
       defensiveStyle: string | null;
       griefPattern: string | null;
       shameTrigger: string | null;
-      internalConflicts: string | null;
+      internalConflicts: Prisma.JsonValue | null;
     } | null;
   };
   participants: string[];
@@ -299,7 +301,7 @@ export function deriveUnspokenThoughtStream(context: NarrativeConsciousnessConte
   const passHint = context.narrativePasses[0]?.summary ?? context.narrativePasses[0]?.content;
   return joinHints(
     [
-      p?.internalConflicts,
+      profileJsonFieldToString(p?.internalConflicts) || null,
       p?.relationalStyle,
       passHint ? `What the scene leans toward (without naming it outright): ${passHint.slice(0, 220)}` : null,
     ],

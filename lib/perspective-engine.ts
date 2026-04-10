@@ -8,6 +8,7 @@ import type {
   SettingState,
 } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
+import { profileJsonFieldToString } from "@/lib/profile-json";
 import { loadNarrativeDNAForPerson } from "@/lib/narrative-dna-context";
 import {
   deriveAttentionBias,
@@ -303,14 +304,15 @@ export async function generatePerspectiveNarrative(input: PerspectiveNarrativeIn
       : "Emotional baseline not set; memory layer is empty or sparse.");
 
   const thought =
-    ctx.characterProfile?.coreBeliefs ||
+    profileJsonFieldToString(ctx.characterProfile?.coreBeliefs) ||
     ctx.characterProfile?.worldview ||
     "Worldview / core beliefs not recorded — add a character profile when ready.";
 
-  const feared = ctx.characterProfile?.fears || "Fears not recorded.";
+  const feared =
+    profileJsonFieldToString(ctx.characterProfile?.fears) || "Fears not recorded.";
 
   const basePossible =
-    ctx.characterProfile?.desires ||
+    profileJsonFieldToString(ctx.characterProfile?.desires) ||
     "Desires and affordances not recorded — historical constraints apply once meta scene is linked.";
 
   const constraintNote =
@@ -426,8 +428,8 @@ export function deriveWhatThisCharacterMisses(ctx: EmbodiedPerspectiveContext): 
 }
 
 export function deriveWhatFeelsSafeOrThreatening(ctx: EmbodiedPerspectiveContext): string {
-  const fear = ctx.characterProfile?.fears?.trim();
-  const longing = ctx.characterProfile?.desires?.trim();
+  const fear = profileJsonFieldToString(ctx.characterProfile?.fears);
+  const longing = profileJsonFieldToString(ctx.characterProfile?.desires);
   const stress = ctx.enneagramType ? deriveStressBehavior(ctx.enneagramType) : "";
   return [
     fear ? `Named fear: ${fear}` : null,
@@ -489,9 +491,9 @@ export function summarizeEmbodiedPerspective(ctx: EmbodiedPerspectiveContext): E
       "—",
     socialSalience: ctx.salience.social.join(" | ") || "—",
     threatPerception: deriveWhatFeelsSafeOrThreatening(ctx),
-    desirePull: ctx.characterProfile?.desires?.trim() ?? ctx.enneagramDerived?.coreLonging ?? "—",
+    desirePull: profileJsonFieldToString(ctx.characterProfile?.desires) || ctx.enneagramDerived?.coreLonging || "—",
     memoryActivation: deriveWhatTriggersMemory(ctx),
-    internalTension: ctx.characterProfile?.internalConflicts?.trim() ?? "—",
+    internalTension: profileJsonFieldToString(ctx.characterProfile?.internalConflicts) || "—",
   };
 }
 

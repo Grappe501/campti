@@ -109,6 +109,105 @@ enum FragmentType {
   OTHER
 }
 
+/// Constitutional / simulation law category (TruthPolicy, VoicePolicy, etc. are rows with this type — not separate tables).
+enum RuleType {
+  TRUTH
+  AMBIGUITY
+  REVEAL
+  VOICE
+  VIOLENCE
+  THEOLOGY
+  DETERMINISM
+  DRAFT_ELIGIBILITY
+}
+
+enum RuleScope {
+  GLOBAL
+  ENTITY
+  SCENE
+  CHARACTER
+  VOICE
+  SYSTEM
+}
+
+enum RuleSeverity {
+  INFO
+  WARNING
+  BLOCKING
+}
+
+/// Character engine — bounded choice and moral/social limits.
+enum CharacterConstraintType {
+  MORAL
+  SOCIAL
+  PHYSICAL
+  PSYCHOLOGICAL
+}
+
+/// Character engine — what activates interior response.
+enum CharacterTriggerType {
+  EMOTIONAL
+  SOCIAL
+  MEMORY
+  ENVIRONMENTAL
+}
+
+/// Environment & risk layer — reusable categories for RiskRegime and analytics.
+enum EnvironmentRiskCategory {
+  FLOOD
+  DISEASE
+  CONFLICT
+  ISOLATION
+  SCARCITY
+  SURVEILLANCE
+  TRANSPORT
+}
+
+/// Corridor / adjacency between simulation nodes (river, trail, trade path, etc.).
+enum NodeConnectionType {
+  RIVER
+  BAYOU
+  TRAIL
+  ROAD
+  FERRY
+  MILITARY_ROUTE
+  TRADE_PATH
+}
+
+/// Layered meaning attached to a place (sacred, trauma, trade, etc.).
+enum PlaceMemoryType {
+  SACRED
+  TRAUMA
+  BURIAL
+  TRADE
+  WAR
+  COMMUNITY
+  DISPLACEMENT
+  CONTINUITY
+}
+
+/// Stage 2 — Ontology spine: what classes of objects exist in the simulation graph.
+enum OntologyFamily {
+  ENTITY
+  NARRATIVE
+  SIMULATION
+  ENVIRONMENT
+  RELATIONSHIP
+  SUPPORT
+}
+
+/// Stage 2 — Controlled vocabulary families for RegistryValue rows.
+enum RegistryFamily {
+  SYMBOLIC
+  RELATIONSHIP
+  ENVIRONMENT
+  PRESSURE
+  PERMISSION
+  READINESS
+  BRANCH
+  GENERAL
+}
+
 model Source {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
@@ -659,6 +758,7 @@ model Claim {
   @@index([confidence])
 }
 
+/// Stable identity row; simulation layers hang off this. OntologyType key `person` classifies instances (see OntologyType seed).
 model Person {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
@@ -690,6 +790,34 @@ model Person {
   relationshipsAsB   CharacterRelationship[] @relation("CharacterRelationshipPersonB")
   voicePasses        VoicePass[]
   characterVoiceAssets CharacterVoiceAsset[]
+
+  characterConstraints        CharacterConstraint[]
+  characterTriggers           CharacterTrigger[]
+  characterPerceptionProfile CharacterPerceptionProfile?
+  characterVoiceProfile      CharacterVoiceProfile?
+  characterChoiceProfile     CharacterChoiceProfile?
+}
+
+/// Pointer to external / master timeline world-state definitions (era slice). Not full simulation logic.
+model WorldStateReference {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  eraId       String   @unique
+  label       String
+  description String?  @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  characterStates CharacterState[]
+  placeStates     PlaceState[]
+  nodeConnections NodeConnection[]
+  placeMemories   PlaceMemoryProfile[]
+
+  @@index([eraId])
 }
 
 model Place {
@@ -720,6 +848,12 @@ model Place {
   settingStates  SettingState[]
   metaScenes     MetaScene[]
   fragmentClusters FragmentCluster[]
+
+  /// Simulation layer — persistent terrain / hydrology / resource logic (Environment & Node Engine).
+  environmentProfile  PlaceEnvironmentProfile?
+  placeStates         PlaceState[]
+  environmentNodes    EnvironmentNode[]
+  placeMemoryProfiles PlaceMemoryProfile[]
 
   @@index([visibility])
   @@index([placeType])
@@ -914,7 +1048,8 @@ model AudioSyncSegment {
   @@index([segmentOrder])
 }
 
-/// Psychographic / narrative mind model for a Person (1:1).
+/// Psychographic / narrative mind model for a Person (1:1). Extends OntologyType `person` (classification spine).
+/// ConstitutionalRule + NarrativePermissionProfile keys may be referenced from perception / choice layers.
 model CharacterProfile {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
@@ -923,12 +1058,20 @@ model CharacterProfile {
   personId String @unique
   person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
 
-  worldview          String?
-  coreBeliefs        String?
-  fears              String?
-  desires            String?
-  internalConflicts  String?
+  worldview         String? @db.Text
+  /// Structured belief payloads (JSON arrays/objects); legacy plain text migrated into JSON string where needed.
+  coreBeliefs       Json?
+  misbeliefs        Json?
+  fears             Json?
+  desires           Json?
+  internalConflicts Json?
+
+  moralFramework     String? @db.Text
+  theologyFramework  String? @db.Text
   socialPosition     String?
+  roleArchetype      String?
+  narrativeFunction  String?
+
   educationLevel     String?
   religiousContext   String?
   emotionalBaseline  String?
@@ -936,9 +1079,13 @@ model CharacterProfile {
   speechPatterns     String?
   memoryBias         String?
   sensoryBias        String?
-  moralFramework     String?
   contradictions     String?
-  notes              String?
+  notes              String? @db.Text
+
+  recordType     RecordType       @default(HYBRID)
+  visibility     VisibilityStatus @default(REVIEW)
+  /// Optional certainty label (aligns with ConfidenceProfile keys informally until FK).
+  certainty      String?
 
   enneagramType          EnneagramType?
   enneagramWing          String?
@@ -958,6 +1105,9 @@ model CharacterProfile {
   griefPattern           String?
   controlPattern         String?
   notesOnTypeUse         String?
+
+  @@index([recordType])
+  @@index([visibility])
 }
 
 /// Internal memory entries for a character; may optionally tie to a source Fragment.
@@ -1010,7 +1160,7 @@ model CharacterRelationship {
   @@index([personBId])
 }
 
-/// Scene-scoped character state (optional Scene link).
+/// Dynamic character state slice (labelled arc, scene link optional). Future: tighter Scene/MetaScene linkage for simulation.
 model CharacterState {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
@@ -1019,8 +1169,18 @@ model CharacterState {
   personId String
   person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
 
-  sceneId String?
-  scene   Scene? @relation(fields: [sceneId], references: [id], onDelete: SetNull)
+  /// Named arc slice (e.g. opening_day, pre_attack); optional when scene-scoped only.
+  label              String?
+  sceneId            String?
+  scene              Scene? @relation(fields: [sceneId], references: [id], onDelete: SetNull)
+
+  emotionalBaseline String?
+  /// Future: RegistryValue key (pressure family); free string until wired.
+  pressureLevel      String?
+  trustLevel         Int     @default(50)
+  fearLevel          Int     @default(50)
+  stabilityLevel     Int     @default(50)
+  cognitiveLoad      Int     @default(50)
 
   emotionalState   String?
   motivation       String?
@@ -1028,10 +1188,142 @@ model CharacterState {
   knowledgeState   String?
   physicalState    String?
   socialConstraint String?
-  notes            String?
+  notes            String? @db.Text
+
+  /// World-era grounding (Stage 3.1) — optional pointer to master timeline / world-state table.
+  worldStateId String?
+  worldState   WorldStateReference? @relation(fields: [worldStateId], references: [id], onDelete: SetNull)
+  /// Snapshot JSON for inspection; PlaceState / environment engine inform full logic later.
+  environmentSnapshot Json?
+  powerContext        Json?
+  economicContext     Json?
+  socialContext       Json?
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
 
   @@index([personId])
   @@index([sceneId])
+  @@index([label])
+  @@index([worldStateId])
+}
+
+/// Hard / soft limits on action — checked later against ConstitutionalRule + scene law.
+model CharacterConstraint {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  type        CharacterConstraintType
+  description String                  @db.Text
+  isHardConstraint Boolean            @default(true)
+  notes       String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@index([personId])
+  @@index([type])
+}
+
+/// Activation patterns — future links to environment/events in application logic.
+model CharacterTrigger {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  triggerType     CharacterTriggerType
+  description     String               @db.Text
+  intensity       Int                  @default(3)
+  responsePattern String? @db.Text
+  notes           String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@index([personId])
+  @@index([triggerType])
+}
+
+/// POV / attention simulation — filters what truth the character can carry into perception pipelines.
+model CharacterPerceptionProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String @unique
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  sensoryBias          String? @db.Text
+  attentionFocus       String? @db.Text
+  blindSpots           Json?
+  interpretationStyle  String? @db.Text
+  memoryReliability    String? @db.Text
+  /// Aligns with NarrativePermissionProfile.key (Stage 2).
+  narrativePermissionKey String?
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@index([narrativePermissionKey])
+}
+
+/// Voice behavior for prose simulation (distinct from NarrativeVoiceProfile scope table).
+model CharacterVoiceProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String @unique
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  dictionLevel             String?
+  rhythmStyle              String?
+  metaphorStyle            String?
+  dialectNotes             String? @db.Text
+  silencePatterns          String? @db.Text
+  emotionalExpressionStyle String? @db.Text
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+}
+
+/// Choice bandwidth — bounded decision system inputs for branch/scene engines.
+model CharacterChoiceProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String @unique
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  riskTolerance         Int     @default(50)
+  decisionSpeed         String?
+  conflictStyle         String?
+  loyaltyPriority       Json?
+  selfPreservationBias  Int     @default(50)
+  moralRigidity         Int     @default(50)
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
 }
 
 /// Rich environment model for a Place (1:1).
@@ -1079,6 +1371,171 @@ model SettingState {
   notes             String?
 
   @@index([placeId])
+}
+
+/// Persistent simulation environment logic for a Place (terrain, hydrology, resources, sacred load). Distinct from SettingProfile (prose-facing).
+/// Future: align terrainType / hydrologyType with RegistryValue (ENVIRONMENT family) and OntologyType.
+model PlaceEnvironmentProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  placeId String @unique
+  place   Place @relation(fields: [placeId], references: [id], onDelete: Cascade)
+
+  terrainType      String?
+  hydrologyType    String?
+  fertilityProfile String? @db.Text
+  floodRiskLevel   Int     @default(0)
+  droughtRiskLevel Int     @default(0)
+  mobilityProfile  String? @db.Text
+  sensoryProfile   Json?
+  resourceProfile  Json?
+  sacredProfile    Json?
+  notes            String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@index([placeId])
+}
+
+/// Era- or slice-specific place behavior (strategic value, access, transport, pressure). Ties to WorldStateReference when applicable.
+model PlaceState {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  placeId String
+  place   Place @relation(fields: [placeId], references: [id], onDelete: Cascade)
+
+  worldStateId String?
+  worldState   WorldStateReference? @relation(fields: [worldStateId], references: [id], onDelete: SetNull)
+
+  label              String
+  settlementPattern  String?
+  strategicValue     Int     @default(0)
+  riskLevel          Int     @default(0)
+  controlProfile     Json?
+  accessProfile      Json?
+  transportProfile   Json?
+  economicProfile    Json?
+  pressureProfile    Json?
+  memoryLoad         Json?
+  activePopulationEstimate Int?
+  notes              String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@index([placeId])
+  @@index([worldStateId])
+  @@index([label])
+}
+
+/// Meaningful location in the simulation network (landing, bluff, hub). `key` is globally unique for engine lookups.
+model EnvironmentNode {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  placeId String
+  place   Place @relation(fields: [placeId], references: [id], onDelete: Cascade)
+
+  key         String  @unique
+  label       String
+  nodeType    String?
+  isCoreNode  Boolean @default(false)
+  regionLabel String?
+  summary     String? @db.Text
+  notes       String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  outgoingConnections NodeConnection[] @relation("NodeConnectionFrom")
+  incomingConnections NodeConnection[] @relation("NodeConnectionTo")
+
+  @@index([placeId])
+  @@index([nodeType])
+}
+
+/// Corridor / adjacency between nodes (river segment, trail, trade path).
+model NodeConnection {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  fromNodeId String
+  fromNode   EnvironmentNode @relation("NodeConnectionFrom", fields: [fromNodeId], references: [id], onDelete: Cascade)
+  toNodeId   String
+  toNode     EnvironmentNode @relation("NodeConnectionTo", fields: [toNodeId], references: [id], onDelete: Cascade)
+
+  connectionType   NodeConnectionType
+  bidirectional      Boolean            @default(true)
+  travelRisk         Int                @default(0)
+  travelDifficulty   Int                @default(0)
+  seasonalModifier   Json?
+  worldStateId       String?
+  worldState         WorldStateReference? @relation(fields: [worldStateId], references: [id], onDelete: SetNull)
+  notes              String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@index([fromNodeId])
+  @@index([toNodeId])
+  @@index([connectionType])
+  @@index([worldStateId])
+}
+
+/// Reusable risk definition for environment / node analytics (not per-instance event rows).
+model RiskRegime {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  key          String                  @unique
+  label        String
+  description  String?                 @db.Text
+  category     EnvironmentRiskCategory
+  baseSeverity Int                     @default(0)
+  notes        String?                 @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@index([category])
+}
+
+/// Layered memory / sacred meaning for a place, optionally scoped to a world-state era.
+model PlaceMemoryProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  placeId String
+  place   Place @relation(fields: [placeId], references: [id], onDelete: Cascade)
+
+  memoryType   PlaceMemoryType
+  label        String
+  description  String? @db.Text
+  worldStateId String?
+  worldState   WorldStateReference? @relation(fields: [worldStateId], references: [id], onDelete: SetNull)
+  notes        String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@index([placeId])
+  @@index([memoryType])
+  @@index([worldStateId])
 }
 
 /// Meta-layer scene: world state, constraints, POV — optionally linked to a draft Scene.
@@ -1361,6 +1818,7 @@ model Symbol {
   recordType      RecordType
   name            String
   meaning         String?
+  /// Stage 2+: symbolic categories live in `RegistryValue` (family SYMBOLIC); this enum stays until a dedicated migration replaces it.
   category        SymbolCategory?
   sourceTraceNote String?
 
@@ -1433,6 +1891,7 @@ model Motif {
 
   name        String
   description String @db.Text
+  /// Stage 2+: motif categories may align with RegistryValue (family SYMBOLIC); free text until migration.
   usagePattern String?
 
   sourceId String?
@@ -1697,4 +2156,160 @@ model ReaderVoiceListen {
   @@unique([sessionId, personId])
   @@index([personId])
   @@index([totalListenSeconds])
+}
+
+/// System governing law for deterministic simulation (Stage 1). Distinct from `NarrativeRule` (source-extracted DNA).
+/// Policy “kinds” (Truth, Voice, Determinism, …) are expressed via `ruleType`, not separate Prisma models.
+model ConstitutionalRule {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  key         String   @unique
+  name        String
+  description String   @db.Text
+
+  ruleType RuleType
+  scope    RuleScope
+  severity RuleSeverity
+
+  isActive Boolean @default(true)
+
+  recordType RecordType
+  visibility VisibilityStatus
+
+  /// Certainty / confidence label for this rule as an object (e.g. system, contested).
+  certainty String?
+
+  /// Aligns with `NarrativePermissionProfile.key` / RegistryValue (family PERMISSION) when set.
+  narrativePermission String?
+
+  /// Rule-specific structured parameters for enforcement engines (Stage 14+).
+  /// May reference OntologyType.key or RegistryValue.key as strings; keep keys stable for forward compatibility.
+  config Json?
+  notes  String? @db.Text
+
+  @@index([ruleType])
+  @@index([scope])
+  @@index([severity])
+  @@index([isActive])
+  @@index([recordType])
+  @@index([visibility])
+}
+
+/// Master registry: kinds of objects that may exist in Campti (person, scene, branch_condition, …).
+model OntologyType {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  key         String         @unique
+  name        String
+  description String         @db.Text
+  family      OntologyFamily
+  isActive    Boolean        @default(true)
+  recordType  RecordType
+  visibility  VisibilityStatus
+
+  appliesTo       Json?
+  sourceTraceNote String? @db.Text
+  notes           String? @db.Text
+
+  @@index([family])
+  @@index([isActive])
+  @@index([recordType])
+  @@index([visibility])
+}
+
+/// Editable controlled vocabulary (categories, permissions, readiness, branch states, …).
+model RegistryValue {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  key          String         @unique
+  label        String
+  description  String?        @db.Text
+  registryType String         @default("default")
+  family       RegistryFamily
+  sortOrder    Int            @default(0)
+  isActive     Boolean        @default(true)
+
+  config Json?
+  /// Future: scope targets (e.g. model names) without join tables yet.
+  appliesTo       Json?
+  sourceTraceNote String? @db.Text
+  notes           String? @db.Text
+
+  @@index([family])
+  @@index([registryType])
+  @@index([isActive])
+  @@index([sortOrder])
+}
+
+/// Narrative permission ladder — what information may do in story systems (bindings, drafts, reveal).
+model NarrativePermissionProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  key         String  @unique
+  name        String
+  description String? @db.Text
+  isActive    Boolean @default(true)
+
+  allowsDirectNarrativeUse Boolean @default(false)
+  allowsSceneSupport        Boolean @default(false)
+  allowsAtmosphereSupport   Boolean @default(false)
+  allowsCanonicalReveal     Boolean @default(false)
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+
+  notes String? @db.Text
+
+  @@index([isActive])
+}
+
+/// Standardized confidence ladder (maps to numeric rank for ordering).
+model ConfidenceProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  key          String @unique
+  label        String
+  description  String? @db.Text
+  numericValue Int
+
+  isActive Boolean @default(true)
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+
+  notes String? @db.Text
+
+  @@index([numericValue])
+  @@index([isActive])
+}
+
+/// Scene composition readiness gates (draft eligibility spine).
+model SceneReadinessProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  key         String  @unique
+  label       String
+  description String? @db.Text
+  isDraftable Boolean @default(false)
+
+  isActive Boolean @default(true)
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+
+  notes String? @db.Text
+
+  @@index([isActive])
 }

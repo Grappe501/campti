@@ -1,4 +1,5 @@
 import type { CharacterMemory, CharacterProfile, SettingProfile, SettingState } from "@prisma/client";
+import { profileJsonFieldToSlice } from "@/lib/profile-json";
 
 export type EnvironmentActContext = {
   settingProfile: SettingProfile | null;
@@ -56,7 +57,7 @@ export function howHungerGriefFearChangeAttention(ctx: {
   memories: CharacterMemory[];
 }): string {
   const grief = ctx.memories.some((m) => /loss|grief|dead|gone|hurt/i.test(m.description));
-  const fear = ctx.characterProfile?.fears?.trim();
+  const fear = profileJsonFieldToSlice(ctx.characterProfile?.fears, 300);
   const parts: string[] = [];
   if (grief) parts.push("Memory field contains grief-markers — attention may snag on absence.");
   if (fear) parts.push(`Named fear tightens scan: ${fear.slice(0, 140)}`);

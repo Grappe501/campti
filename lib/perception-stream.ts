@@ -10,6 +10,7 @@ import {
   type NarrativeConsciousnessContext,
 } from "@/lib/narrative-consciousness";
 import { buildGravityTimingContext, type GravityTimingContext } from "@/lib/emotional-gravity";
+import { profileJsonFieldToString } from "@/lib/profile-json";
 
 export type PerceptionTimingHint = "linger" | "steady" | "quick" | "hold";
 
@@ -249,7 +250,7 @@ export function injectReturnUnits(
  * Pulls a split impulse from profile / relationship / conflict (contradiction, not therapy-speak).
  */
 export function deriveInternalConflict(context: NarrativeConsciousnessContext): string | null {
-  const ic = context.povPerson.profile?.internalConflicts?.trim();
+  const ic = profileJsonFieldToString(context.povPerson.profile?.internalConflicts).trim();
   if (ic) {
     const frag = ic.slice(0, 110);
     return `${frag}${ic.length > 110 ? "…" : ""} — wants one thing, braces for another.`;
@@ -489,7 +490,7 @@ export function deriveUnspokenThought(context: NarrativeConsciousnessContext): P
   const thought = clip(deriveUnspokenThoughtStream(context), 300);
   const summary =
     thought ||
-    clip(context.povPerson.profile?.internalConflicts, 240) ||
+    clip(profileJsonFieldToString(context.povPerson.profile?.internalConflicts), 240) ||
     "Something is being held back from language.";
   const conceal = context.povPerson.profile?.defensiveStyle ? 0.55 : 0.3;
   return {

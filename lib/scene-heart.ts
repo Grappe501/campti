@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { profileJsonFieldToString } from "@/lib/profile-json";
 import { getNarrativeDnaContextForMetaScene } from "@/lib/narrative-dna-context";
 
 export type HeartSnapshot = {
@@ -67,7 +68,11 @@ export async function doesSymbolismTouchCharacter(metaSceneId: string): Promise<
     where: { personId: m.povPersonId },
     select: { internalConflicts: true, fears: true, desires: true },
   });
-  return Boolean(prof?.internalConflicts?.trim() || prof?.fears?.trim() || prof?.desires?.trim());
+  return Boolean(
+    profileJsonFieldToString(prof?.internalConflicts) ||
+      profileJsonFieldToString(prof?.fears) ||
+      profileJsonFieldToString(prof?.desires),
+  );
 }
 
 export async function doesRelationshipPressureExist(metaSceneId: string): Promise<boolean> {

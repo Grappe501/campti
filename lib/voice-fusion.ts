@@ -1,5 +1,6 @@
 import type { GravityTimingContext } from "@/lib/emotional-gravity";
 import type { NarrativeConsciousnessContext } from "@/lib/narrative-consciousness";
+import { profileJsonFieldToString } from "@/lib/profile-json";
 import { prisma } from "@/lib/prisma";
 import type { PerceptionUnit } from "@/lib/perception-stream";
 import { groupPerceptionUnitsForRender, sceneRng } from "@/lib/perception-stream";
@@ -61,7 +62,7 @@ export async function resolveVoiceProfileForMetaScene(
   const silence = parseBias(row?.silenceStyle);
   const interior =
     row?.interiorityStyle?.toLowerCase().includes("deep") ||
-    p?.internalConflicts?.trim()
+    profileJsonFieldToString(p?.internalConflicts).trim()
       ? 0.75
       : 0.45;
   const memory =

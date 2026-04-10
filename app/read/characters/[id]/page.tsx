@@ -10,6 +10,7 @@ import {
   getPublicCharacterById,
   recordTypeReaderLabel,
 } from "@/lib/public-data";
+import { profileJsonFieldToString } from "@/lib/profile-json";
 import { VisibilityStatus } from "@prisma/client";
 
 export const dynamic = "force-dynamic";
@@ -17,10 +18,16 @@ export const dynamic = "force-dynamic";
 type Props = { params: Promise<{ id: string }> };
 
 function mergeFields(
-  parts: (string | null | undefined)[],
+  parts: (string | null | undefined | unknown)[],
   max = 8,
 ): string | null {
-  const t = parts.map((x) => x?.trim()).filter(Boolean) as string[];
+  const t = parts
+    .map((x) => {
+      if (x == null) return "";
+      if (typeof x === "string") return x.trim();
+      return profileJsonFieldToString(x).trim();
+    })
+    .filter(Boolean) as string[];
   if (!t.length) return null;
   return t.slice(0, max).join("\n\n");
 }
@@ -190,7 +197,7 @@ export default async function ReadCharacterDetailPage({ params }: Props) {
           </h2>
           <p className="max-w-2xl text-sm leading-relaxed text-stone-400">
             {cp.coreLonging?.trim() ||
-              cp.desires?.trim() ||
+              profileJsonFieldToString(cp.desires) ||
               "The page can hold them longer than a single visit—return when you are ready to listen closer."}
           </p>
           {person.scenes[0] ? (

@@ -13,7 +13,12 @@ import {
 } from "../lib/ingestion-constants";
 import { prisma } from "../lib/prisma";
 import { seedOriginWorldAnchor } from "./seed-origin-anchor";
+import { seedOpeningTerrainChapterOnePass } from "./seed-opening-terrain-pass";
 import { seedFullDemo } from "./seed-full-demo";
+import { seedConstitutionalRules } from "./seed-constitutional-rules";
+import { seedOntology } from "./seed-ontology";
+import { seedCharacterEngineSample } from "./seed-character-engine";
+import { seedEnvironment } from "./seed-environment";
 
 async function main() {
   const people = [
@@ -528,7 +533,12 @@ async function main() {
   });
 
   await seedOriginWorldAnchor(prisma);
+  await seedOpeningTerrainChapterOnePass(prisma);
   await seedFullDemo(prisma);
+  await seedConstitutionalRules();
+  await seedOntology();
+  await seedCharacterEngineSample(prisma);
+  await seedEnvironment(prisma);
 }
 
 main()

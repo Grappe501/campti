@@ -1,5 +1,6 @@
 import type { CharacterProfile, EnneagramType } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
+import { profileJsonFieldToInferenceText } from "@/lib/profile-json";
 import { deriveLikelyBlindSpot, deriveLikelySceneFocus, getEnneagramProfile } from "@/lib/enneagram-engine";
 
 export type EnneagramInferenceCandidate = {
@@ -43,10 +44,11 @@ function scoreTextForType(text: string, type: EnneagramType): number {
 function textFromProfile(p: CharacterProfile): string {
   return [
     p.worldview,
-    p.coreBeliefs,
-    p.fears,
-    p.desires,
-    p.internalConflicts,
+    profileJsonFieldToInferenceText(p.coreBeliefs),
+    profileJsonFieldToInferenceText(p.misbeliefs),
+    profileJsonFieldToInferenceText(p.fears),
+    profileJsonFieldToInferenceText(p.desires),
+    profileJsonFieldToInferenceText(p.internalConflicts),
     p.emotionalBaseline,
     p.behavioralPatterns,
     p.memoryBias,
