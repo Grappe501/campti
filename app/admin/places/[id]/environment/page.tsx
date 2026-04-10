@@ -9,6 +9,10 @@ import {
   createPlaceEnvironmentProfile,
   createPlaceMemoryProfile,
   createPlaceState,
+  deletePlaceMemoryProfile,
+  deletePlaceState,
+  updatePlaceMemoryProfile,
+  updatePlaceState,
 } from "@/app/actions/environment";
 import { AdminFormError } from "@/components/admin-form-error";
 import { DetailSection } from "@/components/detail-section";
@@ -18,13 +22,13 @@ import { describePlaceEnvironmentRichly } from "@/lib/descriptive-synthesis";
 import { SyntheticRead } from "@/components/synthetic-read";
 import { fieldClass, labelClass, labelSpanClass } from "@/lib/admin-styles";
 import { profileJsonFieldToFormText } from "@/lib/profile-json";
-import { RecordType, VisibilityStatus } from "@prisma/client";
+import { PlaceMemoryType, RecordType, VisibilityStatus } from "@prisma/client";
 
 export const dynamic = "force-dynamic";
 
 type Props = {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ error?: string; saved?: string }>;
+  searchParams: Promise<{ error?: string; saved?: string; deleted?: string }>;
 };
 
 const sf = [
@@ -48,6 +52,7 @@ const sf = [
 
 const recordTypeOptions = Object.values(RecordType);
 const visibilityOptions = Object.values(VisibilityStatus);
+const placeMemoryTypeOptions = Object.values(PlaceMemoryType);
 
 export default async function PlaceEnvironmentPage({ params, searchParams }: Props) {
   const { id } = await params;
@@ -84,6 +89,11 @@ export default async function PlaceEnvironmentPage({ params, searchParams }: Pro
       {sp.saved ? (
         <p className="rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-900" role="status">
           Saved.
+        </p>
+      ) : null}
+      {sp.deleted ? (
+        <p className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-950" role="status">
+          Deleted ({sp.deleted}).
         </p>
       ) : null}
 
@@ -261,10 +271,158 @@ export default async function PlaceEnvironmentPage({ params, searchParams }: Pro
           ) : (
             bundle.placeStates.map((s) => (
               <li key={s.id} className="rounded-md border border-stone-100 p-3 text-sm">
-                <p className="font-medium">{s.label}</p>
-                <p className="text-xs text-stone-500">
-                  world: {s.worldState?.eraId ?? "—"} · risk {s.riskLevel} · strategic {s.strategicValue}
-                </p>
+                <details className="group">
+                  <summary className="cursor-pointer font-medium text-stone-900">{s.label}</summary>
+                  <p className="mt-1 text-xs text-stone-500">
+                    world: {s.worldState?.eraId ?? "—"} · risk {s.riskLevel} · strategic {s.strategicValue}
+                  </p>
+                  <form action={updatePlaceState} className="mt-3 space-y-3 border-t border-stone-100 pt-3">
+                    <input type="hidden" name="id" value={s.id} />
+                    <input type="hidden" name="placeId" value={place.id} />
+                    <label className={labelClass}>
+                      <span className={labelSpanClass}>Label</span>
+                      <input name="label" className={fieldClass} required defaultValue={s.label} />
+                    </label>
+                    <label className={labelClass}>
+                      <span className={labelSpanClass}>World state</span>
+                      <select name="worldStateId" className={fieldClass} defaultValue={s.worldStateId ?? ""}>
+                        <option value="">— optional</option>
+                        {worldStates.map((w) => (
+                          <option key={w.id} value={w.id}>
+                            {w.eraId} — {w.label}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <label className={labelClass}>
+                        <span className={labelSpanClass}>Settlement pattern</span>
+                        <input name="settlementPattern" className={fieldClass} defaultValue={s.settlementPattern ?? ""} />
+                      </label>
+                      <label className={labelClass}>
+                        <span className={labelSpanClass}>Active population est.</span>
+                        <input
+                          name="activePopulationEstimate"
+                          type="number"
+                          min={0}
+                          className={fieldClass}
+                          defaultValue={s.activePopulationEstimate ?? ""}
+                        />
+                      </label>
+                      <label className={labelClass}>
+                        <span className={labelSpanClass}>Strategic value (0–100)</span>
+                        <input
+                          name="strategicValue"
+                          type="number"
+                          min={0}
+                          max={100}
+                          className={fieldClass}
+                          defaultValue={s.strategicValue}
+                        />
+                      </label>
+                      <label className={labelClass}>
+                        <span className={labelSpanClass}>Risk level (0–100)</span>
+                        <input name="riskLevel" type="number" min={0} max={100} className={fieldClass} defaultValue={s.riskLevel} />
+                      </label>
+                    </div>
+                    <label className={labelClass}>
+                      <span className={labelSpanClass}>Control profile (JSON)</span>
+                      <textarea
+                        name="controlProfileJson"
+                        rows={2}
+                        className={fieldClass}
+                        defaultValue={profileJsonFieldToFormText(s.controlProfile)}
+                      />
+                    </label>
+                    <label className={labelClass}>
+                      <span className={labelSpanClass}>Access profile (JSON)</span>
+                      <textarea
+                        name="accessProfileJson"
+                        rows={2}
+                        className={fieldClass}
+                        defaultValue={profileJsonFieldToFormText(s.accessProfile)}
+                      />
+                    </label>
+                    <label className={labelClass}>
+                      <span className={labelSpanClass}>Transport profile (JSON)</span>
+                      <textarea
+                        name="transportProfileJson"
+                        rows={2}
+                        className={fieldClass}
+                        defaultValue={profileJsonFieldToFormText(s.transportProfile)}
+                      />
+                    </label>
+                    <label className={labelClass}>
+                      <span className={labelSpanClass}>Economic profile (JSON)</span>
+                      <textarea
+                        name="economicProfileJson"
+                        rows={2}
+                        className={fieldClass}
+                        defaultValue={profileJsonFieldToFormText(s.economicProfile)}
+                      />
+                    </label>
+                    <label className={labelClass}>
+                      <span className={labelSpanClass}>Pressure profile (JSON)</span>
+                      <textarea
+                        name="pressureProfileJson"
+                        rows={2}
+                        className={fieldClass}
+                        defaultValue={profileJsonFieldToFormText(s.pressureProfile)}
+                      />
+                    </label>
+                    <label className={labelClass}>
+                      <span className={labelSpanClass}>Memory load (JSON)</span>
+                      <textarea
+                        name="memoryLoadJson"
+                        rows={2}
+                        className={fieldClass}
+                        defaultValue={profileJsonFieldToFormText(s.memoryLoad)}
+                      />
+                    </label>
+                    <label className={labelClass}>
+                      <span className={labelSpanClass}>Notes</span>
+                      <textarea name="notes" rows={2} className={fieldClass} defaultValue={s.notes ?? ""} />
+                    </label>
+                    <div className="grid gap-3 sm:grid-cols-3">
+                      <label className={labelClass}>
+                        <span className={labelSpanClass}>Record type</span>
+                        <select name="recordType" className={fieldClass} defaultValue={s.recordType ?? ""}>
+                          <option value="">— default</option>
+                          {recordTypeOptions.map((rt) => (
+                            <option key={rt} value={rt}>
+                              {rt}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                      <label className={labelClass}>
+                        <span className={labelSpanClass}>Visibility</span>
+                        <select name="visibility" className={fieldClass} defaultValue={s.visibility ?? ""}>
+                          <option value="">— default</option>
+                          {visibilityOptions.map((v) => (
+                            <option key={v} value={v}>
+                              {v}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                      <label className={labelClass}>
+                        <span className={labelSpanClass}>Certainty</span>
+                        <input name="certainty" className={fieldClass} defaultValue={s.certainty ?? ""} />
+                      </label>
+                    </div>
+                    <button type="submit" className="rounded-full bg-stone-900 px-4 py-1.5 text-xs font-medium text-amber-50">
+                      Save place state
+                    </button>
+                  </form>
+                  <form action={deletePlaceState} className="mt-2">
+                    <input type="hidden" name="id" value={s.id} />
+                    <input type="hidden" name="placeId" value={place.id} />
+                    <button type="submit" className="text-xs text-rose-800 hover:underline">
+                      Remove place state
+                    </button>
+                  </form>
+                </details>
               </li>
             ))
           )}
@@ -312,8 +470,90 @@ export default async function PlaceEnvironmentPage({ params, searchParams }: Pro
             <li className="text-stone-600">None yet.</li>
           ) : (
             bundle.memoryProfiles.map((m) => (
-              <li key={m.id} className="rounded border border-stone-100 px-2 py-1">
-                <span className="font-medium">{m.memoryType}</span> · {m.label}
+              <li key={m.id} className="rounded border border-stone-100 px-2 py-2">
+                <details>
+                  <summary className="cursor-pointer font-medium text-stone-900">
+                    <span className="font-medium">{m.memoryType}</span> · {m.label}
+                  </summary>
+                  <p className="mt-1 text-xs text-stone-500">
+                    world: {m.worldState?.eraId ?? "—"} · {m.description ? "Has description" : "No description"}
+                  </p>
+                  <form action={updatePlaceMemoryProfile} className="mt-3 space-y-2 border-t border-stone-100 pt-3">
+                    <input type="hidden" name="id" value={m.id} />
+                    <input type="hidden" name="placeId" value={place.id} />
+                    <label className={labelClass}>
+                      <span className={labelSpanClass}>Memory type</span>
+                      <select name="memoryType" className={fieldClass} required defaultValue={m.memoryType}>
+                        {placeMemoryTypeOptions.map((t) => (
+                          <option key={t} value={t}>
+                            {t}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <label className={labelClass}>
+                      <span className={labelSpanClass}>Label</span>
+                      <input name="label" className={fieldClass} required defaultValue={m.label} />
+                    </label>
+                    <label className={labelClass}>
+                      <span className={labelSpanClass}>Description</span>
+                      <textarea name="description" rows={2} className={fieldClass} defaultValue={m.description ?? ""} />
+                    </label>
+                    <label className={labelClass}>
+                      <span className={labelSpanClass}>World state</span>
+                      <select name="worldStateId" className={fieldClass} defaultValue={m.worldStateId ?? ""}>
+                        <option value="">— optional</option>
+                        {worldStates.map((w) => (
+                          <option key={w.id} value={w.id}>
+                            {w.eraId} — {w.label}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <label className={labelClass}>
+                      <span className={labelSpanClass}>Notes</span>
+                      <textarea name="notes" rows={2} className={fieldClass} defaultValue={m.notes ?? ""} />
+                    </label>
+                    <div className="grid gap-3 sm:grid-cols-3">
+                      <label className={labelClass}>
+                        <span className={labelSpanClass}>Record type</span>
+                        <select name="recordType" className={fieldClass} defaultValue={m.recordType ?? ""}>
+                          <option value="">— default</option>
+                          {recordTypeOptions.map((rt) => (
+                            <option key={rt} value={rt}>
+                              {rt}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                      <label className={labelClass}>
+                        <span className={labelSpanClass}>Visibility</span>
+                        <select name="visibility" className={fieldClass} defaultValue={m.visibility ?? ""}>
+                          <option value="">— default</option>
+                          {visibilityOptions.map((v) => (
+                            <option key={v} value={v}>
+                              {v}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                      <label className={labelClass}>
+                        <span className={labelSpanClass}>Certainty</span>
+                        <input name="certainty" className={fieldClass} defaultValue={m.certainty ?? ""} />
+                      </label>
+                    </div>
+                    <button type="submit" className="rounded-full bg-stone-900 px-4 py-1.5 text-xs font-medium text-amber-50">
+                      Save memory profile
+                    </button>
+                  </form>
+                  <form action={deletePlaceMemoryProfile} className="mt-2">
+                    <input type="hidden" name="id" value={m.id} />
+                    <input type="hidden" name="placeId" value={place.id} />
+                    <button type="submit" className="text-xs text-rose-800 hover:underline">
+                      Remove memory profile
+                    </button>
+                  </form>
+                </details>
               </li>
             ))
           )}
@@ -322,19 +562,8 @@ export default async function PlaceEnvironmentPage({ params, searchParams }: Pro
           <input type="hidden" name="placeId" value={place.id} />
           <label className={labelClass}>
             <span className={labelSpanClass}>Memory type</span>
-            <select name="memoryType" className={fieldClass} required>
-              {(
-                [
-                  "SACRED",
-                  "TRAUMA",
-                  "BURIAL",
-                  "TRADE",
-                  "WAR",
-                  "COMMUNITY",
-                  "DISPLACEMENT",
-                  "CONTINUITY",
-                ] as const
-              ).map((t) => (
+            <select name="memoryType" className={fieldClass} required defaultValue={PlaceMemoryType.CONTINUITY}>
+              {placeMemoryTypeOptions.map((t) => (
                 <option key={t} value={t}>
                   {t}
                 </option>
@@ -348,6 +577,17 @@ export default async function PlaceEnvironmentPage({ params, searchParams }: Pro
           <label className={labelClass}>
             <span className={labelSpanClass}>Description</span>
             <textarea name="description" rows={2} className={fieldClass} />
+          </label>
+          <label className={labelClass}>
+            <span className={labelSpanClass}>World state</span>
+            <select name="worldStateId" className={fieldClass} defaultValue="">
+              <option value="">— optional</option>
+              {worldStates.map((w) => (
+                <option key={w.id} value={w.id}>
+                  {w.eraId} — {w.label}
+                </option>
+              ))}
+            </select>
           </label>
           <button type="submit" className="text-sm font-medium text-amber-900 hover:underline">
             Add memory profile

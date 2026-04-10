@@ -4,7 +4,10 @@ import { getNodeConnectionsForAdmin } from "@/lib/data-access";
 
 export const dynamic = "force-dynamic";
 
-export default async function AdminConnectionsPage() {
+type Props = { searchParams: Promise<{ deleted?: string }> };
+
+export default async function AdminConnectionsPage({ searchParams }: Props) {
+  const sp = await searchParams;
   const rows = await getNodeConnectionsForAdmin();
 
   return (
@@ -13,6 +16,11 @@ export default async function AdminConnectionsPage() {
         title="Node connections"
         description="Corridors and adjacency (river, trail, trade path). Branch engine will use travel risk and seasonal modifiers."
       />
+      {sp.deleted ? (
+        <p className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-2 text-sm text-amber-950" role="status">
+          Connection removed.
+        </p>
+      ) : null}
       <p className="text-sm">
         <Link href="/admin/connections/new" className="text-amber-900 hover:underline">
           New connection

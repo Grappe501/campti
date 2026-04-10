@@ -1,14 +1,21 @@
 "use server";
 
+import type { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import {
+  deleteEnvironmentNodeSchema,
+  deleteNodeConnectionSchema,
+  deletePlaceMemoryProfileSchema,
+  deletePlaceStateSchema,
+  deleteRiskRegimeSchema,
   environmentNodeCreateSchema,
   environmentNodeUpdateSchema,
   nodeConnectionCreateSchema,
   nodeConnectionUpdateSchema,
   parseEnvJson,
+  patchEnvJsonFromForm,
   placeEnvironmentProfileUpsertSchema,
   placeMemoryProfileCreateSchema,
   placeMemoryProfileUpdateSchema,
@@ -130,26 +137,37 @@ export async function updatePlaceState(formData: FormData) {
 
   const d = parsed.data;
   try {
+    const existing = await prisma.placeState.findUnique({ where: { id: d.id } });
+    if (!existing || existing.placeId !== placeId) redirect("/admin/places?error=validation");
+
+    const data: Prisma.PlaceStateUpdateInput = {
+      label: d.label,
+      worldState: d.worldStateId ? { connect: { id: d.worldStateId } } : { disconnect: true },
+      settlementPattern: d.settlementPattern ?? null,
+      strategicValue: d.strategicValue ?? undefined,
+      riskLevel: d.riskLevel ?? undefined,
+      activePopulationEstimate: d.activePopulationEstimate ?? null,
+      notes: d.notes ?? null,
+      recordType: d.recordType,
+      visibility: d.visibility,
+      certainty: d.certainty ?? null,
+    };
+    const cp = patchEnvJsonFromForm(raw, "controlProfileJson");
+    if (cp !== undefined) data.controlProfile = cp;
+    const ap = patchEnvJsonFromForm(raw, "accessProfileJson");
+    if (ap !== undefined) data.accessProfile = ap;
+    const tp = patchEnvJsonFromForm(raw, "transportProfileJson");
+    if (tp !== undefined) data.transportProfile = tp;
+    const ep = patchEnvJsonFromForm(raw, "economicProfileJson");
+    if (ep !== undefined) data.economicProfile = ep;
+    const pp = patchEnvJsonFromForm(raw, "pressureProfileJson");
+    if (pp !== undefined) data.pressureProfile = pp;
+    const ml = patchEnvJsonFromForm(raw, "memoryLoadJson");
+    if (ml !== undefined) data.memoryLoad = ml;
+
     await prisma.placeState.update({
       where: { id: d.id },
-      data: {
-        label: d.label,
-        worldStateId: d.worldStateId ?? null,
-        settlementPattern: d.settlementPattern ?? null,
-        strategicValue: d.strategicValue ?? undefined,
-        riskLevel: d.riskLevel ?? undefined,
-        controlProfile: parseEnvJson(d.controlProfileJson ?? undefined),
-        accessProfile: parseEnvJson(d.accessProfileJson ?? undefined),
-        transportProfile: parseEnvJson(d.transportProfileJson ?? undefined),
-        economicProfile: parseEnvJson(d.economicProfileJson ?? undefined),
-        pressureProfile: parseEnvJson(d.pressureProfileJson ?? undefined),
-        memoryLoad: parseEnvJson(d.memoryLoadJson ?? undefined),
-        activePopulationEstimate: d.activePopulationEstimate ?? null,
-        notes: d.notes ?? null,
-        recordType: d.recordType,
-        visibility: d.visibility,
-        certainty: d.certainty ?? null,
-      },
+      data,
     });
   } catch {
     redirect(`/admin/places/${placeId}/environment?error=db`);
@@ -262,22 +280,25 @@ export async function updateNodeConnection(formData: FormData) {
 
   const d = parsed.data;
   try {
+    const data: Prisma.NodeConnectionUpdateInput = {
+      fromNode: { connect: { id: d.fromNodeId } },
+      toNode: { connect: { id: d.toNodeId } },
+      connectionType: d.connectionType,
+      bidirectional: d.bidirectional,
+      travelRisk: d.travelRisk ?? undefined,
+      travelDifficulty: d.travelDifficulty ?? undefined,
+      worldState: d.worldStateId ? { connect: { id: d.worldStateId } } : { disconnect: true },
+      notes: d.notes ?? null,
+      recordType: d.recordType,
+      visibility: d.visibility,
+      certainty: d.certainty ?? null,
+    };
+    const sm = patchEnvJsonFromForm(raw, "seasonalModifierJson");
+    if (sm !== undefined) data.seasonalModifier = sm;
+
     await prisma.nodeConnection.update({
       where: { id: d.id },
-      data: {
-        fromNodeId: d.fromNodeId,
-        toNodeId: d.toNodeId,
-        connectionType: d.connectionType,
-        bidirectional: d.bidirectional,
-        travelRisk: d.travelRisk ?? undefined,
-        travelDifficulty: d.travelDifficulty ?? undefined,
-        seasonalModifier: parseEnvJson(d.seasonalModifierJson ?? undefined),
-        worldStateId: d.worldStateId ?? null,
-        notes: d.notes ?? null,
-        recordType: d.recordType,
-        visibility: d.visibility,
-        certainty: d.certainty ?? null,
-      },
+      data,
     });
     revalidatePath("/admin/connections");
     revalidatePath(`/admin/connections/${d.id}`);
@@ -380,6 +401,9 @@ export async function updatePlaceMemoryProfile(formData: FormData) {
 
   const d = parsed.data;
   try {
+    const existing = await prisma.placeMemoryProfile.findUnique({ where: { id: d.id } });
+    if (!existing || existing.placeId !== placeId) redirect("/admin/places?error=validation");
+
     await prisma.placeMemoryProfile.update({
       where: { id: d.id },
       data: {
@@ -399,4 +423,92 @@ export async function updatePlaceMemoryProfile(formData: FormData) {
 
   envRevalidatePlace(placeId);
   redirect(`/admin/places/${placeId}/environment?saved=memory`);
+}
+
+export async function deletePlaceState(formData: FormData) {
+  const raw = formStringRecord(formData);
+  const parsed = deletePlaceStateSchema.safeParse(raw);
+  if (!parsed.success) redirect("/admin/places?error=validation");
+
+  const d = parsed.data;
+  const row = await prisma.placeState.findUnique({ where: { id: d.id } });
+  if (!row || row.placeId !== d.placeId) redirect("/admin/places?error=validation");
+  try {
+    await prisma.placeState.delete({ where: { id: d.id } });
+  } catch {
+    redirect(`/admin/places/${d.placeId}/environment?error=db`);
+  }
+
+  envRevalidatePlace(d.placeId);
+  redirect(`/admin/places/${d.placeId}/environment?deleted=state`);
+}
+
+export async function deletePlaceMemoryProfile(formData: FormData) {
+  const raw = formStringRecord(formData);
+  const parsed = deletePlaceMemoryProfileSchema.safeParse(raw);
+  if (!parsed.success) redirect("/admin/places?error=validation");
+
+  const d = parsed.data;
+  const row = await prisma.placeMemoryProfile.findUnique({ where: { id: d.id } });
+  if (!row || row.placeId !== d.placeId) redirect("/admin/places?error=validation");
+  try {
+    await prisma.placeMemoryProfile.delete({ where: { id: d.id } });
+  } catch {
+    redirect(`/admin/places/${d.placeId}/environment?error=db`);
+  }
+
+  envRevalidatePlace(d.placeId);
+  redirect(`/admin/places/${d.placeId}/environment?deleted=memory`);
+}
+
+export async function deleteEnvironmentNode(formData: FormData) {
+  const raw = formStringRecord(formData);
+  const parsed = deleteEnvironmentNodeSchema.safeParse(raw);
+  if (!parsed.success) redirect("/admin/nodes?error=validation");
+
+  const d = parsed.data;
+  const node = await prisma.environmentNode.findUnique({ where: { id: d.id } });
+  if (!node) redirect("/admin/nodes?error=validation");
+  try {
+    await prisma.environmentNode.delete({ where: { id: d.id } });
+  } catch {
+    redirect(`/admin/nodes/${d.id}?error=db`);
+  }
+
+  revalidatePath("/admin/nodes");
+  revalidatePath("/admin/connections");
+  envRevalidatePlace(node.placeId);
+  redirect("/admin/nodes?deleted=1");
+}
+
+export async function deleteNodeConnection(formData: FormData) {
+  const raw = formStringRecord(formData);
+  const parsed = deleteNodeConnectionSchema.safeParse(raw);
+  if (!parsed.success) redirect("/admin/connections?error=validation");
+
+  const d = parsed.data;
+  try {
+    await prisma.nodeConnection.delete({ where: { id: d.id } });
+  } catch {
+    redirect(`/admin/connections/${d.id}?error=db`);
+  }
+
+  revalidatePath("/admin/connections");
+  redirect("/admin/connections?deleted=1");
+}
+
+export async function deleteRiskRegime(formData: FormData) {
+  const raw = formStringRecord(formData);
+  const parsed = deleteRiskRegimeSchema.safeParse(raw);
+  if (!parsed.success) redirect("/admin/risks?error=validation");
+
+  const d = parsed.data;
+  try {
+    await prisma.riskRegime.delete({ where: { id: d.id } });
+  } catch {
+    redirect(`/admin/risks/${d.id}?error=db`);
+  }
+
+  revalidatePath("/admin/risks");
+  redirect("/admin/risks?deleted=1");
 }

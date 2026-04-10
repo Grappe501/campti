@@ -32,6 +32,15 @@ export function parseEnvJson(raw: string | null | undefined): Prisma.InputJsonVa
   }
 }
 
+/** When updating from FormData, only touch JSON columns if the field was present (avoids wiping on partial submits). */
+export function patchEnvJsonFromForm(
+  raw: Record<string, string>,
+  key: string,
+): Prisma.InputJsonValue | typeof Prisma.JsonNull | undefined {
+  if (!Object.prototype.hasOwnProperty.call(raw, key)) return undefined;
+  return parseEnvJson(raw[key]);
+}
+
 export const placeEnvironmentProfileUpsertSchema = z.object({
   placeId: z.string().cuid(),
   terrainType: optText(500),
@@ -154,6 +163,28 @@ export const placeMemoryProfileCreateSchema = z.object({
 });
 
 export const placeMemoryProfileUpdateSchema = placeMemoryProfileCreateSchema.extend({
+  id: z.string().cuid(),
+});
+
+export const deletePlaceStateSchema = z.object({
+  id: z.string().cuid(),
+  placeId: z.string().cuid(),
+});
+
+export const deletePlaceMemoryProfileSchema = z.object({
+  id: z.string().cuid(),
+  placeId: z.string().cuid(),
+});
+
+export const deleteEnvironmentNodeSchema = z.object({
+  id: z.string().cuid(),
+});
+
+export const deleteNodeConnectionSchema = z.object({
+  id: z.string().cuid(),
+});
+
+export const deleteRiskRegimeSchema = z.object({
   id: z.string().cuid(),
 });
 

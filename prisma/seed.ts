@@ -19,6 +19,7 @@ import { seedConstitutionalRules } from "./seed-constitutional-rules";
 import { seedOntology } from "./seed-ontology";
 import { seedCharacterEngineSample } from "./seed-character-engine";
 import { seedEnvironment } from "./seed-environment";
+import { seedPressure } from "./seed-pressure";
 
 async function main() {
   const people = [
@@ -539,6 +540,7 @@ async function main() {
   await seedOntology();
   await seedCharacterEngineSample(prisma);
   await seedEnvironment(prisma);
+  await seedPressure(prisma);
 }
 
 main()

@@ -186,6 +186,29 @@ enum PlaceMemoryType {
   CONTINUITY
 }
 
+/// Stage 5 — Governance / order pressure (world-state field).
+enum JusticeMode {
+  RESTORATIVE
+  PUNITIVE
+  HIERARCHICAL
+  MIXED
+}
+
+/// Stage 5 — Socio-economic status band (character, world-state slice).
+enum StatusPosition {
+  HIGH
+  MID
+  LOW
+  AMBIGUOUS
+}
+
+/// Stage 5 — Demographic identity self-perception (character, world-state slice).
+enum SelfPerceptionState {
+  AFFIRMED
+  CONDITIONAL
+  QUESTIONED
+}
+
 /// Stage 2 — Ontology spine: what classes of objects exist in the simulation graph.
 enum OntologyFamily {
   ENTITY
@@ -796,6 +819,14 @@ model Person {
   characterPerceptionProfile CharacterPerceptionProfile?
   characterVoiceProfile      CharacterVoiceProfile?
   characterChoiceProfile     CharacterChoiceProfile?
+
+  governanceImpacts          CharacterGovernanceImpact[]
+  socioEconomicProfiles      CharacterSocioEconomicProfile[]
+  demographicProfiles        CharacterDemographicProfile[]
+  familyPressureProfiles     CharacterFamilyPressureProfile[]
+  characterIntelligenceProfiles CharacterIntelligenceProfile[]
+  characterDevelopmentProfiles CharacterDevelopmentProfile[]
+  characterBiologicalStates CharacterBiologicalState[]
 }
 
 /// Pointer to external / master timeline world-state definitions (era slice). Not full simulation logic.
@@ -817,7 +848,375 @@ model WorldStateReference {
   nodeConnections NodeConnection[]
   placeMemories   PlaceMemoryProfile[]
 
+  governanceProfile       WorldGovernanceProfile?
+  worldPressureBundle     WorldPressureBundle?
+  knowledgeProfile        WorldKnowledgeProfile?
+  expressionProfile       WorldExpressionProfile?
+  characterGovernanceImpacts CharacterGovernanceImpact[]
+  characterSocioEconomicProfiles CharacterSocioEconomicProfile[]
+  characterDemographicProfiles   CharacterDemographicProfile[]
+  characterFamilyPressureProfiles CharacterFamilyPressureProfile[]
+  characterIntelligenceProfiles    CharacterIntelligenceProfile[]
+  characterDevelopmentProfiles     CharacterDevelopmentProfile[]
+  characterBiologicalStates        CharacterBiologicalState[]
+
   @@index([eraId])
+}
+
+/// Stage 5 — Governing pressure field for a world state (laws, conformity, enforcement).
+model WorldGovernanceProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  worldStateId String @unique
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  label String
+
+  controlIntensity        Int @default(50)
+  punishmentSeverity      Int @default(50)
+  enforcementVisibility Int @default(50)
+  justiceFairness         Int @default(50)
+  conformityPressure      Int @default(50)
+
+  justiceMode      JusticeMode @default(MIXED)
+  authorityProfile Json?
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@index([worldStateId])
+}
+
+/// Stage 5 — Character expression constraints under governance (authentic / allowed / suppressed).
+model CharacterGovernanceImpact {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  allowedExpressionRange Int @default(50)
+  suppressionLevel       Int @default(50)
+  punishmentRisk         Int @default(50)
+
+  adaptiveBehavior Json?
+  authenticSelf    Json?
+  allowedSelf      Json?
+  suppressedSelf   Json?
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@unique([personId, worldStateId])
+  @@index([personId])
+  @@index([worldStateId])
+}
+
+/// Stage 5 — Material and status pressure for a character in a world state.
+model CharacterSocioEconomicProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  statusPosition StatusPosition?
+
+  resourceAccess    Int @default(50)
+  roleExpectation   Int @default(50)
+  mobilityPotential Int @default(50)
+  dependencyLevel   Int @default(50)
+  survivalPressure  Int @default(50)
+  privilegeFactor   Int @default(50)
+
+  perceivedValue String? @db.Text
+
+  internalEffects Json?
+  copingPatterns  Json?
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@unique([personId, worldStateId])
+  @@index([personId])
+  @@index([worldStateId])
+}
+
+/// Stage 5 — Social assignment and identity pressure for a character in a world state.
+model CharacterDemographicProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  visibleTraits    Json?
+  ancestryContext  Json?
+
+  statusValue            Int @default(0)
+  trustBias              Int @default(0)
+  inclusionLevel         Int @default(50)
+  riskExposure           Int @default(50)
+  privilegeModifier      Int @default(50)
+  mobilityModifier       Int @default(50)
+  punishmentRiskModifier Int @default(50)
+  belongingSense         Int @default(50)
+  identityCohesion       Int @default(50)
+  vigilanceLevel         Int @default(50)
+
+  selfPerception SelfPerceptionState?
+
+  stressPatterns      Json?
+  adaptiveBehaviors   Json?
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@unique([personId, worldStateId])
+  @@index([personId])
+  @@index([worldStateId])
+}
+
+/// Stage 5 — Family obligation and attachment pressure for a character in a world state.
+model CharacterFamilyPressureProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  attachmentStrength         Int @default(50)
+  obligationPressure         Int @default(50)
+  emotionalExpressionRange   Int @default(50)
+  individualFreedom          Int @default(50)
+  loyaltyExpectation         Int @default(50)
+
+  conflictZones      Json?
+  feltLove           Json?
+  expressedLove      Json?
+  constrainedEmotion Json?
+  behaviorPatterns   Json?
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@unique([personId, worldStateId])
+  @@index([personId])
+  @@index([worldStateId])
+}
+
+/// Stage 5 — Inspectable world-state pressure mix (weights + summary JSON).
+model WorldPressureBundle {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  worldStateId String @unique
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  governanceWeight   Int @default(25)
+  economicWeight     Int @default(25)
+  demographicWeight  Int @default(25)
+  familyWeight       Int @default(25)
+
+  summary Json?
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@index([worldStateId])
+}
+
+/// Stage 5.5 — What can be known, built, and conceptualized in this era (knowledge horizon).
+model WorldKnowledgeProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  worldStateId String @unique
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  label String?
+
+  abstractionCeiling       Int @default(50)
+  literacyRegime           String? @db.Text
+  dominantExplanatorySystems Json?
+  technologyHorizon          Json?
+  informationFlowSpeed     Int @default(50)
+  geographicAwarenessNorm  String? @db.Text
+  tabooKnowledgeDomains    Json?
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@index([worldStateId])
+}
+
+/// Stage 5.5 — Norms for how discourse and inner speech are shaped (expression horizon).
+model WorldExpressionProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  worldStateId String @unique
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  label String?
+
+  publicExpressionCeiling          Int @default(50)
+  internalLanguageComplexityNorm   Int @default(50)
+  metaphorSourceDomains            Json?
+  acceptableExplanationModes       Json?
+  silencePatternsNorm              String? @db.Text
+  tabooPhrasingDomains             Json?
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@index([worldStateId])
+}
+
+/// Stage 5.5 — Usable cognition (multi-vector; not a single IQ scalar).
+model CharacterIntelligenceProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  patternRecognition       Int @default(50)
+  workingMemory            Int @default(50)
+  abstractionCapacity      Int @default(50)
+  socialInference          Int @default(50)
+  environmentalInference   Int @default(50)
+  selfReflectionDepth      Int @default(50)
+  impulseControl           Int @default(50)
+  planningHorizon          Int @default(50)
+  metacognition            Int @default(50)
+  memoryStrength           Int @default(50)
+  expressionComplexity     Int @default(50)
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@unique([personId, worldStateId])
+  @@index([personId])
+  @@index([worldStateId])
+}
+
+/// Stage 5.5 — Age, maturity, role load (world-sliced).
+model CharacterDevelopmentProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  ageBand              String?
+  maturityRate         Int @default(50)
+  socialRoleByAge      String? @db.Text
+  regulationLevel      Int @default(50)
+  responsibilityLoad   Int @default(50)
+  roleCompression        Int @default(50)
+  /// Higher = more sheltered / protected developmental space; lower = more exposure / adultification pressure.
+  protectednessExposure  Int @default(50)
+  developmentalCompression Json?
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@unique([personId, worldStateId])
+  @@index([personId])
+  @@index([worldStateId])
+}
+
+/// Stage 5.5 — Body and conditions that shape intelligence expression.
+model CharacterBiologicalState {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  nutritionLoad         Int @default(50)
+  fatigueLoad           Int @default(50)
+  illnessLoad           Int @default(50)
+  chronicStress         Int @default(50)
+  bodyPain              Int @default(50)
+  reproductiveLoad      Int?
+  laborExhaustion       Int @default(50)
+  environmentalExposure Int @default(50)
+  traumaLoad            Int @default(50)
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@unique([personId, worldStateId])
+  @@index([personId])
+  @@index([worldStateId])
 }
 
 model Place {

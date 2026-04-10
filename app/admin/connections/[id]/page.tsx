@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
-import { updateNodeConnection } from "@/app/actions/environment";
+import { deleteNodeConnection, updateNodeConnection } from "@/app/actions/environment";
 import { getEnvironmentNodesForAdmin, getNodeConnectionByIdForAdmin, getWorldStateReferences } from "@/lib/data-access";
 import { fieldClass, labelClass, labelSpanClass } from "@/lib/admin-styles";
 import { profileJsonFieldToFormText } from "@/lib/profile-json";
@@ -130,6 +130,13 @@ export default async function ConnectionDetailPage({ params }: Props) {
         </label>
         <button type="submit" className="rounded-full bg-stone-900 px-5 py-2 text-sm font-medium text-amber-50">
           Save
+        </button>
+      </form>
+
+      <form action={deleteNodeConnection} className="rounded-lg border border-rose-100 bg-rose-50/40 p-4 text-sm">
+        <input type="hidden" name="id" value={row.id} />
+        <button type="submit" className="text-sm font-medium text-rose-800 hover:underline">
+          Delete connection
         </button>
       </form>
     </div>

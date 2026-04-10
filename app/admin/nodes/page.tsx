@@ -4,7 +4,10 @@ import { getEnvironmentNodesForAdmin } from "@/lib/data-access";
 
 export const dynamic = "force-dynamic";
 
-export default async function AdminNodesPage() {
+type Props = { searchParams: Promise<{ deleted?: string }> };
+
+export default async function AdminNodesPage({ searchParams }: Props) {
+  const sp = await searchParams;
   const nodes = await getEnvironmentNodesForAdmin();
 
   return (
@@ -13,6 +16,11 @@ export default async function AdminNodesPage() {
         title="Environment nodes"
         description="Simulation network locations (river channel, landing, hub). Classify with nodeType; align to RegistryValue (ENVIRONMENT) later."
       />
+      {sp.deleted ? (
+        <p className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-2 text-sm text-amber-950" role="status">
+          Node removed.
+        </p>
+      ) : null}
       <p className="text-sm">
         <Link href="/admin/nodes/new" className="text-amber-900 hover:underline">
           New node

@@ -147,6 +147,17 @@ const ROWS: SeedRow[] = [
     scope: RuleScope.SYSTEM,
     severity: RuleSeverity.BLOCKING,
   },
+  {
+    key: "intelligence-core-law",
+    name: "Core Intelligence Law — historically bounded cognition",
+    description:
+      "A character may reason deeply only within historically possible knowledge: perception through body and training, interpretation through culture and world state, inference through era-available knowledge, maturation through age and environment. " +
+      "External models (e.g. OpenAI) provide inference, association, and simulation power; the character brain wrapper constrains that power to the character’s age, body, training, world state, technology horizon, cultural language, and available knowledge. " +
+      "Intelligence is not a single scalar: profiles may be low abstraction with high environmental intelligence, high social intelligence with low self-awareness, high planning with low emotional regulation, etc.",
+    ruleType: RuleType.DETERMINISM,
+    scope: RuleScope.CHARACTER,
+    severity: RuleSeverity.BLOCKING,
+  },
 ];
 
 export async function seedConstitutionalRules(): Promise<void> {

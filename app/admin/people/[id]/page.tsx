@@ -32,6 +32,14 @@ export default async function AdminPersonDetailPage({ params, searchParams }: Pr
           <Link href={`/admin/characters/${person.id}/mind`} className="text-amber-900 hover:underline">
             Character mind (world model) →
           </Link>
+          {" · "}
+          <Link href={`/admin/characters/${person.id}/pressure`} className="text-amber-900 hover:underline">
+            Pressure (Stage 5) →
+          </Link>
+          {" · "}
+          <Link href={`/admin/characters/${person.id}/intelligence`} className="text-amber-900 hover:underline">
+            Intelligence (Stage 5.5) →
+          </Link>
         </p>
       </div>
 

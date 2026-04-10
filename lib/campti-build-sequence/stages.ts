@@ -116,6 +116,25 @@ export const CAMPTI_BUILD_STAGES: CamptiBuildStage[] = [
     goal: "The world defines the shape of thinkable choice before characters choose.",
   },
   {
+    stage: 5.5,
+    id: "intelligence-knowledge-horizon",
+    title: "Intelligence, Knowledge Horizon & Maturity Engine",
+    promptLabel: "CAMPTI STAGE 5.5 — INTELLIGENCE, KNOWLEDGE HORIZON AND MATURITY ENGINE",
+    layerFocus:
+      "Before relationship/desire engines, bound cognition: what can be noticed, understood, and said under era, body, and training — not a single IQ scalar.",
+    modelsToBuild: [
+      "WorldKnowledgeProfile",
+      "WorldExpressionProfile",
+      "CharacterIntelligenceProfile",
+      "CharacterDevelopmentProfile",
+      "CharacterBiologicalState",
+      "evaluateCharacterKnowledgeHorizon / assembleCharacterCognitiveEnvelope (simulation stubs)",
+    ],
+    adminSurfaces: ["/admin/world-states/[id]/knowledge", "/admin/characters/[id]/intelligence"],
+    goal: "Inference is substrate-only; the character’s mind is historically and biologically bounded.",
+    antiPatterns: ["Letting the model speak with modern therapy or academic abstraction in premodern minds", "Collapsing intelligence to one number"],
+  },
+  {
     stage: 6,
     id: "symbol-motif-law",
     title: "Symbol / Motif Law Engine",

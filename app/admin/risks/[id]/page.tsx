@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
-import { updateRiskRegime } from "@/app/actions/environment";
+import { deleteRiskRegime, updateRiskRegime } from "@/app/actions/environment";
 import { getRiskRegimeByIdForAdmin } from "@/lib/data-access";
 import { fieldClass, labelClass, labelSpanClass } from "@/lib/admin-styles";
 import { EnvironmentRiskCategory, RecordType, VisibilityStatus } from "@prisma/client";
@@ -87,6 +87,13 @@ export default async function RiskRegimeDetailPage({ params }: Props) {
         </label>
         <button type="submit" className="rounded-full bg-stone-900 px-5 py-2 text-sm font-medium text-amber-50">
           Save
+        </button>
+      </form>
+
+      <form action={deleteRiskRegime} className="rounded-lg border border-rose-100 bg-rose-50/40 p-4 text-sm">
+        <input type="hidden" name="id" value={r.id} />
+        <button type="submit" className="text-sm font-medium text-rose-800 hover:underline">
+          Delete risk regime
         </button>
       </form>
     </div>

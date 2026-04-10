@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
-import { updateEnvironmentNode } from "@/app/actions/environment";
+import { deleteEnvironmentNode, updateEnvironmentNode } from "@/app/actions/environment";
 import { getEnvironmentNodeByIdForAdmin, getNodeConnectionsForAdmin } from "@/lib/data-access";
 import { fieldClass, labelClass, labelSpanClass } from "@/lib/admin-styles";
 import { RecordType, VisibilityStatus } from "@prisma/client";
@@ -91,6 +91,14 @@ export default async function AdminNodeDetailPage({ params }: Props) {
         </label>
         <button type="submit" className="rounded-full bg-stone-900 px-5 py-2 text-sm font-medium text-amber-50">
           Save
+        </button>
+      </form>
+
+      <form action={deleteEnvironmentNode} className="rounded-lg border border-rose-100 bg-rose-50/40 p-4 text-sm">
+        <input type="hidden" name="id" value={node.id} />
+        <p className="text-stone-700">Deletes this node and its corridor rows (connections cascade).</p>
+        <button type="submit" className="mt-2 text-sm font-medium text-rose-800 hover:underline">
+          Delete node
         </button>
       </form>
 

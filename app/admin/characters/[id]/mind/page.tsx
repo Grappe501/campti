@@ -2,17 +2,19 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   addCharacterMemoryAction,
+  deleteCharacterMemoryAction,
+} from "@/app/actions/world-model";
+import {
   addCharacterStateAction,
   createCharacterChoiceProfile,
   createCharacterConstraint,
   createCharacterPerceptionProfile,
   createCharacterTrigger,
   createCharacterVoiceProfile,
-  deleteCharacterMemoryAction,
   deleteCharacterStateAction,
   updateCharacterState,
   upsertCharacterProfileAction,
-} from "@/app/actions/world-model";
+} from "@/app/actions/character-engine";
 import { AdminFormError } from "@/components/admin-form-error";
 import { DetailSection } from "@/components/detail-section";
 import { PageHeader } from "@/components/page-header";

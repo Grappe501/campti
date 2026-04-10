@@ -27,6 +27,8 @@ import type {
   NodeConnectionAdminFilters,
   PlaceFullEnvironmentBundle,
 } from "@/lib/environment-types";
+import type { CharacterIntelligenceBundle } from "@/lib/intelligence-types";
+import type { CharacterPressureBundle, WorldGovernanceAdminFilters } from "@/lib/pressure-order-types";
 
 async function safe<T>(fn: () => Promise<T>, fallback: T): Promise<T> {
   try {
@@ -2274,6 +2276,10 @@ export async function getWorldStateReferences() {
   );
 }
 
+export async function getWorldStateById(id: string) {
+  return safe(() => prisma.worldStateReference.findUnique({ where: { id } }), null);
+}
+
 /** Simulation + environment layers for a place (Place + profile + states + nodes + memory + connections touching those nodes). */
 export async function getPlaceFullEnvironmentBundle(placeId: string): Promise<PlaceFullEnvironmentBundle | null> {
   return safe(
@@ -2645,5 +2651,274 @@ export async function getEntityHintsForDecomposition(): Promise<EntityHintsForDe
       personNames: [],
       openQuestionTitles: [],
     },
+  );
+}
+
+/** Stage 5 — world pressure bundle row + linked world state (admin inspection). */
+export async function getWorldPressureBundleForAdmin(worldStateId: string) {
+  return safe(
+    () =>
+      prisma.worldPressureBundle.findUnique({
+        where: { worldStateId },
+        include: { worldState: true },
+      }),
+    null,
+  );
+}
+
+export async function getWorldPressureBundleByIdForAdmin(id: string) {
+  return safe(
+    () =>
+      prisma.worldPressureBundle.findUnique({
+        where: { id },
+        include: { worldState: true },
+      }),
+    null,
+  );
+}
+
+export async function getWorldPressureBundlesForAdmin() {
+  return safe(
+    () =>
+      prisma.worldPressureBundle.findMany({
+        take: 100,
+        orderBy: { updatedAt: "desc" },
+        include: { worldState: { select: { id: true, eraId: true, label: true } } },
+      }),
+    [],
+  );
+}
+
+/** Stage 5 — full character × world pressure slice for admin and future scene engines. */
+export async function getCharacterPressureBundle(
+  personId: string,
+  worldStateId: string,
+): Promise<CharacterPressureBundle | null> {
+  return safe(
+    async () => {
+      const [person, worldState] = await Promise.all([
+        prisma.person.findUnique({
+          where: { id: personId },
+          include: { characterProfile: true },
+        }),
+        prisma.worldStateReference.findUnique({ where: { id: worldStateId } }),
+      ]);
+      if (!person || !worldState) return null;
+
+      const [governanceImpact, socioEconomic, demographic, familyPressure, characterState] = await Promise.all([
+        prisma.characterGovernanceImpact.findUnique({
+          where: { personId_worldStateId: { personId, worldStateId } },
+        }),
+        prisma.characterSocioEconomicProfile.findUnique({
+          where: { personId_worldStateId: { personId, worldStateId } },
+        }),
+        prisma.characterDemographicProfile.findUnique({
+          where: { personId_worldStateId: { personId, worldStateId } },
+        }),
+        prisma.characterFamilyPressureProfile.findUnique({
+          where: { personId_worldStateId: { personId, worldStateId } },
+        }),
+        prisma.characterState.findFirst({
+          where: { personId, worldStateId },
+          orderBy: { updatedAt: "desc" },
+        }),
+      ]);
+
+      return {
+        person,
+        worldState,
+        governanceImpact,
+        socioEconomic,
+        demographic,
+        familyPressure,
+        characterState,
+      };
+    },
+    null,
+  );
+}
+
+export async function getWorldGovernanceProfilesForAdmin(filters?: WorldGovernanceAdminFilters) {
+  const where: Prisma.WorldGovernanceProfileWhereInput = {};
+  if (filters?.visibility) where.visibility = filters.visibility;
+  if (filters?.recordType) where.recordType = filters.recordType;
+  if (filters?.search?.trim()) {
+    where.label = { contains: filters.search.trim(), mode: "insensitive" };
+  }
+  return safe(
+    () =>
+      prisma.worldGovernanceProfile.findMany({
+        where,
+        take: 200,
+        orderBy: { updatedAt: "desc" },
+        include: { worldState: { select: { id: true, eraId: true, label: true } } },
+      }),
+    [],
+  );
+}
+
+export async function getWorldGovernanceProfileByIdForAdmin(id: string) {
+  return safe(
+    () =>
+      prisma.worldGovernanceProfile.findUnique({
+        where: { id },
+        include: { worldState: true },
+      }),
+    null,
+  );
+}
+
+export async function getCharacterPressureProfilesForAdmin(personId: string) {
+  return safe(
+    async () => {
+      const [governanceImpacts, socioEconomicProfiles, demographicProfiles, familyPressureProfiles] =
+        await Promise.all([
+          prisma.characterGovernanceImpact.findMany({
+            where: { personId },
+            orderBy: { updatedAt: "desc" },
+            include: { worldState: { select: { id: true, eraId: true, label: true } } },
+          }),
+          prisma.characterSocioEconomicProfile.findMany({
+            where: { personId },
+            orderBy: { updatedAt: "desc" },
+            include: { worldState: { select: { id: true, eraId: true, label: true } } },
+          }),
+          prisma.characterDemographicProfile.findMany({
+            where: { personId },
+            orderBy: { updatedAt: "desc" },
+            include: { worldState: { select: { id: true, eraId: true, label: true } } },
+          }),
+          prisma.characterFamilyPressureProfile.findMany({
+            where: { personId },
+            orderBy: { updatedAt: "desc" },
+            include: { worldState: { select: { id: true, eraId: true, label: true } } },
+          }),
+        ]);
+      return {
+        governanceImpacts,
+        socioEconomicProfiles,
+        demographicProfiles,
+        familyPressureProfiles,
+      };
+    },
+    {
+      governanceImpacts: [],
+      socioEconomicProfiles: [],
+      demographicProfiles: [],
+      familyPressureProfiles: [],
+    },
+  );
+}
+
+/** Stage 5.5 — batch world knowledge + expression rows for many era slices (avoids N+1 on character intelligence page). */
+export async function getWorldIntelligenceHorizonsForWorldIds(worldStateIds: string[]) {
+  return safe(
+    async () => {
+      if (worldStateIds.length === 0) {
+        return { knowledgeByWorld: new Map(), expressionByWorld: new Map() };
+      }
+      const [knowledge, expression] = await Promise.all([
+        prisma.worldKnowledgeProfile.findMany({ where: { worldStateId: { in: worldStateIds } } }),
+        prisma.worldExpressionProfile.findMany({ where: { worldStateId: { in: worldStateIds } } }),
+      ]);
+      return {
+        knowledgeByWorld: new Map(knowledge.map((k) => [k.worldStateId, k])),
+        expressionByWorld: new Map(expression.map((e) => [e.worldStateId, e])),
+      };
+    },
+    {
+      knowledgeByWorld: new Map(),
+      expressionByWorld: new Map(),
+    },
+  );
+}
+
+/** Stage 5.5 — world knowledge + expression profiles for a single era slice. */
+export async function getWorldIntelligenceHorizonForAdmin(worldStateId: string) {
+  return safe(
+    async () => {
+      const [knowledge, expression] = await Promise.all([
+        prisma.worldKnowledgeProfile.findUnique({
+          where: { worldStateId },
+          include: { worldState: { select: { id: true, eraId: true, label: true } } },
+        }),
+        prisma.worldExpressionProfile.findUnique({
+          where: { worldStateId },
+          include: { worldState: { select: { id: true, eraId: true, label: true } } },
+        }),
+      ]);
+      return { knowledge, expression };
+    },
+    { knowledge: null, expression: null },
+  );
+}
+
+/** Stage 5.5 — character cognition / development / biological rows by world state (admin). */
+export async function getCharacterIntelligenceProfilesForAdmin(personId: string) {
+  return safe(
+    async () => {
+      const [intelligence, development, biological] = await Promise.all([
+        prisma.characterIntelligenceProfile.findMany({
+          where: { personId },
+          orderBy: { updatedAt: "desc" },
+          include: { worldState: { select: { id: true, eraId: true, label: true } } },
+        }),
+        prisma.characterDevelopmentProfile.findMany({
+          where: { personId },
+          orderBy: { updatedAt: "desc" },
+          include: { worldState: { select: { id: true, eraId: true, label: true } } },
+        }),
+        prisma.characterBiologicalState.findMany({
+          where: { personId },
+          orderBy: { updatedAt: "desc" },
+          include: { worldState: { select: { id: true, eraId: true, label: true } } },
+        }),
+      ]);
+      return { intelligence, development, biological };
+    },
+    {
+      intelligence: [],
+      development: [],
+      biological: [],
+    },
+  );
+}
+
+/** Stage 5.5 — full character × world intelligence slice for envelopes and simulation. */
+export async function getCharacterIntelligenceBundle(
+  personId: string,
+  worldStateId: string,
+): Promise<CharacterIntelligenceBundle | null> {
+  return safe(
+    async () => {
+      const [person, worldState] = await Promise.all([
+        prisma.person.findUnique({ where: { id: personId } }),
+        prisma.worldStateReference.findUnique({ where: { id: worldStateId } }),
+      ]);
+      if (!person || !worldState) return null;
+
+      const [intelligence, development, biological, worldKnowledge, worldExpression] = await Promise.all([
+        prisma.characterIntelligenceProfile.findUnique({
+          where: { personId_worldStateId: { personId, worldStateId } },
+        }),
+        prisma.characterDevelopmentProfile.findUnique({
+          where: { personId_worldStateId: { personId, worldStateId } },
+        }),
+        prisma.characterBiologicalState.findUnique({
+          where: { personId_worldStateId: { personId, worldStateId } },
+        }),
+        prisma.worldKnowledgeProfile.findUnique({ where: { worldStateId } }),
+        prisma.worldExpressionProfile.findUnique({ where: { worldStateId } }),
+      ]);
+
+      return {
+        intelligence,
+        development,
+        biological,
+        worldKnowledge,
+        worldExpression,
+      };
+    },
+    null,
   );
 }

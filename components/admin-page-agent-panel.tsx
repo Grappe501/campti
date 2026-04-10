@@ -9,7 +9,6 @@ type ChatMessage = { role: "user" | "assistant"; content: string };
 
 export function AdminPageAgentPanel() {
   const pathname = usePathname() ?? "/admin";
-  if (pathname === "/admin/login") return null;
 
   const entityRef = useMemo(() => parseEntityFromAdminPath(pathname), [pathname]);
 
@@ -66,6 +65,8 @@ export function AdminPageAgentPanel() {
       setLoading(false);
     }
   }, [input, loading, messages, pathname, entityRef]);
+
+  if (pathname === "/admin/login") return null;
 
   return (
     <>
