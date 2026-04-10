@@ -20,6 +20,8 @@ import { seedOntology } from "./seed-ontology";
 import { seedCharacterEngineSample } from "./seed-character-engine";
 import { seedEnvironment } from "./seed-environment";
 import { seedPressure } from "./seed-pressure";
+import { seedRelationship } from "./seed-relationship";
+import { seedContinuity } from "./seed-continuity";
 
 async function main() {
   const people = [
@@ -541,6 +543,8 @@ async function main() {
   await seedCharacterEngineSample(prisma);
   await seedEnvironment(prisma);
   await seedPressure(prisma);
+  await seedRelationship(prisma);
+  await seedContinuity(prisma);
 }
 
 main()

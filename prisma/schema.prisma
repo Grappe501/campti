@@ -209,6 +209,55 @@ enum SelfPerceptionState {
   QUESTIONED
 }
 
+/// Stage 6 — Relationship engine: bond category (world-sliced dyad).
+enum RelationshipType {
+  KINSHIP
+  ALLIANCE
+  FRIENDSHIP
+  MARRIAGE_BOND
+  COURTSHIP
+  CHOSEN_FAMILY
+  PROTECTIVE
+  DOMINANCE
+  TRANSLATION_BRIDGE
+  RIVALRY
+  SPIRITUAL_AUTHORITY
+  ECONOMIC_DEPENDENCY
+}
+
+/// Stage 6 — Desire / attachment slice (character × world).
+enum AttachmentStyle {
+  SECURE
+  ANXIOUS
+  AVOIDANT
+  DISORGANIZED
+  DUTY_BOUND
+  SPLIT_EXPRESSION
+}
+
+/// Stage 6 — How a bond is socially legible.
+enum PublicStatus {
+  OPEN
+  IMPLIED
+  HIDDEN
+  DENIED
+  FORCED
+  CODED
+}
+
+/// Stage 6.5 — Dominant route by which usable skill/knowledge is acquired (character slice).
+enum TrainingMode {
+  ORAL_TRADITION
+  APPRENTICESHIP
+  RITUAL_INSTRUCTION
+  HOUSEHOLD_TRAINING
+  FORMAL_SCHOOLING
+  RELIGIOUS_CATECHESIS
+  MILITARY_TRAINING
+  SELF_TAUGHT
+  MIXED
+}
+
 /// Stage 2 — Ontology spine: what classes of objects exist in the simulation graph.
 enum OntologyFamily {
   ENTITY
@@ -827,6 +876,23 @@ model Person {
   characterIntelligenceProfiles CharacterIntelligenceProfile[]
   characterDevelopmentProfiles CharacterDevelopmentProfile[]
   characterBiologicalStates CharacterBiologicalState[]
+
+  relationshipProfilesAsA      RelationshipProfile[] @relation("RelationshipProfilePersonA")
+  relationshipProfilesAsB      RelationshipProfile[] @relation("RelationshipProfilePersonB")
+  characterMaskingProfiles     CharacterMaskingProfile[]
+  characterDesireProfiles      CharacterDesireProfile[]
+  relationshipNetworkSummaries RelationshipNetworkSummary[]
+
+  characterTraumaProfiles            CharacterTraumaProfile[]
+  characterConsequenceMemoryProfiles CharacterConsequenceMemoryProfile[]
+  characterRumorReputationProfiles   CharacterRumorReputationProfile[]
+  characterEducationProfiles         CharacterEducationProfile[]
+  characterLearningEnvelopes         CharacterLearningEnvelope[]
+
+  characterPhysicalHealthProfiles   CharacterPhysicalHealthProfile[]
+  characterMentalHealthProfiles       CharacterMentalHealthProfile[]
+  characterEmotionalHealthProfiles    CharacterEmotionalHealthProfile[]
+  characterHealthEnvelopes          CharacterHealthEnvelope[]
 }
 
 /// Pointer to external / master timeline world-state definitions (era slice). Not full simulation logic.
@@ -859,6 +925,28 @@ model WorldStateReference {
   characterIntelligenceProfiles    CharacterIntelligenceProfile[]
   characterDevelopmentProfiles     CharacterDevelopmentProfile[]
   characterBiologicalStates        CharacterBiologicalState[]
+
+  worldRelationshipNormProfile WorldRelationshipNormProfile?
+  relationshipProfiles         RelationshipProfile[]
+  relationshipDisclosureProfiles RelationshipDisclosureProfile[]
+  characterMaskingProfiles     CharacterMaskingProfile[]
+  characterDesireProfiles      CharacterDesireProfile[]
+  relationshipNetworkSummaries RelationshipNetworkSummary[]
+
+  worldEducationNormProfile WorldEducationNormProfile?
+
+  characterTraumaProfiles            CharacterTraumaProfile[]
+  characterConsequenceMemoryProfiles CharacterConsequenceMemoryProfile[]
+  characterRumorReputationProfiles   CharacterRumorReputationProfile[]
+  characterEducationProfiles         CharacterEducationProfile[]
+  characterLearningEnvelopes         CharacterLearningEnvelope[]
+
+  worldHealthNormProfile WorldHealthNormProfile?
+
+  characterPhysicalHealthProfiles   CharacterPhysicalHealthProfile[]
+  characterMentalHealthProfiles     CharacterMentalHealthProfile[]
+  characterEmotionalHealthProfiles  CharacterEmotionalHealthProfile[]
+  characterHealthEnvelopes          CharacterHealthEnvelope[]
 
   @@index([eraId])
 }
@@ -1207,6 +1295,609 @@ model CharacterBiologicalState {
   laborExhaustion       Int @default(50)
   environmentalExposure Int @default(50)
   traumaLoad            Int @default(50)
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@unique([personId, worldStateId])
+  @@index([personId])
+  @@index([worldStateId])
+}
+
+/// Stage 6 — Dyadic bond under a world slice. personAId & personBId are normalized (personAId < personBId lexicographically).
+model RelationshipProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personAId String
+  personA   Person @relation("RelationshipProfilePersonA", fields: [personAId], references: [id], onDelete: Cascade)
+  personBId String
+  personB   Person @relation("RelationshipProfilePersonB", fields: [personBId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  relationshipType RelationshipType
+  publicStatus     PublicStatus
+  privateStatus    String?
+
+  hiddenTruth          Json?
+  powerDirection       Json?
+  dependencyDirection  Json?
+
+  trustLevel          Int @default(50)
+  fearLevel           Int @default(50)
+  shameLeverage       Int @default(50)
+  obligationWeight    Int @default(50)
+  betrayalThreshold   Int @default(50)
+  rescueThreshold     Int @default(50)
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  dynamicStates      RelationshipDynamicState[]
+  disclosureProfiles RelationshipDisclosureProfile[]
+
+  @@unique([personAId, personBId, worldStateId])
+  @@index([personAId])
+  @@index([personBId])
+  @@index([worldStateId])
+  @@index([relationshipType])
+}
+
+/// Stage 6 — Time-varying relational dynamics for a RelationshipProfile.
+model RelationshipDynamicState {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  relationshipProfileId String
+  relationshipProfile   RelationshipProfile @relation(fields: [relationshipProfileId], references: [id], onDelete: Cascade)
+
+  label String
+
+  emotionalTemperature Int @default(50)
+  volatility           Int @default(50)
+  intimacyLevel        Int @default(50)
+  conflictLoad         Int @default(50)
+  mutualRecognition    Int @default(50)
+  disclosureSafety     Int @default(50)
+
+  currentTensions Json?
+  currentNeeds    Json?
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@index([relationshipProfileId])
+}
+
+/// Stage 6 — Character-level masking / code-switching under governance and norms.
+model CharacterMaskingProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  maskingIntensity    Int @default(50)
+  codeSwitchingLoad   Int @default(50)
+  secrecyNeed         Int @default(50)
+  disclosureRisk      Int @default(50)
+
+  authenticPrivateSelf     Json?
+  publicMask               Json?
+  trustedCircleExpression  Json?
+  forbiddenExpression        Json?
+  adaptiveStrategies       Json?
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@unique([personId, worldStateId])
+  @@index([personId])
+  @@index([worldStateId])
+}
+
+/// Stage 6 — Desire, attachment, and taboo exposure (character × world).
+model CharacterDesireProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  attractionPattern Json?
+  attachmentStyle   AttachmentStyle @default(DUTY_BOUND)
+
+  desireVisibility    Int @default(50)
+  desireSuppression   Int @default(50)
+  jealousySensitivity Int @default(50)
+  loyaltyPriority     Json?
+
+  intimacyNeed       Int @default(50)
+  autonomyNeed       Int @default(50)
+  tabooExposureRisk  Int @default(50)
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@unique([personId, worldStateId])
+  @@index([personId])
+  @@index([worldStateId])
+}
+
+/// Stage 6 — Era-level norms for bonds, desire, and relational visibility (one per world state).
+model WorldRelationshipNormProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  worldStateId String @unique
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  label String
+
+  marriageRules             Json?
+  sexualNorms               Json?
+  desireExpressionRules     Json?
+  tabooSystem                 Json?
+  emotionalExpressionRules  Json?
+  genderDynamics              Json?
+
+  relationalVisibility   Int @default(50)
+  punishmentForViolation Int @default(50)
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@index([worldStateId])
+}
+
+/// Stage 6 — Disclosure / secrecy envelope for a dyad in a world slice.
+model RelationshipDisclosureProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  relationshipProfileId String
+  relationshipProfile   RelationshipProfile @relation(fields: [relationshipProfileId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  truthShareCapacity         Int @default(50)
+  emotionalDisclosureCapacity Int @default(50)
+  secrecyBurden              Int @default(50)
+  misrecognitionRisk         Int @default(50)
+  exposureConsequence      Int @default(50)
+
+  safeTopics    Json?
+  unsafeTopics  Json?
+  codedChannels Json?
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@unique([relationshipProfileId, worldStateId])
+  @@index([relationshipProfileId])
+  @@index([worldStateId])
+}
+
+/// Stage 6 — Rolled-up network view for a character in an era (inspection / authoring).
+model RelationshipNetworkSummary {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  keyBonds         Json?
+  primaryTensions  Json?
+  dependencyMap    Json?
+  trustMap         Json?
+  hiddenConflicts  Json?
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@unique([personId, worldStateId])
+  @@index([personId])
+  @@index([worldStateId])
+}
+
+/// Stage 6.5 — Accumulated shock, silence, and body-memory (character × world).
+model CharacterTraumaProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  traumaLoad           Int @default(50)
+  silenceLoad          Int @default(50)
+  hypervigilanceLoad   Int @default(50)
+  shameResidue         Int @default(50)
+  griefResidue         Int @default(50)
+
+  bodyMemory       Json?
+  triggerPatterns  Json?
+  copingPatterns   Json?
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@unique([personId, worldStateId])
+  @@index([personId])
+  @@index([worldStateId])
+}
+
+/// Stage 6.5 — Learned behavior from repeated outcomes (character × world).
+model CharacterConsequenceMemoryProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  punishmentMemory   Int @default(50)
+  protectionMemory   Int @default(50)
+  betrayalMemory     Int @default(50)
+  rewardConditioning Int @default(50)
+  exposureLearning   Int @default(50)
+
+  learnedRules          Json?
+  avoidancePatterns     Json?
+  reinforcementPatterns Json?
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@unique([personId, worldStateId])
+  @@index([personId])
+  @@index([worldStateId])
+}
+
+/// Stage 6.5 — Social perception / rumor field (character × world).
+model CharacterRumorReputationProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  publicTrust       Int @default(50)
+  suspicionLoad     Int @default(50)
+  scandalRisk       Int @default(50)
+  narrativeControl  Int @default(50)
+  rumorExposure     Int @default(50)
+
+  reputationThemes     Json?
+  vulnerableNarratives Json?
+  protectiveNarratives Json?
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@unique([personId, worldStateId])
+  @@index([personId])
+  @@index([worldStateId])
+}
+
+/// Stage 6.5 — How learning is structured in a world state (one row per world).
+model WorldEducationNormProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  worldStateId String @unique
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  label String
+
+  childTrainingModel          Json?
+  youthInitiationModel        Json?
+  elderTransmissionMode       Json?
+  literacyAccessPattern       Json?
+  specialistTrainingPaths     Json?
+  genderedTrainingDifferences Json?
+
+  eliteKnowledgeAccess  Int @default(50)
+  commonKnowledgeAccess Int @default(50)
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@index([worldStateId])
+}
+
+/// Stage 6.5 — Training / education slice (character × world).
+model CharacterEducationProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  primaryTrainingMode TrainingMode @default(MIXED)
+
+  literacyLevel               Int @default(50)
+  numeracyLevel               Int @default(50)
+  oralTraditionDepth          Int @default(50)
+  ecologicalKnowledgeDepth    Int @default(50)
+  institutionalSchoolingAccess Int @default(50)
+
+  apprenticeshipDomains Json?
+
+  religiousInstructionDepth Int @default(50)
+  strategicTrainingDepth    Int @default(50)
+  historicalAwarenessRange  Int @default(50)
+
+  languageExposure Json?
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@unique([personId, worldStateId])
+  @@index([personId])
+  @@index([worldStateId])
+}
+
+/// Stage 6.5 — Inspectable rollup: training vs expression vs pressure distortion (character × world).
+model CharacterLearningEnvelope {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  trainedCapacity               Int @default(50)
+  expressiveCapacity            Int @default(50)
+  pressureDistortion            Int @default(50)
+  learnedAvoidance              Int @default(50)
+  socialRiskAdjustedDisclosure  Int @default(50)
+
+  summary Json?
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@unique([personId, worldStateId])
+  @@index([personId])
+  @@index([worldStateId])
+}
+
+/// Stage 6.5 — Era-level health interpretation, care access, stigma (not clinical diagnosis tables).
+model WorldHealthNormProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  worldStateId String @unique
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  label String @default("Health norms")
+
+  bodyInterpretationModel   Json?
+  mindInterpretationModel   Json?
+  emotionInterpretationModel Json?
+  healingSystems            Json?
+  stigmaPatterns            Json?
+
+  communityCareCapacity     Int @default(50)
+  institutionalCareCapacity Int @default(50)
+  survivalBurden            Int @default(50)
+  restPossibility           Int @default(50)
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@index([worldStateId])
+}
+
+/// Stage 6.5 — Physical condition slice (character × world); scales are engine-facing, not DSM labels.
+model CharacterPhysicalHealthProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  injuryLoad            Int @default(50)
+  chronicPainLoad       Int @default(50)
+  illnessBurden         Int @default(50)
+  nutritionStatus       Int @default(50)
+  sleepQuality          Int @default(50)
+  enduranceCapacity     Int @default(50)
+  mobilityLimitationLoad Int @default(50)
+  reproductiveBurden    Int @default(50)
+  agingBurden           Int @default(50)
+  recoveryCapacity      Int @default(50)
+
+  sensoryLimitations Json?
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@unique([personId, worldStateId])
+  @@index([personId])
+  @@index([worldStateId])
+}
+
+/// Stage 6.5 — Mental regulation / load slice (character × world).
+model CharacterMentalHealthProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  attentionStability    Int @default(50)
+  clarityLevel          Int @default(50)
+  intrusiveThoughtLoad  Int @default(50)
+  dissociationTendency    Int @default(50)
+  vigilanceLevel          Int @default(50)
+  despairLoad             Int @default(50)
+  controlCompulsion       Int @default(50)
+  moodInstability         Int @default(50)
+  stressTolerance         Int @default(50)
+  realityCoherence        Int @default(50)
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@unique([personId, worldStateId])
+  @@index([personId])
+  @@index([worldStateId])
+}
+
+/// Stage 6.5 — Emotional capacity / saturation slice (character × world).
+model CharacterEmotionalHealthProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  emotionalRange          Int @default(50)
+  suppressionLoad         Int @default(50)
+  griefSaturation         Int @default(50)
+  shameSaturation         Int @default(50)
+  tendernessAccess        Int @default(50)
+  angerRegulation         Int @default(50)
+  fearCarryover           Int @default(50)
+  relationalOpenness      Int @default(50)
+  recoveryAfterDistress   Int @default(50)
+  emotionalNumbnessLoad   Int @default(50)
+  emotionalFloodingLoad   Int @default(50)
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@unique([personId, worldStateId])
+  @@index([personId])
+  @@index([worldStateId])
+}
+
+/// Stage 6.5 — Rollup: functioning, care access, simulation vs world-facing health narrative.
+model CharacterHealthEnvelope {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  worldStateId String
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  functionalCapacity         Int @default(50)
+  careAccess                 Int @default(50)
+  visibleHealthPresentation  Json?
+  hiddenHealthBurden         Json?
+  socialInterpretation       Json?
+  simulationLayer            Json?
+  worldFacingHealthNarrative Json?
+  summary                    Json?
 
   notes String? @db.Text
 

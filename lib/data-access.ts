@@ -29,6 +29,8 @@ import type {
 } from "@/lib/environment-types";
 import type { CharacterIntelligenceBundle } from "@/lib/intelligence-types";
 import type { CharacterPressureBundle, WorldGovernanceAdminFilters } from "@/lib/pressure-order-types";
+import type { CharacterRelationshipBundle, RelationshipProfileAdminFilters } from "@/lib/relationship-order-types";
+import type { CharacterContinuityBundle } from "@/lib/continuity-order-types";
 
 async function safe<T>(fn: () => Promise<T>, fallback: T): Promise<T> {
   try {
@@ -2920,5 +2922,282 @@ export async function getCharacterIntelligenceBundle(
       };
     },
     null,
+  );
+}
+
+/** Stage 6 — world relationship norms row for admin. */
+export async function getWorldRelationshipNormProfileForAdmin(worldStateId: string) {
+  return safe(
+    () =>
+      prisma.worldRelationshipNormProfile.findUnique({
+        where: { worldStateId },
+        include: { worldState: { select: { id: true, eraId: true, label: true } } },
+      }),
+    null,
+  );
+}
+
+/** Stage 6 — character × world relationship slice (masking, desire, network, norms, dyads). */
+export async function getCharacterRelationshipBundle(
+  personId: string,
+  worldStateId: string,
+): Promise<CharacterRelationshipBundle | null> {
+  return safe(
+    async () => {
+      const [worldState, masking, desire, networkSummary, worldNorms, relationshipProfilesInvolvingPerson] =
+        await Promise.all([
+          prisma.worldStateReference.findUnique({ where: { id: worldStateId } }),
+          prisma.characterMaskingProfile.findUnique({ where: { personId_worldStateId: { personId, worldStateId } } }),
+          prisma.characterDesireProfile.findUnique({ where: { personId_worldStateId: { personId, worldStateId } } }),
+          prisma.relationshipNetworkSummary.findUnique({ where: { personId_worldStateId: { personId, worldStateId } } }),
+          prisma.worldRelationshipNormProfile.findUnique({ where: { worldStateId } }),
+          prisma.relationshipProfile.findMany({
+            where: {
+              worldStateId,
+              OR: [{ personAId: personId }, { personBId: personId }],
+            },
+            orderBy: { updatedAt: "desc" },
+            include: {
+              personA: { select: { id: true, name: true } },
+              personB: { select: { id: true, name: true } },
+              disclosureProfiles: { where: { worldStateId } },
+            },
+          }),
+        ]);
+      if (!worldState) return null;
+      return {
+        worldState,
+        masking,
+        desire,
+        networkSummary,
+        worldNorms,
+        relationshipProfilesInvolvingPerson,
+      };
+    },
+    null,
+  );
+}
+
+/** Stage 6 — list relationship profiles for admin index. */
+export async function getRelationshipProfilesForAdmin(filters?: RelationshipProfileAdminFilters) {
+  return safe(
+    async () => {
+      const where: Prisma.RelationshipProfileWhereInput = {};
+      if (filters?.visibility) where.visibility = filters.visibility;
+      if (filters?.recordType) where.recordType = filters.recordType;
+      if (filters?.worldStateId) where.worldStateId = filters.worldStateId;
+      if (filters?.relationshipType) where.relationshipType = filters.relationshipType;
+      if (filters?.search?.trim()) {
+        where.notes = { contains: filters.search.trim(), mode: "insensitive" };
+      }
+      return prisma.relationshipProfile.findMany({
+        where,
+        take: 200,
+        orderBy: { updatedAt: "desc" },
+        include: {
+          personA: { select: { id: true, name: true } },
+          personB: { select: { id: true, name: true } },
+          worldState: { select: { id: true, eraId: true, label: true } },
+        },
+      });
+    },
+    [],
+  );
+}
+
+export async function getRelationshipProfileByIdForAdmin(id: string) {
+  return safe(
+    () =>
+      prisma.relationshipProfile.findUnique({
+        where: { id },
+        include: {
+          personA: { select: { id: true, name: true } },
+          personB: { select: { id: true, name: true } },
+          worldState: true,
+          dynamicStates: { orderBy: { updatedAt: "desc" } },
+          disclosureProfiles: true,
+        },
+      }),
+    null,
+  );
+}
+
+export async function getMaskingProfilesForAdmin(personId: string) {
+  return safe(
+    () =>
+      prisma.characterMaskingProfile.findMany({
+        where: { personId },
+        orderBy: { updatedAt: "desc" },
+        include: { worldState: { select: { id: true, eraId: true, label: true } } },
+      }),
+    [],
+  );
+}
+
+export async function getDesireProfilesForAdmin(personId: string) {
+  return safe(
+    () =>
+      prisma.characterDesireProfile.findMany({
+        where: { personId },
+        orderBy: { updatedAt: "desc" },
+        include: { worldState: { select: { id: true, eraId: true, label: true } } },
+      }),
+    [],
+  );
+}
+
+/** Stage 6.5 — world education norms for world-state admin page. */
+export async function getWorldEducationNormProfileForAdmin(worldStateId: string) {
+  return safe(
+    () =>
+      prisma.worldEducationNormProfile.findUnique({
+        where: { worldStateId },
+        include: { worldState: { select: { id: true, eraId: true, label: true } } },
+      }),
+    null,
+  );
+}
+
+/** Stage 6.5 — list all world education norm rows (global index). */
+export async function getWorldEducationNormProfilesForAdmin() {
+  return safe(
+    () =>
+      prisma.worldEducationNormProfile.findMany({
+        take: 200,
+        orderBy: { updatedAt: "desc" },
+        include: { worldState: { select: { id: true, eraId: true, label: true } } },
+      }),
+    [],
+  );
+}
+
+export async function getWorldEducationNormProfileByIdForAdmin(id: string) {
+  return safe(
+    () =>
+      prisma.worldEducationNormProfile.findUnique({
+        where: { id },
+        include: { worldState: true },
+      }),
+    null,
+  );
+}
+
+/** Stage 6.5 — world health interpretation norms for world-state admin page. */
+export async function getWorldHealthNormProfileForAdmin(worldStateId: string) {
+  return safe(
+    () =>
+      prisma.worldHealthNormProfile.findUnique({
+        where: { worldStateId },
+        include: { worldState: { select: { id: true, eraId: true, label: true } } },
+      }),
+    null,
+  );
+}
+
+/** Stage 6.5 — trauma, consequence, rumor, education, envelope + intelligence / pressure / relationship refs. */
+export async function getCharacterContinuityBundle(
+  personId: string,
+  worldStateId: string,
+): Promise<CharacterContinuityBundle | null> {
+  return safe(
+    async () => {
+      const [p, ws] = await Promise.all([
+        prisma.person.findUnique({ where: { id: personId } }),
+        prisma.worldStateReference.findUnique({ where: { id: worldStateId } }),
+      ]);
+      if (!p || !ws) return null;
+
+      const [
+        trauma,
+        consequenceMemory,
+        rumorReputation,
+        education,
+        learningEnvelope,
+        worldEducationNorm,
+        worldHealthNorm,
+        physicalHealth,
+        mentalHealth,
+        emotionalHealth,
+        healthEnvelope,
+        intelligenceRef,
+        pressureRef,
+        relationshipRef,
+      ] = await Promise.all([
+        prisma.characterTraumaProfile.findUnique({
+          where: { personId_worldStateId: { personId, worldStateId } },
+        }),
+        prisma.characterConsequenceMemoryProfile.findUnique({
+          where: { personId_worldStateId: { personId, worldStateId } },
+        }),
+        prisma.characterRumorReputationProfile.findUnique({
+          where: { personId_worldStateId: { personId, worldStateId } },
+        }),
+        prisma.characterEducationProfile.findUnique({
+          where: { personId_worldStateId: { personId, worldStateId } },
+        }),
+        prisma.characterLearningEnvelope.findUnique({
+          where: { personId_worldStateId: { personId, worldStateId } },
+        }),
+        prisma.worldEducationNormProfile.findUnique({ where: { worldStateId } }),
+        prisma.worldHealthNormProfile.findUnique({ where: { worldStateId } }),
+        prisma.characterPhysicalHealthProfile.findUnique({
+          where: { personId_worldStateId: { personId, worldStateId } },
+        }),
+        prisma.characterMentalHealthProfile.findUnique({
+          where: { personId_worldStateId: { personId, worldStateId } },
+        }),
+        prisma.characterEmotionalHealthProfile.findUnique({
+          where: { personId_worldStateId: { personId, worldStateId } },
+        }),
+        prisma.characterHealthEnvelope.findUnique({
+          where: { personId_worldStateId: { personId, worldStateId } },
+        }),
+        getCharacterIntelligenceBundle(personId, worldStateId),
+        getCharacterPressureBundle(personId, worldStateId),
+        getCharacterRelationshipBundle(personId, worldStateId),
+      ]);
+
+      return {
+        trauma,
+        consequenceMemory,
+        rumorReputation,
+        education,
+        learningEnvelope,
+        worldEducationNorm,
+        worldHealthNorm,
+        physicalHealth,
+        mentalHealth,
+        emotionalHealth,
+        healthEnvelope,
+        intelligenceRef,
+        pressureRef,
+        relationshipRef,
+      };
+    },
+    null,
+  );
+}
+
+export async function getCharacterEducationProfilesForAdmin(personId: string) {
+  return safe(
+    () =>
+      prisma.characterEducationProfile.findMany({
+        where: { personId },
+        orderBy: { updatedAt: "desc" },
+        include: { worldState: { select: { id: true, eraId: true, label: true } } },
+      }),
+    [],
+  );
+}
+
+export async function getRumorProfilesForAdmin(personId: string) {
+  return safe(
+    () =>
+      prisma.characterRumorReputationProfile.findMany({
+        where: { personId },
+        orderBy: { updatedAt: "desc" },
+        include: { worldState: { select: { id: true, eraId: true, label: true } } },
+      }),
+    [],
   );
 }

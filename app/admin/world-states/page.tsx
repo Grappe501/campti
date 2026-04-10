@@ -27,6 +27,18 @@ export default async function AdminWorldStatesPage() {
               <Link href={`/admin/world-states/${w.id}/knowledge`} className="text-amber-900 hover:underline">
                 Knowledge
               </Link>
+              <span className="text-stone-500"> · </span>
+              <Link href={`/admin/world-states/${w.id}/relationships`} className="text-amber-900 hover:underline">
+                Relationships
+              </Link>
+              <span className="text-stone-500"> · </span>
+              <Link href={`/admin/world-states/${w.id}/education`} className="text-amber-900 hover:underline">
+                Education
+              </Link>
+              <span className="text-stone-500"> · </span>
+              <Link href={`/admin/world-states/${w.id}/health`} className="text-amber-900 hover:underline">
+                Health
+              </Link>
             </li>
           ))}
         </ul>

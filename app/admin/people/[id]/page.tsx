@@ -40,6 +40,14 @@ export default async function AdminPersonDetailPage({ params, searchParams }: Pr
           <Link href={`/admin/characters/${person.id}/intelligence`} className="text-amber-900 hover:underline">
             Intelligence (Stage 5.5) →
           </Link>
+          {" · "}
+          <Link href={`/admin/characters/${person.id}/relationships`} className="text-amber-900 hover:underline">
+            Relationships (Stage 6) →
+          </Link>
+          {" · "}
+          <Link href={`/admin/characters/${person.id}/continuity`} className="text-amber-900 hover:underline">
+            Continuity (Stage 6.5) →
+          </Link>
         </p>
       </div>
 

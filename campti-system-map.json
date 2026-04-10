@@ -1,0 +1,329 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "meta": {
+    "project": "Campti",
+    "purpose": "Historically grounded narrative simulation: law-bound story objects, bounded character cognition, world-state-shaped pressure and relationships — not raw LLM improvisation.",
+    "mapGeneratedFor": "AI / human onboarding after thread context loss",
+    "mapVersion": "1.0.0",
+    "asOf": "2026-04-10",
+    "repositoryPathHint": "Next.js app + Prisma/Postgres; admin UI under /admin/*"
+  },
+  "core_law_summary": {
+    "inference_vs_simulation": "External LLM may act as inference substrate; Campti constrains what a character can know, infer, express, and risk by era (world state), body, training, pressure, and relationships.",
+    "personality_constant_expression_filtered": "Core personality can be stable; expression and legibility change with governance, norms, masking, disclosure, and rumor fields.",
+    "no_isolated_minds": "Behavior is framed as emerging from intelligence + pressure + environment + relationships + continuity — not a single IQ or diagnosis label."
+  },
+  "architecture_layers": [
+    "Constitutional / narrative rules (law before content)",
+    "Ontology & registries (what kinds of objects exist)",
+    "Character core + CharacterState (world-linked)",
+    "Environment & place graph (Stage 4)",
+    "Pressure & historical order (Stage 5)",
+    "Bounded cognition: intelligence, knowledge horizon, maturity, biology (Stage 5.5)",
+    "Relationships, desire, masking, disclosure (Stage 6.1 in build sequence)",
+    "Continuity: trauma, consequence, rumor, education, health envelopes (Stage 6.5)",
+    "Symbols/motifs (parallel Stage 6 in sequence file — see numbering note)",
+    "Future: brain assembly (product roadmap), scene runner, timeline, voice, memory, branches, runs"
+  ],
+  "roadmap_numbering_note": {
+    "issue": "The file lib/campti-build-sequence/stages.ts defines CAMPTI_BUILD_STAGES with numeric stage IDs 1–15. Stage 7 there is already 'Timeline / Anchor Engine'. Product discussion also uses 'Stage 7' for Brain Assembly — these names collide.",
+    "recommendation": "Introduce a distinct slug for brain work (e.g. brain-assembly-engine) in stages.ts or a separate ROADMAP.md when implemented; do not overwrite timeline stage metadata without an explicit renumbering decision.",
+    "product_next_steps": [
+      {
+        "id": "brain-assembly-engine",
+        "title": "Character Brain Assembly / Cognitive Envelope Engine",
+        "intent": "First assembled 'brain wrapper': combine existing profiles into usable per-moment outputs (notice, meaning, regulation, relational safety, decision).",
+        "suggested_outputs": [
+          "Perception envelope (notice / miss / misread / speed)",
+          "Meaning-making envelope (internal explanation + idiom + danger/shame/omen framing)",
+          "Emotional regulation envelope (freeze/flood/numb/contain/redirect)",
+          "Relational safety envelope (who is safe, what can be said, disclosure cost)",
+          "Decision envelope (options, forbidden options, likely action, cost of speech)"
+        ],
+        "implementation_options": [
+          "Five tables: CharacterPerceptionEnvelope, CharacterMeaningEnvelope, CharacterRegulationEnvelope, CharacterRelationalSafetyEnvelope, CharacterDecisionEnvelope (each keyed by personId + worldStateId or scene slice as designed)",
+          "Or one CharacterBrainState with five JSON sections for envelopes"
+        ],
+        "inputs_to_compose_from_existing_schema": [
+          "WorldKnowledgeProfile, WorldExpressionProfile",
+          "CharacterIntelligenceProfile, CharacterDevelopmentProfile, CharacterBiologicalState",
+          "CharacterGovernanceImpact, CharacterSocioEconomicProfile, CharacterDemographicProfile, CharacterFamilyPressureProfile, WorldGovernanceProfile, WorldPressureBundle",
+          "CharacterMaskingProfile, CharacterDesireProfile, RelationshipProfile, RelationshipDisclosureProfile, RelationshipDynamicState, WorldRelationshipNormProfile, CharacterRumorReputationProfile",
+          "CharacterTraumaProfile, CharacterConsequenceMemoryProfile, CharacterEducationProfile, CharacterLearningEnvelope",
+          "CharacterPhysicalHealthProfile, CharacterMentalHealthProfile, CharacterEmotionalHealthProfile, CharacterHealthEnvelope, WorldHealthNormProfile",
+          "PlaceState, environment nodes, risk — when scene is in scope"
+        ],
+        "explicitly_not_in_scope_first_pass": "Full scene simulation loop; prose generation; spiritual engine; rumor propagation dynamics — assembly is structured outputs + stubs until runner exists."
+      },
+      {
+        "id": "scene-brain-runner",
+        "title": "Scene-time decision runner (product 'Stage 7.5')",
+        "intent": "Given a moment (scene + world state), invoke assembly + constraints to produce bounded choice / speech legality.",
+        "depends_on": ["brain-assembly-engine", "scene constraint layer maturity"]
+      }
+    ]
+  },
+  "repository_build_sequence": {
+    "source_file": "lib/campti-build-sequence/stages.ts",
+    "export_name": "CAMPTI_BUILD_STAGES",
+    "stages": [
+      {
+        "stage": 1,
+        "id": "constitutional-core",
+        "title": "Constitutional Core",
+        "goal": "No narrative object exists without legal status."
+      },
+      {
+        "stage": 2,
+        "id": "ontology-registry-spine",
+        "title": "Ontology / Registry Spine",
+        "goal": "Every object inherits from a known ontology."
+      },
+      {
+        "stage": 3,
+        "id": "character-engine",
+        "title": "Character Engine",
+        "goal": "Characters as bounded simulation systems with triggers and choice bandwidth."
+      },
+      {
+        "stage": 4,
+        "id": "place-environment-engine",
+        "title": "Place / Environment Engine",
+        "goal": "Place changes what can be seen, said, remembered, and survived."
+      },
+      {
+        "stage": 5,
+        "id": "pressure-historical-order",
+        "title": "Pressure / Historical Order Engine",
+        "goal": "External forces compress choice before characters choose."
+      },
+      {
+        "stage": 5.5,
+        "id": "intelligence-knowledge-horizon",
+        "title": "Intelligence, Knowledge Horizon & Maturity Engine",
+        "goal": "Historically and biologically bounded cognition — not a single IQ scalar."
+      },
+      {
+        "stage": 6.1,
+        "id": "relationship-desire-masking",
+        "title": "Relationship, Desire & Masking Engine",
+        "goal": "Bonds, desire, masking, disclosure under world norms."
+      },
+      {
+        "stage": 6.5,
+        "id": "trauma-consequence-rumor-education",
+        "title": "Trauma, Health, Consequence Memory, Rumor & Education Engine",
+        "goal": "Continuity over time; era-shaped health and learning — not simulation runs yet."
+      },
+      {
+        "stage": 6,
+        "id": "symbol-motif-law",
+        "title": "Symbol / Motif Law Engine",
+        "note": "Numeric id 6 is listed after 6.5 in the array; order is intentional for Cursor execution messaging, not numeric sorting."
+      },
+      {
+        "stage": 7,
+        "id": "timeline-anchor",
+        "title": "Timeline / Anchor Engine",
+        "goal": "Temporal determinism — fixed and elastic moments.",
+        "collision_warning": "Product roadmap may use 'Stage 7' for Brain Assembly — different concept; see roadmap_numbering_note."
+      },
+      {
+        "stage": 8,
+        "id": "scene-constraint",
+        "title": "Scene Constraint Engine",
+        "goal": "Scene simulation law — legality before prose."
+      },
+      {
+        "stage": 9,
+        "id": "meta-scene-experience",
+        "title": "Meta-Scene / Experience Engine",
+        "goal": "Separate event truth from reader experience."
+      },
+      {
+        "stage": 10,
+        "id": "voice-governance",
+        "title": "Voice Governance Engine",
+        "goal": "Rule-bound language output."
+      },
+      {
+        "stage": 11,
+        "id": "memory-fragment",
+        "title": "Memory / Fragment Engine",
+        "goal": "Non-linear memory under law."
+      },
+      {
+        "stage": 12,
+        "id": "branch-determinism",
+        "title": "Branch / Determinism Engine",
+        "goal": "Explicit legal path space."
+      },
+      {
+        "stage": 13,
+        "id": "research-story-binding",
+        "title": "Research-to-Story Binding Engine",
+        "goal": "Traceable truth flow from archive to story."
+      },
+      {
+        "stage": 14,
+        "id": "composition-readiness",
+        "title": "Composition Readiness Engine",
+        "goal": "Gates before prose generation."
+      },
+      {
+        "stage": 15,
+        "id": "simulation-run-layer",
+        "title": "Simulation Run Layer",
+        "goal": "Runnable scenarios and trace."
+      }
+    ]
+  },
+  "prisma_domain_models": {
+    "anchors": ["Person", "WorldStateReference", "CharacterState"],
+    "constitutional": ["ConstitutionalRule", "NarrativeRule"],
+    "ontology": ["OntologyType", "RegistryValue"],
+    "stage_5_pressure": [
+      "WorldGovernanceProfile",
+      "WorldPressureBundle",
+      "CharacterGovernanceImpact",
+      "CharacterSocioEconomicProfile",
+      "CharacterDemographicProfile",
+      "CharacterFamilyPressureProfile"
+    ],
+    "stage_5_5_cognition": [
+      "WorldKnowledgeProfile",
+      "WorldExpressionProfile",
+      "CharacterIntelligenceProfile",
+      "CharacterDevelopmentProfile",
+      "CharacterBiologicalState"
+    ],
+    "stage_6_1_relationship": [
+      "RelationshipProfile",
+      "RelationshipDynamicState",
+      "RelationshipDisclosureProfile",
+      "WorldRelationshipNormProfile",
+      "CharacterMaskingProfile",
+      "CharacterDesireProfile",
+      "RelationshipNetworkSummary"
+    ],
+    "stage_6_5_continuity_health": [
+      "CharacterTraumaProfile",
+      "CharacterConsequenceMemoryProfile",
+      "CharacterRumorReputationProfile",
+      "WorldEducationNormProfile",
+      "CharacterEducationProfile",
+      "CharacterLearningEnvelope",
+      "WorldHealthNormProfile",
+      "CharacterPhysicalHealthProfile",
+      "CharacterMentalHealthProfile",
+      "CharacterEmotionalHealthProfile",
+      "CharacterHealthEnvelope"
+    ],
+    "environment": [
+      "PlaceEnvironmentProfile",
+      "PlaceState",
+      "EnvironmentNode",
+      "NodeConnection",
+      "RiskRegime",
+      "PlaceMemoryProfile"
+    ],
+    "narrative_core": [
+      "Scene",
+      "Chapter",
+      "Event",
+      "MetaScene",
+      "Source",
+      "Claim",
+      "Fragment",
+      "FragmentCluster"
+    ]
+  },
+  "engine_and_service_modules": {
+    "description": "Domain logic and stubs live under lib/; server mutations under app/actions/; admin reads often via lib/data-access.ts with safe() fallback when DB unavailable.",
+    "key_files": {
+      "intelligence": ["lib/intelligence-engine.ts", "lib/intelligence-types.ts", "app/actions/intelligence.ts"],
+      "pressure": ["lib/pressure-order.ts", "lib/pressure-order-types.ts", "lib/pressure-order-schemas.ts", "app/actions/pressure-order.ts"],
+      "relationships": ["lib/relationship-order.ts", "lib/relationship-order-types.ts", "lib/relationship-order-schemas.ts", "app/actions/relationship-order.ts"],
+      "continuity": ["lib/continuity-order.ts", "lib/continuity-order-types.ts", "lib/continuity-order-schemas.ts", "app/actions/continuity-order.ts"],
+      "environment": ["lib/environment.ts", "lib/environment-schemas.ts", "app/actions/environment.ts"],
+      "character": ["lib/character.ts"],
+      "meta_scene_eval": ["lib/scene-intelligence.ts"]
+    },
+    "notable_stubs": [
+      "assembleCharacterContinuityEnvelope (lib/continuity-order.ts) returns null — future full merge",
+      "relationship-order: evaluateDisclosureSafety, evaluateDesireConstraint, evaluateMaskingPressure, assembleRelationshipCollisionEnvelope, evaluateRelationalTabooRisk",
+      "continuity-order: evaluateTraumaActivation, evaluateConsequenceLearning, evaluateRumorRisk, evaluateEducationConstraint, evaluateHealthCrossLayerEffects",
+      "pressure-order: assembleCharacterPressureStack and several evaluate* stubs",
+      "intelligence-engine: assembleCharacterCognitiveEnvelope implemented as deterministic merge; deeper simulation TBD"
+    ]
+  },
+  "data_access_bundles": {
+    "getCharacterIntelligenceBundle": "person × world: intelligence, development, biological, worldKnowledge, worldExpression",
+    "getCharacterPressureBundle": "person × world: governance, socio-economic, demographic, family pressure, characterState",
+    "getCharacterRelationshipBundle": "person × world: masking, desire, network summary, world relationship norms, dyads involving person",
+    "getCharacterContinuityBundle": "person × world: trauma, consequence, rumor, education, learning envelope, world education norm, world health norm, physical/mental/emotional health, health envelope, plus intelligenceRef, pressureRef, relationshipRef"
+  },
+  "admin_navigation": {
+    "primary_nav_component": "components/admin-nav.tsx",
+    "notable_routes": {
+      "brain_and_law": ["/admin/brain", "/admin/narrative-rules", "/admin/build-sequence"],
+      "people_characters": [
+        "/admin/people",
+        "/admin/characters/[id]/mind",
+        "/admin/characters/[id]/pressure",
+        "/admin/characters/[id]/intelligence",
+        "/admin/characters/[id]/relationships",
+        "/admin/characters/[id]/continuity"
+      ],
+      "world_states": [
+        "/admin/world-states",
+        "/admin/world-states/[id]/knowledge",
+        "/admin/world-states/[id]/pressure",
+        "/admin/world-states/[id]/relationships",
+        "/admin/world-states/[id]/education",
+        "/admin/world-states/[id]/health"
+      ],
+      "relationships_global": ["/admin/relationships", "/admin/relationships/new", "/admin/relationships/[id]"],
+      "continuity_education_index": ["/admin/continuity/education", "/admin/continuity/education/new", "/admin/continuity/education/[id]", "/admin/continuity/learning"],
+      "environment": ["/admin/places", "/admin/nodes", "/admin/connections", "/admin/risks"],
+      "ingestion": ["/admin/sources", "/admin/ingestion", "/admin/extracted", "/admin/claims"],
+      "scenes": ["/admin/scenes", "/admin/meta-scenes", "/admin/meta-scenes/[id]/compose"]
+    }
+  },
+  "migrations_and_ops": {
+    "schema": "prisma/schema.prisma",
+    "migrations_folder": "prisma/migrations/",
+    "notable_recent_domains": [
+      "Stage 6 relationship engine migration",
+      "Stage 6.5 continuity/education migration",
+      "Stage 6.5 health layer migration"
+    ],
+    "windows_note": "If npx prisma generate fails with EPERM renaming query_engine-windows.dll.node, close processes locking node_modules/.prisma/client and retry.",
+    "build_safety": "data-access uses safe() try/catch patterns so missing DATABASE_URL does not always crash build paths — verify locally."
+  },
+  "seeding": {
+    "entry": "prisma/seed.ts",
+    "partial_modules": [
+      "seed-constitutional-rules",
+      "seed-ontology",
+      "seed-environment",
+      "seed-pressure",
+      "seed-relationship",
+      "seed-continuity"
+    ],
+    "note": "Continuity seed includes world education norms, health norms, Alexis examples — additive upserts."
+  },
+  "current_status_snapshot": {
+    "implemented_in_schema": "Broad coverage: law, ontology, character, world state, pressure, cognition, relationships, continuity, health, environment, narrative objects (scene/chapter/event), fragments, claims.",
+    "not_yet_done_product_priority": [
+      "Brain Assembly Engine (composed envelopes or CharacterBrainState)",
+      "Scene-time brain runner consuming assembly + scene constraints",
+      "Full simulation evaluation loops (many stubs intentionally)"
+    ]
+  },
+  "conventions": {
+    "world_slice_key": "Most character-simulation tables use personId + worldStateId with @@unique where one row per era.",
+    "json_fields": "Flexible era language and structured payloads; avoid DSM-first labels in user-facing story fields — health uses simulationLayer vs worldFacingHealthNarrative pattern.",
+    "dyad_normalization": "RelationshipProfile uses personAId < personBId lexicographic normalization in app logic."
+  }
+}
