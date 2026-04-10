@@ -1,0 +1,2719 @@
+{
+  "kind": "filesystem",
+  "handoffVersion": 2,
+  "generatedAt": "2026-04-10T13:47:26.453Z",
+  "purpose": "Repository and build layout: files, routes, npm scripts, dependencies. Pair with campti-handoff-story.json for narrative state.",
+  "repository": {
+    "name": "campti",
+    "version": "0.1.0",
+    "rootPath": "C:\\Users\\User\\Desktop\\Campti"
+  },
+  "runtime": {
+    "node": "v22.18.0",
+    "platform": "win32",
+    "cwd": "C:\\Users\\User\\Desktop\\Campti"
+  },
+  "executablesAndScripts": {
+    "npmScripts": {
+      "dev": "next dev",
+      "build": "prisma generate && next build",
+      "start": "next start",
+      "lint": "eslint",
+      "postinstall": "prisma generate",
+      "db:push": "prisma db push",
+      "db:seed": "prisma db seed",
+      "db:studio": "prisma studio",
+      "db:narrative-system": "tsx scripts/ingest-narrative-system-doc.ts",
+      "db:narrative-dna": "tsx scripts/seed-narrative-dna-documents.ts",
+      "db:narrative-dna-guides": "tsx scripts/seed-narrative-dna-guides.ts",
+      "db:historical-timeline": "tsx scripts/ingest-historical-timeline.ts",
+      "report:handoff": "tsx scripts/generate-handoff-report.ts"
+    },
+    "narrative": {
+      "note": "All ingestion is TypeScript run via tsx; there are no Python scripts in this repo.",
+      "scriptFiles": [
+        {
+          "file": "scripts/generate-handoff-report.ts",
+          "bytes": 18044,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/ingest-historical-timeline.ts",
+          "bytes": 7307,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/ingest-narrative-system-doc.ts",
+          "bytes": 5666,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/load-env.ts",
+          "bytes": 737,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/seed-narrative-dna-documents.ts",
+          "bytes": 6924,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/seed-narrative-dna-guides.ts",
+          "bytes": 3010,
+          "role": "CLI / ingestion script"
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "production": {
+      "@prisma/client": "^6.6.0",
+      "@supabase/supabase-js": "^2.102.1",
+      "next": "^15.2.4",
+      "openai": "^6.33.0",
+      "react": "^19.1.0",
+      "react-dom": "^19.1.0",
+      "zod": "^4.3.6"
+    },
+    "development": {
+      "@eslint/eslintrc": "^3",
+      "@netlify/plugin-nextjs": "^5",
+      "@tailwindcss/postcss": "^4",
+      "@types/node": "^20",
+      "@types/react": "^19",
+      "@types/react-dom": "^19",
+      "eslint": "^9",
+      "eslint-config-next": "^15.2.4",
+      "prisma": "^6.6.0",
+      "tailwindcss": "^4",
+      "tsx": "^4.19.3",
+      "typescript": "^5"
+    }
+  },
+  "prisma": {
+    "schemaFile": "prisma/schema.prisma",
+    "schemaBytes": 47202,
+    "seedCommand": "tsx prisma/seed.ts",
+    "note": "PostgreSQL via DATABASE_URL; Prisma Client generated on postinstall/build."
+  },
+  "nextJs": {
+    "appRouterRoots": [
+      "app/"
+    ],
+    "routesDiscovered": [
+      {
+        "path": "/admin/attachment",
+        "file": "app/admin/attachment/page.tsx",
+        "bytes": 6217
+      },
+      {
+        "path": "/admin/audio-sync/[id]",
+        "file": "app/admin/audio-sync/[id]/page.tsx",
+        "bytes": 4310
+      },
+      {
+        "path": "/admin/bindings",
+        "file": "app/admin/bindings/page.tsx",
+        "bytes": 7779
+      },
+      {
+        "path": "/admin/brain",
+        "file": "app/admin/brain/page.tsx",
+        "bytes": 19639
+      },
+      {
+        "path": "/admin/chapters/[id]",
+        "file": "app/admin/chapters/[id]/page.tsx",
+        "bytes": 10637
+      },
+      {
+        "path": "/admin/chapters",
+        "file": "app/admin/chapters/page.tsx",
+        "bytes": 5669
+      },
+      {
+        "path": "/admin/characters/[id]/mind",
+        "file": "app/admin/characters/[id]/mind/page.tsx",
+        "bytes": 17532
+      },
+      {
+        "path": "/admin/chunks/[id]",
+        "file": "app/admin/chunks/[id]/page.tsx",
+        "bytes": 4428
+      },
+      {
+        "path": "/admin/chunks",
+        "file": "app/admin/chunks/page.tsx",
+        "bytes": 2198
+      },
+      {
+        "path": "/admin/claims/[id]",
+        "file": "app/admin/claims/[id]/page.tsx",
+        "bytes": 4970
+      },
+      {
+        "path": "/admin/claims",
+        "file": "app/admin/claims/page.tsx",
+        "bytes": 8825
+      },
+      {
+        "path": "/admin/clusters/[id]",
+        "file": "app/admin/clusters/[id]/page.tsx",
+        "bytes": 9819
+      },
+      {
+        "path": "/admin/clusters",
+        "file": "app/admin/clusters/page.tsx",
+        "bytes": 3121
+      },
+      {
+        "path": "/admin/continuity/[id]",
+        "file": "app/admin/continuity/[id]/page.tsx",
+        "bytes": 6705
+      },
+      {
+        "path": "/admin/continuity",
+        "file": "app/admin/continuity/page.tsx",
+        "bytes": 7722
+      },
+      {
+        "path": "/admin/dashboard",
+        "file": "app/admin/dashboard/page.tsx",
+        "bytes": 2563
+      },
+      {
+        "path": "/admin/events/[id]",
+        "file": "app/admin/events/[id]/page.tsx",
+        "bytes": 8089
+      },
+      {
+        "path": "/admin/events",
+        "file": "app/admin/events/page.tsx",
+        "bytes": 6522
+      },
+      {
+        "path": "/admin/extracted/[id]/merge",
+        "file": "app/admin/extracted/[id]/merge/page.tsx",
+        "bytes": 14925
+      },
+      {
+        "path": "/admin/extracted/[id]",
+        "file": "app/admin/extracted/[id]/page.tsx",
+        "bytes": 18367
+      },
+      {
+        "path": "/admin/extracted",
+        "file": "app/admin/extracted/page.tsx",
+        "bytes": 15771
+      },
+      {
+        "path": "/admin/fragments/[id]",
+        "file": "app/admin/fragments/[id]/page.tsx",
+        "bytes": 36311
+      },
+      {
+        "path": "/admin/fragments",
+        "file": "app/admin/fragments/page.tsx",
+        "bytes": 11297
+      },
+      {
+        "path": "/admin/ingestion/[sourceId]",
+        "file": "app/admin/ingestion/[sourceId]/page.tsx",
+        "bytes": 20939
+      },
+      {
+        "path": "/admin/ingestion",
+        "file": "app/admin/ingestion/page.tsx",
+        "bytes": 9097
+      },
+      {
+        "path": "/admin/literary-devices/[id]",
+        "file": "app/admin/literary-devices/[id]/page.tsx",
+        "bytes": 3721
+      },
+      {
+        "path": "/admin/literary-devices",
+        "file": "app/admin/literary-devices/page.tsx",
+        "bytes": 968
+      },
+      {
+        "path": "/admin/meta-scenes/[id]/cinematic",
+        "file": "app/admin/meta-scenes/[id]/cinematic/page.tsx",
+        "bytes": 10385
+      },
+      {
+        "path": "/admin/meta-scenes/[id]/compose",
+        "file": "app/admin/meta-scenes/[id]/compose/page.tsx",
+        "bytes": 56239
+      },
+      {
+        "path": "/admin/meta-scenes/[id]/experience-tuning",
+        "file": "app/admin/meta-scenes/[id]/experience-tuning/page.tsx",
+        "bytes": 6718
+      },
+      {
+        "path": "/admin/meta-scenes/[id]",
+        "file": "app/admin/meta-scenes/[id]/page.tsx",
+        "bytes": 8992
+      },
+      {
+        "path": "/admin/meta-scenes/[id]/perception",
+        "file": "app/admin/meta-scenes/[id]/perception/page.tsx",
+        "bytes": 6489
+      },
+      {
+        "path": "/admin/meta-scenes/[id]/view",
+        "file": "app/admin/meta-scenes/[id]/view/page.tsx",
+        "bytes": 6829
+      },
+      {
+        "path": "/admin/meta-scenes",
+        "file": "app/admin/meta-scenes/page.tsx",
+        "bytes": 8053
+      },
+      {
+        "path": "/admin/motifs/[id]",
+        "file": "app/admin/motifs/[id]/page.tsx",
+        "bytes": 3706
+      },
+      {
+        "path": "/admin/motifs",
+        "file": "app/admin/motifs/page.tsx",
+        "bytes": 895
+      },
+      {
+        "path": "/admin/narrative-rules/[id]",
+        "file": "app/admin/narrative-rules/[id]/page.tsx",
+        "bytes": 5440
+      },
+      {
+        "path": "/admin/narrative-rules",
+        "file": "app/admin/narrative-rules/page.tsx",
+        "bytes": 1227
+      },
+      {
+        "path": "/admin/patterns/[id]",
+        "file": "app/admin/patterns/[id]/page.tsx",
+        "bytes": 4870
+      },
+      {
+        "path": "/admin/patterns",
+        "file": "app/admin/patterns/page.tsx",
+        "bytes": 1043
+      },
+      {
+        "path": "/admin/people/[id]",
+        "file": "app/admin/people/[id]/page.tsx",
+        "bytes": 9736
+      },
+      {
+        "path": "/admin/people",
+        "file": "app/admin/people/page.tsx",
+        "bytes": 4815
+      },
+      {
+        "path": "/admin/places/[id]/environment",
+        "file": "app/admin/places/[id]/environment/page.tsx",
+        "bytes": 8173
+      },
+      {
+        "path": "/admin/places/[id]",
+        "file": "app/admin/places/[id]/page.tsx",
+        "bytes": 7489
+      },
+      {
+        "path": "/admin/places",
+        "file": "app/admin/places/page.tsx",
+        "bytes": 7571
+      },
+      {
+        "path": "/admin/questions/[id]",
+        "file": "app/admin/questions/[id]/page.tsx",
+        "bytes": 6423
+      },
+      {
+        "path": "/admin/questions",
+        "file": "app/admin/questions/page.tsx",
+        "bytes": 7679
+      },
+      {
+        "path": "/admin/relationships/[id]",
+        "file": "app/admin/relationships/[id]/page.tsx",
+        "bytes": 7188
+      },
+      {
+        "path": "/admin/relationships",
+        "file": "app/admin/relationships/page.tsx",
+        "bytes": 4461
+      },
+      {
+        "path": "/admin/runs/[id]",
+        "file": "app/admin/runs/[id]/page.tsx",
+        "bytes": 10579
+      },
+      {
+        "path": "/admin/scenes/[id]",
+        "file": "app/admin/scenes/[id]/page.tsx",
+        "bytes": 7659
+      },
+      {
+        "path": "/admin/scenes/[id]/workspace",
+        "file": "app/admin/scenes/[id]/workspace/page.tsx",
+        "bytes": 23903
+      },
+      {
+        "path": "/admin/scenes",
+        "file": "app/admin/scenes/page.tsx",
+        "bytes": 6773
+      },
+      {
+        "path": "/admin/sources/[id]/decompose",
+        "file": "app/admin/sources/[id]/decompose/page.tsx",
+        "bytes": 5573
+      },
+      {
+        "path": "/admin/sources/[id]",
+        "file": "app/admin/sources/[id]/page.tsx",
+        "bytes": 22154
+      },
+      {
+        "path": "/admin/sources",
+        "file": "app/admin/sources/page.tsx",
+        "bytes": 10460
+      },
+      {
+        "path": "/admin/symbols/[id]",
+        "file": "app/admin/symbols/[id]/page.tsx",
+        "bytes": 5974
+      },
+      {
+        "path": "/admin/symbols",
+        "file": "app/admin/symbols/page.tsx",
+        "bytes": 1113
+      },
+      {
+        "path": "/admin/themes/[id]",
+        "file": "app/admin/themes/[id]/page.tsx",
+        "bytes": 4763
+      },
+      {
+        "path": "/admin/themes",
+        "file": "app/admin/themes/page.tsx",
+        "bytes": 1054
+      },
+      {
+        "path": "/membership",
+        "file": "app/membership/page.tsx",
+        "bytes": 3089
+      },
+      {
+        "path": "/page.tsx",
+        "file": "app/page.tsx",
+        "bytes": 10579
+      },
+      {
+        "path": "/read/chapters/[id]",
+        "file": "app/read/chapters/[id]/page.tsx",
+        "bytes": 7231
+      },
+      {
+        "path": "/read/chapters",
+        "file": "app/read/chapters/page.tsx",
+        "bytes": 2668
+      },
+      {
+        "path": "/read/characters/[id]",
+        "file": "app/read/characters/[id]/page.tsx",
+        "bytes": 13524
+      },
+      {
+        "path": "/read/characters",
+        "file": "app/read/characters/page.tsx",
+        "bytes": 2063
+      },
+      {
+        "path": "/read",
+        "file": "app/read/page.tsx",
+        "bytes": 5266
+      },
+      {
+        "path": "/read/places/[id]",
+        "file": "app/read/places/[id]/page.tsx",
+        "bytes": 5883
+      },
+      {
+        "path": "/read/places",
+        "file": "app/read/places/page.tsx",
+        "bytes": 1596
+      },
+      {
+        "path": "/read/scenes/[id]",
+        "file": "app/read/scenes/[id]/page.tsx",
+        "bytes": 2442
+      },
+      {
+        "path": "/read/symbols",
+        "file": "app/read/symbols/page.tsx",
+        "bytes": 6034
+      },
+      {
+        "path": "/read/timeline",
+        "file": "app/read/timeline/page.tsx",
+        "bytes": 1339
+      },
+      {
+        "path": "/subscribe",
+        "file": "app/subscribe/page.tsx",
+        "bytes": 124
+      }
+    ],
+    "routeCount": 73
+  },
+  "filesystem": {
+    "excludeDirectoryNames": [
+      "node_modules",
+      ".git",
+      ".next",
+      "dist",
+      "build",
+      ".turbo",
+      "coverage",
+      ".vercel"
+    ],
+    "maxFilesScanned": 25000,
+    "truncated": false,
+    "totalEntries": 380,
+    "totalFileBytesIndexed": 2542039,
+    "filesByTopLevelFolder": {
+      ".env": {
+        "files": 1,
+        "bytes": 408
+      },
+      ".env.example": {
+        "files": 1,
+        "bytes": 406
+      },
+      ".gitignore": {
+        "files": 1,
+        "bytes": 367
+      },
+      "app": {
+        "files": 103,
+        "bytes": 787795
+      },
+      "components": {
+        "files": 42,
+        "bytes": 138330
+      },
+      "eslint.config.mjs": {
+        "files": 1,
+        "bytes": 458
+      },
+      "lib": {
+        "files": 110,
+        "bytes": 778696
+      },
+      "middleware.ts": {
+        "files": 1,
+        "bytes": 722
+      },
+      "netlify.toml": {
+        "files": 1,
+        "bytes": 129
+      },
+      "next-env.d.ts": {
+        "files": 1,
+        "bytes": 262
+      },
+      "next.config.ts": {
+        "files": 1,
+        "bytes": 104
+      },
+      "package-lock.json": {
+        "files": 1,
+        "bytes": 247263
+      },
+      "package.json": {
+        "files": 1,
+        "bytes": 1330
+      },
+      "postcss.config.mjs": {
+        "files": 1,
+        "bytes": 94
+      },
+      "prisma": {
+        "files": 7,
+        "bytes": 189767
+      },
+      "public": {
+        "files": 1,
+        "bytes": 0
+      },
+      "reports": {
+        "files": 3,
+        "bytes": 162929
+      },
+      "scripts": {
+        "files": 6,
+        "bytes": 41688
+      },
+      "styles": {
+        "files": 1,
+        "bytes": 117
+      },
+      "tsconfig.json": {
+        "files": 1,
+        "bytes": 562
+      },
+      "tsconfig.tsbuildinfo": {
+        "files": 1,
+        "bytes": 190612
+      }
+    },
+    "entries": [
+      {
+        "relativePath": ".env",
+        "bytes": 408,
+        "kind": "file"
+      },
+      {
+        "relativePath": ".env.example",
+        "bytes": 406,
+        "kind": "file"
+      },
+      {
+        "relativePath": ".gitignore",
+        "bytes": 367,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/actions",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/actions/chapters.ts",
+        "bytes": 3694,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/cinematic-narrative.ts",
+        "bytes": 8142,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/claims.ts",
+        "bytes": 2963,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/clusters.ts",
+        "bytes": 5531,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/continuity.ts",
+        "bytes": 2704,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/entity-linking.ts",
+        "bytes": 6947,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/events.ts",
+        "bytes": 2954,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/extracted-entity.ts",
+        "bytes": 3524,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/fragments.ts",
+        "bytes": 27842,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/ingestion.ts",
+        "bytes": 9933,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/narrative-dna-admin.ts",
+        "bytes": 7029,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/narrative-dna-consolidation.ts",
+        "bytes": 2898,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/narrative-dna.ts",
+        "bytes": 1873,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/narrative-passes.ts",
+        "bytes": 11343,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/openai-extraction.ts",
+        "bytes": 2210,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/people.ts",
+        "bytes": 2737,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/places.ts",
+        "bytes": 2954,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/questions.ts",
+        "bytes": 2689,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/reader-memory.ts",
+        "bytes": 3847,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/scene-intelligence.ts",
+        "bytes": 2201,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/scene-soul.ts",
+        "bytes": 5432,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/scenes.ts",
+        "bytes": 13533,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/source-text.ts",
+        "bytes": 2099,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/sources.ts",
+        "bytes": 4483,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/world-model.ts",
+        "bytes": 26386,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/admin",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/attachment",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/attachment/page.tsx",
+        "bytes": 6217,
+        "kind": "file",
+        "role": "Next.js route /admin/attachment"
+      },
+      {
+        "relativePath": "app/admin/audio-sync",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/audio-sync/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/audio-sync/[id]/page.tsx",
+        "bytes": 4310,
+        "kind": "file",
+        "role": "Next.js route /admin/audio-sync/[id]"
+      },
+      {
+        "relativePath": "app/admin/bindings",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/bindings/page.tsx",
+        "bytes": 7779,
+        "kind": "file",
+        "role": "Next.js route /admin/bindings"
+      },
+      {
+        "relativePath": "app/admin/brain",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/brain/page.tsx",
+        "bytes": 19639,
+        "kind": "file",
+        "role": "Next.js route /admin/brain"
+      },
+      {
+        "relativePath": "app/admin/chapters",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/chapters/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/chapters/[id]/page.tsx",
+        "bytes": 10637,
+        "kind": "file",
+        "role": "Next.js route /admin/chapters/[id]"
+      },
+      {
+        "relativePath": "app/admin/chapters/page.tsx",
+        "bytes": 5669,
+        "kind": "file",
+        "role": "Next.js route /admin/chapters"
+      },
+      {
+        "relativePath": "app/admin/characters",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/mind",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/mind/page.tsx",
+        "bytes": 17532,
+        "kind": "file",
+        "role": "Next.js route /admin/characters/[id]/mind"
+      },
+      {
+        "relativePath": "app/admin/chunks",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/chunks/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/chunks/[id]/page.tsx",
+        "bytes": 4428,
+        "kind": "file",
+        "role": "Next.js route /admin/chunks/[id]"
+      },
+      {
+        "relativePath": "app/admin/chunks/page.tsx",
+        "bytes": 2198,
+        "kind": "file",
+        "role": "Next.js route /admin/chunks"
+      },
+      {
+        "relativePath": "app/admin/claims",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/claims/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/claims/[id]/page.tsx",
+        "bytes": 4970,
+        "kind": "file",
+        "role": "Next.js route /admin/claims/[id]"
+      },
+      {
+        "relativePath": "app/admin/claims/page.tsx",
+        "bytes": 8825,
+        "kind": "file",
+        "role": "Next.js route /admin/claims"
+      },
+      {
+        "relativePath": "app/admin/clusters",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/clusters/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/clusters/[id]/page.tsx",
+        "bytes": 9819,
+        "kind": "file",
+        "role": "Next.js route /admin/clusters/[id]"
+      },
+      {
+        "relativePath": "app/admin/clusters/page.tsx",
+        "bytes": 3121,
+        "kind": "file",
+        "role": "Next.js route /admin/clusters"
+      },
+      {
+        "relativePath": "app/admin/continuity",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/continuity/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/continuity/[id]/page.tsx",
+        "bytes": 6705,
+        "kind": "file",
+        "role": "Next.js route /admin/continuity/[id]"
+      },
+      {
+        "relativePath": "app/admin/continuity/page.tsx",
+        "bytes": 7722,
+        "kind": "file",
+        "role": "Next.js route /admin/continuity"
+      },
+      {
+        "relativePath": "app/admin/dashboard",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/dashboard/page.tsx",
+        "bytes": 2563,
+        "kind": "file",
+        "role": "Next.js route /admin/dashboard"
+      },
+      {
+        "relativePath": "app/admin/events",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/events/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/events/[id]/page.tsx",
+        "bytes": 8089,
+        "kind": "file",
+        "role": "Next.js route /admin/events/[id]"
+      },
+      {
+        "relativePath": "app/admin/events/page.tsx",
+        "bytes": 6522,
+        "kind": "file",
+        "role": "Next.js route /admin/events"
+      },
+      {
+        "relativePath": "app/admin/extracted",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/extracted/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/extracted/[id]/merge",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/extracted/[id]/merge/page.tsx",
+        "bytes": 14925,
+        "kind": "file",
+        "role": "Next.js route /admin/extracted/[id]/merge"
+      },
+      {
+        "relativePath": "app/admin/extracted/[id]/page.tsx",
+        "bytes": 18367,
+        "kind": "file",
+        "role": "Next.js route /admin/extracted/[id]"
+      },
+      {
+        "relativePath": "app/admin/extracted/page.tsx",
+        "bytes": 15771,
+        "kind": "file",
+        "role": "Next.js route /admin/extracted"
+      },
+      {
+        "relativePath": "app/admin/fragments",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/fragments/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/fragments/[id]/page.tsx",
+        "bytes": 36311,
+        "kind": "file",
+        "role": "Next.js route /admin/fragments/[id]"
+      },
+      {
+        "relativePath": "app/admin/fragments/page.tsx",
+        "bytes": 11297,
+        "kind": "file",
+        "role": "Next.js route /admin/fragments"
+      },
+      {
+        "relativePath": "app/admin/ingestion",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/ingestion/[sourceId]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/ingestion/[sourceId]/page.tsx",
+        "bytes": 20939,
+        "kind": "file",
+        "role": "Next.js route /admin/ingestion/[sourceId]"
+      },
+      {
+        "relativePath": "app/admin/ingestion/page.tsx",
+        "bytes": 9097,
+        "kind": "file",
+        "role": "Next.js route /admin/ingestion"
+      },
+      {
+        "relativePath": "app/admin/layout.tsx",
+        "bytes": 392,
+        "kind": "file",
+        "role": "Next.js layout"
+      },
+      {
+        "relativePath": "app/admin/literary-devices",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/literary-devices/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/literary-devices/[id]/page.tsx",
+        "bytes": 3721,
+        "kind": "file",
+        "role": "Next.js route /admin/literary-devices/[id]"
+      },
+      {
+        "relativePath": "app/admin/literary-devices/page.tsx",
+        "bytes": 968,
+        "kind": "file",
+        "role": "Next.js route /admin/literary-devices"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/cinematic",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/cinematic/page.tsx",
+        "bytes": 10385,
+        "kind": "file",
+        "role": "Next.js route /admin/meta-scenes/[id]/cinematic"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/compose",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/compose/page.tsx",
+        "bytes": 56239,
+        "kind": "file",
+        "role": "Next.js route /admin/meta-scenes/[id]/compose"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/experience-tuning",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/experience-tuning/page.tsx",
+        "bytes": 6718,
+        "kind": "file",
+        "role": "Next.js route /admin/meta-scenes/[id]/experience-tuning"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/page.tsx",
+        "bytes": 8992,
+        "kind": "file",
+        "role": "Next.js route /admin/meta-scenes/[id]"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/perception",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/perception/page.tsx",
+        "bytes": 6489,
+        "kind": "file",
+        "role": "Next.js route /admin/meta-scenes/[id]/perception"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/view",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/view/page.tsx",
+        "bytes": 6829,
+        "kind": "file",
+        "role": "Next.js route /admin/meta-scenes/[id]/view"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/page.tsx",
+        "bytes": 8053,
+        "kind": "file",
+        "role": "Next.js route /admin/meta-scenes"
+      },
+      {
+        "relativePath": "app/admin/motifs",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/motifs/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/motifs/[id]/page.tsx",
+        "bytes": 3706,
+        "kind": "file",
+        "role": "Next.js route /admin/motifs/[id]"
+      },
+      {
+        "relativePath": "app/admin/motifs/page.tsx",
+        "bytes": 895,
+        "kind": "file",
+        "role": "Next.js route /admin/motifs"
+      },
+      {
+        "relativePath": "app/admin/narrative-rules",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative-rules/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative-rules/[id]/page.tsx",
+        "bytes": 5440,
+        "kind": "file",
+        "role": "Next.js route /admin/narrative-rules/[id]"
+      },
+      {
+        "relativePath": "app/admin/narrative-rules/page.tsx",
+        "bytes": 1227,
+        "kind": "file",
+        "role": "Next.js route /admin/narrative-rules"
+      },
+      {
+        "relativePath": "app/admin/patterns",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/patterns/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/patterns/[id]/page.tsx",
+        "bytes": 4870,
+        "kind": "file",
+        "role": "Next.js route /admin/patterns/[id]"
+      },
+      {
+        "relativePath": "app/admin/patterns/page.tsx",
+        "bytes": 1043,
+        "kind": "file",
+        "role": "Next.js route /admin/patterns"
+      },
+      {
+        "relativePath": "app/admin/people",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/people/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/people/[id]/page.tsx",
+        "bytes": 9736,
+        "kind": "file",
+        "role": "Next.js route /admin/people/[id]"
+      },
+      {
+        "relativePath": "app/admin/people/page.tsx",
+        "bytes": 4815,
+        "kind": "file",
+        "role": "Next.js route /admin/people"
+      },
+      {
+        "relativePath": "app/admin/places",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/places/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/places/[id]/environment",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/places/[id]/environment/page.tsx",
+        "bytes": 8173,
+        "kind": "file",
+        "role": "Next.js route /admin/places/[id]/environment"
+      },
+      {
+        "relativePath": "app/admin/places/[id]/page.tsx",
+        "bytes": 7489,
+        "kind": "file",
+        "role": "Next.js route /admin/places/[id]"
+      },
+      {
+        "relativePath": "app/admin/places/page.tsx",
+        "bytes": 7571,
+        "kind": "file",
+        "role": "Next.js route /admin/places"
+      },
+      {
+        "relativePath": "app/admin/questions",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/questions/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/questions/[id]/page.tsx",
+        "bytes": 6423,
+        "kind": "file",
+        "role": "Next.js route /admin/questions/[id]"
+      },
+      {
+        "relativePath": "app/admin/questions/page.tsx",
+        "bytes": 7679,
+        "kind": "file",
+        "role": "Next.js route /admin/questions"
+      },
+      {
+        "relativePath": "app/admin/relationships",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/relationships/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/relationships/[id]/page.tsx",
+        "bytes": 7188,
+        "kind": "file",
+        "role": "Next.js route /admin/relationships/[id]"
+      },
+      {
+        "relativePath": "app/admin/relationships/page.tsx",
+        "bytes": 4461,
+        "kind": "file",
+        "role": "Next.js route /admin/relationships"
+      },
+      {
+        "relativePath": "app/admin/runs",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/runs/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/runs/[id]/page.tsx",
+        "bytes": 10579,
+        "kind": "file",
+        "role": "Next.js route /admin/runs/[id]"
+      },
+      {
+        "relativePath": "app/admin/scenes",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/scenes/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/scenes/[id]/page.tsx",
+        "bytes": 7659,
+        "kind": "file",
+        "role": "Next.js route /admin/scenes/[id]"
+      },
+      {
+        "relativePath": "app/admin/scenes/[id]/workspace",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/scenes/[id]/workspace/page.tsx",
+        "bytes": 23903,
+        "kind": "file",
+        "role": "Next.js route /admin/scenes/[id]/workspace"
+      },
+      {
+        "relativePath": "app/admin/scenes/page.tsx",
+        "bytes": 6773,
+        "kind": "file",
+        "role": "Next.js route /admin/scenes"
+      },
+      {
+        "relativePath": "app/admin/sources",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/sources/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/sources/[id]/decompose",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/sources/[id]/decompose/decompose-toolbar.tsx",
+        "bytes": 3874,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/admin/sources/[id]/decompose/page.tsx",
+        "bytes": 5573,
+        "kind": "file",
+        "role": "Next.js route /admin/sources/[id]/decompose"
+      },
+      {
+        "relativePath": "app/admin/sources/[id]/page.tsx",
+        "bytes": 22154,
+        "kind": "file",
+        "role": "Next.js route /admin/sources/[id]"
+      },
+      {
+        "relativePath": "app/admin/sources/page.tsx",
+        "bytes": 10460,
+        "kind": "file",
+        "role": "Next.js route /admin/sources"
+      },
+      {
+        "relativePath": "app/admin/symbols",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/symbols/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/symbols/[id]/page.tsx",
+        "bytes": 5974,
+        "kind": "file",
+        "role": "Next.js route /admin/symbols/[id]"
+      },
+      {
+        "relativePath": "app/admin/symbols/page.tsx",
+        "bytes": 1113,
+        "kind": "file",
+        "role": "Next.js route /admin/symbols"
+      },
+      {
+        "relativePath": "app/admin/themes",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/themes/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/themes/[id]/page.tsx",
+        "bytes": 4763,
+        "kind": "file",
+        "role": "Next.js route /admin/themes/[id]"
+      },
+      {
+        "relativePath": "app/admin/themes/page.tsx",
+        "bytes": 1054,
+        "kind": "file",
+        "role": "Next.js route /admin/themes"
+      },
+      {
+        "relativePath": "app/globals.css",
+        "bytes": 1694,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/layout.tsx",
+        "bytes": 796,
+        "kind": "file",
+        "role": "Next.js layout"
+      },
+      {
+        "relativePath": "app/membership",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/membership/page.tsx",
+        "bytes": 3089,
+        "kind": "file",
+        "role": "Next.js route /membership"
+      },
+      {
+        "relativePath": "app/page.tsx",
+        "bytes": 10579,
+        "kind": "file",
+        "role": "Next.js route /"
+      },
+      {
+        "relativePath": "app/read",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/chapters",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/chapters/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/chapters/[id]/page.tsx",
+        "bytes": 7231,
+        "kind": "file",
+        "role": "Next.js route /read/chapters/[id]"
+      },
+      {
+        "relativePath": "app/read/chapters/page.tsx",
+        "bytes": 2668,
+        "kind": "file",
+        "role": "Next.js route /read/chapters"
+      },
+      {
+        "relativePath": "app/read/characters",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/characters/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/characters/[id]/page.tsx",
+        "bytes": 13524,
+        "kind": "file",
+        "role": "Next.js route /read/characters/[id]"
+      },
+      {
+        "relativePath": "app/read/characters/page.tsx",
+        "bytes": 2063,
+        "kind": "file",
+        "role": "Next.js route /read/characters"
+      },
+      {
+        "relativePath": "app/read/layout.tsx",
+        "bytes": 686,
+        "kind": "file",
+        "role": "Next.js layout"
+      },
+      {
+        "relativePath": "app/read/page.tsx",
+        "bytes": 5266,
+        "kind": "file",
+        "role": "Next.js route /read"
+      },
+      {
+        "relativePath": "app/read/places",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/places/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/places/[id]/page.tsx",
+        "bytes": 5883,
+        "kind": "file",
+        "role": "Next.js route /read/places/[id]"
+      },
+      {
+        "relativePath": "app/read/places/page.tsx",
+        "bytes": 1596,
+        "kind": "file",
+        "role": "Next.js route /read/places"
+      },
+      {
+        "relativePath": "app/read/scenes",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/scenes/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/scenes/[id]/page.tsx",
+        "bytes": 2442,
+        "kind": "file",
+        "role": "Next.js route /read/scenes/[id]"
+      },
+      {
+        "relativePath": "app/read/symbols",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/symbols/page.tsx",
+        "bytes": 6034,
+        "kind": "file",
+        "role": "Next.js route /read/symbols"
+      },
+      {
+        "relativePath": "app/read/timeline",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/timeline/page.tsx",
+        "bytes": 1339,
+        "kind": "file",
+        "role": "Next.js route /read/timeline"
+      },
+      {
+        "relativePath": "app/subscribe",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/subscribe/page.tsx",
+        "bytes": 124,
+        "kind": "file",
+        "role": "Next.js route /subscribe"
+      },
+      {
+        "relativePath": "components",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "components/admin",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/admin/dna-source-support-panel.tsx",
+        "bytes": 2018,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/admin-form-error.tsx",
+        "bytes": 485,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/admin-nav.tsx",
+        "bytes": 2077,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/admin-table.tsx",
+        "bytes": 1499,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/alert-banner.tsx",
+        "bytes": 687,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/ambiguity-meter.tsx",
+        "bytes": 606,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/confidence-dot.tsx",
+        "bytes": 607,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/detail-section.tsx",
+        "bytes": 543,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/empty-state.tsx",
+        "bytes": 454,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/fragment-badges.tsx",
+        "bytes": 1142,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/page-header.tsx",
+        "bytes": 731,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/AtmosphereLayer.tsx",
+        "bytes": 1608,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/ImmersiveSceneReader.tsx",
+        "bytes": 9342,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/SidePanel.tsx",
+        "bytes": 2650,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/atmosphere-block.tsx",
+        "bytes": 602,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/audio-teaser.tsx",
+        "bytes": 1805,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/character-follow-button.tsx",
+        "bytes": 1037,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/character-spotlight.tsx",
+        "bytes": 1051,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/character-voice-section.tsx",
+        "bytes": 2699,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/continue-reading-banner.tsx",
+        "bytes": 2783,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/explore-deeper-card.tsx",
+        "bytes": 1082,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/home-return-layer.tsx",
+        "bytes": 1645,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/immersive-error-boundary.tsx",
+        "bytes": 856,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/linked-reading-blocks.tsx",
+        "bytes": 3782,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/membership-tier-card.tsx",
+        "bytes": 1047,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/place-spotlight.tsx",
+        "bytes": 883,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/premium-depth-gate.tsx",
+        "bytes": 3937,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/public-audio-player.tsx",
+        "bytes": 12941,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/public-hero.tsx",
+        "bytes": 1821,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/public-site-chrome.tsx",
+        "bytes": 928,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/read-scene-experience.tsx",
+        "bytes": 38778,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/reader-thread-suggestions.tsx",
+        "bytes": 1127,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/return-experience-card.tsx",
+        "bytes": 1782,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/scene-reader.tsx",
+        "bytes": 793,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/timeline-section.tsx",
+        "bytes": 3410,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/world-entry-card.tsx",
+        "bytes": 1154,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/read-nav.tsx",
+        "bytes": 1524,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/record-meta-badges.tsx",
+        "bytes": 540,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/scene-intelligence-panel.tsx",
+        "bytes": 13030,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/scene-soul-panel.tsx",
+        "bytes": 11132,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/status-badge.tsx",
+        "bytes": 999,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/synthetic-read.tsx",
+        "bytes": 713,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "eslint.config.mjs",
+        "bytes": 458,
+        "kind": "file"
+      },
+      {
+        "relativePath": "lib",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "lib/admin-styles.ts",
+        "bytes": 345,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/attachment-analytics.ts",
+        "bytes": 5543,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/attachment-local-test.ts",
+        "bytes": 948,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/attachment-quality.ts",
+        "bytes": 1340,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/audio-cue-map.ts",
+        "bytes": 3611,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/audio-script.ts",
+        "bytes": 2783,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/audio-sync.ts",
+        "bytes": 5732,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-session.ts",
+        "bytes": 376,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/character-type-inference.ts",
+        "bytes": 6918,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/chunk-aggregation.ts",
+        "bytes": 4894,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cinematic-ai.ts",
+        "bytes": 6975,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cinematic-assembly.ts",
+        "bytes": 3075,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cinematic-flow.ts",
+        "bytes": 3578,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cinematic-prose.ts",
+        "bytes": 9170,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cinematic-quality.ts",
+        "bytes": 2980,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/data-access.ts",
+        "bytes": 68456,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/demo-book",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/demo-book/ids.ts",
+        "bytes": 1058,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/demo-book/prose-part1.ts",
+        "bytes": 13018,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/demo-book/prose-part2.ts",
+        "bytes": 11157,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/demo-book/prose-part3.ts",
+        "bytes": 7101,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/demo-book/scene-drafts-registry.ts",
+        "bytes": 316,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/descriptive-ai.ts",
+        "bytes": 4687,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/descriptive-constants.ts",
+        "bytes": 506,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/descriptive-prompts.ts",
+        "bytes": 3210,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/descriptive-synthesis.ts",
+        "bytes": 23799,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/descriptive-validation.ts",
+        "bytes": 1943,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/embodied-environment.ts",
+        "bytes": 3146,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/embodied-narrative-generation.ts",
+        "bytes": 5690,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/emotional-gravity.ts",
+        "bytes": 6806,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/emotional-hooks.ts",
+        "bytes": 10295,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/enneagram-engine.ts",
+        "bytes": 12251,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/entity-matching.ts",
+        "bytes": 11040,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/entity-merge.ts",
+        "bytes": 28759,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/entity-normalization.ts",
+        "bytes": 1427,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/extraction-normalizer.ts",
+        "bytes": 6349,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/extraction-prompt.ts",
+        "bytes": 5434,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/extraction-warnings.ts",
+        "bytes": 1960,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-ai-assist.ts",
+        "bytes": 1335,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-clustering.ts",
+        "bytes": 8988,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-constants.ts",
+        "bytes": 220,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-decomposition.ts",
+        "bytes": 12260,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-density.ts",
+        "bytes": 2498,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-interpretation.ts",
+        "bytes": 4818,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-narrative-dna.ts",
+        "bytes": 449,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-refinement.ts",
+        "bytes": 6023,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-service.ts",
+        "bytes": 5478,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-types.ts",
+        "bytes": 2813,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-validation.ts",
+        "bytes": 5595,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/group-by.ts",
+        "bytes": 291,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/guided-experience.ts",
+        "bytes": 5837,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/guided-fusion.ts",
+        "bytes": 2175,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/hook-quality.ts",
+        "bytes": 1441,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/immersive-presets.ts",
+        "bytes": 1930,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/ingestion-constants.ts",
+        "bytes": 1810,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/ingestion-contracts.ts",
+        "bytes": 2720,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/ingestion-packet.ts",
+        "bytes": 1938,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/ingestion-validation.ts",
+        "bytes": 1932,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/linking-validation.ts",
+        "bytes": 1308,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/meta-scene-composer.ts",
+        "bytes": 15012,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/mock-extraction.ts",
+        "bytes": 3091,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-binding.ts",
+        "bytes": 11333,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-consciousness-ai.ts",
+        "bytes": 7557,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-consciousness.ts",
+        "bytes": 10962,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-dna-ai.ts",
+        "bytes": 6284,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-dna-consolidation.ts",
+        "bytes": 31616,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-dna-context.ts",
+        "bytes": 8182,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-dna-extractor.ts",
+        "bytes": 10242,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-dna-guide-constants.ts",
+        "bytes": 2239,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-dna-ingest-runner.ts",
+        "bytes": 2649,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-dna-persist.ts",
+        "bytes": 5550,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-dna-prompt.ts",
+        "bytes": 3002,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-dna-validation.ts",
+        "bytes": 7635,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-style.ts",
+        "bytes": 2147,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/openai-extraction.ts",
+        "bytes": 23927,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/openai.ts",
+        "bytes": 1076,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/perception-stream.ts",
+        "bytes": 26420,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/perspective-engine.ts",
+        "bytes": 17623,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/premium-content.ts",
+        "bytes": 1010,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/premium-depth-offers.ts",
+        "bytes": 8559,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prisma.ts",
+        "bytes": 299,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/promote-extracted.ts",
+        "bytes": 11092,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/public-data.ts",
+        "bytes": 48241,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/public-experience-rendering.ts",
+        "bytes": 8010,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/public-scene-immersion.ts",
+        "bytes": 3961,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/read-labels.ts",
+        "bytes": 202,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/reader-flow.ts",
+        "bytes": 12131,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/reader-memory.ts",
+        "bytes": 13400,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/reader-threads.ts",
+        "bytes": 6187,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/reading-blocks.ts",
+        "bytes": 214,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/reading-progress.ts",
+        "bytes": 1328,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/relationship-dynamics.ts",
+        "bytes": 3726,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-assist-context.ts",
+        "bytes": 7490,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-assist-prompts.ts",
+        "bytes": 10955,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-beats.ts",
+        "bytes": 6779,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-composition.ts",
+        "bytes": 8902,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-continuity.ts",
+        "bytes": 2352,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-heart.ts",
+        "bytes": 5569,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-intelligence-ai.ts",
+        "bytes": 1065,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-intelligence-validation.ts",
+        "bytes": 3524,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-intelligence.ts",
+        "bytes": 15172,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-soul-ai.ts",
+        "bytes": 1266,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-soul-validation.ts",
+        "bytes": 1241,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/section-xiii-internal.ts",
+        "bytes": 7561,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/session-follow.ts",
+        "bytes": 1098,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/source-chunking.ts",
+        "bytes": 5738,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/validation.ts",
+        "bytes": 7683,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/voice-fusion.ts",
+        "bytes": 9095,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/voice-prompts.ts",
+        "bytes": 4805,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/voice-rendering.ts",
+        "bytes": 2855,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/world-dynamics.ts",
+        "bytes": 2104,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "middleware.ts",
+        "bytes": 722,
+        "kind": "file"
+      },
+      {
+        "relativePath": "netlify.toml",
+        "bytes": 129,
+        "kind": "file"
+      },
+      {
+        "relativePath": "next-env.d.ts",
+        "bytes": 262,
+        "kind": "file"
+      },
+      {
+        "relativePath": "next.config.ts",
+        "bytes": 104,
+        "kind": "file"
+      },
+      {
+        "relativePath": "package-lock.json",
+        "bytes": 247263,
+        "kind": "file"
+      },
+      {
+        "relativePath": "package.json",
+        "bytes": 1330,
+        "kind": "file",
+        "role": "npm manifest + scripts"
+      },
+      {
+        "relativePath": "postcss.config.mjs",
+        "bytes": 94,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260407120000_phase9b_scene_intelligence",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260407120000_phase9b_scene_intelligence/migration.sql",
+        "bytes": 5487,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260407140000_phase_9c_character_soul",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260407140000_phase_9c_character_soul/migration.sql",
+        "bytes": 3135,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260407180000_phase_10d_cinematic_narrative",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260407180000_phase_10d_cinematic_narrative/migration.sql",
+        "bytes": 3489,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/schema.prisma",
+        "bytes": 47202,
+        "kind": "file",
+        "role": "database schema"
+      },
+      {
+        "relativePath": "prisma/seed-full-demo.ts",
+        "bytes": 55154,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed-origin-anchor.ts",
+        "bytes": 58109,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed.ts",
+        "bytes": 17191,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "public",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "public/.gitkeep",
+        "bytes": 0,
+        "kind": "file",
+        "role": "static assets"
+      },
+      {
+        "relativePath": "reports",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "reports/campti-handoff-filesystem.json",
+        "bytes": 68916,
+        "kind": "file"
+      },
+      {
+        "relativePath": "reports/campti-handoff-index.json",
+        "bytes": 528,
+        "kind": "file"
+      },
+      {
+        "relativePath": "reports/campti-handoff-story.json",
+        "bytes": 93485,
+        "kind": "file"
+      },
+      {
+        "relativePath": "scripts",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "scripts/generate-handoff-report.ts",
+        "bytes": 18044,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/ingest-historical-timeline.ts",
+        "bytes": 7307,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/ingest-narrative-system-doc.ts",
+        "bytes": 5666,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/load-env.ts",
+        "bytes": 737,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/seed-narrative-dna-documents.ts",
+        "bytes": 6924,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/seed-narrative-dna-guides.ts",
+        "bytes": 3010,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "styles",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "styles/theme.css",
+        "bytes": 117,
+        "kind": "file"
+      },
+      {
+        "relativePath": "tsconfig.json",
+        "bytes": 562,
+        "kind": "file"
+      },
+      {
+        "relativePath": "tsconfig.tsbuildinfo",
+        "bytes": 190612,
+        "kind": "file"
+      }
+    ]
+  }
+}

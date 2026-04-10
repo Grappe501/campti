@@ -1,10 +1,12 @@
 /**
- * Generates a JSON handoff report for AI / documentation:
- * - Environment + npm scripts (executables)
- * - Prisma model list + DB narrative snapshot (if DATABASE_URL works)
- * - File tree with sizes (excludes node_modules, .git, .next, etc.)
+ * Generates split JSON handoff reports for AI / documentation:
+ * - reports/campti-handoff-filesystem.json — repo tree, routes, npm scripts, deps
+ * - reports/campti-handoff-story.json — Prisma story graph from DATABASE_URL
+ * - reports/campti-handoff-index.json — pointers + shared metadata
  *
- * Usage: npx tsx scripts/generate-handoff-report.ts [--out reports/campti-handoff.json]
+ * Optional: --combined-out <path> writes the legacy single-file merge.
+ *
+ * Usage: npx tsx scripts/generate-handoff-report.ts
  */
 import * as fs from "node:fs";
 import * as path from "node:path";
@@ -30,7 +32,6 @@ type FileEntry = {
   relativePath: string;
   bytes: number;
   kind: "file" | "directory";
-  /** One-line hint: route type, prisma seed, etc. */
   role?: string;
 };
 
@@ -102,49 +103,7 @@ function walk(
   }
 }
 
-async function main() {
-  const args = process.argv.slice(2);
-  let outPath: string | null = null;
-  const idx = args.indexOf("--out");
-  if (idx >= 0 && args[idx + 1]) outPath = path.resolve(args[idx + 1]);
-
-  const repoRoot = path.resolve(__dirname, "..");
-  const generatedAt = new Date().toISOString();
-
-  const pkg = JSON.parse(fs.readFileSync(path.join(repoRoot, "package.json"), "utf8")) as {
-    name?: string;
-    version?: string;
-    scripts?: Record<string, string>;
-    dependencies?: Record<string, string>;
-    devDependencies?: Record<string, string>;
-    prisma?: { seed?: string };
-  };
-
-  const maxFiles = Number(process.env.HANDOFF_MAX_FILES ?? "25000");
-  const fileEntries: FileEntry[] = [];
-  walk(repoRoot, "", fileEntries, maxFiles);
-
-  const totalBytes = fileEntries.filter((e) => e.kind === "file").reduce((a, e) => a + e.bytes, 0);
-  const truncated = fileEntries.length >= maxFiles;
-
-  const byTopLevel: Record<string, { files: number; bytes: number }> = {};
-  for (const e of fileEntries) {
-    if (e.kind !== "file") continue;
-    const top = e.relativePath.split("/")[0] ?? "(root)";
-    if (!byTopLevel[top]) byTopLevel[top] = { files: 0, bytes: 0 };
-    byTopLevel[top].files += 1;
-    byTopLevel[top].bytes += e.bytes;
-  }
-
-  const routes = fileEntries
-    .filter((e) => e.kind === "file" && e.relativePath.startsWith("app/") && e.relativePath.endsWith("/page.tsx"))
-    .map((e) => ({
-      path: "/" + e.relativePath.replace(/^app\//, "").replace(/\/page\.tsx$/, ""),
-      file: e.relativePath,
-      bytes: e.bytes,
-    }));
-
-  let dbSnapshot: Record<string, unknown> = { error: "not_queried" };
+async function loadStorySnapshot(): Promise<Record<string, unknown>> {
   try {
     const [
       chapters,
@@ -373,7 +332,7 @@ async function main() {
         })),
     }));
 
-    dbSnapshot = {
+    return {
       counts: {
         chapters: chapters.length,
         scenes: scenes.length,
@@ -430,13 +389,76 @@ async function main() {
       aliases,
     };
   } catch (e) {
-    dbSnapshot = {
+    return {
       error: "database_query_failed",
       message: e instanceof Error ? e.message : String(e),
     };
-  } finally {
-    await prisma.$disconnect().catch(() => undefined);
   }
+}
+
+function writeJson(filePath: string, obj: unknown): void {
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  const json = JSON.stringify(obj, null, 2);
+  fs.writeFileSync(filePath, json, "utf8");
+  console.log(`Wrote ${filePath} (${Buffer.byteLength(json, "utf8")} bytes)`);
+}
+
+async function main() {
+  const args = process.argv.slice(2);
+  let combinedOut: string | null = null;
+  const cidx = args.indexOf("--combined-out");
+  if (cidx >= 0 && args[cidx + 1]) combinedOut = path.resolve(args[cidx + 1]);
+
+  const reportsDir = path.resolve(__dirname, "..", "reports");
+  const defaultFs = path.join(reportsDir, "campti-handoff-filesystem.json");
+  const defaultStory = path.join(reportsDir, "campti-handoff-story.json");
+  const defaultIndex = path.join(reportsDir, "campti-handoff-index.json");
+
+  let fsOut = defaultFs;
+  let storyOut = defaultStory;
+  let indexOut = defaultIndex;
+  const fsi = args.indexOf("--filesystem-out");
+  if (fsi >= 0 && args[fsi + 1]) fsOut = path.resolve(args[fsi + 1]);
+  const si = args.indexOf("--story-out");
+  if (si >= 0 && args[si + 1]) storyOut = path.resolve(args[si + 1]);
+  const ii = args.indexOf("--index-out");
+  if (ii >= 0 && args[ii + 1]) indexOut = path.resolve(args[ii + 1]);
+
+  const repoRoot = path.resolve(__dirname, "..");
+  const generatedAt = new Date().toISOString();
+
+  const pkg = JSON.parse(fs.readFileSync(path.join(repoRoot, "package.json"), "utf8")) as {
+    name?: string;
+    version?: string;
+    scripts?: Record<string, string>;
+    dependencies?: Record<string, string>;
+    devDependencies?: Record<string, string>;
+    prisma?: { seed?: string };
+  };
+
+  const maxFiles = Number(process.env.HANDOFF_MAX_FILES ?? "25000");
+  const fileEntries: FileEntry[] = [];
+  walk(repoRoot, "", fileEntries, maxFiles);
+
+  const totalBytes = fileEntries.filter((e) => e.kind === "file").reduce((a, e) => a + e.bytes, 0);
+  const truncated = fileEntries.length >= maxFiles;
+
+  const byTopLevel: Record<string, { files: number; bytes: number }> = {};
+  for (const e of fileEntries) {
+    if (e.kind !== "file") continue;
+    const top = e.relativePath.split("/")[0] ?? "(root)";
+    if (!byTopLevel[top]) byTopLevel[top] = { files: 0, bytes: 0 };
+    byTopLevel[top].files += 1;
+    byTopLevel[top].bytes += e.bytes;
+  }
+
+  const routes = fileEntries
+    .filter((e) => e.kind === "file" && e.relativePath.startsWith("app/") && e.relativePath.endsWith("/page.tsx"))
+    .map((e) => ({
+      path: "/" + e.relativePath.replace(/^app\//, "").replace(/\/page\.tsx$/, ""),
+      file: e.relativePath,
+      bytes: e.bytes,
+    }));
 
   const prismaSchemaPath = path.join(repoRoot, "prisma", "schema.prisma");
   let prismaSchemaBytes = 0;
@@ -446,11 +468,15 @@ async function main() {
     /* ignore */
   }
 
-  const report = {
-    handoffVersion: 1,
+  const storySnapshot = await loadStorySnapshot();
+  await prisma.$disconnect().catch(() => undefined);
+
+  const filesystemReport = {
+    kind: "filesystem" as const,
+    handoffVersion: 2,
     generatedAt,
     purpose:
-      "Campti project handoff: UI + Prisma story graph + seeded narrative DNA. Upload to an AI thread for continuation.",
+      "Repository and build layout: files, routes, npm scripts, dependencies. Pair with campti-handoff-story.json for narrative state.",
     repository: {
       name: pkg.name ?? "campti",
       version: pkg.version ?? "0.0.0",
@@ -494,20 +520,70 @@ async function main() {
       filesByTopLevelFolder: byTopLevel,
       entries: fileEntries,
     },
-    storySystemFromDatabase: dbSnapshot,
+  };
+
+  const storyReport = {
+    kind: "story" as const,
+    handoffVersion: 2,
+    generatedAt,
+    purpose:
+      "Narrative graph exported from the database (themes, symbols, chapters, scenes, bindings, etc.). Requires DATABASE_URL when generating.",
+    repository: {
+      name: pkg.name ?? "campti",
+      version: pkg.version ?? "0.0.0",
+      rootPath: repoRoot,
+    },
     readingAndAdminUrls: {
       readHub: "/read",
       adminDashboard: "/admin/dashboard",
     },
+    storySystemFromDatabase: storySnapshot,
   };
 
-  const json = JSON.stringify(report, null, 2);
-  if (outPath) {
-    fs.mkdirSync(path.dirname(outPath), { recursive: true });
-    fs.writeFileSync(outPath, json, "utf8");
-    console.log(`Wrote ${outPath} (${Buffer.byteLength(json, "utf8")} bytes)`);
-  } else {
-    console.log(json);
+  const rel = (abs: string) => path.relative(repoRoot, abs).split(path.sep).join("/");
+
+  const indexReport = {
+    kind: "index" as const,
+    handoffVersion: 2,
+    generatedAt,
+    purpose:
+      "Entry point: open filesystem JSON for repo structure, story JSON for literary/narrative database state.",
+    repository: {
+      name: pkg.name ?? "campti",
+      version: pkg.version ?? "0.0.0",
+      rootPath: repoRoot,
+    },
+    artifacts: {
+      filesystem: rel(fsOut),
+      story: rel(storyOut),
+    },
+    runtime: {
+      node: process.version,
+      platform: process.platform,
+    },
+  };
+
+  writeJson(fsOut, filesystemReport);
+  writeJson(storyOut, storyReport);
+  writeJson(indexOut, indexReport);
+
+  if (combinedOut) {
+    const merged = {
+      handoffVersion: 2,
+      generatedAt,
+      purpose:
+        "Legacy combined export (filesystem + story). Prefer campti-handoff-index.json and split artifacts for large uploads.",
+      repository: filesystemReport.repository,
+      runtime: filesystemReport.runtime,
+      executablesAndScripts: filesystemReport.executablesAndScripts,
+      dependencies: filesystemReport.dependencies,
+      prisma: filesystemReport.prisma,
+      nextJs: filesystemReport.nextJs,
+      filesystem: filesystemReport.filesystem,
+      storySystemFromDatabase: storyReport.storySystemFromDatabase,
+      readingAndAdminUrls: storyReport.readingAndAdminUrls,
+    };
+    writeJson(combinedOut, merged);
   }
 }
 
