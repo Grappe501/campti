@@ -1098,6 +1098,7 @@ Later family movement toward the Campti area after Alexis’s relocation from th
         status: "suggested",
       },
     ],
+    skipDuplicates: true,
   });
 
   await prisma.metaSceneNarrativePass.upsert({

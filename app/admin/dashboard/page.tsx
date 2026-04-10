@@ -15,8 +15,18 @@ export default async function AdminDashboardPage() {
     { label: "Events", value: counts.events, href: "/admin/events" },
     { label: "Chapters", value: counts.chapters, href: "/admin/chapters" },
     { label: "Scenes", value: counts.scenes, href: "/admin/scenes" },
+    { label: "Meta scenes", value: counts.metaScenes, href: "/admin/meta-scenes" },
     { label: "Open questions", value: counts.openQuestions, href: "/admin/questions" },
     { label: "Continuity notes", value: counts.continuityNotes, href: "/admin/continuity" },
+    { label: "Symbols", value: counts.symbols, href: "/admin/symbols" },
+    { label: "Themes", value: counts.themes, href: "/admin/themes" },
+    { label: "Motifs", value: counts.motifs, href: "/admin/motifs" },
+    { label: "Narrative rules", value: counts.narrativeRules, href: "/admin/narrative-rules" },
+    { label: "Literary devices", value: counts.literaryDevices, href: "/admin/literary-devices" },
+    { label: "Patterns", value: counts.narrativePatterns, href: "/admin/patterns" },
+    { label: "Bindings", value: counts.narrativeBindings, href: "/admin/bindings" },
+    { label: "Fragments", value: counts.fragments, href: "/admin/fragments" },
+    { label: "Clusters", value: counts.fragmentClusters, href: "/admin/clusters" },
   ];
 
   return (

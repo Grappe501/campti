@@ -13,6 +13,7 @@ import {
 } from "../lib/ingestion-constants";
 import { prisma } from "../lib/prisma";
 import { seedOriginWorldAnchor } from "./seed-origin-anchor";
+import { seedFullDemo } from "./seed-full-demo";
 
 async function main() {
   const people = [
@@ -527,6 +528,7 @@ async function main() {
   });
 
   await seedOriginWorldAnchor(prisma);
+  await seedFullDemo(prisma);
 }
 
 main()
