@@ -1,0 +1,5227 @@
+{
+  "handoffVersion": 1,
+  "generatedAt": "2026-04-10T13:30:48.234Z",
+  "purpose": "Campti project handoff: UI + Prisma story graph + seeded narrative DNA. Upload to an AI thread for continuation.",
+  "repository": {
+    "name": "campti",
+    "version": "0.1.0",
+    "rootPath": "C:\\Users\\User\\Desktop\\Campti"
+  },
+  "runtime": {
+    "node": "v22.18.0",
+    "platform": "win32",
+    "cwd": "C:\\Users\\User\\Desktop\\Campti"
+  },
+  "executablesAndScripts": {
+    "npmScripts": {
+      "dev": "next dev",
+      "build": "prisma generate && next build",
+      "start": "next start",
+      "lint": "eslint",
+      "postinstall": "prisma generate",
+      "db:push": "prisma db push",
+      "db:seed": "prisma db seed",
+      "db:studio": "prisma studio",
+      "db:narrative-system": "tsx scripts/ingest-narrative-system-doc.ts",
+      "db:narrative-dna": "tsx scripts/seed-narrative-dna-documents.ts",
+      "db:narrative-dna-guides": "tsx scripts/seed-narrative-dna-guides.ts",
+      "db:historical-timeline": "tsx scripts/ingest-historical-timeline.ts",
+      "report:handoff": "tsx scripts/generate-handoff-report.ts --out reports/campti-handoff-report.json"
+    },
+    "narrative": {
+      "note": "All ingestion is TypeScript run via tsx; there are no Python scripts in this repo.",
+      "scriptFiles": [
+        {
+          "file": "scripts/generate-handoff-report.ts",
+          "bytes": 15343,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/ingest-historical-timeline.ts",
+          "bytes": 7307,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/ingest-narrative-system-doc.ts",
+          "bytes": 5666,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/load-env.ts",
+          "bytes": 737,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/seed-narrative-dna-documents.ts",
+          "bytes": 6924,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/seed-narrative-dna-guides.ts",
+          "bytes": 3010,
+          "role": "CLI / ingestion script"
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "production": {
+      "@prisma/client": "^6.6.0",
+      "@supabase/supabase-js": "^2.102.1",
+      "next": "^15.2.4",
+      "openai": "^6.33.0",
+      "react": "^19.1.0",
+      "react-dom": "^19.1.0",
+      "zod": "^4.3.6"
+    },
+    "development": {
+      "@eslint/eslintrc": "^3",
+      "@netlify/plugin-nextjs": "^5",
+      "@tailwindcss/postcss": "^4",
+      "@types/node": "^20",
+      "@types/react": "^19",
+      "@types/react-dom": "^19",
+      "eslint": "^9",
+      "eslint-config-next": "^15.2.4",
+      "prisma": "^6.6.0",
+      "tailwindcss": "^4",
+      "tsx": "^4.19.3",
+      "typescript": "^5"
+    }
+  },
+  "prisma": {
+    "schemaFile": "prisma/schema.prisma",
+    "schemaBytes": 47202,
+    "seedCommand": "tsx prisma/seed.ts",
+    "note": "PostgreSQL via DATABASE_URL; Prisma Client generated on postinstall/build."
+  },
+  "nextJs": {
+    "appRouterRoots": [
+      "app/"
+    ],
+    "routesDiscovered": [
+      {
+        "path": "/admin/attachment",
+        "file": "app/admin/attachment/page.tsx",
+        "bytes": 6217
+      },
+      {
+        "path": "/admin/audio-sync/[id]",
+        "file": "app/admin/audio-sync/[id]/page.tsx",
+        "bytes": 4310
+      },
+      {
+        "path": "/admin/bindings",
+        "file": "app/admin/bindings/page.tsx",
+        "bytes": 7779
+      },
+      {
+        "path": "/admin/brain",
+        "file": "app/admin/brain/page.tsx",
+        "bytes": 19639
+      },
+      {
+        "path": "/admin/chapters/[id]",
+        "file": "app/admin/chapters/[id]/page.tsx",
+        "bytes": 10637
+      },
+      {
+        "path": "/admin/chapters",
+        "file": "app/admin/chapters/page.tsx",
+        "bytes": 5669
+      },
+      {
+        "path": "/admin/characters/[id]/mind",
+        "file": "app/admin/characters/[id]/mind/page.tsx",
+        "bytes": 17532
+      },
+      {
+        "path": "/admin/chunks/[id]",
+        "file": "app/admin/chunks/[id]/page.tsx",
+        "bytes": 4428
+      },
+      {
+        "path": "/admin/chunks",
+        "file": "app/admin/chunks/page.tsx",
+        "bytes": 2198
+      },
+      {
+        "path": "/admin/claims/[id]",
+        "file": "app/admin/claims/[id]/page.tsx",
+        "bytes": 4970
+      },
+      {
+        "path": "/admin/claims",
+        "file": "app/admin/claims/page.tsx",
+        "bytes": 8825
+      },
+      {
+        "path": "/admin/clusters/[id]",
+        "file": "app/admin/clusters/[id]/page.tsx",
+        "bytes": 9819
+      },
+      {
+        "path": "/admin/clusters",
+        "file": "app/admin/clusters/page.tsx",
+        "bytes": 3121
+      },
+      {
+        "path": "/admin/continuity/[id]",
+        "file": "app/admin/continuity/[id]/page.tsx",
+        "bytes": 6705
+      },
+      {
+        "path": "/admin/continuity",
+        "file": "app/admin/continuity/page.tsx",
+        "bytes": 7722
+      },
+      {
+        "path": "/admin/dashboard",
+        "file": "app/admin/dashboard/page.tsx",
+        "bytes": 2563
+      },
+      {
+        "path": "/admin/events/[id]",
+        "file": "app/admin/events/[id]/page.tsx",
+        "bytes": 8089
+      },
+      {
+        "path": "/admin/events",
+        "file": "app/admin/events/page.tsx",
+        "bytes": 6522
+      },
+      {
+        "path": "/admin/extracted/[id]/merge",
+        "file": "app/admin/extracted/[id]/merge/page.tsx",
+        "bytes": 14925
+      },
+      {
+        "path": "/admin/extracted/[id]",
+        "file": "app/admin/extracted/[id]/page.tsx",
+        "bytes": 18367
+      },
+      {
+        "path": "/admin/extracted",
+        "file": "app/admin/extracted/page.tsx",
+        "bytes": 15771
+      },
+      {
+        "path": "/admin/fragments/[id]",
+        "file": "app/admin/fragments/[id]/page.tsx",
+        "bytes": 36311
+      },
+      {
+        "path": "/admin/fragments",
+        "file": "app/admin/fragments/page.tsx",
+        "bytes": 11297
+      },
+      {
+        "path": "/admin/ingestion/[sourceId]",
+        "file": "app/admin/ingestion/[sourceId]/page.tsx",
+        "bytes": 20939
+      },
+      {
+        "path": "/admin/ingestion",
+        "file": "app/admin/ingestion/page.tsx",
+        "bytes": 9097
+      },
+      {
+        "path": "/admin/literary-devices/[id]",
+        "file": "app/admin/literary-devices/[id]/page.tsx",
+        "bytes": 3721
+      },
+      {
+        "path": "/admin/literary-devices",
+        "file": "app/admin/literary-devices/page.tsx",
+        "bytes": 968
+      },
+      {
+        "path": "/admin/meta-scenes/[id]/cinematic",
+        "file": "app/admin/meta-scenes/[id]/cinematic/page.tsx",
+        "bytes": 10385
+      },
+      {
+        "path": "/admin/meta-scenes/[id]/compose",
+        "file": "app/admin/meta-scenes/[id]/compose/page.tsx",
+        "bytes": 56239
+      },
+      {
+        "path": "/admin/meta-scenes/[id]/experience-tuning",
+        "file": "app/admin/meta-scenes/[id]/experience-tuning/page.tsx",
+        "bytes": 6718
+      },
+      {
+        "path": "/admin/meta-scenes/[id]",
+        "file": "app/admin/meta-scenes/[id]/page.tsx",
+        "bytes": 8992
+      },
+      {
+        "path": "/admin/meta-scenes/[id]/perception",
+        "file": "app/admin/meta-scenes/[id]/perception/page.tsx",
+        "bytes": 6489
+      },
+      {
+        "path": "/admin/meta-scenes/[id]/view",
+        "file": "app/admin/meta-scenes/[id]/view/page.tsx",
+        "bytes": 6829
+      },
+      {
+        "path": "/admin/meta-scenes",
+        "file": "app/admin/meta-scenes/page.tsx",
+        "bytes": 8053
+      },
+      {
+        "path": "/admin/motifs/[id]",
+        "file": "app/admin/motifs/[id]/page.tsx",
+        "bytes": 3706
+      },
+      {
+        "path": "/admin/motifs",
+        "file": "app/admin/motifs/page.tsx",
+        "bytes": 895
+      },
+      {
+        "path": "/admin/narrative-rules/[id]",
+        "file": "app/admin/narrative-rules/[id]/page.tsx",
+        "bytes": 5440
+      },
+      {
+        "path": "/admin/narrative-rules",
+        "file": "app/admin/narrative-rules/page.tsx",
+        "bytes": 1227
+      },
+      {
+        "path": "/admin/patterns/[id]",
+        "file": "app/admin/patterns/[id]/page.tsx",
+        "bytes": 4870
+      },
+      {
+        "path": "/admin/patterns",
+        "file": "app/admin/patterns/page.tsx",
+        "bytes": 1043
+      },
+      {
+        "path": "/admin/people/[id]",
+        "file": "app/admin/people/[id]/page.tsx",
+        "bytes": 9736
+      },
+      {
+        "path": "/admin/people",
+        "file": "app/admin/people/page.tsx",
+        "bytes": 4815
+      },
+      {
+        "path": "/admin/places/[id]/environment",
+        "file": "app/admin/places/[id]/environment/page.tsx",
+        "bytes": 8173
+      },
+      {
+        "path": "/admin/places/[id]",
+        "file": "app/admin/places/[id]/page.tsx",
+        "bytes": 7489
+      },
+      {
+        "path": "/admin/places",
+        "file": "app/admin/places/page.tsx",
+        "bytes": 7571
+      },
+      {
+        "path": "/admin/questions/[id]",
+        "file": "app/admin/questions/[id]/page.tsx",
+        "bytes": 6423
+      },
+      {
+        "path": "/admin/questions",
+        "file": "app/admin/questions/page.tsx",
+        "bytes": 7679
+      },
+      {
+        "path": "/admin/relationships/[id]",
+        "file": "app/admin/relationships/[id]/page.tsx",
+        "bytes": 7188
+      },
+      {
+        "path": "/admin/relationships",
+        "file": "app/admin/relationships/page.tsx",
+        "bytes": 4461
+      },
+      {
+        "path": "/admin/runs/[id]",
+        "file": "app/admin/runs/[id]/page.tsx",
+        "bytes": 10579
+      },
+      {
+        "path": "/admin/scenes/[id]",
+        "file": "app/admin/scenes/[id]/page.tsx",
+        "bytes": 7659
+      },
+      {
+        "path": "/admin/scenes/[id]/workspace",
+        "file": "app/admin/scenes/[id]/workspace/page.tsx",
+        "bytes": 23903
+      },
+      {
+        "path": "/admin/scenes",
+        "file": "app/admin/scenes/page.tsx",
+        "bytes": 6773
+      },
+      {
+        "path": "/admin/sources/[id]/decompose",
+        "file": "app/admin/sources/[id]/decompose/page.tsx",
+        "bytes": 5573
+      },
+      {
+        "path": "/admin/sources/[id]",
+        "file": "app/admin/sources/[id]/page.tsx",
+        "bytes": 22154
+      },
+      {
+        "path": "/admin/sources",
+        "file": "app/admin/sources/page.tsx",
+        "bytes": 10460
+      },
+      {
+        "path": "/admin/symbols/[id]",
+        "file": "app/admin/symbols/[id]/page.tsx",
+        "bytes": 5974
+      },
+      {
+        "path": "/admin/symbols",
+        "file": "app/admin/symbols/page.tsx",
+        "bytes": 1113
+      },
+      {
+        "path": "/admin/themes/[id]",
+        "file": "app/admin/themes/[id]/page.tsx",
+        "bytes": 4763
+      },
+      {
+        "path": "/admin/themes",
+        "file": "app/admin/themes/page.tsx",
+        "bytes": 1054
+      },
+      {
+        "path": "/membership",
+        "file": "app/membership/page.tsx",
+        "bytes": 3089
+      },
+      {
+        "path": "/page.tsx",
+        "file": "app/page.tsx",
+        "bytes": 10579
+      },
+      {
+        "path": "/read/chapters/[id]",
+        "file": "app/read/chapters/[id]/page.tsx",
+        "bytes": 7231
+      },
+      {
+        "path": "/read/chapters",
+        "file": "app/read/chapters/page.tsx",
+        "bytes": 2668
+      },
+      {
+        "path": "/read/characters/[id]",
+        "file": "app/read/characters/[id]/page.tsx",
+        "bytes": 13524
+      },
+      {
+        "path": "/read/characters",
+        "file": "app/read/characters/page.tsx",
+        "bytes": 2063
+      },
+      {
+        "path": "/read",
+        "file": "app/read/page.tsx",
+        "bytes": 5266
+      },
+      {
+        "path": "/read/places/[id]",
+        "file": "app/read/places/[id]/page.tsx",
+        "bytes": 5883
+      },
+      {
+        "path": "/read/places",
+        "file": "app/read/places/page.tsx",
+        "bytes": 1596
+      },
+      {
+        "path": "/read/scenes/[id]",
+        "file": "app/read/scenes/[id]/page.tsx",
+        "bytes": 2442
+      },
+      {
+        "path": "/read/symbols",
+        "file": "app/read/symbols/page.tsx",
+        "bytes": 6034
+      },
+      {
+        "path": "/read/timeline",
+        "file": "app/read/timeline/page.tsx",
+        "bytes": 1339
+      },
+      {
+        "path": "/subscribe",
+        "file": "app/subscribe/page.tsx",
+        "bytes": 124
+      }
+    ],
+    "routeCount": 73
+  },
+  "filesystem": {
+    "excludeDirectoryNames": [
+      "node_modules",
+      ".git",
+      ".next",
+      "dist",
+      "build",
+      ".turbo",
+      "coverage",
+      ".vercel"
+    ],
+    "maxFilesScanned": 25000,
+    "truncated": false,
+    "totalEntries": 378,
+    "totalFileBytesIndexed": 2538791,
+    "filesByTopLevelFolder": {
+      ".env": {
+        "files": 1,
+        "bytes": 408
+      },
+      ".env.example": {
+        "files": 1,
+        "bytes": 406
+      },
+      ".gitignore": {
+        "files": 1,
+        "bytes": 367
+      },
+      "app": {
+        "files": 103,
+        "bytes": 787795
+      },
+      "components": {
+        "files": 42,
+        "bytes": 138330
+      },
+      "eslint.config.mjs": {
+        "files": 1,
+        "bytes": 458
+      },
+      "lib": {
+        "files": 110,
+        "bytes": 778696
+      },
+      "middleware.ts": {
+        "files": 1,
+        "bytes": 722
+      },
+      "netlify.toml": {
+        "files": 1,
+        "bytes": 129
+      },
+      "next-env.d.ts": {
+        "files": 1,
+        "bytes": 262
+      },
+      "next.config.ts": {
+        "files": 1,
+        "bytes": 104
+      },
+      "package-lock.json": {
+        "files": 1,
+        "bytes": 247263
+      },
+      "package.json": {
+        "files": 1,
+        "bytes": 1371
+      },
+      "postcss.config.mjs": {
+        "files": 1,
+        "bytes": 94
+      },
+      "prisma": {
+        "files": 7,
+        "bytes": 189767
+      },
+      "public": {
+        "files": 1,
+        "bytes": 0
+      },
+      "reports": {
+        "files": 1,
+        "bytes": 162341
+      },
+      "scripts": {
+        "files": 6,
+        "bytes": 38987
+      },
+      "styles": {
+        "files": 1,
+        "bytes": 117
+      },
+      "tsconfig.json": {
+        "files": 1,
+        "bytes": 562
+      },
+      "tsconfig.tsbuildinfo": {
+        "files": 1,
+        "bytes": 190612
+      }
+    },
+    "entries": [
+      {
+        "relativePath": ".env",
+        "bytes": 408,
+        "kind": "file"
+      },
+      {
+        "relativePath": ".env.example",
+        "bytes": 406,
+        "kind": "file"
+      },
+      {
+        "relativePath": ".gitignore",
+        "bytes": 367,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/actions",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/actions/chapters.ts",
+        "bytes": 3694,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/cinematic-narrative.ts",
+        "bytes": 8142,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/claims.ts",
+        "bytes": 2963,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/clusters.ts",
+        "bytes": 5531,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/continuity.ts",
+        "bytes": 2704,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/entity-linking.ts",
+        "bytes": 6947,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/events.ts",
+        "bytes": 2954,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/extracted-entity.ts",
+        "bytes": 3524,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/fragments.ts",
+        "bytes": 27842,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/ingestion.ts",
+        "bytes": 9933,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/narrative-dna-admin.ts",
+        "bytes": 7029,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/narrative-dna-consolidation.ts",
+        "bytes": 2898,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/narrative-dna.ts",
+        "bytes": 1873,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/narrative-passes.ts",
+        "bytes": 11343,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/openai-extraction.ts",
+        "bytes": 2210,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/people.ts",
+        "bytes": 2737,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/places.ts",
+        "bytes": 2954,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/questions.ts",
+        "bytes": 2689,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/reader-memory.ts",
+        "bytes": 3847,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/scene-intelligence.ts",
+        "bytes": 2201,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/scene-soul.ts",
+        "bytes": 5432,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/scenes.ts",
+        "bytes": 13533,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/source-text.ts",
+        "bytes": 2099,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/sources.ts",
+        "bytes": 4483,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/world-model.ts",
+        "bytes": 26386,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/admin",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/attachment",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/attachment/page.tsx",
+        "bytes": 6217,
+        "kind": "file",
+        "role": "Next.js route /admin/attachment"
+      },
+      {
+        "relativePath": "app/admin/audio-sync",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/audio-sync/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/audio-sync/[id]/page.tsx",
+        "bytes": 4310,
+        "kind": "file",
+        "role": "Next.js route /admin/audio-sync/[id]"
+      },
+      {
+        "relativePath": "app/admin/bindings",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/bindings/page.tsx",
+        "bytes": 7779,
+        "kind": "file",
+        "role": "Next.js route /admin/bindings"
+      },
+      {
+        "relativePath": "app/admin/brain",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/brain/page.tsx",
+        "bytes": 19639,
+        "kind": "file",
+        "role": "Next.js route /admin/brain"
+      },
+      {
+        "relativePath": "app/admin/chapters",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/chapters/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/chapters/[id]/page.tsx",
+        "bytes": 10637,
+        "kind": "file",
+        "role": "Next.js route /admin/chapters/[id]"
+      },
+      {
+        "relativePath": "app/admin/chapters/page.tsx",
+        "bytes": 5669,
+        "kind": "file",
+        "role": "Next.js route /admin/chapters"
+      },
+      {
+        "relativePath": "app/admin/characters",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/mind",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/mind/page.tsx",
+        "bytes": 17532,
+        "kind": "file",
+        "role": "Next.js route /admin/characters/[id]/mind"
+      },
+      {
+        "relativePath": "app/admin/chunks",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/chunks/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/chunks/[id]/page.tsx",
+        "bytes": 4428,
+        "kind": "file",
+        "role": "Next.js route /admin/chunks/[id]"
+      },
+      {
+        "relativePath": "app/admin/chunks/page.tsx",
+        "bytes": 2198,
+        "kind": "file",
+        "role": "Next.js route /admin/chunks"
+      },
+      {
+        "relativePath": "app/admin/claims",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/claims/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/claims/[id]/page.tsx",
+        "bytes": 4970,
+        "kind": "file",
+        "role": "Next.js route /admin/claims/[id]"
+      },
+      {
+        "relativePath": "app/admin/claims/page.tsx",
+        "bytes": 8825,
+        "kind": "file",
+        "role": "Next.js route /admin/claims"
+      },
+      {
+        "relativePath": "app/admin/clusters",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/clusters/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/clusters/[id]/page.tsx",
+        "bytes": 9819,
+        "kind": "file",
+        "role": "Next.js route /admin/clusters/[id]"
+      },
+      {
+        "relativePath": "app/admin/clusters/page.tsx",
+        "bytes": 3121,
+        "kind": "file",
+        "role": "Next.js route /admin/clusters"
+      },
+      {
+        "relativePath": "app/admin/continuity",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/continuity/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/continuity/[id]/page.tsx",
+        "bytes": 6705,
+        "kind": "file",
+        "role": "Next.js route /admin/continuity/[id]"
+      },
+      {
+        "relativePath": "app/admin/continuity/page.tsx",
+        "bytes": 7722,
+        "kind": "file",
+        "role": "Next.js route /admin/continuity"
+      },
+      {
+        "relativePath": "app/admin/dashboard",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/dashboard/page.tsx",
+        "bytes": 2563,
+        "kind": "file",
+        "role": "Next.js route /admin/dashboard"
+      },
+      {
+        "relativePath": "app/admin/events",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/events/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/events/[id]/page.tsx",
+        "bytes": 8089,
+        "kind": "file",
+        "role": "Next.js route /admin/events/[id]"
+      },
+      {
+        "relativePath": "app/admin/events/page.tsx",
+        "bytes": 6522,
+        "kind": "file",
+        "role": "Next.js route /admin/events"
+      },
+      {
+        "relativePath": "app/admin/extracted",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/extracted/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/extracted/[id]/merge",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/extracted/[id]/merge/page.tsx",
+        "bytes": 14925,
+        "kind": "file",
+        "role": "Next.js route /admin/extracted/[id]/merge"
+      },
+      {
+        "relativePath": "app/admin/extracted/[id]/page.tsx",
+        "bytes": 18367,
+        "kind": "file",
+        "role": "Next.js route /admin/extracted/[id]"
+      },
+      {
+        "relativePath": "app/admin/extracted/page.tsx",
+        "bytes": 15771,
+        "kind": "file",
+        "role": "Next.js route /admin/extracted"
+      },
+      {
+        "relativePath": "app/admin/fragments",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/fragments/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/fragments/[id]/page.tsx",
+        "bytes": 36311,
+        "kind": "file",
+        "role": "Next.js route /admin/fragments/[id]"
+      },
+      {
+        "relativePath": "app/admin/fragments/page.tsx",
+        "bytes": 11297,
+        "kind": "file",
+        "role": "Next.js route /admin/fragments"
+      },
+      {
+        "relativePath": "app/admin/ingestion",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/ingestion/[sourceId]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/ingestion/[sourceId]/page.tsx",
+        "bytes": 20939,
+        "kind": "file",
+        "role": "Next.js route /admin/ingestion/[sourceId]"
+      },
+      {
+        "relativePath": "app/admin/ingestion/page.tsx",
+        "bytes": 9097,
+        "kind": "file",
+        "role": "Next.js route /admin/ingestion"
+      },
+      {
+        "relativePath": "app/admin/layout.tsx",
+        "bytes": 392,
+        "kind": "file",
+        "role": "Next.js layout"
+      },
+      {
+        "relativePath": "app/admin/literary-devices",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/literary-devices/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/literary-devices/[id]/page.tsx",
+        "bytes": 3721,
+        "kind": "file",
+        "role": "Next.js route /admin/literary-devices/[id]"
+      },
+      {
+        "relativePath": "app/admin/literary-devices/page.tsx",
+        "bytes": 968,
+        "kind": "file",
+        "role": "Next.js route /admin/literary-devices"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/cinematic",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/cinematic/page.tsx",
+        "bytes": 10385,
+        "kind": "file",
+        "role": "Next.js route /admin/meta-scenes/[id]/cinematic"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/compose",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/compose/page.tsx",
+        "bytes": 56239,
+        "kind": "file",
+        "role": "Next.js route /admin/meta-scenes/[id]/compose"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/experience-tuning",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/experience-tuning/page.tsx",
+        "bytes": 6718,
+        "kind": "file",
+        "role": "Next.js route /admin/meta-scenes/[id]/experience-tuning"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/page.tsx",
+        "bytes": 8992,
+        "kind": "file",
+        "role": "Next.js route /admin/meta-scenes/[id]"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/perception",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/perception/page.tsx",
+        "bytes": 6489,
+        "kind": "file",
+        "role": "Next.js route /admin/meta-scenes/[id]/perception"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/view",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/view/page.tsx",
+        "bytes": 6829,
+        "kind": "file",
+        "role": "Next.js route /admin/meta-scenes/[id]/view"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/page.tsx",
+        "bytes": 8053,
+        "kind": "file",
+        "role": "Next.js route /admin/meta-scenes"
+      },
+      {
+        "relativePath": "app/admin/motifs",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/motifs/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/motifs/[id]/page.tsx",
+        "bytes": 3706,
+        "kind": "file",
+        "role": "Next.js route /admin/motifs/[id]"
+      },
+      {
+        "relativePath": "app/admin/motifs/page.tsx",
+        "bytes": 895,
+        "kind": "file",
+        "role": "Next.js route /admin/motifs"
+      },
+      {
+        "relativePath": "app/admin/narrative-rules",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative-rules/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative-rules/[id]/page.tsx",
+        "bytes": 5440,
+        "kind": "file",
+        "role": "Next.js route /admin/narrative-rules/[id]"
+      },
+      {
+        "relativePath": "app/admin/narrative-rules/page.tsx",
+        "bytes": 1227,
+        "kind": "file",
+        "role": "Next.js route /admin/narrative-rules"
+      },
+      {
+        "relativePath": "app/admin/patterns",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/patterns/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/patterns/[id]/page.tsx",
+        "bytes": 4870,
+        "kind": "file",
+        "role": "Next.js route /admin/patterns/[id]"
+      },
+      {
+        "relativePath": "app/admin/patterns/page.tsx",
+        "bytes": 1043,
+        "kind": "file",
+        "role": "Next.js route /admin/patterns"
+      },
+      {
+        "relativePath": "app/admin/people",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/people/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/people/[id]/page.tsx",
+        "bytes": 9736,
+        "kind": "file",
+        "role": "Next.js route /admin/people/[id]"
+      },
+      {
+        "relativePath": "app/admin/people/page.tsx",
+        "bytes": 4815,
+        "kind": "file",
+        "role": "Next.js route /admin/people"
+      },
+      {
+        "relativePath": "app/admin/places",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/places/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/places/[id]/environment",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/places/[id]/environment/page.tsx",
+        "bytes": 8173,
+        "kind": "file",
+        "role": "Next.js route /admin/places/[id]/environment"
+      },
+      {
+        "relativePath": "app/admin/places/[id]/page.tsx",
+        "bytes": 7489,
+        "kind": "file",
+        "role": "Next.js route /admin/places/[id]"
+      },
+      {
+        "relativePath": "app/admin/places/page.tsx",
+        "bytes": 7571,
+        "kind": "file",
+        "role": "Next.js route /admin/places"
+      },
+      {
+        "relativePath": "app/admin/questions",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/questions/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/questions/[id]/page.tsx",
+        "bytes": 6423,
+        "kind": "file",
+        "role": "Next.js route /admin/questions/[id]"
+      },
+      {
+        "relativePath": "app/admin/questions/page.tsx",
+        "bytes": 7679,
+        "kind": "file",
+        "role": "Next.js route /admin/questions"
+      },
+      {
+        "relativePath": "app/admin/relationships",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/relationships/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/relationships/[id]/page.tsx",
+        "bytes": 7188,
+        "kind": "file",
+        "role": "Next.js route /admin/relationships/[id]"
+      },
+      {
+        "relativePath": "app/admin/relationships/page.tsx",
+        "bytes": 4461,
+        "kind": "file",
+        "role": "Next.js route /admin/relationships"
+      },
+      {
+        "relativePath": "app/admin/runs",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/runs/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/runs/[id]/page.tsx",
+        "bytes": 10579,
+        "kind": "file",
+        "role": "Next.js route /admin/runs/[id]"
+      },
+      {
+        "relativePath": "app/admin/scenes",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/scenes/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/scenes/[id]/page.tsx",
+        "bytes": 7659,
+        "kind": "file",
+        "role": "Next.js route /admin/scenes/[id]"
+      },
+      {
+        "relativePath": "app/admin/scenes/[id]/workspace",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/scenes/[id]/workspace/page.tsx",
+        "bytes": 23903,
+        "kind": "file",
+        "role": "Next.js route /admin/scenes/[id]/workspace"
+      },
+      {
+        "relativePath": "app/admin/scenes/page.tsx",
+        "bytes": 6773,
+        "kind": "file",
+        "role": "Next.js route /admin/scenes"
+      },
+      {
+        "relativePath": "app/admin/sources",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/sources/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/sources/[id]/decompose",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/sources/[id]/decompose/decompose-toolbar.tsx",
+        "bytes": 3874,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/admin/sources/[id]/decompose/page.tsx",
+        "bytes": 5573,
+        "kind": "file",
+        "role": "Next.js route /admin/sources/[id]/decompose"
+      },
+      {
+        "relativePath": "app/admin/sources/[id]/page.tsx",
+        "bytes": 22154,
+        "kind": "file",
+        "role": "Next.js route /admin/sources/[id]"
+      },
+      {
+        "relativePath": "app/admin/sources/page.tsx",
+        "bytes": 10460,
+        "kind": "file",
+        "role": "Next.js route /admin/sources"
+      },
+      {
+        "relativePath": "app/admin/symbols",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/symbols/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/symbols/[id]/page.tsx",
+        "bytes": 5974,
+        "kind": "file",
+        "role": "Next.js route /admin/symbols/[id]"
+      },
+      {
+        "relativePath": "app/admin/symbols/page.tsx",
+        "bytes": 1113,
+        "kind": "file",
+        "role": "Next.js route /admin/symbols"
+      },
+      {
+        "relativePath": "app/admin/themes",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/themes/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/themes/[id]/page.tsx",
+        "bytes": 4763,
+        "kind": "file",
+        "role": "Next.js route /admin/themes/[id]"
+      },
+      {
+        "relativePath": "app/admin/themes/page.tsx",
+        "bytes": 1054,
+        "kind": "file",
+        "role": "Next.js route /admin/themes"
+      },
+      {
+        "relativePath": "app/globals.css",
+        "bytes": 1694,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/layout.tsx",
+        "bytes": 796,
+        "kind": "file",
+        "role": "Next.js layout"
+      },
+      {
+        "relativePath": "app/membership",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/membership/page.tsx",
+        "bytes": 3089,
+        "kind": "file",
+        "role": "Next.js route /membership"
+      },
+      {
+        "relativePath": "app/page.tsx",
+        "bytes": 10579,
+        "kind": "file",
+        "role": "Next.js route /"
+      },
+      {
+        "relativePath": "app/read",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/chapters",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/chapters/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/chapters/[id]/page.tsx",
+        "bytes": 7231,
+        "kind": "file",
+        "role": "Next.js route /read/chapters/[id]"
+      },
+      {
+        "relativePath": "app/read/chapters/page.tsx",
+        "bytes": 2668,
+        "kind": "file",
+        "role": "Next.js route /read/chapters"
+      },
+      {
+        "relativePath": "app/read/characters",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/characters/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/characters/[id]/page.tsx",
+        "bytes": 13524,
+        "kind": "file",
+        "role": "Next.js route /read/characters/[id]"
+      },
+      {
+        "relativePath": "app/read/characters/page.tsx",
+        "bytes": 2063,
+        "kind": "file",
+        "role": "Next.js route /read/characters"
+      },
+      {
+        "relativePath": "app/read/layout.tsx",
+        "bytes": 686,
+        "kind": "file",
+        "role": "Next.js layout"
+      },
+      {
+        "relativePath": "app/read/page.tsx",
+        "bytes": 5266,
+        "kind": "file",
+        "role": "Next.js route /read"
+      },
+      {
+        "relativePath": "app/read/places",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/places/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/places/[id]/page.tsx",
+        "bytes": 5883,
+        "kind": "file",
+        "role": "Next.js route /read/places/[id]"
+      },
+      {
+        "relativePath": "app/read/places/page.tsx",
+        "bytes": 1596,
+        "kind": "file",
+        "role": "Next.js route /read/places"
+      },
+      {
+        "relativePath": "app/read/scenes",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/scenes/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/scenes/[id]/page.tsx",
+        "bytes": 2442,
+        "kind": "file",
+        "role": "Next.js route /read/scenes/[id]"
+      },
+      {
+        "relativePath": "app/read/symbols",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/symbols/page.tsx",
+        "bytes": 6034,
+        "kind": "file",
+        "role": "Next.js route /read/symbols"
+      },
+      {
+        "relativePath": "app/read/timeline",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/read/timeline/page.tsx",
+        "bytes": 1339,
+        "kind": "file",
+        "role": "Next.js route /read/timeline"
+      },
+      {
+        "relativePath": "app/subscribe",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/subscribe/page.tsx",
+        "bytes": 124,
+        "kind": "file",
+        "role": "Next.js route /subscribe"
+      },
+      {
+        "relativePath": "components",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "components/admin",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/admin/dna-source-support-panel.tsx",
+        "bytes": 2018,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/admin-form-error.tsx",
+        "bytes": 485,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/admin-nav.tsx",
+        "bytes": 2077,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/admin-table.tsx",
+        "bytes": 1499,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/alert-banner.tsx",
+        "bytes": 687,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/ambiguity-meter.tsx",
+        "bytes": 606,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/confidence-dot.tsx",
+        "bytes": 607,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/detail-section.tsx",
+        "bytes": 543,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/empty-state.tsx",
+        "bytes": 454,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/fragment-badges.tsx",
+        "bytes": 1142,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/page-header.tsx",
+        "bytes": 731,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/AtmosphereLayer.tsx",
+        "bytes": 1608,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/ImmersiveSceneReader.tsx",
+        "bytes": 9342,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/SidePanel.tsx",
+        "bytes": 2650,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/atmosphere-block.tsx",
+        "bytes": 602,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/audio-teaser.tsx",
+        "bytes": 1805,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/character-follow-button.tsx",
+        "bytes": 1037,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/character-spotlight.tsx",
+        "bytes": 1051,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/character-voice-section.tsx",
+        "bytes": 2699,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/continue-reading-banner.tsx",
+        "bytes": 2783,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/explore-deeper-card.tsx",
+        "bytes": 1082,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/home-return-layer.tsx",
+        "bytes": 1645,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/immersive-error-boundary.tsx",
+        "bytes": 856,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/linked-reading-blocks.tsx",
+        "bytes": 3782,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/membership-tier-card.tsx",
+        "bytes": 1047,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/place-spotlight.tsx",
+        "bytes": 883,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/premium-depth-gate.tsx",
+        "bytes": 3937,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/public-audio-player.tsx",
+        "bytes": 12941,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/public-hero.tsx",
+        "bytes": 1821,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/public-site-chrome.tsx",
+        "bytes": 928,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/read-scene-experience.tsx",
+        "bytes": 38778,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/reader-thread-suggestions.tsx",
+        "bytes": 1127,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/return-experience-card.tsx",
+        "bytes": 1782,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/scene-reader.tsx",
+        "bytes": 793,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/timeline-section.tsx",
+        "bytes": 3410,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/world-entry-card.tsx",
+        "bytes": 1154,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/read-nav.tsx",
+        "bytes": 1524,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/record-meta-badges.tsx",
+        "bytes": 540,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/scene-intelligence-panel.tsx",
+        "bytes": 13030,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/scene-soul-panel.tsx",
+        "bytes": 11132,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/status-badge.tsx",
+        "bytes": 999,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/synthetic-read.tsx",
+        "bytes": 713,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "eslint.config.mjs",
+        "bytes": 458,
+        "kind": "file"
+      },
+      {
+        "relativePath": "lib",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "lib/admin-styles.ts",
+        "bytes": 345,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/attachment-analytics.ts",
+        "bytes": 5543,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/attachment-local-test.ts",
+        "bytes": 948,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/attachment-quality.ts",
+        "bytes": 1340,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/audio-cue-map.ts",
+        "bytes": 3611,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/audio-script.ts",
+        "bytes": 2783,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/audio-sync.ts",
+        "bytes": 5732,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-session.ts",
+        "bytes": 376,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/character-type-inference.ts",
+        "bytes": 6918,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/chunk-aggregation.ts",
+        "bytes": 4894,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cinematic-ai.ts",
+        "bytes": 6975,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cinematic-assembly.ts",
+        "bytes": 3075,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cinematic-flow.ts",
+        "bytes": 3578,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cinematic-prose.ts",
+        "bytes": 9170,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cinematic-quality.ts",
+        "bytes": 2980,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/data-access.ts",
+        "bytes": 68456,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/demo-book",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/demo-book/ids.ts",
+        "bytes": 1058,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/demo-book/prose-part1.ts",
+        "bytes": 13018,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/demo-book/prose-part2.ts",
+        "bytes": 11157,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/demo-book/prose-part3.ts",
+        "bytes": 7101,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/demo-book/scene-drafts-registry.ts",
+        "bytes": 316,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/descriptive-ai.ts",
+        "bytes": 4687,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/descriptive-constants.ts",
+        "bytes": 506,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/descriptive-prompts.ts",
+        "bytes": 3210,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/descriptive-synthesis.ts",
+        "bytes": 23799,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/descriptive-validation.ts",
+        "bytes": 1943,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/embodied-environment.ts",
+        "bytes": 3146,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/embodied-narrative-generation.ts",
+        "bytes": 5690,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/emotional-gravity.ts",
+        "bytes": 6806,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/emotional-hooks.ts",
+        "bytes": 10295,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/enneagram-engine.ts",
+        "bytes": 12251,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/entity-matching.ts",
+        "bytes": 11040,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/entity-merge.ts",
+        "bytes": 28759,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/entity-normalization.ts",
+        "bytes": 1427,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/extraction-normalizer.ts",
+        "bytes": 6349,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/extraction-prompt.ts",
+        "bytes": 5434,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/extraction-warnings.ts",
+        "bytes": 1960,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-ai-assist.ts",
+        "bytes": 1335,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-clustering.ts",
+        "bytes": 8988,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-constants.ts",
+        "bytes": 220,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-decomposition.ts",
+        "bytes": 12260,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-density.ts",
+        "bytes": 2498,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-interpretation.ts",
+        "bytes": 4818,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-narrative-dna.ts",
+        "bytes": 449,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-refinement.ts",
+        "bytes": 6023,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-service.ts",
+        "bytes": 5478,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-types.ts",
+        "bytes": 2813,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/fragment-validation.ts",
+        "bytes": 5595,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/group-by.ts",
+        "bytes": 291,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/guided-experience.ts",
+        "bytes": 5837,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/guided-fusion.ts",
+        "bytes": 2175,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/hook-quality.ts",
+        "bytes": 1441,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/immersive-presets.ts",
+        "bytes": 1930,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/ingestion-constants.ts",
+        "bytes": 1810,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/ingestion-contracts.ts",
+        "bytes": 2720,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/ingestion-packet.ts",
+        "bytes": 1938,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/ingestion-validation.ts",
+        "bytes": 1932,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/linking-validation.ts",
+        "bytes": 1308,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/meta-scene-composer.ts",
+        "bytes": 15012,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/mock-extraction.ts",
+        "bytes": 3091,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-binding.ts",
+        "bytes": 11333,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-consciousness-ai.ts",
+        "bytes": 7557,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-consciousness.ts",
+        "bytes": 10962,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-dna-ai.ts",
+        "bytes": 6284,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-dna-consolidation.ts",
+        "bytes": 31616,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-dna-context.ts",
+        "bytes": 8182,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-dna-extractor.ts",
+        "bytes": 10242,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-dna-guide-constants.ts",
+        "bytes": 2239,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-dna-ingest-runner.ts",
+        "bytes": 2649,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-dna-persist.ts",
+        "bytes": 5550,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-dna-prompt.ts",
+        "bytes": 3002,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-dna-validation.ts",
+        "bytes": 7635,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/narrative-style.ts",
+        "bytes": 2147,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/openai-extraction.ts",
+        "bytes": 23927,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/openai.ts",
+        "bytes": 1076,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/perception-stream.ts",
+        "bytes": 26420,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/perspective-engine.ts",
+        "bytes": 17623,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/premium-content.ts",
+        "bytes": 1010,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/premium-depth-offers.ts",
+        "bytes": 8559,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prisma.ts",
+        "bytes": 299,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/promote-extracted.ts",
+        "bytes": 11092,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/public-data.ts",
+        "bytes": 48241,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/public-experience-rendering.ts",
+        "bytes": 8010,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/public-scene-immersion.ts",
+        "bytes": 3961,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/read-labels.ts",
+        "bytes": 202,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/reader-flow.ts",
+        "bytes": 12131,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/reader-memory.ts",
+        "bytes": 13400,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/reader-threads.ts",
+        "bytes": 6187,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/reading-blocks.ts",
+        "bytes": 214,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/reading-progress.ts",
+        "bytes": 1328,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/relationship-dynamics.ts",
+        "bytes": 3726,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-assist-context.ts",
+        "bytes": 7490,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-assist-prompts.ts",
+        "bytes": 10955,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-beats.ts",
+        "bytes": 6779,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-composition.ts",
+        "bytes": 8902,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-continuity.ts",
+        "bytes": 2352,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-heart.ts",
+        "bytes": 5569,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-intelligence-ai.ts",
+        "bytes": 1065,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-intelligence-validation.ts",
+        "bytes": 3524,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-intelligence.ts",
+        "bytes": 15172,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-soul-ai.ts",
+        "bytes": 1266,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-soul-validation.ts",
+        "bytes": 1241,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/section-xiii-internal.ts",
+        "bytes": 7561,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/session-follow.ts",
+        "bytes": 1098,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/source-chunking.ts",
+        "bytes": 5738,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/validation.ts",
+        "bytes": 7683,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/voice-fusion.ts",
+        "bytes": 9095,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/voice-prompts.ts",
+        "bytes": 4805,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/voice-rendering.ts",
+        "bytes": 2855,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/world-dynamics.ts",
+        "bytes": 2104,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "middleware.ts",
+        "bytes": 722,
+        "kind": "file"
+      },
+      {
+        "relativePath": "netlify.toml",
+        "bytes": 129,
+        "kind": "file"
+      },
+      {
+        "relativePath": "next-env.d.ts",
+        "bytes": 262,
+        "kind": "file"
+      },
+      {
+        "relativePath": "next.config.ts",
+        "bytes": 104,
+        "kind": "file"
+      },
+      {
+        "relativePath": "package-lock.json",
+        "bytes": 247263,
+        "kind": "file"
+      },
+      {
+        "relativePath": "package.json",
+        "bytes": 1371,
+        "kind": "file",
+        "role": "npm manifest + scripts"
+      },
+      {
+        "relativePath": "postcss.config.mjs",
+        "bytes": 94,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260407120000_phase9b_scene_intelligence",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260407120000_phase9b_scene_intelligence/migration.sql",
+        "bytes": 5487,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260407140000_phase_9c_character_soul",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260407140000_phase_9c_character_soul/migration.sql",
+        "bytes": 3135,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260407180000_phase_10d_cinematic_narrative",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260407180000_phase_10d_cinematic_narrative/migration.sql",
+        "bytes": 3489,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/schema.prisma",
+        "bytes": 47202,
+        "kind": "file",
+        "role": "database schema"
+      },
+      {
+        "relativePath": "prisma/seed-full-demo.ts",
+        "bytes": 55154,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed-origin-anchor.ts",
+        "bytes": 58109,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed.ts",
+        "bytes": 17191,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "public",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "public/.gitkeep",
+        "bytes": 0,
+        "kind": "file",
+        "role": "static assets"
+      },
+      {
+        "relativePath": "reports",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "reports/campti-handoff-report.json",
+        "bytes": 162341,
+        "kind": "file"
+      },
+      {
+        "relativePath": "scripts",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "scripts/generate-handoff-report.ts",
+        "bytes": 15343,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/ingest-historical-timeline.ts",
+        "bytes": 7307,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/ingest-narrative-system-doc.ts",
+        "bytes": 5666,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/load-env.ts",
+        "bytes": 737,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/seed-narrative-dna-documents.ts",
+        "bytes": 6924,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/seed-narrative-dna-guides.ts",
+        "bytes": 3010,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "styles",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "styles/theme.css",
+        "bytes": 117,
+        "kind": "file"
+      },
+      {
+        "relativePath": "tsconfig.json",
+        "bytes": 562,
+        "kind": "file"
+      },
+      {
+        "relativePath": "tsconfig.tsbuildinfo",
+        "bytes": 190612,
+        "kind": "file"
+      }
+    ]
+  },
+  "storySystemFromDatabase": {
+    "counts": {
+      "chapters": 13,
+      "scenes": 39,
+      "people": 7,
+      "places": 8,
+      "symbols": 10,
+      "themes": 5,
+      "motifs": 1,
+      "narrativeRules": 4,
+      "literaryDevices": 1,
+      "narrativePatterns": 3,
+      "narrativeBindings": 17,
+      "fragments": 14,
+      "fragmentClusters": 4,
+      "events": 13,
+      "sources": 13,
+      "claims": 2,
+      "openQuestions": 12,
+      "continuityNotes": 11,
+      "metaScenes": 40,
+      "characterRelationships": 6,
+      "aliases": 0,
+      "characterProfiles": 6
+    },
+    "chapterSceneOutline": [
+      {
+        "chapter": {
+          "id": "seed-ch-prologue",
+          "title": "Prologue — Smoke Before Speech",
+          "chapterNumber": 0,
+          "summary": "Establishes the corridor, hybridity as method, and the contract with the reader.",
+          "status": "complete"
+        },
+        "scenes": [
+          {
+            "id": "seed-scene-prologue-1",
+            "orderInChapter": 1,
+            "sceneNumber": 1,
+            "description": "Smoke before speech — thesis of the corridor",
+            "summary": "Reader contract; hybridity as method."
+          },
+          {
+            "id": "demo-scene-pr-2",
+            "orderInChapter": 2,
+            "sceneNumber": 2,
+            "description": "River patience — arrival’s grammar",
+            "summary": "Alexis at the landing; translation."
+          },
+          {
+            "id": "demo-scene-pr-3",
+            "orderInChapter": 3,
+            "sceneNumber": 3,
+            "description": "Night oil — sassafras and bridge-names",
+            "summary": "François as word; inheritance of smoke."
+          }
+        ]
+      },
+      {
+        "chapter": {
+          "id": "seed-ch-1",
+          "title": "Chapter 1 — Alexis: Arrival in Natchitoches",
+          "chapterNumber": 1,
+          "summary": "Letters, clerk’s pen, river patience — Alexis becomes a sentence others can parse.",
+          "status": "complete"
+        },
+        "scenes": [
+          {
+            "id": "seed-scene-ch1-1",
+            "orderInChapter": 1,
+            "sceneNumber": 1,
+            "description": "Morning trader street — Grappe as handle",
+            "summary": "Clerk writes the name; Alexis claims corridor."
+          },
+          {
+            "id": "demo-scene-ch1-2",
+            "orderInChapter": 2,
+            "sceneNumber": 2,
+            "description": "Heat and nod — public Black recognition",
+            "summary": "Space negotiated; letters as risk."
+          },
+          {
+            "id": "demo-scene-ch1-3",
+            "orderInChapter": 3,
+            "sceneNumber": 3,
+            "description": "Bronze river — testing voice over water",
+            "summary": "Future branches; smoke across water."
+          }
+        ]
+      },
+      {
+        "chapter": {
+          "id": "seed-ch-2",
+          "title": "Chapter 2 — François: The Trader, Interpreter, Bridge",
+          "chapterNumber": 2,
+          "summary": "Multilingual table; land talk; loneliness of translation.",
+          "status": "complete"
+        },
+        "scenes": [
+          {
+            "id": "seed-scene-ch2-1",
+            "orderInChapter": 1,
+            "sceneNumber": 1,
+            "description": "Trader’s table country",
+            "summary": "Languages; land talk; seam as livelihood."
+          },
+          {
+            "id": "demo-scene-ch2-2",
+            "orderInChapter": 2,
+            "sceneNumber": 2,
+            "description": "Official with papers — refusal of tidy transfer",
+            "summary": "Market exhales; bridge loneliness."
+          },
+          {
+            "id": "demo-scene-ch2-3",
+            "orderInChapter": 3,
+            "sceneNumber": 3,
+            "description": "Fire circle — cession as weather",
+            "summary": "Stars; downstream pull toward Campti."
+          }
+        ]
+      },
+      {
+        "chapter": {
+          "id": "demo-ch-3",
+          "title": "Chapter 3 — Black Lake: Buford and the Oral Arm",
+          "chapterNumber": 3,
+          "summary": "Hybrid injury story; roux theology; cemetery ethics without spectacle.",
+          "status": "complete"
+        },
+        "scenes": [
+          {
+            "id": "demo-sc-ch3-1",
+            "orderInChapter": 1,
+            "sceneNumber": 1,
+            "description": "Buford at Black Lake porch",
+            "summary": "Oral arm story; cemetery ethics named."
+          },
+          {
+            "id": "demo-sc-ch3-2",
+            "orderInChapter": 2,
+            "sceneNumber": 2,
+            "description": "Roux and okra — kitchen theology",
+            "summary": "Hybrid teaching; stirring time."
+          },
+          {
+            "id": "demo-sc-ch3-3",
+            "orderInChapter": 3,
+            "sceneNumber": 3,
+            "description": "Lantern path — François as pattern not ghost",
+            "summary": "Return habit; smoke holds."
+          }
+        ]
+      },
+      {
+        "chapter": {
+          "id": "demo-ch-4",
+          "title": "Chapter 4 — The Letters and the Seam",
+          "chapterNumber": 4,
+          "summary": "Lillian triages paper; spreadsheet vs kin; seam log.",
+          "status": "complete"
+        },
+        "scenes": [
+          {
+            "id": "demo-sc-ch4-1",
+            "orderInChapter": 1,
+            "sceneNumber": 1,
+            "description": "Letters on the dining-room archive",
+            "summary": "Lillian triages paper; seam log."
+          },
+          {
+            "id": "demo-sc-ch4-2",
+            "orderInChapter": 2,
+            "sceneNumber": 2,
+            "description": "Spreadsheet vs stubborn kin",
+            "summary": "Brain as shelf; margin notes."
+          },
+          {
+            "id": "demo-sc-ch4-3",
+            "orderInChapter": 3,
+            "sceneNumber": 3,
+            "description": "Reading aloud — ethics of quoting",
+            "summary": "Seam log saved; cursor blinks."
+          }
+        ]
+      },
+      {
+        "chapter": {
+          "id": "demo-ch-5",
+          "title": "Chapter 5 — Cemetery Geography",
+          "chapterNumber": 5,
+          "summary": "Walking the line without metaphor theft; anger steady as river.",
+          "status": "complete"
+        },
+        "scenes": [
+          {
+            "id": "demo-sc-ch5-1",
+            "orderInChapter": 1,
+            "sceneNumber": 1,
+            "description": "Cemetery path with niece",
+            "summary": "No metaphor for the line; notice."
+          },
+          {
+            "id": "demo-sc-ch5-2",
+            "orderInChapter": 2,
+            "sceneNumber": 2,
+            "description": "Half-gone stone",
+            "summary": "Anger steady as river."
+          },
+          {
+            "id": "demo-sc-ch5-3",
+            "orderInChapter": 3,
+            "sceneNumber": 3,
+            "description": "Fish joke off-record",
+            "summary": "Smoke from grill; symbol shorthand."
+          }
+        ]
+      },
+      {
+        "chapter": {
+          "id": "demo-ch-6",
+          "title": "Chapter 6 — Reunion as Archive",
+          "chapterNumber": 6,
+          "summary": "Microphone ethics; storm; transcription as respect.",
+          "status": "complete"
+        },
+        "scenes": [
+          {
+            "id": "demo-sc-ch6-1",
+            "orderInChapter": 1,
+            "sceneNumber": 1,
+            "description": "Reunion tent microphone",
+            "summary": "Elder stories; performance vs truth."
+          },
+          {
+            "id": "demo-sc-ch6-2",
+            "orderInChapter": 2,
+            "sceneNumber": 2,
+            "description": "Storm breaks the heat",
+            "summary": "Trailer shelter; narrative interruption."
+          },
+          {
+            "id": "demo-sc-ch6-3",
+            "orderInChapter": 3,
+            "sceneNumber": 3,
+            "description": "Dance floor; transcription promise",
+            "summary": "Ingestion ethics; feed the kin."
+          }
+        ]
+      },
+      {
+        "chapter": {
+          "id": "demo-ch-7",
+          "title": "Chapter 7 — Natchitoches Files",
+          "chapterNumber": 7,
+          "summary": "Archive box; microfilm; brick not cathedral.",
+          "status": "complete"
+        },
+        "scenes": [
+          {
+            "id": "demo-sc-ch7-1",
+            "orderInChapter": 1,
+            "sceneNumber": 1,
+            "description": "Archive box thud",
+            "summary": "Maps messy; François pattern."
+          },
+          {
+            "id": "demo-sc-ch7-2",
+            "orderInChapter": 2,
+            "sceneNumber": 2,
+            "description": "Courthouse steps sandwich",
+            "summary": "Scene seed: fair booth echo."
+          },
+          {
+            "id": "demo-sc-ch7-3",
+            "orderInChapter": 3,
+            "sceneNumber": 3,
+            "description": "Microfilm whir — brick not cathedral",
+            "summary": "Listening as method."
+          }
+        ]
+      },
+      {
+        "chapter": {
+          "id": "demo-ch-8",
+          "title": "Chapter 8 — François Echo (Support Layer)",
+          "chapterNumber": 8,
+          "summary": "Source support UI; fragment clusters; night drive.",
+          "status": "complete"
+        },
+        "scenes": [
+          {
+            "id": "demo-sc-ch8-1",
+            "orderInChapter": 1,
+            "sceneNumber": 1,
+            "description": "Workspace — sourceSupportLevel",
+            "summary": "Interior pass accepted."
+          },
+          {
+            "id": "demo-sc-ch8-2",
+            "orderInChapter": 2,
+            "sceneNumber": 2,
+            "description": "Fragment cluster wiring",
+            "summary": "System as findable soul."
+          },
+          {
+            "id": "demo-sc-ch8-3",
+            "orderInChapter": 3,
+            "sceneNumber": 3,
+            "description": "Night drive — stars",
+            "summary": "Corridor longer than miles."
+          }
+        ]
+      },
+      {
+        "chapter": {
+          "id": "demo-ch-9",
+          "title": "Chapter 9 — Merge Fight",
+          "chapterNumber": 9,
+          "summary": "Entity resolution; oral vs database dignity; dismiss bad assist.",
+          "status": "complete"
+        },
+        "scenes": [
+          {
+            "id": "demo-sc-ch9-1",
+            "orderInChapter": 1,
+            "sceneNumber": 1,
+            "description": "Merge fight — polite war",
+            "summary": "Split knot; brain-memo quoted."
+          },
+          {
+            "id": "demo-sc-ch9-2",
+            "orderInChapter": 2,
+            "sceneNumber": 2,
+            "description": "Buford call — hybrid flag",
+            "summary": "Person vs claim as question mark."
+          },
+          {
+            "id": "demo-sc-ch9-3",
+            "orderInChapter": 3,
+            "sceneNumber": 3,
+            "description": "Reject smoothed dialect",
+            "summary": "Dismiss assist; voice integrity."
+          }
+        ]
+      },
+      {
+        "chapter": {
+          "id": "demo-ch-10",
+          "title": "Chapter 10 — Flame and Persistence",
+          "chapterNumber": 10,
+          "summary": "Bonfire stories; DNA unease; roux memory.",
+          "status": "complete"
+        },
+        "scenes": [
+          {
+            "id": "demo-sc-ch10-1",
+            "orderInChapter": 1,
+            "sceneNumber": 1,
+            "description": "Bonfire — flame as persistence",
+            "summary": "Buford pokes fire; letters story spare."
+          },
+          {
+            "id": "demo-sc-ch10-2",
+            "orderInChapter": 2,
+            "sceneNumber": 2,
+            "description": "DNA percentages argument",
+            "summary": "Paper lies too; embers."
+          },
+          {
+            "id": "demo-sc-ch10-3",
+            "orderInChapter": 3,
+            "sceneNumber": 3,
+            "description": "Dew sneakers — unlogged beauty",
+            "summary": "Roux memory in iron."
+          }
+        ]
+      },
+      {
+        "chapter": {
+          "id": "demo-ch-11",
+          "title": "Chapter 11 — Campti Evening",
+          "chapterNumber": 11,
+          "summary": "Town as plural fact; sweet tea; smoke lifts.",
+          "status": "complete"
+        },
+        "scenes": [
+          {
+            "id": "demo-sc-ch11-1",
+            "orderInChapter": 1,
+            "sceneNumber": 1,
+            "description": "Campti evening drive",
+            "summary": "Town plural; cemetery memory."
+          },
+          {
+            "id": "demo-sc-ch11-2",
+            "orderInChapter": 2,
+            "sceneNumber": 2,
+            "description": "Sweet tea porch",
+            "summary": "Going public; immersion ethics."
+          },
+          {
+            "id": "demo-sc-ch11-3",
+            "orderInChapter": 3,
+            "sceneNumber": 3,
+            "description": "Chimney smoke — corridor sentence",
+            "summary": "Demo-ready; honest enough to begin."
+          }
+        ]
+      },
+      {
+        "chapter": {
+          "id": "demo-ch-12",
+          "title": "Epilogue — The Narrator Steps Forward",
+          "chapterNumber": 12,
+          "summary": "Lillian named; method as love; end of demo draft.",
+          "status": "complete"
+        },
+        "scenes": [
+          {
+            "id": "demo-sc-ch12-1",
+            "orderInChapter": 1,
+            "sceneNumber": 1,
+            "description": "Epilogue — Lillian steps forward",
+            "summary": "Narrator identity; method love."
+          },
+          {
+            "id": "demo-sc-ch12-2",
+            "orderInChapter": 2,
+            "sceneNumber": 2,
+            "description": "Direct address — click the seam",
+            "summary": "Variables will change."
+          },
+          {
+            "id": "demo-sc-ch12-3",
+            "orderInChapter": 3,
+            "sceneNumber": 3,
+            "description": "Coda — database housekeeping",
+            "summary": "End of demo draft."
+          }
+        ]
+      }
+    ],
+    "characterProfiles": [
+      {
+        "personId": "seed-person-alexis",
+        "worldview": "Kin and land move through language before they move through law; a name on paper is a door, not the whole house.",
+        "coreBeliefs": null,
+        "desires": "Carry letters and lineage without being reduced to a clerk’s spelling.",
+        "fears": "Paper that outlives the body and misnames the living.",
+        "internalConflicts": "Name as public handle versus corridor identity — translation as survival.",
+        "emotionalBaseline": "Watchful, heat-tired, quietly determined.",
+        "enneagramType": null,
+        "notes": "Chapter 1 POV — arrival and translation; demo character arc seed.",
+        "personName": "Alexis Grappe"
+      },
+      {
+        "personId": "seed-person-child-grande-terre-pov",
+        "worldview": "The circle of adults is the shape of the world; trails and river are extensions of home.",
+        "coreBeliefs": "If the morning smoke rises, the day belongs to us.",
+        "desires": null,
+        "fears": null,
+        "internalConflicts": null,
+        "emotionalBaseline": "Open curiosity with occasional unease when adults tighten without explaining.",
+        "enneagramType": "SEVEN",
+        "notes": "POV lens only — not a psychologized modern child.",
+        "personName": "Child POV — Grande Terre (opening)"
+      },
+      {
+        "personId": "seed-person-francois",
+        "worldview": "Frontier as translation zone — languages, kinship, and paperwork overlap; survival is fluency across systems.",
+        "coreBeliefs": null,
+        "desires": null,
+        "fears": null,
+        "internalConflicts": "Loyalty split across kin, trade obligation, and colonial demand — exact emotional interior is partly speculative.",
+        "emotionalBaseline": null,
+        "enneagramType": null,
+        "notes": "Bridge character for genealogical and thematic continuity toward Campti. Do not overstate uncertain ancestry or undocumented lines as settled fact. See private research source for excerpt.",
+        "personName": "François Grappe"
+      },
+      {
+        "personId": "seed-person-louise-guedon",
+        "worldview": null,
+        "coreBeliefs": "Continuity of family name and care across displacement.",
+        "desires": null,
+        "fears": null,
+        "internalConflicts": null,
+        "emotionalBaseline": null,
+        "enneagramType": null,
+        "notes": "Supporting bridge for lineage toward later generations; not meant to overload the opening Grande Terre scene.",
+        "personName": "Louise Marguerite Guédon"
+      },
+      {
+        "personId": "seed-person-marie-anne-grande-terre",
+        "worldview": "Rooted in kinship, land, continuity, and lived trade relationships — the world holds because people hold each other to it.",
+        "coreBeliefs": "The world is relational. Survival depends on memory, lineage, and reciprocal obligation — not on paper or distant decrees.",
+        "desires": "Continuity, safety, transmission of culture, preservation of dignity and belonging for those who come after.",
+        "fears": "Disruption of kinship lines; violent incursion; loss of daughters to chaos or capture; collapse of the order that keeps children safe.",
+        "internalConflicts": "How to survive inside a changing world without surrendering what makes a people themselves — adaptation without self-erasure.",
+        "emotionalBaseline": "Observant, controlled, protective.",
+        "enneagramType": null,
+        "notes": "Ambiguity around exact titles and formal tribal role is intentional. This profile is a narrative-world anchor, not a certificate of identity.",
+        "personName": "Marie Anne Thérèse de la Grande Terre"
+      },
+      {
+        "personId": "seed-person-narrator",
+        "worldview": "Archives are acts of love when done with humility; the seam between oral and paper is sacred ground.",
+        "coreBeliefs": "Label uncertainty; refuse smooth AI overrides; protect living people from careless merges.",
+        "desires": null,
+        "fears": null,
+        "internalConflicts": null,
+        "emotionalBaseline": "Tired, stubborn, tender.",
+        "enneagramType": null,
+        "notes": "Demo narrator — continuity note on hidden identity relaxed for showroom clarity.",
+        "personName": "Lillian Grappe"
+      }
+    ],
+    "chapters": [
+      {
+        "id": "seed-ch-prologue",
+        "title": "Prologue — Smoke Before Speech",
+        "chapterNumber": 0,
+        "summary": "Establishes the corridor, hybridity as method, and the contract with the reader.",
+        "status": "complete",
+        "recordType": "HYBRID",
+        "visibility": "PUBLIC"
+      },
+      {
+        "id": "seed-ch-1",
+        "title": "Chapter 1 — Alexis: Arrival in Natchitoches",
+        "chapterNumber": 1,
+        "summary": "Letters, clerk’s pen, river patience — Alexis becomes a sentence others can parse.",
+        "status": "complete",
+        "recordType": "HYBRID",
+        "visibility": "PUBLIC"
+      },
+      {
+        "id": "seed-ch-2",
+        "title": "Chapter 2 — François: The Trader, Interpreter, Bridge",
+        "chapterNumber": 2,
+        "summary": "Multilingual table; land talk; loneliness of translation.",
+        "status": "complete",
+        "recordType": "HYBRID",
+        "visibility": "PUBLIC"
+      },
+      {
+        "id": "demo-ch-3",
+        "title": "Chapter 3 — Black Lake: Buford and the Oral Arm",
+        "chapterNumber": 3,
+        "summary": "Hybrid injury story; roux theology; cemetery ethics without spectacle.",
+        "status": "complete",
+        "recordType": "HYBRID",
+        "visibility": "PUBLIC"
+      },
+      {
+        "id": "demo-ch-4",
+        "title": "Chapter 4 — The Letters and the Seam",
+        "chapterNumber": 4,
+        "summary": "Lillian triages paper; spreadsheet vs kin; seam log.",
+        "status": "complete",
+        "recordType": "HYBRID",
+        "visibility": "PUBLIC"
+      },
+      {
+        "id": "demo-ch-5",
+        "title": "Chapter 5 — Cemetery Geography",
+        "chapterNumber": 5,
+        "summary": "Walking the line without metaphor theft; anger steady as river.",
+        "status": "complete",
+        "recordType": "HYBRID",
+        "visibility": "PUBLIC"
+      },
+      {
+        "id": "demo-ch-6",
+        "title": "Chapter 6 — Reunion as Archive",
+        "chapterNumber": 6,
+        "summary": "Microphone ethics; storm; transcription as respect.",
+        "status": "complete",
+        "recordType": "HYBRID",
+        "visibility": "PUBLIC"
+      },
+      {
+        "id": "demo-ch-7",
+        "title": "Chapter 7 — Natchitoches Files",
+        "chapterNumber": 7,
+        "summary": "Archive box; microfilm; brick not cathedral.",
+        "status": "complete",
+        "recordType": "HYBRID",
+        "visibility": "PUBLIC"
+      },
+      {
+        "id": "demo-ch-8",
+        "title": "Chapter 8 — François Echo (Support Layer)",
+        "chapterNumber": 8,
+        "summary": "Source support UI; fragment clusters; night drive.",
+        "status": "complete",
+        "recordType": "HYBRID",
+        "visibility": "PUBLIC"
+      },
+      {
+        "id": "demo-ch-9",
+        "title": "Chapter 9 — Merge Fight",
+        "chapterNumber": 9,
+        "summary": "Entity resolution; oral vs database dignity; dismiss bad assist.",
+        "status": "complete",
+        "recordType": "HYBRID",
+        "visibility": "PUBLIC"
+      },
+      {
+        "id": "demo-ch-10",
+        "title": "Chapter 10 — Flame and Persistence",
+        "chapterNumber": 10,
+        "summary": "Bonfire stories; DNA unease; roux memory.",
+        "status": "complete",
+        "recordType": "HYBRID",
+        "visibility": "PUBLIC"
+      },
+      {
+        "id": "demo-ch-11",
+        "title": "Chapter 11 — Campti Evening",
+        "chapterNumber": 11,
+        "summary": "Town as plural fact; sweet tea; smoke lifts.",
+        "status": "complete",
+        "recordType": "HYBRID",
+        "visibility": "PUBLIC"
+      },
+      {
+        "id": "demo-ch-12",
+        "title": "Epilogue — The Narrator Steps Forward",
+        "chapterNumber": 12,
+        "summary": "Lillian named; method as love; end of demo draft.",
+        "status": "complete",
+        "recordType": "HYBRID",
+        "visibility": "PUBLIC"
+      }
+    ],
+    "scenes": [
+      {
+        "id": "demo-sc-ch10-1",
+        "chapterId": "demo-ch-10",
+        "sceneNumber": 1,
+        "orderInChapter": 1,
+        "description": "Bonfire — flame as persistence",
+        "summary": "Buford pokes fire; letters story spare.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch10-2",
+        "chapterId": "demo-ch-10",
+        "sceneNumber": 2,
+        "orderInChapter": 2,
+        "description": "DNA percentages argument",
+        "summary": "Paper lies too; embers.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch10-3",
+        "chapterId": "demo-ch-10",
+        "sceneNumber": 3,
+        "orderInChapter": 3,
+        "description": "Dew sneakers — unlogged beauty",
+        "summary": "Roux memory in iron.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch11-1",
+        "chapterId": "demo-ch-11",
+        "sceneNumber": 1,
+        "orderInChapter": 1,
+        "description": "Campti evening drive",
+        "summary": "Town plural; cemetery memory.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch11-2",
+        "chapterId": "demo-ch-11",
+        "sceneNumber": 2,
+        "orderInChapter": 2,
+        "description": "Sweet tea porch",
+        "summary": "Going public; immersion ethics.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch11-3",
+        "chapterId": "demo-ch-11",
+        "sceneNumber": 3,
+        "orderInChapter": 3,
+        "description": "Chimney smoke — corridor sentence",
+        "summary": "Demo-ready; honest enough to begin.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch12-1",
+        "chapterId": "demo-ch-12",
+        "sceneNumber": 1,
+        "orderInChapter": 1,
+        "description": "Epilogue — Lillian steps forward",
+        "summary": "Narrator identity; method love.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch12-2",
+        "chapterId": "demo-ch-12",
+        "sceneNumber": 2,
+        "orderInChapter": 2,
+        "description": "Direct address — click the seam",
+        "summary": "Variables will change.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch12-3",
+        "chapterId": "demo-ch-12",
+        "sceneNumber": 3,
+        "orderInChapter": 3,
+        "description": "Coda — database housekeeping",
+        "summary": "End of demo draft.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch3-1",
+        "chapterId": "demo-ch-3",
+        "sceneNumber": 1,
+        "orderInChapter": 1,
+        "description": "Buford at Black Lake porch",
+        "summary": "Oral arm story; cemetery ethics named.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch3-2",
+        "chapterId": "demo-ch-3",
+        "sceneNumber": 2,
+        "orderInChapter": 2,
+        "description": "Roux and okra — kitchen theology",
+        "summary": "Hybrid teaching; stirring time.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch3-3",
+        "chapterId": "demo-ch-3",
+        "sceneNumber": 3,
+        "orderInChapter": 3,
+        "description": "Lantern path — François as pattern not ghost",
+        "summary": "Return habit; smoke holds.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch4-1",
+        "chapterId": "demo-ch-4",
+        "sceneNumber": 1,
+        "orderInChapter": 1,
+        "description": "Letters on the dining-room archive",
+        "summary": "Lillian triages paper; seam log.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch4-2",
+        "chapterId": "demo-ch-4",
+        "sceneNumber": 2,
+        "orderInChapter": 2,
+        "description": "Spreadsheet vs stubborn kin",
+        "summary": "Brain as shelf; margin notes.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch4-3",
+        "chapterId": "demo-ch-4",
+        "sceneNumber": 3,
+        "orderInChapter": 3,
+        "description": "Reading aloud — ethics of quoting",
+        "summary": "Seam log saved; cursor blinks.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch5-1",
+        "chapterId": "demo-ch-5",
+        "sceneNumber": 1,
+        "orderInChapter": 1,
+        "description": "Cemetery path with niece",
+        "summary": "No metaphor for the line; notice.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch5-2",
+        "chapterId": "demo-ch-5",
+        "sceneNumber": 2,
+        "orderInChapter": 2,
+        "description": "Half-gone stone",
+        "summary": "Anger steady as river.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch5-3",
+        "chapterId": "demo-ch-5",
+        "sceneNumber": 3,
+        "orderInChapter": 3,
+        "description": "Fish joke off-record",
+        "summary": "Smoke from grill; symbol shorthand.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch6-1",
+        "chapterId": "demo-ch-6",
+        "sceneNumber": 1,
+        "orderInChapter": 1,
+        "description": "Reunion tent microphone",
+        "summary": "Elder stories; performance vs truth.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch6-2",
+        "chapterId": "demo-ch-6",
+        "sceneNumber": 2,
+        "orderInChapter": 2,
+        "description": "Storm breaks the heat",
+        "summary": "Trailer shelter; narrative interruption.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch6-3",
+        "chapterId": "demo-ch-6",
+        "sceneNumber": 3,
+        "orderInChapter": 3,
+        "description": "Dance floor; transcription promise",
+        "summary": "Ingestion ethics; feed the kin.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch7-1",
+        "chapterId": "demo-ch-7",
+        "sceneNumber": 1,
+        "orderInChapter": 1,
+        "description": "Archive box thud",
+        "summary": "Maps messy; François pattern.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch7-2",
+        "chapterId": "demo-ch-7",
+        "sceneNumber": 2,
+        "orderInChapter": 2,
+        "description": "Courthouse steps sandwich",
+        "summary": "Scene seed: fair booth echo.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch7-3",
+        "chapterId": "demo-ch-7",
+        "sceneNumber": 3,
+        "orderInChapter": 3,
+        "description": "Microfilm whir — brick not cathedral",
+        "summary": "Listening as method.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch8-1",
+        "chapterId": "demo-ch-8",
+        "sceneNumber": 1,
+        "orderInChapter": 1,
+        "description": "Workspace — sourceSupportLevel",
+        "summary": "Interior pass accepted.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch8-2",
+        "chapterId": "demo-ch-8",
+        "sceneNumber": 2,
+        "orderInChapter": 2,
+        "description": "Fragment cluster wiring",
+        "summary": "System as findable soul.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch8-3",
+        "chapterId": "demo-ch-8",
+        "sceneNumber": 3,
+        "orderInChapter": 3,
+        "description": "Night drive — stars",
+        "summary": "Corridor longer than miles.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch9-1",
+        "chapterId": "demo-ch-9",
+        "sceneNumber": 1,
+        "orderInChapter": 1,
+        "description": "Merge fight — polite war",
+        "summary": "Split knot; brain-memo quoted.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch9-2",
+        "chapterId": "demo-ch-9",
+        "sceneNumber": 2,
+        "orderInChapter": 2,
+        "description": "Buford call — hybrid flag",
+        "summary": "Person vs claim as question mark.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-sc-ch9-3",
+        "chapterId": "demo-ch-9",
+        "sceneNumber": 3,
+        "orderInChapter": 3,
+        "description": "Reject smoothed dialect",
+        "summary": "Dismiss assist; voice integrity.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-scene-ch1-1",
+        "chapterId": "seed-ch-1",
+        "sceneNumber": 1,
+        "orderInChapter": 1,
+        "description": "Morning trader street — Grappe as handle",
+        "summary": "Clerk writes the name; Alexis claims corridor.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-scene-ch1-2",
+        "chapterId": "seed-ch-1",
+        "sceneNumber": 2,
+        "orderInChapter": 2,
+        "description": "Heat and nod — public Black recognition",
+        "summary": "Space negotiated; letters as risk.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-scene-ch1-3",
+        "chapterId": "seed-ch-1",
+        "sceneNumber": 3,
+        "orderInChapter": 3,
+        "description": "Bronze river — testing voice over water",
+        "summary": "Future branches; smoke across water.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-scene-ch2-1",
+        "chapterId": "seed-ch-2",
+        "sceneNumber": 1,
+        "orderInChapter": 1,
+        "description": "Trader’s table country",
+        "summary": "Languages; land talk; seam as livelihood.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-scene-ch2-2",
+        "chapterId": "seed-ch-2",
+        "sceneNumber": 2,
+        "orderInChapter": 2,
+        "description": "Official with papers — refusal of tidy transfer",
+        "summary": "Market exhales; bridge loneliness.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-scene-ch2-3",
+        "chapterId": "seed-ch-2",
+        "sceneNumber": 3,
+        "orderInChapter": 3,
+        "description": "Fire circle — cession as weather",
+        "summary": "Stars; downstream pull toward Campti.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-scene-prologue-1",
+        "chapterId": "seed-ch-prologue",
+        "sceneNumber": 1,
+        "orderInChapter": 1,
+        "description": "Smoke before speech — thesis of the corridor",
+        "summary": "Reader contract; hybridity as method.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-scene-pr-2",
+        "chapterId": "seed-ch-prologue",
+        "sceneNumber": 2,
+        "orderInChapter": 2,
+        "description": "River patience — arrival’s grammar",
+        "summary": "Alexis at the landing; translation.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-scene-pr-3",
+        "chapterId": "seed-ch-prologue",
+        "sceneNumber": 3,
+        "orderInChapter": 3,
+        "description": "Night oil — sassafras and bridge-names",
+        "summary": "François as word; inheritance of smoke.",
+        "recordType": "HYBRID"
+      }
+    ],
+    "people": [
+      {
+        "id": "seed-person-alexis",
+        "name": "Alexis Grappe",
+        "description": null,
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-person-buford",
+        "name": "Buford \"Trixie\" Grappe",
+        "description": null,
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-person-child-grande-terre-pov",
+        "name": "Child POV — Grande Terre (opening)",
+        "description": "Narrative POV vehicle for pre-attack innocence and sensory immersion; not a historical individual.",
+        "recordType": "FICTIONAL"
+      },
+      {
+        "id": "seed-person-francois",
+        "name": "François Grappe",
+        "description": null,
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-person-narrator",
+        "name": "Lillian Grappe",
+        "description": "Frame narrator for the demo novel — archivist, merge reviewer, scene author; transparency over disguise.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-person-louise-guedon",
+        "name": "Louise Marguerite Guédon",
+        "description": "Genealogical bridge figure in the François Grappe research line; documentary presence varies — treat as hypothesis where records thin.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-person-marie-anne-grande-terre",
+        "name": "Marie Anne Thérèse de la Grande Terre",
+        "description": "Origin matriarchal anchor for the opening world — inferred social position; formal title and exact role in community governance intentionally left ambiguous.",
+        "recordType": "HYBRID"
+      }
+    ],
+    "places": [
+      {
+        "id": "seed-place-black-lake",
+        "name": "Black Lake",
+        "placeType": "LAKE",
+        "description": null,
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "seed-place-campti",
+        "name": "Campti",
+        "placeType": "TOWN",
+        "description": null,
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "demo-place-cemetery-campti",
+        "name": "Campti — cemetery corridor",
+        "placeType": "CEMETERY",
+        "description": "Racially stratified burial ground — represented in fiction with ethical restraint; not flattened into metaphor.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-place-cane-river-corridor",
+        "name": "Cane River corridor",
+        "placeType": "REGION",
+        "description": "Parishes and kin paths between Natchitoches and Campti.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-place-grande-terre-homeland",
+        "name": "Grande Terre Homeland Zone",
+        "placeType": "REGION",
+        "description": "Trade-route homeland / village zone before rupture — composite setting for early-contact rhythm (not a single surveyed parcel).",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-place-grappe-kitchen",
+        "name": "Grappe kitchen / home archive",
+        "placeType": "HOME",
+        "description": "Roux, okra, letters on table — domestic method.",
+        "recordType": "FICTIONAL"
+      },
+      {
+        "id": "seed-place-natchitoches",
+        "name": "Natchitoches",
+        "placeType": "TOWN",
+        "description": null,
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "demo-place-natchitoches-landing",
+        "name": "Natchitoches landing",
+        "placeType": "RIVER",
+        "description": "River stairs, trade street, clerk offices — arrival grammar.",
+        "recordType": "HYBRID"
+      }
+    ],
+    "symbols": [
+      {
+        "id": "narrative-sys-symbol-billy-club",
+        "name": "Billy Club",
+        "meaning": null,
+        "meaningPrimary": null,
+        "category": null,
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "narrative-sys-symbol-fire",
+        "name": "Fire",
+        "meaning": null,
+        "meaningPrimary": null,
+        "category": "ELEMENTAL",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-symbol-flame",
+        "name": "Flame",
+        "meaning": "Persistence",
+        "meaningPrimary": null,
+        "category": "ELEMENTAL",
+        "recordType": "FICTIONAL"
+      },
+      {
+        "id": "narrative-sys-symbol-garden",
+        "name": "Garden",
+        "meaning": null,
+        "meaningPrimary": null,
+        "category": "LANDSCAPE",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "narrative-sys-symbol-graveyard-line",
+        "name": "Graveyard Line",
+        "meaning": null,
+        "meaningPrimary": null,
+        "category": "LANDSCAPE",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "narrative-sys-symbol-gumbo",
+        "name": "Gumbo",
+        "meaning": null,
+        "meaningPrimary": null,
+        "category": "CULINARY",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-symbol-okra",
+        "name": "Okra",
+        "meaning": "Thickening ties",
+        "meaningPrimary": null,
+        "category": "CULINARY",
+        "recordType": "FICTIONAL"
+      },
+      {
+        "id": "seed-symbol-roux",
+        "name": "Roux",
+        "meaning": "Foundation",
+        "meaningPrimary": null,
+        "category": "CULINARY",
+        "recordType": "FICTIONAL"
+      },
+      {
+        "id": "seed-symbol-sassafras",
+        "name": "Sassafras",
+        "meaning": "Rooted place",
+        "meaningPrimary": null,
+        "category": "LANDSCAPE",
+        "recordType": "FICTIONAL"
+      },
+      {
+        "id": "seed-symbol-smoke",
+        "name": "Smoke",
+        "meaning": "Signal and memory",
+        "meaningPrimary": null,
+        "category": "ELEMENTAL",
+        "recordType": "FICTIONAL"
+      }
+    ],
+    "themes": [
+      {
+        "id": "dna-seed-genealogy-theme-time",
+        "name": "Anchored time",
+        "description": "Historical anchors constrain fantasy; when years or events are known, honor them in scene construction.",
+        "category": "core",
+        "intensity": 4
+      },
+      {
+        "id": "demo-theme-hybridity",
+        "name": "Hybridity as method",
+        "description": "When oral and documentary strands disagree, label the seam — fragments are not facts by default.",
+        "category": "core",
+        "intensity": 5
+      },
+      {
+        "id": "demo-theme-land-memory",
+        "name": "Land as memory vs land as file",
+        "description": "Cession, corridor, return — paper maps and walked paths in tension.",
+        "category": "core",
+        "intensity": 4
+      },
+      {
+        "id": "dna-seed-thematic-theme-memory",
+        "name": "Memory vs record",
+        "description": "Emotional truth and documented fact can diverge; both remain legible in the model as separate layers.",
+        "category": "core",
+        "intensity": 4
+      },
+      {
+        "id": "dna-seed-overview-theme-place",
+        "name": "Place as witness",
+        "description": "Landscape and town hold memory that outlives individual narrators; setting is an active carrier of meaning.",
+        "category": "core",
+        "intensity": 4
+      }
+    ],
+    "motifs": [
+      {
+        "id": "demo-motif-smoke-return",
+        "name": "Smoke on the corridor",
+        "description": "Winter fields, chimneys, signal — memory before explanation.",
+        "usagePattern": "Reprise at chapter turns; sensory return hook."
+      }
+    ],
+    "narrativeRules": [
+      {
+        "id": "demo-rule-label-oral",
+        "title": "Label oral history distinctly",
+        "description": "Oral claims (e.g., injury stories) remain flagged hybrid until documentary confirmation — never silent merge.",
+        "category": "memory",
+        "strength": 5,
+        "scope": "global"
+      },
+      {
+        "id": "dna-seed-ix-rule-motif",
+        "title": "Motifs earn recurrence",
+        "description": "Recurring images should accrue meaning across scenes rather than repeating as decoration.",
+        "category": "symbolism",
+        "strength": 4,
+        "scope": "global"
+      },
+      {
+        "id": "dna-seed-overview-rule-structure",
+        "title": "Nonlinear truth is allowed",
+        "description": "The overview establishes that the narrative may move across time and teller; the system must not force a single chronological spine as the only valid reading.",
+        "category": "structure",
+        "strength": 4,
+        "scope": "global"
+      },
+      {
+        "id": "dna-seed-thematic-rule-ambiguity",
+        "title": "Preserve interpretive gaps",
+        "description": "Do not collapse ambiguous family or historical material into a single authoritative reading in generation prompts.",
+        "category": "narration",
+        "strength": 4,
+        "scope": "global"
+      }
+    ],
+    "literaryDevices": [
+      {
+        "id": "demo-device-seam-reveal",
+        "name": "Seam revelation",
+        "description": "Direct address in epilogue; second-person ethics; UI metaphor for merge.",
+        "systemEffect": "Forces reader awareness of construction without breaking immersion carelessly."
+      }
+    ],
+    "narrativePatterns": [
+      {
+        "id": "demo-pattern-generational-echo",
+        "title": "Generational echo",
+        "description": "Alexis → François → Buford → Lillian — same seam, different register.",
+        "patternType": "generational",
+        "strength": 5
+      },
+      {
+        "id": "dna-seed-genealogy-pattern-line",
+        "title": "Lineage shadows present action",
+        "description": "Present-day choices echo generational patterns; genealogy informs subtext, not exposition dumps.",
+        "patternType": "generational",
+        "strength": 4
+      },
+      {
+        "id": "dna-seed-ix-pattern-oral",
+        "title": "Oral cadence inheritance",
+        "description": "Dialogue and interior monologue may carry oral-storytelling rhythm even in close third.",
+        "patternType": "identity",
+        "strength": 4
+      }
+    ],
+    "narrativeBindings": [
+      {
+        "id": "bind-dna-seed-genealogy-pattern-line-src",
+        "sourceType": "narrative_pattern",
+        "sourceId": "dna-seed-genealogy-pattern-line",
+        "targetType": "source",
+        "targetId": "source-historical-timeline-grappe-anchors",
+        "relationship": "emerges_from",
+        "strength": 4,
+        "notes": "Seed"
+      },
+      {
+        "id": "bind-dna-seed-genealogy-theme-time-src",
+        "sourceType": "theme",
+        "sourceId": "dna-seed-genealogy-theme-time",
+        "targetType": "source",
+        "targetId": "source-historical-timeline-grappe-anchors",
+        "relationship": "emerges_from",
+        "strength": 4,
+        "notes": "Seed"
+      },
+      {
+        "id": "bind-dna-seed-ix-pattern-oral-src",
+        "sourceType": "narrative_pattern",
+        "sourceId": "dna-seed-ix-pattern-oral",
+        "targetType": "source",
+        "targetId": "source-narrative-system-subthemes",
+        "relationship": "emerges_from",
+        "strength": 4,
+        "notes": "Seed"
+      },
+      {
+        "id": "bind-dna-seed-ix-rule-motif-src",
+        "sourceType": "narrative_rule",
+        "sourceId": "dna-seed-ix-rule-motif",
+        "targetType": "source",
+        "targetId": "source-narrative-system-subthemes",
+        "relationship": "emerges_from",
+        "strength": 4,
+        "notes": "Seed"
+      },
+      {
+        "id": "bind-dna-seed-overview-rule-structure-src",
+        "sourceType": "narrative_rule",
+        "sourceId": "dna-seed-overview-rule-structure",
+        "targetType": "source",
+        "targetId": "source-campti-section-i-overview",
+        "relationship": "emerges_from",
+        "strength": 4,
+        "notes": "Seed"
+      },
+      {
+        "id": "bind-dna-seed-overview-theme-place-src",
+        "sourceType": "theme",
+        "sourceId": "dna-seed-overview-theme-place",
+        "targetType": "source",
+        "targetId": "source-campti-section-i-overview",
+        "relationship": "emerges_from",
+        "strength": 4,
+        "notes": "Seed"
+      },
+      {
+        "id": "bind-dna-seed-thematic-rule-ambiguity-src",
+        "sourceType": "narrative_rule",
+        "sourceId": "dna-seed-thematic-rule-ambiguity",
+        "targetType": "source",
+        "targetId": "source-campti-section-iv-thematic",
+        "relationship": "emerges_from",
+        "strength": 4,
+        "notes": "Seed"
+      },
+      {
+        "id": "bind-dna-seed-thematic-theme-memory-src",
+        "sourceType": "theme",
+        "sourceId": "dna-seed-thematic-theme-memory",
+        "targetType": "source",
+        "targetId": "source-campti-section-iv-thematic",
+        "relationship": "emerges_from",
+        "strength": 4,
+        "notes": "Seed"
+      },
+      {
+        "id": "demo-bind-device-seam-ch1-1",
+        "sourceType": "literary_device",
+        "sourceId": "demo-device-seam-reveal",
+        "targetType": "scene",
+        "targetId": "seed-scene-ch1-1",
+        "relationship": "influences",
+        "strength": 4,
+        "notes": "Demo binding"
+      },
+      {
+        "id": "demo-bind-motif-smoke-ch1-3",
+        "sourceType": "motif",
+        "sourceId": "demo-motif-smoke-return",
+        "targetType": "scene",
+        "targetId": "demo-scene-ch1-3",
+        "relationship": "expresses",
+        "strength": 4,
+        "notes": "Demo binding"
+      },
+      {
+        "id": "demo-bind-motif-smoke-pro",
+        "sourceType": "motif",
+        "sourceId": "demo-motif-smoke-return",
+        "targetType": "scene",
+        "targetId": "seed-scene-prologue-1",
+        "relationship": "expresses",
+        "strength": 4,
+        "notes": "Demo binding"
+      },
+      {
+        "id": "demo-bind-pattern-gen-ch1",
+        "sourceType": "narrative_pattern",
+        "sourceId": "demo-pattern-generational-echo",
+        "targetType": "chapter",
+        "targetId": "seed-ch-1",
+        "relationship": "emerges_from",
+        "strength": 4,
+        "notes": "Demo binding"
+      },
+      {
+        "id": "demo-bind-rule-oral-buford",
+        "sourceType": "narrative_rule",
+        "sourceId": "demo-rule-label-oral",
+        "targetType": "person",
+        "targetId": "seed-person-buford",
+        "relationship": "influences",
+        "strength": 4,
+        "notes": "Demo binding"
+      },
+      {
+        "id": "demo-bind-symbol-smoke-ch1-3",
+        "sourceType": "symbol",
+        "sourceId": "seed-symbol-smoke",
+        "targetType": "scene",
+        "targetId": "demo-scene-ch1-3",
+        "relationship": "expresses",
+        "strength": 4,
+        "notes": "Demo binding"
+      },
+      {
+        "id": "demo-bind-theme-hybrid-ch1",
+        "sourceType": "theme",
+        "sourceId": "demo-theme-hybridity",
+        "targetType": "chapter",
+        "targetId": "seed-ch-1",
+        "relationship": "expresses",
+        "strength": 4,
+        "notes": "Demo binding"
+      },
+      {
+        "id": "demo-bind-theme-hybrid-ch4",
+        "sourceType": "theme",
+        "sourceId": "demo-theme-hybridity",
+        "targetType": "chapter",
+        "targetId": "demo-ch-4",
+        "relationship": "expresses",
+        "strength": 4,
+        "notes": "Demo binding"
+      },
+      {
+        "id": "demo-bind-theme-land-ch1",
+        "sourceType": "theme",
+        "sourceId": "demo-theme-land-memory",
+        "targetType": "chapter",
+        "targetId": "seed-ch-1",
+        "relationship": "expresses",
+        "strength": 4,
+        "notes": "Demo binding"
+      }
+    ],
+    "fragments": [
+      {
+        "id": "demo-frag-merge-fight",
+        "title": "Merge review note",
+        "fragmentType": "CONTINUITY_CONSTRAINT",
+        "summary": "Demo continuity: sloppy merging harms.",
+        "text": "Are we sure this François is that François? Split the knot.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-frag-seam-direct",
+        "title": "Seam log (fiction)",
+        "fragmentType": "THEME_STATEMENT",
+        "summary": "Ethical through-line for demo novel.",
+        "text": "Where strands disagree, keep both — label the seam.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-frag-gt-adult-unease",
+        "title": "Adult unease before violence names itself",
+        "fragmentType": "SCENE_SEED",
+        "summary": "Subtle premonition — adult register only.",
+        "text": "Someone laughs late; someone else doesn’t. A question hangs a half-beat too long. The child notices only that the day feels ordinary.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-frag-gt-child-certainty",
+        "title": "Child certainty the world will continue",
+        "fragmentType": "EMOTIONAL_BEAT",
+        "summary": "Innocence as dramatic irony reservoir.",
+        "text": "The child does not doubt tomorrow — doubt is an adult tool. Tomorrow is a shape adults build while the child plays inside it.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-frag-gt-elder-women-continuity",
+        "title": "Elder women as the system",
+        "fragmentType": "CHARACTER_INSIGHT",
+        "summary": "Women-centered continuity — authority without podium.",
+        "text": "The elder women do not ‘help’ the village — they are its memory engine: who owes what, who married in, who cannot be trusted with fire.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-frag-gt-francois-research-bridge",
+        "title": "François Grappe — research bridge (not the opening emotional center)",
+        "fragmentType": "HISTORICAL_ANCHOR",
+        "summary": "Explicit deferral of surname dominance; bridge to later generations.",
+        "text": "The Grappe name will arrive later with documentation and dispute — here, at Grande Terre, the world is still named by mothers, water, and smoke.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-frag-gt-maternal-order",
+        "title": "Maternal order (narrator register)",
+        "fragmentType": "NARRATOR_VOICE",
+        "summary": "Frame opening as maternal / communal order.",
+        "text": "We begin where a mother’s hands still sort the world into knowable pieces — before history arrives with its louder tools.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-frag-gt-peace-before-destruction",
+        "title": "Peace must be made real",
+        "fragmentType": "SYMBOLIC_NOTE",
+        "summary": "Moral stake: peace as active creation.",
+        "text": "Peace is not the absence of noise — it is the agreement, renewed daily, that we will not turn on each other first.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-frag-gt-river-trail-embodied",
+        "title": "River and trail knowledge — embodied",
+        "fragmentType": "MEMORY",
+        "summary": "Knowledge as practice, not lesson.",
+        "text": "Nobody explains the ford; bodies explain it — how cold, where the slick is, when the season makes the bank a lie.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-frag-gt-smoke-morning",
+        "title": "Morning smoke — continuity without speech",
+        "fragmentType": "IMAGE_OR_SENSORY",
+        "summary": "Smoke as proof of ongoing life — sensory anchor for peace.",
+        "text": "Smoke rises at the hour it is supposed to, and the child reads that as law: if smoke, then day; if day, then we continue.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-frag-gt-trade-artery",
+        "title": "The trail as familiar artery",
+        "fragmentType": "SCENE_SEED",
+        "summary": "Trade civilization as relationship, not abstract ‘frontier.’",
+        "text": "The trade route is not danger yet — it is the village’s widened breath: people you might love, goods you might need, stories carried in dust.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-frag-gt-women-carry-names",
+        "title": "Names and roles through women",
+        "fragmentType": "ORAL_HISTORY",
+        "summary": "Matrilineal continuity vs documentary erasure.",
+        "text": "Titles slip across languages; what persists is who remembers your mother’s line when the paper does not.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-frag-oral-buford",
+        "title": null,
+        "fragmentType": "ORAL_HISTORY",
+        "summary": null,
+        "text": "Oral accounts describe Buford Grappe losing his arm in a hunting accident; treat as hybrid until parish records confirm.",
+        "recordType": "ORAL_HISTORY"
+      },
+      {
+        "id": "seed-frag-smoke-memory",
+        "title": null,
+        "fragmentType": "MEMORY",
+        "summary": "Sensory memory tied to communal gathering.",
+        "text": "Smoke on winter fields marked gatherings — memory before explanation.",
+        "recordType": "HYBRID"
+      }
+    ],
+    "fragmentClusters": [
+      {
+        "id": "seed-cluster-gt-pre-peace",
+        "title": "Grande Terre — pre-loss calm",
+        "clusterType": "emotional_arc",
+        "summary": "Peace as rhythm: trade, women’s work, child certainty.",
+        "chapterId": null,
+        "sceneId": null,
+        "symbolId": null
+      },
+      {
+        "id": "demo-cluster-paper-trail",
+        "title": "Paper trail / oral river",
+        "clusterType": "thematic",
+        "summary": "Chapters 4 & 9 — ingestion, merge fight, seam log.",
+        "chapterId": "demo-ch-4",
+        "sceneId": null,
+        "symbolId": null
+      },
+      {
+        "id": "seed-cluster-gt-smoke-memory",
+        "title": "Smoke / memory / continuity",
+        "clusterType": "symbol",
+        "summary": "Sensory and moral images of smoke as continuity before rupture.",
+        "chapterId": null,
+        "sceneId": null,
+        "symbolId": null
+      },
+      {
+        "id": "demo-cluster-smoke-lineage",
+        "title": "Smoke → lineage → return",
+        "clusterType": "symbolic",
+        "summary": "Signal/memory across generations; ties scenes to symbol seed-smoke.",
+        "chapterId": "seed-ch-prologue",
+        "sceneId": null,
+        "symbolId": "seed-symbol-smoke"
+      }
+    ],
+    "events": [
+      {
+        "id": "timeline-ev-fort-st-jean-baptiste-1714",
+        "title": "Establishment of Fort St. Jean Baptiste (1714)",
+        "description": null,
+        "eventType": "POLITICAL",
+        "startYear": 1714,
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "timeline-ev-alexis-louise-marriage-1746",
+        "title": "Marriage of Alexis Grappe and Louise Guedon (1746)",
+        "description": null,
+        "eventType": "MARRIAGE",
+        "startYear": 1746,
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "demo-event-alexis-arrival",
+        "title": "Alexis arrives Natchitoches (novel demo)",
+        "description": "Framing arrival for corridor narrative.",
+        "eventType": "MIGRATION",
+        "startYear": 1800,
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "timeline-ev-louisiana-purchase-1803",
+        "title": "Louisiana Purchase (1803)",
+        "description": null,
+        "eventType": "POLITICAL",
+        "startYear": 1803,
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "timeline-ev-civil-war-reconstruction",
+        "title": "Civil War and Reconstruction Impact",
+        "description": "Regional and family-level effects (broad span).",
+        "eventType": "WAR",
+        "startYear": 1861,
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "timeline-ev-grappe-reservation",
+        "title": "Establishment of Grappe Reservation",
+        "description": null,
+        "eventType": "LAND",
+        "startYear": null,
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "timeline-ev-pre-colonial-natchitoches",
+        "title": "Pre-Colonial Natchitoches Life",
+        "description": "Indigenous and colonial-era lifeways before the fort narrative.",
+        "eventType": "CULTURAL",
+        "startYear": null,
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "timeline-ev-campti-catholic-church",
+        "title": "Founding of Campti Catholic Church",
+        "description": null,
+        "eventType": "CHURCH",
+        "startYear": null,
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "timeline-ev-jim-crow-campti",
+        "title": "Jim Crow Era in Campti",
+        "description": "Local racial order and everyday life under segregation.",
+        "eventType": "CULTURAL",
+        "startYear": null,
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "timeline-ev-buford-marshal",
+        "title": "Buford Grappe as Marshal",
+        "description": "Law enforcement and community visibility in town memory.",
+        "eventType": "POLITICAL",
+        "startYear": null,
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "timeline-ev-migration-arkansas",
+        "title": "Migration to Arkansas",
+        "description": null,
+        "eventType": "MIGRATION",
+        "startYear": null,
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "timeline-ev-francois-interpreter",
+        "title": "Rise of François Grappe as Interpreter",
+        "description": "Trade, languages, and mediation between communities.",
+        "eventType": "FAMILY",
+        "startYear": null,
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "timeline-ev-modern-rediscovery",
+        "title": "Modern Rediscovery of Grappe Lineage",
+        "description": "Contemporary research, kinship, and narrative recovery.",
+        "eventType": "CULTURAL",
+        "startYear": null,
+        "recordType": "HYBRID"
+      }
+    ],
+    "sources": [
+      {
+        "id": "seed-source-francois-grappe-excerpt",
+        "title": "François Grappe and the Caddo Land Cession – Dayna Bowker Lee excerpt",
+        "sourceType": "NOTE",
+        "recordType": "HYBRID",
+        "summary": "Research excerpt describing François Grappe as a mixed French-Indigenous frontier figure born in 1747 near the Caddo post by present-day Texarkana, educated by Alexis Grappe, embedded with Caddo communities, and active across French, Spanish, and later U.S. frontier systems."
+      },
+      {
+        "id": "seed-source-grappe-legacy",
+        "title": "Grappe Legacy: A Comprehensive Guide",
+        "sourceType": "PDF",
+        "recordType": "HYBRID",
+        "summary": "Compiled family notes, land references, and narrative hooks for the Campti–Natchitoches corridor."
+      },
+      {
+        "id": "source-historical-timeline-grappe-anchors",
+        "title": "Historical Timeline – Grappe Narrative Anchors",
+        "sourceType": "NOTE",
+        "recordType": "HYBRID",
+        "summary": null
+      },
+      {
+        "id": "source-campti-section-i-overview",
+        "title": "Section I — Overview (Campti narrative bible)",
+        "sourceType": "NOTE",
+        "recordType": "HYBRID",
+        "summary": null
+      },
+      {
+        "id": "source-campti-section-iv-thematic",
+        "title": "Section IV — Thematic Framework",
+        "sourceType": "NOTE",
+        "recordType": "HYBRID",
+        "summary": null
+      },
+      {
+        "id": "source-narrative-system-subthemes",
+        "title": "Section IX — Subthemes, Motifs, and Literary Devices",
+        "sourceType": "NOTE",
+        "recordType": "HYBRID",
+        "summary": null
+      },
+      {
+        "id": "source-campti-section-v-narrative-structure",
+        "title": "Section V — Narrative Structure & Chapter Frameworks",
+        "sourceType": "NOTE",
+        "recordType": "HYBRID",
+        "summary": null
+      },
+      {
+        "id": "source-campti-section-viii-themes-symbols",
+        "title": "Section VIII — Themes and Symbols",
+        "sourceType": "NOTE",
+        "recordType": "HYBRID",
+        "summary": null
+      },
+      {
+        "id": "source-campti-section-xi-theological-symbolism",
+        "title": "Section XI — Theological and Spiritual Symbolism",
+        "sourceType": "NOTE",
+        "recordType": "HYBRID",
+        "summary": null
+      },
+      {
+        "id": "source-campti-section-xiii-enneagram-mapping",
+        "title": "Section XIII — Enneagram Mapping of Primary Characters",
+        "sourceType": "NOTE",
+        "recordType": "HYBRID",
+        "summary": null
+      },
+      {
+        "id": "source-campti-section-xiv-symbolism-motifs",
+        "title": "Section XIV — Symbolism and Recurring Motifs",
+        "sourceType": "NOTE",
+        "recordType": "HYBRID",
+        "summary": null
+      },
+      {
+        "id": "source-campti-section-xvi-literary-visual",
+        "title": "Section XVI — Literary and Visual Symbolism Guide",
+        "sourceType": "NOTE",
+        "recordType": "HYBRID",
+        "summary": null
+      },
+      {
+        "id": "demo-source-smoke-corridor",
+        "title": "The Smoke of the Corridor — Demo manuscript spine",
+        "sourceType": "NOTE",
+        "recordType": "HYBRID",
+        "summary": "Synthetic spine document for narrative DNA bindings in showroom."
+      }
+    ],
+    "claims": [
+      {
+        "id": "demo-claim-dna-not-proof",
+        "description": "DNA percentages are hypotheses about affinity, not tribal enrollment certificates.",
+        "confidence": 4,
+        "recordType": "HYBRID",
+        "needsReview": false
+      },
+      {
+        "id": "demo-claim-treaty-kitchen",
+        "description": "Reservation discussed in kitchens along the corridor before appearing in indexed files.",
+        "confidence": 3,
+        "recordType": "ORAL_HISTORY",
+        "needsReview": true
+      }
+    ],
+    "openQuestions": [
+      {
+        "id": "seed-oq-grappe-treaty",
+        "title": "What is the strongest evidence trail for the Grappe Reservation treaty?",
+        "description": "Map citations and oral history against documentary fragments.",
+        "status": "researching",
+        "priority": 1
+      },
+      {
+        "id": "seed-oq-francois-doc",
+        "title": "Was François Grappe Jr. formally documented in surviving records?",
+        "description": "Track parish, federal, and tribal records; note gaps explicitly.",
+        "status": "open",
+        "priority": 2
+      },
+      {
+        "id": "demo-oq-public-readiness",
+        "title": "Is every cinematic pass ready for public?",
+        "description": "Spot-check published passes before wide demo.",
+        "status": "open",
+        "priority": 2
+      },
+      {
+        "id": "seed-oq-graveyard-line",
+        "title": "How should the graveyard racial dividing line be represented in narrative vs documentation?",
+        "description": "Resolve ethics of depiction; avoid flattening violence into metaphor.",
+        "status": "open",
+        "priority": 3
+      },
+      {
+        "id": "narrative-sys-oq-strength",
+        "title": "What defines strength in the Grappe lineage?",
+        "description": null,
+        "status": "open",
+        "priority": null
+      },
+      {
+        "id": "narrative-sys-oq-memory-truth",
+        "title": "Where does memory diverge from truth?",
+        "description": null,
+        "status": "open",
+        "priority": null
+      },
+      {
+        "id": "narrative-sys-oq-identity",
+        "title": "What is inherited vs chosen identity?",
+        "description": null,
+        "status": "open",
+        "priority": null
+      },
+      {
+        "id": "narrative-sys-oq-faith",
+        "title": "Where does faith heal vs harm?",
+        "description": null,
+        "status": "open",
+        "priority": null
+      },
+      {
+        "id": "narrative-sys-oq-power",
+        "title": "Who truly holds power in the family?",
+        "description": null,
+        "status": "open",
+        "priority": null
+      },
+      {
+        "id": "timeline-oq-oral-vs-documented",
+        "title": "What parts of this timeline are oral vs documented?",
+        "description": null,
+        "status": "open",
+        "priority": null
+      },
+      {
+        "id": "timeline-oq-identity-legal-cultural",
+        "title": "Where does identity shift legally vs culturally?",
+        "description": null,
+        "status": "open",
+        "priority": null
+      },
+      {
+        "id": "timeline-oq-lost-each-transition",
+        "title": "What was lost during each transition?",
+        "description": null,
+        "status": "open",
+        "priority": null
+      }
+    ],
+    "continuityNotes": [
+      {
+        "id": "seed-cn-narrator-reveal",
+        "title": "Narrator reveal must remain hidden until final chapter",
+        "description": "Structure scenes so identity clues are reversible until the close.",
+        "severity": "high",
+        "status": "open"
+      },
+      {
+        "id": "narrative-sys-cn-nonlinear",
+        "title": "Narrative must remain nonlinear",
+        "description": null,
+        "severity": "high",
+        "status": "open"
+      },
+      {
+        "id": "narrative-sys-cn-memory-contradictions",
+        "title": "Memory contradictions are intentional",
+        "description": null,
+        "severity": "high",
+        "status": "open"
+      },
+      {
+        "id": "narrative-sys-cn-emotional-truth",
+        "title": "Emotional truth > factual certainty",
+        "description": null,
+        "severity": "high",
+        "status": "open"
+      },
+      {
+        "id": "narrative-sys-cn-oral-voice",
+        "title": "Preserve oral storytelling voice",
+        "description": null,
+        "severity": "high",
+        "status": "open"
+      },
+      {
+        "id": "timeline-cn-nonlinear",
+        "title": "Timeline is nonlinear",
+        "description": null,
+        "severity": "high",
+        "status": "open"
+      },
+      {
+        "id": "timeline-cn-events-overlap-emotionally",
+        "title": "Events overlap emotionally",
+        "description": null,
+        "severity": "high",
+        "status": "open"
+      },
+      {
+        "id": "timeline-cn-memory-distorts-sequence",
+        "title": "Memory may distort sequence",
+        "description": null,
+        "severity": "high",
+        "status": "open"
+      },
+      {
+        "id": "seed-cn-buford-accidents",
+        "title": "Track whether Buford’s accidents are documented, oral, or hybrid",
+        "description": "Align Buford’s arc with record types and claims.",
+        "severity": "low",
+        "status": "open"
+      },
+      {
+        "id": "demo-cn-narrator-relaxed",
+        "title": "Showroom: narrator identity public in epilogue",
+        "description": "Continuity from early seed relaxed for demo — re-tighten narrator concealment for production novel if desired.",
+        "severity": "low",
+        "status": "resolved"
+      },
+      {
+        "id": "seed-cn-oral-label",
+        "title": "Do not collapse oral history into verified fact without labeling",
+        "description": "Use chapter notes and claim types to keep hybridity visible.",
+        "severity": "medium",
+        "status": "open"
+      }
+    ],
+    "metaScenes": [
+      {
+        "id": "demo-meta-demo-sc-ch7-1",
+        "title": "Archive box thud",
+        "sceneId": "demo-sc-ch7-1",
+        "placeId": "seed-place-natchitoches",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch10-1",
+        "title": "Bonfire — flame as persistence",
+        "sceneId": "demo-sc-ch10-1",
+        "placeId": "seed-place-campti",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-scene-ch1-3",
+        "title": "Bronze river — testing voice over water",
+        "sceneId": "demo-scene-ch1-3",
+        "placeId": "demo-place-natchitoches-landing",
+        "povPersonId": "seed-person-alexis",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch3-1",
+        "title": "Buford at Black Lake porch",
+        "sceneId": "demo-sc-ch3-1",
+        "placeId": "seed-place-black-lake",
+        "povPersonId": "seed-person-buford",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch9-2",
+        "title": "Buford call — hybrid flag",
+        "sceneId": "demo-sc-ch9-2",
+        "placeId": "seed-place-black-lake",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch11-1",
+        "title": "Campti evening drive",
+        "sceneId": "demo-sc-ch11-1",
+        "placeId": "seed-place-campti",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch5-1",
+        "title": "Cemetery path with niece",
+        "sceneId": "demo-sc-ch5-1",
+        "placeId": "demo-place-cemetery-campti",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch11-3",
+        "title": "Chimney smoke — corridor sentence",
+        "sceneId": "demo-sc-ch11-3",
+        "placeId": "seed-place-campti",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch12-3",
+        "title": "Coda — database housekeeping",
+        "sceneId": "demo-sc-ch12-3",
+        "placeId": "demo-place-grappe-kitchen",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch7-2",
+        "title": "Courthouse steps sandwich",
+        "sceneId": "demo-sc-ch7-2",
+        "placeId": "demo-place-natchitoches-landing",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch6-3",
+        "title": "Dance floor; transcription promise",
+        "sceneId": "demo-sc-ch6-3",
+        "placeId": "seed-place-campti",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch10-3",
+        "title": "Dew sneakers — unlogged beauty",
+        "sceneId": "demo-sc-ch10-3",
+        "placeId": "seed-place-campti",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch12-2",
+        "title": "Direct address — click the seam",
+        "sceneId": "demo-sc-ch12-2",
+        "placeId": "seed-place-campti",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch10-2",
+        "title": "DNA percentages argument",
+        "sceneId": "demo-sc-ch10-2",
+        "placeId": "seed-place-campti",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch12-1",
+        "title": "Epilogue — Lillian steps forward",
+        "sceneId": "demo-sc-ch12-1",
+        "placeId": "demo-place-grappe-kitchen",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-scene-ch2-3",
+        "title": "Fire circle — cession as weather",
+        "sceneId": "demo-scene-ch2-3",
+        "placeId": "demo-place-cane-river-corridor",
+        "povPersonId": "seed-person-francois",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch5-3",
+        "title": "Fish joke off-record",
+        "sceneId": "demo-sc-ch5-3",
+        "placeId": "seed-place-campti",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch8-2",
+        "title": "Fragment cluster wiring",
+        "sceneId": "demo-sc-ch8-2",
+        "placeId": "demo-place-grappe-kitchen",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "seed-meta-grande-terre-3-days",
+        "title": "Grande Terre — Three Days Before the Attack",
+        "sceneId": null,
+        "placeId": "seed-place-grande-terre-homeland",
+        "povPersonId": "seed-person-child-grande-terre-pov",
+        "timePeriod": "Early 1700s — before French violence reaches the immediate scene (approximate)",
+        "narrativePurpose": "Make the reader love the world before it breaks — emotional foundation for the entire novel.",
+        "symbolicElements": "Smoke as continuity; river/trail as embodied knowledge; women’s labor as civilization; child’s certainty as tragic irony.",
+        "centralConflict": "Peace as earned equilibrium vs. forces that treat land and people as disposable — violence is not yet present, but the story’s moral stakes are named.",
+        "emotionalVoltage": "High warmth with a thin wire of dread — the reader should love the world before learning its fragility."
+      },
+      {
+        "id": "demo-meta-demo-sc-ch5-2",
+        "title": "Half-gone stone",
+        "sceneId": "demo-sc-ch5-2",
+        "placeId": "demo-place-cemetery-campti",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-scene-ch1-2",
+        "title": "Heat and nod — public Black recognition",
+        "sceneId": "demo-scene-ch1-2",
+        "placeId": "demo-place-natchitoches-landing",
+        "povPersonId": "seed-person-alexis",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch3-3",
+        "title": "Lantern path — François as pattern not ghost",
+        "sceneId": "demo-sc-ch3-3",
+        "placeId": "seed-place-black-lake",
+        "povPersonId": "seed-person-buford",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch4-1",
+        "title": "Letters on the dining-room archive",
+        "sceneId": "demo-sc-ch4-1",
+        "placeId": "demo-place-grappe-kitchen",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch9-1",
+        "title": "Merge fight — polite war",
+        "sceneId": "demo-sc-ch9-1",
+        "placeId": "demo-place-grappe-kitchen",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch7-3",
+        "title": "Microfilm whir — brick not cathedral",
+        "sceneId": "demo-sc-ch7-3",
+        "placeId": "seed-place-natchitoches",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-seed-scene-ch1-1",
+        "title": "Morning trader street — Grappe as handle",
+        "sceneId": "seed-scene-ch1-1",
+        "placeId": "seed-place-natchitoches",
+        "povPersonId": "seed-person-alexis",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch8-3",
+        "title": "Night drive — stars",
+        "sceneId": "demo-sc-ch8-3",
+        "placeId": "demo-place-cane-river-corridor",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-scene-pr-3",
+        "title": "Night oil — sassafras and bridge-names",
+        "sceneId": "demo-scene-pr-3",
+        "placeId": "seed-place-natchitoches",
+        "povPersonId": "seed-person-alexis",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-scene-ch2-2",
+        "title": "Official with papers — refusal of tidy transfer",
+        "sceneId": "demo-scene-ch2-2",
+        "placeId": "demo-place-natchitoches-landing",
+        "povPersonId": "seed-person-francois",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch4-3",
+        "title": "Reading aloud — ethics of quoting",
+        "sceneId": "demo-sc-ch4-3",
+        "placeId": "demo-place-grappe-kitchen",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch9-3",
+        "title": "Reject smoothed dialect",
+        "sceneId": "demo-sc-ch9-3",
+        "placeId": "demo-place-grappe-kitchen",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch6-1",
+        "title": "Reunion tent microphone",
+        "sceneId": "demo-sc-ch6-1",
+        "placeId": "seed-place-campti",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-scene-pr-2",
+        "title": "River patience — arrival’s grammar",
+        "sceneId": "demo-scene-pr-2",
+        "placeId": "seed-place-natchitoches",
+        "povPersonId": "seed-person-alexis",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch3-2",
+        "title": "Roux and okra — kitchen theology",
+        "sceneId": "demo-sc-ch3-2",
+        "placeId": "demo-place-grappe-kitchen",
+        "povPersonId": "seed-person-buford",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-seed-scene-prologue-1",
+        "title": "Smoke before speech — thesis of the corridor",
+        "sceneId": "seed-scene-prologue-1",
+        "placeId": "seed-place-black-lake",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch4-2",
+        "title": "Spreadsheet vs stubborn kin",
+        "sceneId": "demo-sc-ch4-2",
+        "placeId": "demo-place-grappe-kitchen",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch6-2",
+        "title": "Storm breaks the heat",
+        "sceneId": "demo-sc-ch6-2",
+        "placeId": "seed-place-campti",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch11-2",
+        "title": "Sweet tea porch",
+        "sceneId": "demo-sc-ch11-2",
+        "placeId": "seed-place-black-lake",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-seed-scene-ch2-1",
+        "title": "Trader’s table country",
+        "sceneId": "seed-scene-ch2-1",
+        "placeId": "demo-place-natchitoches-landing",
+        "povPersonId": "seed-person-francois",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      },
+      {
+        "id": "demo-meta-demo-sc-ch8-1",
+        "title": "Workspace — sourceSupportLevel",
+        "sceneId": "demo-sc-ch8-1",
+        "placeId": "demo-place-grappe-kitchen",
+        "povPersonId": "seed-person-narrator",
+        "timePeriod": null,
+        "narrativePurpose": "Showroom: guided + narrative passes populated.",
+        "symbolicElements": "Smoke, flame, roux — recurring demo symbols.",
+        "centralConflict": "Paper vs oral dignity; merge ethics vs narrative smoothness.",
+        "emotionalVoltage": "medium-high"
+      }
+    ],
+    "characterRelationships": [
+      {
+        "id": "cmnp5xp15002xvh0wg78x4fqu",
+        "personAId": "seed-person-child-grande-terre-pov",
+        "personBId": "seed-person-marie-anne-grande-terre",
+        "relationshipType": "parent_child",
+        "relationshipSummary": "Child POV orbits Marie’s watchful calm; safety assumed until adult tension sharpens without full explanation."
+      },
+      {
+        "id": "cmnsmg7mf003bvhp0od0xaot5",
+        "personAId": "seed-person-alexis",
+        "personBId": "seed-person-buford",
+        "relationshipType": "lineage_carrying",
+        "relationshipSummary": "Letters north; name threads corridor."
+      },
+      {
+        "id": "cmnsmg7or003dvhp08oa7o8fx",
+        "personAId": "seed-person-alexis",
+        "personBId": "seed-person-francois",
+        "relationshipType": "lineage_carrying",
+        "relationshipSummary": "Education and bridge-figure inheritance."
+      },
+      {
+        "id": "cmnsmg7px003fvhp0mmnh4h6k",
+        "personAId": "seed-person-buford",
+        "personBId": "seed-person-francois",
+        "relationshipType": "lineage_carrying",
+        "relationshipSummary": "Interpreter echo in family storytelling."
+      },
+      {
+        "id": "cmnsmg7r4003hvhp01rwpvwa2",
+        "personAId": "seed-person-buford",
+        "personBId": "seed-person-narrator",
+        "relationshipType": "kinship_present",
+        "relationshipSummary": "Porch, phone calls, archive care."
+      },
+      {
+        "id": "cmnsmg7sa003jvhp0ucj6nsju",
+        "personAId": "seed-person-francois",
+        "personBId": "seed-person-narrator",
+        "relationshipType": "research_bridge",
+        "relationshipSummary": "Support layer in Chapter 8 meta."
+      }
+    ],
+    "aliases": []
+  },
+  "readingAndAdminUrls": {
+    "readHub": "/read",
+    "adminDashboard": "/admin/dashboard"
+  }
+}

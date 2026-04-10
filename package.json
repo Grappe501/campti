@@ -14,7 +14,8 @@
     "db:narrative-system": "tsx scripts/ingest-narrative-system-doc.ts",
     "db:narrative-dna": "tsx scripts/seed-narrative-dna-documents.ts",
     "db:narrative-dna-guides": "tsx scripts/seed-narrative-dna-guides.ts",
-    "db:historical-timeline": "tsx scripts/ingest-historical-timeline.ts"
+    "db:historical-timeline": "tsx scripts/ingest-historical-timeline.ts",
+    "report:handoff": "tsx scripts/generate-handoff-report.ts --out reports/campti-handoff-report.json"
   },
   "dependencies": {
     "@prisma/client": "^6.6.0",
