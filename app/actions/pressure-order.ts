@@ -1,6 +1,7 @@
 "use server";
 
 import type { Prisma } from "@prisma/client";
+import { RecordType, VisibilityStatus } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { patchEnvJsonFromForm } from "@/lib/environment-schemas";
@@ -15,10 +16,12 @@ import {
   characterSocioEconomicProfileUpsertSchema,
   deleteByIdSchema,
   parsePressureJson,
+  parseWorldStateEraDriversText,
   worldGovernanceProfileUpdateSchema,
   worldGovernanceProfileUpsertSchema,
   worldPressureBundleUpdateSchema,
   worldPressureBundleUpsertSchema,
+  worldStateEraProfileUpsertSchema,
 } from "@/lib/pressure-order-schemas";
 import { prisma } from "@/lib/prisma";
 
@@ -32,6 +35,7 @@ function formStringRecord(fd: FormData): Record<string, string> {
 
 function revalidatePressureForWorld(worldStateId: string) {
   revalidatePath(`/admin/world-states/${worldStateId}/pressure`);
+  revalidatePath(`/admin/world-states/${worldStateId}/profile`);
   revalidatePath("/admin/pressure/governance");
   revalidatePath("/admin/pressure/bundles");
 }
@@ -579,4 +583,57 @@ export async function deleteWorldPressureBundle(formData: FormData) {
 
   revalidatePressureForWorld(row.worldStateId);
   redirect("/admin/pressure/bundles?deleted=1");
+}
+
+export async function upsertWorldStateEraProfile(formData: FormData) {
+  const raw = formStringRecord(formData);
+  const parsed = worldStateEraProfileUpsertSchema.safeParse(raw);
+  if (!parsed.success) {
+    const ws = raw.worldStateId;
+    redirect(ws ? `/admin/world-states/${ws}/profile?error=validation` : "/admin/world-states?error=validation");
+  }
+
+  const d = parsed.data;
+  const drivers = parseWorldStateEraDriversText(d.driversText ?? undefined);
+  try {
+    await prisma.worldStateEraProfile.upsert({
+      where: { worldStateId: d.worldStateId },
+      create: {
+        worldStateId: d.worldStateId,
+        coreEconomicDrivers: drivers,
+        powerSummary: d.powerSummary ?? null,
+        meaningOfWork: d.meaningOfWork ?? null,
+        knobEconomicPressure: d.knobEconomicPressure ?? 50,
+        knobRelationalInterdependence: d.knobRelationalInterdependence ?? 50,
+        knobAutonomyBaseline: d.knobAutonomyBaseline ?? 50,
+        knobSystemicExtraction: d.knobSystemicExtraction ?? 50,
+        knobCollectiveCohesion: d.knobCollectiveCohesion ?? 50,
+        evidenceRationale: d.evidenceRationale ?? null,
+        notes: d.notes ?? null,
+        recordType: d.recordType ?? RecordType.HYBRID,
+        visibility: d.visibility ?? VisibilityStatus.REVIEW,
+        certainty: d.certainty ?? null,
+      },
+      update: {
+        coreEconomicDrivers: drivers,
+        powerSummary: d.powerSummary ?? null,
+        meaningOfWork: d.meaningOfWork ?? null,
+        knobEconomicPressure: d.knobEconomicPressure ?? 50,
+        knobRelationalInterdependence: d.knobRelationalInterdependence ?? 50,
+        knobAutonomyBaseline: d.knobAutonomyBaseline ?? 50,
+        knobSystemicExtraction: d.knobSystemicExtraction ?? 50,
+        knobCollectiveCohesion: d.knobCollectiveCohesion ?? 50,
+        evidenceRationale: d.evidenceRationale ?? null,
+        notes: d.notes ?? null,
+        recordType: d.recordType ?? RecordType.HYBRID,
+        visibility: d.visibility ?? VisibilityStatus.REVIEW,
+        certainty: d.certainty ?? null,
+      },
+    });
+  } catch {
+    redirect(`/admin/world-states/${d.worldStateId}/profile?error=db`);
+  }
+
+  revalidatePressureForWorld(d.worldStateId);
+  redirect(`/admin/world-states/${d.worldStateId}/profile?saved=1`);
 }

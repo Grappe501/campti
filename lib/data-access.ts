@@ -29,6 +29,7 @@ import type {
 } from "@/lib/environment-types";
 import type { CharacterIntelligenceBundle } from "@/lib/intelligence-types";
 import type { CharacterPressureBundle, WorldGovernanceAdminFilters } from "@/lib/pressure-order-types";
+import { computeEffectivePressureWeights } from "@/lib/world-era-profile";
 import type { CharacterRelationshipBundle, RelationshipProfileAdminFilters } from "@/lib/relationship-order-types";
 import type { CharacterContinuityBundle } from "@/lib/continuity-order-types";
 
@@ -2278,8 +2279,30 @@ export async function getWorldStateReferences() {
   );
 }
 
+/** World states with era profile + pressure bundle presence for admin population / tuning. */
+export async function getWorldStateReferencesWithEraCoverage() {
+  return safe(
+    () =>
+      prisma.worldStateReference.findMany({
+        orderBy: { eraId: "asc" },
+        select: {
+          id: true,
+          eraId: true,
+          label: true,
+          worldEraProfile: { select: { id: true, updatedAt: true, evidenceRationale: true } },
+          worldPressureBundle: { select: { id: true } },
+        },
+      }),
+    [],
+  );
+}
+
 export async function getWorldStateById(id: string) {
   return safe(() => prisma.worldStateReference.findUnique({ where: { id } }), null);
+}
+
+export async function getWorldStateEraProfileForAdmin(worldStateId: string) {
+  return safe(() => prisma.worldStateEraProfile.findUnique({ where: { worldStateId } }), null);
 }
 
 /** Simulation + environment layers for a place (Place + profile + states + nodes + memory + connections touching those nodes). */
@@ -2707,24 +2730,29 @@ export async function getCharacterPressureBundle(
       ]);
       if (!person || !worldState) return null;
 
-      const [governanceImpact, socioEconomic, demographic, familyPressure, characterState] = await Promise.all([
-        prisma.characterGovernanceImpact.findUnique({
-          where: { personId_worldStateId: { personId, worldStateId } },
-        }),
-        prisma.characterSocioEconomicProfile.findUnique({
-          where: { personId_worldStateId: { personId, worldStateId } },
-        }),
-        prisma.characterDemographicProfile.findUnique({
-          where: { personId_worldStateId: { personId, worldStateId } },
-        }),
-        prisma.characterFamilyPressureProfile.findUnique({
-          where: { personId_worldStateId: { personId, worldStateId } },
-        }),
-        prisma.characterState.findFirst({
-          where: { personId, worldStateId },
-          orderBy: { updatedAt: "desc" },
-        }),
-      ]);
+      const [governanceImpact, socioEconomic, demographic, familyPressure, characterState, worldPressureBundle, eraProfile] =
+        await Promise.all([
+          prisma.characterGovernanceImpact.findUnique({
+            where: { personId_worldStateId: { personId, worldStateId } },
+          }),
+          prisma.characterSocioEconomicProfile.findUnique({
+            where: { personId_worldStateId: { personId, worldStateId } },
+          }),
+          prisma.characterDemographicProfile.findUnique({
+            where: { personId_worldStateId: { personId, worldStateId } },
+          }),
+          prisma.characterFamilyPressureProfile.findUnique({
+            where: { personId_worldStateId: { personId, worldStateId } },
+          }),
+          prisma.characterState.findFirst({
+            where: { personId, worldStateId },
+            orderBy: { updatedAt: "desc" },
+          }),
+          prisma.worldPressureBundle.findUnique({ where: { worldStateId } }),
+          prisma.worldStateEraProfile.findUnique({ where: { worldStateId } }),
+        ]);
+
+      const effectivePressureWeights = computeEffectivePressureWeights(worldPressureBundle, eraProfile);
 
       return {
         person,
@@ -2734,6 +2762,9 @@ export async function getCharacterPressureBundle(
         demographic,
         familyPressure,
         characterState,
+        worldPressureBundle,
+        eraProfile,
+        effectivePressureWeights,
       };
     },
     null,

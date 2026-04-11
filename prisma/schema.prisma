@@ -943,12 +943,48 @@ model WorldStateReference {
 
   worldHealthNormProfile WorldHealthNormProfile?
 
+  worldEraProfile WorldStateEraProfile?
+
   characterPhysicalHealthProfiles   CharacterPhysicalHealthProfile[]
   characterMentalHealthProfiles     CharacterMentalHealthProfile[]
   characterEmotionalHealthProfiles  CharacterEmotionalHealthProfile[]
   characterHealthEnvelopes          CharacterHealthEnvelope[]
 
   @@index([eraId])
+}
+
+/// Era-level economic / power lens for a world slice (drivers, power summary, simulation knobs).
+model WorldStateEraProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  worldStateId String @unique
+  worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
+
+  /// Up to six short labels (e.g. trade networks, cotton, timber).
+  coreEconomicDrivers String[] @default([])
+  /// Who holds leverage; used in prompts and assembly.
+  powerSummary String? @db.Text
+  /// What “work” means in this era (identity vs wage vs coercion).
+  meaningOfWork String? @db.Text
+
+  knobEconomicPressure          Int @default(50)
+  knobRelationalInterdependence Int @default(50)
+  knobAutonomyBaseline          Int @default(50)
+  knobSystemicExtraction        Int @default(50)
+  knobCollectiveCohesion        Int @default(50)
+
+  /// One short paragraph tying knobs/drivers to sources or historical structure (keeps tuning accountable).
+  evidenceRationale String? @db.Text
+
+  notes String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@index([worldStateId])
 }
 
 /// Stage 5 — Governing pressure field for a world state (laws, conformity, enforcement).
@@ -2288,6 +2324,8 @@ model CharacterState {
   powerContext        Json?
   economicContext     Json?
   socialContext       Json?
+  /// Optional schema-free overrides (e.g. counterpart hints for scene-time brain).
+  structuredDataJson  Json?
 
   recordType RecordType       @default(HYBRID)
   visibility VisibilityStatus @default(REVIEW)

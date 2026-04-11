@@ -39,6 +39,9 @@ import {
   generateMetaSceneNarrativePassAction,
   updateNarrativePassStatusAction,
 } from "@/app/actions/narrative-passes";
+import { composeSavedMessage } from "./compose-saved-message";
+import { ComposeSectionNav } from "./compose-section-nav";
+import { ComposeWorldPreviewBlocks } from "./compose-world-preview-blocks";
 
 export const dynamic = "force-dynamic";
 
@@ -99,40 +102,7 @@ export default async function MetaSceneComposePage({ params, searchParams }: Pro
     { key: "other", label: "Other / unlabeled role" },
   ] as const;
 
-  const savedLabel =
-    sp.saved === "core"
-      ? "Scene core saved."
-      : sp.saved === "context"
-        ? "Context layer saved."
-        : sp.saved === "charstate"
-          ? "Character state saved."
-          : sp.saved === "settingstate"
-            ? "Setting state saved."
-            : sp.saved === "link"
-              ? "Fragment linked."
-              : sp.saved === "unlink"
-                ? "Fragment unlinked."
-                : sp.saved === "intel"
-                  ? "Scene intelligence queue refreshed."
-                  : sp.saved === "suggestion"
-                    ? "Suggestion updated."
-                    : sp.saved === "soul"
-                      ? "Soul suggestions generated."
-                      : sp.saved === "soulsug"
-                        ? "Soul suggestion updated."
-                        : sp.saved === "preview"
-                          ? "Descriptive cache generated (template)."
-                          : sp.saved === "aienhance"
-                            ? "AI enhancement applied (optional layer)."
-                            : sp.saved === "pass"
-                              ? "Narrative pass saved."
-                              : sp.saved === "passstatus"
-                                ? "Pass status updated."
-                                : sp.saved === "passdel"
-                                  ? "Pass deleted."
-                                  : sp.saved
-                                    ? "Saved."
-                                    : null;
+  const savedLabel = composeSavedMessage(sp.saved);
 
   return (
     <div className="mx-auto max-w-5xl space-y-8 pb-16">
@@ -164,6 +134,7 @@ export default async function MetaSceneComposePage({ params, searchParams }: Pro
             Experience tuning
           </Link>
         </div>
+        <ComposeSectionNav />
       </div>
 
       <AdminFormError error={sp.error} />
@@ -174,27 +145,31 @@ export default async function MetaSceneComposePage({ params, searchParams }: Pro
       ) : null}
 
       {intel ? (
-        <SceneIntelligencePanel
-          metaSceneId={id}
-          report={intel}
-          storedSuggestions={storedSuggestions}
-          linkedFragmentIds={linkedFragmentIds}
-        />
+        <section id="compose-intelligence" className="scroll-mt-28">
+          <SceneIntelligencePanel
+            metaSceneId={id}
+            report={intel}
+            storedSuggestions={storedSuggestions}
+            linkedFragmentIds={linkedFragmentIds}
+          />
+        </section>
       ) : null}
 
       {soulCtx ? (
-        <SceneSoulPanel
-          metaSceneId={id}
-          povPersonId={meta.povPersonId}
-          placeId={meta.placeId}
-          timePeriod={meta.timePeriod}
-          soulSuggestions={soulSuggestions}
-          participantPersonIds={soulCtx.participantIds}
-        />
+        <section id="compose-soul" className="scroll-mt-28">
+          <SceneSoulPanel
+            metaSceneId={id}
+            povPersonId={meta.povPersonId}
+            placeId={meta.placeId}
+            timePeriod={meta.timePeriod}
+            soulSuggestions={soulSuggestions}
+            participantPersonIds={soulCtx.participantIds}
+          />
+        </section>
       ) : null}
 
       {/* Panel 1 — Scene core */}
-      <details open className="group rounded-xl border border-stone-200 bg-white shadow-sm">
+      <details id="compose-panel-1" open className="group scroll-mt-28 rounded-xl border border-stone-200 bg-white shadow-sm">
         <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900 marker:content-none [&::-webkit-details-marker]:hidden">
           <span className="text-sm uppercase tracking-wide text-stone-500">Panel 1 ·</span> Scene core
         </summary>
@@ -269,8 +244,8 @@ export default async function MetaSceneComposePage({ params, searchParams }: Pro
       </details>
 
       {/* Panel 2 — Character context */}
-      <details open className="rounded-xl border border-stone-200 bg-white shadow-sm">
-        <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900">
+      <details id="compose-panel-2" open className="scroll-mt-28 rounded-xl border border-stone-200 bg-white shadow-sm">
+        <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900 marker:content-none [&::-webkit-details-marker]:hidden">
           <span className="text-sm uppercase tracking-wide text-stone-500">Panel 2 ·</span> Character context (POV)
         </summary>
         <div className="border-t border-stone-100 space-y-4 px-5 py-4 text-sm text-stone-700">
@@ -397,8 +372,8 @@ export default async function MetaSceneComposePage({ params, searchParams }: Pro
       </details>
 
       {/* Panel 3 — Environment */}
-      <details open className="rounded-xl border border-stone-200 bg-white shadow-sm">
-        <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900">
+      <details id="compose-panel-3" open className="scroll-mt-28 rounded-xl border border-stone-200 bg-white shadow-sm">
+        <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900 marker:content-none [&::-webkit-details-marker]:hidden">
           <span className="text-sm uppercase tracking-wide text-stone-500">Panel 3 ·</span> Environment context
         </summary>
         <div className="border-t border-stone-100 space-y-4 px-5 py-4 text-sm text-stone-700">
@@ -537,8 +512,8 @@ export default async function MetaSceneComposePage({ params, searchParams }: Pro
         <input type="hidden" name="metaSceneId" value={id} />
 
         {/* Panel 4 — Constraints */}
-        <details open className="rounded-xl border border-stone-200 bg-white shadow-sm">
-          <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900">
+        <details id="compose-panel-4" open className="scroll-mt-28 rounded-xl border border-stone-200 bg-white shadow-sm">
+          <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900 marker:content-none [&::-webkit-details-marker]:hidden">
             <span className="text-sm uppercase tracking-wide text-stone-500">Panel 4 ·</span> Constraints layer
           </summary>
           <div className="border-t border-stone-100 space-y-4 px-5 py-4">
@@ -579,8 +554,8 @@ export default async function MetaSceneComposePage({ params, searchParams }: Pro
         </details>
 
         {/* Panel 5 — Emotional + conflict */}
-        <details open className="rounded-xl border border-stone-200 bg-white shadow-sm">
-          <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900">
+        <details id="compose-panel-5" open className="scroll-mt-28 rounded-xl border border-stone-200 bg-white shadow-sm">
+          <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900 marker:content-none [&::-webkit-details-marker]:hidden">
             <span className="text-sm uppercase tracking-wide text-stone-500">Panel 5 ·</span> Emotional + conflict layer
           </summary>
           <div className="border-t border-stone-100 space-y-4 px-5 py-4">
@@ -631,8 +606,8 @@ export default async function MetaSceneComposePage({ params, searchParams }: Pro
         </details>
 
         {/* Panel 6 — Symbolic */}
-        <details open className="rounded-xl border border-stone-200 bg-white shadow-sm">
-          <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900">
+        <details id="compose-panel-6" open className="scroll-mt-28 rounded-xl border border-stone-200 bg-white shadow-sm">
+          <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900 marker:content-none [&::-webkit-details-marker]:hidden">
             <span className="text-sm uppercase tracking-wide text-stone-500">Panel 6 ·</span> Symbolic layer
           </summary>
           <div className="border-t border-stone-100 space-y-4 px-5 py-4">
@@ -681,8 +656,8 @@ export default async function MetaSceneComposePage({ params, searchParams }: Pro
         </details>
 
         {/* Meta layer fields (still part of same save) */}
-        <details className="rounded-xl border border-stone-200 bg-white shadow-sm">
-          <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900">
+        <details id="compose-context-meta" className="scroll-mt-28 rounded-xl border border-stone-200 bg-white shadow-sm">
+          <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900 marker:content-none [&::-webkit-details-marker]:hidden">
             Environment + narrative meta (same save)
           </summary>
           <div className="border-t border-stone-100 space-y-4 px-5 py-4">
@@ -720,8 +695,8 @@ export default async function MetaSceneComposePage({ params, searchParams }: Pro
         </details>
 
         {/* Panel 8 — Source grounding (editable support level) */}
-        <details open className="rounded-xl border border-stone-200 bg-white shadow-sm">
-          <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900">
+        <details id="compose-panel-8" open className="scroll-mt-28 rounded-xl border border-stone-200 bg-white shadow-sm">
+          <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900 marker:content-none [&::-webkit-details-marker]:hidden">
             <span className="text-sm uppercase tracking-wide text-stone-500">Panel 8 ·</span> Source grounding
           </summary>
           <div className="border-t border-stone-100 space-y-4 px-5 py-4">
@@ -766,8 +741,8 @@ export default async function MetaSceneComposePage({ params, searchParams }: Pro
       </form>
 
       {/* Panel 7 — Fragment integration */}
-      <details open className="rounded-xl border border-stone-200 bg-white shadow-sm">
-        <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900">
+      <details id="compose-fragments" open className="scroll-mt-28 rounded-xl border border-stone-200 bg-white shadow-sm">
+        <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900 marker:content-none [&::-webkit-details-marker]:hidden">
           <span className="text-sm uppercase tracking-wide text-stone-500">Panel 7 ·</span> Fragment integration
         </summary>
         <div className="border-t border-stone-100 space-y-6 px-5 py-4">
@@ -962,7 +937,7 @@ export default async function MetaSceneComposePage({ params, searchParams }: Pro
       </details>
 
       {/* Narrative passes & cached previews */}
-      <details open className="rounded-xl border border-violet-200/80 bg-white shadow-sm">
+      <details id="compose-narrative" open className="scroll-mt-28 rounded-xl border border-violet-200/80 bg-white shadow-sm">
         <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900 marker:content-none [&::-webkit-details-marker]:hidden">
           <span className="text-sm uppercase tracking-wide text-stone-500">Narrative intelligence ·</span> Passes & cached summaries
         </summary>
@@ -1065,8 +1040,8 @@ export default async function MetaSceneComposePage({ params, searchParams }: Pro
       </details>
 
       {/* Panel 9 — World state preview */}
-      <details open className="rounded-xl border border-stone-200 bg-white shadow-sm">
-        <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900">
+      <details id="compose-panel-9" open className="scroll-mt-28 rounded-xl border border-stone-200 bg-white shadow-sm">
+        <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900 marker:content-none [&::-webkit-details-marker]:hidden">
           <span className="text-sm uppercase tracking-wide text-stone-500">Panel 9 ·</span> World state preview
         </summary>
         <div className="border-t border-stone-100 space-y-4 px-5 py-4 text-sm text-stone-700">
@@ -1074,38 +1049,7 @@ export default async function MetaSceneComposePage({ params, searchParams }: Pro
             Rich template synthesis from structured models — not final novel prose. Style: {preview?.styleNote ?? "—"}.
           </p>
           {preview ? (
-            <>
-              <section>
-                <h4 className="text-xs font-medium uppercase text-stone-500">POV perspective summary</h4>
-                <pre className="mt-2 whitespace-pre-wrap rounded-lg bg-stone-50 p-4 font-sans text-sm leading-relaxed">
-                  {preview.povSummary}
-                </pre>
-              </section>
-              <section>
-                <h4 className="text-xs font-medium uppercase text-stone-500">Environment</h4>
-                <pre className="mt-2 whitespace-pre-wrap rounded-lg bg-stone-50 p-4 font-sans text-sm leading-relaxed">
-                  {preview.environmentSummary}
-                </pre>
-              </section>
-              <section>
-                <h4 className="text-xs font-medium uppercase text-stone-500">Emotional context</h4>
-                <pre className="mt-2 whitespace-pre-wrap rounded-lg bg-stone-50 p-4 font-sans text-sm leading-relaxed">
-                  {preview.emotionalContext}
-                </pre>
-              </section>
-              <section>
-                <h4 className="text-xs font-medium uppercase text-stone-500">Constraints</h4>
-                <pre className="mt-2 whitespace-pre-wrap rounded-lg bg-stone-50 p-4 font-sans text-sm leading-relaxed">
-                  {preview.constraintsSummary}
-                </pre>
-              </section>
-              <section>
-                <h4 className="text-xs font-medium uppercase text-stone-500">Symbolic</h4>
-                <pre className="mt-2 whitespace-pre-wrap rounded-lg bg-stone-50 p-4 font-sans text-sm leading-relaxed">
-                  {preview.symbolicSummary}
-                </pre>
-              </section>
-            </>
+            <ComposeWorldPreviewBlocks preview={preview} />
           ) : (
             <p className="text-stone-500">Preview unavailable.</p>
           )}
@@ -1113,8 +1057,8 @@ export default async function MetaSceneComposePage({ params, searchParams }: Pro
       </details>
 
       {/* Panel 10 — Perspective synthesis */}
-      <details open className="rounded-xl border border-stone-200 bg-white shadow-sm">
-        <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900">
+      <details id="compose-panel-10" open className="scroll-mt-28 rounded-xl border border-stone-200 bg-white shadow-sm">
+        <summary className="cursor-pointer list-none px-5 py-4 font-medium text-stone-900 marker:content-none [&::-webkit-details-marker]:hidden">
           <span className="text-sm uppercase tracking-wide text-stone-500">Panel 10 ·</span> Perspective preview (embodied synthesis)
         </summary>
         <div className="border-t border-stone-100 space-y-3 px-5 py-4 text-sm text-stone-700">

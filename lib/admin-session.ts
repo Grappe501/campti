@@ -1,5 +1,5 @@
 /**
- * Signed admin session cookie (Web Crypto — works in Edge middleware and Node routes).
+ * Signed admin session cookie (Web Crypto — works in Edge proxy and Node routes).
  * When CAMPTI_ADMIN_PASSWORD is unset, admin UI is open (legacy dev); when set, session required.
  */
 
