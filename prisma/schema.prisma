@@ -74,6 +74,122 @@ enum WritingMode {
   HYBRID
 }
 
+/// One genealogical “question” (subject + predicate + optional witness/discriminator). Multiple assertions attach here.
+enum GenealogicalPredicate {
+  BIRTH_YEAR
+  DEATH_YEAR
+  BIRTH_PLACE
+  DEATH_PLACE
+  BURIAL_PLACE
+  FATHER_ID
+  MOTHER_ID
+  FREEDOM_STATUS
+  RACIAL_CLASSIFICATION_RECORDED
+  ENSLAVED_NAME
+  FREE_NAME
+  UNION_SPOUSE_ID
+  RESIDENCE_AT_DATE
+  LAND_TENURE
+  OTHER
+}
+
+enum FactAssertionStatus {
+  ACTIVE
+  SUPERSEDED
+  REJECTED
+}
+
+enum NarrativeDependencyConsumerKind {
+  SCENE
+  CHAPTER
+  BOOK
+  BEAT
+  META_SCENE
+  EXPORT_BUNDLE
+}
+
+enum NarrativeDependencyProducerKind {
+  GENEALOGICAL_ASSERTION
+  PERSON
+  WORLD_STATE_REFERENCE
+  PLACE
+  HISTORICAL_EVENT
+  LEGACY_CLAIM
+  EPIC
+  BOOK
+  CHAPTER
+  /// Phase 5E/6 — simulation scenario used as generation/regen input.
+  SIMULATION_SCENARIO
+  /// Phase 5/6 — pinned cognition / inner-voice / decision session used as source material.
+  COGNITION_SESSION
+}
+
+/// Cached reader assembly / chapter compile validity (distinct from genealogical truth).
+enum NarrativeAssemblyStatus {
+  CURRENT
+  STALE
+  REBUILDING
+}
+
+/// Scene/chapter continuity gate for publish pipeline (human triage).
+enum NarrativeContinuityState {
+  OK
+  WARNING
+  BLOCKING
+}
+
+/// What prose blob `ProseQualityReport.reportJson` describes.
+enum ProseQualityAnalysisScope {
+  SCENE
+  CHAPTER_ASSEMBLY
+}
+
+/// Planned vs simulation vs exploratory cognition slices (does not replace `CharacterState` rows).
+enum CognitionSnapshotKind {
+  CANONICAL_PLANNED
+  SIMULATION_BASE
+  EXPLORATORY
+}
+
+enum InnerVoiceSessionMode {
+  INNER_VOICE
+  DECISION_TRACE
+  ALTERNATE_RUN
+  GOD_MODE_QA
+}
+
+enum CognitionCanonicalStatus {
+  EXPLORATORY
+  PINNED
+  REJECTED
+}
+
+enum SimulationScenarioStatus {
+  DRAFT
+  READY
+  ARCHIVED
+}
+
+enum DependencyStrength {
+  HARD
+  SOFT
+}
+
+enum RevisionJobKind {
+  REEVALUATE_SCENE
+  REGENERATE_SCENE_AI
+  CONTINUITY_CHECK
+  MARK_STALE
+}
+
+enum RevisionJobStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
 /// Story-system personality law (default; author may override in CharacterProfile fields).
 enum EnneagramType {
   ONE
@@ -305,7 +421,8 @@ model Source {
   extractedSummary   String?
   reviewedSummary    String?
 
-  claims        Claim[]
+  claims                   Claim[]
+  genealogicalAssertions GenealogicalAssertion[]
   persons       Person[]
   places        Place[]
   events        Event[]
@@ -329,6 +446,8 @@ model Source {
   literaryDevices     LiteraryDevice[]
   narrativePatterns   NarrativePattern[]
   narrativeDnaSymbols Symbol[]
+
+  censusResearchDatasets CensusResearchDataset[]
 
   @@index([visibility])
   @@index([recordType])
@@ -809,6 +928,71 @@ model Alias {
   @@index([label])
 }
 
+/// Logical slot: one stable “question” (e.g. “father of X”). Competing assertions reference the same slot.
+model GenealogicalFactSlot {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  subjectType String
+  subjectId   String
+  predicate   GenealogicalPredicate
+  /// Disambiguate multiple slots for the same predicate (e.g. census year, oral vs record).
+  discriminator String @default("")
+
+  slotLabel String?
+  notes     String?  @db.Text
+
+  assertions GenealogicalAssertion[]
+
+  @@unique([subjectType, subjectId, predicate, discriminator])
+  @@index([subjectType, subjectId])
+}
+
+/// One cited (or invented-branch) statement in a slot. Many ACTIVE rows = competing claims; `narrativePreferred` picks prose default without deleting others.
+model GenealogicalAssertion {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  slotId String
+  slot   GenealogicalFactSlot @relation(fields: [slotId], references: [id], onDelete: Cascade)
+
+  valueJson Json
+
+  visibility   VisibilityStatus
+  recordType   RecordType
+  confidence   Int              @default(3)
+  quoteExcerpt String?          @db.Text
+  notes        String?          @db.Text
+  needsReview  Boolean          @default(true)
+
+  sourceId String?
+  source   Source? @relation(fields: [sourceId], references: [id], onDelete: SetNull)
+
+  status FactAssertionStatus @default(ACTIVE)
+
+  /// If this assertion supersedes another row (audit); does not remove competing branches unless REJECTED.
+  supersedesId String?
+  supersedes   GenealogicalAssertion?  @relation("AssertionSupersedes", fields: [supersedesId], references: [id], onDelete: SetNull)
+  supersededBy GenealogicalAssertion[] @relation("AssertionSupersedes")
+
+  /// Optional bridge from legacy freeform Claim rows.
+  legacyClaimId String?
+  legacyClaim     Claim?  @relation(fields: [legacyClaimId], references: [id], onDelete: SetNull)
+
+  /// Exactly one preferred assertion per slot for generation / default UI (enforced in application transactions).
+  narrativePreferred Boolean @default(false)
+
+  /// Optional parallel narrative branch tag when multiple ACTIVE claims intentionally coexist (e.g. reconstruction forks).
+  branchTag String?
+
+  @@index([slotId])
+  @@index([sourceId])
+  @@index([status])
+  @@index([legacyClaimId])
+}
+
 model Claim {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
@@ -824,6 +1008,8 @@ model Claim {
 
   sourceId String
   source   Source @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+
+  structuredAssertions GenealogicalAssertion[]
 
   @@index([sourceId])
   @@index([needsReview])
@@ -844,6 +1030,9 @@ model Person {
   birthYear       Int?
   deathYear       Int?
   sourceTraceNote String?
+
+  /// Grappe working lineage id (e.g. GRP-0001) from `lib/lineage/grappe-lineage-working.v1.json`.
+  lineageWorkingId String? @unique @map("lineage_working_id")
 
   places          Place[]
   events          Event[]
@@ -893,6 +1082,228 @@ model Person {
   characterMentalHealthProfiles       CharacterMentalHealthProfile[]
   characterEmotionalHealthProfiles    CharacterEmotionalHealthProfile[]
   characterHealthEnvelopes          CharacterHealthEnvelope[]
+
+  /// Slow-changing cognitive core (1:1). Complements literary `CharacterProfile`; not reader prose.
+  characterCoreProfile    CharacterCoreProfile?
+  characterStateSnapshots CharacterStateSnapshot[]
+  innerVoiceSessions      CharacterInnerVoiceSession[]
+  cognitionSimulationRuns SimulationRun[]
+}
+
+/// Slow-changing cognitive profile (1:1 with Person). Grounds inner voice / traces; does not replace `CharacterProfile`.
+model CharacterCoreProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  characterId String @unique @map("personId")
+  person      Person @relation(fields: [characterId], references: [id], onDelete: Cascade)
+
+  worldviewJson         Json?
+  /// Legacy free-text lens; prefer `worldviewJson` for structured authoring.
+  worldviewSummary      String? @db.Text
+  valuesJson            Json?
+  woundsJson            Json?
+  attachmentStyle       String? @db.Text
+  socialMaskJson        Json?
+  tabooBoundariesJson   Json?
+  decisionStyleJson     Json?
+  defenseMechanismsJson Json?
+  privateDesiresJson    Json?
+  identityTensionsJson  Json?
+  notes                 String? @db.Text
+
+  /// Cognition-layer Enneagram (may mirror `CharacterProfile` or diverge for simulation/inner voice).
+  enneagramType               EnneagramType?
+  enneagramWing               String?
+  instinctStacking            String?
+  baselineIntegrationLevel    Int?
+  stressPatternJson           Json?
+  growthPatternJson           Json?
+  egoFixation                 String? @db.Text
+  coreFear                    String? @db.Text
+  coreDesire                  String? @db.Text
+  virtue                      String? @db.Text
+  vice                        String? @db.Text
+  harmDefenseStyle            String? @db.Text
+  imageStrategy               String? @db.Text
+  attachmentPatternOverride   String? @db.Text
+  notesEnneagram              String? @db.Text
+
+  /// Thought-language mediation (mind vs spoken vs rendered English).
+  mindLanguagePrimary        String?
+  mindLanguageSecondary      String?
+  spokenLanguageProfileJson  Json?
+  registerProfileJson        Json?
+  translationRenderMode      String?
+  codeSwitchTriggersJson     Json?
+  retainedLexiconJson        Json?
+
+  /// Desire / pleasure / attachment architecture (slow-changing; JSON blobs).
+  desireProfileJson            Json?
+  pleasurePatternJson          Json?
+  attachmentLongingJson        Json?
+  sexualConstraintProfileJson  Json?
+  notesDesire                  String? @db.Text
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  @@index([characterId])
+  @@index([enneagramType])
+}
+
+/// Scene/chapter-anchored mutable cognitive state. Distinct from simulation `CharacterState` rows.
+model CharacterStateSnapshot {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  characterId String
+  person      Person @relation(fields: [characterId], references: [id], onDelete: Cascade)
+
+  snapshotKind CognitionSnapshotKind @default(CANONICAL_PLANNED)
+
+  sceneId String?
+  scene   Scene?  @relation(fields: [sceneId], references: [id], onDelete: SetNull)
+
+  chapterId String?
+  chapter   Chapter? @relation(fields: [chapterId], references: [id], onDelete: SetNull)
+
+  worldStateReferenceId String?
+  worldStateReference   WorldStateReference? @relation("WorldStateToCharacterStateSnapshots", fields: [worldStateReferenceId], references: [id], onDelete: SetNull)
+
+  /// When multiple snapshots exist for the same scene, higher = later in narrative time.
+  sequenceIndex Int?
+
+  label String?
+
+  currentFear                String? @db.Text
+  currentDesire              String? @db.Text
+  currentObligation          String? @db.Text
+  currentShame                 String? @db.Text
+  currentHope                String? @db.Text
+  currentAnger               String? @db.Text
+  currentSocialRisk          String? @db.Text
+  currentStatusVulnerability String? @db.Text
+  currentMask                String? @db.Text
+  currentContradiction       String? @db.Text
+
+  /// Scene-time desire / attachment activations (0–100).
+  currentArousal                  Int?
+  currentLoneliness               Int?
+  currentWantednessHunger         Int?
+  currentNeedToBeNeeded           Int?
+  currentAttachmentAche             Int?
+  currentPleasureSeeking          Int?
+  currentForbiddenDesirePressure  Int?
+  currentResentmentAtDeprivation  Int?
+
+  relationshipsSnapshotJson Json?
+  /// Assertion ids or `{ slotId, assertionId }[]` for status/freedom/kin grounding.
+  genealogicalContextRefsJson Json?
+
+  supersedesId String?
+  supersedes   CharacterStateSnapshot?  @relation("CognitionSnapshotSupersedes", fields: [supersedesId], references: [id], onDelete: SetNull)
+  supersededBy CharacterStateSnapshot[] @relation("CognitionSnapshotSupersedes")
+
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
+  certainty  String?
+
+  simulationScenariosBase SimulationScenario[]
+
+  @@index([characterId])
+  @@index([sceneId])
+  @@index([chapterId])
+  @@index([worldStateReferenceId])
+  @@index([snapshotKind])
+}
+
+/// Author interrogation / inner voice / god-mode QA. Advisory unless `canonicalStatus` = PINNED.
+model CharacterInnerVoiceSession {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  sceneId String?
+  scene   Scene?  @relation(fields: [sceneId], references: [id], onDelete: SetNull)
+
+  mode InnerVoiceSessionMode
+
+  prompt   String @db.Text
+  response String @db.Text
+
+  canonicalStatus CognitionCanonicalStatus @default(EXPLORATORY)
+
+  inputContextJson  Json
+  outputSummaryJson Json?
+
+  createdBy String?
+
+  @@index([personId])
+  @@index([sceneId])
+  @@index([mode])
+  @@index([canonicalStatus])
+}
+
+/// Variable bundle + optional base snapshot for reruns (does not mutate Scene prose).
+model SimulationScenario {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sceneId String
+  scene   Scene @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+
+  title String
+
+  baseSnapshotId String?
+  baseSnapshot   CharacterStateSnapshot? @relation(fields: [baseSnapshotId], references: [id], onDelete: SetNull)
+
+  variableOverridesJson Json
+  outcomeSummaryJson    Json?
+
+  status SimulationScenarioStatus @default(DRAFT)
+
+  createdBy String?
+
+  runs SimulationRun[]
+
+  @@index([sceneId])
+  @@index([status])
+}
+
+model SimulationRun {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  scenarioId String
+  scenario   SimulationScenario @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
+
+  personId String?
+  person   Person? @relation(fields: [personId], references: [id], onDelete: SetNull)
+
+  /// Deterministic hash of engine version + scenario + character + effective overrides (reproducibility).
+  inputHash String?
+
+  inputJson  Json
+  outputJson Json
+
+  prosePreview String? @db.Text
+
+  canonicalStatus CognitionCanonicalStatus @default(EXPLORATORY)
+
+  diffFromBaseJson Json?
+
+  @@index([scenarioId])
+  @@index([personId])
+  @@index([canonicalStatus])
+  @@index([inputHash])
 }
 
 /// Pointer to external / master timeline world-state definitions (era slice). Not full simulation logic.
@@ -904,6 +1315,12 @@ model WorldStateReference {
   eraId       String   @unique
   label       String
   description String?  @db.Text
+
+  /// Era language ecology: dominant/prestige/sacred/legal/trade, literacy, hierarchy (structured JSON).
+  languageEnvironmentJson Json?
+
+  /// Era desire taboo / kin / marriage / punishment pressures (structured JSON).
+  desireEnvironmentJson Json?
 
   recordType RecordType       @default(HYBRID)
   visibility VisibilityStatus @default(REVIEW)
@@ -950,7 +1367,76 @@ model WorldStateReference {
   characterEmotionalHealthProfiles  CharacterEmotionalHealthProfile[]
   characterHealthEnvelopes          CharacterHealthEnvelope[]
 
+  epicsDefaultingHere Epic[]       @relation("EpicToWorldState")
+  booksDefaultingHere  Book[]       @relation("BookToWorldState")
+  chapterOverrides     Chapter[]    @relation("ChapterToWorldState")
+  sceneOverrides       Scene[]      @relation("SceneToWorldState")
+  beatOverrides        NarrativeBeat[] @relation("BeatToWorldState")
+
+  characterStateSnapshots CharacterStateSnapshot[] @relation("WorldStateToCharacterStateSnapshots")
+
   @@index([eraId])
+}
+
+/// Top-level epic container (e.g. one continuous saga). Books are ordered movements within it.
+model Epic {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title         String
+  slug          String? @unique
+  summary       String? @db.Text
+  /// Expected book movements (default 8); informational for UI.
+  movementCount Int     @default(8)
+  status        String  @default("draft")
+
+  /// Default era slice when no lower unit overrides.
+  defaultWorldStateId String?
+  defaultWorldState   WorldStateReference? @relation("EpicToWorldState", fields: [defaultWorldStateId], references: [id], onDelete: SetNull)
+
+  /// System metadata: export prefs, spine themes, revision policy ids, etc.
+  metadataJson Json?
+
+  books Book[]
+
+  @@index([status])
+}
+
+/// One book-length movement inside an epic (e.g. “Book 3 — Francois”). `movementIndex` is stable across renames.
+model Book {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  epicId String
+  epic   Epic   @relation(fields: [epicId], references: [id], onDelete: Cascade)
+
+  movementIndex Int
+  title         String
+  subtitle      String?
+  summary       String? @db.Text
+  status        String  @default("draft")
+
+  /// Reader-facing title (clean); falls back to `title` in assembly if null.
+  readerFacingTitle String?
+
+  defaultWorldStateId String?
+  defaultWorldState   WorldStateReference? @relation("BookToWorldState", fields: [defaultWorldStateId], references: [id], onDelete: SetNull)
+
+  /// When any child scene/chapter assembly is invalidated by upstream fact or text change.
+  narrativeAssemblyStatus NarrativeAssemblyStatus @default(CURRENT)
+  assemblyInvalidatedAt   DateTime?
+
+  privateNotes String? @db.Text
+  metadataJson Json?
+
+  chapters Chapter[]
+
+  @@unique([epicId, movementIndex])
+  @@index([epicId])
+  @@index([status])
+  @@index([narrativeAssemblyStatus])
 }
 
 /// Era-level economic / power lens for a world slice (drivers, power summary, simulation knobs).
@@ -2794,6 +3280,12 @@ model Chapter {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  bookId String
+  book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  /// Order within the parent book (reader flow).
+  sequenceInBook Int @default(0)
+
   visibility       VisibilityStatus
   recordType       RecordType
   title            String
@@ -2807,6 +3299,29 @@ model Chapter {
   publicNotes      String?
   sourceTraceNote  String?
 
+  /// Optional era/world override for all scenes unless scene/beat overrides.
+  worldStateOverrideId String?
+  worldStateOverride   WorldStateReference? @relation("ChapterToWorldState", fields: [worldStateOverrideId], references: [id], onDelete: SetNull)
+
+  /// Cached reader chapter text (assembled from scenes). Invalidated when `narrativeAssemblyStatus` is STALE.
+  readerAssembledText String? @db.Text
+  assemblyContentHash  String?
+  lastAssembledAt      DateTime?
+
+  narrativeAssemblyStatus NarrativeAssemblyStatus @default(CURRENT)
+  assemblyInvalidatedAt   DateTime?
+
+  /// Planning / AI chapter summary vs human-edited synopsis (optional).
+  generatedSummary String? @db.Text
+  humanEditedSummary String? @db.Text
+
+  generationMetadataJson Json?
+  continuityState       NarrativeContinuityState @default(OK)
+
+  proseQualityReports ProseQualityReport[]
+
+  characterStateSnapshots CharacterStateSnapshot[]
+
   scenes          Scene[]
   persons         Person[]
   places          Place[]
@@ -2816,8 +3331,12 @@ model Chapter {
   brainMemos      BrainMemo[]
   fragmentClusters FragmentCluster[]
 
+  @@index([bookId])
+  @@index([bookId, sequenceInBook])
   @@index([chapterNumber])
   @@index([visibility])
+  @@index([narrativeAssemblyStatus])
+  @@index([worldStateOverrideId])
 }
 
 model Scene {
@@ -2840,9 +3359,24 @@ model Scene {
 
   writingMode WritingMode @default(HYBRID)
 
+  /// Legacy union field — prefer `authoringText` / `generationText` / `publishedReaderText` for new work.
   draftText       String? @db.Text
+  /// Latest model-generated draft (provisional).
+  generationText  String? @db.Text
+  /// Primary human working copy for revision.
+  authoringText   String? @db.Text
+  /// Author-approved text surfaced to readers when set.
+  publishedReaderText String? @db.Text
+
   narrativeIntent String?
   emotionalTone   String?
+
+  worldStateOverrideId String?
+  worldStateOverride   WorldStateReference? @relation("SceneToWorldState", fields: [worldStateOverrideId], references: [id], onDelete: SetNull)
+
+  narrativeAssemblyStatus NarrativeAssemblyStatus @default(CURRENT)
+  assemblyInvalidatedAt   DateTime?
+  continuityState         NarrativeContinuityState @default(OK)
 
   historicalConfidence Int?
   structuredDataJson   Json?
@@ -2882,11 +3416,60 @@ model Scene {
   sceneAudioAssets SceneAudioAsset[]
   cinematicNarrativePasses     CinematicNarrativePass[]
 
+  narrativeBeats NarrativeBeat[]
+
+  revisionJobs RevisionJob[]
+
+  proseQualityReports ProseQualityReport[]
+
+  characterStateSnapshots CharacterStateSnapshot[]
+  innerVoiceSessions    CharacterInnerVoiceSession[]
+  simulationScenarios   SimulationScenario[]
+
   @@index([chapterId])
   @@index([orderInChapter])
   @@index([writingMode])
   @@index([sceneStatus])
   @@index([lastAssistRunId])
+  @@index([worldStateOverrideId])
+  @@index([narrativeAssemblyStatus])
+}
+
+/// Draft-Scene planning beats (distinct from `SceneBeat` on MetaScene). Drives scene generation and ordering.
+/// Microbeats stay in `microbeatsJson` until a future migration promotes them.
+model NarrativeBeat {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sceneId String
+  scene   Scene  @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+
+  orderIndex Int
+  label      String?
+  /// Short intent for UI / prompts.
+  intentSummary String? @db.Text
+  /// Structured beat plan (objectives, pressure, reveal ladder).
+  beatPlanJson  Json?
+  /// Optional finer units: [{ "id", "intent", "sensoryAnchor" }, …]
+  microbeatsJson Json?
+
+  /// AI planning notes — not reader copy.
+  generationNotes String? @db.Text
+
+  worldStateOverrideId String?
+  worldStateOverride   WorldStateReference? @relation("BeatToWorldState", fields: [worldStateOverrideId], references: [id], onDelete: SetNull)
+
+  status                    String                  @default("planned")
+  narrativeAssemblyStatus   NarrativeAssemblyStatus @default(CURRENT)
+  continuityState           NarrativeContinuityState @default(OK)
+
+  metadataJson Json?
+
+  @@unique([sceneId, orderIndex])
+  @@index([sceneId])
+  @@index([orderIndex])
+  @@index([worldStateOverrideId])
 }
 
 model SceneAssistRun {
@@ -2935,6 +3518,51 @@ model SceneDraftVersion {
 
   @@index([sceneId])
   @@index([source])
+
+  proseQualityReports ProseQualityReport[]
+}
+
+/// Snapshot of deterministic (or hybrid) prose QA: rhythm, repetition, voice fit, etc. AI output is never authoritative here—reports are inputs to human revision.
+model ProseQualityReport {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  analysisScope ProseQualityAnalysisScope @default(SCENE)
+
+  /// Scene-scoped analysis — set when `analysisScope` = SCENE.
+  sceneId String?
+  scene   Scene?   @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+
+  /// Assembled chapter read — set when `analysisScope` = CHAPTER_ASSEMBLY (sceneId null).
+  chapterId String?
+  chapter   Chapter? @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  sceneDraftVersionId String?
+  sceneDraftVersion   SceneDraftVersion? @relation(fields: [sceneDraftVersionId], references: [id], onDelete: SetNull)
+
+  /// e.g. deterministic_v1, hybrid_ai_v1 (if a model augments heuristics—still stored as provisional).
+  analyzerKind String
+
+  /// sha256 hex of analyzed prose (dedupe / integrity).
+  proseSha256 String
+
+  reportJson Json
+
+  /// Optional pointers to profiles used when scoring voice fit.
+  narrativeVoiceProfileId String?
+  characterVoicePersonId  String?
+
+  authorGoalsSnapshot Json?
+
+  /// Serialized `AnalyzeProseContext` + narrative ids so reports stay interpretable later.
+  analyzerContextSnapshot Json?
+
+  @@index([sceneId])
+  @@index([chapterId])
+  @@index([sceneDraftVersionId])
+  @@index([analyzerKind])
+  @@index([proseSha256])
+  @@index([analysisScope])
 }
 
 model Symbol {
@@ -3440,4 +4068,178 @@ model SceneReadinessProfile {
   notes String? @db.Text
 
   @@index([isActive])
+}
+
+/// Louisiana colony census OCR bundle (imported from `campti_census.sqlite` for simulation / queries).
+model CensusResearchDataset {
+  id        String   @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  label            String
+  notes            String? @db.Text
+  sqliteOriginPath String?
+
+  /// Short catalog blurb for LLM / story-assembly prompt injection (stable summary of this bundle).
+  storyAssemblySummary String? @db.Text
+
+  /// Optional link to the script-indexed `Source` row for the `.sqlite` file (upload-* id).
+  linkedSourceId String?
+  linkedSource   Source? @relation(fields: [linkedSourceId], references: [id], onDelete: SetNull)
+
+  pages        CensusResearchPage[]
+  entries      CensusResearchEntry[]
+  nameRows     CensusResearchNameRow[]
+  missingPages CensusResearchMissingPage[]
+
+  @@index([linkedSourceId])
+}
+
+model CensusResearchPage {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  datasetId String
+  dataset   CensusResearchDataset @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+
+  /// `pages.order` in the source SQLite export.
+  sortOrder   Int
+  filename    String
+  pagerRaw    String?
+  cleanLen    Int?
+  textHash    String?
+  textPreview String? @db.Text
+  ocrText     String? @db.Text
+  pageType    String?
+  docPageCode String?
+  isDuplicate Boolean @default(false)
+  titleGuess  String?
+
+  /// Uppercase ASCII-ish fold of title_guess for matching (optional; filled on import).
+  normalizedTitleGuess String @default("")
+
+  @@unique([datasetId, sortOrder])
+  @@index([datasetId])
+  @@index([filename])
+  @@index([docPageCode])
+  @@index([normalizedTitleGuess])
+}
+
+model CensusResearchEntry {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  datasetId String
+  dataset   CensusResearchDataset @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+
+  /// `entry_id` in the source SQLite export.
+  externalEntryId Int
+
+  sourceFilename   String
+  sourceOrder      Int?
+  docPageCode      String?
+  pageType         String?
+  rawEntry         String  @db.Text
+  displayName      String?
+  childrenCount     Float?
+  negroSlavesCount  Float?
+  indianSlavesCount Float?
+  domesticCount     Float?
+  wifeMentioned     Boolean @default(false)
+  widowMentioned    Boolean @default(false)
+  onHisLand         Boolean @default(false)
+  roleGuess         String?
+
+  /// Denormalized label for search + AI: from name_index.normalized_name when present, else derived from display_name.
+  normalizedLabel String @default("")
+
+  @@unique([datasetId, externalEntryId])
+  @@index([datasetId])
+  @@index([displayName])
+  @@index([docPageCode])
+  @@index([normalizedLabel])
+}
+
+model CensusResearchNameRow {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  datasetId String
+  dataset   CensusResearchDataset @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+
+  externalEntryId Int?
+  displayName     String
+  normalizedName  String
+  sourceFilename  String?
+  docPageCode     String?
+
+  @@index([datasetId])
+  @@index([normalizedName])
+}
+
+model CensusResearchMissingPage {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  datasetId String
+  dataset   CensusResearchDataset @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+
+  missingGroupId   String
+  status           String?
+  description      String? @db.Text
+  insertAfterOrder Int?
+  expectedSource   String? @db.Text
+  notes            String? @db.Text
+
+  @@unique([datasetId, missingGroupId])
+}
+
+/// Directed edge: narrative consumer (scene, chapter, …) depends on a producer entity for revision invalidation.
+/// Producer identity is (producerKind + producerId); no polymorphic FK to keep migrations stable.
+model NarrativeDependencyEdge {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  consumerKind NarrativeDependencyConsumerKind
+  consumerId   String
+
+  producerKind NarrativeDependencyProducerKind
+  producerId   String
+
+  strength DependencyStrength @default(HARD)
+
+  /// Optional fingerprint of the consumer input bundle when the edge was written (e.g. hash of SceneAssistRun inputSnapshot).
+  inputSnapshotHash String?
+
+  @@index([consumerKind, consumerId])
+  @@index([producerKind, producerId])
+  @@index([strength])
+}
+
+/// Durable queue row for regeneration / continuity passes after upstream fact changes.
+model RevisionJob {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  kind   RevisionJobKind
+  status RevisionJobStatus @default(PENDING)
+
+  /// Primary target when kind is scene-scoped.
+  sceneId String?
+  scene   Scene?  @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+
+  payload       Json?
+  errorMessage  String?   @db.Text
+  startedAt     DateTime?
+  completedAt   DateTime?
+  attemptCount  Int       @default(0)
+
+  @@index([status])
+  @@index([kind])
+  @@index([sceneId])
 }

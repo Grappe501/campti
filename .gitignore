@@ -38,3 +38,7 @@ next-env.d.ts
 # prisma
 prisma/*.db
 prisma/*.db-journal
+
+# Local drop folder for script indexer (keep folder, ignore contents)
+uploads/incoming/**
+!uploads/incoming/.gitkeep

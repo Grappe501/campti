@@ -30,6 +30,7 @@ import type {
 import type { CharacterIntelligenceBundle } from "@/lib/intelligence-types";
 import type { CharacterPressureBundle, WorldGovernanceAdminFilters } from "@/lib/pressure-order-types";
 import { computeEffectivePressureWeights } from "@/lib/world-era-profile";
+import { SCRIPT_UPLOAD_ARCHIVE_STATUS } from "@/lib/script-upload-index";
 import type { CharacterRelationshipBundle, RelationshipProfileAdminFilters } from "@/lib/relationship-order-types";
 import type { CharacterContinuityBundle } from "@/lib/continuity-order-types";
 
@@ -46,6 +47,7 @@ export async function getDashboardCounts() {
     async () => {
       const [
         sources,
+        scriptIndexedSources,
         claims,
         people,
         places,
@@ -66,6 +68,9 @@ export async function getDashboardCounts() {
         metaScenes,
       ] = await Promise.all([
         prisma.source.count(),
+        prisma.source.count({
+          where: { archiveStatus: SCRIPT_UPLOAD_ARCHIVE_STATUS },
+        }),
         prisma.claim.count(),
         prisma.person.count(),
         prisma.place.count(),
@@ -87,6 +92,7 @@ export async function getDashboardCounts() {
       ]);
       return {
         sources,
+        scriptIndexedSources,
         claims,
         people,
         places,
@@ -109,6 +115,7 @@ export async function getDashboardCounts() {
     },
     {
       sources: 0,
+      scriptIndexedSources: 0,
       claims: 0,
       people: 0,
       places: 0,
@@ -128,6 +135,28 @@ export async function getDashboardCounts() {
       fragmentClusters: 0,
       metaScenes: 0,
     },
+  );
+}
+
+/** Sources registered by `scripts/index-incoming-uploads.ts` (drop folder + script). */
+export async function getRecentScriptIndexedSources(limit = 12) {
+  return safe(
+    () =>
+      prisma.source.findMany({
+        where: { archiveStatus: SCRIPT_UPLOAD_ARCHIVE_STATUS },
+        orderBy: { updatedAt: "desc" },
+        take: limit,
+        select: {
+          id: true,
+          title: true,
+          updatedAt: true,
+          filePath: true,
+          ingestionStatus: true,
+          sourceText: { select: { id: true, textStatus: true } },
+          _count: { select: { sourceChunks: true } },
+        },
+      }),
+    [],
   );
 }
 

@@ -1,12 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 import {
   recordReaderImprintAction,
   recordVoiceListenSeconds,
   syncReaderStateFromClient,
 } from "@/app/actions/reader-memory";
+import { HandsFreePanel } from "@/components/read/hands-free-panel";
+import { ReaderOptionsBar } from "@/components/read/reader-options-bar";
 import { AtmosphereBlock } from "@/components/public/atmosphere-block";
 import { AtmosphereLayer } from "@/components/public/AtmosphereLayer";
 import { AudioTeaser } from "@/components/public/audio-teaser";
@@ -41,6 +51,16 @@ import {
 import type { PublicSceneImmersion } from "@/lib/public-scene-immersion";
 import { ambientSrcForKey } from "@/lib/public-scene-immersion";
 import { IMMERSIVE_TONE_PRESETS } from "@/lib/immersive-presets";
+import { splitReadingBlocks } from "@/lib/reading-blocks";
+import {
+  loadReaderUiPreferences,
+  saveReaderUiPreferences,
+  fontRemForStep,
+  brightnessFilterForStep,
+  FONT_STEPS_REM,
+  type ReaderUiPreferences,
+} from "@/lib/reader-ui-preferences";
+import type { HandsFreeAction } from "@/lib/hands-free/types";
 
 type ReadSceneExperienceProps = {
   data: PublicSceneViewModel;
@@ -49,6 +69,8 @@ type ReadSceneExperienceProps = {
   readerPack: PublicSceneReaderPack;
   title: string;
   perceptionPayload?: PublicPerceptionExperiencePayload | null;
+  /** Public chapter list for voice “go to chapter N”. */
+  chapterIndex?: { id: string; title: string; chapterNumber: number | null }[];
 };
 
 /** Matches Prisma `ReaderLastMode` string values (avoid client import of generated enum). */
@@ -118,18 +140,38 @@ export function ReadSceneExperience({
   readerPack,
   title,
   perceptionPayload = null,
+  chapterIndex = [],
 }: ReadSceneExperienceProps) {
+  const router = useRouter();
   const [mode, setMode] = useState<PublicExperienceMode>("reading");
   const [hydrated, setHydrated] = useState(false);
   const [panel, setPanel] = useState<SidePanelEntity | null>(null);
   const [depthOpen, setDepthOpen] = useState(false);
+  const [readerPrefs, setReaderPrefs] = useState<ReaderUiPreferences>(() => ({
+    fontStep: 2,
+    columns: 1,
+    flow: "scroll",
+    optionsBarExpanded: true,
+    ambientBedMuted: false,
+    brightnessStep: 3,
+  }));
+  const [paragraphIndex, setParagraphIndex] = useState(0);
   const scrollPersistRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastListenImprintAtRef = useRef(0);
 
   useEffect(() => {
     setMode(readStoredMode());
+    setReaderPrefs(loadReaderUiPreferences());
     setHydrated(true);
   }, []);
+
+  useEffect(() => {
+    saveReaderUiPreferences(readerPrefs);
+  }, [readerPrefs]);
+
+  useEffect(() => {
+    setParagraphIndex(0);
+  }, [data.scene.id]);
 
   useEffect(() => {
     try {
@@ -412,6 +454,11 @@ export function ReadSceneExperience({
   const tone = IMMERSIVE_TONE_PRESETS[immersion.tonePreset];
   const immersiveReaderKey = `${data.scene.id}-${data.readingBody.length}-${mode}`;
 
+  const paragraphBlocks = useMemo(
+    () => splitReadingBlocks(data.readingBody),
+    [data.readingBody],
+  );
+
   const readerShellClass =
     mode === "reading"
       ? "rounded-lg border border-stone-800/90 bg-[#12110f]/80 px-6 py-10 sm:px-10 sm:py-12"
@@ -438,6 +485,124 @@ export function ReadSceneExperience({
     mode === "immersive" ||
     mode === "guided" ||
     (mode === "listen" && Boolean(perceptionSegmentsForMode?.length));
+
+  const displayReadingBody = useMemo(() => {
+    if (immersiveReader || mode !== "reading" || readerPrefs.flow !== "paragraph") {
+      return data.readingBody;
+    }
+    if (!paragraphBlocks.length) return data.readingBody;
+    const i = Math.min(Math.max(paragraphIndex, 0), paragraphBlocks.length - 1);
+    return paragraphBlocks[i] ?? data.readingBody;
+  }, [
+    immersiveReader,
+    mode,
+    readerPrefs.flow,
+    data.readingBody,
+    paragraphBlocks,
+    paragraphIndex,
+  ]);
+
+  const readerStageStyle: CSSProperties = {
+    fontSize: `${fontRemForStep(readerPrefs.fontStep)}rem`,
+    columnCount:
+      mode === "reading" && !immersiveReader && readerPrefs.columns === 2 ? 2 : undefined,
+    columnGap: "1.75rem",
+    filter: brightnessFilterForStep(readerPrefs.brightnessStep),
+  };
+
+  const handleHandsFree = useCallback(
+    (action: HandsFreeAction) => {
+      const maxFont = FONT_STEPS_REM.length - 1;
+      /** Voice/gaze should feel instant — smooth scroll reads as laggy. */
+      const hop = { behavior: "auto" as const };
+      switch (action.type) {
+        case "next": {
+          if (
+            mode === "reading" &&
+            !immersiveReader &&
+            readerPrefs.flow === "paragraph" &&
+            paragraphBlocks.length > 0
+          ) {
+            setParagraphIndex((i) => Math.min(paragraphBlocks.length - 1, i + 1));
+            return;
+          }
+          if (navigation.nextScene) {
+            router.push(`/read/scenes/${navigation.nextScene.id}`);
+            return;
+          }
+          window.scrollBy({ top: 380, ...hop });
+          break;
+        }
+        case "previous": {
+          if (mode === "reading" && !immersiveReader && readerPrefs.flow === "paragraph") {
+            setParagraphIndex((i) => Math.max(0, i - 1));
+            return;
+          }
+          if (navigation.prevScene) {
+            router.push(`/read/scenes/${navigation.prevScene.id}`);
+            return;
+          }
+          window.scrollBy({ top: -380, ...hop });
+          break;
+        }
+        case "brighter":
+          setReaderPrefs((p) => ({
+            ...p,
+            brightnessStep: Math.min(6, p.brightnessStep + 1),
+          }));
+          break;
+        case "dimmer":
+          setReaderPrefs((p) => ({
+            ...p,
+            brightnessStep: Math.max(0, p.brightnessStep - 1),
+          }));
+          break;
+        case "zoomIn":
+          setReaderPrefs((p) => ({
+            ...p,
+            fontStep: Math.min(maxFont, p.fontStep + 1),
+          }));
+          break;
+        case "zoomOut":
+          setReaderPrefs((p) => ({
+            ...p,
+            fontStep: Math.max(0, p.fontStep - 1),
+          }));
+          break;
+        case "goToChapter": {
+          const n = action.chapterNumber;
+          const byNum = chapterIndex.find((c) => c.chapterNumber === n);
+          if (byNum) {
+            router.push(`/read/chapters/${byNum.id}`);
+            return;
+          }
+          const ordered = [...chapterIndex].filter((c) => c.chapterNumber != null);
+          ordered.sort((a, b) => (a.chapterNumber ?? 0) - (b.chapterNumber ?? 0));
+          const byOrder = ordered[n - 1] ?? chapterIndex[n - 1];
+          if (byOrder) router.push(`/read/chapters/${byOrder.id}`);
+          break;
+        }
+        case "scrollDown":
+          window.scrollBy({ top: 420, ...hop });
+          break;
+        case "scrollUp":
+          window.scrollBy({ top: -420, ...hop });
+          break;
+        default:
+          break;
+      }
+    },
+    [
+      chapterIndex,
+      immersiveReader,
+      mode,
+      navigation.nextScene,
+      navigation.prevScene,
+      paragraphBlocks.length,
+      readerPrefs.flow,
+      router,
+    ],
+  );
 
   const modeButton = (m: PublicExperienceMode, label: string) => (
     <button
@@ -472,7 +637,7 @@ export function ReadSceneExperience({
       ) : null}
 
       <article
-        className={`campti-scene-enter mx-auto max-w-2xl space-y-12 pb-24 ${showAtmosphere || mode === "listen" ? "relative z-10" : ""}`}
+        className={`campti-scene-enter mx-auto w-full max-w-[min(100%,42rem)] space-y-12 pb-24 xl:max-w-[48rem] ${showAtmosphere || mode === "listen" ? "relative z-10" : ""}`}
       >
         <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0 flex-1">
@@ -633,7 +798,7 @@ export function ReadSceneExperience({
           />
         ) : null}
 
-        <div className={readerShellClass}>
+        <div className={readerShellClass} style={readerStageStyle}>
           {data.narrativePassSummary && data.readingSourceLabel === "narrative" ? (
             <p
               className={`mb-10 border-b pb-8 text-sm italic leading-relaxed ${
@@ -661,13 +826,50 @@ export function ReadSceneExperience({
             </ImmersiveErrorBoundary>
           ) : (
             <LinkedReadingBlocks
-              text={data.readingBody}
+              text={displayReadingBody}
               entities={linkEntities}
               onEntityClick={onEntityClick}
               immersive={false}
             />
           )}
         </div>
+
+        {mode === "reading" &&
+        !immersiveReader &&
+        readerPrefs.flow === "paragraph" &&
+        paragraphBlocks.length > 1 ? (
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-cyan-950/30 bg-black/25 px-4 py-3 text-[0.75rem] text-stone-400">
+            <button
+              type="button"
+              disabled={paragraphIndex <= 0}
+              onClick={() => setParagraphIndex((i) => Math.max(0, i - 1))}
+              className="rounded-md border border-stone-700/80 px-3 py-1.5 transition enabled:hover:border-cyan-800/50 enabled:hover:text-stone-200 disabled:opacity-35"
+            >
+              ← Previous beat
+            </button>
+            <span className="tabular-nums text-stone-500">
+              {paragraphIndex + 1} / {paragraphBlocks.length}
+            </span>
+            <button
+              type="button"
+              disabled={paragraphIndex >= paragraphBlocks.length - 1}
+              onClick={() =>
+                setParagraphIndex((i) => Math.min(paragraphBlocks.length - 1, i + 1))
+              }
+              className="rounded-md border border-stone-700/80 px-3 py-1.5 transition enabled:hover:border-cyan-800/50 enabled:hover:text-stone-200 disabled:opacity-35"
+            >
+              Next beat →
+            </button>
+          </div>
+        ) : null}
+
+        <ReaderOptionsBar
+          prefs={readerPrefs}
+          onChange={setReaderPrefs}
+          hasAudio={hasAudio}
+        />
+
+        <HandsFreePanel onAction={handleHandsFree} active />
 
         <div className="space-y-4">
           {!listenFirst && hasAudio ? (

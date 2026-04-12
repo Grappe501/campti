@@ -36,7 +36,7 @@ export const dynamic = "force-dynamic";
 
 type Props = {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ error?: string; saved?: string }>;
+  searchParams: Promise<{ error?: string; saved?: string; worldStateId?: string }>;
 };
 
 const profileTextFields = [
@@ -90,6 +90,7 @@ const triggerTypeOptions = Object.values(CharacterTriggerType);
 export default async function CharacterMindPage({ params, searchParams }: Props) {
   const { id } = await params;
   const sp = await searchParams;
+  const selectedWorldForBrain = sp.worldStateId?.trim() || null;
   const person = await getCharacterMindBundle(id);
   if (!person) notFound();
 
@@ -117,6 +118,30 @@ export default async function CharacterMindPage({ params, searchParams }: Props)
           title={`Mind model · ${person.name}`}
           description="Character profile, simulation layers (constraints, triggers, perception, voice, choice), memories, and scene states — bounded, curated inputs for deterministic narrative simulation."
         />
+        {worldStates.length > 0 ? (
+          <p className="mt-3 text-sm text-stone-600">
+            <span className="font-medium text-stone-800">Stage 7 brain (by era):</span>{" "}
+            {worldStates.map((w, i) => {
+              const href = `/admin/characters/${id}/brain?worldStateId=${w.id}`;
+              const isSelected = selectedWorldForBrain === w.id;
+              return (
+                <span key={w.id}>
+                  {i > 0 ? " · " : null}
+                  <Link
+                    href={href}
+                    className={
+                      isSelected
+                        ? "font-medium text-amber-950 underline decoration-amber-300 underline-offset-2"
+                        : "text-amber-900 hover:underline"
+                    }
+                  >
+                    {w.label}
+                  </Link>
+                </span>
+              );
+            })}
+          </p>
+        ) : null}
       </div>
 
       <AdminFormError error={sp.error} />
@@ -431,6 +456,17 @@ export default async function CharacterMindPage({ params, searchParams }: Props)
                   trust {s.trustLevel} · fear {s.fearLevel} · stability {s.stabilityLevel} · load {s.cognitiveLoad}
                   {s.pressureLevel ? ` · pressure ${s.pressureLevel}` : ""}
                 </p>
+                {s.worldStateId ? (
+                  <p className="mt-1 text-xs">
+                    <Link
+                      href={`/admin/characters/${id}/brain?worldStateId=${s.worldStateId}${s.sceneId ? `&sceneId=${s.sceneId}` : ""}`}
+                      className="text-amber-900 hover:underline"
+                    >
+                      Open Stage 7 brain snapshot
+                      {s.sceneId ? " (scene-aware)" : ""} →
+                    </Link>
+                  </p>
+                ) : null}
                 <form action={updateCharacterState} className="mt-3 space-y-2 rounded border border-dashed border-stone-200 p-3">
                   <input type="hidden" name="id" value={s.id} />
                   <input type="hidden" name="personId" value={person.id} />

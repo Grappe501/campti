@@ -1,14 +1,25 @@
 import Link from "next/link";
 import { PageHeader } from "@/components/page-header";
-import { getDashboardCounts } from "@/lib/data-access";
+import { getDashboardCounts, getRecentScriptIndexedSources } from "@/lib/data-access";
+import { SCRIPT_UPLOAD_ARCHIVE_STATUS } from "@/lib/script-upload-index";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboardPage() {
-  const counts = await getDashboardCounts();
+  const [counts, scriptUploads] = await Promise.all([
+    getDashboardCounts(),
+    getRecentScriptIndexedSources(12),
+  ]);
+
+  const scriptIngestionHref = `/admin/ingestion?archiveStatus=${encodeURIComponent(SCRIPT_UPLOAD_ARCHIVE_STATUS)}`;
 
   const stats = [
     { label: "Sources", value: counts.sources, href: "/admin/sources" },
+    {
+      label: "Script-indexed uploads",
+      value: counts.scriptIndexedSources,
+      href: scriptIngestionHref,
+    },
     { label: "Claims", value: counts.claims, href: "/admin/claims" },
     { label: "People", value: counts.people, href: "/admin/people" },
     { label: "Places", value: counts.places, href: "/admin/places" },
@@ -49,6 +60,53 @@ export default async function AdminDashboardPage() {
           </Link>
         ))}
       </div>
+
+      <section className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <h2 className="text-lg font-medium text-stone-900">Incoming uploads (script-indexed)</h2>
+          <Link
+            href={scriptIngestionHref}
+            className="text-sm font-medium text-amber-800 underline-offset-2 hover:underline"
+          >
+            View in ingestion
+          </Link>
+        </div>
+        <p className="mt-1 text-sm text-stone-600">
+          Drop files under <code className="rounded bg-stone-100 px-1 py-0.5 text-xs">uploads/incoming/</code>, then run{" "}
+          <code className="rounded bg-stone-100 px-1 py-0.5 text-xs">npx tsx scripts/index-incoming-uploads.ts</code>.
+          Text files become searchable chunks; other types are registered with path. Louisiana census bundle:{" "}
+          <code className="rounded bg-stone-100 px-1 py-0.5 text-xs">npm run research:census-pipeline</code>{" "}
+          (sync from Downloads, index, import SQLite with normalized labels for story assembly).
+        </p>
+        {scriptUploads.length === 0 ? (
+          <p className="mt-4 text-sm text-stone-500">No script-indexed files yet.</p>
+        ) : (
+          <ul className="mt-4 divide-y divide-stone-100">
+            {scriptUploads.map((s) => (
+              <li key={s.id} className="flex flex-wrap items-center justify-between gap-2 py-3 first:pt-0">
+                <div className="min-w-0">
+                  <Link
+                    href={`/admin/sources/${s.id}`}
+                    className="font-medium text-stone-900 underline-offset-2 hover:underline"
+                  >
+                    {s.title}
+                  </Link>
+                  {s.filePath ? (
+                    <p className="truncate text-xs text-stone-500">{s.filePath}</p>
+                  ) : null}
+                </div>
+                <div className="shrink-0 text-right text-xs text-stone-500">
+                  {s._count.sourceChunks > 0 ? (
+                    <span>{s._count.sourceChunks} chunks</span>
+                  ) : (
+                    <span>registered</span>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
     </div>
   );
 }

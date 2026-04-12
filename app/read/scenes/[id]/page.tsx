@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ReadSceneExperience } from "@/components/public/read-scene-experience";
 import {
+  getPublicChapterIndex,
   getPublicSceneById,
   getPublicSceneNavigation,
   getPublicSceneReaderPack,
@@ -60,6 +61,7 @@ export default async function ReadScenePage({ params }: Props) {
     };
 
   const perceptionPayload = await buildPublicPerceptionPayload(data);
+  const chapterIndex = await getPublicChapterIndex();
 
   return (
     <ReadSceneExperience
@@ -69,6 +71,7 @@ export default async function ReadScenePage({ params }: Props) {
       readerPack={readerPack}
       title={title}
       perceptionPayload={perceptionPayload}
+      chapterIndex={chapterIndex}
     />
   );
 }

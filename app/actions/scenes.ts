@@ -116,6 +116,20 @@ function ensureNotLocked(sceneStatus: string | null | undefined) {
   }
 }
 
+/** Preserve `?ws=&focal=&debug=1` after workspace POST redirects. */
+function redirectSceneWorkspace(sceneId: string, formData: FormData, flags: { saved?: string; error?: string }) {
+  const p = new URLSearchParams();
+  if (flags.saved) p.set("saved", flags.saved);
+  if (flags.error) p.set("error", flags.error);
+  if (String(formData.get("workspaceDebug") ?? "").trim() === "1") p.set("debug", "1");
+  const ws = String(formData.get("workspaceWs") ?? "").trim();
+  if (ws) p.set("ws", ws);
+  const focal = String(formData.get("workspaceFocal") ?? "").trim();
+  if (focal) p.set("focal", focal);
+  const qs = p.toString();
+  redirect(qs ? `/admin/scenes/${sceneId}/workspace?${qs}` : `/admin/scenes/${sceneId}/workspace`);
+}
+
 export async function updateSceneWorkspace(formData: FormData) {
   const parsed = sceneWorkspaceUpdateSchema.safeParse({
     id: formData.get("id"),
@@ -131,7 +145,8 @@ export async function updateSceneWorkspace(formData: FormData) {
 
   if (!parsed.success) {
     const id = String(formData.get("id") ?? "");
-    redirect(id ? `/admin/scenes/${id}/workspace?error=validation` : "/admin/scenes?error=validation");
+    if (id) redirectSceneWorkspace(id, formData, { error: "validation" });
+    redirect("/admin/scenes?error=validation");
   }
 
   const d = parsed.data;
@@ -159,7 +174,7 @@ export async function updateSceneWorkspace(formData: FormData) {
   revalidatePath(`/admin/scenes/${d.id}/workspace`);
   revalidatePath(`/admin/scenes/${d.id}`);
   revalidatePath(`/admin/chapters/${existing.chapterId}`);
-  redirect(`/admin/scenes/${d.id}/workspace?saved=1`);
+  redirectSceneWorkspace(d.id, formData, { saved: "1" });
 }
 
 export async function linkEntityToScene(formData: FormData) {
@@ -198,7 +213,7 @@ export async function linkEntityToScene(formData: FormData) {
   revalidatePath(`/admin/scenes/${sceneId}/workspace`);
   revalidatePath(`/admin/scenes/${sceneId}`);
   revalidatePath(`/admin/chapters/${existing.chapterId}`);
-  redirect(`/admin/scenes/${sceneId}/workspace?saved=linked`);
+  redirectSceneWorkspace(sceneId, formData, { saved: "linked" });
 }
 
 export async function unlinkEntityFromScene(formData: FormData) {
@@ -237,7 +252,7 @@ export async function unlinkEntityFromScene(formData: FormData) {
   revalidatePath(`/admin/scenes/${sceneId}/workspace`);
   revalidatePath(`/admin/scenes/${sceneId}`);
   revalidatePath(`/admin/chapters/${existing.chapterId}`);
-  redirect(`/admin/scenes/${sceneId}/workspace?saved=unlinked`);
+  redirectSceneWorkspace(sceneId, formData, { saved: "unlinked" });
 }
 
 export async function generateSceneScaffold(formData: FormData) {
@@ -303,7 +318,7 @@ export async function generateSceneScaffold(formData: FormData) {
   });
 
   revalidatePath(`/admin/scenes/${sceneId}/workspace`);
-  redirect(`/admin/scenes/${sceneId}/workspace?saved=scaffold`);
+  redirectSceneWorkspace(sceneId, formData, { saved: "scaffold" });
 }
 
 export async function generateSceneSummaryFromDraft(formData: FormData) {
@@ -332,7 +347,7 @@ export async function generateSceneSummaryFromDraft(formData: FormData) {
   revalidatePath(`/admin/scenes/${sceneId}/workspace`);
   revalidatePath(`/admin/scenes/${sceneId}`);
   revalidatePath(`/admin/chapters/${scene.chapterId}`);
-  redirect(`/admin/scenes/${sceneId}/workspace?saved=summary`);
+  redirectSceneWorkspace(sceneId, formData, { saved: "summary" });
 }
 
 export async function updateSceneOrderInChapter(formData: FormData) {

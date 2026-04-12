@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -9,13 +10,18 @@ import {
 } from "@/app/actions/scenes";
 import { AdminFormError } from "@/components/admin-form-error";
 import { PageHeader } from "@/components/page-header";
+import { loadSceneLegalityView } from "@/app/actions/scene-constraints";
+import { SceneReadinessPanel } from "@/components/scene-readiness-panel";
 import {
   getSceneByIdFull,
   getSceneContextData,
+  getWorldStateReferences,
   searchEntitiesForScene,
 } from "@/lib/data-access";
 import { fieldClass, labelClass, labelSpanClass } from "@/lib/admin-styles";
 import { getSceneContinuityWarnings } from "@/lib/scene-continuity";
+import type { WorkspaceStickySearch } from "@/lib/workspace-sticky-params";
+import { withWorkspaceSticky } from "@/lib/workspace-sticky-params";
 import { WritingMode } from "@prisma/client";
 
 export const dynamic = "force-dynamic";
@@ -27,6 +33,9 @@ type Props = {
     saved?: string;
     q?: string;
     t?: string;
+    ws?: string;
+    focal?: string;
+    debug?: string;
   }>;
 };
 
@@ -39,18 +48,34 @@ function adminHref(type: string, id: string) {
   return null;
 }
 
+function WorkspaceStickyHidden(props: {
+  debugOn: boolean;
+  workspaceWs: string;
+  workspaceFocal: string;
+}) {
+  return (
+    <>
+      {props.debugOn ? <input type="hidden" name="workspaceDebug" value="1" /> : null}
+      <input type="hidden" name="workspaceWs" value={props.workspaceWs} />
+      <input type="hidden" name="workspaceFocal" value={props.workspaceFocal} />
+    </>
+  );
+}
+
 function ModePanel({
   mode,
   sceneId,
   structuredDataJson,
   locked,
   guidance,
+  workspaceStickyHidden,
 }: {
   mode: WritingMode;
   sceneId: string;
   structuredDataJson: unknown;
   locked: boolean;
   guidance: string[];
+  workspaceStickyHidden: ReactNode;
 }) {
   if (mode === WritingMode.STRUCTURED) {
     return (
@@ -61,6 +86,7 @@ function ModePanel({
         </p>
         <form action={generateSceneScaffold}>
           <input type="hidden" name="sceneId" value={sceneId} />
+          {workspaceStickyHidden}
           <button
             type="submit"
             disabled={locked}
@@ -127,12 +153,16 @@ function EntityList({
   type,
   sceneId,
   locked,
+  sticky,
+  workspaceStickyHidden,
 }: {
   title: string;
   items: Array<{ id: string; label: string }>;
   type: "person" | "place" | "event" | "symbol" | "source" | "openQuestion";
   sceneId: string;
   locked: boolean;
+  sticky: WorkspaceStickySearch;
+  workspaceStickyHidden: ReactNode;
 }) {
   return (
     <div>
@@ -145,14 +175,15 @@ function EntityList({
         <ul className="mt-1 space-y-1">
           {items.map((it) => {
             const href = adminHref(type, it.id);
+            const entityHref = href ? withWorkspaceSticky(href, sticky) : null;
             return (
               <li
                 key={it.id}
                 className="flex items-center justify-between gap-2"
               >
-                {href ? (
+                {entityHref ? (
                   <Link
-                    href={href}
+                    href={entityHref}
                     className="text-sm text-amber-900 hover:underline"
                   >
                     {it.label}
@@ -161,6 +192,7 @@ function EntityList({
                   <span className="text-sm text-stone-800">{it.label}</span>
                 )}
                 <form action={unlinkEntityFromScene}>
+                  {workspaceStickyHidden}
                   <input type="hidden" name="sceneId" value={sceneId} />
                   <input type="hidden" name="entityType" value={type} />
                   <input type="hidden" name="entityId" value={it.id} />
@@ -193,6 +225,44 @@ export default async function AdminSceneWorkspacePage({ params, searchParams }: 
   const type = (sp.t ?? "person").trim();
   const query = (sp.q ?? "").trim();
   const results = query.length >= 2 ? await searchEntitiesForScene(type, query) : [];
+
+  const worldStates = await getWorldStateReferences();
+  const rawWs = sp.ws;
+  const rawFocal = sp.focal;
+  const selectedWorldStateId =
+    rawWs === undefined
+      ? worldStates[0]?.id ?? null
+      : rawWs.trim() === ""
+        ? null
+        : worldStates.some((w) => w.id === rawWs.trim())
+          ? rawWs.trim()
+          : worldStates[0]?.id ?? null;
+  const focalForEngine =
+    rawFocal === undefined ? null : rawFocal.trim() === "" ? null : rawFocal.trim();
+  const selectedFocalPersonId =
+    focalForEngine && scene.persons.some((p) => p.id === focalForEngine) ? focalForEngine : null;
+
+  const legality = await loadSceneLegalityView({
+    sceneId: scene.id,
+    worldStateId: selectedWorldStateId,
+    focalPersonId: selectedFocalPersonId,
+    draftTextEmpty: !(scene.draftText && scene.draftText.trim().length > 0),
+  });
+
+  const showStage8Debug = (sp.debug ?? "").trim() === "1";
+
+  const sticky: WorkspaceStickySearch = {
+    ...(selectedWorldStateId ? { ws: selectedWorldStateId } : {}),
+    ...(selectedFocalPersonId ? { focal: selectedFocalPersonId } : {}),
+    ...(showStage8Debug ? { debug: "1" } : {}),
+  };
+  const stickyHidden = (
+    <WorkspaceStickyHidden
+      debugOn={showStage8Debug}
+      workspaceWs={selectedWorldStateId ?? ""}
+      workspaceFocal={selectedFocalPersonId ?? ""}
+    />
+  );
 
   const warnings = getSceneContinuityWarnings({
     sceneStatus: scene.sceneStatus,
@@ -227,7 +297,7 @@ export default async function AdminSceneWorkspacePage({ params, searchParams }: 
     <div className="mx-auto max-w-6xl space-y-6">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <Link href={`/admin/scenes/${scene.id}`} className="text-sm text-amber-900 hover:underline">
+          <Link href={withWorkspaceSticky(`/admin/scenes/${scene.id}`, sticky)} className="text-sm text-amber-900 hover:underline">
             ← Scene details
           </Link>
           <PageHeader
@@ -257,6 +327,7 @@ export default async function AdminSceneWorkspacePage({ params, searchParams }: 
         </div>
 
         <form action={updateSceneWorkspace} className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
+          {stickyHidden}
           <input type="hidden" name="id" value={scene.id} />
           <label className={labelClass}>
             <span className={labelSpanClass}>Writing mode</span>
@@ -309,17 +380,17 @@ export default async function AdminSceneWorkspacePage({ params, searchParams }: 
           <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
             <p className="text-sm font-medium text-stone-900">Linked entities</p>
             <div className="mt-3 space-y-3 text-sm">
-              <EntityList title="People" items={scene.persons.map((p) => ({ id: p.id, label: p.name }))} type="person" sceneId={scene.id} locked={locked} />
-              <EntityList title="Places" items={scene.places.map((p) => ({ id: p.id, label: p.name }))} type="place" sceneId={scene.id} locked={locked} />
-              <EntityList title="Events" items={scene.events.map((e) => ({ id: e.id, label: e.title }))} type="event" sceneId={scene.id} locked={locked} />
-              <EntityList title="Symbols" items={scene.symbols.map((s) => ({ id: s.id, label: s.name }))} type="symbol" sceneId={scene.id} locked={locked} />
+              <EntityList title="People" items={scene.persons.map((p) => ({ id: p.id, label: p.name }))} type="person" sceneId={scene.id} locked={locked} sticky={sticky} workspaceStickyHidden={stickyHidden} />
+              <EntityList title="Places" items={scene.places.map((p) => ({ id: p.id, label: p.name }))} type="place" sceneId={scene.id} locked={locked} sticky={sticky} workspaceStickyHidden={stickyHidden} />
+              <EntityList title="Events" items={scene.events.map((e) => ({ id: e.id, label: e.title }))} type="event" sceneId={scene.id} locked={locked} sticky={sticky} workspaceStickyHidden={stickyHidden} />
+              <EntityList title="Symbols" items={scene.symbols.map((s) => ({ id: s.id, label: s.name }))} type="symbol" sceneId={scene.id} locked={locked} sticky={sticky} workspaceStickyHidden={stickyHidden} />
             </div>
           </div>
 
           <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
             <p className="text-sm font-medium text-stone-900">Source anchors</p>
             <div className="mt-3 space-y-2 text-sm">
-              <EntityList title="Linked sources" items={scene.sources.map((s) => ({ id: s.id, label: s.title }))} type="source" sceneId={scene.id} locked={locked} />
+              <EntityList title="Linked sources" items={scene.sources.map((s) => ({ id: s.id, label: s.title }))} type="source" sceneId={scene.id} locked={locked} sticky={sticky} workspaceStickyHidden={stickyHidden} />
               {ctx?.claims?.length ? (
                 <div className="mt-3 rounded-lg bg-stone-50 p-3">
                   <p className="text-xs font-medium uppercase tracking-widest text-stone-500">Relevant claims</p>
@@ -341,7 +412,7 @@ export default async function AdminSceneWorkspacePage({ params, searchParams }: 
           <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm">
             <p className="text-sm font-medium text-stone-900">Open questions</p>
             <div className="mt-3">
-              <EntityList title="Linked questions" items={scene.openQuestions.map((q) => ({ id: q.id, label: q.title }))} type="openQuestion" sceneId={scene.id} locked={locked} />
+              <EntityList title="Linked questions" items={scene.openQuestions.map((q) => ({ id: q.id, label: q.title }))} type="openQuestion" sceneId={scene.id} locked={locked} sticky={sticky} workspaceStickyHidden={stickyHidden} />
             </div>
           </div>
 
@@ -351,7 +422,7 @@ export default async function AdminSceneWorkspacePage({ params, searchParams }: 
               <ul className="mt-3 space-y-1 text-sm">
                 {scene.continuityNotes.map((n) => (
                   <li key={n.id}>
-                    <Link href={`/admin/continuity/${n.id}`} className="text-amber-900 hover:underline">
+                    <Link href={withWorkspaceSticky(`/admin/continuity/${n.id}`, sticky)} className="text-amber-900 hover:underline">
                       {n.title}
                     </Link>
                   </li>
@@ -368,6 +439,7 @@ export default async function AdminSceneWorkspacePage({ params, searchParams }: 
           <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm space-y-4">
             <p className="text-sm font-medium text-stone-900">Draft</p>
             <form action={updateSceneWorkspace} className="space-y-3">
+              {stickyHidden}
               <input type="hidden" name="id" value={scene.id} />
               <label className={labelClass}>
                 <span className={labelSpanClass}>Draft text</span>
@@ -429,6 +501,7 @@ export default async function AdminSceneWorkspacePage({ params, searchParams }: 
 
             <div className="flex flex-wrap gap-2">
               <form action={generateSceneSummaryFromDraft}>
+                {stickyHidden}
                 <input type="hidden" name="sceneId" value={scene.id} />
                 <button
                   type="submit"
@@ -439,7 +512,7 @@ export default async function AdminSceneWorkspacePage({ params, searchParams }: 
                 </button>
               </form>
               <Link
-                href={`/admin/chapters/${scene.chapterId}`}
+                href={withWorkspaceSticky(`/admin/chapters/${scene.chapterId}`, sticky)}
                 className="rounded-full border border-amber-800/30 bg-amber-50 px-4 py-2 text-sm font-medium text-amber-950 hover:bg-amber-100"
               >
                 Back to chapter
@@ -450,6 +523,7 @@ export default async function AdminSceneWorkspacePage({ params, searchParams }: 
           <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm space-y-3">
             <p className="text-sm font-medium text-stone-900">Trace + continuity summaries</p>
             <form action={updateSceneWorkspace} className="space-y-3">
+              {stickyHidden}
               <input type="hidden" name="id" value={scene.id} />
               <label className={labelClass}>
                 <span className={labelSpanClass}>Source trace summary</span>
@@ -492,11 +566,25 @@ export default async function AdminSceneWorkspacePage({ params, searchParams }: 
             structuredDataJson={scene.structuredDataJson}
             locked={locked}
             guidance={guidance}
+            workspaceStickyHidden={stickyHidden}
+          />
+
+          <SceneReadinessPanel
+            sceneId={scene.id}
+            legality={legality}
+            worldStates={worldStates}
+            people={scene.persons.map((p) => ({ id: p.id, name: p.name }))}
+            selectedWorldStateId={selectedWorldStateId}
+            selectedFocalPersonId={selectedFocalPersonId || null}
+            debug={showStage8Debug}
           />
 
           <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm space-y-3">
             <p className="text-sm font-medium text-stone-900">Link entities</p>
             <form method="get" className="space-y-3">
+              {showStage8Debug ? <input type="hidden" name="debug" value="1" /> : null}
+              <input type="hidden" name="ws" value={selectedWorldStateId ?? ""} />
+              <input type="hidden" name="focal" value={selectedFocalPersonId ?? ""} />
               <label className={labelClass}>
                 <span className={labelSpanClass}>Type</span>
                 <select name="t" defaultValue={type} className={fieldClass}>
@@ -531,12 +619,13 @@ export default async function AdminSceneWorkspacePage({ params, searchParams }: 
                     const rid = String(o.id ?? "");
                     const label = String((o.name ?? o.title ?? o.description ?? rid) || "(unknown)");
                     const href = adminHref(type, rid);
+                    const entityHref = href ? withWorkspaceSticky(href, sticky) : null;
                     return (
                       <li key={rid} className="rounded-lg border border-stone-200 bg-white p-3">
                         <div className="flex items-start justify-between gap-3">
                           <div className="min-w-0">
-                            {href ? (
-                              <Link href={href} className="block truncate font-medium text-amber-900 hover:underline">
+                            {entityHref ? (
+                              <Link href={entityHref} className="block truncate font-medium text-amber-900 hover:underline">
                                 {label}
                               </Link>
                             ) : (
@@ -545,6 +634,7 @@ export default async function AdminSceneWorkspacePage({ params, searchParams }: 
                             <p className="mt-1 font-mono text-[11px] text-stone-500">{rid}</p>
                           </div>
                           <form action={linkEntityToScene}>
+                            {stickyHidden}
                             <input type="hidden" name="sceneId" value={scene.id} />
                             <input type="hidden" name="entityType" value={type} />
                             <input type="hidden" name="entityId" value={rid} />

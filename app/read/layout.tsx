@@ -1,5 +1,5 @@
-import { ReadNav } from "@/components/read-nav";
 import type { Metadata } from "next";
+import { ReadCockpitFrame } from "@/components/read/read-cockpit-frame";
 
 export const metadata: Metadata = {
   title: "Read — Campti",
@@ -16,10 +16,5 @@ export default function ReadLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className="flex min-h-screen flex-col bg-[#0f0e0c] text-stone-200">
-      <ReadNav />
-      <div className="flex-1 px-6 py-12 sm:px-10 lg:px-12">{children}</div>
-    </div>
-  );
+  return <ReadCockpitFrame>{children}</ReadCockpitFrame>;
 }

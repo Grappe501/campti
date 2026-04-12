@@ -174,4 +174,31 @@ export const worldPressureBundleUpdateSchema = worldPressureBundleUpsertSchema
   .omit({ worldStateId: true })
   .extend({ id: z.string().cuid() });
 
+/** One line per driver; first six non-empty lines stored. */
+export const worldStateEraProfileUpsertSchema = z.object({
+  worldStateId: z.string().cuid(),
+  driversText: z.string().max(20000).optional().nullable(),
+  powerSummary: optText(50000),
+  meaningOfWork: optText(50000),
+  knobEconomicPressure: emptyToUndefInt(int0_100.optional()),
+  knobRelationalInterdependence: emptyToUndefInt(int0_100.optional()),
+  knobAutonomyBaseline: emptyToUndefInt(int0_100.optional()),
+  knobSystemicExtraction: emptyToUndefInt(int0_100.optional()),
+  knobCollectiveCohesion: emptyToUndefInt(int0_100.optional()),
+  evidenceRationale: optText(50000),
+  notes: optText(50000),
+  recordType: optRt,
+  visibility: optVis,
+  certainty: optText(500),
+});
+
+export function parseWorldStateEraDriversText(raw: string | null | undefined): string[] {
+  if (!raw?.trim()) return [];
+  return raw
+    .split(/\r?\n/)
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .slice(0, 6);
+}
+
 export const deleteByIdSchema = z.object({ id: z.string().cuid() });

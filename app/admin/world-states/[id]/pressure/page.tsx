@@ -23,6 +23,9 @@ export default async function WorldStatePressurePage({ params }: Props) {
           <Link href="/admin/world-states" className="text-amber-900 hover:underline">
             ← World states
           </Link>
+          <Link href={`/admin/world-states/${ws.id}/profile`} className="text-amber-900 hover:underline">
+            Era profile
+          </Link>
           <Link href={`/admin/world-states/${ws.id}/knowledge`} className="text-amber-900 hover:underline">
             Knowledge horizon (5.5) →
           </Link>
@@ -63,6 +66,13 @@ export default async function WorldStatePressurePage({ params }: Props) {
 
       <section className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm">
         <h2 className="text-lg font-medium text-stone-900">World pressure bundle</h2>
+        <p className="mt-1 text-sm text-stone-600">
+          Era knobs can tilt these weights at runtime —{" "}
+          <Link href={`/admin/world-states/${ws.id}/profile`} className="text-amber-900 hover:underline">
+            edit era profile
+          </Link>
+          .
+        </p>
         {bundle ? (
           <div className="mt-3 space-y-2 text-sm text-stone-700">
             <p>

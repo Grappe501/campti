@@ -8,8 +8,10 @@ import type {
   Person,
   WorldGovernanceProfile,
   WorldPressureBundle,
+  WorldStateEraProfile,
   WorldStateReference,
 } from "@prisma/client";
+import type { EffectivePressureWeights } from "@/lib/world-era-profile";
 
 export type WorldGovernanceProfileRecord = WorldGovernanceProfile;
 export type CharacterGovernanceImpactRecord = CharacterGovernanceImpact;
@@ -37,4 +39,9 @@ export type CharacterPressureBundle = {
   demographic: CharacterDemographicProfile | null;
   familyPressure: CharacterFamilyPressureProfile | null;
   characterState: CharacterState | null;
+  /** Stage 5 bundle row when present; used with era knobs for effective weights. */
+  worldPressureBundle: WorldPressureBundle | null;
+  eraProfile: WorldStateEraProfile | null;
+  /** Era-tilted weights; null when bundle or era profile missing. */
+  effectivePressureWeights: EffectivePressureWeights | null;
 };

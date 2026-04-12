@@ -140,6 +140,7 @@ export const eventUpdateSchema = eventCreateSchema.extend({
 
 export const chapterCreateSchema = z.object({
   title: z.string().trim().min(1, "Title is required"),
+  bookId: z.string().trim().min(1).optional(),
   summary: z.string().trim().optional(),
   timePeriod: z.string().trim().optional(),
   chapterNumber: optionalInt,

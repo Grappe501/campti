@@ -14,6 +14,7 @@ import {
   WritingMode,
 } from "@prisma/client";
 import type { PrismaClient } from "@prisma/client";
+import { DEFAULT_BOOK_ID } from "../lib/constants/narrative-defaults";
 import { DEMO } from "../lib/demo-book/ids";
 import { SCENE_DRAFTS } from "../lib/demo-book/scene-drafts-registry";
 
@@ -821,8 +822,10 @@ export async function seedFullDemo(prisma: PrismaClient) {
     await prisma.chapter.upsert({
       where: { id: ch.id },
       update: {
+        bookId: DEFAULT_BOOK_ID,
         title: ch.title,
         chapterNumber: ch.chapterNumber,
+        sequenceInBook: ch.chapterNumber ?? 0,
         summary: ch.summary,
         status: ch.status,
         timePeriod: ch.timePeriod,
@@ -833,6 +836,8 @@ export async function seedFullDemo(prisma: PrismaClient) {
       },
       create: {
         id: ch.id,
+        bookId: DEFAULT_BOOK_ID,
+        sequenceInBook: ch.chapterNumber ?? 0,
         title: ch.title,
         chapterNumber: ch.chapterNumber,
         summary: ch.summary,

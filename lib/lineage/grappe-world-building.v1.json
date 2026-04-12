@@ -1,0 +1,374 @@
+{
+  "version": "4",
+  "disclaimer": "Fiction, atmosphere, and deliberate inference. Does not override parish proof or interpretation.authority_note in the lineage file. Campti is the narrative stage; GRP-* ids parallel genealogy for prompts and scenes.",
+  "setting": {
+    "primary_label": "Campti & Cane River corridor",
+    "primary_pocket_ids": ["wb-pocket-campti-fiction-stage", "wb-pocket-campti-1805"],
+    "geography": "Campti (Natchitoches Parish), Red River, Isle Brevelle, upper river memory vs present-day town — your novel's ground truth is emotional and political, not a single map coordinate.",
+    "story_function": "Every Grappé generation eventually answers to this place: who holds land, who names children, who speaks for the river when the empire changes.",
+    "tone_notes": [
+      "Post-Purchase paperwork rubbing against oral tenure",
+      "Creole households as small diplomacies",
+      "River as character — floods, fords, testimony"
+    ]
+  },
+  "grappe_narrative_spine": [
+    {
+      "order": 1,
+      "grp_id": "GRP-0103",
+      "story_role": "Chitimacha / Grand Terre lineage cluster — deep time under the story",
+      "campti_connection": "Not Campti-born; explains why later generations carry Indigenous-colonial friction into the Cane River world."
+    },
+    {
+      "order": 2,
+      "grp_id": "GRP-0101",
+      "story_role": "Jeanne / Marie Anne Therese de la Grande Terre — maternal root, multiple colonial names",
+      "campti_connection": "Guedon line feeds Louise; landscape memory travels down to grandchildren at the river."
+    },
+    {
+      "order": 3,
+      "grp_id": "GRP-0100",
+      "story_role": "Jacques Guedon dit Nantais — colonial Louisiana anchor",
+      "campti_connection": "Death at Campti (per profile); ties founding maternal line to the same parish geography as later Campti chapters."
+    },
+    {
+      "order": 4,
+      "grp_id": "GRP-0110",
+      "story_role": "Jean Baptiste II Besson — first marriage, widowhood arc for Louise",
+      "campti_connection": "Explains children ordering before Alexis; frontier marriage politics upstream of Campti settlement."
+    },
+    {
+      "order": 5,
+      "grp_id": "GRP-0002",
+      "story_role": "Louise Marguerite Guedon — widow, strategist, regional power node",
+      "campti_connection": "Mother of Francois household line; oral-history Rosette/freedom lore attaches to her strategy."
+    },
+    {
+      "order": 6,
+      "grp_id": "GRP-0001",
+      "story_role": "Alexis Grappe dit Touline — alliance marriage, French colonial authority",
+      "campti_connection": "Not 'of Campti' in 1805 deposition (that's his son); his line inherits river politics that land in Campti generations later."
+    },
+    {
+      "order": 7,
+      "grp_id": "GRP-0040",
+      "story_role": "Francois Grappe Sr. — upper Red childhood, trader, 'of Campte' in 1805 testimony",
+      "campti_connection": "Primary fiction lens for Campti: sworn local knowledge, father's commandant past, mill stones — your town's name in his mouth."
+    },
+    {
+      "order": 8,
+      "grp_id": "GRP-0041",
+      "story_role": "Marie Louise Rosette — enslaved/free Creole maternal anchor (dit Souris, Dupre-associated labels in screenshots)",
+      "campti_connection": "Household center for Campti/Cane River descendants; narrative and screenshot confidence high — parish extracts still gold standard."
+    },
+    {
+      "order": 9,
+      "grp_id": "GRP-0055",
+      "story_role": "Jacques Grappe — De La Cerda branch anchor (parallel to Marie Pelagie/Perot direct-path line)",
+      "campti_connection": "Natchitoches-born, ends in Claiborne — radiation from Campti/Cane River; B-plot vs your Perot/Dorthlon A-plot."
+    },
+    {
+      "order": 10,
+      "grp_id": "GRP-0042",
+      "story_role": "Marie Pelagie Grappe (1766) — mother of Emmanuel Lucas; not the Pelagie b.1790 sibling",
+      "campti_connection": "Perot marriage; chronology distinguishes her from GRP-0052 in UI timelines."
+    },
+    {
+      "order": 11,
+      "grp_id": "GRP-0203",
+      "story_role": "Jean Chrysostome Perot — spouse line, spelling variants (Perot/Perrot/Dorthlon)",
+      "campti_connection": "Legal and godparent paper often runs Natchitoches → hinterland; Campti as later chapter."
+    },
+    {
+      "order": 12,
+      "grp_id": "GRP-0320",
+      "story_role": "Emmanuel Lucas Grappe Perot — dual-surname pivot; bridge to LeBrun/Dorthlon/Trichel",
+      "campti_connection": "Screenshot-locked; spouse/children + civil war era next."
+    },
+    {
+      "order": 13,
+      "grp_id": "GRP-0011",
+      "story_role": "Jean B Grappe — direct-line link toward American Louisiana",
+      "campti_connection": "Parallel branch to Francois/Rosette household; can contrast town vs plantation vs river."
+    },
+    {
+      "order": 14,
+      "grp_id": "GRP-0021",
+      "story_role": "Buford B Grappe Sr. — twentieth-century pivot, Arkansas/Louisiana",
+      "campti_connection": "Modern family return to Campti as home place / story present."
+    },
+    {
+      "order": 15,
+      "grp_id": "GRP-0032",
+      "story_role": "Thomas A Grappe — user's line generation",
+      "campti_connection": "Contemporary hook to Campti as lived place."
+    },
+    {
+      "order": 16,
+      "grp_id": "GRP-0035",
+      "story_role": "Stoywn Grappe — present descendant placeholder",
+      "campti_connection": "Reader surrogate; name/spelling open — Campti as 'home' in fiction."
+    },
+    {
+      "order": 17,
+      "grp_id": "GRP-0330",
+      "story_role": "Marie Jeanne — Model B mother of Pelagie in screenshot chain; Francois (St Denis) + Fanny as her parents",
+      "campti_connection": "Deep colonial labor and naming layers under the same Cane River geography as Campti chapters — fiction can hold ambiguity until parish merge."
+    }
+  ],
+  "branch_map": {
+    "summary": "Three layers: founding (Alexis+Louise), Rosette generation (Francois+Rosette), optional Model B subgraph (Jeanne + St Denis parents GRP-0330–0332) parallel to Rosette labels, then forks — Pelagie/Perot pivot at Emmanuel Lucas GRP-0320 vs Jacques/De La Cerda parallel. Forward: LeBrun / Dorthlon / Fee Trichel still need parish proof. Marie Pelagie 1766 is Emmanuel's mother — not Pelagie b.1790.",
+    "A_founding_line": ["GRP-0001", "GRP-0002", "GRP-0110"],
+    "B_rosette_generation": ["GRP-0040", "GRP-0041"],
+    "B2_jeanne_st_denis_screenshot_subgraph": ["GRP-0331", "GRP-0332", "GRP-0330"],
+    "C_direct_path_perot_hypothesis": [
+      "GRP-0040",
+      "GRP-0041",
+      "GRP-0042",
+      "GRP-0203",
+      "GRP-0320"
+    ],
+    "C_jacques_de_la_cerda_branch": [
+      "GRP-0055",
+      "GRP-0300",
+      "GRP-0301",
+      "GRP-0309",
+      "GRP-0302",
+      "GRP-0303",
+      "GRP-0304",
+      "GRP-0305",
+      "GRP-0306",
+      "GRP-0307",
+      "GRP-0308"
+    ],
+    "unresolved_or_noisy": [
+      "Son Jacques Grappe + spouse collision with Marie Rosa (GRP-0306)",
+      "Exact birth years for several Jacques-branch children",
+      "Whether Emmanuel Lucas maps to GRP-0214 Manuel or a distinct person",
+      "Pelagie name collision: Marie Pelagie 1766 (GRP-0042) vs Pelagie 1790 (GRP-0052)",
+      "Rosette (GRP-0041) vs Marie Jeanne (GRP-0330) as Pelagie's mother — Model A vs B; parish merge before narrative canon"
+    ],
+    "next_proof_targets": [
+      "GRP-0320 spouse(s) and children — parish/civil",
+      "Marie Ursule LeBrun",
+      "Francois Eugene Dorthlon",
+      "Leontine Fee Dortlon Trichel"
+    ]
+  },
+  "documents": [
+    {
+      "id": "wb-doc-sibley-1805-grappe",
+      "title": "Deposition of Francis Grappe before John Sibley JP (Red River French settlements)",
+      "author": "John Sibley (recorder); Francois/Francis Grappe (deponent)",
+      "published_or_date": "1805-09-22; reported National Intelligencer (Washington DC)",
+      "kind": "primary_transcript",
+      "related_grp_ids": ["GRP-0040", "GRP-0041"],
+      "extracted_facts": [
+        "Deponent 'of Campte' (Campti), age 57 in Sept 1805 → birth ~1748.",
+        "Born near ancient Caddo village on Red River; 'upwards of five hundred miles above Natchitoches' by river course.",
+        "Lived there until age sixteen or seventeen; parents had lived there years before his birth.",
+        "Father commandant for years; succeeded by M. Gloso; post abandoned after Louisiana cession to Spain (1762).",
+        "Father built small fort by governor's order: two small cannon, flagstaff, French flag occasionally hoisted.",
+        "~30 years French occupation as military post + family settlement; agriculture like lower Louisiana.",
+        "Mill stones: deponent brought them down in 1778 to Opelousas; said Company had brought them to Caddo country.",
+        "Also describes Dout on Sabine, Yattasee Point / Bayou Pierre area, Spanish jurisdiction, Verge exclusive Indian trade — second paragraph."
+      ],
+      "inferred": [
+        "Witness is credible to US as intelligence asset: trade geography + French residue after 1762.",
+        "Childhood memory reaches back before 1762 abandonment — good for timeline of father's role.",
+        "Mother absent from text: room for Rosette as silent or off-record in fiction (do not assert as fact)."
+      ],
+      "between_the_lines": [
+        "Sibley's mission: new state inventorying land, improvements, and whether locals are 'hostile' — testimony is also surveillance.",
+        "Naming 'the Company' as pre-birth trader network — corporate ghost in family memory.",
+        "Moving mill stones 1778: heavy logistics as story image of displacement and reuse."
+      ],
+      "fiction_hooks": [
+        "Swearing-in room 1805: smell of ink, September heat, age 57 body remembering cold at the upper post.",
+        "Two cannon that never quite equal 'fifteen soldiers' on paper.",
+        "Flag 'occasionally' hoisted — when, and for whom?"
+      ]
+    },
+    {
+      "id": "wb-doc-cole-jett-2024-red-river-french",
+      "title": "Testimony by Francois Grappe about the French along the Red River in New Orleans Territory",
+      "author": "Robin Cole-Jett",
+      "published_or_date": "2024-09-24",
+      "kind": "secondary_article",
+      "related_grp_ids": ["GRP-0040"],
+      "extracted_facts": [
+        "Context: Dr. John Sibley Indian agent + JP Natchitoches; summer 1805 counts; autumn task to interview prior inhabitants for US land use.",
+        "1729 map reference: Yatachez / Nasonis villages along R. Rouge; Ruderman map detail.",
+        "Nassonites / Caddoquis: mound region, long continuity; de la Harpe 1719 trading posts; Harpe post location still debated (Bowie County TX conjecture, right bank).",
+        "Yattasee Point: displaced peoples, Bayou Pierre / Red near Shreveport; vacherie; African/Native Creoles, Panis, Canechi freed under royal decree context.",
+        "Fort le Dout (Sabine / Lake Fork area): Handbook of Texas; Woldert site possibility.",
+        "Historiographic split: McConnell '500 miles' twin villages OK-TX vs Cole-Jett Lamar County Fort St. Louis de Carolette reading — not resolved in article."
+      ],
+      "inferred": [
+        "Upper Red is a palimpsest: French company posts, Caddo towns, later American grid — good for layered haunt in fiction.",
+        "Yattasee pocket as refuge ecology matches themes of Rosette-line liminality (inference only)."
+      ],
+      "between_the_lines": [
+        "Article's job is partly to correct Texas canon — your novel can mirror that: contested memory vs map.",
+        "Indigenous nations named but testimony centered on French infrastructure — whose words get preserved?"
+      ],
+      "fiction_hooks": [
+        "Map table: finger tracing R. Rouge while deponent speaks '500 miles'.",
+        "Fort Dout as unseen ruin — 'remains of buildings and works now to be seen' from deposition echoed in Cole-Jett.",
+        "Yattasee ad-hoc village: displaced stacking on displaced — extra plot pressure for mixed-lineage household stories."
+      ]
+    },
+    {
+      "id": "wb-doc-user-batch-jacques-de-la-cerda",
+      "title": "User batch: Jacques Grappe branch vs Pelagie/Perot fork",
+      "author": "Project notes",
+      "published_or_date": "2026",
+      "kind": "user_notes",
+      "related_grp_ids": [
+        "GRP-0055",
+        "GRP-0300",
+        "GRP-0301",
+        "GRP-0042",
+        "GRP-0203"
+      ],
+      "extracted_facts": [
+        "Jacques Grappe b. 20 Sep 1763 Natchitoches; d. Oct 1848 Claiborne Parish — son of Francois+Rosette (parallel branch).",
+        "Marie Rosa De La Cerda ca. 1800 Nacogdoches — ca. 1853; spouse of Jacques.",
+        "Children include Francois (s/o Jacques), Gabriel, Tebourse Jacques, Severin, Margil/Magee, Jacques (son), Marie Louise, Marie Jeanne.",
+        "Francois (s/o Jacques) married Marie Julienne Trichel; witness Eugene D'Ortolon — Trichel/D'Ortolon network crosses this branch.",
+        "Direct-path candidate remains Pelagie/Perot/Emmanuel Lucas line — not replaced by Jacques branch."
+      ],
+      "inferred": [
+        "Jacques branch shows Natchitoches/Campti → Claiborne/Bienville radiation — good for novel geography even if not your DNA line.",
+        "Two Francois Grappe labels (Sr. vs son of Jacques) are a permanent disambiguation problem in prompts."
+      ],
+      "between_the_lines": [
+        "Compiled trees duplicate 'Jacques' as child with same spouse as father — classic GEDCOM collision.",
+        "Trichel appears on the 'wrong' branch first — history is networked, not linear."
+      ],
+      "fiction_hooks": [
+        "Two brothers named Francois in living memory — which one the courthouse clerk meant.",
+        "Claiborne burial weather vs Campti porch — same family, different county silence."
+      ]
+    },
+    {
+      "id": "wb-doc-screenshots-rosette-emmanuel-bridge",
+      "title": "Screenshot chain: Francois+Rosette → Marie Pelagie+Perot → Emmanuel Lucas",
+      "author": "Project / Ancestry screenshots",
+      "published_or_date": "2026",
+      "kind": "user_notes",
+      "related_grp_ids": ["GRP-0040", "GRP-0041", "GRP-0042", "GRP-0203", "GRP-0320", "GRP-0052"],
+      "extracted_facts": [
+        "Francois Baptiste Touline Grappe + Marie Louise Rosette (dit Souris Jeanne, Dupre-associated) consistent across panels.",
+        "Marie Pelagie Grappe b.1766 + Jean Chrysostome Perot → Emmanuel Lucas Grappe Perot b.1801 d.1860 with dual Grappe/Perot naming.",
+        "Pelagie b.1790 (GRP-0052) appears in same household timeline as sibling — not Emmanuel's mother (chronology).",
+        "Trichel names (e.g. Pierre Andre Athanase Trichel) appear in related streams — network crosses before later Trichel marriages."
+      ],
+      "inferred": [
+        "Rosette generation is the documented enslaved/free Creole maternal pivot — not a 'missing' branch.",
+        "Emmanuel is the identity-transition generation for surname and legal status modeling in fiction."
+      ],
+      "between_the_lines": [
+        "Screenshots prove structure across UI, not a single parish PDF — next step is citation-grade extraction.",
+        "Mixed-status sibling labels in trees need per-person parish support."
+      ],
+      "fiction_hooks": [
+        "Two Pelagies in one scroll — the UI lies unless you read birth years.",
+        "Dupre string — who held the pen vs who held the child."
+      ]
+    },
+    {
+      "id": "wb-doc-screenshots-st-denis-jeanne-fanny",
+      "title": "Screenshot chain: Marie Jeanne; parents Francois (St Denis) + Fanny",
+      "author": "Project / Ancestry screenshots",
+      "published_or_date": "2026",
+      "kind": "user_notes",
+      "related_grp_ids": ["GRP-0330", "GRP-0331", "GRP-0332", "GRP-0042", "GRP-0041"],
+      "extracted_facts": [
+        "Some panels name Pelagie's mother as Marie Jeanne (enslaved) with father Francois Baptiste Touline Grappe.",
+        "Jeanne's parents named as Francois (St Denis slave) and Fanny — extends documented enslaved line before Rosette-only labels in other imports.",
+        "1779 marriage/property contract cited by user as status document (assets, Trichel/Fontenot network) — needs full archive citation in lineage file."
+      ],
+      "inferred": [
+        "Model A (Rosette as mother in JSON) vs Model B (Jeanne + St Denis grandparents) must merge in parish acts — fiction can hold both until proof.",
+        "'St Denis' may index Louis Juchereau de St Denis colonial networks — not automatic proof of estate or individual."
+      ],
+      "between_the_lines": [
+        "Same bloodline can carry multiple colonial name layers — silence is not absence.",
+        "Property contracts list people as assets — different evidentiary weight than christening margins."
+      ],
+      "fiction_hooks": [
+        "A mother known under three names in three documents — which one the church used when Pelagie married.",
+        "Fanny without a surname yet — room for careful research, not invention as fact."
+      ]
+    }
+  ],
+  "setting_pockets": [
+    {
+      "id": "wb-pocket-campti-fiction-stage",
+      "label": "Campti — primary fiction stage",
+      "geography": "Unincorporated community, Natchitoches Parish, Louisiana; Cane River National Heritage Area; historically tied to Creole plantations, Catholic parish life, Red River trade and later rail/road.",
+      "era_notes": [
+        "Spanish/French/American administrative layers",
+        "Jim Crow and civil rights as later novel pressure",
+        "Present-day Campti as emotional 'home' for returning family story"
+      ],
+      "mood_for_fiction": "Small place where everyone maps everyone else's kin; river memory vs courthouse paper.",
+      "related_grp_ids": ["GRP-0040", "GRP-0041", "GRP-0021", "GRP-0032", "GRP-0035"],
+      "related_document_ids": ["wb-doc-sibley-1805-grappe"]
+    },
+    {
+      "id": "wb-pocket-caddo-ancient-village",
+      "label": "Ancient Caddo village (upper Red, Nassonite area)",
+      "geography": "Red River above Natchitoches; '500 miles' by river measure in 1805 speech — not modern highway miles. Nassonite / Caddo country per Cole-Jett digest.",
+      "era_notes": ["French military-civilian post ~30 years to 1762", "Agriculture parallel to lower Louisiana"],
+      "mood_for_fiction": "Palisade logic, fifteen soldiers never full, cannon as theatre of sovereignty.",
+      "related_grp_ids": ["GRP-0040"],
+      "related_document_ids": ["wb-doc-sibley-1805-grappe", "wb-doc-cole-jett-2024-red-river-french"]
+    },
+    {
+      "id": "wb-pocket-campti-1805",
+      "label": "Campti / Campte (deposition home)",
+      "geography": "Natchitoches County, New Orleans Territory / early Louisiana; Francois 'of Campte' when sworn.",
+      "era_notes": ["Post-Purchase US jurisdiction", "Justice of peace office as paper border"],
+      "mood_for_fiction": "Old river knowledge translated into sworn English for a new empire.",
+      "related_grp_ids": ["GRP-0040"],
+      "related_document_ids": ["wb-doc-sibley-1805-grappe"]
+    },
+    {
+      "id": "wb-pocket-yattasee-bayou-pierre",
+      "label": "Yattasee Point / Bayou Pierre (Spanish line)",
+      "geography": "SW branch Red ~25 leagues above Natchitoches; later Shreveport area; French grants, Spanish jurisdiction in testimony.",
+      "era_notes": ["Refugee indigenous aggregation", "Vacherie economy"],
+      "mood_for_fiction": "Border fluidity; who counts as 'French inhabitant' on paper vs ground.",
+      "related_grp_ids": [],
+      "related_document_ids": ["wb-doc-sibley-1805-grappe", "wb-doc-cole-jett-2024-red-river-french"]
+    },
+    {
+      "id": "wb-pocket-fort-dout-sabine",
+      "label": "Le Dout / Sabine trading ground",
+      "geography": "~150 miles NW Natchitoches per deposition; Sabine / Lake Fork conjectures (Handbook of Texas).",
+      "era_notes": ["Ancient trade resort", "French flag memory"],
+      "mood_for_fiction": "Ruin-gazing; trade as diplomacy.",
+      "related_document_ids": ["wb-doc-sibley-1805-grappe", "wb-doc-cole-jett-2024-red-river-french"]
+    },
+    {
+      "id": "wb-pocket-claiborne-jacques-end",
+      "label": "Claiborne Parish — Jacques branch terminus (1848)",
+      "geography": "North Louisiana; Jacques Grappe death Oct 1848 per user batch — not Campti but same story region.",
+      "era_notes": ["Post-statehood Louisiana", "County formation / parish records"],
+      "mood_for_fiction": "End-of-life away from birthplace — migration as plot, not failure.",
+      "related_grp_ids": ["GRP-0055"],
+      "related_document_ids": ["wb-doc-user-batch-jacques-de-la-cerda"]
+    }
+  ],
+  "cross_cutting_themes": [
+    "Campti as moral center of the fiction even when scenes range the upper Red — always ask who gets to come home.",
+    "Knowledge of rivers as state asset — Grappe's testimony as cartography of memory.",
+    "Company / post / family — blurred institutions on the frontier.",
+    "Silence of women and enslaved people in official oaths — narrative space for Rosette and Louise strategies.",
+    "Displacement stacks (Yattasee, mill stones, abandoned posts) as emotional pattern for Creole fiction.",
+    "US 'legitimacy of land claims' vs oral tenure — pressure on Campti present.",
+    "Parallel branches (Jacques/De La Cerda vs Pelagie/Perot) — same Rosette generation, different novels inside one family; Trichel/D'Ortolon ties can appear on the 'wrong' branch first."
+  ]
+}

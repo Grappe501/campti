@@ -11,6 +11,10 @@ import {
   buildPromptVersionLabel,
   INSTRUCTIONS_VERSION,
 } from "../lib/ingestion-constants";
+import {
+  DEFAULT_BOOK_ID,
+  DEFAULT_EPIC_ID,
+} from "../lib/constants/narrative-defaults";
 import { prisma } from "../lib/prisma";
 import { seedOriginWorldAnchor } from "./seed-origin-anchor";
 import { seedOpeningTerrainChapterOnePass } from "./seed-opening-terrain-pass";
@@ -22,6 +26,8 @@ import { seedEnvironment } from "./seed-environment";
 import { seedPressure } from "./seed-pressure";
 import { seedRelationship } from "./seed-relationship";
 import { seedContinuity } from "./seed-continuity";
+import { seedIngestionPacket01 } from "./seed-ingestion-packet-01";
+import { seedIngestionPacketRedRiver } from "./seed-ingestion-packet-red-river";
 
 async function main() {
   const people = [
@@ -29,6 +35,8 @@ async function main() {
     { id: "seed-person-francois", name: "François Grappe" },
     { id: "seed-person-buford", name: 'Buford "Trixie" Grappe' },
     { id: "seed-person-narrator", name: "Narrator" },
+    { id: "seed-person-asha", name: "Asha" },
+    { id: "seed-person-elaya", name: "Elaya" },
   ];
 
   for (const p of people) {
@@ -87,11 +95,37 @@ async function main() {
     });
   }
 
-  const chPrologue = await prisma.chapter.upsert({
-    where: { id: "seed-ch-prologue" },
+  await prisma.epic.upsert({
+    where: { id: DEFAULT_EPIC_ID },
     update: {},
     create: {
+      id: DEFAULT_EPIC_ID,
+      title: "Campti Epic",
+      movementCount: 8,
+      status: "draft",
+    },
+  });
+
+  await prisma.book.upsert({
+    where: { id: DEFAULT_BOOK_ID },
+    update: {},
+    create: {
+      id: DEFAULT_BOOK_ID,
+      epicId: DEFAULT_EPIC_ID,
+      movementIndex: 1,
+      title: "Seed book (movement 1)",
+      readerFacingTitle: "Book I",
+      status: "draft",
+    },
+  });
+
+  const chPrologue = await prisma.chapter.upsert({
+    where: { id: "seed-ch-prologue" },
+    update: { bookId: DEFAULT_BOOK_ID },
+    create: {
       id: "seed-ch-prologue",
+      bookId: DEFAULT_BOOK_ID,
+      sequenceInBook: 0,
       title: "Prologue",
       chapterNumber: 0,
       summary: "The story begins before the road, in smoke and memory.",
@@ -104,9 +138,11 @@ async function main() {
 
   const ch1 = await prisma.chapter.upsert({
     where: { id: "seed-ch-1" },
-    update: {},
+    update: { bookId: DEFAULT_BOOK_ID },
     create: {
       id: "seed-ch-1",
+      bookId: DEFAULT_BOOK_ID,
+      sequenceInBook: 1,
       title: "Chapter 1: Alexis – Arrival in Natchitoches",
       chapterNumber: 1,
       summary: "Alexis arrives in Natchitoches; the town and its histories press into view.",
@@ -119,9 +155,11 @@ async function main() {
 
   const ch2 = await prisma.chapter.upsert({
     where: { id: "seed-ch-2" },
-    update: {},
+    update: { bookId: DEFAULT_BOOK_ID },
     create: {
       id: "seed-ch-2",
+      bookId: DEFAULT_BOOK_ID,
+      sequenceInBook: 2,
       title: "Chapter 2: François – The Trader, the Interpreter, the Bridge",
       chapterNumber: 2,
       summary: "François moves between worlds, trade, and translation.",
@@ -545,6 +583,8 @@ async function main() {
   await seedPressure(prisma);
   await seedRelationship(prisma);
   await seedContinuity(prisma);
+  await seedIngestionPacket01(prisma);
+  await seedIngestionPacketRedRiver(prisma);
 }
 
 main()

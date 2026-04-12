@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
+import { CamptiLandingSplash } from "@/components/public/campti-landing-splash";
 import { CharacterSpotlight } from "@/components/public/character-spotlight";
 import { PlaceSpotlight } from "@/components/public/place-spotlight";
 import { PublicHero } from "@/components/public/public-hero";
@@ -38,6 +39,7 @@ export default async function HomePage() {
   const home = await getPublicHomeData();
 
   return (
+    <CamptiLandingSplash>
     <div
       className={`${display.variable} ${sans.variable} min-h-screen bg-[#0f0e0c] font-sans text-stone-200 antialiased`}
       style={{ fontFamily: "var(--font-campti-sans), system-ui, sans-serif" }}
@@ -237,5 +239,6 @@ export default async function HomePage() {
         </footer>
       </div>
     </div>
+    </CamptiLandingSplash>
   );
 }

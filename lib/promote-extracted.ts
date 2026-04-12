@@ -6,6 +6,7 @@ import {
   SymbolCategory,
   VisibilityStatus,
 } from "@prisma/client";
+import { DEFAULT_BOOK_ID } from "@/lib/constants/narrative-defaults";
 import { prisma } from "@/lib/prisma";
 
 type JsonObj = Record<string, unknown>;
@@ -334,6 +335,7 @@ export async function promoteExtractedChapter(
 
   const created = await prisma.chapter.create({
     data: {
+      bookId: DEFAULT_BOOK_ID,
       title,
       summary: str(d.summary) ?? str(d.description) ?? null,
       chapterNumber: num(d.chapterNumber) ?? null,

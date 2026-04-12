@@ -91,6 +91,12 @@ export default async function CharacterContinuityPage({ params }: Props) {
                     <span className="font-normal text-stone-600"> — {w.label}</span>
                   </h2>
                   <div className="flex flex-wrap gap-x-3 text-xs">
+                    <Link
+                      href={`/admin/characters/${id}/brain?worldStateId=${w.id}`}
+                      className="text-amber-900 hover:underline"
+                    >
+                      Stage 7 brain →
+                    </Link>
                     <Link href={`/admin/world-states/${w.id}/education`} className="text-amber-900 hover:underline">
                       Education norms →
                     </Link>

@@ -39,6 +39,13 @@ export async function seedEnvironment(prisma: PrismaClient): Promise<void> {
       description: "Shrinking population; layered oral and documentary memory.",
     },
     {
+      id: "seed-ws-ref-ws09",
+      eraId: "WS-09-RED-RIVER-TRADE-ERA",
+      label: "Red River Trade Era (pre-French contact, Caddo trade network)",
+      description:
+        "Caddoan-speaking trade houses and kin networks along the Red River; reputation is collective; public speech is indirect and risk-aware.",
+    },
+    {
       id: "seed-ws-ref-ws07",
       eraId: "WS-07-ENGINEERED-WATERWAY",
       label: "Engineered waterway",

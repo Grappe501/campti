@@ -1,5 +1,6 @@
 "use server";
 
+import { DEFAULT_BOOK_ID } from "@/lib/constants/narrative-defaults";
 import { prisma } from "@/lib/prisma";
 import { chapterCreateSchema, chapterUpdateSchema } from "@/lib/validation";
 import { RecordType, VisibilityStatus } from "@prisma/client";
@@ -19,6 +20,7 @@ function parseVisibility(v: string): VisibilityStatus {
 export async function createChapter(formData: FormData) {
   const parsed = chapterCreateSchema.safeParse({
     title: formData.get("title"),
+    bookId: formData.get("bookId"),
     summary: formData.get("summary"),
     timePeriod: formData.get("timePeriod"),
     chapterNumber: formData.get("chapterNumber"),
@@ -38,6 +40,7 @@ export async function createChapter(formData: FormData) {
   const d = parsed.data;
   await prisma.chapter.create({
     data: {
+      bookId: d.bookId?.trim() || DEFAULT_BOOK_ID,
       title: d.title,
       summary: d.summary?.length ? d.summary : null,
       timePeriod: d.timePeriod?.length ? d.timePeriod : null,
