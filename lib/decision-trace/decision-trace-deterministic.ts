@@ -121,6 +121,25 @@ export function deriveTriggerPressures(frame: CharacterCognitionFrame): Pressure
       weight: 0.42,
     });
   }
+  const sf = frame.socialFieldContext;
+  if (sf?.contractVersion === "2") {
+    out.push({
+      label: `Social witness / proximity risk (${(sf.witnessRisk * 100).toFixed(0)}/100)`,
+      weight: clamp01(sf.witnessRisk * 0.9),
+    });
+    out.push({
+      label: `Gossip network pressure (${(sf.gossipPressure * 100).toFixed(0)}/100; spread ${(sf.socialBreakdown.gossip.gossipSpreadFactor * 100).toFixed(0)})`,
+      weight: clamp01(sf.gossipPressure * 0.86),
+    });
+    out.push({
+      label: `Authority climate (${(sf.authorityPressure * 100).toFixed(0)}/100; civil ${(sf.socialBreakdown.authority.civilAuthorityPressure * 100).toFixed(0)}, elite ${(sf.socialBreakdown.authority.eliteClassPressure * 100).toFixed(0)})`,
+      weight: clamp01(sf.authorityPressure * 0.88),
+    });
+    out.push({
+      label: `Kin proximity (${(sf.kinProximityPressure * 100).toFixed(0)}/100; clusters ${sf.socialBreakdown.kin.clusters.length})`,
+      weight: clamp01(sf.kinProximityPressure * 0.82),
+    });
+  }
   if (!out.length && frame.fearStack.length) {
     out.push({
       label: `Ambient fear (top of stack): ${frame.fearStack[0]!.label.slice(0, 200)}`,

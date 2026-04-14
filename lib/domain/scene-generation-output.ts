@@ -1,3 +1,9 @@
+import type { HumanizationAdvisoryReport } from "@/lib/domain/author-voice-humanization";
+import type {
+  SceneGenerationSocialBundleV1,
+  SceneGenerationSocialQaScalars,
+} from "@/lib/domain/scene-generation-social";
+
 /**
  * Phase 6 — AI scene generation output (structured; never overwrites authoring/published reader text).
  */
@@ -29,4 +35,10 @@ export type SceneGenerationRunResult = {
   savedGenerationText: boolean;
   /** Ids of dependency edges created this pass (best-effort). */
   registeredDependencyIds: string[];
+  /** Phase 6.1 — copy of the bundle fed to the model (null if social field could not resolve). */
+  socialFieldGeneration?: SceneGenerationSocialBundleV1 | null;
+  /** QA scalars from the live field (debug / advisory; not shown to readers). */
+  socialFieldQaScalars?: SceneGenerationSocialQaScalars | null;
+  /** Phase 7 — deterministic humanization advisory (optional). */
+  humanizationAdvisory?: HumanizationAdvisoryReport | null;
 };

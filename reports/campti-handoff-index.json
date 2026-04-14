@@ -1,7 +1,7 @@
 {
   "kind": "index",
   "handoffVersion": 2,
-  "generatedAt": "2026-04-10T13:47:26.453Z",
+  "generatedAt": "2026-04-12T16:45:53.449Z",
   "purpose": "Entry point: open filesystem JSON for repo structure, story JSON for literary/narrative database state.",
   "repository": {
     "name": "campti",

@@ -30,7 +30,7 @@ export function ContinueReadingBanner() {
       const raw = localStorage.getItem(READING_PROGRESS_STORAGE_KEY);
       if (!raw) return;
       const p = JSON.parse(raw) as ContinueReadingPayload;
-      if (p?.sceneId && p?.chapterId) setPayload(p);
+      if (p?.sceneId && p?.chapterId) queueMicrotask(() => setPayload(p));
     } catch {
       /* ignore */
     }

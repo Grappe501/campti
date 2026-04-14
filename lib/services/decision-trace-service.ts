@@ -45,7 +45,7 @@ export async function buildDecisionTracePackage(
   const frame = await resolveCharacterCognitionFrame(
     params.characterId,
     params.sceneId,
-    params.simulation
+    params.simulation ? { simulation: params.simulation } : undefined
   );
   const pressureBreakdown = buildDecisionPressureBreakdown(frame);
   const cognitionPayload = {

@@ -25,6 +25,7 @@ import type {
   InnerVoiceTextureProfile,
   ThoughtFragmentProfile,
 } from "@/lib/domain/thought-realism";
+import type { SocialFieldContext } from "@/lib/domain/population-social-field";
 
 /** DB: `CharacterCoreProfile` (1:1 Person). */
 export type CharacterCore = {
@@ -168,6 +169,8 @@ export type CharacterCognitionFrame = {
   cognitiveDistortionProfile: CognitiveDistortionProfile;
   /** Phase 5C.2 — rhythm and bleed-through for inner voice. */
   innerVoiceTextureProfile: InnerVoiceTextureProfile;
+  /** Phase 5F — population density / witness / gossip pressures (deterministic, lightweight). */
+  socialFieldContext?: SocialFieldContext;
 } & ResolvedCognitionLayer;
 
 export type { RankedCognitionItem };
@@ -196,6 +199,7 @@ export type {
 export type GodModeAnswer = import("@/lib/domain/inner-voice").CharacterInnerVoiceResponse;
 
 export type {
+  ResolveCharacterCognitionFrameOptions,
   ResolveCognitionFrameSimulationOptions,
   SimulationCanonicalStatus,
   SimulationComparisonSummary,

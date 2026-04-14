@@ -103,6 +103,17 @@ function walk(
   }
 }
 
+/** One query at a time — avoids exhausting pooled DB connections (e.g. Supabase session mode). */
+async function runQueriesSequential(
+  fns: Array<() => Promise<unknown>>,
+): Promise<any[]> {
+  const out: any[] = [];
+  for (const fn of fns) {
+    out.push(await fn());
+  }
+  return out;
+}
+
 async function loadStorySnapshot(): Promise<Record<string, unknown>> {
   try {
     const [
@@ -127,8 +138,9 @@ async function loadStorySnapshot(): Promise<Record<string, unknown>> {
       metaScenes,
       characterRelationships,
       aliases,
-    ] = await Promise.all([
-      prisma.chapter.findMany({
+    ] = await runQueriesSequential([
+      () =>
+        prisma.chapter.findMany({
         orderBy: [{ chapterNumber: "asc" }],
         select: {
           id: true,
@@ -140,7 +152,8 @@ async function loadStorySnapshot(): Promise<Record<string, unknown>> {
           visibility: true,
         },
       }),
-      prisma.scene.findMany({
+      () =>
+        prisma.scene.findMany({
         orderBy: [{ chapterId: "asc" }, { orderInChapter: "asc" }],
         select: {
           id: true,
@@ -152,15 +165,18 @@ async function loadStorySnapshot(): Promise<Record<string, unknown>> {
           recordType: true,
         },
       }),
-      prisma.person.findMany({
+      () =>
+        prisma.person.findMany({
         orderBy: { name: "asc" },
         select: { id: true, name: true, description: true, recordType: true },
       }),
-      prisma.place.findMany({
+      () =>
+        prisma.place.findMany({
         orderBy: { name: "asc" },
         select: { id: true, name: true, placeType: true, description: true, recordType: true },
       }),
-      prisma.symbol.findMany({
+      () =>
+        prisma.symbol.findMany({
         orderBy: { name: "asc" },
         select: {
           id: true,
@@ -171,27 +187,33 @@ async function loadStorySnapshot(): Promise<Record<string, unknown>> {
           recordType: true,
         },
       }),
-      prisma.theme.findMany({
+      () =>
+        prisma.theme.findMany({
         orderBy: { name: "asc" },
         select: { id: true, name: true, description: true, category: true, intensity: true },
       }),
-      prisma.motif.findMany({
+      () =>
+        prisma.motif.findMany({
         orderBy: { name: "asc" },
         select: { id: true, name: true, description: true, usagePattern: true },
       }),
-      prisma.narrativeRule.findMany({
+      () =>
+        prisma.narrativeRule.findMany({
         orderBy: { title: "asc" },
         select: { id: true, title: true, description: true, category: true, strength: true, scope: true },
       }),
-      prisma.literaryDevice.findMany({
+      () =>
+        prisma.literaryDevice.findMany({
         orderBy: { name: "asc" },
         select: { id: true, name: true, description: true, systemEffect: true },
       }),
-      prisma.narrativePattern.findMany({
+      () =>
+        prisma.narrativePattern.findMany({
         orderBy: { title: "asc" },
         select: { id: true, title: true, description: true, patternType: true, strength: true },
       }),
-      prisma.narrativeBinding.findMany({
+      () =>
+        prisma.narrativeBinding.findMany({
         orderBy: { id: "asc" },
         select: {
           id: true,
@@ -204,7 +226,8 @@ async function loadStorySnapshot(): Promise<Record<string, unknown>> {
           notes: true,
         },
       }),
-      prisma.fragment.findMany({
+      () =>
+        prisma.fragment.findMany({
         orderBy: { id: "asc" },
         take: 400,
         select: {
@@ -216,7 +239,8 @@ async function loadStorySnapshot(): Promise<Record<string, unknown>> {
           recordType: true,
         },
       }),
-      prisma.fragmentCluster.findMany({
+      () =>
+        prisma.fragmentCluster.findMany({
         orderBy: { title: "asc" },
         select: {
           id: true,
@@ -228,7 +252,8 @@ async function loadStorySnapshot(): Promise<Record<string, unknown>> {
           symbolId: true,
         },
       }),
-      prisma.event.findMany({
+      () =>
+        prisma.event.findMany({
         orderBy: { startYear: "asc" },
         select: {
           id: true,
@@ -239,23 +264,28 @@ async function loadStorySnapshot(): Promise<Record<string, unknown>> {
           recordType: true,
         },
       }),
-      prisma.source.findMany({
+      () =>
+        prisma.source.findMany({
         orderBy: { title: "asc" },
         select: { id: true, title: true, sourceType: true, recordType: true, summary: true },
       }),
-      prisma.claim.findMany({
+      () =>
+        prisma.claim.findMany({
         orderBy: { id: "asc" },
         select: { id: true, description: true, confidence: true, recordType: true, needsReview: true },
       }),
-      prisma.openQuestion.findMany({
+      () =>
+        prisma.openQuestion.findMany({
         orderBy: { priority: "asc" },
         select: { id: true, title: true, description: true, status: true, priority: true },
       }),
-      prisma.continuityNote.findMany({
+      () =>
+        prisma.continuityNote.findMany({
         orderBy: { severity: "asc" },
         select: { id: true, title: true, description: true, severity: true, status: true },
       }),
-      prisma.metaScene.findMany({
+      () =>
+        prisma.metaScene.findMany({
         orderBy: { title: "asc" },
         select: {
           id: true,
@@ -270,7 +300,8 @@ async function loadStorySnapshot(): Promise<Record<string, unknown>> {
           emotionalVoltage: true,
         },
       }),
-      prisma.characterRelationship.findMany({
+      () =>
+        prisma.characterRelationship.findMany({
         orderBy: { id: "asc" },
         select: {
           id: true,
@@ -280,7 +311,8 @@ async function loadStorySnapshot(): Promise<Record<string, unknown>> {
           relationshipSummary: true,
         },
       }),
-      prisma.alias.findMany({
+      () =>
+        prisma.alias.findMany({
         orderBy: { label: "asc" },
         take: 200,
         select: { id: true, label: true, entityType: true, entityId: true },
@@ -301,7 +333,7 @@ async function loadStorySnapshot(): Promise<Record<string, unknown>> {
         notes: true,
       },
     });
-    const peopleById = new Map(people.map((p) => [p.id, p.name]));
+    const peopleById = new Map(people.map((p: { id: string; name: string }) => [p.id, p.name]));
     const characterProfilesWithNames = characterProfiles.map((cp) => ({
       ...cp,
       personName: peopleById.get(cp.personId) ?? null,
@@ -313,7 +345,7 @@ async function loadStorySnapshot(): Promise<Record<string, unknown>> {
         ? `Listed first 400 of ${fragmentCount} fragments; full count in counts.`
         : undefined;
 
-    const chapterSceneOutline = chapters.map((ch) => ({
+    const chapterSceneOutline = chapters.map((ch: { id: string; title: string; chapterNumber: number | null; summary: string | null; status: string | null }) => ({
       chapter: {
         id: ch.id,
         title: ch.title,
@@ -322,8 +354,14 @@ async function loadStorySnapshot(): Promise<Record<string, unknown>> {
         status: ch.status,
       },
       scenes: scenes
-        .filter((s) => s.chapterId === ch.id)
-        .map((s) => ({
+        .filter((s: { chapterId: string }) => s.chapterId === ch.id)
+        .map((s: {
+          id: string;
+          orderInChapter: number | null;
+          sceneNumber: number | null;
+          description: string;
+          summary: string | null;
+        }) => ({
           id: s.id,
           orderInChapter: s.orderInChapter,
           sceneNumber: s.sceneNumber,
@@ -371,7 +409,7 @@ async function loadStorySnapshot(): Promise<Record<string, unknown>> {
       literaryDevices,
       narrativePatterns,
       narrativeBindings,
-      fragments: fragments.map((f) => ({
+      fragments: fragments.map((f: { text: string | null; [key: string]: unknown }) => ({
         ...f,
         text:
           f.text && f.text.length > 500

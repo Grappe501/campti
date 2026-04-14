@@ -1,17 +1,9 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-const eslintConfig = [
-  { ignores: [".next/**", "node_modules/**", "next-env.d.ts"] },
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-];
-
+/**
+ * Next.js 16 ships flat ESLint config — avoid FlatCompat + extends(), which can
+ * trigger "Converting circular structure to JSON" under ESLint 9.
+ * @see https://nextjs.org/docs/app/api-reference/config/eslint
+ */
+const eslintConfig = [...nextCoreWebVitals];
 export default eslintConfig;

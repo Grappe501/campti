@@ -1,5 +1,8 @@
 import type { GenealogicalAssertion, Person, WorldStateReference } from "@prisma/client";
 
+import type { AuthorVoiceShapingV1 } from "@/lib/domain/author-voice-humanization";
+import type { SceneGenerationSocialBundleV1 } from "@/lib/domain/scene-generation-social";
+
 /**
  * Serializable snapshot for scene generation / regen. All fields are inputs—never treated as canon.
  * Wire to OpenAI (or other) from a loader that resolves world-state inheritance.
@@ -116,4 +119,16 @@ export type SceneGenerationContractV1 = {
    * Keeps generation aligned with mediation / register rules without dumping full frame.
    */
   thoughtLanguageMediation?: Record<string, unknown> | null;
+
+  /**
+   * Phase 6.1 — Deterministic literary guidance from live `SocialFieldContext` (compact; not raw JSON).
+   * Populated by `loadSceneGenerationInput` when world state + place resolve.
+   */
+  socialFieldGeneration?: SceneGenerationSocialBundleV1 | null;
+
+  /**
+   * Phase 7 — Author voice / witness / humanization shaping (prompt + trace; not canon).
+   * Optional so older contracts still deserialize.
+   */
+  authorVoiceShaping?: AuthorVoiceShapingV1 | null;
 };

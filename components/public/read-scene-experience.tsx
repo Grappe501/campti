@@ -158,11 +158,14 @@ export function ReadSceneExperience({
   const [paragraphIndex, setParagraphIndex] = useState(0);
   const scrollPersistRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastListenImprintAtRef = useRef(0);
+  const firstRelatedSymbolId = data.relatedSymbols[0]?.id ?? null;
 
   useEffect(() => {
-    setMode(readStoredMode());
-    setReaderPrefs(loadReaderUiPreferences());
-    setHydrated(true);
+    queueMicrotask(() => {
+      setMode(readStoredMode());
+      setReaderPrefs(loadReaderUiPreferences());
+      setHydrated(true);
+    });
   }, []);
 
   useEffect(() => {
@@ -170,7 +173,7 @@ export function ReadSceneExperience({
   }, [readerPrefs]);
 
   useEffect(() => {
-    setParagraphIndex(0);
+    queueMicrotask(() => setParagraphIndex(0));
   }, [data.scene.id]);
 
   useEffect(() => {
@@ -251,7 +254,7 @@ export function ReadSceneExperience({
         lastMetaSceneId: data.metaSceneId,
         lastCharacterId: data.povPerson?.id ?? null,
         lastPlaceId: data.primaryPlace?.id ?? null,
-        lastSymbolId: data.relatedSymbols[0]?.id ?? null,
+        lastSymbolId: firstRelatedSymbolId,
         lastMode: mapModeToReaderLastMode(mode),
         scrollAnchorY: typeof window !== "undefined" ? Math.round(window.scrollY) : null,
         rhythmAuto,
@@ -264,7 +267,7 @@ export function ReadSceneExperience({
     data.metaSceneId,
     data.povPerson?.id,
     data.primaryPlace?.id,
-    data.relatedSymbols[0]?.id,
+    firstRelatedSymbolId,
     data.scene.id,
     mode,
     readerPack.continuation.headline,
@@ -354,7 +357,7 @@ export function ReadSceneExperience({
         });
       }
     },
-    [data.povPerson?.id, data.scene.id],
+    [data.povPerson, data.scene.id],
   );
 
   useEffect(() => {

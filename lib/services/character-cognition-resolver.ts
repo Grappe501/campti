@@ -2,6 +2,7 @@ import { FactAssertionStatus } from "@prisma/client";
 
 import { composeDeterministicCognitionLayer } from "@/lib/cognition/deterministic-cognition-compose";
 import type { CharacterCognitionFrame, CharacterCore, CharacterState } from "@/lib/domain/cognition";
+import type { SocialFieldContext } from "@/lib/domain/population-social-field";
 import {
   applyEnneagramShapingToResolvedCognition,
   buildEnneagramInnerVoicePattern,
@@ -33,9 +34,33 @@ import { buildCharacterDesireProfileFromCore } from "@/lib/cognition/character-d
 import { applyDesireShapingToCognitionFrame } from "@/lib/cognition/desire-cognition-shaping";
 import { buildWorldStateDesireEnvironment } from "@/lib/cognition/world-state-desire-environment";
 import { buildThoughtRealismProfiles } from "@/lib/cognition/thought-realism-profiles";
-import type { ResolveCognitionFrameSimulationOptions } from "@/lib/domain/simulation-run";
+import type {
+  ResolveCharacterCognitionFrameOptions,
+  ResolveCognitionFrameSimulationOptions,
+} from "@/lib/domain/simulation-run";
+import { buildSocialFieldContextFromQuery } from "@/lib/services/social-field-context-service";
 import { applySimulationOverridesToRelationshipContext } from "@/lib/simulation/apply-simulation-overrides";
 import { mergeCharacterStateSnapshot } from "@/lib/simulation/merge-character-state-snapshot";
+
+function parishPlaceIdFromSceneJson(structuredDataJson: unknown): string | null {
+  if (!structuredDataJson || typeof structuredDataJson !== "object") return null;
+  const v = (structuredDataJson as Record<string, unknown>).parishPlaceId;
+  return typeof v === "string" && v.length ? v : null;
+}
+
+function coerceFrameOptions(
+  third?: ResolveCharacterCognitionFrameOptions | ResolveCognitionFrameSimulationOptions
+): ResolveCharacterCognitionFrameOptions {
+  if (third == null) return {};
+  const k = third as Record<string, unknown>;
+  if ("simulation" in k || "includeSocialField" in k) {
+    return third as ResolveCharacterCognitionFrameOptions;
+  }
+  if ("patch" in k) {
+    return { simulation: third as ResolveCognitionFrameSimulationOptions };
+  }
+  return {};
+}
 
 /**
  * Loads core profile, scene snapshot, legacy simulation state, world state, relationships, and assertions,
@@ -47,12 +72,16 @@ import { mergeCharacterStateSnapshot } from "@/lib/simulation/merge-character-st
 export async function resolveCharacterCognitionFrame(
   characterId: string,
   sceneId: string,
-  simulation?: ResolveCognitionFrameSimulationOptions
+  third?: ResolveCharacterCognitionFrameOptions | ResolveCognitionFrameSimulationOptions
 ): Promise<CharacterCognitionFrame> {
+  const opts = coerceFrameOptions(third);
+  const simulation = opts.simulation;
+
   const scene = await prisma.scene.findUniqueOrThrow({
     where: { id: sceneId },
     include: {
       chapter: { include: { book: true } },
+      places: { take: 4 },
     },
   });
 
@@ -164,6 +193,21 @@ export async function resolveCharacterCognitionFrame(
   const storyYear =
     simulation?.patch?.approximateStoryYear ??
     inferApproximateStoryYearFromScene(scene.structuredDataJson, scene.historicalAnchor);
+
+  let socialFieldContext: SocialFieldContext | undefined;
+  if (opts.includeSocialField !== false) {
+    const primaryPlaceId = scene.places[0]?.id ?? null;
+    socialFieldContext = await buildSocialFieldContextFromQuery({
+      sceneId: scene.id,
+      worldStateId: worldStateRow?.id ?? null,
+      storyYear,
+      focalPersonIds: [characterId],
+      placeId: primaryPlaceId,
+      householdId: null,
+      parishPlaceId: parishPlaceIdFromSceneJson(scene.structuredDataJson),
+    });
+  }
+
   const cognitionAgeYears = computeCharacterAgeYears({
     birthYear: person.birthYear,
     deathYear: person.deathYear,
@@ -345,6 +389,7 @@ export async function resolveCharacterCognitionFrame(
     thoughtFragmentProfile,
     cognitiveDistortionProfile,
     innerVoiceTextureProfile,
+    socialFieldContext,
     ...embodiedResolved,
   };
 }
@@ -394,6 +439,7 @@ export function cognitionFrameToPromptPayload(frame: CharacterCognitionFrame): R
       cognitiveDistortion: frame.cognitiveDistortionProfile,
       innerVoiceTexture: frame.innerVoiceTextureProfile,
     },
+    socialField: frame.socialFieldContext ?? null,
     resolved: {
       perceivedReality: frame.perceivedReality,
       activeMotives: frame.activeMotives,

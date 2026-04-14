@@ -421,14 +421,14 @@ model Source {
   extractedSummary   String?
   reviewedSummary    String?
 
-  claims                   Claim[]
+  claims                 Claim[]
   genealogicalAssertions GenealogicalAssertion[]
-  persons       Person[]
-  places        Place[]
-  events        Event[]
-  chapters      Chapter[]
-  scenes        Scene[]
-  openQuestions OpenQuestion[]
+  persons                Person[]
+  places                 Place[]
+  events                 Event[]
+  chapters               Chapter[]
+  scenes                 Scene[]
+  openQuestions          OpenQuestion[]
 
   sourceText        SourceText?
   ingestionRuns     IngestionRun[]     @relation("SourceIngestionRuns")
@@ -499,7 +499,7 @@ model SourceText {
   textNotes      String?
 
   sourceChunks SourceChunk[]
-  fragments      Fragment[]
+  fragments    Fragment[]
 }
 
 model Fragment {
@@ -507,22 +507,22 @@ model Fragment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  title            String?
-  fragmentType     FragmentType
+  title                          String?
+  fragmentType                   FragmentType
   /// When set, treated as the primary narrative identity; otherwise `fragmentType` is primary.
-  primaryFragmentType FragmentType?
+  primaryFragmentType            FragmentType?
   /// Additional FragmentType values (JSON array of enum strings).
-  secondaryFragmentTypes Json?
-  surfaceMeaning         String? @db.Text
-  hiddenMeaning          String? @db.Text
-  symbolicUse            String? @db.Text
-  emotionalUse           String? @db.Text
-  narrativeUse           String? @db.Text
+  secondaryFragmentTypes         Json?
+  surfaceMeaning                 String?       @db.Text
+  hiddenMeaning                  String?       @db.Text
+  symbolicUse                    String?       @db.Text
+  emotionalUse                   String?       @db.Text
+  narrativeUse                   String?       @db.Text
   /// Cached deterministic or AI-enhanced interpretation summary (author remains source of truth on raw fields).
-  generatedInterpretationSummary String? @db.Text
-  decompositionPressure  String?
-  sceneReadinessScore    Int?
-  clusterHint            String?
+  generatedInterpretationSummary String?       @db.Text
+  decompositionPressure          String?
+  sceneReadinessScore            Int?
+  clusterHint                    String?
 
   visibility       VisibilityStatus @default(PRIVATE)
   recordType       RecordType?
@@ -573,13 +573,13 @@ model FragmentCluster {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  title             String
-  clusterType       String
-  summary           String?
-  emotionalTone     String?
-  dominantFunction  String?
-  confidence        Int?
-  notes             String?
+  title                     String
+  clusterType               String
+  summary                   String?
+  emotionalTone             String?
+  dominantFunction          String?
+  confidence                Int?
+  notes                     String?
   /// Cached synthesis (template or AI); author `summary` remains primary record field.
   generatedClusterSynthesis String? @db.Text
 
@@ -613,7 +613,7 @@ model FragmentClusterLink {
   updatedAt DateTime @updatedAt
 
   fragmentId String
-  fragment   Fragment @relation(fields: [fragmentId], references: [id], onDelete: Cascade)
+  fragment   Fragment        @relation(fields: [fragmentId], references: [id], onDelete: Cascade)
   clusterId  String
   cluster    FragmentCluster @relation(fields: [clusterId], references: [id], onDelete: Cascade)
 
@@ -635,13 +635,13 @@ model SceneConstructionSuggestion {
   sceneId     String?
   scene       Scene?     @relation(fields: [sceneId], references: [id], onDelete: SetNull)
 
-  title            String
-  suggestionType   String
-  summary          String  @db.Text
-  confidence       Int?
-  status           String
+  title                 String
+  suggestionType        String
+  summary               String  @db.Text
+  confidence            Int?
+  status                String
   supportingFragmentIds Json?
-  notes            String?
+  notes                 String?
 
   @@index([metaSceneId])
   @@index([sceneId])
@@ -654,15 +654,15 @@ model FragmentPlacementCandidate {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  fragmentId   String
-  fragment     Fragment @relation(fields: [fragmentId], references: [id], onDelete: Cascade)
-  targetType   String
-  targetId     String?
-  targetLabel  String?
-  confidence   Int?
-  rationale    String?
-  status       String
-  notes        String?
+  fragmentId  String
+  fragment    Fragment @relation(fields: [fragmentId], references: [id], onDelete: Cascade)
+  targetType  String
+  targetId    String?
+  targetLabel String?
+  confidence  Int?
+  rationale   String?
+  status      String
+  notes       String?
 
   @@index([fragmentId])
   @@index([targetType])
@@ -934,14 +934,14 @@ model GenealogicalFactSlot {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  subjectType String
-  subjectId   String
-  predicate   GenealogicalPredicate
+  subjectType   String
+  subjectId     String
+  predicate     GenealogicalPredicate
   /// Disambiguate multiple slots for the same predicate (e.g. census year, oral vs record).
-  discriminator String @default("")
+  discriminator String                @default("")
 
   slotLabel String?
-  notes     String?  @db.Text
+  notes     String? @db.Text
 
   assertions GenealogicalAssertion[]
 
@@ -979,7 +979,7 @@ model GenealogicalAssertion {
 
   /// Optional bridge from legacy freeform Claim rows.
   legacyClaimId String?
-  legacyClaim     Claim?  @relation(fields: [legacyClaimId], references: [id], onDelete: SetNull)
+  legacyClaim   Claim?  @relation(fields: [legacyClaimId], references: [id], onDelete: SetNull)
 
   /// Exactly one preferred assertion per slot for generation / default UI (enforced in application transactions).
   narrativePreferred Boolean @default(false)
@@ -1042,32 +1042,32 @@ model Person {
   openQuestions   OpenQuestion[]
   continuityNotes ContinuityNote[]
 
-  characterProfile  CharacterProfile?
-  characterMemories CharacterMemory[]
-  characterStates   CharacterState[]
-  metaScenesAsPov   MetaScene[]
-  fragmentClusters    FragmentCluster[]
-  relationshipsAsA   CharacterRelationship[] @relation("CharacterRelationshipPersonA")
-  relationshipsAsB   CharacterRelationship[] @relation("CharacterRelationshipPersonB")
-  voicePasses        VoicePass[]
+  characterProfile     CharacterProfile?
+  characterMemories    CharacterMemory[]
+  characterStates      CharacterState[]
+  metaScenesAsPov      MetaScene[]
+  fragmentClusters     FragmentCluster[]
+  relationshipsAsA     CharacterRelationship[] @relation("CharacterRelationshipPersonA")
+  relationshipsAsB     CharacterRelationship[] @relation("CharacterRelationshipPersonB")
+  voicePasses          VoicePass[]
   characterVoiceAssets CharacterVoiceAsset[]
 
-  characterConstraints        CharacterConstraint[]
-  characterTriggers           CharacterTrigger[]
+  characterConstraints       CharacterConstraint[]
+  characterTriggers          CharacterTrigger[]
   characterPerceptionProfile CharacterPerceptionProfile?
   characterVoiceProfile      CharacterVoiceProfile?
   characterChoiceProfile     CharacterChoiceProfile?
 
-  governanceImpacts          CharacterGovernanceImpact[]
-  socioEconomicProfiles      CharacterSocioEconomicProfile[]
-  demographicProfiles        CharacterDemographicProfile[]
-  familyPressureProfiles     CharacterFamilyPressureProfile[]
+  governanceImpacts             CharacterGovernanceImpact[]
+  socioEconomicProfiles         CharacterSocioEconomicProfile[]
+  demographicProfiles           CharacterDemographicProfile[]
+  familyPressureProfiles        CharacterFamilyPressureProfile[]
   characterIntelligenceProfiles CharacterIntelligenceProfile[]
-  characterDevelopmentProfiles CharacterDevelopmentProfile[]
-  characterBiologicalStates CharacterBiologicalState[]
+  characterDevelopmentProfiles  CharacterDevelopmentProfile[]
+  characterBiologicalStates     CharacterBiologicalState[]
 
-  relationshipProfilesAsA      RelationshipProfile[] @relation("RelationshipProfilePersonA")
-  relationshipProfilesAsB      RelationshipProfile[] @relation("RelationshipProfilePersonB")
+  relationshipProfilesAsA      RelationshipProfile[]        @relation("RelationshipProfilePersonA")
+  relationshipProfilesAsB      RelationshipProfile[]        @relation("RelationshipProfilePersonB")
   characterMaskingProfiles     CharacterMaskingProfile[]
   characterDesireProfiles      CharacterDesireProfile[]
   relationshipNetworkSummaries RelationshipNetworkSummary[]
@@ -1078,16 +1078,19 @@ model Person {
   characterEducationProfiles         CharacterEducationProfile[]
   characterLearningEnvelopes         CharacterLearningEnvelope[]
 
-  characterPhysicalHealthProfiles   CharacterPhysicalHealthProfile[]
-  characterMentalHealthProfiles       CharacterMentalHealthProfile[]
-  characterEmotionalHealthProfiles    CharacterEmotionalHealthProfile[]
-  characterHealthEnvelopes          CharacterHealthEnvelope[]
+  characterPhysicalHealthProfiles  CharacterPhysicalHealthProfile[]
+  characterMentalHealthProfiles    CharacterMentalHealthProfile[]
+  characterEmotionalHealthProfiles CharacterEmotionalHealthProfile[]
+  characterHealthEnvelopes         CharacterHealthEnvelope[]
 
   /// Slow-changing cognitive core (1:1). Complements literary `CharacterProfile`; not reader prose.
   characterCoreProfile    CharacterCoreProfile?
   characterStateSnapshots CharacterStateSnapshot[]
   innerVoiceSessions      CharacterInnerVoiceSession[]
   cognitionSimulationRuns SimulationRun[]
+
+  /// Phase 5F — optional link from promoted census / population row.
+  populationLink PopulationEntity? @relation("PopulationEntityPerson")
 }
 
 /// Slow-changing cognitive profile (1:1 with Person). Grounds inner voice / traces; does not replace `CharacterProfile`.
@@ -1114,37 +1117,37 @@ model CharacterCoreProfile {
   notes                 String? @db.Text
 
   /// Cognition-layer Enneagram (may mirror `CharacterProfile` or diverge for simulation/inner voice).
-  enneagramType               EnneagramType?
-  enneagramWing               String?
-  instinctStacking            String?
-  baselineIntegrationLevel    Int?
-  stressPatternJson           Json?
-  growthPatternJson           Json?
-  egoFixation                 String? @db.Text
-  coreFear                    String? @db.Text
-  coreDesire                  String? @db.Text
-  virtue                      String? @db.Text
-  vice                        String? @db.Text
-  harmDefenseStyle            String? @db.Text
-  imageStrategy               String? @db.Text
-  attachmentPatternOverride   String? @db.Text
-  notesEnneagram              String? @db.Text
+  enneagramType             EnneagramType?
+  enneagramWing             String?
+  instinctStacking          String?
+  baselineIntegrationLevel  Int?
+  stressPatternJson         Json?
+  growthPatternJson         Json?
+  egoFixation               String?        @db.Text
+  coreFear                  String?        @db.Text
+  coreDesire                String?        @db.Text
+  virtue                    String?        @db.Text
+  vice                      String?        @db.Text
+  harmDefenseStyle          String?        @db.Text
+  imageStrategy             String?        @db.Text
+  attachmentPatternOverride String?        @db.Text
+  notesEnneagram            String?        @db.Text
 
   /// Thought-language mediation (mind vs spoken vs rendered English).
-  mindLanguagePrimary        String?
-  mindLanguageSecondary      String?
-  spokenLanguageProfileJson  Json?
-  registerProfileJson        Json?
-  translationRenderMode      String?
-  codeSwitchTriggersJson     Json?
-  retainedLexiconJson        Json?
+  mindLanguagePrimary       String?
+  mindLanguageSecondary     String?
+  spokenLanguageProfileJson Json?
+  registerProfileJson       Json?
+  translationRenderMode     String?
+  codeSwitchTriggersJson    Json?
+  retainedLexiconJson       Json?
 
   /// Desire / pleasure / attachment architecture (slow-changing; JSON blobs).
-  desireProfileJson            Json?
-  pleasurePatternJson          Json?
-  attachmentLongingJson        Json?
-  sexualConstraintProfileJson  Json?
-  notesDesire                  String? @db.Text
+  desireProfileJson           Json?
+  pleasurePatternJson         Json?
+  attachmentLongingJson       Json?
+  sexualConstraintProfileJson Json?
+  notesDesire                 String? @db.Text
 
   recordType RecordType       @default(HYBRID)
   visibility VisibilityStatus @default(REVIEW)
@@ -1182,7 +1185,7 @@ model CharacterStateSnapshot {
   currentFear                String? @db.Text
   currentDesire              String? @db.Text
   currentObligation          String? @db.Text
-  currentShame                 String? @db.Text
+  currentShame               String? @db.Text
   currentHope                String? @db.Text
   currentAnger               String? @db.Text
   currentSocialRisk          String? @db.Text
@@ -1191,16 +1194,16 @@ model CharacterStateSnapshot {
   currentContradiction       String? @db.Text
 
   /// Scene-time desire / attachment activations (0–100).
-  currentArousal                  Int?
-  currentLoneliness               Int?
-  currentWantednessHunger         Int?
-  currentNeedToBeNeeded           Int?
-  currentAttachmentAche             Int?
-  currentPleasureSeeking          Int?
-  currentForbiddenDesirePressure  Int?
-  currentResentmentAtDeprivation  Int?
+  currentArousal                 Int?
+  currentLoneliness              Int?
+  currentWantednessHunger        Int?
+  currentNeedToBeNeeded          Int?
+  currentAttachmentAche          Int?
+  currentPleasureSeeking         Int?
+  currentForbiddenDesirePressure Int?
+  currentResentmentAtDeprivation Int?
 
-  relationshipsSnapshotJson Json?
+  relationshipsSnapshotJson   Json?
   /// Assertion ids or `{ slotId, assertionId }[]` for status/freedom/kin grounding.
   genealogicalContextRefsJson Json?
 
@@ -1257,7 +1260,7 @@ model SimulationScenario {
   updatedAt DateTime @updatedAt
 
   sceneId String
-  scene   Scene @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+  scene   Scene  @relation(fields: [sceneId], references: [id], onDelete: Cascade)
 
   title String
 
@@ -1308,13 +1311,13 @@ model SimulationRun {
 
 /// Pointer to external / master timeline world-state definitions (era slice). Not full simulation logic.
 model WorldStateReference {
-  id          String   @id @default(cuid())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  eraId       String   @unique
+  eraId       String  @unique
   label       String
-  description String?  @db.Text
+  description String? @db.Text
 
   /// Era language ecology: dominant/prestige/sacred/legal/trade, literacy, hierarchy (structured JSON).
   languageEnvironmentJson Json?
@@ -1331,24 +1334,24 @@ model WorldStateReference {
   nodeConnections NodeConnection[]
   placeMemories   PlaceMemoryProfile[]
 
-  governanceProfile       WorldGovernanceProfile?
-  worldPressureBundle     WorldPressureBundle?
-  knowledgeProfile        WorldKnowledgeProfile?
-  expressionProfile       WorldExpressionProfile?
-  characterGovernanceImpacts CharacterGovernanceImpact[]
-  characterSocioEconomicProfiles CharacterSocioEconomicProfile[]
-  characterDemographicProfiles   CharacterDemographicProfile[]
+  governanceProfile               WorldGovernanceProfile?
+  worldPressureBundle             WorldPressureBundle?
+  knowledgeProfile                WorldKnowledgeProfile?
+  expressionProfile               WorldExpressionProfile?
+  characterGovernanceImpacts      CharacterGovernanceImpact[]
+  characterSocioEconomicProfiles  CharacterSocioEconomicProfile[]
+  characterDemographicProfiles    CharacterDemographicProfile[]
   characterFamilyPressureProfiles CharacterFamilyPressureProfile[]
-  characterIntelligenceProfiles    CharacterIntelligenceProfile[]
-  characterDevelopmentProfiles     CharacterDevelopmentProfile[]
-  characterBiologicalStates        CharacterBiologicalState[]
+  characterIntelligenceProfiles   CharacterIntelligenceProfile[]
+  characterDevelopmentProfiles    CharacterDevelopmentProfile[]
+  characterBiologicalStates       CharacterBiologicalState[]
 
-  worldRelationshipNormProfile WorldRelationshipNormProfile?
-  relationshipProfiles         RelationshipProfile[]
+  worldRelationshipNormProfile   WorldRelationshipNormProfile?
+  relationshipProfiles           RelationshipProfile[]
   relationshipDisclosureProfiles RelationshipDisclosureProfile[]
-  characterMaskingProfiles     CharacterMaskingProfile[]
-  characterDesireProfiles      CharacterDesireProfile[]
-  relationshipNetworkSummaries RelationshipNetworkSummary[]
+  characterMaskingProfiles       CharacterMaskingProfile[]
+  characterDesireProfiles        CharacterDesireProfile[]
+  relationshipNetworkSummaries   RelationshipNetworkSummary[]
 
   worldEducationNormProfile WorldEducationNormProfile?
 
@@ -1362,20 +1365,147 @@ model WorldStateReference {
 
   worldEraProfile WorldStateEraProfile?
 
-  characterPhysicalHealthProfiles   CharacterPhysicalHealthProfile[]
-  characterMentalHealthProfiles     CharacterMentalHealthProfile[]
-  characterEmotionalHealthProfiles  CharacterEmotionalHealthProfile[]
-  characterHealthEnvelopes          CharacterHealthEnvelope[]
+  characterPhysicalHealthProfiles  CharacterPhysicalHealthProfile[]
+  characterMentalHealthProfiles    CharacterMentalHealthProfile[]
+  characterEmotionalHealthProfiles CharacterEmotionalHealthProfile[]
+  characterHealthEnvelopes         CharacterHealthEnvelope[]
 
-  epicsDefaultingHere Epic[]       @relation("EpicToWorldState")
-  booksDefaultingHere  Book[]       @relation("BookToWorldState")
-  chapterOverrides     Chapter[]    @relation("ChapterToWorldState")
-  sceneOverrides       Scene[]      @relation("SceneToWorldState")
-  beatOverrides        NarrativeBeat[] @relation("BeatToWorldState")
+  epicsDefaultingHere Epic[]          @relation("EpicToWorldState")
+  booksDefaultingHere Book[]          @relation("BookToWorldState")
+  chapterOverrides    Chapter[]       @relation("ChapterToWorldState")
+  sceneOverrides      Scene[]         @relation("SceneToWorldState")
+  beatOverrides       NarrativeBeat[] @relation("BeatToWorldState")
 
   characterStateSnapshots CharacterStateSnapshot[] @relation("WorldStateToCharacterStateSnapshots")
 
+  populationHouseholds PopulationHousehold[]
+  populationEntities   PopulationEntity[]
+
   @@index([eraId])
+}
+
+/// Phase 5F — census-scale population substrate (not full cognition per row).
+enum PopulationEntityRecordStatus {
+  UNVERIFIED
+  CENSUS_INGESTED
+  LINKED_PERSON
+  PROMOTED_MODELED
+  MERGED
+}
+
+model PopulationHousehold {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  label       String
+  displayName String?
+
+  worldStateReferenceId String?
+  worldStateReference   WorldStateReference? @relation(fields: [worldStateReferenceId], references: [id], onDelete: SetNull)
+
+  primaryPlaceId String?
+  primaryPlace   Place?  @relation("PopulationHouseholdPrimaryPlace", fields: [primaryPlaceId], references: [id], onDelete: SetNull)
+
+  censusHouseholdKey String?
+  structuredDataJson Json?
+  notes              String? @db.Text
+
+  members PopulationEntity[]
+
+  @@index([worldStateReferenceId])
+  @@index([primaryPlaceId])
+  @@index([censusHouseholdKey])
+}
+
+model PopulationEntity {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  displayName    String
+  normalizedName String
+  aliasesCompact Json?
+
+  birthYear             Int?
+  deathYear             Int?
+  gender                String?
+  ethnicityOrBackground String?
+  statusOrClass         String?
+  occupationOrRole      String?
+
+  householdId String?
+  household   PopulationHousehold? @relation(fields: [householdId], references: [id], onDelete: SetNull)
+
+  primaryLocationId String?
+  primaryLocation   Place?  @relation("PopulationEntityPrimaryPlace", fields: [primaryLocationId], references: [id], onDelete: SetNull)
+
+  worldStateReferenceId String?
+  worldStateReference   WorldStateReference? @relation(fields: [worldStateReferenceId], references: [id], onDelete: SetNull)
+
+  /// Optional link after promotion to a canonical `Person` (scalable path A).
+  personId     String? @unique
+  linkedPerson Person? @relation("PopulationEntityPerson", fields: [personId], references: [id], onDelete: SetNull)
+
+  isModeledCharacter Boolean @default(false)
+  isPromotable       Boolean @default(true)
+
+  authorityWeight     Int @default(50)
+  gossipWeight        Int @default(50)
+  kinVisibilityWeight Int @default(50)
+
+  visibilityProfileJson Json?
+
+  recordStatus   PopulationEntityRecordStatus @default(CENSUS_INGESTED)
+  confidence     Float?                       @default(0.7)
+  sourceDataset  String?
+  sourceRecordId String?
+  notes          String?                      @db.Text
+
+  aliases   PopulationEntityAlias[]
+  presences PopulationEntityPresence[]
+
+  @@index([normalizedName])
+  @@index([worldStateReferenceId])
+  @@index([householdId])
+  @@index([primaryLocationId])
+  @@index([personId])
+}
+
+model PopulationEntityAlias {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  populationEntityId String
+  populationEntity   PopulationEntity @relation(fields: [populationEntityId], references: [id], onDelete: Cascade)
+
+  alias           String
+  normalizedAlias String
+  source          String?
+
+  @@unique([populationEntityId, normalizedAlias])
+  @@index([normalizedAlias])
+}
+
+model PopulationEntityPresence {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  populationEntityId String
+  populationEntity   PopulationEntity @relation(fields: [populationEntityId], references: [id], onDelete: Cascade)
+
+  placeId String?
+  place   Place?  @relation("PopulationEntityPresencePlace", fields: [placeId], references: [id], onDelete: SetNull)
+
+  yearStart Int?
+  yearEnd   Int?
+
+  confidence Float?  @default(0.7)
+  sourceNote String? @db.Text
+
+  @@index([populationEntityId])
+  @@index([placeId])
+  @@index([yearStart, yearEnd])
 }
 
 /// Top-level epic container (e.g. one continuous saga). Books are ordered movements within it.
@@ -1445,15 +1575,15 @@ model WorldStateEraProfile {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  worldStateId String @unique
+  worldStateId String              @unique
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
   /// Up to six short labels (e.g. trade networks, cotton, timber).
   coreEconomicDrivers String[] @default([])
   /// Who holds leverage; used in prompts and assembly.
-  powerSummary String? @db.Text
+  powerSummary        String?  @db.Text
   /// What “work” means in this era (identity vs wage vs coercion).
-  meaningOfWork String? @db.Text
+  meaningOfWork       String?  @db.Text
 
   knobEconomicPressure          Int @default(50)
   knobRelationalInterdependence Int @default(50)
@@ -1479,16 +1609,16 @@ model WorldGovernanceProfile {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  worldStateId String @unique
+  worldStateId String              @unique
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
   label String
 
-  controlIntensity        Int @default(50)
-  punishmentSeverity      Int @default(50)
+  controlIntensity      Int @default(50)
+  punishmentSeverity    Int @default(50)
   enforcementVisibility Int @default(50)
-  justiceFairness         Int @default(50)
-  conformityPressure      Int @default(50)
+  justiceFairness       Int @default(50)
+  conformityPressure    Int @default(50)
 
   justiceMode      JusticeMode @default(MIXED)
   authorityProfile Json?
@@ -1583,8 +1713,8 @@ model CharacterDemographicProfile {
   worldStateId String
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
-  visibleTraits    Json?
-  ancestryContext  Json?
+  visibleTraits   Json?
+  ancestryContext Json?
 
   statusValue            Int @default(0)
   trustBias              Int @default(0)
@@ -1599,8 +1729,8 @@ model CharacterDemographicProfile {
 
   selfPerception SelfPerceptionState?
 
-  stressPatterns      Json?
-  adaptiveBehaviors   Json?
+  stressPatterns    Json?
+  adaptiveBehaviors Json?
 
   notes String? @db.Text
 
@@ -1625,11 +1755,11 @@ model CharacterFamilyPressureProfile {
   worldStateId String
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
-  attachmentStrength         Int @default(50)
-  obligationPressure         Int @default(50)
-  emotionalExpressionRange   Int @default(50)
-  individualFreedom          Int @default(50)
-  loyaltyExpectation         Int @default(50)
+  attachmentStrength       Int @default(50)
+  obligationPressure       Int @default(50)
+  emotionalExpressionRange Int @default(50)
+  individualFreedom        Int @default(50)
+  loyaltyExpectation       Int @default(50)
 
   conflictZones      Json?
   feltLove           Json?
@@ -1654,13 +1784,13 @@ model WorldPressureBundle {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  worldStateId String @unique
+  worldStateId String              @unique
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
-  governanceWeight   Int @default(25)
-  economicWeight     Int @default(25)
-  demographicWeight  Int @default(25)
-  familyWeight       Int @default(25)
+  governanceWeight  Int @default(25)
+  economicWeight    Int @default(25)
+  demographicWeight Int @default(25)
+  familyWeight      Int @default(25)
 
   summary Json?
 
@@ -1679,18 +1809,18 @@ model WorldKnowledgeProfile {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  worldStateId String @unique
+  worldStateId String              @unique
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
   label String?
 
-  abstractionCeiling       Int @default(50)
-  literacyRegime           String? @db.Text
+  abstractionCeiling         Int     @default(50)
+  literacyRegime             String? @db.Text
   dominantExplanatorySystems Json?
   technologyHorizon          Json?
-  informationFlowSpeed     Int @default(50)
-  geographicAwarenessNorm  String? @db.Text
-  tabooKnowledgeDomains    Json?
+  informationFlowSpeed       Int     @default(50)
+  geographicAwarenessNorm    String? @db.Text
+  tabooKnowledgeDomains      Json?
 
   notes String? @db.Text
 
@@ -1707,17 +1837,17 @@ model WorldExpressionProfile {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  worldStateId String @unique
+  worldStateId String              @unique
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
   label String?
 
-  publicExpressionCeiling          Int @default(50)
-  internalLanguageComplexityNorm   Int @default(50)
-  metaphorSourceDomains            Json?
-  acceptableExplanationModes       Json?
-  silencePatternsNorm              String? @db.Text
-  tabooPhrasingDomains             Json?
+  publicExpressionCeiling        Int     @default(50)
+  internalLanguageComplexityNorm Int     @default(50)
+  metaphorSourceDomains          Json?
+  acceptableExplanationModes     Json?
+  silencePatternsNorm            String? @db.Text
+  tabooPhrasingDomains           Json?
 
   notes String? @db.Text
 
@@ -1740,17 +1870,17 @@ model CharacterIntelligenceProfile {
   worldStateId String
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
-  patternRecognition       Int @default(50)
-  workingMemory            Int @default(50)
-  abstractionCapacity      Int @default(50)
-  socialInference          Int @default(50)
-  environmentalInference   Int @default(50)
-  selfReflectionDepth      Int @default(50)
-  impulseControl           Int @default(50)
-  planningHorizon          Int @default(50)
-  metacognition            Int @default(50)
-  memoryStrength           Int @default(50)
-  expressionComplexity     Int @default(50)
+  patternRecognition     Int @default(50)
+  workingMemory          Int @default(50)
+  abstractionCapacity    Int @default(50)
+  socialInference        Int @default(50)
+  environmentalInference Int @default(50)
+  selfReflectionDepth    Int @default(50)
+  impulseControl         Int @default(50)
+  planningHorizon        Int @default(50)
+  metacognition          Int @default(50)
+  memoryStrength         Int @default(50)
+  expressionComplexity   Int @default(50)
 
   notes String? @db.Text
 
@@ -1775,14 +1905,14 @@ model CharacterDevelopmentProfile {
   worldStateId String
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
-  ageBand              String?
-  maturityRate         Int @default(50)
-  socialRoleByAge      String? @db.Text
-  regulationLevel      Int @default(50)
-  responsibilityLoad   Int @default(50)
-  roleCompression        Int @default(50)
+  ageBand                  String?
+  maturityRate             Int     @default(50)
+  socialRoleByAge          String? @db.Text
+  regulationLevel          Int     @default(50)
+  responsibilityLoad       Int     @default(50)
+  roleCompression          Int     @default(50)
   /// Higher = more sheltered / protected developmental space; lower = more exposure / adultification pressure.
-  protectednessExposure  Int @default(50)
+  protectednessExposure    Int     @default(50)
   developmentalCompression Json?
 
   notes String? @db.Text
@@ -1808,15 +1938,15 @@ model CharacterBiologicalState {
   worldStateId String
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
-  nutritionLoad         Int @default(50)
-  fatigueLoad           Int @default(50)
-  illnessLoad           Int @default(50)
-  chronicStress         Int @default(50)
-  bodyPain              Int @default(50)
+  nutritionLoad         Int  @default(50)
+  fatigueLoad           Int  @default(50)
+  illnessLoad           Int  @default(50)
+  chronicStress         Int  @default(50)
+  bodyPain              Int  @default(50)
   reproductiveLoad      Int?
-  laborExhaustion       Int @default(50)
-  environmentalExposure Int @default(50)
-  traumaLoad            Int @default(50)
+  laborExhaustion       Int  @default(50)
+  environmentalExposure Int  @default(50)
+  traumaLoad            Int  @default(50)
 
   notes String? @db.Text
 
@@ -1847,16 +1977,16 @@ model RelationshipProfile {
   publicStatus     PublicStatus
   privateStatus    String?
 
-  hiddenTruth          Json?
-  powerDirection       Json?
-  dependencyDirection  Json?
+  hiddenTruth         Json?
+  powerDirection      Json?
+  dependencyDirection Json?
 
-  trustLevel          Int @default(50)
-  fearLevel           Int @default(50)
-  shameLeverage       Int @default(50)
-  obligationWeight    Int @default(50)
-  betrayalThreshold   Int @default(50)
-  rescueThreshold     Int @default(50)
+  trustLevel        Int @default(50)
+  fearLevel         Int @default(50)
+  shameLeverage     Int @default(50)
+  obligationWeight  Int @default(50)
+  betrayalThreshold Int @default(50)
+  rescueThreshold   Int @default(50)
 
   notes String? @db.Text
 
@@ -1916,16 +2046,16 @@ model CharacterMaskingProfile {
   worldStateId String
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
-  maskingIntensity    Int @default(50)
-  codeSwitchingLoad   Int @default(50)
-  secrecyNeed         Int @default(50)
-  disclosureRisk      Int @default(50)
+  maskingIntensity  Int @default(50)
+  codeSwitchingLoad Int @default(50)
+  secrecyNeed       Int @default(50)
+  disclosureRisk    Int @default(50)
 
-  authenticPrivateSelf     Json?
-  publicMask               Json?
-  trustedCircleExpression  Json?
-  forbiddenExpression        Json?
-  adaptiveStrategies       Json?
+  authenticPrivateSelf    Json?
+  publicMask              Json?
+  trustedCircleExpression Json?
+  forbiddenExpression     Json?
+  adaptiveStrategies      Json?
 
   notes String? @db.Text
 
@@ -1953,14 +2083,14 @@ model CharacterDesireProfile {
   attractionPattern Json?
   attachmentStyle   AttachmentStyle @default(DUTY_BOUND)
 
-  desireVisibility    Int @default(50)
-  desireSuppression   Int @default(50)
-  jealousySensitivity Int @default(50)
+  desireVisibility    Int   @default(50)
+  desireSuppression   Int   @default(50)
+  jealousySensitivity Int   @default(50)
   loyaltyPriority     Json?
 
-  intimacyNeed       Int @default(50)
-  autonomyNeed       Int @default(50)
-  tabooExposureRisk  Int @default(50)
+  intimacyNeed      Int @default(50)
+  autonomyNeed      Int @default(50)
+  tabooExposureRisk Int @default(50)
 
   notes String? @db.Text
 
@@ -1979,17 +2109,17 @@ model WorldRelationshipNormProfile {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  worldStateId String @unique
+  worldStateId String              @unique
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
   label String
 
-  marriageRules             Json?
-  sexualNorms               Json?
-  desireExpressionRules     Json?
-  tabooSystem                 Json?
-  emotionalExpressionRules  Json?
-  genderDynamics              Json?
+  marriageRules            Json?
+  sexualNorms              Json?
+  desireExpressionRules    Json?
+  tabooSystem              Json?
+  emotionalExpressionRules Json?
+  genderDynamics           Json?
 
   relationalVisibility   Int @default(50)
   punishmentForViolation Int @default(50)
@@ -2015,11 +2145,11 @@ model RelationshipDisclosureProfile {
   worldStateId String
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
-  truthShareCapacity         Int @default(50)
+  truthShareCapacity          Int @default(50)
   emotionalDisclosureCapacity Int @default(50)
-  secrecyBurden              Int @default(50)
-  misrecognitionRisk         Int @default(50)
-  exposureConsequence      Int @default(50)
+  secrecyBurden               Int @default(50)
+  misrecognitionRisk          Int @default(50)
+  exposureConsequence         Int @default(50)
 
   safeTopics    Json?
   unsafeTopics  Json?
@@ -2048,11 +2178,11 @@ model RelationshipNetworkSummary {
   worldStateId String
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
-  keyBonds         Json?
-  primaryTensions  Json?
-  dependencyMap    Json?
-  trustMap         Json?
-  hiddenConflicts  Json?
+  keyBonds        Json?
+  primaryTensions Json?
+  dependencyMap   Json?
+  trustMap        Json?
+  hiddenConflicts Json?
 
   notes String? @db.Text
 
@@ -2077,15 +2207,15 @@ model CharacterTraumaProfile {
   worldStateId String
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
-  traumaLoad           Int @default(50)
-  silenceLoad          Int @default(50)
-  hypervigilanceLoad   Int @default(50)
-  shameResidue         Int @default(50)
-  griefResidue         Int @default(50)
+  traumaLoad         Int @default(50)
+  silenceLoad        Int @default(50)
+  hypervigilanceLoad Int @default(50)
+  shameResidue       Int @default(50)
+  griefResidue       Int @default(50)
 
-  bodyMemory       Json?
-  triggerPatterns  Json?
-  copingPatterns   Json?
+  bodyMemory      Json?
+  triggerPatterns Json?
+  copingPatterns  Json?
 
   notes String? @db.Text
 
@@ -2143,11 +2273,11 @@ model CharacterRumorReputationProfile {
   worldStateId String
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
-  publicTrust       Int @default(50)
-  suspicionLoad     Int @default(50)
-  scandalRisk       Int @default(50)
-  narrativeControl  Int @default(50)
-  rumorExposure     Int @default(50)
+  publicTrust      Int @default(50)
+  suspicionLoad    Int @default(50)
+  scandalRisk      Int @default(50)
+  narrativeControl Int @default(50)
+  rumorExposure    Int @default(50)
 
   reputationThemes     Json?
   vulnerableNarratives Json?
@@ -2170,7 +2300,7 @@ model WorldEducationNormProfile {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  worldStateId String @unique
+  worldStateId String              @unique
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
   label String
@@ -2208,10 +2338,10 @@ model CharacterEducationProfile {
 
   primaryTrainingMode TrainingMode @default(MIXED)
 
-  literacyLevel               Int @default(50)
-  numeracyLevel               Int @default(50)
-  oralTraditionDepth          Int @default(50)
-  ecologicalKnowledgeDepth    Int @default(50)
+  literacyLevel                Int @default(50)
+  numeracyLevel                Int @default(50)
+  oralTraditionDepth           Int @default(50)
+  ecologicalKnowledgeDepth     Int @default(50)
   institutionalSchoolingAccess Int @default(50)
 
   apprenticeshipDomains Json?
@@ -2245,11 +2375,11 @@ model CharacterLearningEnvelope {
   worldStateId String
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
-  trainedCapacity               Int @default(50)
-  expressiveCapacity            Int @default(50)
-  pressureDistortion            Int @default(50)
-  learnedAvoidance              Int @default(50)
-  socialRiskAdjustedDisclosure  Int @default(50)
+  trainedCapacity              Int @default(50)
+  expressiveCapacity           Int @default(50)
+  pressureDistortion           Int @default(50)
+  learnedAvoidance             Int @default(50)
+  socialRiskAdjustedDisclosure Int @default(50)
 
   summary Json?
 
@@ -2270,16 +2400,16 @@ model WorldHealthNormProfile {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  worldStateId String @unique
+  worldStateId String              @unique
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
   label String @default("Health norms")
 
-  bodyInterpretationModel   Json?
-  mindInterpretationModel   Json?
+  bodyInterpretationModel    Json?
+  mindInterpretationModel    Json?
   emotionInterpretationModel Json?
-  healingSystems            Json?
-  stigmaPatterns            Json?
+  healingSystems             Json?
+  stigmaPatterns             Json?
 
   communityCareCapacity     Int @default(50)
   institutionalCareCapacity Int @default(50)
@@ -2307,16 +2437,16 @@ model CharacterPhysicalHealthProfile {
   worldStateId String
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
-  injuryLoad            Int @default(50)
-  chronicPainLoad       Int @default(50)
-  illnessBurden         Int @default(50)
-  nutritionStatus       Int @default(50)
-  sleepQuality          Int @default(50)
-  enduranceCapacity     Int @default(50)
+  injuryLoad             Int @default(50)
+  chronicPainLoad        Int @default(50)
+  illnessBurden          Int @default(50)
+  nutritionStatus        Int @default(50)
+  sleepQuality           Int @default(50)
+  enduranceCapacity      Int @default(50)
   mobilityLimitationLoad Int @default(50)
-  reproductiveBurden    Int @default(50)
-  agingBurden           Int @default(50)
-  recoveryCapacity      Int @default(50)
+  reproductiveBurden     Int @default(50)
+  agingBurden            Int @default(50)
+  recoveryCapacity       Int @default(50)
 
   sensoryLimitations Json?
 
@@ -2343,16 +2473,16 @@ model CharacterMentalHealthProfile {
   worldStateId String
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
-  attentionStability    Int @default(50)
-  clarityLevel          Int @default(50)
-  intrusiveThoughtLoad  Int @default(50)
-  dissociationTendency    Int @default(50)
-  vigilanceLevel          Int @default(50)
-  despairLoad             Int @default(50)
-  controlCompulsion       Int @default(50)
-  moodInstability         Int @default(50)
-  stressTolerance         Int @default(50)
-  realityCoherence        Int @default(50)
+  attentionStability   Int @default(50)
+  clarityLevel         Int @default(50)
+  intrusiveThoughtLoad Int @default(50)
+  dissociationTendency Int @default(50)
+  vigilanceLevel       Int @default(50)
+  despairLoad          Int @default(50)
+  controlCompulsion    Int @default(50)
+  moodInstability      Int @default(50)
+  stressTolerance      Int @default(50)
+  realityCoherence     Int @default(50)
 
   notes String? @db.Text
 
@@ -2377,17 +2507,17 @@ model CharacterEmotionalHealthProfile {
   worldStateId String
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
-  emotionalRange          Int @default(50)
-  suppressionLoad         Int @default(50)
-  griefSaturation         Int @default(50)
-  shameSaturation         Int @default(50)
-  tendernessAccess        Int @default(50)
-  angerRegulation         Int @default(50)
-  fearCarryover           Int @default(50)
-  relationalOpenness      Int @default(50)
-  recoveryAfterDistress   Int @default(50)
-  emotionalNumbnessLoad   Int @default(50)
-  emotionalFloodingLoad   Int @default(50)
+  emotionalRange        Int @default(50)
+  suppressionLoad       Int @default(50)
+  griefSaturation       Int @default(50)
+  shameSaturation       Int @default(50)
+  tendernessAccess      Int @default(50)
+  angerRegulation       Int @default(50)
+  fearCarryover         Int @default(50)
+  relationalOpenness    Int @default(50)
+  recoveryAfterDistress Int @default(50)
+  emotionalNumbnessLoad Int @default(50)
+  emotionalFloodingLoad Int @default(50)
 
   notes String? @db.Text
 
@@ -2412,8 +2542,8 @@ model CharacterHealthEnvelope {
   worldStateId String
   worldState   WorldStateReference @relation(fields: [worldStateId], references: [id], onDelete: Restrict)
 
-  functionalCapacity         Int @default(50)
-  careAccess                 Int @default(50)
+  functionalCapacity         Int   @default(50)
+  careAccess                 Int   @default(50)
   visibleHealthPresentation  Json?
   hiddenHealthBurden         Json?
   socialInterpretation       Json?
@@ -2456,9 +2586,9 @@ model Place {
   sources       Source[]
   openQuestions OpenQuestion[]
 
-  settingProfile SettingProfile?
-  settingStates  SettingState[]
-  metaScenes     MetaScene[]
+  settingProfile   SettingProfile?
+  settingStates    SettingState[]
+  metaScenes       MetaScene[]
   fragmentClusters FragmentCluster[]
 
   /// Simulation layer — persistent terrain / hydrology / resource logic (Environment & Node Engine).
@@ -2466,6 +2596,10 @@ model Place {
   placeStates         PlaceState[]
   environmentNodes    EnvironmentNode[]
   placeMemoryProfiles PlaceMemoryProfile[]
+
+  populationEntitiesPrimary   PopulationEntity[]         @relation("PopulationEntityPrimaryPlace")
+  populationEntityPresences   PopulationEntityPresence[] @relation("PopulationEntityPresencePlace")
+  populationHouseholdsPrimary PopulationHousehold[]      @relation("PopulationHouseholdPrimaryPlace")
 
   @@index([visibility])
   @@index([placeType])
@@ -2518,12 +2652,12 @@ model VoicePass {
   voiceProfileId String?
   voiceProfile   NarrativeVoiceProfile? @relation(fields: [voiceProfileId], references: [id], onDelete: SetNull)
 
-  passType String // pov_render, character_voice, narrator_voice, alternate_perspective, emotional_gravity, audio_script
-  content  String  @db.Text
-  summary  String?
-  status   String // generated, accepted, revised, rejected, archived
+  passType   String // pov_render, character_voice, narrator_voice, alternate_perspective, emotional_gravity, audio_script
+  content    String  @db.Text
+  summary    String?
+  status     String // generated, accepted, revised, rejected, archived
   confidence Int?
-  notes    String?
+  notes      String?
 
   @@index([metaSceneId])
   @@index([personId])
@@ -2542,12 +2676,12 @@ model CharacterVoiceAsset {
   personId String
   person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
 
-  assetType String // sample, monologue, narration, teaser
-  title     String
-  audioUrl  String?
+  assetType  String // sample, monologue, narration, teaser
+  title      String
+  audioUrl   String?
   transcript String? @db.Text
-  status    String // draft, ready, published
-  notes     String?
+  status     String // draft, ready, published
+  notes      String?
 
   @@index([personId])
   @@index([assetType])
@@ -2561,18 +2695,18 @@ model SceneAudioAsset {
   updatedAt DateTime @updatedAt
 
   sceneId String?
-  scene   Scene? @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+  scene   Scene?  @relation(fields: [sceneId], references: [id], onDelete: Cascade)
 
   metaSceneId String?
   metaScene   MetaScene? @relation(fields: [metaSceneId], references: [id], onDelete: Cascade)
 
-  assetType String // narration, ambient_mix, immersive_mix, excerpt
-  title     String
-  audioUrl  String?
-  transcript String? @db.Text
+  assetType       String // narration, ambient_mix, immersive_mix, excerpt
+  title           String
+  audioUrl        String?
+  transcript      String? @db.Text
   durationSeconds Int?
-  status    String
-  notes     String?
+  status          String
+  notes           String?
 
   audioSyncSegments AudioSyncSegment[]
 
@@ -2592,7 +2726,7 @@ model CinematicNarrativePass {
   metaScene   MetaScene? @relation(fields: [metaSceneId], references: [id], onDelete: Cascade)
 
   sceneId String?
-  scene   Scene? @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+  scene   Scene?  @relation(fields: [sceneId], references: [id], onDelete: Cascade)
 
   /// Optional loose link to MetaSceneNarrativePass.id or VoicePass.id (polymorphic; not enforced FK).
   sourcePassId String?
@@ -2623,13 +2757,13 @@ model SceneBeat {
   metaSceneId String
   metaScene   MetaScene @relation(fields: [metaSceneId], references: [id], onDelete: Cascade)
 
-  beatType         String
-  orderIndex       Int
-  summary          String  @db.Text
-  emotionalCharge  String?
-  symbolicCharge   String?
-  pacingHint       String?
-  notes            String?
+  beatType        String
+  orderIndex      Int
+  summary         String  @db.Text
+  emotionalCharge String?
+  symbolicCharge  String?
+  pacingHint      String?
+  notes           String?
 
   @@index([metaSceneId])
   @@index([beatType])
@@ -2678,11 +2812,11 @@ model CharacterProfile {
   desires           Json?
   internalConflicts Json?
 
-  moralFramework     String? @db.Text
-  theologyFramework  String? @db.Text
-  socialPosition     String?
-  roleArchetype      String?
-  narrativeFunction  String?
+  moralFramework    String? @db.Text
+  theologyFramework String? @db.Text
+  socialPosition    String?
+  roleArchetype     String?
+  narrativeFunction String?
 
   educationLevel     String?
   religiousContext   String?
@@ -2694,29 +2828,29 @@ model CharacterProfile {
   contradictions     String?
   notes              String? @db.Text
 
-  recordType     RecordType       @default(HYBRID)
-  visibility     VisibilityStatus @default(REVIEW)
+  recordType RecordType       @default(HYBRID)
+  visibility VisibilityStatus @default(REVIEW)
   /// Optional certainty label (aligns with ConfidenceProfile keys informally until FK).
-  certainty      String?
+  certainty  String?
 
-  enneagramType          EnneagramType?
-  enneagramWing          String?
-  enneagramConfidence    Int?
-  enneagramSource        String?
-  stressPattern          String?
-  growthPattern          String?
-  defensiveStyle         String?
-  coreLonging            String?
-  coreFear               String?
-  attentionBias          String?
-  relationalStyle        String?
-  conflictStyle          String?
-  attachmentPattern      String?
-  shameTrigger           String?
-  angerPattern           String?
-  griefPattern           String?
-  controlPattern         String?
-  notesOnTypeUse         String?
+  enneagramType       EnneagramType?
+  enneagramWing       String?
+  enneagramConfidence Int?
+  enneagramSource     String?
+  stressPattern       String?
+  growthPattern       String?
+  defensiveStyle      String?
+  coreLonging         String?
+  coreFear            String?
+  attentionBias       String?
+  relationalStyle     String?
+  conflictStyle       String?
+  attachmentPattern   String?
+  shameTrigger        String?
+  angerPattern        String?
+  griefPattern        String?
+  controlPattern      String?
+  notesOnTypeUse      String?
 
   @@index([recordType])
   @@index([visibility])
@@ -2755,15 +2889,15 @@ model CharacterRelationship {
   personBId String
   personB   Person @relation("CharacterRelationshipPersonB", fields: [personBId], references: [id], onDelete: Cascade)
 
-  relationshipType       String
-  relationshipSummary    String? @db.Text
-  emotionalPattern       String? @db.Text
-  conflictPattern          String? @db.Text
-  attachmentPattern      String? @db.Text
-  powerDynamic           String? @db.Text
-  enneagramDynamic       String? @db.Text
-  confidence             Int?
-  notes                  String? @db.Text
+  relationshipType        String
+  relationshipSummary     String? @db.Text
+  emotionalPattern        String? @db.Text
+  conflictPattern         String? @db.Text
+  attachmentPattern       String? @db.Text
+  powerDynamic            String? @db.Text
+  enneagramDynamic        String? @db.Text
+  confidence              Int?
+  notes                   String? @db.Text
   /// Cached rich dyad synthesis (does not replace authored relationship fields).
   generatedDynamicSummary String? @db.Text
 
@@ -2782,17 +2916,17 @@ model CharacterState {
   person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
 
   /// Named arc slice (e.g. opening_day, pre_attack); optional when scene-scoped only.
-  label              String?
-  sceneId            String?
-  scene              Scene? @relation(fields: [sceneId], references: [id], onDelete: SetNull)
+  label   String?
+  sceneId String?
+  scene   Scene?  @relation(fields: [sceneId], references: [id], onDelete: SetNull)
 
   emotionalBaseline String?
   /// Future: RegistryValue key (pressure family); free string until wired.
-  pressureLevel      String?
-  trustLevel         Int     @default(50)
-  fearLevel          Int     @default(50)
-  stabilityLevel     Int     @default(50)
-  cognitiveLoad      Int     @default(50)
+  pressureLevel     String?
+  trustLevel        Int     @default(50)
+  fearLevel         Int     @default(50)
+  stabilityLevel    Int     @default(50)
+  cognitiveLoad     Int     @default(50)
 
   emotionalState   String?
   motivation       String?
@@ -2803,8 +2937,8 @@ model CharacterState {
   notes            String? @db.Text
 
   /// World-era grounding (Stage 3.1) — optional pointer to master timeline / world-state table.
-  worldStateId String?
-  worldState   WorldStateReference? @relation(fields: [worldStateId], references: [id], onDelete: SetNull)
+  worldStateId        String?
+  worldState          WorldStateReference? @relation(fields: [worldStateId], references: [id], onDelete: SetNull)
   /// Snapshot JSON for inspection; PlaceState / environment engine inform full logic later.
   environmentSnapshot Json?
   powerContext        Json?
@@ -2832,10 +2966,10 @@ model CharacterConstraint {
   personId String
   person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
 
-  type        CharacterConstraintType
-  description String                  @db.Text
-  isHardConstraint Boolean            @default(true)
-  notes       String? @db.Text
+  type             CharacterConstraintType
+  description      String                  @db.Text
+  isHardConstraint Boolean                 @default(true)
+  notes            String?                 @db.Text
 
   recordType RecordType       @default(HYBRID)
   visibility VisibilityStatus @default(REVIEW)
@@ -2857,8 +2991,8 @@ model CharacterTrigger {
   triggerType     CharacterTriggerType
   description     String               @db.Text
   intensity       Int                  @default(3)
-  responsePattern String? @db.Text
-  notes           String? @db.Text
+  responsePattern String?              @db.Text
+  notes           String?              @db.Text
 
   recordType RecordType       @default(HYBRID)
   visibility VisibilityStatus @default(REVIEW)
@@ -2877,11 +3011,11 @@ model CharacterPerceptionProfile {
   personId String @unique
   person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
 
-  sensoryBias          String? @db.Text
-  attentionFocus       String? @db.Text
-  blindSpots           Json?
-  interpretationStyle  String? @db.Text
-  memoryReliability    String? @db.Text
+  sensoryBias            String? @db.Text
+  attentionFocus         String? @db.Text
+  blindSpots             Json?
+  interpretationStyle    String? @db.Text
+  memoryReliability      String? @db.Text
   /// Aligns with NarrativePermissionProfile.key (Stage 2).
   narrativePermissionKey String?
 
@@ -2926,12 +3060,12 @@ model CharacterChoiceProfile {
   personId String @unique
   person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
 
-  riskTolerance         Int     @default(50)
-  decisionSpeed         String?
-  conflictStyle         String?
-  loyaltyPriority       Json?
-  selfPreservationBias  Int     @default(50)
-  moralRigidity         Int     @default(50)
+  riskTolerance        Int     @default(50)
+  decisionSpeed        String?
+  conflictStyle        String?
+  loyaltyPriority      Json?
+  selfPreservationBias Int     @default(50)
+  moralRigidity        Int     @default(50)
 
   notes String? @db.Text
 
@@ -2947,7 +3081,7 @@ model SettingProfile {
   updatedAt DateTime @updatedAt
 
   placeId String @unique
-  place   Place @relation(fields: [placeId], references: [id], onDelete: Cascade)
+  place   Place  @relation(fields: [placeId], references: [id], onDelete: Cascade)
 
   physicalDescription String? @db.Text
   environmentType     String?
@@ -2974,7 +3108,7 @@ model SettingState {
   updatedAt DateTime @updatedAt
 
   placeId String
-  place   Place @relation(fields: [placeId], references: [id], onDelete: Cascade)
+  place   Place  @relation(fields: [placeId], references: [id], onDelete: Cascade)
 
   timePeriod        String?
   season            String?
@@ -2995,7 +3129,7 @@ model PlaceEnvironmentProfile {
   updatedAt DateTime @updatedAt
 
   placeId String @unique
-  place   Place @relation(fields: [placeId], references: [id], onDelete: Cascade)
+  place   Place  @relation(fields: [placeId], references: [id], onDelete: Cascade)
 
   terrainType      String?
   hydrologyType    String?
@@ -3022,23 +3156,23 @@ model PlaceState {
   updatedAt DateTime @updatedAt
 
   placeId String
-  place   Place @relation(fields: [placeId], references: [id], onDelete: Cascade)
+  place   Place  @relation(fields: [placeId], references: [id], onDelete: Cascade)
 
   worldStateId String?
   worldState   WorldStateReference? @relation(fields: [worldStateId], references: [id], onDelete: SetNull)
 
-  label              String
-  settlementPattern  String?
-  strategicValue     Int     @default(0)
-  riskLevel          Int     @default(0)
-  controlProfile     Json?
-  accessProfile      Json?
-  transportProfile   Json?
-  economicProfile    Json?
-  pressureProfile    Json?
-  memoryLoad         Json?
+  label                    String
+  settlementPattern        String?
+  strategicValue           Int     @default(0)
+  riskLevel                Int     @default(0)
+  controlProfile           Json?
+  accessProfile            Json?
+  transportProfile         Json?
+  economicProfile          Json?
+  pressureProfile          Json?
+  memoryLoad               Json?
   activePopulationEstimate Int?
-  notes              String? @db.Text
+  notes                    String? @db.Text
 
   recordType RecordType       @default(HYBRID)
   visibility VisibilityStatus @default(REVIEW)
@@ -3056,7 +3190,7 @@ model EnvironmentNode {
   updatedAt DateTime @updatedAt
 
   placeId String
-  place   Place @relation(fields: [placeId], references: [id], onDelete: Cascade)
+  place   Place  @relation(fields: [placeId], references: [id], onDelete: Cascade)
 
   key         String  @unique
   label       String
@@ -3089,13 +3223,13 @@ model NodeConnection {
   toNode     EnvironmentNode @relation("NodeConnectionTo", fields: [toNodeId], references: [id], onDelete: Cascade)
 
   connectionType   NodeConnectionType
-  bidirectional      Boolean            @default(true)
-  travelRisk         Int                @default(0)
-  travelDifficulty   Int                @default(0)
-  seasonalModifier   Json?
-  worldStateId       String?
-  worldState         WorldStateReference? @relation(fields: [worldStateId], references: [id], onDelete: SetNull)
-  notes              String? @db.Text
+  bidirectional    Boolean              @default(true)
+  travelRisk       Int                  @default(0)
+  travelDifficulty Int                  @default(0)
+  seasonalModifier Json?
+  worldStateId     String?
+  worldState       WorldStateReference? @relation(fields: [worldStateId], references: [id], onDelete: SetNull)
+  notes            String?              @db.Text
 
   recordType RecordType       @default(HYBRID)
   visibility VisibilityStatus @default(REVIEW)
@@ -3134,14 +3268,14 @@ model PlaceMemoryProfile {
   updatedAt DateTime @updatedAt
 
   placeId String
-  place   Place @relation(fields: [placeId], references: [id], onDelete: Cascade)
+  place   Place  @relation(fields: [placeId], references: [id], onDelete: Cascade)
 
   memoryType   PlaceMemoryType
   label        String
-  description  String? @db.Text
+  description  String?              @db.Text
   worldStateId String?
   worldState   WorldStateReference? @relation(fields: [worldStateId], references: [id], onDelete: SetNull)
-  notes        String? @db.Text
+  notes        String?              @db.Text
 
   recordType RecordType       @default(HYBRID)
   visibility VisibilityStatus @default(REVIEW)
@@ -3159,7 +3293,7 @@ model MetaScene {
   updatedAt DateTime @updatedAt
 
   sceneId String?
-  scene   Scene? @relation(fields: [sceneId], references: [id], onDelete: SetNull)
+  scene   Scene?  @relation(fields: [sceneId], references: [id], onDelete: SetNull)
 
   title String
 
@@ -3167,37 +3301,37 @@ model MetaScene {
   dateEstimate String?
 
   placeId String
-  place   Place @relation(fields: [placeId], references: [id], onDelete: Restrict)
+  place   Place  @relation(fields: [placeId], references: [id], onDelete: Restrict)
 
   povPersonId String
   povPerson   Person @relation(fields: [povPersonId], references: [id], onDelete: Restrict)
 
   participants String[] @default([])
 
-  environmentDescription String? @db.Text
-  sensoryField           String? @db.Text
-  historicalConstraints  String? @db.Text
-  socialConstraints      String? @db.Text
-  characterStatesSummary String? @db.Text
-  emotionalVoltage       String?
-  centralConflict        String?
-  symbolicElements       String?
-  narrativePurpose       String?
-  continuityDependencies String?
-  sourceSupportLevel     String?
-  notes                  String?
+  environmentDescription      String? @db.Text
+  sensoryField                String? @db.Text
+  historicalConstraints       String? @db.Text
+  socialConstraints           String? @db.Text
+  characterStatesSummary      String? @db.Text
+  emotionalVoltage            String?
+  centralConflict             String?
+  symbolicElements            String?
+  narrativePurpose            String?
+  continuityDependencies      String?
+  sourceSupportLevel          String?
+  notes                       String?
   /// Cached template or AI-enhanced world-state prose (author fields above remain canonical).
-  generatedWorldSummary         String? @db.Text
-  generatedPerspectiveSummary   String? @db.Text
+  generatedWorldSummary       String? @db.Text
+  generatedPerspectiveSummary String? @db.Text
 
-  fragmentClusters FragmentCluster[]
+  fragmentClusters             FragmentCluster[]
   sceneConstructionSuggestions SceneConstructionSuggestion[]
-  sceneSoulSuggestions        SceneSoulSuggestion[]
-  narrativePasses               MetaSceneNarrativePass[]
-  voicePasses                   VoicePass[]
-  sceneAudioAssets              SceneAudioAsset[]
-  cinematicNarrativePasses      CinematicNarrativePass[]
-  sceneBeats                    SceneBeat[]
+  sceneSoulSuggestions         SceneSoulSuggestion[]
+  narrativePasses              MetaSceneNarrativePass[]
+  voicePasses                  VoicePass[]
+  sceneAudioAssets             SceneAudioAsset[]
+  cinematicNarrativePasses     CinematicNarrativePass[]
+  sceneBeats                   SceneBeat[]
 
   @@index([sceneId])
   @@index([placeId])
@@ -3213,13 +3347,13 @@ model MetaSceneNarrativePass {
   metaSceneId String
   metaScene   MetaScene @relation(fields: [metaSceneId], references: [id], onDelete: Cascade)
 
-  passType  String // opening, interior, environment, relationship_pressure, symbolic, embodied, full_structured, ...
-  styleMode String?
-  content   String  @db.Text
-  summary   String?
+  passType   String // opening, interior, environment, relationship_pressure, symbolic, embodied, full_structured, ...
+  styleMode  String?
+  content    String  @db.Text
+  summary    String?
   confidence Int?
-  status    String // generated, accepted, revised, rejected, archived
-  notes     String?
+  status     String // generated, accepted, revised, rejected, archived
+  notes      String?
 
   voicePasses VoicePass[]
 
@@ -3237,12 +3371,12 @@ model SceneSoulSuggestion {
   metaSceneId String
   metaScene   MetaScene @relation(fields: [metaSceneId], references: [id], onDelete: Cascade)
 
-  title           String
-  suggestionType  String
-  summary         String  @db.Text
-  confidence      Int?
-  status          String
-  notes           String?
+  title          String
+  suggestionType String
+  summary        String  @db.Text
+  confidence     Int?
+  status         String
+  notes          String?
 
   @@index([metaSceneId])
   @@index([status])
@@ -3304,31 +3438,31 @@ model Chapter {
   worldStateOverride   WorldStateReference? @relation("ChapterToWorldState", fields: [worldStateOverrideId], references: [id], onDelete: SetNull)
 
   /// Cached reader chapter text (assembled from scenes). Invalidated when `narrativeAssemblyStatus` is STALE.
-  readerAssembledText String? @db.Text
-  assemblyContentHash  String?
-  lastAssembledAt      DateTime?
+  readerAssembledText String?   @db.Text
+  assemblyContentHash String?
+  lastAssembledAt     DateTime?
 
   narrativeAssemblyStatus NarrativeAssemblyStatus @default(CURRENT)
   assemblyInvalidatedAt   DateTime?
 
   /// Planning / AI chapter summary vs human-edited synopsis (optional).
-  generatedSummary String? @db.Text
+  generatedSummary   String? @db.Text
   humanEditedSummary String? @db.Text
 
   generationMetadataJson Json?
-  continuityState       NarrativeContinuityState @default(OK)
+  continuityState        NarrativeContinuityState @default(OK)
 
   proseQualityReports ProseQualityReport[]
 
   characterStateSnapshots CharacterStateSnapshot[]
 
-  scenes          Scene[]
-  persons         Person[]
-  places          Place[]
-  events          Event[]
-  sources         Source[]
-  continuityNotes ContinuityNote[]
-  brainMemos      BrainMemo[]
+  scenes           Scene[]
+  persons          Person[]
+  places           Place[]
+  events           Event[]
+  sources          Source[]
+  continuityNotes  ContinuityNote[]
+  brainMemos       BrainMemo[]
   fragmentClusters FragmentCluster[]
 
   @@index([bookId])
@@ -3360,11 +3494,11 @@ model Scene {
   writingMode WritingMode @default(HYBRID)
 
   /// Legacy union field — prefer `authoringText` / `generationText` / `publishedReaderText` for new work.
-  draftText       String? @db.Text
+  draftText           String? @db.Text
   /// Latest model-generated draft (provisional).
-  generationText  String? @db.Text
+  generationText      String? @db.Text
   /// Primary human working copy for revision.
-  authoringText   String? @db.Text
+  authoringText       String? @db.Text
   /// Author-approved text surfaced to readers when set.
   publishedReaderText String? @db.Text
 
@@ -3374,7 +3508,7 @@ model Scene {
   worldStateOverrideId String?
   worldStateOverride   WorldStateReference? @relation("SceneToWorldState", fields: [worldStateOverrideId], references: [id], onDelete: SetNull)
 
-  narrativeAssemblyStatus NarrativeAssemblyStatus @default(CURRENT)
+  narrativeAssemblyStatus NarrativeAssemblyStatus  @default(CURRENT)
   assemblyInvalidatedAt   DateTime?
   continuityState         NarrativeContinuityState @default(OK)
 
@@ -3385,35 +3519,35 @@ model Scene {
   sceneStatus          String?
 
   /// Author-facing overrides for public return / continuation copy (optional).
-  publicReturnHookOverride          String?
-  publicPremiumInvitationLine       String?
-  publicContinuationInvitationLine  String?
+  publicReturnHookOverride         String?
+  publicPremiumInvitationLine      String?
+  publicContinuationInvitationLine String?
 
   /**
    * AI assist metadata (lightweight pointers/summaries only).
    * Full traceability lives on SceneAssistRun rows.
    */
-  lastAssistRunId              String?
-  aiAssistNotes                String?
-  lastGroundingScore           Int?
-  lastContinuityCheckSummary   String?
+  lastAssistRunId            String?
+  aiAssistNotes              String?
+  lastGroundingScore         Int?
+  lastContinuityCheckSummary String?
 
-  persons         Person[]
-  places          Place[]
-  events          Event[]
-  symbols         Symbol[]
-  sources         Source[]
-  openQuestions   OpenQuestion[]
-  continuityNotes ContinuityNote[]
-  sceneNotes      SceneNote[]
-  assistRuns      SceneAssistRun[]
-  draftVersions   SceneDraftVersion[]
-  brainMemos      BrainMemo[]
-  characterStates CharacterState[]
-  metaScenes      MetaScene[]
-  fragmentClusters FragmentCluster[]
+  persons                      Person[]
+  places                       Place[]
+  events                       Event[]
+  symbols                      Symbol[]
+  sources                      Source[]
+  openQuestions                OpenQuestion[]
+  continuityNotes              ContinuityNote[]
+  sceneNotes                   SceneNote[]
+  assistRuns                   SceneAssistRun[]
+  draftVersions                SceneDraftVersion[]
+  brainMemos                   BrainMemo[]
+  characterStates              CharacterState[]
+  metaScenes                   MetaScene[]
+  fragmentClusters             FragmentCluster[]
   sceneConstructionSuggestions SceneConstructionSuggestion[]
-  sceneAudioAssets SceneAudioAsset[]
+  sceneAudioAssets             SceneAudioAsset[]
   cinematicNarrativePasses     CinematicNarrativePass[]
 
   narrativeBeats NarrativeBeat[]
@@ -3423,8 +3557,8 @@ model Scene {
   proseQualityReports ProseQualityReport[]
 
   characterStateSnapshots CharacterStateSnapshot[]
-  innerVoiceSessions    CharacterInnerVoiceSession[]
-  simulationScenarios   SimulationScenario[]
+  innerVoiceSessions      CharacterInnerVoiceSession[]
+  simulationScenarios     SimulationScenario[]
 
   @@index([chapterId])
   @@index([orderInChapter])
@@ -3445,12 +3579,12 @@ model NarrativeBeat {
   sceneId String
   scene   Scene  @relation(fields: [sceneId], references: [id], onDelete: Cascade)
 
-  orderIndex Int
-  label      String?
+  orderIndex     Int
+  label          String?
   /// Short intent for UI / prompts.
-  intentSummary String? @db.Text
+  intentSummary  String? @db.Text
   /// Structured beat plan (objectives, pressure, reveal ladder).
-  beatPlanJson  Json?
+  beatPlanJson   Json?
   /// Optional finer units: [{ "id", "intent", "sensoryAnchor" }, …]
   microbeatsJson Json?
 
@@ -3460,9 +3594,9 @@ model NarrativeBeat {
   worldStateOverrideId String?
   worldStateOverride   WorldStateReference? @relation("BeatToWorldState", fields: [worldStateOverrideId], references: [id], onDelete: SetNull)
 
-  status                    String                  @default("planned")
-  narrativeAssemblyStatus   NarrativeAssemblyStatus @default(CURRENT)
-  continuityState           NarrativeContinuityState @default(OK)
+  status                  String                   @default("planned")
+  narrativeAssemblyStatus NarrativeAssemblyStatus  @default(CURRENT)
+  continuityState         NarrativeContinuityState @default(OK)
 
   metadataJson Json?
 
@@ -3483,9 +3617,9 @@ model SceneAssistRun {
   assistType String // prompt, draft, expand, continue, link_suggest, continuity_check, grounding_check, summarize
   status     String // queued, completed, failed, applied, dismissed
 
-  modelName      String?
-  promptVersion  String?
-  writingMode    WritingMode?
+  modelName     String?
+  promptVersion String?
+  writingMode   WritingMode?
 
   inputSnapshot Json?
   outputText    String? @db.Text
@@ -3510,16 +3644,16 @@ model SceneDraftVersion {
   createdAt DateTime @default(now())
 
   sceneId String
-  scene   Scene   @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+  scene   Scene  @relation(fields: [sceneId], references: [id], onDelete: Cascade)
 
   source    String // manual_save, ai_insert, ai_replace, ai_append
-  draftText String @db.Text
+  draftText String  @db.Text
   notes     String?
+
+  proseQualityReports ProseQualityReport[]
 
   @@index([sceneId])
   @@index([source])
-
-  proseQualityReports ProseQualityReport[]
 }
 
 /// Snapshot of deterministic (or hybrid) prose QA: rhythm, repetition, voice fit, etc. AI output is never authoritative here—reports are inputs to human revision.
@@ -3531,7 +3665,7 @@ model ProseQualityReport {
 
   /// Scene-scoped analysis — set when `analysisScope` = SCENE.
   sceneId String?
-  scene   Scene?   @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+  scene   Scene?  @relation(fields: [sceneId], references: [id], onDelete: Cascade)
 
   /// Assembled chapter read — set when `analysisScope` = CHAPTER_ASSEMBLY (sceneId null).
   chapterId String?
@@ -3582,17 +3716,17 @@ model Symbol {
   meaningPrimary   String? @db.Text
   meaningSecondary String? @db.Text
   emotionalTone    String?
-  usageContext     String?  @db.Text
+  usageContext     String? @db.Text
   /// e.g. high, medium, low, interpretive, contested
-  certainty String?
+  certainty        String?
   /// Multi-layer tags from extraction: theme, symbol, rule, motif, etc.
-  layers    Json?
+  layers           Json?
 
   sourceId String?
   source   Source? @relation(fields: [sourceId], references: [id], onDelete: SetNull)
 
-  scenes             Scene[]
-  fragmentClusters   FragmentCluster[]
+  scenes           Scene[]
+  fragmentClusters FragmentCluster[]
 
   @@index([sourceId])
 }
@@ -3645,8 +3779,8 @@ model Motif {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name        String
-  description String @db.Text
+  name         String
+  description  String  @db.Text
   /// Stage 2+: motif categories may align with RegistryValue (family SYMBOLIC); free text until migration.
   usagePattern String?
 
@@ -3664,9 +3798,9 @@ model LiteraryDevice {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name          String
-  description   String @db.Text
-  systemEffect  String @db.Text
+  name         String
+  description  String @db.Text
+  systemEffect String @db.Text
 
   sourceId String?
   source   Source? @relation(fields: [sourceId], references: [id], onDelete: SetNull)
@@ -3819,7 +3953,7 @@ model ReaderState {
   updatedAt DateTime @updatedAt
 
   userId    String?
-  sessionId String @unique
+  sessionId String  @unique
 
   lastSceneId     String?
   lastMetaSceneId String?
@@ -3827,15 +3961,19 @@ model ReaderState {
   lastPlaceId     String?
   lastSymbolId    String?
 
-  lastMode         ReaderLastMode?
-  emotionalTrace   String?
-  returnHook       String?
-  /** Author- or server-composed invitation to continue the narrative thread. */
+  lastMode             ReaderLastMode?
+  emotionalTrace       String?
+  returnHook           String?
+  /**
+   * Author- or server-composed invitation to continue the narrative thread.
+   */
   continuationHeadline String?
-  /** Opaque client key for scroll/segment resume (e.g. hash of scene + segment). */
-  lastScrollKey  String?
-  lastInteractionAt DateTime @default(now())
-  notes          String?
+  /**
+   * Opaque client key for scroll/segment resume (e.g. hash of scene + segment).
+   */
+  lastScrollKey        String?
+  lastInteractionAt    DateTime        @default(now())
+  notes                String?
 
   /// Client-restored scroll anchor (main column).
   scrollAnchorY Int?
@@ -3921,9 +4059,9 @@ model ConstitutionalRule {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  key         String   @unique
+  key         String @unique
   name        String
-  description String   @db.Text
+  description String @db.Text
 
   ruleType RuleType
   scope    RuleScope
@@ -3959,11 +4097,11 @@ model OntologyType {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  key         String         @unique
+  key         String           @unique
   name        String
-  description String         @db.Text
+  description String           @db.Text
   family      OntologyFamily
-  isActive    Boolean        @default(true)
+  isActive    Boolean          @default(true)
   recordType  RecordType
   visibility  VisibilityStatus
 
@@ -3991,7 +4129,7 @@ model RegistryValue {
   sortOrder    Int            @default(0)
   isActive     Boolean        @default(true)
 
-  config Json?
+  config          Json?
   /// Future: scope targets (e.g. model names) without join tables yet.
   appliesTo       Json?
   sourceTraceNote String? @db.Text
@@ -4015,9 +4153,9 @@ model NarrativePermissionProfile {
   isActive    Boolean @default(true)
 
   allowsDirectNarrativeUse Boolean @default(false)
-  allowsSceneSupport        Boolean @default(false)
-  allowsAtmosphereSupport   Boolean @default(false)
-  allowsCanonicalReveal     Boolean @default(false)
+  allowsSceneSupport       Boolean @default(false)
+  allowsAtmosphereSupport  Boolean @default(false)
+  allowsCanonicalReveal    Boolean @default(false)
 
   recordType RecordType       @default(HYBRID)
   visibility VisibilityStatus @default(REVIEW)
@@ -4033,7 +4171,7 @@ model ConfidenceProfile {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  key          String @unique
+  key          String  @unique
   label        String
   description  String? @db.Text
   numericValue Int
@@ -4137,12 +4275,12 @@ model CensusResearchEntry {
   /// `entry_id` in the source SQLite export.
   externalEntryId Int
 
-  sourceFilename   String
-  sourceOrder      Int?
-  docPageCode      String?
-  pageType         String?
-  rawEntry         String  @db.Text
-  displayName      String?
+  sourceFilename    String
+  sourceOrder       Int?
+  docPageCode       String?
+  pageType          String?
+  rawEntry          String  @db.Text
+  displayName       String?
   childrenCount     Float?
   negroSlavesCount  Float?
   indianSlavesCount Float?
@@ -4233,11 +4371,11 @@ model RevisionJob {
   sceneId String?
   scene   Scene?  @relation(fields: [sceneId], references: [id], onDelete: Cascade)
 
-  payload       Json?
-  errorMessage  String?   @db.Text
-  startedAt     DateTime?
-  completedAt   DateTime?
-  attemptCount  Int       @default(0)
+  payload      Json?
+  errorMessage String?   @db.Text
+  startedAt    DateTime?
+  completedAt  DateTime?
+  attemptCount Int       @default(0)
 
   @@index([status])
   @@index([kind])

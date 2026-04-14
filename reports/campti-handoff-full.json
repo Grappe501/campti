@@ -1,6 +1,6 @@
 {
   "handoffVersion": 2,
-  "generatedAt": "2026-04-10T13:47:26.453Z",
+  "generatedAt": "2026-04-12T16:45:53.449Z",
   "purpose": "Legacy combined export (filesystem + story). Prefer campti-handoff-index.json and split artifacts for large uploads.",
   "repository": {
     "name": "campti",
@@ -15,10 +15,13 @@
   "executablesAndScripts": {
     "npmScripts": {
       "dev": "next dev",
-      "build": "prisma generate && next build",
+      "build": "node scripts/prisma-generate-optional.mjs && next build",
       "start": "next start",
       "lint": "eslint",
-      "postinstall": "prisma generate",
+      "typecheck": "tsc --noEmit",
+      "postinstall": "node scripts/prisma-generate-optional.mjs",
+      "db:generate": "prisma generate",
+      "db:validate": "prisma validate",
       "db:push": "prisma db push",
       "db:seed": "prisma db seed",
       "db:studio": "prisma studio",
@@ -26,14 +29,44 @@
       "db:narrative-dna": "tsx scripts/seed-narrative-dna-documents.ts",
       "db:narrative-dna-guides": "tsx scripts/seed-narrative-dna-guides.ts",
       "db:historical-timeline": "tsx scripts/ingest-historical-timeline.ts",
-      "report:handoff": "tsx scripts/generate-handoff-report.ts"
+      "db:campti-history-atlas": "tsx scripts/ingest-campti-history-atlas.ts",
+      "db:grappe-lineage-source": "tsx scripts/ingest-grappe-lineage-source.ts",
+      "db:wire-grp-lineage": "tsx scripts/wire-grp-lineage-persons.ts",
+      "report:handoff": "tsx scripts/generate-handoff-report.ts",
+      "report:handoff:full": "tsx scripts/generate-handoff-report.ts --combined-out reports/campti-handoff-full.json",
+      "verify:stage8": "tsx scripts/verify-stage8-classification.ts",
+      "verify:stage8-5": "tsx scripts/verify-stage8-5-outcome-envelope.ts",
+      "uploads:index": "tsx scripts/index-incoming-uploads.ts",
+      "uploads:sync-research": "tsx scripts/sync-campti-research-bundle.ts",
+      "db:import-campti-census": "tsx scripts/import-campti-census-sqlite.ts",
+      "research:census-pipeline": "tsx scripts/research-census-pipeline.ts"
     },
     "narrative": {
       "note": "All ingestion is TypeScript run via tsx; there are no Python scripts in this repo.",
       "scriptFiles": [
         {
           "file": "scripts/generate-handoff-report.ts",
-          "bytes": 18044,
+          "bytes": 18629,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/import-campti-census-sqlite.ts",
+          "bytes": 9392,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/index-incoming-uploads.ts",
+          "bytes": 6853,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/ingest-campti-history-atlas.ts",
+          "bytes": 13367,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/ingest-grappe-lineage-source.ts",
+          "bytes": 4349,
           "role": "CLI / ingestion script"
         },
         {
@@ -47,8 +80,23 @@
           "role": "CLI / ingestion script"
         },
         {
+          "file": "scripts/inspect-campti-sqlite.mjs",
+          "bytes": 519,
+          "role": "CLI / ingestion script"
+        },
+        {
           "file": "scripts/load-env.ts",
           "bytes": 737,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/prisma-generate-optional.mjs",
+          "bytes": 716,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/research-census-pipeline.ts",
+          "bytes": 1113,
           "role": "CLI / ingestion script"
         },
         {
@@ -60,38 +108,65 @@
           "file": "scripts/seed-narrative-dna-guides.ts",
           "bytes": 3010,
           "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/sync-campti-research-bundle.ts",
+          "bytes": 1679,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/verify-red-river-focal-alternation.ts",
+          "bytes": 4511,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/verify-stage8-5-outcome-envelope.ts",
+          "bytes": 2936,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/verify-stage8-classification.ts",
+          "bytes": 736,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/wire-grp-lineage-persons.ts",
+          "bytes": 2130,
+          "role": "CLI / ingestion script"
         }
       ]
     }
   },
   "dependencies": {
     "production": {
-      "@prisma/client": "^6.6.0",
-      "@supabase/supabase-js": "^2.102.1",
-      "next": "^15.2.4",
-      "openai": "^6.33.0",
-      "react": "^19.1.0",
-      "react-dom": "^19.1.0",
+      "@prisma/client": "^6.19.3",
+      "@supabase/supabase-js": "^2.103.0",
+      "next": "^16.2.3",
+      "openai": "^6.34.0",
+      "react": "^19.2.5",
+      "react-dom": "^19.2.5",
       "zod": "^4.3.6"
     },
     "development": {
       "@eslint/eslintrc": "^3",
-      "@netlify/plugin-nextjs": "^5",
+      "@netlify/plugin-nextjs": "^5.15.9",
       "@tailwindcss/postcss": "^4",
+      "@types/better-sqlite3": "^7.6.13",
       "@types/node": "^20",
       "@types/react": "^19",
       "@types/react-dom": "^19",
+      "better-sqlite3": "^12.8.0",
       "eslint": "^9",
-      "eslint-config-next": "^15.2.4",
-      "prisma": "^6.6.0",
+      "eslint-config-next": "^16.2.3",
+      "prisma": "^6.19.3",
       "tailwindcss": "^4",
-      "tsx": "^4.19.3",
+      "tsx": "^4.21.0",
       "typescript": "^5"
     }
   },
   "prisma": {
     "schemaFile": "prisma/schema.prisma",
-    "schemaBytes": 47202,
+    "schemaBytes": 130726,
     "seedCommand": "tsx prisma/seed.ts",
     "note": "PostgreSQL via DATABASE_URL; Prisma Client generated on postinstall/build."
   },
@@ -118,7 +193,12 @@
       {
         "path": "/admin/brain",
         "file": "app/admin/brain/page.tsx",
-        "bytes": 19639
+        "bytes": 26802
+      },
+      {
+        "path": "/admin/build-sequence",
+        "file": "app/admin/build-sequence/page.tsx",
+        "bytes": 6512
       },
       {
         "path": "/admin/chapters/[id]",
@@ -131,9 +211,34 @@
         "bytes": 5669
       },
       {
+        "path": "/admin/characters/[id]/brain",
+        "file": "app/admin/characters/[id]/brain/page.tsx",
+        "bytes": 9251
+      },
+      {
+        "path": "/admin/characters/[id]/continuity",
+        "file": "app/admin/characters/[id]/continuity/page.tsx",
+        "bytes": 54337
+      },
+      {
+        "path": "/admin/characters/[id]/intelligence",
+        "file": "app/admin/characters/[id]/intelligence/page.tsx",
+        "bytes": 20860
+      },
+      {
         "path": "/admin/characters/[id]/mind",
         "file": "app/admin/characters/[id]/mind/page.tsx",
-        "bytes": 17532
+        "bytes": 56593
+      },
+      {
+        "path": "/admin/characters/[id]/pressure",
+        "file": "app/admin/characters/[id]/pressure/page.tsx",
+        "bytes": 27151
+      },
+      {
+        "path": "/admin/characters/[id]/relationships",
+        "file": "app/admin/characters/[id]/relationships/page.tsx",
+        "bytes": 17602
       },
       {
         "path": "/admin/chunks/[id]",
@@ -166,9 +271,59 @@
         "bytes": 3121
       },
       {
+        "path": "/admin/confidence/[id]",
+        "file": "app/admin/confidence/[id]/page.tsx",
+        "bytes": 4166
+      },
+      {
+        "path": "/admin/confidence/new",
+        "file": "app/admin/confidence/new/page.tsx",
+        "bytes": 3453
+      },
+      {
+        "path": "/admin/confidence",
+        "file": "app/admin/confidence/page.tsx",
+        "bytes": 1788
+      },
+      {
+        "path": "/admin/connections/[id]",
+        "file": "app/admin/connections/[id]/page.tsx",
+        "bytes": 6220
+      },
+      {
+        "path": "/admin/connections/new",
+        "file": "app/admin/connections/new/page.tsx",
+        "bytes": 5159
+      },
+      {
+        "path": "/admin/connections",
+        "file": "app/admin/connections/page.tsx",
+        "bytes": 2544
+      },
+      {
         "path": "/admin/continuity/[id]",
         "file": "app/admin/continuity/[id]/page.tsx",
         "bytes": 6705
+      },
+      {
+        "path": "/admin/continuity/education/[id]",
+        "file": "app/admin/continuity/education/[id]/page.tsx",
+        "bytes": 5510
+      },
+      {
+        "path": "/admin/continuity/education/new",
+        "file": "app/admin/continuity/education/new/page.tsx",
+        "bytes": 3618
+      },
+      {
+        "path": "/admin/continuity/education",
+        "file": "app/admin/continuity/education/page.tsx",
+        "bytes": 1642
+      },
+      {
+        "path": "/admin/continuity/learning",
+        "file": "app/admin/continuity/learning/page.tsx",
+        "bytes": 897
       },
       {
         "path": "/admin/continuity",
@@ -178,7 +333,7 @@
       {
         "path": "/admin/dashboard",
         "file": "app/admin/dashboard/page.tsx",
-        "bytes": 2563
+        "bytes": 5302
       },
       {
         "path": "/admin/events/[id]",
@@ -236,6 +391,11 @@
         "bytes": 968
       },
       {
+        "path": "/admin/login",
+        "file": "app/admin/login/page.tsx",
+        "bytes": 354
+      },
+      {
         "path": "/admin/meta-scenes/[id]/cinematic",
         "file": "app/admin/meta-scenes/[id]/cinematic/page.tsx",
         "bytes": 10385
@@ -243,7 +403,7 @@
       {
         "path": "/admin/meta-scenes/[id]/compose",
         "file": "app/admin/meta-scenes/[id]/compose/page.tsx",
-        "bytes": 56239
+        "bytes": 54660
       },
       {
         "path": "/admin/meta-scenes/[id]/experience-tuning",
@@ -281,14 +441,74 @@
         "bytes": 895
       },
       {
+        "path": "/admin/narrative/books/[bookId]",
+        "file": "app/admin/narrative/books/[bookId]/page.tsx",
+        "bytes": 1784
+      },
+      {
+        "path": "/admin/narrative/chapters/[chapterId]/assembly",
+        "file": "app/admin/narrative/chapters/[chapterId]/assembly/page.tsx",
+        "bytes": 2036
+      },
+      {
+        "path": "/admin/narrative",
+        "file": "app/admin/narrative/page.tsx",
+        "bytes": 2545
+      },
+      {
         "path": "/admin/narrative-rules/[id]",
         "file": "app/admin/narrative-rules/[id]/page.tsx",
         "bytes": 5440
       },
       {
+        "path": "/admin/narrative-rules/constitutional/[id]",
+        "file": "app/admin/narrative-rules/constitutional/[id]/page.tsx",
+        "bytes": 2427
+      },
+      {
+        "path": "/admin/narrative-rules/constitutional/new",
+        "file": "app/admin/narrative-rules/constitutional/new/page.tsx",
+        "bytes": 1456
+      },
+      {
+        "path": "/admin/narrative-rules/constitutional",
+        "file": "app/admin/narrative-rules/constitutional/page.tsx",
+        "bytes": 235
+      },
+      {
         "path": "/admin/narrative-rules",
         "file": "app/admin/narrative-rules/page.tsx",
-        "bytes": 1227
+        "bytes": 6639
+      },
+      {
+        "path": "/admin/nodes/[id]",
+        "file": "app/admin/nodes/[id]/page.tsx",
+        "bytes": 5684
+      },
+      {
+        "path": "/admin/nodes/new",
+        "file": "app/admin/nodes/new/page.tsx",
+        "bytes": 4125
+      },
+      {
+        "path": "/admin/nodes",
+        "file": "app/admin/nodes/page.tsx",
+        "bytes": 2526
+      },
+      {
+        "path": "/admin/ontology/[id]",
+        "file": "app/admin/ontology/[id]/page.tsx",
+        "bytes": 4788
+      },
+      {
+        "path": "/admin/ontology/new",
+        "file": "app/admin/ontology/new/page.tsx",
+        "bytes": 4193
+      },
+      {
+        "path": "/admin/ontology",
+        "file": "app/admin/ontology/page.tsx",
+        "bytes": 4406
       },
       {
         "path": "/admin/patterns/[id]",
@@ -303,7 +523,7 @@
       {
         "path": "/admin/people/[id]",
         "file": "app/admin/people/[id]/page.tsx",
-        "bytes": 9736
+        "bytes": 10486
       },
       {
         "path": "/admin/people",
@@ -311,9 +531,24 @@
         "bytes": 4815
       },
       {
+        "path": "/admin/permissions/[id]",
+        "file": "app/admin/permissions/[id]/page.tsx",
+        "bytes": 4998
+      },
+      {
+        "path": "/admin/permissions/new",
+        "file": "app/admin/permissions/new/page.tsx",
+        "bytes": 3910
+      },
+      {
+        "path": "/admin/permissions",
+        "file": "app/admin/permissions/page.tsx",
+        "bytes": 2112
+      },
+      {
         "path": "/admin/places/[id]/environment",
         "file": "app/admin/places/[id]/environment/page.tsx",
-        "bytes": 8173
+        "bytes": 32810
       },
       {
         "path": "/admin/places/[id]",
@@ -326,6 +561,36 @@
         "bytes": 7571
       },
       {
+        "path": "/admin/pressure/bundles/[id]",
+        "file": "app/admin/pressure/bundles/[id]/page.tsx",
+        "bytes": 4834
+      },
+      {
+        "path": "/admin/pressure/bundles/new",
+        "file": "app/admin/pressure/bundles/new/page.tsx",
+        "bytes": 4043
+      },
+      {
+        "path": "/admin/pressure/bundles",
+        "file": "app/admin/pressure/bundles/page.tsx",
+        "bytes": 1980
+      },
+      {
+        "path": "/admin/pressure/governance/[id]",
+        "file": "app/admin/pressure/governance/[id]/page.tsx",
+        "bytes": 5698
+      },
+      {
+        "path": "/admin/pressure/governance/new",
+        "file": "app/admin/pressure/governance/new/page.tsx",
+        "bytes": 4846
+      },
+      {
+        "path": "/admin/pressure/governance",
+        "file": "app/admin/pressure/governance/page.tsx",
+        "bytes": 2078
+      },
+      {
         "path": "/admin/questions/[id]",
         "file": "app/admin/questions/[id]/page.tsx",
         "bytes": 6423
@@ -336,14 +601,79 @@
         "bytes": 7679
       },
       {
+        "path": "/admin/readiness/[id]",
+        "file": "app/admin/readiness/[id]/page.tsx",
+        "bytes": 4168
+      },
+      {
+        "path": "/admin/readiness/new",
+        "file": "app/admin/readiness/new/page.tsx",
+        "bytes": 3524
+      },
+      {
+        "path": "/admin/readiness",
+        "file": "app/admin/readiness/page.tsx",
+        "bytes": 1824
+      },
+      {
+        "path": "/admin/registries/[id]",
+        "file": "app/admin/registries/[id]/page.tsx",
+        "bytes": 3448
+      },
+      {
+        "path": "/admin/registries",
+        "file": "app/admin/registries/page.tsx",
+        "bytes": 5721
+      },
+      {
+        "path": "/admin/registries/values/[id]",
+        "file": "app/admin/registries/values/[id]/page.tsx",
+        "bytes": 4527
+      },
+      {
+        "path": "/admin/registries/values/new",
+        "file": "app/admin/registries/values/new/page.tsx",
+        "bytes": 3731
+      },
+      {
+        "path": "/admin/registries/values",
+        "file": "app/admin/registries/values/page.tsx",
+        "bytes": 4505
+      },
+      {
         "path": "/admin/relationships/[id]",
         "file": "app/admin/relationships/[id]/page.tsx",
-        "bytes": 7188
+        "bytes": 15612
+      },
+      {
+        "path": "/admin/relationships/networks",
+        "file": "app/admin/relationships/networks/page.tsx",
+        "bytes": 886
+      },
+      {
+        "path": "/admin/relationships/new",
+        "file": "app/admin/relationships/new/page.tsx",
+        "bytes": 6214
       },
       {
         "path": "/admin/relationships",
         "file": "app/admin/relationships/page.tsx",
-        "bytes": 4461
+        "bytes": 1717
+      },
+      {
+        "path": "/admin/risks/[id]",
+        "file": "app/admin/risks/[id]/page.tsx",
+        "bytes": 4398
+      },
+      {
+        "path": "/admin/risks/new",
+        "file": "app/admin/risks/new/page.tsx",
+        "bytes": 3553
+      },
+      {
+        "path": "/admin/risks",
+        "file": "app/admin/risks/page.tsx",
+        "bytes": 1694
       },
       {
         "path": "/admin/runs/[id]",
@@ -358,7 +688,7 @@
       {
         "path": "/admin/scenes/[id]/workspace",
         "file": "app/admin/scenes/[id]/workspace/page.tsx",
-        "bytes": 23903
+        "bytes": 27722
       },
       {
         "path": "/admin/scenes",
@@ -401,6 +731,41 @@
         "bytes": 1054
       },
       {
+        "path": "/admin/world-states/[id]/education",
+        "file": "app/admin/world-states/[id]/education/page.tsx",
+        "bytes": 8185
+      },
+      {
+        "path": "/admin/world-states/[id]/health",
+        "file": "app/admin/world-states/[id]/health/page.tsx",
+        "bytes": 9147
+      },
+      {
+        "path": "/admin/world-states/[id]/knowledge",
+        "file": "app/admin/world-states/[id]/knowledge/page.tsx",
+        "bytes": 12045
+      },
+      {
+        "path": "/admin/world-states/[id]/pressure",
+        "file": "app/admin/world-states/[id]/pressure/page.tsx",
+        "bytes": 4241
+      },
+      {
+        "path": "/admin/world-states/[id]/profile",
+        "file": "app/admin/world-states/[id]/profile/page.tsx",
+        "bytes": 11946
+      },
+      {
+        "path": "/admin/world-states/[id]/relationships",
+        "file": "app/admin/world-states/[id]/relationships/page.tsx",
+        "bytes": 8899
+      },
+      {
+        "path": "/admin/world-states",
+        "file": "app/admin/world-states/page.tsx",
+        "bytes": 3946
+      },
+      {
         "path": "/membership",
         "file": "app/membership/page.tsx",
         "bytes": 3089
@@ -408,7 +773,7 @@
       {
         "path": "/page.tsx",
         "file": "app/page.tsx",
-        "bytes": 10579
+        "bytes": 10713
       },
       {
         "path": "/read/chapters/[id]",
@@ -423,7 +788,7 @@
       {
         "path": "/read/characters/[id]",
         "file": "app/read/characters/[id]/page.tsx",
-        "bytes": 13524
+        "bytes": 13754
       },
       {
         "path": "/read/characters",
@@ -448,7 +813,7 @@
       {
         "path": "/read/scenes/[id]",
         "file": "app/read/scenes/[id]/page.tsx",
-        "bytes": 2442
+        "bytes": 2555
       },
       {
         "path": "/read/symbols",
@@ -466,7 +831,7 @@
         "bytes": 124
       }
     ],
-    "routeCount": 73
+    "routeCount": 131
   },
   "filesystem": {
     "excludeDirectoryNames": [
@@ -481,8 +846,8 @@
     ],
     "maxFilesScanned": 25000,
     "truncated": false,
-    "totalEntries": 380,
-    "totalFileBytesIndexed": 2542039,
+    "totalEntries": 839,
+    "totalFileBytesIndexed": 9235219,
     "filesByTopLevelFolder": {
       ".env": {
         "files": 1,
@@ -490,31 +855,35 @@
       },
       ".env.example": {
         "files": 1,
-        "bytes": 406
+        "bytes": 702
       },
       ".gitignore": {
         "files": 1,
-        "bytes": 367
+        "bytes": 485
       },
       "app": {
-        "files": 103,
-        "bytes": 787795
+        "files": 189,
+        "bytes": 1419302
+      },
+      "campti-system-map.json": {
+        "files": 1,
+        "bytes": 16267
       },
       "components": {
-        "files": 42,
-        "bytes": 138330
+        "files": 52,
+        "bytes": 224296
+      },
+      "docs": {
+        "files": 3,
+        "bytes": 31841
       },
       "eslint.config.mjs": {
         "files": 1,
-        "bytes": 458
+        "bytes": 365
       },
       "lib": {
-        "files": 110,
-        "bytes": 778696
-      },
-      "middleware.ts": {
-        "files": 1,
-        "bytes": 722
+        "files": 287,
+        "bytes": 1671701
       },
       "netlify.toml": {
         "files": 1,
@@ -522,7 +891,7 @@
       },
       "next-env.d.ts": {
         "files": 1,
-        "bytes": 262
+        "bytes": 251
       },
       "next.config.ts": {
         "files": 1,
@@ -530,31 +899,35 @@
       },
       "package-lock.json": {
         "files": 1,
-        "bytes": 247263
+        "bytes": 281234
       },
       "package.json": {
         "files": 1,
-        "bytes": 1330
+        "bytes": 2388
       },
       "postcss.config.mjs": {
         "files": 1,
         "bytes": 94
       },
       "prisma": {
-        "files": 7,
-        "bytes": 189767
+        "files": 43,
+        "bytes": 633192
+      },
+      "proxy.ts": {
+        "files": 1,
+        "bytes": 1959
       },
       "public": {
         "files": 1,
         "bytes": 0
       },
       "reports": {
-        "files": 3,
-        "bytes": 162929
+        "files": 4,
+        "bytes": 450789
       },
       "scripts": {
-        "files": 6,
-        "bytes": 41688
+        "files": 18,
+        "bytes": 90574
       },
       "styles": {
         "files": 1,
@@ -562,11 +935,15 @@
       },
       "tsconfig.json": {
         "files": 1,
-        "bytes": 562
+        "bytes": 698
       },
       "tsconfig.tsbuildinfo": {
         "files": 1,
-        "bytes": 190612
+        "bytes": 234716
+      },
+      "uploads": {
+        "files": 12,
+        "bytes": 4173607
       }
     },
     "entries": [
@@ -577,12 +954,12 @@
       },
       {
         "relativePath": ".env.example",
-        "bytes": 406,
+        "bytes": 702,
         "kind": "file"
       },
       {
         "relativePath": ".gitignore",
-        "bytes": 367,
+        "bytes": 485,
         "kind": "file"
       },
       {
@@ -596,8 +973,28 @@
         "kind": "directory"
       },
       {
+        "relativePath": "app/actions/brain-assembly.ts",
+        "bytes": 564,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/campti-history-atlas.ts",
+        "bytes": 731,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/census-research-story-assembly.ts",
+        "bytes": 856,
+        "kind": "file"
+      },
+      {
         "relativePath": "app/actions/chapters.ts",
-        "bytes": 3694,
+        "bytes": 3851,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/character-engine.ts",
+        "bytes": 17635,
         "kind": "file"
       },
       {
@@ -616,6 +1013,21 @@
         "kind": "file"
       },
       {
+        "relativePath": "app/actions/cognition.ts",
+        "bytes": 4979,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/constitutional-rules.ts",
+        "bytes": 5664,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/continuity-order.ts",
+        "bytes": 44033,
+        "kind": "file"
+      },
+      {
         "relativePath": "app/actions/continuity.ts",
         "bytes": 2704,
         "kind": "file"
@@ -623,6 +1035,11 @@
       {
         "relativePath": "app/actions/entity-linking.ts",
         "bytes": 6947,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/environment.ts",
+        "bytes": 17672,
         "kind": "file"
       },
       {
@@ -641,8 +1058,18 @@
         "kind": "file"
       },
       {
+        "relativePath": "app/actions/grappe-lineage.ts",
+        "bytes": 1990,
+        "kind": "file"
+      },
+      {
         "relativePath": "app/actions/ingestion.ts",
         "bytes": 9933,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/intelligence.ts",
+        "bytes": 11772,
         "kind": "file"
       },
       {
@@ -666,6 +1093,16 @@
         "kind": "file"
       },
       {
+        "relativePath": "app/actions/narrative-workflow.ts",
+        "bytes": 1467,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/ontology.ts",
+        "bytes": 15705,
+        "kind": "file"
+      },
+      {
         "relativePath": "app/actions/openai-extraction.ts",
         "bytes": 2210,
         "kind": "file"
@@ -681,6 +1118,21 @@
         "kind": "file"
       },
       {
+        "relativePath": "app/actions/population-social-field.ts",
+        "bytes": 1332,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/pressure-order.ts",
+        "bytes": 25859,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/prose-quality.ts",
+        "bytes": 1599,
+        "kind": "file"
+      },
+      {
         "relativePath": "app/actions/questions.ts",
         "bytes": 2689,
         "kind": "file"
@@ -688,6 +1140,26 @@
       {
         "relativePath": "app/actions/reader-memory.ts",
         "bytes": 3847,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/relationship-order.ts",
+        "bytes": 27865,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/scene-brain-runner.ts",
+        "bytes": 2218,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/scene-constraints.ts",
+        "bytes": 875,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/scene-generation.ts",
+        "bytes": 1307,
         "kind": "file"
       },
       {
@@ -702,7 +1174,12 @@
       },
       {
         "relativePath": "app/actions/scenes.ts",
-        "bytes": 13533,
+        "bytes": 14295,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/simulation-run.ts",
+        "bytes": 1059,
         "kind": "file"
       },
       {
@@ -717,7 +1194,7 @@
       },
       {
         "relativePath": "app/actions/world-model.ts",
-        "bytes": 26386,
+        "bytes": 22686,
         "kind": "file"
       },
       {
@@ -770,9 +1247,25 @@
       },
       {
         "relativePath": "app/admin/brain/page.tsx",
-        "bytes": 19639,
+        "bytes": 26802,
         "kind": "file",
         "role": "Next.js route /admin/brain"
+      },
+      {
+        "relativePath": "app/admin/build-sequence",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/build-sequence/copy-prompt-button.tsx",
+        "bytes": 662,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/admin/build-sequence/page.tsx",
+        "bytes": 6512,
+        "kind": "file",
+        "role": "Next.js route /admin/build-sequence"
       },
       {
         "relativePath": "app/admin/chapters",
@@ -807,15 +1300,70 @@
         "kind": "directory"
       },
       {
+        "relativePath": "app/admin/characters/[id]/brain",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/brain/page.tsx",
+        "bytes": 9251,
+        "kind": "file",
+        "role": "Next.js route /admin/characters/[id]/brain"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/continuity",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/continuity/page.tsx",
+        "bytes": 54337,
+        "kind": "file",
+        "role": "Next.js route /admin/characters/[id]/continuity"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/intelligence",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/intelligence/page.tsx",
+        "bytes": 20860,
+        "kind": "file",
+        "role": "Next.js route /admin/characters/[id]/intelligence"
+      },
+      {
         "relativePath": "app/admin/characters/[id]/mind",
         "bytes": 0,
         "kind": "directory"
       },
       {
         "relativePath": "app/admin/characters/[id]/mind/page.tsx",
-        "bytes": 17532,
+        "bytes": 56593,
         "kind": "file",
         "role": "Next.js route /admin/characters/[id]/mind"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/pressure",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/pressure/page.tsx",
+        "bytes": 27151,
+        "kind": "file",
+        "role": "Next.js route /admin/characters/[id]/pressure"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/relationships",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/relationships/page.tsx",
+        "bytes": 17602,
+        "kind": "file",
+        "role": "Next.js route /admin/characters/[id]/relationships"
       },
       {
         "relativePath": "app/admin/chunks",
@@ -884,6 +1432,72 @@
         "role": "Next.js route /admin/clusters"
       },
       {
+        "relativePath": "app/admin/confidence",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/confidence/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/confidence/[id]/page.tsx",
+        "bytes": 4166,
+        "kind": "file",
+        "role": "Next.js route /admin/confidence/[id]"
+      },
+      {
+        "relativePath": "app/admin/confidence/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/confidence/new/page.tsx",
+        "bytes": 3453,
+        "kind": "file",
+        "role": "Next.js route /admin/confidence/new"
+      },
+      {
+        "relativePath": "app/admin/confidence/page.tsx",
+        "bytes": 1788,
+        "kind": "file",
+        "role": "Next.js route /admin/confidence"
+      },
+      {
+        "relativePath": "app/admin/connections",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/connections/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/connections/[id]/page.tsx",
+        "bytes": 6220,
+        "kind": "file",
+        "role": "Next.js route /admin/connections/[id]"
+      },
+      {
+        "relativePath": "app/admin/connections/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/connections/new/page.tsx",
+        "bytes": 5159,
+        "kind": "file",
+        "role": "Next.js route /admin/connections/new"
+      },
+      {
+        "relativePath": "app/admin/connections/page.tsx",
+        "bytes": 2544,
+        "kind": "file",
+        "role": "Next.js route /admin/connections"
+      },
+      {
         "relativePath": "app/admin/continuity",
         "bytes": 0,
         "kind": "directory"
@@ -900,6 +1514,50 @@
         "role": "Next.js route /admin/continuity/[id]"
       },
       {
+        "relativePath": "app/admin/continuity/education",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/continuity/education/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/continuity/education/[id]/page.tsx",
+        "bytes": 5510,
+        "kind": "file",
+        "role": "Next.js route /admin/continuity/education/[id]"
+      },
+      {
+        "relativePath": "app/admin/continuity/education/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/continuity/education/new/page.tsx",
+        "bytes": 3618,
+        "kind": "file",
+        "role": "Next.js route /admin/continuity/education/new"
+      },
+      {
+        "relativePath": "app/admin/continuity/education/page.tsx",
+        "bytes": 1642,
+        "kind": "file",
+        "role": "Next.js route /admin/continuity/education"
+      },
+      {
+        "relativePath": "app/admin/continuity/learning",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/continuity/learning/page.tsx",
+        "bytes": 897,
+        "kind": "file",
+        "role": "Next.js route /admin/continuity/learning"
+      },
+      {
         "relativePath": "app/admin/continuity/page.tsx",
         "bytes": 7722,
         "kind": "file",
@@ -912,7 +1570,7 @@
       },
       {
         "relativePath": "app/admin/dashboard/page.tsx",
-        "bytes": 2563,
+        "bytes": 5302,
         "kind": "file",
         "role": "Next.js route /admin/dashboard"
       },
@@ -1017,7 +1675,7 @@
       },
       {
         "relativePath": "app/admin/layout.tsx",
-        "bytes": 392,
+        "bytes": 598,
         "kind": "file",
         "role": "Next.js layout"
       },
@@ -1042,6 +1700,22 @@
         "bytes": 968,
         "kind": "file",
         "role": "Next.js route /admin/literary-devices"
+      },
+      {
+        "relativePath": "app/admin/login",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/login/admin-login-form.tsx",
+        "bytes": 2499,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/admin/login/page.tsx",
+        "bytes": 354,
+        "kind": "file",
+        "role": "Next.js route /admin/login"
       },
       {
         "relativePath": "app/admin/meta-scenes",
@@ -1070,8 +1744,23 @@
         "kind": "directory"
       },
       {
+        "relativePath": "app/admin/meta-scenes/[id]/compose/compose-saved-message.ts",
+        "bytes": 890,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/compose/compose-section-nav.tsx",
+        "bytes": 1845,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/compose/compose-world-preview-blocks.tsx",
+        "bytes": 1013,
+        "kind": "file"
+      },
+      {
         "relativePath": "app/admin/meta-scenes/[id]/compose/page.tsx",
-        "bytes": 56239,
+        "bytes": 54660,
         "kind": "file",
         "role": "Next.js route /admin/meta-scenes/[id]/compose"
       },
@@ -1143,6 +1832,54 @@
         "role": "Next.js route /admin/motifs"
       },
       {
+        "relativePath": "app/admin/narrative",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative/books",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative/books/[bookId]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative/books/[bookId]/page.tsx",
+        "bytes": 1784,
+        "kind": "file",
+        "role": "Next.js route /admin/narrative/books/[bookId]"
+      },
+      {
+        "relativePath": "app/admin/narrative/chapters",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative/chapters/[chapterId]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative/chapters/[chapterId]/assembly",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative/chapters/[chapterId]/assembly/page.tsx",
+        "bytes": 2036,
+        "kind": "file",
+        "role": "Next.js route /admin/narrative/chapters/[chapterId]/assembly"
+      },
+      {
+        "relativePath": "app/admin/narrative/page.tsx",
+        "bytes": 2545,
+        "kind": "file",
+        "role": "Next.js route /admin/narrative"
+      },
+      {
         "relativePath": "app/admin/narrative-rules",
         "bytes": 0,
         "kind": "directory"
@@ -1159,10 +1896,109 @@
         "role": "Next.js route /admin/narrative-rules/[id]"
       },
       {
+        "relativePath": "app/admin/narrative-rules/constitutional",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative-rules/constitutional/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative-rules/constitutional/[id]/page.tsx",
+        "bytes": 2427,
+        "kind": "file",
+        "role": "Next.js route /admin/narrative-rules/constitutional/[id]"
+      },
+      {
+        "relativePath": "app/admin/narrative-rules/constitutional/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative-rules/constitutional/new/page.tsx",
+        "bytes": 1456,
+        "kind": "file",
+        "role": "Next.js route /admin/narrative-rules/constitutional/new"
+      },
+      {
+        "relativePath": "app/admin/narrative-rules/constitutional/page.tsx",
+        "bytes": 235,
+        "kind": "file",
+        "role": "Next.js route /admin/narrative-rules/constitutional"
+      },
+      {
         "relativePath": "app/admin/narrative-rules/page.tsx",
-        "bytes": 1227,
+        "bytes": 6639,
         "kind": "file",
         "role": "Next.js route /admin/narrative-rules"
+      },
+      {
+        "relativePath": "app/admin/nodes",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/nodes/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/nodes/[id]/page.tsx",
+        "bytes": 5684,
+        "kind": "file",
+        "role": "Next.js route /admin/nodes/[id]"
+      },
+      {
+        "relativePath": "app/admin/nodes/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/nodes/new/page.tsx",
+        "bytes": 4125,
+        "kind": "file",
+        "role": "Next.js route /admin/nodes/new"
+      },
+      {
+        "relativePath": "app/admin/nodes/page.tsx",
+        "bytes": 2526,
+        "kind": "file",
+        "role": "Next.js route /admin/nodes"
+      },
+      {
+        "relativePath": "app/admin/ontology",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/ontology/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/ontology/[id]/page.tsx",
+        "bytes": 4788,
+        "kind": "file",
+        "role": "Next.js route /admin/ontology/[id]"
+      },
+      {
+        "relativePath": "app/admin/ontology/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/ontology/new/page.tsx",
+        "bytes": 4193,
+        "kind": "file",
+        "role": "Next.js route /admin/ontology/new"
+      },
+      {
+        "relativePath": "app/admin/ontology/page.tsx",
+        "bytes": 4406,
+        "kind": "file",
+        "role": "Next.js route /admin/ontology"
       },
       {
         "relativePath": "app/admin/patterns",
@@ -1198,7 +2034,7 @@
       },
       {
         "relativePath": "app/admin/people/[id]/page.tsx",
-        "bytes": 9736,
+        "bytes": 10486,
         "kind": "file",
         "role": "Next.js route /admin/people/[id]"
       },
@@ -1207,6 +2043,39 @@
         "bytes": 4815,
         "kind": "file",
         "role": "Next.js route /admin/people"
+      },
+      {
+        "relativePath": "app/admin/permissions",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/permissions/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/permissions/[id]/page.tsx",
+        "bytes": 4998,
+        "kind": "file",
+        "role": "Next.js route /admin/permissions/[id]"
+      },
+      {
+        "relativePath": "app/admin/permissions/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/permissions/new/page.tsx",
+        "bytes": 3910,
+        "kind": "file",
+        "role": "Next.js route /admin/permissions/new"
+      },
+      {
+        "relativePath": "app/admin/permissions/page.tsx",
+        "bytes": 2112,
+        "kind": "file",
+        "role": "Next.js route /admin/permissions"
       },
       {
         "relativePath": "app/admin/places",
@@ -1225,7 +2094,7 @@
       },
       {
         "relativePath": "app/admin/places/[id]/environment/page.tsx",
-        "bytes": 8173,
+        "bytes": 32810,
         "kind": "file",
         "role": "Next.js route /admin/places/[id]/environment"
       },
@@ -1240,6 +2109,77 @@
         "bytes": 7571,
         "kind": "file",
         "role": "Next.js route /admin/places"
+      },
+      {
+        "relativePath": "app/admin/pressure",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/pressure/bundles",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/pressure/bundles/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/pressure/bundles/[id]/page.tsx",
+        "bytes": 4834,
+        "kind": "file",
+        "role": "Next.js route /admin/pressure/bundles/[id]"
+      },
+      {
+        "relativePath": "app/admin/pressure/bundles/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/pressure/bundles/new/page.tsx",
+        "bytes": 4043,
+        "kind": "file",
+        "role": "Next.js route /admin/pressure/bundles/new"
+      },
+      {
+        "relativePath": "app/admin/pressure/bundles/page.tsx",
+        "bytes": 1980,
+        "kind": "file",
+        "role": "Next.js route /admin/pressure/bundles"
+      },
+      {
+        "relativePath": "app/admin/pressure/governance",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/pressure/governance/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/pressure/governance/[id]/page.tsx",
+        "bytes": 5698,
+        "kind": "file",
+        "role": "Next.js route /admin/pressure/governance/[id]"
+      },
+      {
+        "relativePath": "app/admin/pressure/governance/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/pressure/governance/new/page.tsx",
+        "bytes": 4846,
+        "kind": "file",
+        "role": "Next.js route /admin/pressure/governance/new"
+      },
+      {
+        "relativePath": "app/admin/pressure/governance/page.tsx",
+        "bytes": 2078,
+        "kind": "file",
+        "role": "Next.js route /admin/pressure/governance"
       },
       {
         "relativePath": "app/admin/questions",
@@ -1264,6 +2204,94 @@
         "role": "Next.js route /admin/questions"
       },
       {
+        "relativePath": "app/admin/readiness",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/readiness/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/readiness/[id]/page.tsx",
+        "bytes": 4168,
+        "kind": "file",
+        "role": "Next.js route /admin/readiness/[id]"
+      },
+      {
+        "relativePath": "app/admin/readiness/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/readiness/new/page.tsx",
+        "bytes": 3524,
+        "kind": "file",
+        "role": "Next.js route /admin/readiness/new"
+      },
+      {
+        "relativePath": "app/admin/readiness/page.tsx",
+        "bytes": 1824,
+        "kind": "file",
+        "role": "Next.js route /admin/readiness"
+      },
+      {
+        "relativePath": "app/admin/registries",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/registries/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/registries/[id]/page.tsx",
+        "bytes": 3448,
+        "kind": "file",
+        "role": "Next.js route /admin/registries/[id]"
+      },
+      {
+        "relativePath": "app/admin/registries/page.tsx",
+        "bytes": 5721,
+        "kind": "file",
+        "role": "Next.js route /admin/registries"
+      },
+      {
+        "relativePath": "app/admin/registries/values",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/registries/values/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/registries/values/[id]/page.tsx",
+        "bytes": 4527,
+        "kind": "file",
+        "role": "Next.js route /admin/registries/values/[id]"
+      },
+      {
+        "relativePath": "app/admin/registries/values/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/registries/values/new/page.tsx",
+        "bytes": 3731,
+        "kind": "file",
+        "role": "Next.js route /admin/registries/values/new"
+      },
+      {
+        "relativePath": "app/admin/registries/values/page.tsx",
+        "bytes": 4505,
+        "kind": "file",
+        "role": "Next.js route /admin/registries/values"
+      },
+      {
         "relativePath": "app/admin/relationships",
         "bytes": 0,
         "kind": "directory"
@@ -1275,15 +2303,70 @@
       },
       {
         "relativePath": "app/admin/relationships/[id]/page.tsx",
-        "bytes": 7188,
+        "bytes": 15612,
         "kind": "file",
         "role": "Next.js route /admin/relationships/[id]"
       },
       {
+        "relativePath": "app/admin/relationships/networks",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/relationships/networks/page.tsx",
+        "bytes": 886,
+        "kind": "file",
+        "role": "Next.js route /admin/relationships/networks"
+      },
+      {
+        "relativePath": "app/admin/relationships/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/relationships/new/page.tsx",
+        "bytes": 6214,
+        "kind": "file",
+        "role": "Next.js route /admin/relationships/new"
+      },
+      {
         "relativePath": "app/admin/relationships/page.tsx",
-        "bytes": 4461,
+        "bytes": 1717,
         "kind": "file",
         "role": "Next.js route /admin/relationships"
+      },
+      {
+        "relativePath": "app/admin/risks",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/risks/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/risks/[id]/page.tsx",
+        "bytes": 4398,
+        "kind": "file",
+        "role": "Next.js route /admin/risks/[id]"
+      },
+      {
+        "relativePath": "app/admin/risks/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/risks/new/page.tsx",
+        "bytes": 3553,
+        "kind": "file",
+        "role": "Next.js route /admin/risks/new"
+      },
+      {
+        "relativePath": "app/admin/risks/page.tsx",
+        "bytes": 1694,
+        "kind": "file",
+        "role": "Next.js route /admin/risks"
       },
       {
         "relativePath": "app/admin/runs",
@@ -1324,7 +2407,7 @@
       },
       {
         "relativePath": "app/admin/scenes/[id]/workspace/page.tsx",
-        "bytes": 23903,
+        "bytes": 27722,
         "kind": "file",
         "role": "Next.js route /admin/scenes/[id]/workspace"
       },
@@ -1417,6 +2500,147 @@
         "role": "Next.js route /admin/themes"
       },
       {
+        "relativePath": "app/admin/world-states",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/education",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/education/page.tsx",
+        "bytes": 8185,
+        "kind": "file",
+        "role": "Next.js route /admin/world-states/[id]/education"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/health",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/health/page.tsx",
+        "bytes": 9147,
+        "kind": "file",
+        "role": "Next.js route /admin/world-states/[id]/health"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/knowledge",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/knowledge/page.tsx",
+        "bytes": 12045,
+        "kind": "file",
+        "role": "Next.js route /admin/world-states/[id]/knowledge"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/pressure",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/pressure/page.tsx",
+        "bytes": 4241,
+        "kind": "file",
+        "role": "Next.js route /admin/world-states/[id]/pressure"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/profile",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/profile/page.tsx",
+        "bytes": 11946,
+        "kind": "file",
+        "role": "Next.js route /admin/world-states/[id]/profile"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/relationships",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/relationships/page.tsx",
+        "bytes": 8899,
+        "kind": "file",
+        "role": "Next.js route /admin/world-states/[id]/relationships"
+      },
+      {
+        "relativePath": "app/admin/world-states/page.tsx",
+        "bytes": 3946,
+        "kind": "file",
+        "role": "Next.js route /admin/world-states"
+      },
+      {
+        "relativePath": "app/api",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/api/admin",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "API route"
+      },
+      {
+        "relativePath": "app/api/admin/agent",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "API route"
+      },
+      {
+        "relativePath": "app/api/admin/agent/chat",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "API route"
+      },
+      {
+        "relativePath": "app/api/admin/agent/chat/route.ts",
+        "bytes": 3851,
+        "kind": "file",
+        "role": "API route"
+      },
+      {
+        "relativePath": "app/api/admin/auth",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "API route"
+      },
+      {
+        "relativePath": "app/api/admin/auth/login",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "API route"
+      },
+      {
+        "relativePath": "app/api/admin/auth/login/route.ts",
+        "bytes": 1340,
+        "kind": "file",
+        "role": "API route"
+      },
+      {
+        "relativePath": "app/api/admin/auth/logout",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "API route"
+      },
+      {
+        "relativePath": "app/api/admin/auth/logout/route.ts",
+        "bytes": 387,
+        "kind": "file",
+        "role": "API route"
+      },
+      {
         "relativePath": "app/globals.css",
         "bytes": 1694,
         "kind": "file"
@@ -1440,7 +2664,7 @@
       },
       {
         "relativePath": "app/page.tsx",
-        "bytes": 10579,
+        "bytes": 10713,
         "kind": "file",
         "role": "Next.js route /"
       },
@@ -1483,7 +2707,7 @@
       },
       {
         "relativePath": "app/read/characters/[id]/page.tsx",
-        "bytes": 13524,
+        "bytes": 13754,
         "kind": "file",
         "role": "Next.js route /read/characters/[id]"
       },
@@ -1495,7 +2719,7 @@
       },
       {
         "relativePath": "app/read/layout.tsx",
-        "bytes": 686,
+        "bytes": 570,
         "kind": "file",
         "role": "Next.js layout"
       },
@@ -1539,7 +2763,7 @@
       },
       {
         "relativePath": "app/read/scenes/[id]/page.tsx",
-        "bytes": 2442,
+        "bytes": 2555,
         "kind": "file",
         "role": "Next.js route /read/scenes/[id]"
       },
@@ -1577,6 +2801,11 @@
         "role": "Next.js route /subscribe"
       },
       {
+        "relativePath": "campti-system-map.json",
+        "bytes": 16267,
+        "kind": "file"
+      },
+      {
         "relativePath": "components",
         "bytes": 0,
         "kind": "directory"
@@ -1585,6 +2814,12 @@
         "relativePath": "components/admin",
         "bytes": 0,
         "kind": "directory",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/admin/constitutional-rule-form.tsx",
+        "bytes": 5613,
+        "kind": "file",
         "role": "React components"
       },
       {
@@ -1601,7 +2836,19 @@
       },
       {
         "relativePath": "components/admin-nav.tsx",
-        "bytes": 2077,
+        "bytes": 3184,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/admin-page-agent-panel.tsx",
+        "bytes": 8506,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/admin-sign-out-button.tsx",
+        "bytes": 796,
         "kind": "file",
         "role": "React components"
       },
@@ -1620,6 +2867,12 @@
       {
         "relativePath": "components/ambiguity-meter.tsx",
         "bytes": 606,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/brain-summary-preview.tsx",
+        "bytes": 2375,
         "kind": "file",
         "role": "React components"
       },
@@ -1649,7 +2902,7 @@
       },
       {
         "relativePath": "components/page-header.tsx",
-        "bytes": 731,
+        "bytes": 734,
         "kind": "file",
         "role": "React components"
       },
@@ -1667,7 +2920,7 @@
       },
       {
         "relativePath": "components/public/ImmersiveSceneReader.tsx",
-        "bytes": 9342,
+        "bytes": 9690,
         "kind": "file",
         "role": "React components"
       },
@@ -1686,6 +2939,12 @@
       {
         "relativePath": "components/public/audio-teaser.tsx",
         "bytes": 1805,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/campti-landing-splash.tsx",
+        "bytes": 3064,
         "kind": "file",
         "role": "React components"
       },
@@ -1709,7 +2968,7 @@
       },
       {
         "relativePath": "components/public/continue-reading-banner.tsx",
-        "bytes": 2783,
+        "bytes": 2805,
         "kind": "file",
         "role": "React components"
       },
@@ -1721,7 +2980,7 @@
       },
       {
         "relativePath": "components/public/home-return-layer.tsx",
-        "bytes": 1645,
+        "bytes": 1667,
         "kind": "file",
         "role": "React components"
       },
@@ -1775,7 +3034,7 @@
       },
       {
         "relativePath": "components/public/read-scene-experience.tsx",
-        "bytes": 38778,
+        "bytes": 45554,
         "kind": "file",
         "role": "React components"
       },
@@ -1810,8 +3069,32 @@
         "role": "React components"
       },
       {
+        "relativePath": "components/read",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/read/hands-free-panel.tsx",
+        "bytes": 20079,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/read/read-cockpit-frame.tsx",
+        "bytes": 4060,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/read/reader-options-bar.tsx",
+        "bytes": 5395,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
         "relativePath": "components/read-nav.tsx",
-        "bytes": 1524,
+        "bytes": 2858,
         "kind": "file",
         "role": "React components"
       },
@@ -1828,8 +3111,20 @@
         "role": "React components"
       },
       {
+        "relativePath": "components/scene-readiness-panel.tsx",
+        "bytes": 18909,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
         "relativePath": "components/scene-soul-panel.tsx",
         "bytes": 11132,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/scene-time-brain-panel.tsx",
+        "bytes": 7557,
         "kind": "file",
         "role": "React components"
       },
@@ -1846,14 +3141,75 @@
         "role": "React components"
       },
       {
+        "relativePath": "docs",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "docs/build-comprehensive-report-2026-04-12.md",
+        "bytes": 23037,
+        "kind": "file"
+      },
+      {
+        "relativePath": "docs/release-notes",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "docs/release-notes/2026-04-12-cognition-simulation-scene-generation.md",
+        "bytes": 3194,
+        "kind": "file"
+      },
+      {
+        "relativePath": "docs/stage-8-scene-legality-layer.md",
+        "bytes": 5610,
+        "kind": "file"
+      },
+      {
         "relativePath": "eslint.config.mjs",
-        "bytes": 458,
+        "bytes": 365,
         "kind": "file"
       },
       {
         "relativePath": "lib",
         "bytes": 0,
         "kind": "directory"
+      },
+      {
+        "relativePath": "lib/admin-auth-api.ts",
+        "bytes": 600,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/admin-entity-from-path.ts",
+        "bytes": 2342,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/admin-entity-summary.ts",
+        "bytes": 5408,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/admin-page-agents.ts",
+        "bytes": 27574,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/admin-password.ts",
+        "bytes": 499,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/admin-session.ts",
+        "bytes": 3593,
+        "kind": "file",
+        "role": "shared library"
       },
       {
         "relativePath": "lib/admin-styles.ts",
@@ -1898,14 +3254,158 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/brain-assembly-engine.ts",
+        "bytes": 14001,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/brain-assembly-types.ts",
+        "bytes": 5927,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/brain-priority-gaps.ts",
+        "bytes": 2511,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/brain-version.ts",
+        "bytes": 302,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-build-sequence",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-build-sequence/index.ts",
+        "bytes": 471,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-build-sequence/stages.ts",
+        "bytes": 13830,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-build-sequence/types.ts",
+        "bytes": 500,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-build-sequence/universal-rules.ts",
+        "bytes": 1381,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-history-atlas-constants.ts",
+        "bytes": 1260,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-history-atlas-queries.ts",
+        "bytes": 2114,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-registry",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-registry/build-sequence.ts",
+        "bytes": 1975,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-registry/definitions.ts",
+        "bytes": 17600,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-registry/index.ts",
+        "bytes": 567,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-registry/types.ts",
+        "bytes": 1349,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/campti-session.ts",
-        "bytes": 376,
+        "bytes": 371,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/census-research-normalize.ts",
+        "bytes": 434,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/census-research-story-assembly.ts",
+        "bytes": 5602,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/census-research.ts",
+        "bytes": 485,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/character-brain-bundle.ts",
+        "bytes": 32228,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/character-schemas.ts",
+        "bytes": 10040,
         "kind": "file",
         "role": "shared library"
       },
       {
         "relativePath": "lib/character-type-inference.ts",
-        "bytes": 6918,
+        "bytes": 7171,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/character-types.ts",
+        "bytes": 1283,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/character-world-constraints.ts",
+        "bytes": 595,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/character.ts",
+        "bytes": 4978,
         "kind": "file",
         "role": "shared library"
       },
@@ -1946,8 +3446,140 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/cognition",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cognition/character-desire-profile.ts",
+        "bytes": 6018,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cognition/desire-cognition-shaping.ts",
+        "bytes": 16203,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cognition/deterministic-cognition-compose.ts",
+        "bytes": 7509,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cognition/embodied-cognition-shaping.ts",
+        "bytes": 5933,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cognition/inner-voice-contract.ts",
+        "bytes": 11580,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cognition/physical-state-from-sources.ts",
+        "bytes": 3527,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cognition/thought-realism-profiles.ts",
+        "bytes": 9641,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cognition/world-state-desire-environment.ts",
+        "bytes": 2710,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/constants",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/constants/narrative-defaults.ts",
+        "bytes": 227,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/constitution.ts",
+        "bytes": 2403,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/constitutional-rule-constants.ts",
+        "bytes": 1009,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/constitutional-rule-schemas.ts",
+        "bytes": 1677,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/constitutional-rule-types.ts",
+        "bytes": 675,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/continuity-order-schemas.ts",
+        "bytes": 11746,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/continuity-order-types.ts",
+        "bytes": 1696,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/continuity-order.ts",
+        "bytes": 4776,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/data-access.ts",
-        "bytes": 68456,
+        "bytes": 101057,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/decision-trace",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/decision-trace/build-decision-trace-request.ts",
+        "bytes": 2487,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/decision-trace/decision-trace-deterministic.ts",
+        "bytes": 8053,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/decision-trace/decision-trace-llm-adapter.ts",
+        "bytes": 6245,
         "kind": "file",
         "role": "shared library"
       },
@@ -2007,7 +3639,7 @@
       },
       {
         "relativePath": "lib/descriptive-synthesis.ts",
-        "bytes": 23799,
+        "bytes": 24033,
         "kind": "file",
         "role": "shared library"
       },
@@ -2018,8 +3650,116 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/domain",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/cognition.ts",
+        "bytes": 8779,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/decision-trace.ts",
+        "bytes": 3358,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/desire-cognition.ts",
+        "bytes": 4607,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/embodiment.ts",
+        "bytes": 1223,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/enneagram.ts",
+        "bytes": 2261,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/genealogical-values.ts",
+        "bytes": 2511,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/inner-voice.ts",
+        "bytes": 6113,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/narrative-records.ts",
+        "bytes": 1996,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/narrative-units.ts",
+        "bytes": 1052,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/population-social-field.ts",
+        "bytes": 2825,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/scene-generation-contract.ts",
+        "bytes": 3210,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/scene-generation-input.ts",
+        "bytes": 2474,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/scene-generation-output.ts",
+        "bytes": 1148,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/scene-text-resolution.ts",
+        "bytes": 1624,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/simulation-run.ts",
+        "bytes": 9303,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/thought-language.ts",
+        "bytes": 4186,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/thought-realism.ts",
+        "bytes": 1781,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/embodied-environment.ts",
-        "bytes": 3146,
+        "bytes": 3230,
         "kind": "file",
         "role": "shared library"
       },
@@ -2038,6 +3778,36 @@
       {
         "relativePath": "lib/emotional-hooks.ts",
         "bytes": 10295,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/enneagram",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/enneagram/enneagram-cognition-shaping.ts",
+        "bytes": 15009,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/enneagram/index.ts",
+        "bytes": 205,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/enneagram/instinct-stacking.ts",
+        "bytes": 3305,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/enneagram/nine-type-knowledge.ts",
+        "bytes": 16057,
         "kind": "file",
         "role": "shared library"
       },
@@ -2062,6 +3832,24 @@
       {
         "relativePath": "lib/entity-normalization.ts",
         "bytes": 1427,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/environment-schemas.ts",
+        "bytes": 6346,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/environment-types.ts",
+        "bytes": 1887,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/environment.ts",
+        "bytes": 3344,
         "kind": "file",
         "role": "shared library"
       },
@@ -2168,6 +3956,54 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/hands-free",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/hands-free/browser-speech.ts",
+        "bytes": 1861,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/hands-free/gaze-edge-controller.ts",
+        "bytes": 3467,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/hands-free/parse-voice-command.ts",
+        "bytes": 282,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/hands-free/types.ts",
+        "bytes": 347,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/hands-free/voice-command-engine.ts",
+        "bytes": 9017,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/hands-free/webgazer-load.ts",
+        "bytes": 2238,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/hands-free/webgazer-types.ts",
+        "bytes": 56,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/hook-quality.ts",
         "bytes": 1441,
         "kind": "file",
@@ -2204,6 +4040,132 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/inner-voice",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/build-character-inner-voice-request.ts",
+        "bytes": 3798,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/framing",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/framing/age-band.ts",
+        "bytes": 2285,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/framing/age-maturity-thought-style.ts",
+        "bytes": 2571,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/framing/constraint-frame.ts",
+        "bytes": 1811,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/framing/world-state-thought-style.ts",
+        "bytes": 3828,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/index.ts",
+        "bytes": 545,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/inner-voice-llm-adapter.ts",
+        "bytes": 9567,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/inner-voice-session-contract-mapping.ts",
+        "bytes": 1844,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/load-world-state-thought-style-source.ts",
+        "bytes": 1803,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/pinned-policy.ts",
+        "bytes": 1623,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/intelligence-engine.ts",
+        "bytes": 5308,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/intelligence-schemas.ts",
+        "bytes": 3557,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/intelligence-types.ts",
+        "bytes": 932,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/lineage",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/lineage/grappe-lineage-types.ts",
+        "bytes": 8532,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/lineage/grappe-lineage-working.v1.json",
+        "bytes": 71232,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/lineage/grappe-seed-overlap.ts",
+        "bytes": 418,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/lineage/grappe-world-building.v1.json",
+        "bytes": 21448,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/lineage/index.ts",
+        "bytes": 3688,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/linking-validation.ts",
         "bytes": 1308,
         "kind": "file",
@@ -2229,13 +4191,13 @@
       },
       {
         "relativePath": "lib/narrative-consciousness-ai.ts",
-        "bytes": 7557,
+        "bytes": 7755,
         "kind": "file",
         "role": "shared library"
       },
       {
         "relativePath": "lib/narrative-consciousness.ts",
-        "bytes": 10962,
+        "bytes": 11115,
         "kind": "file",
         "role": "shared library"
       },
@@ -2300,6 +4262,30 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/ontology-constants.ts",
+        "bytes": 1343,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/ontology-schemas.ts",
+        "bytes": 4221,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/ontology-types.ts",
+        "bytes": 644,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/ontology.ts",
+        "bytes": 3642,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/openai-extraction.ts",
         "bytes": 23927,
         "kind": "file",
@@ -2313,13 +4299,25 @@
       },
       {
         "relativePath": "lib/perception-stream.ts",
-        "bytes": 26420,
+        "bytes": 26534,
         "kind": "file",
         "role": "shared library"
       },
       {
         "relativePath": "lib/perspective-engine.ts",
-        "bytes": 17623,
+        "bytes": 17840,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/population",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/population/population-name-normalize.ts",
+        "bytes": 316,
         "kind": "file",
         "role": "shared library"
       },
@@ -2336,20 +4334,152 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/pressure-order-schemas.ts",
+        "bytes": 8114,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/pressure-order-types.ts",
+        "bytes": 1965,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/pressure-order.ts",
+        "bytes": 2807,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prisma-cognition-access.ts",
+        "bytes": 170,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prisma-enums",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prisma-enums/prose-quality-scope.ts",
+        "bytes": 356,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/prisma.ts",
         "bytes": 299,
         "kind": "file",
         "role": "shared library"
       },
       {
+        "relativePath": "lib/profile-json.ts",
+        "bytes": 1286,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/promote-extracted.ts",
-        "bytes": 11092,
+        "bytes": 11193,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/analyze-deterministic.ts",
+        "bytes": 4917,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/cliche-scan.ts",
+        "bytes": 810,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/compare-drafts.ts",
+        "bytes": 2402,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/dialogue.ts",
+        "bytes": 1890,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/goal-suggestions.ts",
+        "bytes": 4164,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/historical-anchors.ts",
+        "bytes": 691,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/index.ts",
+        "bytes": 569,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/ngrams.ts",
+        "bytes": 1034,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/rhythm.ts",
+        "bytes": 1381,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/sensory-scan.ts",
+        "bytes": 1198,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/sentence-split.ts",
+        "bytes": 719,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/types.ts",
+        "bytes": 3790,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/voice-fit.ts",
+        "bytes": 2692,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/wordlists.ts",
+        "bytes": 3189,
         "kind": "file",
         "role": "shared library"
       },
       {
         "relativePath": "lib/public-data.ts",
-        "bytes": 48241,
+        "bytes": 48453,
         "kind": "file",
         "role": "shared library"
       },
@@ -2390,6 +4520,12 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/reader-ui-preferences.ts",
+        "bytes": 2520,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/reading-blocks.ts",
         "bytes": 214,
         "kind": "file",
@@ -2408,6 +4544,24 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/relationship-order-schemas.ts",
+        "bytes": 9244,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/relationship-order-types.ts",
+        "bytes": 1460,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/relationship-order.ts",
+        "bytes": 3830,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/scene-assist-context.ts",
         "bytes": 7490,
         "kind": "file",
@@ -2421,13 +4575,37 @@
       },
       {
         "relativePath": "lib/scene-beats.ts",
-        "bytes": 6779,
+        "bytes": 6867,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-brain-runner-types.ts",
+        "bytes": 2370,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-brain-runner.ts",
+        "bytes": 22913,
         "kind": "file",
         "role": "shared library"
       },
       {
         "relativePath": "lib/scene-composition.ts",
-        "bytes": 8902,
+        "bytes": 8983,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-constraint-engine.ts",
+        "bytes": 30490,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-constraint-types.ts",
+        "bytes": 6206,
         "kind": "file",
         "role": "shared library"
       },
@@ -2438,8 +4616,26 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/scene-generation",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-generation/scene-generation-llm-adapter.ts",
+        "bytes": 5341,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-generation/staleness-strategy.ts",
+        "bytes": 1862,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/scene-heart.ts",
-        "bytes": 5569,
+        "bytes": 5707,
         "kind": "file",
         "role": "shared library"
       },
@@ -2462,6 +4658,18 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/scene-outcome-envelope-engine.ts",
+        "bytes": 12461,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-outcome-envelope-types.ts",
+        "bytes": 579,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/scene-soul-ai.ts",
         "bytes": 1266,
         "kind": "file",
@@ -2474,8 +4682,164 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/scene-structured-data-patch.ts",
+        "bytes": 7250,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/script-upload-index.ts",
+        "bytes": 229,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/section-xiii-internal.ts",
         "bytes": 7561,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/book-service.ts",
+        "bytes": 296,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/chapter-assembly-service.ts",
+        "bytes": 4217,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/character-cognition-resolver.ts",
+        "bytes": 17120,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/decision-trace-service.ts",
+        "bytes": 4120,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/epic-service.ts",
+        "bytes": 377,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/genealogical-assertion-service.ts",
+        "bytes": 5699,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/narrative-beat-service.ts",
+        "bytes": 1399,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/narrative-dependency-register.ts",
+        "bytes": 1207,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/narrative-prose-quality-service.ts",
+        "bytes": 4119,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/narrative-revision-service.ts",
+        "bytes": 6867,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/population-ingest-service.ts",
+        "bytes": 4834,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/population-promotion-service.ts",
+        "bytes": 2709,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/prose-quality-service.ts",
+        "bytes": 3433,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/scene-generation-contract-loader.ts",
+        "bytes": 6667,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/scene-generation-dependency-service.ts",
+        "bytes": 4658,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/scene-generation-input-loader.ts",
+        "bytes": 3938,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/scene-generation-service.ts",
+        "bytes": 5833,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/scene-narrative-service.ts",
+        "bytes": 430,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/scene-reader-text.ts",
+        "bytes": 495,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/simulation-run-service.ts",
+        "bytes": 9940,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/simulation-scenario-service.ts",
+        "bytes": 2562,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/social-field-context-service.ts",
+        "bytes": 3508,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/world-state-resolution.ts",
+        "bytes": 1965,
         "kind": "file",
         "role": "shared library"
       },
@@ -2486,20 +4850,128 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/simulation",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/simulation/apply-simulation-overrides.ts",
+        "bytes": 3297,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/simulation/build-simulation-resolution-patch.ts",
+        "bytes": 11130,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/simulation/merge-character-state-snapshot.ts",
+        "bytes": 1240,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/simulation/parse-simulation-override-set.ts",
+        "bytes": 819,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/simulation/simulation-canonical-policy.ts",
+        "bytes": 1061,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/simulation/simulation-diff.ts",
+        "bytes": 10103,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/social-field",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/social-field/social-field-engine.ts",
+        "bytes": 1687,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/source-chunking.ts",
         "bytes": 5738,
         "kind": "file",
         "role": "shared library"
       },
       {
+        "relativePath": "lib/stage8-evaluation-fixtures.ts",
+        "bytes": 3243,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/stage8-outcome-envelope-fixtures.ts",
+        "bytes": 14274,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/thought-language",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/thought-language/apply-inner-voice-request.ts",
+        "bytes": 543,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/thought-language/character-thought-language-profile.ts",
+        "bytes": 2610,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/thought-language/index.ts",
+        "bytes": 617,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/thought-language/rendering-modes.ts",
+        "bytes": 1627,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/thought-language/resolve-thought-language-frame.ts",
+        "bytes": 4036,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/thought-language/world-state-language-environment.ts",
+        "bytes": 3672,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/validation.ts",
-        "bytes": 7683,
+        "bytes": 7730,
         "kind": "file",
         "role": "shared library"
       },
       {
         "relativePath": "lib/voice-fusion.ts",
-        "bytes": 9095,
+        "bytes": 9183,
         "kind": "file",
         "role": "shared library"
       },
@@ -2516,15 +4988,34 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/workspace-sticky-params.ts",
+        "bytes": 997,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/world-context-validation.ts",
+        "bytes": 586,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/world-dynamics.ts",
         "bytes": 2104,
         "kind": "file",
         "role": "shared library"
       },
       {
-        "relativePath": "middleware.ts",
-        "bytes": 722,
-        "kind": "file"
+        "relativePath": "lib/world-era-profile-tuning.ts",
+        "bytes": 6890,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/world-era-profile.ts",
+        "bytes": 2285,
+        "kind": "file",
+        "role": "shared library"
       },
       {
         "relativePath": "netlify.toml",
@@ -2533,7 +5024,7 @@
       },
       {
         "relativePath": "next-env.d.ts",
-        "bytes": 262,
+        "bytes": 251,
         "kind": "file"
       },
       {
@@ -2543,12 +5034,12 @@
       },
       {
         "relativePath": "package-lock.json",
-        "bytes": 247263,
+        "bytes": 281234,
         "kind": "file"
       },
       {
         "relativePath": "package.json",
-        "bytes": 1330,
+        "bytes": 2388,
         "kind": "file",
         "role": "npm manifest + scripts"
       },
@@ -2598,14 +5089,317 @@
         "kind": "file"
       },
       {
+        "relativePath": "prisma/migrations/20260410160000_constitutional_core",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410160000_constitutional_core/migration.sql",
+        "bytes": 1719,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410180000_ontology_registry_spine",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410180000_ontology_registry_spine/migration.sql",
+        "bytes": 4694,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410220000_stage_3_1_world_environment_engine",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410220000_stage_3_1_world_environment_engine/migration.sql",
+        "bytes": 9371,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410240000_stage_5_5_intelligence_engine",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410240000_stage_5_5_intelligence_engine/migration.sql",
+        "bytes": 7361,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410250000_stage_6_relationship_engine",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410250000_stage_6_relationship_engine/migration.sql",
+        "bytes": 11220,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410260000_stage_6_5_continuity_education",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410260000_stage_6_5_continuity_education/migration.sql",
+        "bytes": 9573,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410270000_stage_6_5_health_layer",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410270000_stage_6_5_health_layer/migration.sql",
+        "bytes": 8253,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260411120000_character_state_structured_data_json",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260411120000_character_state_structured_data_json/migration.sql",
+        "bytes": 178,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260411140000_world_state_era_profile",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260411140000_world_state_era_profile/migration.sql",
+        "bytes": 1289,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260411153000_world_state_era_profile_evidence_rationale",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260411153000_world_state_era_profile_evidence_rationale/migration.sql",
+        "bytes": 155,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412180000_census_research_dataset",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412180000_census_research_dataset/migration.sql",
+        "bytes": 5067,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412210000_census_story_assembly_fields",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412210000_census_story_assembly_fields/migration.sql",
+        "bytes": 615,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412220000_person_lineage_working_id",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412220000_person_lineage_working_id/migration.sql",
+        "bytes": 236,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412230000_genealogical_facts_narrative_dependencies",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412230000_genealogical_facts_narrative_dependencies/migration.sql",
+        "bytes": 5389,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412240000_prose_quality_report",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412240000_prose_quality_report/migration.sql",
+        "bytes": 1208,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412270000_epic_book_narrative_hierarchy",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412270000_epic_book_narrative_hierarchy/migration.sql",
+        "bytes": 6809,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412280000_prose_quality_scope_chapter",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412280000_prose_quality_scope_chapter/migration.sql",
+        "bytes": 844,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412290000_character_cognition_layer",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412290000_character_cognition_layer/migration.sql",
+        "bytes": 7415,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412300000_character_core_profile_state_snapshot_foundation",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412300000_character_core_profile_state_snapshot_foundation/migration.sql",
+        "bytes": 2228,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412310000_character_core_enneagram_cognition",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412310000_character_core_enneagram_cognition/migration.sql",
+        "bytes": 1252,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412320000_thought_language_mediation",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412320000_thought_language_mediation/migration.sql",
+        "bytes": 682,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260413120000_simulation_run_input_hash",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260413120000_simulation_run_input_hash/migration.sql",
+        "bytes": 248,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260413140000_narrative_dep_producer_simulation_cognition",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260413140000_narrative_dep_producer_simulation_cognition/migration.sql",
+        "bytes": 167,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260415120000_phase_5c1_desire_cognition",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260415120000_phase_5c1_desire_cognition/migration.sql",
+        "bytes": 1198,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260416120000_phase_5f_population_social_field",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260416120000_phase_5f_population_social_field/migration.sql",
+        "bytes": 5681,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/migration_lock.toml",
+        "bytes": 64,
+        "kind": "file"
+      },
+      {
         "relativePath": "prisma/schema.prisma",
-        "bytes": 47202,
+        "bytes": 130726,
         "kind": "file",
         "role": "database schema"
       },
       {
+        "relativePath": "prisma/seed-character-engine.ts",
+        "bytes": 1631,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed-constitutional-rules.ts",
+        "bytes": 6470,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed-continuity.ts",
+        "bytes": 13058,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed-environment.ts",
+        "bytes": 18139,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
         "relativePath": "prisma/seed-full-demo.ts",
-        "bytes": 55154,
+        "bytes": 55385,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed-ingestion-packet-01.ts",
+        "bytes": 29552,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed-ingestion-packet-red-river.ts",
+        "bytes": 92638,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed-ontology.ts",
+        "bytes": 15733,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed-opening-terrain-pass.ts",
+        "bytes": 63607,
         "kind": "file",
         "role": "prisma seed / migration helper"
       },
@@ -2616,10 +5410,27 @@
         "role": "prisma seed / migration helper"
       },
       {
-        "relativePath": "prisma/seed.ts",
-        "bytes": 17191,
+        "relativePath": "prisma/seed-pressure.ts",
+        "bytes": 16696,
         "kind": "file",
         "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed-relationship.ts",
+        "bytes": 7309,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed.ts",
+        "bytes": 19112,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "proxy.ts",
+        "bytes": 1959,
+        "kind": "file"
       },
       {
         "relativePath": "public",
@@ -2639,7 +5450,12 @@
       },
       {
         "relativePath": "reports/campti-handoff-filesystem.json",
-        "bytes": 68916,
+        "bytes": 151290,
+        "kind": "file"
+      },
+      {
+        "relativePath": "reports/campti-handoff-full.json",
+        "bytes": 151904,
         "kind": "file"
       },
       {
@@ -2649,7 +5465,7 @@
       },
       {
         "relativePath": "reports/campti-handoff-story.json",
-        "bytes": 93485,
+        "bytes": 147067,
         "kind": "file"
       },
       {
@@ -2659,7 +5475,31 @@
       },
       {
         "relativePath": "scripts/generate-handoff-report.ts",
-        "bytes": 18044,
+        "bytes": 18629,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/import-campti-census-sqlite.ts",
+        "bytes": 9392,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/index-incoming-uploads.ts",
+        "bytes": 6853,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/ingest-campti-history-atlas.ts",
+        "bytes": 13367,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/ingest-grappe-lineage-source.ts",
+        "bytes": 4349,
         "kind": "file",
         "role": "CLI / ingestion script"
       },
@@ -2676,8 +5516,26 @@
         "role": "CLI / ingestion script"
       },
       {
+        "relativePath": "scripts/inspect-campti-sqlite.mjs",
+        "bytes": 519,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
         "relativePath": "scripts/load-env.ts",
         "bytes": 737,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/prisma-generate-optional.mjs",
+        "bytes": 716,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/research-census-pipeline.ts",
+        "bytes": 1113,
         "kind": "file",
         "role": "CLI / ingestion script"
       },
@@ -2694,6 +5552,36 @@
         "role": "CLI / ingestion script"
       },
       {
+        "relativePath": "scripts/sync-campti-research-bundle.ts",
+        "bytes": 1679,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/verify-red-river-focal-alternation.ts",
+        "bytes": 4511,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/verify-stage8-5-outcome-envelope.ts",
+        "bytes": 2936,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/verify-stage8-classification.ts",
+        "bytes": 736,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/wire-grp-lineage-persons.ts",
+        "bytes": 2130,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
         "relativePath": "styles",
         "bytes": 0,
         "kind": "directory"
@@ -2705,40 +5593,120 @@
       },
       {
         "relativePath": "tsconfig.json",
-        "bytes": 562,
+        "bytes": 698,
         "kind": "file"
       },
       {
         "relativePath": "tsconfig.tsbuildinfo",
-        "bytes": 190612,
+        "bytes": 234716,
+        "kind": "file"
+      },
+      {
+        "relativePath": "types",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "uploads",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "uploads/incoming",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "uploads/incoming/.gitkeep",
+        "bytes": 0,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_census.sqlite",
+        "bytes": 118784,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_census_entries (1).csv",
+        "bytes": 18374,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_census_entries.csv",
+        "bytes": 18374,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_census_pages.csv",
+        "bytes": 10722,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_digitized_bundle.zip",
+        "bytes": 3887207,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_ingest_plan.md",
+        "bytes": 2255,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_missing_pages_template.csv",
+        "bytes": 364,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_name_index.csv",
+        "bytes": 8629,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_ocr_corpus.md",
+        "bytes": 32504,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_ocr_index.csv",
+        "bytes": 9856,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_structured_dataset.zip",
+        "bytes": 66538,
         "kind": "file"
       }
     ]
   },
   "storySystemFromDatabase": {
     "counts": {
-      "chapters": 13,
-      "scenes": 39,
-      "people": 7,
-      "places": 8,
+      "chapters": 15,
+      "scenes": 41,
+      "people": 56,
+      "places": 20,
       "symbols": 10,
       "themes": 5,
       "motifs": 1,
-      "narrativeRules": 4,
+      "narrativeRules": 9,
       "literaryDevices": 1,
       "narrativePatterns": 3,
-      "narrativeBindings": 17,
-      "fragments": 14,
+      "narrativeBindings": 19,
+      "fragments": 19,
       "fragmentClusters": 4,
-      "events": 13,
-      "sources": 13,
-      "claims": 2,
-      "openQuestions": 12,
-      "continuityNotes": 11,
-      "metaScenes": 40,
-      "characterRelationships": 6,
+      "events": 27,
+      "sources": 29,
+      "claims": 10,
+      "openQuestions": 19,
+      "continuityNotes": 14,
+      "metaScenes": 47,
+      "characterRelationships": 15,
       "aliases": 0,
-      "characterProfiles": 6
+      "characterProfiles": 14
     },
     "chapterSceneOutline": [
       {
@@ -3156,6 +6124,42 @@
             "summary": "End of demo draft."
           }
         ]
+      },
+      {
+        "chapter": {
+          "id": "ing-pkt-01-chapter",
+          "title": "Ingestion packet 01 — legality scaffold (WS-06)",
+          "chapterNumber": 901,
+          "summary": "Holds the Stage 8 / 8.5 intimate_disclosure × REVIEW reference scene.",
+          "status": "scaffold"
+        },
+        "scenes": [
+          {
+            "id": "ing-pkt-01-scene-intimate-review",
+            "orderInChapter": 1,
+            "sceneNumber": 1,
+            "description": "Whispered confession — intimate disclosure under REVIEW visibility; secret truth presses toward the surface near the landing.",
+            "summary": "Packet 01 reference: focal must manage disclosure under social scrutiny; implication safer than spectacle."
+          }
+        ]
+      },
+      {
+        "chapter": {
+          "id": "ing-rr-chapter-riverbank",
+          "title": "Red River Trade Era — Riverbank disclosure (WS-09)",
+          "chapterNumber": 902,
+          "summary": "Public intimate disclosure beat: Asha and a trade-network tie at the busy landing.",
+          "status": "scaffold"
+        },
+        "scenes": [
+          {
+            "id": "ing-rr-scene-riverbank-disclosure",
+            "orderInChapter": 1,
+            "sceneNumber": 1,
+            "description": "The Riverbank Disclosure — Asha stands with Elaya at a busy landing; goods move; voices overlap. Neutral surface, rising tension. She wants clarity on a private feeling; the crowd makes direct speech dangerous.",
+            "summary": "Intimate_disclosure × PUBLIC: indirect invitation, guarded focal speech, risk of house shame if she names the truth aloud."
+          }
+        ]
       }
     ],
     "characterProfiles": [
@@ -3169,19 +6173,71 @@
         "emotionalBaseline": "Watchful, heat-tired, quietly determined.",
         "enneagramType": null,
         "notes": "Chapter 1 POV — arrival and translation; demo character arc seed.",
-        "personName": "Alexis Grappe"
+        "personName": "Alexis Grappe dit Touline"
+      },
+      {
+        "personId": "seed-person-asha",
+        "worldview": "Honor is held in the house line; truth moves through kin and trade obligation — public air is for coded speech, not open confession.",
+        "coreBeliefs": [
+          "The trade house cannot afford spectacle.",
+          "Implication preserves face for everyone who must overhear.",
+          "Elaya is a real tie — not a prop — but witness turns tenderness into risk."
+        ],
+        "desires": [
+          "Emotional clarity with Elaya without becoming the story of the landing.",
+          "A private window where plain speech is possible."
+        ],
+        "fears": [
+          "Naming desire aloud where strangers can parse it.",
+          "House shame attached to her smallest public slip.",
+          "Being misread as performing emotion for the crowd."
+        ],
+        "internalConflicts": [
+          "Duty to the house line versus hunger for unguarded reciprocity.",
+          "Trust in Elaya versus fear of what bystanders will do with what they see."
+        ],
+        "emotionalBaseline": "controlled surface, high inner vigilance",
+        "enneagramType": null,
+        "notes": "Red River WS-09 slice — pairs with world-sliced rows `ing-rr-*-asha-ws09`. Packet 03b: symmetric CharacterProfile with Elaya.",
+        "personName": "Asha"
       },
       {
         "personId": "seed-person-child-grande-terre-pov",
         "worldview": "The circle of adults is the shape of the world; trails and river are extensions of home.",
         "coreBeliefs": "If the morning smoke rises, the day belongs to us.",
-        "desires": null,
-        "fears": null,
-        "internalConflicts": null,
+        "desires": "More room to run; adults in a good mood; interesting visitors who bring smell and sound.",
+        "fears": "Sudden stillness in adults; being made to sit too long; loud unknown dogs.",
+        "internalConflicts": "Wanting both freedom and the warmth of a known lap.",
         "emotionalBaseline": "Open curiosity with occasional unease when adults tighten without explaining.",
         "enneagramType": "SEVEN",
-        "notes": "POV lens only — not a psychologized modern child.",
+        "notes": "Opening terrain: loved-before-threat. Uncertainty: later formal identity (Marie Anne Thérèse) vs. this POV label — preserve separate Person rows if needed.",
         "personName": "Child POV — Grande Terre (opening)"
+      },
+      {
+        "personId": "seed-person-elaya",
+        "worldview": "Alliances are lived in routes and greetings; affection is real but must survive kin eyes — the bank is a stage where generosity can be mistaken for claim.",
+        "coreBeliefs": [
+          "Reciprocity is shown in timing and tone before it is shown in naming.",
+          "Asha’s house face is not hers to spend casually in public.",
+          "Witness density converts tenderness into leverage — guard the signal."
+        ],
+        "desires": [
+          "Plain mutual recognition off the open bank.",
+          "A clear return signal without forcing Asha to name anything aloud."
+        ],
+        "fears": [
+          "Answering Asha in a way that shames her line.",
+          "Being read as pressing when she only meant to meet.",
+          "Losing the alliance mask before the wrong ears."
+        ],
+        "internalConflicts": [
+          "Temptation to answer plainly versus restraint while elders scan the crowd.",
+          "Private trust in Asha versus public performance of respectable alliance."
+        ],
+        "emotionalBaseline": "warm restraint; watchful generosity",
+        "enneagramType": null,
+        "notes": "Red River WS-09 slice — pairs with world-sliced rows `ing-rr-*-elaya-ws09`. Packet 03b: full mind model for two-sided interaction authoring.",
+        "personName": "Elaya"
       },
       {
         "personId": "seed-person-francois",
@@ -3193,7 +6249,79 @@
         "emotionalBaseline": null,
         "enneagramType": null,
         "notes": "Bridge character for genealogical and thematic continuity toward Campti. Do not overstate uncertain ancestry or undocumented lines as settled fact. See private research source for excerpt.",
-        "personName": "François Grappe"
+        "personName": "Francois Grappe"
+      },
+      {
+        "personId": "seed-person-gt-aunt-kin",
+        "worldview": "Children are held by many hands — kinship is workload shared.",
+        "coreBeliefs": "If my sister’s child is hungry, that is my table too.",
+        "desires": "Smooth days; laughter in labor; no one singled out.",
+        "fears": "Illness; discord in the women’s line; being unable to cover for Marie.",
+        "internalConflicts": "Softness toward POV child vs. teaching hardness for survival.",
+        "emotionalBaseline": "Warm, busy, quick to tease, quick to shield.",
+        "enneagramType": null,
+        "notes": "Uncertainty: can merge with another kin voice in short drafts if cast count must shrink.",
+        "personName": "Aunt / kin woman (opening cluster)"
+      },
+      {
+        "personId": "seed-person-gt-community-children",
+        "worldview": "N/A — aggregate simulation node.",
+        "coreBeliefs": null,
+        "desires": null,
+        "fears": null,
+        "internalConflicts": null,
+        "emotionalBaseline": "Play-forward; conflict usually low-stakes among peers.",
+        "enneagramType": null,
+        "notes": "Not a consciousness model. Use for peer noise, game rules, and collective permission in meta-scenes. POV stays child lens.",
+        "personName": "Community children cluster (opening aggregate)"
+      },
+      {
+        "personId": "seed-person-gt-elder-ritual-keeper",
+        "worldview": "Time is layered — seasons, stories, and debt to those not present.",
+        "coreBeliefs": "Correction is medicine; shame is a last resort. Memory must stay usable.",
+        "desires": "That young hands learn the right sequence before urgency teaches the wrong one.",
+        "fears": "Knowledge lost between generations; children learning speed without judgment.",
+        "internalConflicts": "Gentleness vs. firmness when the world hardens.",
+        "emotionalBaseline": "Unhurried; warmth with an edge of standard.",
+        "enneagramType": null,
+        "notes": "Uncertainty: which rituals are shown on page vs. implied — author gates visibility.",
+        "personName": "Elder woman — ritual / memory keeper (opening)"
+      },
+      {
+        "personId": "seed-person-gt-hunter-sentinel",
+        "worldview": "The trail tells truth before anyone speaks.",
+        "coreBeliefs": "Meat and warning are both gifts — ignore neither.",
+        "desires": "Clean kills, safe returns, clear signals to the village.",
+        "fears": "Misreading an edge; fire where it should not be; silence in the wrong place.",
+        "internalConflicts": "Lone work vs. need to report without alarming children.",
+        "emotionalBaseline": "Contained alertness; rare laughter.",
+        "enneagramType": null,
+        "notes": "Uncertainty: how much of his read of danger surfaces to women’s council — keep plausible.",
+        "personName": "Hunter / sentinel (opening)"
+      },
+      {
+        "personId": "seed-person-gt-protector-imprint",
+        "worldview": "Strength is shown by carrying weight and keeping watch — words are secondary.",
+        "coreBeliefs": "The edge of the camp is real; the center must stay soft for children.",
+        "desires": "Recognition as reliable; future building (family, hunt, standing) without hurry.",
+        "fears": "Failing someone smaller; being caught unprepared.",
+        "internalConflicts": "Pride vs. patience; showing competence without drawing danger’s eye.",
+        "emotionalBaseline": "Steady, occasionally showy in safe company.",
+        "enneagramType": null,
+        "notes": "Uncertainty: exact relation to POV child — sibling cohort, cousin, or future-spouse echo is author choice.",
+        "personName": "Young kin — protector imprint (opening)"
+      },
+      {
+        "personId": "seed-person-gt-trade-visitor",
+        "worldview": "Exchange is relationship speed — goods are the grammar.",
+        "coreBeliefs": "A bad trade insults kin; a good trade renews peace.",
+        "desires": "Fair margin, safe night’s fire, credible introductions.",
+        "fears": "Being misread as scout for violence; goods spoiled en route.",
+        "internalConflicts": "Curiosity vs. discretion when asked about the outside world.",
+        "emotionalBaseline": "Performative openness with private calculation.",
+        "enneagramType": null,
+        "notes": "Uncertainty: one figure or several — composite allows branching.",
+        "personName": "Visiting trade presence (composite)"
       },
       {
         "personId": "seed-person-louise-guedon",
@@ -3211,12 +6339,12 @@
         "personId": "seed-person-marie-anne-grande-terre",
         "worldview": "Rooted in kinship, land, continuity, and lived trade relationships — the world holds because people hold each other to it.",
         "coreBeliefs": "The world is relational. Survival depends on memory, lineage, and reciprocal obligation — not on paper or distant decrees.",
-        "desires": "Continuity, safety, transmission of culture, preservation of dignity and belonging for those who come after.",
+        "desires": "That the child’s body remembers safety; that vigilance never has to become speech at the wrong volume.",
         "fears": "Disruption of kinship lines; violent incursion; loss of daughters to chaos or capture; collapse of the order that keeps children safe.",
         "internalConflicts": "How to survive inside a changing world without surrendering what makes a people themselves — adaptation without self-erasure.",
         "emotionalBaseline": "Observant, controlled, protective.",
         "enneagramType": null,
-        "notes": "Ambiguity around exact titles and formal tribal role is intentional. This profile is a narrative-world anchor, not a certificate of identity.",
+        "notes": "Mother/aunt cluster simulation: Marie + aunt figure share vigilance; Marie remains primary moral weight.",
         "personName": "Marie Anne Thérèse de la Grande Terre"
       },
       {
@@ -3347,6 +6475,24 @@
         "chapterNumber": 12,
         "summary": "Lillian named; method as love; end of demo draft.",
         "status": "complete",
+        "recordType": "HYBRID",
+        "visibility": "PUBLIC"
+      },
+      {
+        "id": "ing-pkt-01-chapter",
+        "title": "Ingestion packet 01 — legality scaffold (WS-06)",
+        "chapterNumber": 901,
+        "summary": "Holds the Stage 8 / 8.5 intimate_disclosure × REVIEW reference scene.",
+        "status": "scaffold",
+        "recordType": "HYBRID",
+        "visibility": "REVIEW"
+      },
+      {
+        "id": "ing-rr-chapter-riverbank",
+        "title": "Red River Trade Era — Riverbank disclosure (WS-09)",
+        "chapterNumber": 902,
+        "summary": "Public intimate disclosure beat: Asha and a trade-network tie at the busy landing.",
+        "status": "scaffold",
         "recordType": "HYBRID",
         "visibility": "PUBLIC"
       }
@@ -3623,6 +6769,24 @@
         "recordType": "HYBRID"
       },
       {
+        "id": "ing-pkt-01-scene-intimate-review",
+        "chapterId": "ing-pkt-01-chapter",
+        "sceneNumber": 1,
+        "orderInChapter": 1,
+        "description": "Whispered confession — intimate disclosure under REVIEW visibility; secret truth presses toward the surface near the landing.",
+        "summary": "Packet 01 reference: focal must manage disclosure under social scrutiny; implication safer than spectacle.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "ing-rr-scene-riverbank-disclosure",
+        "chapterId": "ing-rr-chapter-riverbank",
+        "sceneNumber": 1,
+        "orderInChapter": 1,
+        "description": "The Riverbank Disclosure — Asha stands with Elaya at a busy landing; goods move; voices overlap. Neutral surface, rising tension. She wants clarity on a private feeling; the crowd makes direct speech dangerous.",
+        "summary": "Intimate_disclosure × PUBLIC: indirect invitation, guarded focal speech, risk of house shame if she names the truth aloud.",
+        "recordType": "HYBRID"
+      },
+      {
         "id": "seed-scene-ch1-1",
         "chapterId": "seed-ch-1",
         "sceneNumber": 1,
@@ -3707,15 +6871,51 @@
     "people": [
       {
         "id": "seed-person-alexis",
-        "name": "Alexis Grappe",
-        "description": null,
+        "name": "Alexis Grappe dit Touline",
+        "description": "Married 9 Apr 1746 Natchitoches; died 10 Jan 1776 Natchitoches. Preserve dit Touline. Includes Francois (GRP-0040) + Jean B (GRP-0011); other siblings still omitted unless sourced.",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "seed-person-asha",
+        "name": "Asha",
+        "description": "Daughter of a respected trade-house leader; words weigh on the whole house. Emotionally perceptive; under pressure speech narrows to guarded implication.",
         "recordType": "HYBRID"
       },
       {
+        "id": "seed-person-gt-aunt-kin",
+        "name": "Aunt / kin woman (opening cluster)",
+        "description": "Mother-adjacent kin in the labor and childcare web — shares vigilance with Marie; distinct voice optional in draft.",
+        "recordType": "FICTIONAL"
+      },
+      {
+        "id": "person-lineage-GRP-0047",
+        "name": "Baltazar Grappe",
+        "description": "",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0022",
+        "name": "Barbara E Grappe",
+        "description": "",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0015",
+        "name": "Bernard B Grappe",
+        "description": "Spouse GRP-0016; verify not duplicate of mother GRP-0014 in parish records.",
+        "recordType": "HISTORICAL"
+      },
+      {
         "id": "seed-person-buford",
-        "name": "Buford \"Trixie\" Grappe",
-        "description": null,
-        "recordType": "HYBRID"
+        "name": "Buford B Grappe Sr",
+        "description": "Large sibling set omitted in this file—expand when sourced.",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0091",
+        "name": "Catherine Bennillot",
+        "description": "Mother of Alexis; death location may be mis-mapped in online trees.",
+        "recordType": "HISTORICAL"
       },
       {
         "id": "seed-person-child-grande-terre-pov",
@@ -3724,10 +6924,130 @@
         "recordType": "FICTIONAL"
       },
       {
-        "id": "seed-person-francois",
-        "name": "François Grappe",
-        "description": null,
+        "id": "person-lineage-GRP-0103",
+        "name": "Chitimacha (Grand Terre lineage)",
+        "description": "Treat as lineage representation; dates/places may reflect Ancestry artifacts—validate in primary sources.",
+        "recordType": "INFERRED"
+      },
+      {
+        "id": "seed-person-gt-community-children",
+        "name": "Community children cluster (opening aggregate)",
+        "description": "Aggregate narrative object for peer play, noise, and shared horizon — not one historical child.",
+        "recordType": "FICTIONAL"
+      },
+      {
+        "id": "person-lineage-GRP-0048",
+        "name": "Dominique Grappe",
+        "description": "",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "seed-person-elaya",
+        "name": "Elaya",
+        "description": "Trade-network negotiator kin-tied to Asha's house: reads micro-signals and reciprocates implication; wants plain reciprocity off-stage — on the bank, witness turns tenderness into leverage risk (Packet 03 full WS-09 stack).",
         "recordType": "HYBRID"
+      },
+      {
+        "id": "person-lineage-GRP-0019",
+        "name": "Elbert B Grappe",
+        "description": "",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "seed-person-gt-elder-ritual-keeper",
+        "name": "Elder woman — ritual / memory keeper (opening)",
+        "description": "Composite elder: oral law, seasonal memory, correction without humiliation — historically plausible role; specific identity not asserted.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "person-lineage-GRP-0037",
+        "name": "Ellie Roberts",
+        "description": "",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0043",
+        "name": "Felicite Grappe",
+        "description": "",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0104",
+        "name": "Felix (Grand Terre lineage)",
+        "description": "lineage_cluster: French-assigned or translated labels; not a provable nuclear-family individual.",
+        "recordType": "INFERRED"
+      },
+      {
+        "id": "seed-person-francois",
+        "name": "Francois Grappe",
+        "description": "Death year also given as 1829 in some trees; spouse Marie Louise Rosette. Wired to seed-person-francois.",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0051",
+        "name": "Francois Grappe Jr",
+        "description": "Birth approximated c.1788 in source list.",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0038",
+        "name": "Henry L Roberts",
+        "description": "",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0049",
+        "name": "Honore Grappe",
+        "description": "",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "seed-person-gt-hunter-sentinel",
+        "name": "Hunter / sentinel (opening)",
+        "description": "Male figure: subsistence, perimeter awareness, trail literacy — watchfulness without speechifying.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "person-lineage-GRP-0034",
+        "name": "Ida Roberts",
+        "description": "",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0100",
+        "name": "Jacque Guedon dit Nantois",
+        "description": "Born Nantes; died Campti 26 Aug 1735 (verify).",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0011",
+        "name": "Jean B Grappe",
+        "description": "Direct-line ancestor.",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0013",
+        "name": "Jean P L Grappe",
+        "description": "Surname spellings (Vascocu) need normalization pass.",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0101",
+        "name": "Jeanne de la Grande Terre",
+        "description": "First stable documented individual in Indigenous→colonial bridge; died 25 Oct 1735 Natchitoches (verify).",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0017",
+        "name": "John L A Grappe",
+        "description": "Parents: Bernard + Marie Emilie per direct line.",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0105",
+        "name": "Josephine (Grand Terre lineage)",
+        "description": "lineage_cluster: pre-1714 place names in online trees are often retrofitted—use for story hypothesis only.",
+        "recordType": "INFERRED"
       },
       {
         "id": "seed-person-narrator",
@@ -3736,16 +7056,154 @@
         "recordType": "HYBRID"
       },
       {
+        "id": "person-lineage-GRP-0020",
+        "name": "Lola Cecelia Goodson",
+        "description": "",
+        "recordType": "HISTORICAL"
+      },
+      {
         "id": "seed-person-louise-guedon",
         "name": "Louise Marguerite Guédon",
         "description": "Genealogical bridge figure in the François Grappe research line; documentary presence varies — treat as hypothesis where records thin.",
         "recordType": "HYBRID"
       },
       {
+        "id": "person-lineage-GRP-0044",
+        "name": "Madeleine Grappe",
+        "description": "",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0045",
+        "name": "Marguerite Grappe",
+        "description": "",
+        "recordType": "HISTORICAL"
+      },
+      {
         "id": "seed-person-marie-anne-grande-terre",
         "name": "Marie Anne Thérèse de la Grande Terre",
         "description": "Origin matriarchal anchor for the opening world — inferred social position; formal title and exact role in community governance intentionally left ambiguous.",
         "recordType": "HYBRID"
+      },
+      {
+        "id": "person-lineage-GRP-0012",
+        "name": "Marie C F Perot",
+        "description": "Reconcile dates with parish records.",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0014",
+        "name": "Marie Emilie Vascocu",
+        "description": "Wife of Jean P L Grappe (GRP-0013). Distinct from GRP-0016 (wife of Bernard) until records prove otherwise.",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0016",
+        "name": "Marie Emilie Vascocu",
+        "description": "Same name/dates as GRP-0014 in some trees—likely data artifact; dedupe after record review.",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0046",
+        "name": "Marie Genevieve Grappe",
+        "description": "",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0050",
+        "name": "Marie Josephe Grappe",
+        "description": "",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0002",
+        "name": "Marie Louise Marguerite Guedon",
+        "description": "Married Alexis 9 Apr 1746 Natchitoches. Mother of Jean B and Francois (GRP-0040) per expanded household pass.",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0041",
+        "name": "Marie Louise Rosette",
+        "description": "Distinct from Marie Louise Marguerite Guedon (GRP-0002), Alexis's wife.",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0042",
+        "name": "Marie Pelagie Grappe",
+        "description": "",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0053",
+        "name": "Marie Susanne Grappe",
+        "description": "Same birth year as Suzette; verify twins or duplicate entry in source.",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0018",
+        "name": "Martha E Clark",
+        "description": "",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0039",
+        "name": "Mary Jane Green",
+        "description": "",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0102",
+        "name": "Mr. Guedon dit Nantois",
+        "description": "Patriarch placeholder; name normalization needed.",
+        "recordType": "INFERRED"
+      },
+      {
+        "id": "person-lineage-GRP-0052",
+        "name": "Pelagie Grappe",
+        "description": "",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0090",
+        "name": "Pierre Grappe",
+        "description": "Father of Alexis; verify against primary parish records.",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0035",
+        "name": "Stoywn Grappe",
+        "description": "Placeholder spelling—confirm with family.",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0054",
+        "name": "Suzette Grappe",
+        "description": "Same birth year as Marie Susanne; verify in parish records.",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "person-lineage-GRP-0032",
+        "name": "Thomas A Grappe",
+        "description": "",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "seed-person-gt-trade-visitor",
+        "name": "Visiting trade presence (composite)",
+        "description": "Travelers along the trade corridor — may read as kin, ally, or ambiguous; keeps exchange civility visible.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "person-lineage-GRP-0036",
+        "name": "William Roberts",
+        "description": "",
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "seed-person-gt-protector-imprint",
+        "name": "Young kin — protector imprint (opening)",
+        "description": "Composite older boy or young man the child associates with strength and future pairing — not a documented individual; no formal title.",
+        "recordType": "FICTIONAL"
       }
     ],
     "places": [
@@ -3778,6 +7236,69 @@
         "recordType": "HYBRID"
       },
       {
+        "id": "seed-place-grand-ecore",
+        "name": "Grand Ecore",
+        "placeType": "REGION",
+        "description": null,
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "seed-place-gt-food-prep",
+        "name": "Grande Terre — food preparation area",
+        "placeType": "FIELD",
+        "description": "Grinding, drying, smoking — women’s labor density; kinship rhythm audible. Mid-morning through afternoon peak.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-place-gt-lookout-warning",
+        "name": "Grande Terre — lookout / warning zone",
+        "placeType": "FIELD",
+        "description": "Elevated or open sightline — environmental pressure first. Who uses: hunter, sometimes youth sent with message.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-place-gt-river-edge",
+        "name": "Grande Terre — river edge",
+        "placeType": "RIVER",
+        "description": "Ford, washing, cooling, sound-masking. Child movement and women’s labor overlap; danger when current shifts.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-place-gt-sleeping-cluster",
+        "name": "Grande Terre — sleeping cluster",
+        "placeType": "HOME",
+        "description": "Night quiet zone; lowered voices; proximity of kin. Dawn re-starts at smoke, not clock.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-place-gt-smoke-fire-center",
+        "name": "Grande Terre — smoke / fire center",
+        "placeType": "FIELD",
+        "description": "Cooking and drying fires; smoke as timekeeper. Sensory spine for waking order and shared meals.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-place-gt-trade-corridor",
+        "name": "Grande Terre — trade corridor / trail approach",
+        "placeType": "FIELD",
+        "description": "Packed approach where visitors signal — visibility vs. vulnerability. Time-of-day: morning arrivals, evening stories.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-place-gt-tree-line-threshold",
+        "name": "Grande Terre — tree line / threshold",
+        "placeType": "FIELD",
+        "description": "Visual and psychological edge — play runs toward it; hunters read it. Symbolic: world beyond known names.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-place-gt-village-core",
+        "name": "Grande Terre — village core",
+        "placeType": "HOME",
+        "description": "Lodges, packed earth, daily congregation — social gravity center. Historical: inferential settlement cluster, not surveyed plat.",
+        "recordType": "HYBRID"
+      },
+      {
         "id": "seed-place-grande-terre-homeland",
         "name": "Grande Terre Homeland Zone",
         "placeType": "REGION",
@@ -3792,6 +7313,13 @@
         "recordType": "FICTIONAL"
       },
       {
+        "id": "seed-place-los-adaes",
+        "name": "Los Adaes",
+        "placeType": "REGION",
+        "description": null,
+        "recordType": "HISTORICAL"
+      },
+      {
         "id": "seed-place-natchitoches",
         "name": "Natchitoches",
         "placeType": "TOWN",
@@ -3803,6 +7331,20 @@
         "name": "Natchitoches landing",
         "placeType": "RIVER",
         "description": "River stairs, trade street, clerk offices — arrival grammar.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "seed-place-red-river",
+        "name": "Red River",
+        "placeType": "RIVER",
+        "description": null,
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "seed-place-rr-busy-riverbank",
+        "name": "Red River bank — busy trade landing",
+        "placeType": "RIVER",
+        "description": "Goods loaded and exchanged; families and traders overlap; conversations stack — high visibility, relational density.",
         "recordType": "HYBRID"
       }
     ],
@@ -3935,6 +7477,22 @@
     ],
     "narrativeRules": [
       {
+        "id": "seed-nr-cfw-1",
+        "title": "Fixed endpoints, variable micro-paths",
+        "description": "Certain outcomes (e.g., rupture, displacement, documented lineage pressures) may be treated as narratively fixed once canonized. How characters walk toward those endpoints — small choices, sensory emphasis, which day a teaching lands — may vary without breaking continuity.",
+        "category": "structure",
+        "strength": 5,
+        "scope": "global"
+      },
+      {
+        "id": "seed-nr-cfw-4",
+        "title": "Historical plausibility gate",
+        "description": "Where recordType is historical or hybrid, draft generation must not invent ceremonial titles, political offices, or treaty specifics without archival support — use inference labels and OpenQuestion hooks instead.",
+        "category": "structure",
+        "strength": 5,
+        "scope": "global"
+      },
+      {
         "id": "demo-rule-label-oral",
         "title": "Label oral history distinctly",
         "description": "Oral claims (e.g., injury stories) remain flagged hybrid until documentary confirmation — never silent merge.",
@@ -3959,12 +7517,36 @@
         "scope": "global"
       },
       {
+        "id": "seed-nr-cfw-2",
+        "title": "Personality-bounded action",
+        "description": "No character may act outside their authored personality spine to service a twist. Pressure may increase choices; it does not rewrite core beliefs without arc support.",
+        "category": "character",
+        "strength": 5,
+        "scope": "global"
+      },
+      {
         "id": "dna-seed-thematic-rule-ambiguity",
         "title": "Preserve interpretive gaps",
         "description": "Do not collapse ambiguous family or historical material into a single authoritative reading in generation prompts.",
         "category": "narration",
         "strength": 4,
         "scope": "global"
+      },
+      {
+        "id": "seed-nr-cfw-3",
+        "title": "Symbolic laws",
+        "description": "Recurring symbols (smoke, river, trail, mortar) carry moral meaning once established. Drafts cannot invert them without a labeled frame shift (dream, unreliable memory, deliberate counter-myth).",
+        "category": "symbolism",
+        "strength": 4,
+        "scope": "scene"
+      },
+      {
+        "id": "seed-nr-cfw-5",
+        "title": "Temporally anchored fields",
+        "description": "Opening terrain meta-scenes are untimed relative to raid duration — but once a timeline is chosen, downstream chapters must reconcile travel, season, and age tracks.",
+        "category": "structure",
+        "strength": 3,
+        "scope": "scene"
       }
     ],
     "literaryDevices": [
@@ -4168,6 +7750,26 @@
         "relationship": "expresses",
         "strength": 4,
         "notes": "Demo binding"
+      },
+      {
+        "id": "seed-nb-rule-opening-1",
+        "sourceType": "narrative_rule",
+        "sourceId": "seed-nr-cfw-1",
+        "targetType": "meta_scene",
+        "targetId": "seed-meta-gt-silence-before-rupture",
+        "relationship": "influences",
+        "strength": 4,
+        "notes": "Endpoint pressure vs. micro-variation in approach scenes."
+      },
+      {
+        "id": "seed-nb-rule-opening-2",
+        "sourceType": "narrative_rule",
+        "sourceId": "seed-nr-cfw-3",
+        "targetType": "meta_scene",
+        "targetId": "seed-meta-gt-morning-smoke-waking",
+        "relationship": "expresses",
+        "strength": 4,
+        "notes": "Smoke symbolism established early."
       }
     ],
     "fragments": [
@@ -4185,6 +7787,46 @@
         "fragmentType": "THEME_STATEMENT",
         "summary": "Ethical through-line for demo novel.",
         "text": "Where strands disagree, keep both — label the seam.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "ing-pkt-01-frag-implication-channel",
+        "title": null,
+        "fragmentType": "CONTINUITY_CONSTRAINT",
+        "summary": "Implication vs naming — legality-relevant speech pattern.",
+        "text": "Half-said truth — implication as the safer public channel when surveillance is social, not only official.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "ing-rr-frag-implication-over-naming",
+        "title": null,
+        "fragmentType": "CONTINUITY_CONSTRAINT",
+        "summary": "Disclosure channel ordering — Stage 7.5 / 8 legality.",
+        "text": "Public intimate truth routes through tone, timing, and river/kin metaphor before it routes through direct naming — naming aloud is the costly move.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "ing-rr-frag-matriline-descent",
+        "title": null,
+        "fragmentType": "CONTINUITY_CONSTRAINT",
+        "summary": "Kin-lineage logic — disclosure / shame leverage context.",
+        "text": "Matrilineal descent shapes how kin obligation and reputation propagate — individual acts refract through maternal lines.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "ing-rr-frag-silence-speaks",
+        "title": null,
+        "fragmentType": "CONTINUITY_CONSTRAINT",
+        "summary": "Silence as meaningful act — legality-relevant.",
+        "text": "Silence is not absence — it can affirm, refuse, or warn while keeping the trade house face intact.",
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "ing-rr-frag-trade-networks-public-density",
+        "title": null,
+        "fragmentType": "CONTINUITY_CONSTRAINT",
+        "summary": "Place pressure — visibility / surveillance via crowd physics.",
+        "text": "Long-distance trade ties make river landings nodes where strangers, allies, and kin overlap — overhearing and witness density rise by default.",
         "recordType": "HYBRID"
       },
       {
@@ -4324,12 +7966,28 @@
     ],
     "events": [
       {
+        "id": "campti-atlas-ev-french-spanish-red-river-posts",
+        "title": "French & Spanish Red River posts (18th c.)",
+        "description": "Imperial trade and settlement layer before U.S. territorial period. WS-01 / WS-04 antecedent.",
+        "eventType": "POLITICAL",
+        "startYear": 1700,
+        "recordType": "HISTORICAL"
+      },
+      {
         "id": "timeline-ev-fort-st-jean-baptiste-1714",
         "title": "Establishment of Fort St. Jean Baptiste (1714)",
         "description": null,
         "eventType": "POLITICAL",
         "startYear": 1714,
         "recordType": "HYBRID"
+      },
+      {
+        "id": "campti-atlas-ev-name-from-chief-campti",
+        "title": "Campti place-name — chief / missionary record tradition",
+        "description": "Local tradition ties name to Native leader; 1745 missionary visit cited in promotional/history material. Verify in primary sources.",
+        "eventType": "CULTURAL",
+        "startYear": 1745,
+        "recordType": "HISTORICAL"
       },
       {
         "id": "timeline-ev-alexis-louise-marriage-1746",
@@ -4356,11 +8014,99 @@
         "recordType": "HYBRID"
       },
       {
+        "id": "campti-atlas-ev-antebellum-plantation-labor",
+        "title": "Antebellum plantation labor — Natchitoches Parish",
+        "description": "Cotton economy; enslaved labor. WS-04.",
+        "eventType": "LAND",
+        "startYear": 1820,
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "campti-atlas-ev-great-raft-and-shreve-clearing",
+        "title": "Great Raft & Shreve clearing — navigation shift",
+        "description": "Logjam removal redirected growth; Shreveport rises; Campti stays river-rural. WS-07.",
+        "eventType": "LAND",
+        "startYear": 1830,
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "campti-atlas-ev-free-people-of-color-antebellum",
+        "title": "Free people of color — complex status antebellum",
+        "description": "Regional historiography emphasizes nuanced status; do not flatten. WS-04.",
+        "eventType": "CULTURAL",
+        "startYear": 1830,
+        "recordType": "HISTORICAL"
+      },
+      {
         "id": "timeline-ev-civil-war-reconstruction",
         "title": "Civil War and Reconstruction Impact",
         "description": "Regional and family-level effects (broad span).",
         "eventType": "WAR",
         "startYear": 1861,
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "campti-atlas-ev-1864-red-river-campaign-burning",
+        "title": "1864 — Campti burned (Red River Campaign)",
+        "description": "April 1864; Union forces in regional campaign. Church survival is tradition—verify.",
+        "eventType": "WAR",
+        "startYear": 1864,
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "campti-atlas-ev-population-census-arc",
+        "title": "Campti population arc — census aggregates (1880–2020)",
+        "description": "Town place-level counts rise to ~1k then decline to 887 (2020). Cross-check census.gov.",
+        "eventType": "CULTURAL",
+        "startYear": 1880,
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "campti-atlas-ev-jim-crow-louisiana-order",
+        "title": "Jim Crow Louisiana — constitutional disenfranchisement & segregation",
+        "description": "1898 constitution; separate schools; VRA 1965 later. WS-06.",
+        "eventType": "POLITICAL",
+        "startYear": 1898,
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "campti-atlas-ev-forest-products-employment",
+        "title": "Forest products & rural employment (20th–21st c.)",
+        "description": "Timber/paper; parish forest economy ties. WS-08.",
+        "eventType": "LAND",
+        "startYear": 1900,
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "campti-atlas-ev-schools-npsb-lakeview-fairview",
+        "title": "Modern Campti-area public schools (NPSB)",
+        "description": "Fairview-Alpha; Lakeview Jr/Sr High. Desegregation history is statewide + parish archives.",
+        "eventType": "CULTURAL",
+        "startYear": 1950,
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "campti-atlas-ev-civil-rights-desegregation-era",
+        "title": "Civil rights era — desegregation & ongoing equity",
+        "description": "Brown; parish implementation; federal oversight patterns in LA. WS-06 → post-1965.",
+        "eventType": "POLITICAL",
+        "startYear": 1954,
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "campti-atlas-ev-paper-mill-shock-2025",
+        "title": "2025 — International Paper Campti mill closure (regional shock)",
+        "description": "Major job loss reported in regional news; possible reuse — confirm current status. WS-08.",
+        "eventType": "CULTURAL",
+        "startYear": 2025,
+        "recordType": "HISTORICAL"
+      },
+      {
+        "id": "timeline-ev-francois-interpreter",
+        "title": "Rise of François Grappe as Interpreter",
+        "description": "Trade, languages, and mediation between communities.",
+        "eventType": "FAMILY",
+        "startYear": null,
         "recordType": "HYBRID"
       },
       {
@@ -4372,18 +8118,26 @@
         "recordType": "HYBRID"
       },
       {
-        "id": "timeline-ev-pre-colonial-natchitoches",
-        "title": "Pre-Colonial Natchitoches Life",
-        "description": "Indigenous and colonial-era lifeways before the fort narrative.",
+        "id": "campti-atlas-ev-caddo-red-river-trade",
+        "title": "Caddoan trade geometry — Red River corridor (pre-colonial)",
+        "description": "Trade networks across ArkLaTex; salt, agricultural exchange. Era lens: WS-01, WS-09.",
         "eventType": "CULTURAL",
         "startYear": null,
-        "recordType": "HYBRID"
+        "recordType": "HISTORICAL"
       },
       {
         "id": "timeline-ev-campti-catholic-church",
         "title": "Founding of Campti Catholic Church",
         "description": null,
         "eventType": "CHURCH",
+        "startYear": null,
+        "recordType": "HYBRID"
+      },
+      {
+        "id": "timeline-ev-pre-colonial-natchitoches",
+        "title": "Pre-Colonial Natchitoches Life",
+        "description": "Indigenous and colonial-era lifeways before the fort narrative.",
+        "eventType": "CULTURAL",
         "startYear": null,
         "recordType": "HYBRID"
       },
@@ -4412,23 +8166,107 @@
         "recordType": "HYBRID"
       },
       {
-        "id": "timeline-ev-francois-interpreter",
-        "title": "Rise of François Grappe as Interpreter",
-        "description": "Trade, languages, and mediation between communities.",
-        "eventType": "FAMILY",
-        "startYear": null,
-        "recordType": "HYBRID"
-      },
-      {
         "id": "timeline-ev-modern-rediscovery",
         "title": "Modern Rediscovery of Grappe Lineage",
         "description": "Contemporary research, kinship, and narrative recovery.",
         "eventType": "CULTURAL",
         "startYear": null,
         "recordType": "HYBRID"
+      },
+      {
+        "id": "campti-atlas-ev-natchitoches-tribe-hq-campti",
+        "title": "Natchitoches Tribe of Louisiana — Campti headquarters (contemporary)",
+        "description": "State-recognized tribe; HQ Campti per tribal public materials.",
+        "eventType": "CULTURAL",
+        "startYear": null,
+        "recordType": "HISTORICAL"
       }
     ],
     "sources": [
+      {
+        "id": "source-campti-history-atlas",
+        "title": "Campti History Atlas — parish/town cross-reference",
+        "sourceType": "NOTE",
+        "recordType": "HISTORICAL",
+        "summary": "Parish/town chronology spine: demographics, schools, economy, Native continuity, Jim Crow, civil rights, Civil War. Searchable chunks + Event graph."
+      },
+      {
+        "id": "upload-12c15bf54f92f2c16012a06557867e38",
+        "title": "campti_census_entries (1).csv",
+        "sourceType": "NOTE",
+        "recordType": "HISTORICAL",
+        "summary": "Script index: 18268 characters, chunked for search."
+      },
+      {
+        "id": "upload-91afbbd388522dffba74ad2312ace7ed",
+        "title": "campti_census_entries.csv",
+        "sourceType": "NOTE",
+        "recordType": "HISTORICAL",
+        "summary": "Script index: 18268 characters, chunked for search."
+      },
+      {
+        "id": "upload-46031635d33f48607f6132a709e2729d",
+        "title": "campti_census_pages.csv",
+        "sourceType": "NOTE",
+        "recordType": "HISTORICAL",
+        "summary": "Script index: 10646 characters, chunked for search."
+      },
+      {
+        "id": "upload-6772de7a3a9489fc5b4521cdff19161c",
+        "title": "campti_census.sqlite",
+        "sourceType": "OTHER",
+        "recordType": "HISTORICAL",
+        "summary": "Script index: binary or non-text type; path recorded (OTHER)."
+      },
+      {
+        "id": "upload-46c90efe53bb727334ab33a106e251cb",
+        "title": "campti_digitized_bundle.zip",
+        "sourceType": "OTHER",
+        "recordType": "HISTORICAL",
+        "summary": "Script index: binary or non-text type; path recorded (OTHER)."
+      },
+      {
+        "id": "upload-33cd8c16f80c9895e36391496fa5e9bb",
+        "title": "campti_ingest_plan.md",
+        "sourceType": "NOTE",
+        "recordType": "HISTORICAL",
+        "summary": "Script index: 2255 characters, chunked for search."
+      },
+      {
+        "id": "upload-684477dcdb708128b94415b546b9e836",
+        "title": "campti_missing_pages_template.csv",
+        "sourceType": "NOTE",
+        "recordType": "HISTORICAL",
+        "summary": "Script index: 364 characters, chunked for search."
+      },
+      {
+        "id": "upload-433cb12a90efca09260e94384fbdd86b",
+        "title": "campti_name_index.csv",
+        "sourceType": "NOTE",
+        "recordType": "HISTORICAL",
+        "summary": "Script index: 8620 characters, chunked for search."
+      },
+      {
+        "id": "upload-b1470085239d71719a852df9d280830c",
+        "title": "campti_ocr_corpus.md",
+        "sourceType": "NOTE",
+        "recordType": "HISTORICAL",
+        "summary": "Script index: 32178 characters, chunked for search."
+      },
+      {
+        "id": "upload-9a4eeec5b74c7cd12d886833c6e62a2b",
+        "title": "campti_ocr_index.csv",
+        "sourceType": "NOTE",
+        "recordType": "HISTORICAL",
+        "summary": "Script index: 9705 characters, chunked for search."
+      },
+      {
+        "id": "upload-e9b743ddc77824dab581d46a2d79e7a2",
+        "title": "campti_structured_dataset.zip",
+        "sourceType": "OTHER",
+        "recordType": "HISTORICAL",
+        "summary": "Script index: binary or non-text type; path recorded (OTHER)."
+      },
       {
         "id": "seed-source-francois-grappe-excerpt",
         "title": "François Grappe and the Caddo Land Cession – Dayna Bowker Lee excerpt",
@@ -4444,11 +8282,39 @@
         "summary": "Compiled family notes, land references, and narrative hooks for the Campti–Natchitoches corridor."
       },
       {
+        "id": "source-grappe-lineage-working-v1",
+        "title": "Grappe Lineage Working File (provisional_from_screenshots_v1_francois_household)",
+        "sourceType": "NOTE",
+        "recordType": "HYBRID",
+        "summary": "44 nodes (person + lineage_cluster). File: lib/lineage/grappe-lineage-working.v1.json"
+      },
+      {
+        "id": "ing-rr-source-tsha-caddo-handbook",
+        "title": "Handbook of Texas Online — “Caddo Indians” (TSHA)",
+        "sourceType": "WEB",
+        "recordType": "HYBRID",
+        "summary": "Secondary synthesis: Caddoan groups along the Red River; ranked society; long-distance trade; matrilineal clans; political/spiritual offices. Supports collective reputation and public ceremonial order — not scene-specific dialogue."
+      },
+      {
         "id": "source-historical-timeline-grappe-anchors",
         "title": "Historical Timeline – Grappe Narrative Anchors",
         "sourceType": "NOTE",
         "recordType": "HYBRID",
         "summary": null
+      },
+      {
+        "id": "ing-pkt-01-source-curated",
+        "title": "Ingestion packet 01 — curated cues (WS-06 / intimate disclosure slice)",
+        "sourceType": "NOTE",
+        "recordType": "HYBRID",
+        "summary": "Method note: short bullet cues for legality-relevant claims; replace with primary sources when pinned. Not a full documentary dump."
+      },
+      {
+        "id": "ing-rr-source-curated",
+        "title": "Red River Trade Era — curated cues (WS-09 / riverbank disclosure slice)",
+        "sourceType": "NOTE",
+        "recordType": "HYBRID",
+        "summary": "Method note: Caddo trade network, trade-house kinship, indirect public speech. Expand with primary sources when pinned."
       },
       {
         "id": "source-campti-section-i-overview",
@@ -4535,9 +8401,72 @@
         "confidence": 3,
         "recordType": "ORAL_HISTORY",
         "needsReview": true
+      },
+      {
+        "id": "ing-pkt-01-claim-disclosure-audience",
+        "description": "Intimate truth under audience scrutiny carries reputational and safety cost, not only internal cost.",
+        "confidence": 3,
+        "recordType": "HYBRID",
+        "needsReview": true
+      },
+      {
+        "id": "ing-pkt-01-claim-public-legibility",
+        "description": "Under Jim Crow rural order, cross-status recognition in public is often coded or denied.",
+        "confidence": 3,
+        "recordType": "HYBRID",
+        "needsReview": true
+      },
+      {
+        "id": "ing-rr-claim-collective-reputation",
+        "description": "Reputation is collective: individual acts reflect on lineage and trade house; shame risk is high in public missteps.",
+        "confidence": 3,
+        "recordType": "HYBRID",
+        "needsReview": true
+      },
+      {
+        "id": "ing-rr-claim-dyad-witness-leverage",
+        "description": "For Asha × Elaya (WS-09): tenderness or desire can be tactically ‘read’ by bystanders — witness converts intimacy into reputational leverage even when the bond is privately trusted.",
+        "confidence": 3,
+        "recordType": "HYBRID",
+        "needsReview": true
+      },
+      {
+        "id": "ing-rr-claim-indirect-public",
+        "description": "In dense public gatherings, direct contradiction or open accusation is socially dangerous; meaning often travels by tone, implication, and silence.",
+        "confidence": 3,
+        "recordType": "HYBRID",
+        "needsReview": true
+      },
+      {
+        "id": "ing-rr-claim-long-distance-trade-networks",
+        "description": "Caddoan peoples developed long-distance trade networks; prestige goods and materials moved over wide networks (implication: landings and public exchange sites are socially dense and status-bearing).",
+        "confidence": 4,
+        "recordType": "HYBRID",
+        "needsReview": false
+      },
+      {
+        "id": "ing-rr-claim-ranked-authority-hierarchy",
+        "description": "Historic Caddoan political and religious authority was hierarchically organized across affiliated communities — public order and reputation are not purely individual.",
+        "confidence": 4,
+        "recordType": "HYBRID",
+        "needsReview": false
+      },
+      {
+        "id": "ing-rr-claim-riverbank-perception-load",
+        "description": "Busy river landings couple water-edge glare, cargo clutter, and overlapping voices — stillness for private speech is scarce; peripheral listeners are structurally plausible.",
+        "confidence": 3,
+        "recordType": "HYBRID",
+        "needsReview": true
       }
     ],
     "openQuestions": [
+      {
+        "id": "seed-oq-child-formal-identity",
+        "title": "How do we label opening child POV vs later formal identity (Marie Anne Thérèse) in admin and prose?",
+        "description": "Keep separate Person rows if voices diverge; use Alias or notes if they are the same historical subject — author decision pending.",
+        "status": "open",
+        "priority": 1
+      },
       {
         "id": "seed-oq-grappe-treaty",
         "title": "What is the strongest evidence trail for the Grappe Reservation treaty?",
@@ -4546,9 +8475,30 @@
         "priority": 1
       },
       {
+        "id": "seed-oq-raid-timing",
+        "title": "How is the raid timed relative to the innocence arc (same day, season, off-page gap)?",
+        "description": "Affects SettingState, MetaScene dateEstimate, and Chapter 1 handoff — decide before canon prose.",
+        "status": "open",
+        "priority": 1
+      },
+      {
         "id": "seed-oq-francois-doc",
         "title": "Was François Grappe Jr. formally documented in surviving records?",
         "description": "Track parish, federal, and tribal records; note gaps explicitly.",
+        "status": "open",
+        "priority": 2
+      },
+      {
+        "id": "seed-oq-opening-grounding",
+        "title": "What in the pre-contact opening terrain is historically grounded vs. inferential vs. fictional?",
+        "description": "Maintain RecordType per object; flag new claims when archival support is added.",
+        "status": "open",
+        "priority": 2
+      },
+      {
+        "id": "seed-oq-symbolic-laws",
+        "title": "Which symbolic laws are fixed for opening terrain (smoke, river, mortar) across branch drafts?",
+        "description": "List in NarrativeRule + Symbol records; changes require explicit author note.",
         "status": "open",
         "priority": 2
       },
@@ -4567,11 +8517,11 @@
         "priority": 3
       },
       {
-        "id": "narrative-sys-oq-strength",
-        "title": "What defines strength in the Grappe lineage?",
-        "description": null,
+        "id": "seed-oq-archival-support",
+        "title": "Which opening details require later archival or tribal consultation before public-facing copy?",
+        "description": "Track per Claim or Source; keep PRIVATE visibility until reviewed.",
         "status": "open",
-        "priority": null
+        "priority": 3
       },
       {
         "id": "narrative-sys-oq-memory-truth",
@@ -4588,8 +8538,22 @@
         "priority": null
       },
       {
-        "id": "narrative-sys-oq-faith",
-        "title": "Where does faith heal vs harm?",
+        "id": "campti-atlas-oq-parish-vs-town",
+        "title": "Where does Natchitoches Parish data substitute for Campti town facts?",
+        "description": null,
+        "status": "open",
+        "priority": null
+      },
+      {
+        "id": "campti-atlas-oq-primary-vs-story",
+        "title": "Which Campti beats are documented vs family/oral tradition?",
+        "description": null,
+        "status": "open",
+        "priority": null
+      },
+      {
+        "id": "narrative-sys-oq-strength",
+        "title": "What defines strength in the Grappe lineage?",
         "description": null,
         "status": "open",
         "priority": null
@@ -4609,6 +8573,13 @@
         "priority": null
       },
       {
+        "id": "timeline-oq-lost-each-transition",
+        "title": "What was lost during each transition?",
+        "description": null,
+        "status": "open",
+        "priority": null
+      },
+      {
         "id": "timeline-oq-identity-legal-cultural",
         "title": "Where does identity shift legally vs culturally?",
         "description": null,
@@ -4616,8 +8587,8 @@
         "priority": null
       },
       {
-        "id": "timeline-oq-lost-each-transition",
-        "title": "What was lost during each transition?",
+        "id": "narrative-sys-oq-faith",
+        "title": "Where does faith heal vs harm?",
         "description": null,
         "status": "open",
         "priority": null
@@ -4681,6 +8652,13 @@
         "status": "open"
       },
       {
+        "id": "seed-cn-opening-innocence",
+        "title": "Opening innocence arc must complete emotional foundation before raid prose",
+        "description": "Reader affection for Grande Terre simulation must land before rupture scenes. Meta-scenes 1–7 are ordering tools — final prose may merge or split.",
+        "severity": "high",
+        "status": "open"
+      },
+      {
         "id": "seed-cn-buford-accidents",
         "title": "Track whether Buford’s accidents are documented, oral, or hybrid",
         "description": "Align Buford’s arc with record types and claims.",
@@ -4698,6 +8676,20 @@
         "id": "seed-cn-oral-label",
         "title": "Do not collapse oral history into verified fact without labeling",
         "description": "Use chapter notes and claim types to keep hybridity visible.",
+        "severity": "medium",
+        "status": "open"
+      },
+      {
+        "id": "seed-cn-child-pov-voice",
+        "title": "Child POV: sensory and relational — not therapeutic interior",
+        "description": "Draft tools may reference personality models, but published prose for opening terrain stays concrete. Modern psychologizing is out of bounds.",
+        "severity": "medium",
+        "status": "open"
+      },
+      {
+        "id": "seed-cn-raid-timing",
+        "title": "Raid timing relative to opening meta-scenes is author-anchored",
+        "description": "Simulation holds pressure without a fixed hour. When prose draft fixes the raid, update SettingState, MetaScene dateEstimate, and related ContinuityNotes.",
         "severity": "medium",
         "status": "open"
       }
@@ -5052,6 +9044,90 @@
         "emotionalVoltage": "medium-high"
       },
       {
+        "id": "seed-meta-gt-child-known-world",
+        "title": "Opening terrain — child movement through known world",
+        "sceneId": null,
+        "placeId": "seed-place-gt-village-core",
+        "povPersonId": "seed-person-child-grande-terre-pov",
+        "timePeriod": "Early 1700s — opening innocence layer (approximate)",
+        "narrativePurpose": "Map innocence as kinesthetic knowledge — simulation for Terrain I / subchapter.",
+        "symbolicElements": "Circle of known names; trail as extension of kin body.",
+        "centralConflict": "Curiosity vs. adult perimeter rules.",
+        "emotionalVoltage": "Freedom within love — bounded exploration."
+      },
+      {
+        "id": "seed-meta-gt-elder-teaching",
+        "title": "Opening terrain — elder correction / teaching moment",
+        "sceneId": null,
+        "placeId": "seed-place-gt-village-core",
+        "povPersonId": "seed-person-child-grande-terre-pov",
+        "timePeriod": "Early 1700s — opening innocence layer (approximate)",
+        "narrativePurpose": "Simulation for moral framework without sermon — subchapter or Terrain I.",
+        "symbolicElements": "Hands as lineage; correction as inclusion.",
+        "centralConflict": "Standard vs. child impulse — resolved in relationship.",
+        "emotionalVoltage": "Shame risk redirected into belonging — still tender."
+      },
+      {
+        "id": "seed-meta-gt-first-subtle-warning",
+        "title": "Opening terrain — first subtle warning",
+        "sceneId": null,
+        "placeId": "seed-place-gt-tree-line-threshold",
+        "povPersonId": "seed-person-child-grande-terre-pov",
+        "timePeriod": "Early 1700s — opening innocence layer (approximate)",
+        "narrativePurpose": "Turn innocence toward pressure without naming raid — bridge to pre-rupture.",
+        "symbolicElements": "Threshold; listening; unfinished sound.",
+        "centralConflict": "Interpretation vs. premature speech — vigilance without proof.",
+        "emotionalVoltage": "Dread as undertow — love still present, unease leaked."
+      },
+      {
+        "id": "seed-meta-gt-food-labor-kinship",
+        "title": "Opening terrain — food, labor, and kinship rhythm",
+        "sceneId": null,
+        "placeId": "seed-place-gt-food-prep",
+        "povPersonId": "seed-person-child-grande-terre-pov",
+        "timePeriod": "Early 1700s — opening innocence layer (approximate)",
+        "narrativePurpose": "Simulate kinship order under labor — prelude beat or Terrain I interior.",
+        "symbolicElements": "Mortar as heartbeat; shared bowl as moral fact.",
+        "centralConflict": "Task focus vs. child distraction — gentle, not cruel.",
+        "emotionalVoltage": "Warm competence — competence as love language."
+      },
+      {
+        "id": "seed-meta-gt-morning-smoke-waking",
+        "title": "Opening terrain — morning smoke / waking order",
+        "sceneId": null,
+        "placeId": "seed-place-gt-smoke-fire-center",
+        "povPersonId": "seed-person-child-grande-terre-pov",
+        "timePeriod": "Early 1700s — opening innocence layer (approximate)",
+        "narrativePurpose": "Simulation unit: establish loved rhythm before rupture. Possible uses: prologue beat, Terrain I, prelude to Ch.1.",
+        "symbolicElements": "Smoke as covenant of continuity; fire as shared clock.",
+        "centralConflict": "Order vs. child impatience — low stakes, high warmth.",
+        "emotionalVoltage": "Love and continuity — threat not yet in frame."
+      },
+      {
+        "id": "seed-meta-gt-silence-before-rupture",
+        "title": "Opening terrain — silence shift before rupture",
+        "sceneId": null,
+        "placeId": "seed-place-gt-river-edge",
+        "povPersonId": "seed-person-child-grande-terre-pov",
+        "timePeriod": "Early 1700s — opening innocence layer (approximate)",
+        "narrativePurpose": "Final innocence-layer simulation cell before canonical Alexis or raid-adjacent draft.",
+        "symbolicElements": "Water as constant; human sound as fragile overlay.",
+        "centralConflict": "Normalcy performance vs. rising knowledge — unbearable politeness.",
+        "emotionalVoltage": "Grief-before-loss — innocence still intact but fragile."
+      },
+      {
+        "id": "seed-meta-gt-trade-route-awareness",
+        "title": "Opening terrain — trade-route awareness",
+        "sceneId": null,
+        "placeId": "seed-place-gt-trade-corridor",
+        "povPersonId": "seed-person-child-grande-terre-pov",
+        "timePeriod": "Early 1700s — opening innocence layer (approximate)",
+        "narrativePurpose": "Simulate trade-route life before raid — possible prologue or Terrain I.",
+        "symbolicElements": "Trail as artery; gift as relationship; dust as rumor.",
+        "centralConflict": "Openness vs. protective suspicion — still civil.",
+        "emotionalVoltage": "Excitement with a thin wire of adult assessment."
+      },
+      {
         "id": "demo-meta-demo-sc-ch4-3",
         "title": "Reading aloud — ethics of quoting",
         "sceneId": "demo-sc-ch4-3",
@@ -5226,6 +9302,69 @@
         "personBId": "seed-person-narrator",
         "relationshipType": "research_bridge",
         "relationshipSummary": "Support layer in Chapter 8 meta."
+      },
+      {
+        "id": "cmntx0mdm003rvh7g7otwuvw0",
+        "personAId": "seed-person-gt-aunt-kin",
+        "personBId": "seed-person-marie-anne-grande-terre",
+        "relationshipType": "kin_parallel",
+        "relationshipSummary": "Sister-line or close cousin-line — shared childcare and vigilance; Marie leads final calls."
+      },
+      {
+        "id": "cmntx0mh5003tvh7gvujz4fw9",
+        "personAId": "seed-person-child-grande-terre-pov",
+        "personBId": "seed-person-gt-elder-ritual-keeper",
+        "relationshipType": "grandparental_teaching",
+        "relationshipSummary": "Elder corrects and blesses in same gesture — child feels both shy and held."
+      },
+      {
+        "id": "cmntx0mkx003vvh7gibm2j5s1",
+        "personAId": "seed-person-child-grande-terre-pov",
+        "personBId": "seed-person-gt-hunter-sentinel",
+        "relationshipType": "peripheral_authority",
+        "relationshipSummary": "Adult male watchfulness without intimacy of women’s line — child obeys short commands."
+      },
+      {
+        "id": "cmntx0mms003xvh7g788xprtq",
+        "personAId": "seed-person-child-grande-terre-pov",
+        "personBId": "seed-person-gt-protector-imprint",
+        "relationshipType": "sibling_cohort_protector",
+        "relationshipSummary": "Playmate + future protector imprint — tenderness without romance vocabulary for POV age."
+      },
+      {
+        "id": "cmntx0mok003zvh7g684kife4",
+        "personAId": "seed-person-child-grande-terre-pov",
+        "personBId": "seed-person-gt-trade-visitor",
+        "relationshipType": "novelty_contact",
+        "relationshipSummary": "Child experiences visitor as sensory novelty — adults experience as social risk."
+      },
+      {
+        "id": "cmntx0mqc0041vh7gx5w54wfj",
+        "personAId": "seed-person-child-grande-terre-pov",
+        "personBId": "seed-person-gt-community-children",
+        "relationshipType": "peer_field",
+        "relationshipSummary": "Aggregate peers — games, noise, status micro-shifts."
+      },
+      {
+        "id": "cmntx0ms20043vh7gbmlh7pqt",
+        "personAId": "seed-person-gt-elder-ritual-keeper",
+        "personBId": "seed-person-marie-anne-grande-terre",
+        "relationshipType": "intergenerational_alliance",
+        "relationshipSummary": "Elder carries time; Marie carries immediate child stakes — mutual reinforcement."
+      },
+      {
+        "id": "cmntx0mtw0045vh7gabkj057l",
+        "personAId": "seed-person-gt-hunter-sentinel",
+        "personBId": "seed-person-marie-anne-grande-terre",
+        "relationshipType": "intel_counsel",
+        "relationshipSummary": "He brings edge facts; she integrates with women’s council and child placement."
+      },
+      {
+        "id": "ing-rr-charrel-asha-elaya",
+        "personAId": "seed-person-asha",
+        "personBId": "seed-person-elaya",
+        "relationshipType": "trade_alliance_intimate_subtext",
+        "relationshipSummary": "Kin-embedded trade alliance with reciprocal recognition; publicly legible as respectable tie — affection travels by implication, not crowd-facing naming."
       }
     ],
     "aliases": []

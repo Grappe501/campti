@@ -78,7 +78,20 @@ function spacingClass(displayUnitType: ExperiencePerceptionSegment["displayUnitT
   return "mt-9";
 }
 
-export function ImmersiveSceneReader({
+/**
+ * Remount inner reader when text/perception changes so controls reset without
+ * synchronous setState in an effect (react-hooks/set-state-in-effect).
+ */
+export function ImmersiveSceneReader(props: ImmersiveSceneReaderProps) {
+  const { text, perceptionSegments } = props;
+  const resetKey = useMemo(
+    () => `${text}\0${perceptionSegments ? JSON.stringify(perceptionSegments) : ""}`,
+    [text, perceptionSegments],
+  );
+  return <ImmersiveSceneReaderInner key={resetKey} {...props} />;
+}
+
+function ImmersiveSceneReaderInner({
   text,
   entities,
   onEntityClick,
@@ -99,13 +112,6 @@ export function ImmersiveSceneReader({
   const [autoPlay, setAutoPlay] = useState(false);
   const [paused, setPaused] = useState(false);
   const [pacing, setPacing] = useState<Pacing>("slow");
-
-  useEffect(() => {
-    setVisibleCount(1);
-    setAutoPlay(false);
-    setPaused(false);
-    setPacing("slow");
-  }, [text, perceptionSegments]);
 
   const delayForIndex = useCallback(
     (index: number): number => {

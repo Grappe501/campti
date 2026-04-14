@@ -1,11 +1,27 @@
+import {
+  buildAuthorVoiceShaping,
+  flattenAuthorVoiceShapingToPromptLines,
+} from "@/lib/author-workflow/author-voice-helpers";
+import type { NarrativeWitnessMode } from "@/lib/domain/author-voice-humanization";
+import type { AuthorVoiceProfile } from "@/lib/domain/author-voice-humanization";
 import type { SceneGenerationInput } from "@/lib/domain/scene-generation-input";
 import type { SceneGenerationPurpose } from "@/lib/domain/scene-generation-output";
+import type { SocialFieldContext } from "@/lib/domain/population-social-field";
+import { inferApproximateStoryYearFromScene } from "@/lib/inner-voice/framing/age-band";
 import { prisma } from "@/lib/prisma";
+import { buildSceneSocialGenerationBundle } from "@/lib/scene-generation/social-field-generation-prep";
 import {
   cognitionFrameToPromptPayload,
   resolveCharacterCognitionFrame,
 } from "@/lib/services/character-cognition-resolver";
+import { buildSocialFieldContextFromQuery } from "@/lib/services/social-field-context-service";
 import { loadSceneGenerationContract } from "@/lib/services/scene-generation-contract-loader";
+
+function parishPlaceIdFromSceneJson(structuredDataJson: unknown): string | null {
+  if (!structuredDataJson || typeof structuredDataJson !== "object") return null;
+  const v = (structuredDataJson as Record<string, unknown>).parishPlaceId;
+  return typeof v === "string" && v.length ? v : null;
+}
 
 /**
  * Builds `SceneGenerationInput` for the generation boundary (contract + voice + goals + Phase 6 routing).
@@ -21,6 +37,11 @@ export async function loadSceneGenerationInput(
     basisProseOverride?: string | null;
     includeCognitionFrame?: boolean;
     includePinnedDecisionTracePayload?: boolean;
+    /** Phase 6.1 — resolve live social field + compact generation bundle (default true). */
+    includeSocialFieldGeneration?: boolean;
+    /** Phase 7 — narrative witness / humanization shaping. */
+    narrativeWitnessMode?: NarrativeWitnessMode;
+    authorVoiceOverrides?: Partial<AuthorVoiceProfile>;
   }
 ): Promise<SceneGenerationInput> {
   const generationMode = options?.generationMode ?? "draft";
@@ -39,6 +60,7 @@ export async function loadSceneGenerationInput(
         },
       },
       persons: { take: 1 },
+      places: { take: 2 },
     },
   });
 
@@ -71,12 +93,63 @@ export async function loadSceneGenerationInput(
     }
   }
 
+  let socialFieldGeneration: SceneGenerationInput["contract"]["socialFieldGeneration"] = null;
+  let sfResolved: SocialFieldContext | null = null;
+  if (options?.includeSocialFieldGeneration !== false) {
+    const worldStateId = baseContract.effectiveWorldState.worldStateId;
+    const placeId = scene.places[0]?.id ?? baseContract.place?.id ?? null;
+    if (worldStateId && placeId) {
+      try {
+        const storyYear = inferApproximateStoryYearFromScene(scene.structuredDataJson, scene.historicalAnchor);
+        const sf = await buildSocialFieldContextFromQuery({
+          sceneId,
+          worldStateId,
+          storyYear,
+          focalPersonIds: povPersonId ? [povPersonId] : [],
+          placeId,
+          householdId: null,
+          parishPlaceId: parishPlaceIdFromSceneJson(scene.structuredDataJson),
+        });
+        sfResolved = sf;
+        socialFieldGeneration = buildSceneSocialGenerationBundle(sf);
+      } catch {
+        socialFieldGeneration = null;
+      }
+    }
+  }
+
+  const authorVoiceShaping = buildAuthorVoiceShaping({
+    narrativeWitnessMode: options?.narrativeWitnessMode,
+    narrativeVoice: narrativeVoiceProfile
+      ? {
+          sentenceRhythm: narrativeVoiceProfile.sentenceRhythm,
+          dictionStyle: narrativeVoiceProfile.dictionStyle,
+          sensoryBias: narrativeVoiceProfile.sensoryBias,
+          silenceStyle: narrativeVoiceProfile.silenceStyle,
+          memoryStyle: narrativeVoiceProfile.memoryStyle,
+          interiorityStyle: narrativeVoiceProfile.interiorityStyle,
+        }
+      : null,
+    characterVoice: characterVoiceProfile
+      ? {
+          rhythmStyle: characterVoiceProfile.rhythmStyle,
+          metaphorStyle: characterVoiceProfile.metaphorStyle,
+          emotionalExpressionStyle: characterVoiceProfile.emotionalExpressionStyle,
+          silencePatterns: characterVoiceProfile.silencePatterns,
+        }
+      : null,
+    overrides: options?.authorVoiceOverrides,
+  });
+  const flat = flattenAuthorVoiceShapingToPromptLines(authorVoiceShaping);
+
   const contract: SceneGenerationInput["contract"] = {
     ...baseContract,
     thoughtLanguageMediation:
       cognitionFramePayload && cognitionFramePayload.thoughtLanguage != null
         ? (cognitionFramePayload.thoughtLanguage as Record<string, unknown>)
         : null,
+    socialFieldGeneration,
+    authorVoiceShaping,
   };
 
   if (options?.includePinnedDecisionTracePayload !== false && povPersonId) {
@@ -100,6 +173,18 @@ export async function loadSceneGenerationInput(
     generationPurpose,
     cognitionFramePayload,
     pinnedDecisionTracePayload,
+    socialFieldSummaryForGeneration: socialFieldGeneration?.socialFieldSummaryForGeneration ?? null,
+    invisiblePressureSummary: socialFieldGeneration?.invisiblePressureSummary ?? null,
+    authorityAtmosphereSummary: socialFieldGeneration?.authorityAtmosphereSummary ?? null,
+    kinVisibilitySummary: socialFieldGeneration?.kinVisibilitySummary ?? null,
+    populationDensityHint: socialFieldGeneration?.nearbyPopulationHint ?? null,
+    socialFieldQaScalars: sfResolved
+      ? {
+          witnessRisk01: sfResolved.witnessRisk,
+          gossipRisk01: sfResolved.gossipPressure,
+          authorityPressure01: sfResolved.authorityPressure,
+        }
+      : null,
     proseBasis: options?.proseBasis,
     basisProseOverride: options?.basisProseOverride ?? null,
     narrativeVoiceProfile,
@@ -112,5 +197,11 @@ export async function loadSceneGenerationInput(
       narrativeVoiceProfile: proseQaContext.narrativeVoiceProfile ?? narrativeVoiceProfile,
       characterVoiceProfile: proseQaContext.characterVoiceProfile ?? characterVoiceProfile,
     },
+    authorVoiceShaping,
+    narrativeWitnessMode: authorVoiceShaping.narrativeWitnessMode,
+    humanizationHints: flat.humanizationHints,
+    prosePresenceHints: flat.prosePresenceHints,
+    witnessFrameLines: flat.witnessLines,
+    voiceSummaryLines: flat.voiceSummaryLines,
   };
 }

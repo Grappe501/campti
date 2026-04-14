@@ -34,9 +34,27 @@ function buildSystemPrompt(): string {
     "Ground every plot-impacting claim in the JSON contract: genealogical assertions, people, place, world-state era.",
     "Respect thought-language mediation and cognition summaries when provided: no modern therapy vocabulary unless era-appropriate.",
     "Embodiment, desire pressure, and fear stacks may inform texture but must not contradict structured facts.",
+    "SOCIAL WORLD: The scene sits inside a populated historical environment—not a soundstage with only named characters. Unseen observers and rumor matter as much as named dialogue.",
+    "Express social pressure INDIRECTLY: hesitation, silence, glances, physical distance, lowered voice, coded speech, timing of truth, deference, sweat, stillness—never a lecture about society.",
+    "When SOCIAL_GUIDANCE_LINES or SOCIAL_FIELD_FOR_GENERATION is present, let witness exposure, gossip risk, authority, kin scrutiny, and household crowding shape choices and texture. Do not restate that guidance as exposition or analysis.",
+    "Do not paste numbers, percentages, or field names from JSON; embody pressure as felt tension, restraint, secrecy, or exposure.",
+    "In `generationNotes`, at most one short clause may nod to ambient social pressure if useful (no metrics).",
+    "PHASE 7 — HUMAN PRESENCE: Prefer lived specificity over generic summary. Let emotion show through posture, work, object, and timing before naming it.",
+    "Avoid explanatory tone that tidies the scene for a reader; preserve ambiguity and silence where the witness lines ask for it.",
     "Output ONE JSON object only, matching the schema in the user message. No markdown fences.",
     "The JSON field `generatedText` is MODEL DRAFT ONLY — it must never be described as reader-canonical.",
   ].join("\n");
+}
+
+function compactSocialGuidanceLines(input: SceneGenerationInput): string | null {
+  const parts: string[] = [];
+  if (input.populationDensityHint?.trim()) parts.push(`Scale: ${input.populationDensityHint.trim()}`);
+  if (input.invisiblePressureSummary?.trim()) parts.push(`Invisible pressure: ${input.invisiblePressureSummary.trim()}`);
+  if (input.authorityAtmosphereSummary?.trim()) parts.push(`Authority: ${input.authorityAtmosphereSummary.trim()}`);
+  if (input.kinVisibilitySummary?.trim()) parts.push(`Kin & household: ${input.kinVisibilitySummary.trim()}`);
+  if (parts.length) return parts.join("\n");
+  if (input.socialFieldSummaryForGeneration?.trim()) return input.socialFieldSummaryForGeneration.trim();
+  return null;
 }
 
 function truncateJson(v: unknown, max: number): string {
@@ -46,6 +64,7 @@ function truncateJson(v: unknown, max: number): string {
 }
 
 function buildUserPrompt(input: SceneGenerationInput, basisProse: string | null): string {
+  const socialLines = compactSocialGuidanceLines(input);
   return [
     `GENERATION_MODE: ${input.generationMode}`,
     `GENERATION_PURPOSE: ${purposeLabel(input.generationPurpose)}`,
@@ -66,12 +85,43 @@ function buildUserPrompt(input: SceneGenerationInput, basisProse: string | null)
       ? `COGNITION_FRAME_PAYLOAD (respect; do not contradict resolved stacks):\n${truncateJson(input.cognitionFramePayload, 12000)}`
       : "",
     "",
+    socialLines
+      ? `SOCIAL_GUIDANCE_LINES (short phrases—embody, never quote as exposition):\n${socialLines}`
+      : "",
+    "",
+    input.contract.socialFieldGeneration
+      ? [
+          "SOCIAL_FIELD_FOR_GENERATION (full compact bundle JSON; prefer SOCIAL_GUIDANCE_LINES for tone):",
+          truncateJson(input.contract.socialFieldGeneration, 4500),
+        ].join("\n")
+      : "",
+    "",
     input.pinnedDecisionTracePayload
       ? `PINNED_DECISION_TRACE_JSON:\n${truncateJson(input.pinnedDecisionTracePayload, 8000)}`
       : "",
     "",
     basisProse
       ? `BASELINE_PROSE (rewrite/repair from this when present):\n${basisProse.slice(0, 32000)}`
+      : "",
+    "",
+    input.witnessFrameLines?.length
+      ? `WITNESS_MODE_LINES:\n${input.witnessFrameLines.join("\n")}`
+      : "",
+    "",
+    input.voiceSummaryLines?.length
+      ? `VOICE_AXIS_SUMMARY:\n${input.voiceSummaryLines.join("\n")}`
+      : "",
+    "",
+    input.humanizationHints?.length
+      ? `HUMANIZATION_HINTS:\n${input.humanizationHints.join("\n")}`
+      : "",
+    "",
+    input.prosePresenceHints?.length
+      ? `PROSE_PRESENCE_HINTS:\n${input.prosePresenceHints.join("\n")}`
+      : "",
+    "",
+    input.authorVoiceShaping
+      ? `AUTHOR_VOICE_SHAPING_JSON:\n${truncateJson(input.authorVoiceShaping, 4000)}`
       : "",
     "",
     "AUTHOR_GOALS_AND_QA_CONTEXT:",

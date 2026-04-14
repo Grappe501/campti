@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useCallback, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { HandsFreeAction } from "@/lib/hands-free/types";
 import {
   attachReaderCommandGrammars,
@@ -92,7 +92,10 @@ function HandsFreePanelInner({ onAction, active = true }: Props) {
   const lastGazeUiAt = useRef(0);
   /** Skip work when the engine repeats the same interim string (common at 30–60 Hz). */
   const lastInterimSnapshotRef = useRef<string>("");
-  voiceOnRef.current = voiceOn;
+
+  useEffect(() => {
+    voiceOnRef.current = voiceOn;
+  }, [voiceOn]);
 
   const flushInterimUi = useCallback((text: string | null) => {
     pendingInterimText.current = text;
@@ -116,15 +119,17 @@ function HandsFreePanelInner({ onAction, active = true }: Props) {
     }
   }, []);
 
-  if (!gazeControllerRef.current) {
-    gazeControllerRef.current = createGazeEdgeController({
-      edgeFraction: 0.12,
-      hysteresisPx: 20,
-      smoothWindow: 6,
-      dwellMs: 720,
-      cooldownMs: 1180,
-    });
-  }
+  useLayoutEffect(() => {
+    if (gazeControllerRef.current == null) {
+      gazeControllerRef.current = createGazeEdgeController({
+        edgeFraction: 0.12,
+        hysteresisPx: 20,
+        smoothWindow: 6,
+        dwellMs: 720,
+        cooldownMs: 1180,
+      });
+    }
+  }, []);
 
   const dispatchVoiceMerged = useCallback(
     (merged: string, opts?: { fromInterimShortcut?: boolean }) => {
@@ -261,7 +266,7 @@ function HandsFreePanelInner({ onAction, active = true }: Props) {
         clearTimeout(interimUiTimer.current);
         interimUiTimer.current = null;
       }
-      setHeardInterim(null);
+      queueMicrotask(() => setHeardInterim(null));
       try {
         recRef.current?.stop();
       } catch {
@@ -272,8 +277,10 @@ function HandsFreePanelInner({ onAction, active = true }: Props) {
     }
     const Ctor = getSpeechRecognitionConstructor();
     if (!Ctor) {
-      setStatus("Voice commands need Chrome or Edge (Web Speech API).");
-      setVoiceOn(false);
+      queueMicrotask(() => {
+        setStatus("Voice commands need Chrome or Edge (Web Speech API).");
+        setVoiceOn(false);
+      });
       return;
     }
     lastInterimUiAt.current = 0;
@@ -337,10 +344,12 @@ function HandsFreePanelInner({ onAction, active = true }: Props) {
     recRef.current = rec;
     try {
       rec.start();
-      setStatus("Listening for commands…");
+      queueMicrotask(() => setStatus("Listening for commands…"));
     } catch {
-      setStatus("Could not start microphone.");
-      setVoiceOn(false);
+      queueMicrotask(() => {
+        setStatus("Could not start microphone.");
+        setVoiceOn(false);
+      });
     }
     return () => {
       if (flushTimerRef.current) clearTimeout(flushTimerRef.current);
@@ -389,7 +398,7 @@ function HandsFreePanelInner({ onAction, active = true }: Props) {
     if (!gazeOn || !active) {
       gazeControllerRef.current?.reset();
       lastGazeUiAt.current = 0;
-      setGazeVisual({ zone: "none", progress: 0 });
+      queueMicrotask(() => setGazeVisual({ zone: "none", progress: 0 }));
       const wg = webgazerRef.current;
       if (wg) {
         try {
@@ -404,7 +413,7 @@ function HandsFreePanelInner({ onAction, active = true }: Props) {
     }
 
     let cancelled = false;
-    setGazeError(null);
+    queueMicrotask(() => setGazeError(null));
     gazeControllerRef.current?.reset();
 
     (async () => {

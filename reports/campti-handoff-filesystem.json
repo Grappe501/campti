@@ -1,7 +1,7 @@
 {
   "kind": "filesystem",
   "handoffVersion": 2,
-  "generatedAt": "2026-04-10T13:47:26.453Z",
+  "generatedAt": "2026-04-12T16:45:53.449Z",
   "purpose": "Repository and build layout: files, routes, npm scripts, dependencies. Pair with campti-handoff-story.json for narrative state.",
   "repository": {
     "name": "campti",
@@ -16,10 +16,13 @@
   "executablesAndScripts": {
     "npmScripts": {
       "dev": "next dev",
-      "build": "prisma generate && next build",
+      "build": "node scripts/prisma-generate-optional.mjs && next build",
       "start": "next start",
       "lint": "eslint",
-      "postinstall": "prisma generate",
+      "typecheck": "tsc --noEmit",
+      "postinstall": "node scripts/prisma-generate-optional.mjs",
+      "db:generate": "prisma generate",
+      "db:validate": "prisma validate",
       "db:push": "prisma db push",
       "db:seed": "prisma db seed",
       "db:studio": "prisma studio",
@@ -27,14 +30,44 @@
       "db:narrative-dna": "tsx scripts/seed-narrative-dna-documents.ts",
       "db:narrative-dna-guides": "tsx scripts/seed-narrative-dna-guides.ts",
       "db:historical-timeline": "tsx scripts/ingest-historical-timeline.ts",
-      "report:handoff": "tsx scripts/generate-handoff-report.ts"
+      "db:campti-history-atlas": "tsx scripts/ingest-campti-history-atlas.ts",
+      "db:grappe-lineage-source": "tsx scripts/ingest-grappe-lineage-source.ts",
+      "db:wire-grp-lineage": "tsx scripts/wire-grp-lineage-persons.ts",
+      "report:handoff": "tsx scripts/generate-handoff-report.ts",
+      "report:handoff:full": "tsx scripts/generate-handoff-report.ts --combined-out reports/campti-handoff-full.json",
+      "verify:stage8": "tsx scripts/verify-stage8-classification.ts",
+      "verify:stage8-5": "tsx scripts/verify-stage8-5-outcome-envelope.ts",
+      "uploads:index": "tsx scripts/index-incoming-uploads.ts",
+      "uploads:sync-research": "tsx scripts/sync-campti-research-bundle.ts",
+      "db:import-campti-census": "tsx scripts/import-campti-census-sqlite.ts",
+      "research:census-pipeline": "tsx scripts/research-census-pipeline.ts"
     },
     "narrative": {
       "note": "All ingestion is TypeScript run via tsx; there are no Python scripts in this repo.",
       "scriptFiles": [
         {
           "file": "scripts/generate-handoff-report.ts",
-          "bytes": 18044,
+          "bytes": 18629,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/import-campti-census-sqlite.ts",
+          "bytes": 9392,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/index-incoming-uploads.ts",
+          "bytes": 6853,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/ingest-campti-history-atlas.ts",
+          "bytes": 13367,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/ingest-grappe-lineage-source.ts",
+          "bytes": 4349,
           "role": "CLI / ingestion script"
         },
         {
@@ -48,8 +81,23 @@
           "role": "CLI / ingestion script"
         },
         {
+          "file": "scripts/inspect-campti-sqlite.mjs",
+          "bytes": 519,
+          "role": "CLI / ingestion script"
+        },
+        {
           "file": "scripts/load-env.ts",
           "bytes": 737,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/prisma-generate-optional.mjs",
+          "bytes": 716,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/research-census-pipeline.ts",
+          "bytes": 1113,
           "role": "CLI / ingestion script"
         },
         {
@@ -61,38 +109,65 @@
           "file": "scripts/seed-narrative-dna-guides.ts",
           "bytes": 3010,
           "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/sync-campti-research-bundle.ts",
+          "bytes": 1679,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/verify-red-river-focal-alternation.ts",
+          "bytes": 4511,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/verify-stage8-5-outcome-envelope.ts",
+          "bytes": 2936,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/verify-stage8-classification.ts",
+          "bytes": 736,
+          "role": "CLI / ingestion script"
+        },
+        {
+          "file": "scripts/wire-grp-lineage-persons.ts",
+          "bytes": 2130,
+          "role": "CLI / ingestion script"
         }
       ]
     }
   },
   "dependencies": {
     "production": {
-      "@prisma/client": "^6.6.0",
-      "@supabase/supabase-js": "^2.102.1",
-      "next": "^15.2.4",
-      "openai": "^6.33.0",
-      "react": "^19.1.0",
-      "react-dom": "^19.1.0",
+      "@prisma/client": "^6.19.3",
+      "@supabase/supabase-js": "^2.103.0",
+      "next": "^16.2.3",
+      "openai": "^6.34.0",
+      "react": "^19.2.5",
+      "react-dom": "^19.2.5",
       "zod": "^4.3.6"
     },
     "development": {
       "@eslint/eslintrc": "^3",
-      "@netlify/plugin-nextjs": "^5",
+      "@netlify/plugin-nextjs": "^5.15.9",
       "@tailwindcss/postcss": "^4",
+      "@types/better-sqlite3": "^7.6.13",
       "@types/node": "^20",
       "@types/react": "^19",
       "@types/react-dom": "^19",
+      "better-sqlite3": "^12.8.0",
       "eslint": "^9",
-      "eslint-config-next": "^15.2.4",
-      "prisma": "^6.6.0",
+      "eslint-config-next": "^16.2.3",
+      "prisma": "^6.19.3",
       "tailwindcss": "^4",
-      "tsx": "^4.19.3",
+      "tsx": "^4.21.0",
       "typescript": "^5"
     }
   },
   "prisma": {
     "schemaFile": "prisma/schema.prisma",
-    "schemaBytes": 47202,
+    "schemaBytes": 130726,
     "seedCommand": "tsx prisma/seed.ts",
     "note": "PostgreSQL via DATABASE_URL; Prisma Client generated on postinstall/build."
   },
@@ -119,7 +194,12 @@
       {
         "path": "/admin/brain",
         "file": "app/admin/brain/page.tsx",
-        "bytes": 19639
+        "bytes": 26802
+      },
+      {
+        "path": "/admin/build-sequence",
+        "file": "app/admin/build-sequence/page.tsx",
+        "bytes": 6512
       },
       {
         "path": "/admin/chapters/[id]",
@@ -132,9 +212,34 @@
         "bytes": 5669
       },
       {
+        "path": "/admin/characters/[id]/brain",
+        "file": "app/admin/characters/[id]/brain/page.tsx",
+        "bytes": 9251
+      },
+      {
+        "path": "/admin/characters/[id]/continuity",
+        "file": "app/admin/characters/[id]/continuity/page.tsx",
+        "bytes": 54337
+      },
+      {
+        "path": "/admin/characters/[id]/intelligence",
+        "file": "app/admin/characters/[id]/intelligence/page.tsx",
+        "bytes": 20860
+      },
+      {
         "path": "/admin/characters/[id]/mind",
         "file": "app/admin/characters/[id]/mind/page.tsx",
-        "bytes": 17532
+        "bytes": 56593
+      },
+      {
+        "path": "/admin/characters/[id]/pressure",
+        "file": "app/admin/characters/[id]/pressure/page.tsx",
+        "bytes": 27151
+      },
+      {
+        "path": "/admin/characters/[id]/relationships",
+        "file": "app/admin/characters/[id]/relationships/page.tsx",
+        "bytes": 17602
       },
       {
         "path": "/admin/chunks/[id]",
@@ -167,9 +272,59 @@
         "bytes": 3121
       },
       {
+        "path": "/admin/confidence/[id]",
+        "file": "app/admin/confidence/[id]/page.tsx",
+        "bytes": 4166
+      },
+      {
+        "path": "/admin/confidence/new",
+        "file": "app/admin/confidence/new/page.tsx",
+        "bytes": 3453
+      },
+      {
+        "path": "/admin/confidence",
+        "file": "app/admin/confidence/page.tsx",
+        "bytes": 1788
+      },
+      {
+        "path": "/admin/connections/[id]",
+        "file": "app/admin/connections/[id]/page.tsx",
+        "bytes": 6220
+      },
+      {
+        "path": "/admin/connections/new",
+        "file": "app/admin/connections/new/page.tsx",
+        "bytes": 5159
+      },
+      {
+        "path": "/admin/connections",
+        "file": "app/admin/connections/page.tsx",
+        "bytes": 2544
+      },
+      {
         "path": "/admin/continuity/[id]",
         "file": "app/admin/continuity/[id]/page.tsx",
         "bytes": 6705
+      },
+      {
+        "path": "/admin/continuity/education/[id]",
+        "file": "app/admin/continuity/education/[id]/page.tsx",
+        "bytes": 5510
+      },
+      {
+        "path": "/admin/continuity/education/new",
+        "file": "app/admin/continuity/education/new/page.tsx",
+        "bytes": 3618
+      },
+      {
+        "path": "/admin/continuity/education",
+        "file": "app/admin/continuity/education/page.tsx",
+        "bytes": 1642
+      },
+      {
+        "path": "/admin/continuity/learning",
+        "file": "app/admin/continuity/learning/page.tsx",
+        "bytes": 897
       },
       {
         "path": "/admin/continuity",
@@ -179,7 +334,7 @@
       {
         "path": "/admin/dashboard",
         "file": "app/admin/dashboard/page.tsx",
-        "bytes": 2563
+        "bytes": 5302
       },
       {
         "path": "/admin/events/[id]",
@@ -237,6 +392,11 @@
         "bytes": 968
       },
       {
+        "path": "/admin/login",
+        "file": "app/admin/login/page.tsx",
+        "bytes": 354
+      },
+      {
         "path": "/admin/meta-scenes/[id]/cinematic",
         "file": "app/admin/meta-scenes/[id]/cinematic/page.tsx",
         "bytes": 10385
@@ -244,7 +404,7 @@
       {
         "path": "/admin/meta-scenes/[id]/compose",
         "file": "app/admin/meta-scenes/[id]/compose/page.tsx",
-        "bytes": 56239
+        "bytes": 54660
       },
       {
         "path": "/admin/meta-scenes/[id]/experience-tuning",
@@ -282,14 +442,74 @@
         "bytes": 895
       },
       {
+        "path": "/admin/narrative/books/[bookId]",
+        "file": "app/admin/narrative/books/[bookId]/page.tsx",
+        "bytes": 1784
+      },
+      {
+        "path": "/admin/narrative/chapters/[chapterId]/assembly",
+        "file": "app/admin/narrative/chapters/[chapterId]/assembly/page.tsx",
+        "bytes": 2036
+      },
+      {
+        "path": "/admin/narrative",
+        "file": "app/admin/narrative/page.tsx",
+        "bytes": 2545
+      },
+      {
         "path": "/admin/narrative-rules/[id]",
         "file": "app/admin/narrative-rules/[id]/page.tsx",
         "bytes": 5440
       },
       {
+        "path": "/admin/narrative-rules/constitutional/[id]",
+        "file": "app/admin/narrative-rules/constitutional/[id]/page.tsx",
+        "bytes": 2427
+      },
+      {
+        "path": "/admin/narrative-rules/constitutional/new",
+        "file": "app/admin/narrative-rules/constitutional/new/page.tsx",
+        "bytes": 1456
+      },
+      {
+        "path": "/admin/narrative-rules/constitutional",
+        "file": "app/admin/narrative-rules/constitutional/page.tsx",
+        "bytes": 235
+      },
+      {
         "path": "/admin/narrative-rules",
         "file": "app/admin/narrative-rules/page.tsx",
-        "bytes": 1227
+        "bytes": 6639
+      },
+      {
+        "path": "/admin/nodes/[id]",
+        "file": "app/admin/nodes/[id]/page.tsx",
+        "bytes": 5684
+      },
+      {
+        "path": "/admin/nodes/new",
+        "file": "app/admin/nodes/new/page.tsx",
+        "bytes": 4125
+      },
+      {
+        "path": "/admin/nodes",
+        "file": "app/admin/nodes/page.tsx",
+        "bytes": 2526
+      },
+      {
+        "path": "/admin/ontology/[id]",
+        "file": "app/admin/ontology/[id]/page.tsx",
+        "bytes": 4788
+      },
+      {
+        "path": "/admin/ontology/new",
+        "file": "app/admin/ontology/new/page.tsx",
+        "bytes": 4193
+      },
+      {
+        "path": "/admin/ontology",
+        "file": "app/admin/ontology/page.tsx",
+        "bytes": 4406
       },
       {
         "path": "/admin/patterns/[id]",
@@ -304,7 +524,7 @@
       {
         "path": "/admin/people/[id]",
         "file": "app/admin/people/[id]/page.tsx",
-        "bytes": 9736
+        "bytes": 10486
       },
       {
         "path": "/admin/people",
@@ -312,9 +532,24 @@
         "bytes": 4815
       },
       {
+        "path": "/admin/permissions/[id]",
+        "file": "app/admin/permissions/[id]/page.tsx",
+        "bytes": 4998
+      },
+      {
+        "path": "/admin/permissions/new",
+        "file": "app/admin/permissions/new/page.tsx",
+        "bytes": 3910
+      },
+      {
+        "path": "/admin/permissions",
+        "file": "app/admin/permissions/page.tsx",
+        "bytes": 2112
+      },
+      {
         "path": "/admin/places/[id]/environment",
         "file": "app/admin/places/[id]/environment/page.tsx",
-        "bytes": 8173
+        "bytes": 32810
       },
       {
         "path": "/admin/places/[id]",
@@ -327,6 +562,36 @@
         "bytes": 7571
       },
       {
+        "path": "/admin/pressure/bundles/[id]",
+        "file": "app/admin/pressure/bundles/[id]/page.tsx",
+        "bytes": 4834
+      },
+      {
+        "path": "/admin/pressure/bundles/new",
+        "file": "app/admin/pressure/bundles/new/page.tsx",
+        "bytes": 4043
+      },
+      {
+        "path": "/admin/pressure/bundles",
+        "file": "app/admin/pressure/bundles/page.tsx",
+        "bytes": 1980
+      },
+      {
+        "path": "/admin/pressure/governance/[id]",
+        "file": "app/admin/pressure/governance/[id]/page.tsx",
+        "bytes": 5698
+      },
+      {
+        "path": "/admin/pressure/governance/new",
+        "file": "app/admin/pressure/governance/new/page.tsx",
+        "bytes": 4846
+      },
+      {
+        "path": "/admin/pressure/governance",
+        "file": "app/admin/pressure/governance/page.tsx",
+        "bytes": 2078
+      },
+      {
         "path": "/admin/questions/[id]",
         "file": "app/admin/questions/[id]/page.tsx",
         "bytes": 6423
@@ -337,14 +602,79 @@
         "bytes": 7679
       },
       {
+        "path": "/admin/readiness/[id]",
+        "file": "app/admin/readiness/[id]/page.tsx",
+        "bytes": 4168
+      },
+      {
+        "path": "/admin/readiness/new",
+        "file": "app/admin/readiness/new/page.tsx",
+        "bytes": 3524
+      },
+      {
+        "path": "/admin/readiness",
+        "file": "app/admin/readiness/page.tsx",
+        "bytes": 1824
+      },
+      {
+        "path": "/admin/registries/[id]",
+        "file": "app/admin/registries/[id]/page.tsx",
+        "bytes": 3448
+      },
+      {
+        "path": "/admin/registries",
+        "file": "app/admin/registries/page.tsx",
+        "bytes": 5721
+      },
+      {
+        "path": "/admin/registries/values/[id]",
+        "file": "app/admin/registries/values/[id]/page.tsx",
+        "bytes": 4527
+      },
+      {
+        "path": "/admin/registries/values/new",
+        "file": "app/admin/registries/values/new/page.tsx",
+        "bytes": 3731
+      },
+      {
+        "path": "/admin/registries/values",
+        "file": "app/admin/registries/values/page.tsx",
+        "bytes": 4505
+      },
+      {
         "path": "/admin/relationships/[id]",
         "file": "app/admin/relationships/[id]/page.tsx",
-        "bytes": 7188
+        "bytes": 15612
+      },
+      {
+        "path": "/admin/relationships/networks",
+        "file": "app/admin/relationships/networks/page.tsx",
+        "bytes": 886
+      },
+      {
+        "path": "/admin/relationships/new",
+        "file": "app/admin/relationships/new/page.tsx",
+        "bytes": 6214
       },
       {
         "path": "/admin/relationships",
         "file": "app/admin/relationships/page.tsx",
-        "bytes": 4461
+        "bytes": 1717
+      },
+      {
+        "path": "/admin/risks/[id]",
+        "file": "app/admin/risks/[id]/page.tsx",
+        "bytes": 4398
+      },
+      {
+        "path": "/admin/risks/new",
+        "file": "app/admin/risks/new/page.tsx",
+        "bytes": 3553
+      },
+      {
+        "path": "/admin/risks",
+        "file": "app/admin/risks/page.tsx",
+        "bytes": 1694
       },
       {
         "path": "/admin/runs/[id]",
@@ -359,7 +689,7 @@
       {
         "path": "/admin/scenes/[id]/workspace",
         "file": "app/admin/scenes/[id]/workspace/page.tsx",
-        "bytes": 23903
+        "bytes": 27722
       },
       {
         "path": "/admin/scenes",
@@ -402,6 +732,41 @@
         "bytes": 1054
       },
       {
+        "path": "/admin/world-states/[id]/education",
+        "file": "app/admin/world-states/[id]/education/page.tsx",
+        "bytes": 8185
+      },
+      {
+        "path": "/admin/world-states/[id]/health",
+        "file": "app/admin/world-states/[id]/health/page.tsx",
+        "bytes": 9147
+      },
+      {
+        "path": "/admin/world-states/[id]/knowledge",
+        "file": "app/admin/world-states/[id]/knowledge/page.tsx",
+        "bytes": 12045
+      },
+      {
+        "path": "/admin/world-states/[id]/pressure",
+        "file": "app/admin/world-states/[id]/pressure/page.tsx",
+        "bytes": 4241
+      },
+      {
+        "path": "/admin/world-states/[id]/profile",
+        "file": "app/admin/world-states/[id]/profile/page.tsx",
+        "bytes": 11946
+      },
+      {
+        "path": "/admin/world-states/[id]/relationships",
+        "file": "app/admin/world-states/[id]/relationships/page.tsx",
+        "bytes": 8899
+      },
+      {
+        "path": "/admin/world-states",
+        "file": "app/admin/world-states/page.tsx",
+        "bytes": 3946
+      },
+      {
         "path": "/membership",
         "file": "app/membership/page.tsx",
         "bytes": 3089
@@ -409,7 +774,7 @@
       {
         "path": "/page.tsx",
         "file": "app/page.tsx",
-        "bytes": 10579
+        "bytes": 10713
       },
       {
         "path": "/read/chapters/[id]",
@@ -424,7 +789,7 @@
       {
         "path": "/read/characters/[id]",
         "file": "app/read/characters/[id]/page.tsx",
-        "bytes": 13524
+        "bytes": 13754
       },
       {
         "path": "/read/characters",
@@ -449,7 +814,7 @@
       {
         "path": "/read/scenes/[id]",
         "file": "app/read/scenes/[id]/page.tsx",
-        "bytes": 2442
+        "bytes": 2555
       },
       {
         "path": "/read/symbols",
@@ -467,7 +832,7 @@
         "bytes": 124
       }
     ],
-    "routeCount": 73
+    "routeCount": 131
   },
   "filesystem": {
     "excludeDirectoryNames": [
@@ -482,8 +847,8 @@
     ],
     "maxFilesScanned": 25000,
     "truncated": false,
-    "totalEntries": 380,
-    "totalFileBytesIndexed": 2542039,
+    "totalEntries": 839,
+    "totalFileBytesIndexed": 9235219,
     "filesByTopLevelFolder": {
       ".env": {
         "files": 1,
@@ -491,31 +856,35 @@
       },
       ".env.example": {
         "files": 1,
-        "bytes": 406
+        "bytes": 702
       },
       ".gitignore": {
         "files": 1,
-        "bytes": 367
+        "bytes": 485
       },
       "app": {
-        "files": 103,
-        "bytes": 787795
+        "files": 189,
+        "bytes": 1419302
+      },
+      "campti-system-map.json": {
+        "files": 1,
+        "bytes": 16267
       },
       "components": {
-        "files": 42,
-        "bytes": 138330
+        "files": 52,
+        "bytes": 224296
+      },
+      "docs": {
+        "files": 3,
+        "bytes": 31841
       },
       "eslint.config.mjs": {
         "files": 1,
-        "bytes": 458
+        "bytes": 365
       },
       "lib": {
-        "files": 110,
-        "bytes": 778696
-      },
-      "middleware.ts": {
-        "files": 1,
-        "bytes": 722
+        "files": 287,
+        "bytes": 1671701
       },
       "netlify.toml": {
         "files": 1,
@@ -523,7 +892,7 @@
       },
       "next-env.d.ts": {
         "files": 1,
-        "bytes": 262
+        "bytes": 251
       },
       "next.config.ts": {
         "files": 1,
@@ -531,31 +900,35 @@
       },
       "package-lock.json": {
         "files": 1,
-        "bytes": 247263
+        "bytes": 281234
       },
       "package.json": {
         "files": 1,
-        "bytes": 1330
+        "bytes": 2388
       },
       "postcss.config.mjs": {
         "files": 1,
         "bytes": 94
       },
       "prisma": {
-        "files": 7,
-        "bytes": 189767
+        "files": 43,
+        "bytes": 633192
+      },
+      "proxy.ts": {
+        "files": 1,
+        "bytes": 1959
       },
       "public": {
         "files": 1,
         "bytes": 0
       },
       "reports": {
-        "files": 3,
-        "bytes": 162929
+        "files": 4,
+        "bytes": 450789
       },
       "scripts": {
-        "files": 6,
-        "bytes": 41688
+        "files": 18,
+        "bytes": 90574
       },
       "styles": {
         "files": 1,
@@ -563,11 +936,15 @@
       },
       "tsconfig.json": {
         "files": 1,
-        "bytes": 562
+        "bytes": 698
       },
       "tsconfig.tsbuildinfo": {
         "files": 1,
-        "bytes": 190612
+        "bytes": 234716
+      },
+      "uploads": {
+        "files": 12,
+        "bytes": 4173607
       }
     },
     "entries": [
@@ -578,12 +955,12 @@
       },
       {
         "relativePath": ".env.example",
-        "bytes": 406,
+        "bytes": 702,
         "kind": "file"
       },
       {
         "relativePath": ".gitignore",
-        "bytes": 367,
+        "bytes": 485,
         "kind": "file"
       },
       {
@@ -597,8 +974,28 @@
         "kind": "directory"
       },
       {
+        "relativePath": "app/actions/brain-assembly.ts",
+        "bytes": 564,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/campti-history-atlas.ts",
+        "bytes": 731,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/census-research-story-assembly.ts",
+        "bytes": 856,
+        "kind": "file"
+      },
+      {
         "relativePath": "app/actions/chapters.ts",
-        "bytes": 3694,
+        "bytes": 3851,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/character-engine.ts",
+        "bytes": 17635,
         "kind": "file"
       },
       {
@@ -617,6 +1014,21 @@
         "kind": "file"
       },
       {
+        "relativePath": "app/actions/cognition.ts",
+        "bytes": 4979,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/constitutional-rules.ts",
+        "bytes": 5664,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/continuity-order.ts",
+        "bytes": 44033,
+        "kind": "file"
+      },
+      {
         "relativePath": "app/actions/continuity.ts",
         "bytes": 2704,
         "kind": "file"
@@ -624,6 +1036,11 @@
       {
         "relativePath": "app/actions/entity-linking.ts",
         "bytes": 6947,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/environment.ts",
+        "bytes": 17672,
         "kind": "file"
       },
       {
@@ -642,8 +1059,18 @@
         "kind": "file"
       },
       {
+        "relativePath": "app/actions/grappe-lineage.ts",
+        "bytes": 1990,
+        "kind": "file"
+      },
+      {
         "relativePath": "app/actions/ingestion.ts",
         "bytes": 9933,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/intelligence.ts",
+        "bytes": 11772,
         "kind": "file"
       },
       {
@@ -667,6 +1094,16 @@
         "kind": "file"
       },
       {
+        "relativePath": "app/actions/narrative-workflow.ts",
+        "bytes": 1467,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/ontology.ts",
+        "bytes": 15705,
+        "kind": "file"
+      },
+      {
         "relativePath": "app/actions/openai-extraction.ts",
         "bytes": 2210,
         "kind": "file"
@@ -682,6 +1119,21 @@
         "kind": "file"
       },
       {
+        "relativePath": "app/actions/population-social-field.ts",
+        "bytes": 1332,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/pressure-order.ts",
+        "bytes": 25859,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/prose-quality.ts",
+        "bytes": 1599,
+        "kind": "file"
+      },
+      {
         "relativePath": "app/actions/questions.ts",
         "bytes": 2689,
         "kind": "file"
@@ -689,6 +1141,26 @@
       {
         "relativePath": "app/actions/reader-memory.ts",
         "bytes": 3847,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/relationship-order.ts",
+        "bytes": 27865,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/scene-brain-runner.ts",
+        "bytes": 2218,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/scene-constraints.ts",
+        "bytes": 875,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/scene-generation.ts",
+        "bytes": 1307,
         "kind": "file"
       },
       {
@@ -703,7 +1175,12 @@
       },
       {
         "relativePath": "app/actions/scenes.ts",
-        "bytes": 13533,
+        "bytes": 14295,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/actions/simulation-run.ts",
+        "bytes": 1059,
         "kind": "file"
       },
       {
@@ -718,7 +1195,7 @@
       },
       {
         "relativePath": "app/actions/world-model.ts",
-        "bytes": 26386,
+        "bytes": 22686,
         "kind": "file"
       },
       {
@@ -771,9 +1248,25 @@
       },
       {
         "relativePath": "app/admin/brain/page.tsx",
-        "bytes": 19639,
+        "bytes": 26802,
         "kind": "file",
         "role": "Next.js route /admin/brain"
+      },
+      {
+        "relativePath": "app/admin/build-sequence",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/build-sequence/copy-prompt-button.tsx",
+        "bytes": 662,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/admin/build-sequence/page.tsx",
+        "bytes": 6512,
+        "kind": "file",
+        "role": "Next.js route /admin/build-sequence"
       },
       {
         "relativePath": "app/admin/chapters",
@@ -808,15 +1301,70 @@
         "kind": "directory"
       },
       {
+        "relativePath": "app/admin/characters/[id]/brain",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/brain/page.tsx",
+        "bytes": 9251,
+        "kind": "file",
+        "role": "Next.js route /admin/characters/[id]/brain"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/continuity",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/continuity/page.tsx",
+        "bytes": 54337,
+        "kind": "file",
+        "role": "Next.js route /admin/characters/[id]/continuity"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/intelligence",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/intelligence/page.tsx",
+        "bytes": 20860,
+        "kind": "file",
+        "role": "Next.js route /admin/characters/[id]/intelligence"
+      },
+      {
         "relativePath": "app/admin/characters/[id]/mind",
         "bytes": 0,
         "kind": "directory"
       },
       {
         "relativePath": "app/admin/characters/[id]/mind/page.tsx",
-        "bytes": 17532,
+        "bytes": 56593,
         "kind": "file",
         "role": "Next.js route /admin/characters/[id]/mind"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/pressure",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/pressure/page.tsx",
+        "bytes": 27151,
+        "kind": "file",
+        "role": "Next.js route /admin/characters/[id]/pressure"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/relationships",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/characters/[id]/relationships/page.tsx",
+        "bytes": 17602,
+        "kind": "file",
+        "role": "Next.js route /admin/characters/[id]/relationships"
       },
       {
         "relativePath": "app/admin/chunks",
@@ -885,6 +1433,72 @@
         "role": "Next.js route /admin/clusters"
       },
       {
+        "relativePath": "app/admin/confidence",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/confidence/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/confidence/[id]/page.tsx",
+        "bytes": 4166,
+        "kind": "file",
+        "role": "Next.js route /admin/confidence/[id]"
+      },
+      {
+        "relativePath": "app/admin/confidence/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/confidence/new/page.tsx",
+        "bytes": 3453,
+        "kind": "file",
+        "role": "Next.js route /admin/confidence/new"
+      },
+      {
+        "relativePath": "app/admin/confidence/page.tsx",
+        "bytes": 1788,
+        "kind": "file",
+        "role": "Next.js route /admin/confidence"
+      },
+      {
+        "relativePath": "app/admin/connections",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/connections/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/connections/[id]/page.tsx",
+        "bytes": 6220,
+        "kind": "file",
+        "role": "Next.js route /admin/connections/[id]"
+      },
+      {
+        "relativePath": "app/admin/connections/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/connections/new/page.tsx",
+        "bytes": 5159,
+        "kind": "file",
+        "role": "Next.js route /admin/connections/new"
+      },
+      {
+        "relativePath": "app/admin/connections/page.tsx",
+        "bytes": 2544,
+        "kind": "file",
+        "role": "Next.js route /admin/connections"
+      },
+      {
         "relativePath": "app/admin/continuity",
         "bytes": 0,
         "kind": "directory"
@@ -901,6 +1515,50 @@
         "role": "Next.js route /admin/continuity/[id]"
       },
       {
+        "relativePath": "app/admin/continuity/education",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/continuity/education/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/continuity/education/[id]/page.tsx",
+        "bytes": 5510,
+        "kind": "file",
+        "role": "Next.js route /admin/continuity/education/[id]"
+      },
+      {
+        "relativePath": "app/admin/continuity/education/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/continuity/education/new/page.tsx",
+        "bytes": 3618,
+        "kind": "file",
+        "role": "Next.js route /admin/continuity/education/new"
+      },
+      {
+        "relativePath": "app/admin/continuity/education/page.tsx",
+        "bytes": 1642,
+        "kind": "file",
+        "role": "Next.js route /admin/continuity/education"
+      },
+      {
+        "relativePath": "app/admin/continuity/learning",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/continuity/learning/page.tsx",
+        "bytes": 897,
+        "kind": "file",
+        "role": "Next.js route /admin/continuity/learning"
+      },
+      {
         "relativePath": "app/admin/continuity/page.tsx",
         "bytes": 7722,
         "kind": "file",
@@ -913,7 +1571,7 @@
       },
       {
         "relativePath": "app/admin/dashboard/page.tsx",
-        "bytes": 2563,
+        "bytes": 5302,
         "kind": "file",
         "role": "Next.js route /admin/dashboard"
       },
@@ -1018,7 +1676,7 @@
       },
       {
         "relativePath": "app/admin/layout.tsx",
-        "bytes": 392,
+        "bytes": 598,
         "kind": "file",
         "role": "Next.js layout"
       },
@@ -1043,6 +1701,22 @@
         "bytes": 968,
         "kind": "file",
         "role": "Next.js route /admin/literary-devices"
+      },
+      {
+        "relativePath": "app/admin/login",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/login/admin-login-form.tsx",
+        "bytes": 2499,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/admin/login/page.tsx",
+        "bytes": 354,
+        "kind": "file",
+        "role": "Next.js route /admin/login"
       },
       {
         "relativePath": "app/admin/meta-scenes",
@@ -1071,8 +1745,23 @@
         "kind": "directory"
       },
       {
+        "relativePath": "app/admin/meta-scenes/[id]/compose/compose-saved-message.ts",
+        "bytes": 890,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/compose/compose-section-nav.tsx",
+        "bytes": 1845,
+        "kind": "file"
+      },
+      {
+        "relativePath": "app/admin/meta-scenes/[id]/compose/compose-world-preview-blocks.tsx",
+        "bytes": 1013,
+        "kind": "file"
+      },
+      {
         "relativePath": "app/admin/meta-scenes/[id]/compose/page.tsx",
-        "bytes": 56239,
+        "bytes": 54660,
         "kind": "file",
         "role": "Next.js route /admin/meta-scenes/[id]/compose"
       },
@@ -1144,6 +1833,54 @@
         "role": "Next.js route /admin/motifs"
       },
       {
+        "relativePath": "app/admin/narrative",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative/books",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative/books/[bookId]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative/books/[bookId]/page.tsx",
+        "bytes": 1784,
+        "kind": "file",
+        "role": "Next.js route /admin/narrative/books/[bookId]"
+      },
+      {
+        "relativePath": "app/admin/narrative/chapters",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative/chapters/[chapterId]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative/chapters/[chapterId]/assembly",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative/chapters/[chapterId]/assembly/page.tsx",
+        "bytes": 2036,
+        "kind": "file",
+        "role": "Next.js route /admin/narrative/chapters/[chapterId]/assembly"
+      },
+      {
+        "relativePath": "app/admin/narrative/page.tsx",
+        "bytes": 2545,
+        "kind": "file",
+        "role": "Next.js route /admin/narrative"
+      },
+      {
         "relativePath": "app/admin/narrative-rules",
         "bytes": 0,
         "kind": "directory"
@@ -1160,10 +1897,109 @@
         "role": "Next.js route /admin/narrative-rules/[id]"
       },
       {
+        "relativePath": "app/admin/narrative-rules/constitutional",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative-rules/constitutional/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative-rules/constitutional/[id]/page.tsx",
+        "bytes": 2427,
+        "kind": "file",
+        "role": "Next.js route /admin/narrative-rules/constitutional/[id]"
+      },
+      {
+        "relativePath": "app/admin/narrative-rules/constitutional/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/narrative-rules/constitutional/new/page.tsx",
+        "bytes": 1456,
+        "kind": "file",
+        "role": "Next.js route /admin/narrative-rules/constitutional/new"
+      },
+      {
+        "relativePath": "app/admin/narrative-rules/constitutional/page.tsx",
+        "bytes": 235,
+        "kind": "file",
+        "role": "Next.js route /admin/narrative-rules/constitutional"
+      },
+      {
         "relativePath": "app/admin/narrative-rules/page.tsx",
-        "bytes": 1227,
+        "bytes": 6639,
         "kind": "file",
         "role": "Next.js route /admin/narrative-rules"
+      },
+      {
+        "relativePath": "app/admin/nodes",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/nodes/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/nodes/[id]/page.tsx",
+        "bytes": 5684,
+        "kind": "file",
+        "role": "Next.js route /admin/nodes/[id]"
+      },
+      {
+        "relativePath": "app/admin/nodes/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/nodes/new/page.tsx",
+        "bytes": 4125,
+        "kind": "file",
+        "role": "Next.js route /admin/nodes/new"
+      },
+      {
+        "relativePath": "app/admin/nodes/page.tsx",
+        "bytes": 2526,
+        "kind": "file",
+        "role": "Next.js route /admin/nodes"
+      },
+      {
+        "relativePath": "app/admin/ontology",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/ontology/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/ontology/[id]/page.tsx",
+        "bytes": 4788,
+        "kind": "file",
+        "role": "Next.js route /admin/ontology/[id]"
+      },
+      {
+        "relativePath": "app/admin/ontology/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/ontology/new/page.tsx",
+        "bytes": 4193,
+        "kind": "file",
+        "role": "Next.js route /admin/ontology/new"
+      },
+      {
+        "relativePath": "app/admin/ontology/page.tsx",
+        "bytes": 4406,
+        "kind": "file",
+        "role": "Next.js route /admin/ontology"
       },
       {
         "relativePath": "app/admin/patterns",
@@ -1199,7 +2035,7 @@
       },
       {
         "relativePath": "app/admin/people/[id]/page.tsx",
-        "bytes": 9736,
+        "bytes": 10486,
         "kind": "file",
         "role": "Next.js route /admin/people/[id]"
       },
@@ -1208,6 +2044,39 @@
         "bytes": 4815,
         "kind": "file",
         "role": "Next.js route /admin/people"
+      },
+      {
+        "relativePath": "app/admin/permissions",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/permissions/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/permissions/[id]/page.tsx",
+        "bytes": 4998,
+        "kind": "file",
+        "role": "Next.js route /admin/permissions/[id]"
+      },
+      {
+        "relativePath": "app/admin/permissions/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/permissions/new/page.tsx",
+        "bytes": 3910,
+        "kind": "file",
+        "role": "Next.js route /admin/permissions/new"
+      },
+      {
+        "relativePath": "app/admin/permissions/page.tsx",
+        "bytes": 2112,
+        "kind": "file",
+        "role": "Next.js route /admin/permissions"
       },
       {
         "relativePath": "app/admin/places",
@@ -1226,7 +2095,7 @@
       },
       {
         "relativePath": "app/admin/places/[id]/environment/page.tsx",
-        "bytes": 8173,
+        "bytes": 32810,
         "kind": "file",
         "role": "Next.js route /admin/places/[id]/environment"
       },
@@ -1241,6 +2110,77 @@
         "bytes": 7571,
         "kind": "file",
         "role": "Next.js route /admin/places"
+      },
+      {
+        "relativePath": "app/admin/pressure",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/pressure/bundles",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/pressure/bundles/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/pressure/bundles/[id]/page.tsx",
+        "bytes": 4834,
+        "kind": "file",
+        "role": "Next.js route /admin/pressure/bundles/[id]"
+      },
+      {
+        "relativePath": "app/admin/pressure/bundles/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/pressure/bundles/new/page.tsx",
+        "bytes": 4043,
+        "kind": "file",
+        "role": "Next.js route /admin/pressure/bundles/new"
+      },
+      {
+        "relativePath": "app/admin/pressure/bundles/page.tsx",
+        "bytes": 1980,
+        "kind": "file",
+        "role": "Next.js route /admin/pressure/bundles"
+      },
+      {
+        "relativePath": "app/admin/pressure/governance",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/pressure/governance/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/pressure/governance/[id]/page.tsx",
+        "bytes": 5698,
+        "kind": "file",
+        "role": "Next.js route /admin/pressure/governance/[id]"
+      },
+      {
+        "relativePath": "app/admin/pressure/governance/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/pressure/governance/new/page.tsx",
+        "bytes": 4846,
+        "kind": "file",
+        "role": "Next.js route /admin/pressure/governance/new"
+      },
+      {
+        "relativePath": "app/admin/pressure/governance/page.tsx",
+        "bytes": 2078,
+        "kind": "file",
+        "role": "Next.js route /admin/pressure/governance"
       },
       {
         "relativePath": "app/admin/questions",
@@ -1265,6 +2205,94 @@
         "role": "Next.js route /admin/questions"
       },
       {
+        "relativePath": "app/admin/readiness",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/readiness/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/readiness/[id]/page.tsx",
+        "bytes": 4168,
+        "kind": "file",
+        "role": "Next.js route /admin/readiness/[id]"
+      },
+      {
+        "relativePath": "app/admin/readiness/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/readiness/new/page.tsx",
+        "bytes": 3524,
+        "kind": "file",
+        "role": "Next.js route /admin/readiness/new"
+      },
+      {
+        "relativePath": "app/admin/readiness/page.tsx",
+        "bytes": 1824,
+        "kind": "file",
+        "role": "Next.js route /admin/readiness"
+      },
+      {
+        "relativePath": "app/admin/registries",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/registries/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/registries/[id]/page.tsx",
+        "bytes": 3448,
+        "kind": "file",
+        "role": "Next.js route /admin/registries/[id]"
+      },
+      {
+        "relativePath": "app/admin/registries/page.tsx",
+        "bytes": 5721,
+        "kind": "file",
+        "role": "Next.js route /admin/registries"
+      },
+      {
+        "relativePath": "app/admin/registries/values",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/registries/values/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/registries/values/[id]/page.tsx",
+        "bytes": 4527,
+        "kind": "file",
+        "role": "Next.js route /admin/registries/values/[id]"
+      },
+      {
+        "relativePath": "app/admin/registries/values/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/registries/values/new/page.tsx",
+        "bytes": 3731,
+        "kind": "file",
+        "role": "Next.js route /admin/registries/values/new"
+      },
+      {
+        "relativePath": "app/admin/registries/values/page.tsx",
+        "bytes": 4505,
+        "kind": "file",
+        "role": "Next.js route /admin/registries/values"
+      },
+      {
         "relativePath": "app/admin/relationships",
         "bytes": 0,
         "kind": "directory"
@@ -1276,15 +2304,70 @@
       },
       {
         "relativePath": "app/admin/relationships/[id]/page.tsx",
-        "bytes": 7188,
+        "bytes": 15612,
         "kind": "file",
         "role": "Next.js route /admin/relationships/[id]"
       },
       {
+        "relativePath": "app/admin/relationships/networks",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/relationships/networks/page.tsx",
+        "bytes": 886,
+        "kind": "file",
+        "role": "Next.js route /admin/relationships/networks"
+      },
+      {
+        "relativePath": "app/admin/relationships/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/relationships/new/page.tsx",
+        "bytes": 6214,
+        "kind": "file",
+        "role": "Next.js route /admin/relationships/new"
+      },
+      {
         "relativePath": "app/admin/relationships/page.tsx",
-        "bytes": 4461,
+        "bytes": 1717,
         "kind": "file",
         "role": "Next.js route /admin/relationships"
+      },
+      {
+        "relativePath": "app/admin/risks",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/risks/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/risks/[id]/page.tsx",
+        "bytes": 4398,
+        "kind": "file",
+        "role": "Next.js route /admin/risks/[id]"
+      },
+      {
+        "relativePath": "app/admin/risks/new",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/risks/new/page.tsx",
+        "bytes": 3553,
+        "kind": "file",
+        "role": "Next.js route /admin/risks/new"
+      },
+      {
+        "relativePath": "app/admin/risks/page.tsx",
+        "bytes": 1694,
+        "kind": "file",
+        "role": "Next.js route /admin/risks"
       },
       {
         "relativePath": "app/admin/runs",
@@ -1325,7 +2408,7 @@
       },
       {
         "relativePath": "app/admin/scenes/[id]/workspace/page.tsx",
-        "bytes": 23903,
+        "bytes": 27722,
         "kind": "file",
         "role": "Next.js route /admin/scenes/[id]/workspace"
       },
@@ -1418,6 +2501,147 @@
         "role": "Next.js route /admin/themes"
       },
       {
+        "relativePath": "app/admin/world-states",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/education",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/education/page.tsx",
+        "bytes": 8185,
+        "kind": "file",
+        "role": "Next.js route /admin/world-states/[id]/education"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/health",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/health/page.tsx",
+        "bytes": 9147,
+        "kind": "file",
+        "role": "Next.js route /admin/world-states/[id]/health"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/knowledge",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/knowledge/page.tsx",
+        "bytes": 12045,
+        "kind": "file",
+        "role": "Next.js route /admin/world-states/[id]/knowledge"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/pressure",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/pressure/page.tsx",
+        "bytes": 4241,
+        "kind": "file",
+        "role": "Next.js route /admin/world-states/[id]/pressure"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/profile",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/profile/page.tsx",
+        "bytes": 11946,
+        "kind": "file",
+        "role": "Next.js route /admin/world-states/[id]/profile"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/relationships",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/admin/world-states/[id]/relationships/page.tsx",
+        "bytes": 8899,
+        "kind": "file",
+        "role": "Next.js route /admin/world-states/[id]/relationships"
+      },
+      {
+        "relativePath": "app/admin/world-states/page.tsx",
+        "bytes": 3946,
+        "kind": "file",
+        "role": "Next.js route /admin/world-states"
+      },
+      {
+        "relativePath": "app/api",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "app/api/admin",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "API route"
+      },
+      {
+        "relativePath": "app/api/admin/agent",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "API route"
+      },
+      {
+        "relativePath": "app/api/admin/agent/chat",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "API route"
+      },
+      {
+        "relativePath": "app/api/admin/agent/chat/route.ts",
+        "bytes": 3851,
+        "kind": "file",
+        "role": "API route"
+      },
+      {
+        "relativePath": "app/api/admin/auth",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "API route"
+      },
+      {
+        "relativePath": "app/api/admin/auth/login",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "API route"
+      },
+      {
+        "relativePath": "app/api/admin/auth/login/route.ts",
+        "bytes": 1340,
+        "kind": "file",
+        "role": "API route"
+      },
+      {
+        "relativePath": "app/api/admin/auth/logout",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "API route"
+      },
+      {
+        "relativePath": "app/api/admin/auth/logout/route.ts",
+        "bytes": 387,
+        "kind": "file",
+        "role": "API route"
+      },
+      {
         "relativePath": "app/globals.css",
         "bytes": 1694,
         "kind": "file"
@@ -1441,7 +2665,7 @@
       },
       {
         "relativePath": "app/page.tsx",
-        "bytes": 10579,
+        "bytes": 10713,
         "kind": "file",
         "role": "Next.js route /"
       },
@@ -1484,7 +2708,7 @@
       },
       {
         "relativePath": "app/read/characters/[id]/page.tsx",
-        "bytes": 13524,
+        "bytes": 13754,
         "kind": "file",
         "role": "Next.js route /read/characters/[id]"
       },
@@ -1496,7 +2720,7 @@
       },
       {
         "relativePath": "app/read/layout.tsx",
-        "bytes": 686,
+        "bytes": 570,
         "kind": "file",
         "role": "Next.js layout"
       },
@@ -1540,7 +2764,7 @@
       },
       {
         "relativePath": "app/read/scenes/[id]/page.tsx",
-        "bytes": 2442,
+        "bytes": 2555,
         "kind": "file",
         "role": "Next.js route /read/scenes/[id]"
       },
@@ -1578,6 +2802,11 @@
         "role": "Next.js route /subscribe"
       },
       {
+        "relativePath": "campti-system-map.json",
+        "bytes": 16267,
+        "kind": "file"
+      },
+      {
         "relativePath": "components",
         "bytes": 0,
         "kind": "directory"
@@ -1586,6 +2815,12 @@
         "relativePath": "components/admin",
         "bytes": 0,
         "kind": "directory",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/admin/constitutional-rule-form.tsx",
+        "bytes": 5613,
+        "kind": "file",
         "role": "React components"
       },
       {
@@ -1602,7 +2837,19 @@
       },
       {
         "relativePath": "components/admin-nav.tsx",
-        "bytes": 2077,
+        "bytes": 3184,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/admin-page-agent-panel.tsx",
+        "bytes": 8506,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/admin-sign-out-button.tsx",
+        "bytes": 796,
         "kind": "file",
         "role": "React components"
       },
@@ -1621,6 +2868,12 @@
       {
         "relativePath": "components/ambiguity-meter.tsx",
         "bytes": 606,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/brain-summary-preview.tsx",
+        "bytes": 2375,
         "kind": "file",
         "role": "React components"
       },
@@ -1650,7 +2903,7 @@
       },
       {
         "relativePath": "components/page-header.tsx",
-        "bytes": 731,
+        "bytes": 734,
         "kind": "file",
         "role": "React components"
       },
@@ -1668,7 +2921,7 @@
       },
       {
         "relativePath": "components/public/ImmersiveSceneReader.tsx",
-        "bytes": 9342,
+        "bytes": 9690,
         "kind": "file",
         "role": "React components"
       },
@@ -1687,6 +2940,12 @@
       {
         "relativePath": "components/public/audio-teaser.tsx",
         "bytes": 1805,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/public/campti-landing-splash.tsx",
+        "bytes": 3064,
         "kind": "file",
         "role": "React components"
       },
@@ -1710,7 +2969,7 @@
       },
       {
         "relativePath": "components/public/continue-reading-banner.tsx",
-        "bytes": 2783,
+        "bytes": 2805,
         "kind": "file",
         "role": "React components"
       },
@@ -1722,7 +2981,7 @@
       },
       {
         "relativePath": "components/public/home-return-layer.tsx",
-        "bytes": 1645,
+        "bytes": 1667,
         "kind": "file",
         "role": "React components"
       },
@@ -1776,7 +3035,7 @@
       },
       {
         "relativePath": "components/public/read-scene-experience.tsx",
-        "bytes": 38778,
+        "bytes": 45554,
         "kind": "file",
         "role": "React components"
       },
@@ -1811,8 +3070,32 @@
         "role": "React components"
       },
       {
+        "relativePath": "components/read",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/read/hands-free-panel.tsx",
+        "bytes": 20079,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/read/read-cockpit-frame.tsx",
+        "bytes": 4060,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/read/reader-options-bar.tsx",
+        "bytes": 5395,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
         "relativePath": "components/read-nav.tsx",
-        "bytes": 1524,
+        "bytes": 2858,
         "kind": "file",
         "role": "React components"
       },
@@ -1829,8 +3112,20 @@
         "role": "React components"
       },
       {
+        "relativePath": "components/scene-readiness-panel.tsx",
+        "bytes": 18909,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
         "relativePath": "components/scene-soul-panel.tsx",
         "bytes": 11132,
+        "kind": "file",
+        "role": "React components"
+      },
+      {
+        "relativePath": "components/scene-time-brain-panel.tsx",
+        "bytes": 7557,
         "kind": "file",
         "role": "React components"
       },
@@ -1847,14 +3142,75 @@
         "role": "React components"
       },
       {
+        "relativePath": "docs",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "docs/build-comprehensive-report-2026-04-12.md",
+        "bytes": 23037,
+        "kind": "file"
+      },
+      {
+        "relativePath": "docs/release-notes",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "docs/release-notes/2026-04-12-cognition-simulation-scene-generation.md",
+        "bytes": 3194,
+        "kind": "file"
+      },
+      {
+        "relativePath": "docs/stage-8-scene-legality-layer.md",
+        "bytes": 5610,
+        "kind": "file"
+      },
+      {
         "relativePath": "eslint.config.mjs",
-        "bytes": 458,
+        "bytes": 365,
         "kind": "file"
       },
       {
         "relativePath": "lib",
         "bytes": 0,
         "kind": "directory"
+      },
+      {
+        "relativePath": "lib/admin-auth-api.ts",
+        "bytes": 600,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/admin-entity-from-path.ts",
+        "bytes": 2342,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/admin-entity-summary.ts",
+        "bytes": 5408,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/admin-page-agents.ts",
+        "bytes": 27574,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/admin-password.ts",
+        "bytes": 499,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/admin-session.ts",
+        "bytes": 3593,
+        "kind": "file",
+        "role": "shared library"
       },
       {
         "relativePath": "lib/admin-styles.ts",
@@ -1899,14 +3255,158 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/brain-assembly-engine.ts",
+        "bytes": 14001,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/brain-assembly-types.ts",
+        "bytes": 5927,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/brain-priority-gaps.ts",
+        "bytes": 2511,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/brain-version.ts",
+        "bytes": 302,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-build-sequence",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-build-sequence/index.ts",
+        "bytes": 471,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-build-sequence/stages.ts",
+        "bytes": 13830,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-build-sequence/types.ts",
+        "bytes": 500,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-build-sequence/universal-rules.ts",
+        "bytes": 1381,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-history-atlas-constants.ts",
+        "bytes": 1260,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-history-atlas-queries.ts",
+        "bytes": 2114,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-registry",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-registry/build-sequence.ts",
+        "bytes": 1975,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-registry/definitions.ts",
+        "bytes": 17600,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-registry/index.ts",
+        "bytes": 567,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/campti-registry/types.ts",
+        "bytes": 1349,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/campti-session.ts",
-        "bytes": 376,
+        "bytes": 371,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/census-research-normalize.ts",
+        "bytes": 434,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/census-research-story-assembly.ts",
+        "bytes": 5602,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/census-research.ts",
+        "bytes": 485,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/character-brain-bundle.ts",
+        "bytes": 32228,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/character-schemas.ts",
+        "bytes": 10040,
         "kind": "file",
         "role": "shared library"
       },
       {
         "relativePath": "lib/character-type-inference.ts",
-        "bytes": 6918,
+        "bytes": 7171,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/character-types.ts",
+        "bytes": 1283,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/character-world-constraints.ts",
+        "bytes": 595,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/character.ts",
+        "bytes": 4978,
         "kind": "file",
         "role": "shared library"
       },
@@ -1947,8 +3447,140 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/cognition",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cognition/character-desire-profile.ts",
+        "bytes": 6018,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cognition/desire-cognition-shaping.ts",
+        "bytes": 16203,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cognition/deterministic-cognition-compose.ts",
+        "bytes": 7509,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cognition/embodied-cognition-shaping.ts",
+        "bytes": 5933,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cognition/inner-voice-contract.ts",
+        "bytes": 11580,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cognition/physical-state-from-sources.ts",
+        "bytes": 3527,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cognition/thought-realism-profiles.ts",
+        "bytes": 9641,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/cognition/world-state-desire-environment.ts",
+        "bytes": 2710,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/constants",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/constants/narrative-defaults.ts",
+        "bytes": 227,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/constitution.ts",
+        "bytes": 2403,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/constitutional-rule-constants.ts",
+        "bytes": 1009,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/constitutional-rule-schemas.ts",
+        "bytes": 1677,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/constitutional-rule-types.ts",
+        "bytes": 675,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/continuity-order-schemas.ts",
+        "bytes": 11746,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/continuity-order-types.ts",
+        "bytes": 1696,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/continuity-order.ts",
+        "bytes": 4776,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/data-access.ts",
-        "bytes": 68456,
+        "bytes": 101057,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/decision-trace",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/decision-trace/build-decision-trace-request.ts",
+        "bytes": 2487,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/decision-trace/decision-trace-deterministic.ts",
+        "bytes": 8053,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/decision-trace/decision-trace-llm-adapter.ts",
+        "bytes": 6245,
         "kind": "file",
         "role": "shared library"
       },
@@ -2008,7 +3640,7 @@
       },
       {
         "relativePath": "lib/descriptive-synthesis.ts",
-        "bytes": 23799,
+        "bytes": 24033,
         "kind": "file",
         "role": "shared library"
       },
@@ -2019,8 +3651,116 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/domain",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/cognition.ts",
+        "bytes": 8779,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/decision-trace.ts",
+        "bytes": 3358,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/desire-cognition.ts",
+        "bytes": 4607,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/embodiment.ts",
+        "bytes": 1223,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/enneagram.ts",
+        "bytes": 2261,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/genealogical-values.ts",
+        "bytes": 2511,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/inner-voice.ts",
+        "bytes": 6113,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/narrative-records.ts",
+        "bytes": 1996,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/narrative-units.ts",
+        "bytes": 1052,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/population-social-field.ts",
+        "bytes": 2825,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/scene-generation-contract.ts",
+        "bytes": 3210,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/scene-generation-input.ts",
+        "bytes": 2474,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/scene-generation-output.ts",
+        "bytes": 1148,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/scene-text-resolution.ts",
+        "bytes": 1624,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/simulation-run.ts",
+        "bytes": 9303,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/thought-language.ts",
+        "bytes": 4186,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/domain/thought-realism.ts",
+        "bytes": 1781,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/embodied-environment.ts",
-        "bytes": 3146,
+        "bytes": 3230,
         "kind": "file",
         "role": "shared library"
       },
@@ -2039,6 +3779,36 @@
       {
         "relativePath": "lib/emotional-hooks.ts",
         "bytes": 10295,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/enneagram",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/enneagram/enneagram-cognition-shaping.ts",
+        "bytes": 15009,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/enneagram/index.ts",
+        "bytes": 205,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/enneagram/instinct-stacking.ts",
+        "bytes": 3305,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/enneagram/nine-type-knowledge.ts",
+        "bytes": 16057,
         "kind": "file",
         "role": "shared library"
       },
@@ -2063,6 +3833,24 @@
       {
         "relativePath": "lib/entity-normalization.ts",
         "bytes": 1427,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/environment-schemas.ts",
+        "bytes": 6346,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/environment-types.ts",
+        "bytes": 1887,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/environment.ts",
+        "bytes": 3344,
         "kind": "file",
         "role": "shared library"
       },
@@ -2169,6 +3957,54 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/hands-free",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/hands-free/browser-speech.ts",
+        "bytes": 1861,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/hands-free/gaze-edge-controller.ts",
+        "bytes": 3467,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/hands-free/parse-voice-command.ts",
+        "bytes": 282,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/hands-free/types.ts",
+        "bytes": 347,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/hands-free/voice-command-engine.ts",
+        "bytes": 9017,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/hands-free/webgazer-load.ts",
+        "bytes": 2238,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/hands-free/webgazer-types.ts",
+        "bytes": 56,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/hook-quality.ts",
         "bytes": 1441,
         "kind": "file",
@@ -2205,6 +4041,132 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/inner-voice",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/build-character-inner-voice-request.ts",
+        "bytes": 3798,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/framing",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/framing/age-band.ts",
+        "bytes": 2285,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/framing/age-maturity-thought-style.ts",
+        "bytes": 2571,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/framing/constraint-frame.ts",
+        "bytes": 1811,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/framing/world-state-thought-style.ts",
+        "bytes": 3828,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/index.ts",
+        "bytes": 545,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/inner-voice-llm-adapter.ts",
+        "bytes": 9567,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/inner-voice-session-contract-mapping.ts",
+        "bytes": 1844,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/load-world-state-thought-style-source.ts",
+        "bytes": 1803,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/inner-voice/pinned-policy.ts",
+        "bytes": 1623,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/intelligence-engine.ts",
+        "bytes": 5308,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/intelligence-schemas.ts",
+        "bytes": 3557,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/intelligence-types.ts",
+        "bytes": 932,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/lineage",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/lineage/grappe-lineage-types.ts",
+        "bytes": 8532,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/lineage/grappe-lineage-working.v1.json",
+        "bytes": 71232,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/lineage/grappe-seed-overlap.ts",
+        "bytes": 418,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/lineage/grappe-world-building.v1.json",
+        "bytes": 21448,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/lineage/index.ts",
+        "bytes": 3688,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/linking-validation.ts",
         "bytes": 1308,
         "kind": "file",
@@ -2230,13 +4192,13 @@
       },
       {
         "relativePath": "lib/narrative-consciousness-ai.ts",
-        "bytes": 7557,
+        "bytes": 7755,
         "kind": "file",
         "role": "shared library"
       },
       {
         "relativePath": "lib/narrative-consciousness.ts",
-        "bytes": 10962,
+        "bytes": 11115,
         "kind": "file",
         "role": "shared library"
       },
@@ -2301,6 +4263,30 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/ontology-constants.ts",
+        "bytes": 1343,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/ontology-schemas.ts",
+        "bytes": 4221,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/ontology-types.ts",
+        "bytes": 644,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/ontology.ts",
+        "bytes": 3642,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/openai-extraction.ts",
         "bytes": 23927,
         "kind": "file",
@@ -2314,13 +4300,25 @@
       },
       {
         "relativePath": "lib/perception-stream.ts",
-        "bytes": 26420,
+        "bytes": 26534,
         "kind": "file",
         "role": "shared library"
       },
       {
         "relativePath": "lib/perspective-engine.ts",
-        "bytes": 17623,
+        "bytes": 17840,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/population",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/population/population-name-normalize.ts",
+        "bytes": 316,
         "kind": "file",
         "role": "shared library"
       },
@@ -2337,20 +4335,152 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/pressure-order-schemas.ts",
+        "bytes": 8114,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/pressure-order-types.ts",
+        "bytes": 1965,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/pressure-order.ts",
+        "bytes": 2807,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prisma-cognition-access.ts",
+        "bytes": 170,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prisma-enums",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prisma-enums/prose-quality-scope.ts",
+        "bytes": 356,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/prisma.ts",
         "bytes": 299,
         "kind": "file",
         "role": "shared library"
       },
       {
+        "relativePath": "lib/profile-json.ts",
+        "bytes": 1286,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/promote-extracted.ts",
-        "bytes": 11092,
+        "bytes": 11193,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/analyze-deterministic.ts",
+        "bytes": 4917,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/cliche-scan.ts",
+        "bytes": 810,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/compare-drafts.ts",
+        "bytes": 2402,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/dialogue.ts",
+        "bytes": 1890,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/goal-suggestions.ts",
+        "bytes": 4164,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/historical-anchors.ts",
+        "bytes": 691,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/index.ts",
+        "bytes": 569,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/ngrams.ts",
+        "bytes": 1034,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/rhythm.ts",
+        "bytes": 1381,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/sensory-scan.ts",
+        "bytes": 1198,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/sentence-split.ts",
+        "bytes": 719,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/types.ts",
+        "bytes": 3790,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/voice-fit.ts",
+        "bytes": 2692,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/prose-quality/wordlists.ts",
+        "bytes": 3189,
         "kind": "file",
         "role": "shared library"
       },
       {
         "relativePath": "lib/public-data.ts",
-        "bytes": 48241,
+        "bytes": 48453,
         "kind": "file",
         "role": "shared library"
       },
@@ -2391,6 +4521,12 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/reader-ui-preferences.ts",
+        "bytes": 2520,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/reading-blocks.ts",
         "bytes": 214,
         "kind": "file",
@@ -2409,6 +4545,24 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/relationship-order-schemas.ts",
+        "bytes": 9244,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/relationship-order-types.ts",
+        "bytes": 1460,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/relationship-order.ts",
+        "bytes": 3830,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/scene-assist-context.ts",
         "bytes": 7490,
         "kind": "file",
@@ -2422,13 +4576,37 @@
       },
       {
         "relativePath": "lib/scene-beats.ts",
-        "bytes": 6779,
+        "bytes": 6867,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-brain-runner-types.ts",
+        "bytes": 2370,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-brain-runner.ts",
+        "bytes": 22913,
         "kind": "file",
         "role": "shared library"
       },
       {
         "relativePath": "lib/scene-composition.ts",
-        "bytes": 8902,
+        "bytes": 8983,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-constraint-engine.ts",
+        "bytes": 30490,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-constraint-types.ts",
+        "bytes": 6206,
         "kind": "file",
         "role": "shared library"
       },
@@ -2439,8 +4617,26 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/scene-generation",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-generation/scene-generation-llm-adapter.ts",
+        "bytes": 5341,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-generation/staleness-strategy.ts",
+        "bytes": 1862,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/scene-heart.ts",
-        "bytes": 5569,
+        "bytes": 5707,
         "kind": "file",
         "role": "shared library"
       },
@@ -2463,6 +4659,18 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/scene-outcome-envelope-engine.ts",
+        "bytes": 12461,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/scene-outcome-envelope-types.ts",
+        "bytes": 579,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/scene-soul-ai.ts",
         "bytes": 1266,
         "kind": "file",
@@ -2475,8 +4683,164 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/scene-structured-data-patch.ts",
+        "bytes": 7250,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/script-upload-index.ts",
+        "bytes": 229,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/section-xiii-internal.ts",
         "bytes": 7561,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/book-service.ts",
+        "bytes": 296,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/chapter-assembly-service.ts",
+        "bytes": 4217,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/character-cognition-resolver.ts",
+        "bytes": 17120,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/decision-trace-service.ts",
+        "bytes": 4120,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/epic-service.ts",
+        "bytes": 377,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/genealogical-assertion-service.ts",
+        "bytes": 5699,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/narrative-beat-service.ts",
+        "bytes": 1399,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/narrative-dependency-register.ts",
+        "bytes": 1207,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/narrative-prose-quality-service.ts",
+        "bytes": 4119,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/narrative-revision-service.ts",
+        "bytes": 6867,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/population-ingest-service.ts",
+        "bytes": 4834,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/population-promotion-service.ts",
+        "bytes": 2709,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/prose-quality-service.ts",
+        "bytes": 3433,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/scene-generation-contract-loader.ts",
+        "bytes": 6667,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/scene-generation-dependency-service.ts",
+        "bytes": 4658,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/scene-generation-input-loader.ts",
+        "bytes": 3938,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/scene-generation-service.ts",
+        "bytes": 5833,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/scene-narrative-service.ts",
+        "bytes": 430,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/scene-reader-text.ts",
+        "bytes": 495,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/simulation-run-service.ts",
+        "bytes": 9940,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/simulation-scenario-service.ts",
+        "bytes": 2562,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/social-field-context-service.ts",
+        "bytes": 3508,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/services/world-state-resolution.ts",
+        "bytes": 1965,
         "kind": "file",
         "role": "shared library"
       },
@@ -2487,20 +4851,128 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/simulation",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/simulation/apply-simulation-overrides.ts",
+        "bytes": 3297,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/simulation/build-simulation-resolution-patch.ts",
+        "bytes": 11130,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/simulation/merge-character-state-snapshot.ts",
+        "bytes": 1240,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/simulation/parse-simulation-override-set.ts",
+        "bytes": 819,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/simulation/simulation-canonical-policy.ts",
+        "bytes": 1061,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/simulation/simulation-diff.ts",
+        "bytes": 10103,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/social-field",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/social-field/social-field-engine.ts",
+        "bytes": 1687,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/source-chunking.ts",
         "bytes": 5738,
         "kind": "file",
         "role": "shared library"
       },
       {
+        "relativePath": "lib/stage8-evaluation-fixtures.ts",
+        "bytes": 3243,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/stage8-outcome-envelope-fixtures.ts",
+        "bytes": 14274,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/thought-language",
+        "bytes": 0,
+        "kind": "directory",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/thought-language/apply-inner-voice-request.ts",
+        "bytes": 543,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/thought-language/character-thought-language-profile.ts",
+        "bytes": 2610,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/thought-language/index.ts",
+        "bytes": 617,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/thought-language/rendering-modes.ts",
+        "bytes": 1627,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/thought-language/resolve-thought-language-frame.ts",
+        "bytes": 4036,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/thought-language/world-state-language-environment.ts",
+        "bytes": 3672,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/validation.ts",
-        "bytes": 7683,
+        "bytes": 7730,
         "kind": "file",
         "role": "shared library"
       },
       {
         "relativePath": "lib/voice-fusion.ts",
-        "bytes": 9095,
+        "bytes": 9183,
         "kind": "file",
         "role": "shared library"
       },
@@ -2517,15 +4989,34 @@
         "role": "shared library"
       },
       {
+        "relativePath": "lib/workspace-sticky-params.ts",
+        "bytes": 997,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/world-context-validation.ts",
+        "bytes": 586,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
         "relativePath": "lib/world-dynamics.ts",
         "bytes": 2104,
         "kind": "file",
         "role": "shared library"
       },
       {
-        "relativePath": "middleware.ts",
-        "bytes": 722,
-        "kind": "file"
+        "relativePath": "lib/world-era-profile-tuning.ts",
+        "bytes": 6890,
+        "kind": "file",
+        "role": "shared library"
+      },
+      {
+        "relativePath": "lib/world-era-profile.ts",
+        "bytes": 2285,
+        "kind": "file",
+        "role": "shared library"
       },
       {
         "relativePath": "netlify.toml",
@@ -2534,7 +5025,7 @@
       },
       {
         "relativePath": "next-env.d.ts",
-        "bytes": 262,
+        "bytes": 251,
         "kind": "file"
       },
       {
@@ -2544,12 +5035,12 @@
       },
       {
         "relativePath": "package-lock.json",
-        "bytes": 247263,
+        "bytes": 281234,
         "kind": "file"
       },
       {
         "relativePath": "package.json",
-        "bytes": 1330,
+        "bytes": 2388,
         "kind": "file",
         "role": "npm manifest + scripts"
       },
@@ -2599,14 +5090,317 @@
         "kind": "file"
       },
       {
+        "relativePath": "prisma/migrations/20260410160000_constitutional_core",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410160000_constitutional_core/migration.sql",
+        "bytes": 1719,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410180000_ontology_registry_spine",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410180000_ontology_registry_spine/migration.sql",
+        "bytes": 4694,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410220000_stage_3_1_world_environment_engine",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410220000_stage_3_1_world_environment_engine/migration.sql",
+        "bytes": 9371,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410240000_stage_5_5_intelligence_engine",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410240000_stage_5_5_intelligence_engine/migration.sql",
+        "bytes": 7361,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410250000_stage_6_relationship_engine",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410250000_stage_6_relationship_engine/migration.sql",
+        "bytes": 11220,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410260000_stage_6_5_continuity_education",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410260000_stage_6_5_continuity_education/migration.sql",
+        "bytes": 9573,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410270000_stage_6_5_health_layer",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260410270000_stage_6_5_health_layer/migration.sql",
+        "bytes": 8253,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260411120000_character_state_structured_data_json",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260411120000_character_state_structured_data_json/migration.sql",
+        "bytes": 178,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260411140000_world_state_era_profile",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260411140000_world_state_era_profile/migration.sql",
+        "bytes": 1289,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260411153000_world_state_era_profile_evidence_rationale",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260411153000_world_state_era_profile_evidence_rationale/migration.sql",
+        "bytes": 155,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412180000_census_research_dataset",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412180000_census_research_dataset/migration.sql",
+        "bytes": 5067,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412210000_census_story_assembly_fields",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412210000_census_story_assembly_fields/migration.sql",
+        "bytes": 615,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412220000_person_lineage_working_id",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412220000_person_lineage_working_id/migration.sql",
+        "bytes": 236,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412230000_genealogical_facts_narrative_dependencies",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412230000_genealogical_facts_narrative_dependencies/migration.sql",
+        "bytes": 5389,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412240000_prose_quality_report",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412240000_prose_quality_report/migration.sql",
+        "bytes": 1208,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412270000_epic_book_narrative_hierarchy",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412270000_epic_book_narrative_hierarchy/migration.sql",
+        "bytes": 6809,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412280000_prose_quality_scope_chapter",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412280000_prose_quality_scope_chapter/migration.sql",
+        "bytes": 844,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412290000_character_cognition_layer",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412290000_character_cognition_layer/migration.sql",
+        "bytes": 7415,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412300000_character_core_profile_state_snapshot_foundation",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412300000_character_core_profile_state_snapshot_foundation/migration.sql",
+        "bytes": 2228,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412310000_character_core_enneagram_cognition",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412310000_character_core_enneagram_cognition/migration.sql",
+        "bytes": 1252,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412320000_thought_language_mediation",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260412320000_thought_language_mediation/migration.sql",
+        "bytes": 682,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260413120000_simulation_run_input_hash",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260413120000_simulation_run_input_hash/migration.sql",
+        "bytes": 248,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260413140000_narrative_dep_producer_simulation_cognition",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260413140000_narrative_dep_producer_simulation_cognition/migration.sql",
+        "bytes": 167,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260415120000_phase_5c1_desire_cognition",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260415120000_phase_5c1_desire_cognition/migration.sql",
+        "bytes": 1198,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/20260416120000_phase_5f_population_social_field",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "prisma/migrations/20260416120000_phase_5f_population_social_field/migration.sql",
+        "bytes": 5681,
+        "kind": "file"
+      },
+      {
+        "relativePath": "prisma/migrations/migration_lock.toml",
+        "bytes": 64,
+        "kind": "file"
+      },
+      {
         "relativePath": "prisma/schema.prisma",
-        "bytes": 47202,
+        "bytes": 130726,
         "kind": "file",
         "role": "database schema"
       },
       {
+        "relativePath": "prisma/seed-character-engine.ts",
+        "bytes": 1631,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed-constitutional-rules.ts",
+        "bytes": 6470,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed-continuity.ts",
+        "bytes": 13058,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed-environment.ts",
+        "bytes": 18139,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
         "relativePath": "prisma/seed-full-demo.ts",
-        "bytes": 55154,
+        "bytes": 55385,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed-ingestion-packet-01.ts",
+        "bytes": 29552,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed-ingestion-packet-red-river.ts",
+        "bytes": 92638,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed-ontology.ts",
+        "bytes": 15733,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed-opening-terrain-pass.ts",
+        "bytes": 63607,
         "kind": "file",
         "role": "prisma seed / migration helper"
       },
@@ -2617,10 +5411,27 @@
         "role": "prisma seed / migration helper"
       },
       {
-        "relativePath": "prisma/seed.ts",
-        "bytes": 17191,
+        "relativePath": "prisma/seed-pressure.ts",
+        "bytes": 16696,
         "kind": "file",
         "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed-relationship.ts",
+        "bytes": 7309,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "prisma/seed.ts",
+        "bytes": 19112,
+        "kind": "file",
+        "role": "prisma seed / migration helper"
+      },
+      {
+        "relativePath": "proxy.ts",
+        "bytes": 1959,
+        "kind": "file"
       },
       {
         "relativePath": "public",
@@ -2640,7 +5451,12 @@
       },
       {
         "relativePath": "reports/campti-handoff-filesystem.json",
-        "bytes": 68916,
+        "bytes": 151290,
+        "kind": "file"
+      },
+      {
+        "relativePath": "reports/campti-handoff-full.json",
+        "bytes": 151904,
         "kind": "file"
       },
       {
@@ -2650,7 +5466,7 @@
       },
       {
         "relativePath": "reports/campti-handoff-story.json",
-        "bytes": 93485,
+        "bytes": 147067,
         "kind": "file"
       },
       {
@@ -2660,7 +5476,31 @@
       },
       {
         "relativePath": "scripts/generate-handoff-report.ts",
-        "bytes": 18044,
+        "bytes": 18629,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/import-campti-census-sqlite.ts",
+        "bytes": 9392,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/index-incoming-uploads.ts",
+        "bytes": 6853,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/ingest-campti-history-atlas.ts",
+        "bytes": 13367,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/ingest-grappe-lineage-source.ts",
+        "bytes": 4349,
         "kind": "file",
         "role": "CLI / ingestion script"
       },
@@ -2677,8 +5517,26 @@
         "role": "CLI / ingestion script"
       },
       {
+        "relativePath": "scripts/inspect-campti-sqlite.mjs",
+        "bytes": 519,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
         "relativePath": "scripts/load-env.ts",
         "bytes": 737,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/prisma-generate-optional.mjs",
+        "bytes": 716,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/research-census-pipeline.ts",
+        "bytes": 1113,
         "kind": "file",
         "role": "CLI / ingestion script"
       },
@@ -2695,6 +5553,36 @@
         "role": "CLI / ingestion script"
       },
       {
+        "relativePath": "scripts/sync-campti-research-bundle.ts",
+        "bytes": 1679,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/verify-red-river-focal-alternation.ts",
+        "bytes": 4511,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/verify-stage8-5-outcome-envelope.ts",
+        "bytes": 2936,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/verify-stage8-classification.ts",
+        "bytes": 736,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
+        "relativePath": "scripts/wire-grp-lineage-persons.ts",
+        "bytes": 2130,
+        "kind": "file",
+        "role": "CLI / ingestion script"
+      },
+      {
         "relativePath": "styles",
         "bytes": 0,
         "kind": "directory"
@@ -2706,12 +5594,92 @@
       },
       {
         "relativePath": "tsconfig.json",
-        "bytes": 562,
+        "bytes": 698,
         "kind": "file"
       },
       {
         "relativePath": "tsconfig.tsbuildinfo",
-        "bytes": 190612,
+        "bytes": 234716,
+        "kind": "file"
+      },
+      {
+        "relativePath": "types",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "uploads",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "uploads/incoming",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "uploads/incoming/.gitkeep",
+        "bytes": 0,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research",
+        "bytes": 0,
+        "kind": "directory"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_census.sqlite",
+        "bytes": 118784,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_census_entries (1).csv",
+        "bytes": 18374,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_census_entries.csv",
+        "bytes": 18374,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_census_pages.csv",
+        "bytes": 10722,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_digitized_bundle.zip",
+        "bytes": 3887207,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_ingest_plan.md",
+        "bytes": 2255,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_missing_pages_template.csv",
+        "bytes": 364,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_name_index.csv",
+        "bytes": 8629,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_ocr_corpus.md",
+        "bytes": 32504,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_ocr_index.csv",
+        "bytes": 9856,
+        "kind": "file"
+      },
+      {
+        "relativePath": "uploads/incoming/campti-research/campti_structured_dataset.zip",
+        "bytes": 66538,
         "kind": "file"
       }
     ]

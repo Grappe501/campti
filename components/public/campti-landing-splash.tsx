@@ -21,7 +21,7 @@ export function CamptiLandingSplash({ children, dwellMs = 2000 }: Props) {
   useLayoutEffect(() => {
     try {
       if (sessionStorage.getItem(SPLASH_SESSION_KEY) === "1") {
-        setPhase("done");
+        queueMicrotask(() => setPhase("done"));
       }
     } catch {
       /* ignore */
@@ -31,7 +31,7 @@ export function CamptiLandingSplash({ children, dwellMs = 2000 }: Props) {
   useEffect(() => {
     if (phase !== "splash") return;
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mq.matches);
+    queueMicrotask(() => setReducedMotion(mq.matches));
     const dwell = mq.matches ? 0 : dwellMs;
     const t = window.setTimeout(() => setPhase("out"), dwell);
     return () => window.clearTimeout(t);

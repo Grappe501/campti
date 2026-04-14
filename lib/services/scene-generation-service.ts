@@ -1,9 +1,13 @@
 import { createHash } from "node:crypto";
 
+import { flattenAuthorVoiceShapingToPromptLines } from "@/lib/author-workflow/author-voice-helpers";
+import type { HumanizationAdvisoryReport } from "@/lib/domain/author-voice-humanization";
 import type { SceneGenerationInput } from "@/lib/domain/scene-generation-input";
 import type { SceneGenerationRunResult } from "@/lib/domain/scene-generation-output";
 import { analyzeProseDeterministic } from "@/lib/prose-quality";
 import { prisma } from "@/lib/prisma";
+import { assessProseHumanizationAdvisory } from "@/lib/scene-generation/prose-humanization-advisory";
+import { adviseSocialPressureInGeneratedProse } from "@/lib/scene-generation/social-pressure-qa";
 import { generateSceneProseWithModel } from "@/lib/scene-generation/scene-generation-llm-adapter";
 import { loadSceneGenerationInput } from "@/lib/services/scene-generation-input-loader";
 import {
@@ -21,6 +25,9 @@ function hashGenerationInput(input: SceneGenerationInput): string {
         contract: input.contract,
         hasCognition: Boolean(input.cognitionFramePayload),
         hasDt: Boolean(input.pinnedDecisionTracePayload),
+        hasSocialFieldGeneration: Boolean(input.contract.socialFieldGeneration),
+        hasSocialGuidanceLines: Boolean(input.socialFieldSummaryForGeneration),
+        authorVoiceShaping: input.authorVoiceShaping ?? null,
       })
     )
     .digest("hex");
@@ -68,9 +75,15 @@ export type RunSceneGenerationParams = {
   saveGenerationText?: boolean;
   registerDependencies?: boolean;
   runProseQuality?: boolean;
-  /** Overrides loader defaults when provided. */
-  inputOverride?: Partial<Pick<SceneGenerationInput, "generationMode" | "generationPurpose" | "proseBasis" | "basisProseOverride">>;
+  /** Phase 6.1 — append deterministic social-pressure advisories to `output.warnings`. Default true. */
+  runSocialPressureAdvisory?: boolean;
   proseQaContext?: SceneGenerationInput["proseQaContext"];
+  /** Forwarded to `loadSceneGenerationInput`. */
+  loaderOptions?: Parameters<typeof loadSceneGenerationInput>[2];
+  /** Overrides loader defaults when provided. */
+  inputOverride?: Partial<SceneGenerationInput>;
+  /** Phase 7 — append deterministic humanization advisories to warnings. Default true. */
+  runHumanizationAdvisory?: boolean;
 };
 
 export async function runSceneGeneration(
@@ -78,24 +91,66 @@ export async function runSceneGeneration(
 ): Promise<SceneGenerationRunResult> {
   const proseQaContext = params.proseQaContext ?? {};
   const genInput = await loadSceneGenerationInput(params.sceneId, proseQaContext, {
-    generationMode: params.inputOverride?.generationMode,
-    generationPurpose: params.inputOverride?.generationPurpose,
-    proseBasis: params.inputOverride?.proseBasis,
-    basisProseOverride: params.inputOverride?.basisProseOverride,
+    ...params.loaderOptions,
+    ...params.inputOverride,
   });
 
-  const merged: SceneGenerationInput = {
+  let merged: SceneGenerationInput = {
     ...genInput,
     ...(params.inputOverride ?? {}),
     proseQaContext: genInput.proseQaContext,
   };
+  if (merged.authorVoiceShaping) {
+    const flat = flattenAuthorVoiceShapingToPromptLines(merged.authorVoiceShaping);
+    merged = {
+      ...merged,
+      humanizationHints: flat.humanizationHints,
+      prosePresenceHints: flat.prosePresenceHints,
+      witnessFrameLines: flat.witnessLines,
+      voiceSummaryLines: flat.voiceSummaryLines,
+      narrativeWitnessMode: merged.authorVoiceShaping.narrativeWitnessMode,
+      contract: {
+        ...merged.contract,
+        authorVoiceShaping: merged.authorVoiceShaping,
+      },
+    };
+  }
 
   const basis =
     merged.generationMode === "draft" && merged.generationPurpose === "author_draft"
       ? null
       : await resolveBasisProse(params.sceneId, merged);
 
-  const output = await generateSceneProseWithModel(merged, basis);
+  let output = await generateSceneProseWithModel(merged, basis);
+
+  const socialBundle = merged.contract.socialFieldGeneration ?? null;
+  if (params.runSocialPressureAdvisory !== false && socialBundle) {
+    const extra = adviseSocialPressureInGeneratedProse(
+      output.generatedText,
+      socialBundle,
+      merged.socialFieldQaScalars ?? null
+    );
+    if (extra.length) {
+      output = {
+        ...output,
+        warnings: [...output.warnings, ...extra],
+      };
+    }
+  }
+
+  let humanizationAdvisory: HumanizationAdvisoryReport | null = null;
+  if (params.runHumanizationAdvisory !== false) {
+    humanizationAdvisory = assessProseHumanizationAdvisory(output.generatedText);
+    if (humanizationAdvisory.findings.length) {
+      output = {
+        ...output,
+        warnings: [
+          ...output.warnings,
+          ...humanizationAdvisory.findings.map((f) => `[humanization:${f.code}] ${f.message}`),
+        ],
+      };
+    }
+  }
 
   let savedGenerationText = false;
   if (params.saveGenerationText) {
@@ -123,6 +178,9 @@ export async function runSceneGeneration(
     proseQuality,
     savedGenerationText,
     registeredDependencyIds,
+    socialFieldGeneration: socialBundle,
+    socialFieldQaScalars: merged.socialFieldQaScalars ?? null,
+    humanizationAdvisory,
   };
 }
 
@@ -130,7 +188,7 @@ export async function buildSceneGenerationInputForAction(
   sceneId: string,
   proseQaContext: SceneGenerationInput["proseQaContext"],
   options?: Parameters<typeof loadSceneGenerationInput>[2]
-) {
+): Promise<SceneGenerationInput> {
   return loadSceneGenerationInput(sceneId, proseQaContext, options);
 }
 

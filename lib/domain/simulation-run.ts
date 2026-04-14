@@ -115,6 +115,13 @@ export type ResolveCognitionFrameSimulationOptions = {
   patch?: SimulationResolutionPatch;
 };
 
+/** Unified options for `resolveCharacterCognitionFrame` (simulation patch + Phase 5F social field). */
+export type ResolveCharacterCognitionFrameOptions = {
+  simulation?: ResolveCognitionFrameSimulationOptions;
+  /** Default true when population tables exist; set false to skip queries. */
+  includeSocialField?: boolean;
+};
+
 export type SimulationRunInput = {
   scenarioId: string;
   /** Primary character for this run. Use `characterIds` instead for ensemble-oriented callers (first id runs pipeline until multi-character is implemented). */
