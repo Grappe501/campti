@@ -11,7 +11,8 @@
  * `scene-generation-llm-adapter` `buildUserPrompt`: full generation contract JSON, cognition
  * and decision-trace payloads, social bundle + guidance line sources, narrative shaping
  * **merged** defaults, flattened witness/voice/humanization lines, `authorVoiceShaping`,
- * P2-E temporally filtered narrative source ids (`sourceIdsUsed`, sorted in the hash payload),
+ * P2-E temporally filtered narrative source ids (`sourceIdsUsed`, sorted in the hash payload; ids are
+ * already filtered upstream by canonical world-state chronology via `getSourcesForWorldState`),
  * `proseQaContext`, routing (`generationMode` / `purpose`), prose basis selection, and a digest
  * of baseline prose when rewrite/repair uses it.
  *

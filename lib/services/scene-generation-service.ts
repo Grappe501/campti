@@ -91,6 +91,7 @@ export async function runSceneGeneration(
     ...(params.inputOverride ?? {}),
     proseQaContext: genInput.proseQaContext,
   };
+  /** P2-E certified: preserve merge fallback for `sourceIdsUsed` / `narrativeSourcesForScene` when overrides omit them. */
   merged = {
     ...merged,
     sourceIdsUsed: merged.sourceIdsUsed ?? genInput.sourceIdsUsed,

@@ -64,6 +64,11 @@ function truncateJson(v: unknown, max: number): string {
   return `${s.slice(0, max)}…[truncated]`;
 }
 
+/**
+ * P2-E certified: builds the `NARRATIVE_SOURCES_ALLOWED` block from `narrativeSourcesForScene` only.
+ * World-state/year temporal filtering happens in `loadSceneGenerationInput` → `getSourcesForWorldState`
+ * (canonical `chronologyIndex`); do not redesign this adapter layer for chronology.
+ */
 function compactNarrativeSourcesBlock(input: SceneGenerationInput): string | null {
   const sources = input.narrativeSourcesForScene;
   if (!sources?.length) return null;

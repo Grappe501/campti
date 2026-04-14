@@ -35,9 +35,12 @@ function parishPlaceIdFromSceneJson(structuredDataJson: unknown): string | null 
  * Builds `SceneGenerationInput` for the generation boundary (contract + voice + goals + Phase 6 routing).
  * Historical anchor terms: from `AnalyzeProseContext` caller or empty (extend to pull from Place/Registry later).
  *
- * **P2-E — Temporal truth integrity:** narrative source material is loaded only through
- * `getSourcesForWorldState` so scene generation cannot ingest sources from future world states or
- * out-of-range years relative to the resolved era slice.
+ * **P2-E — Temporal truth integrity (approved shape; do not redesign this layer):** narrative sources
+ * are attached only as `narrativeSourcesForScene` + `sourceIdsUsed` from `getSourcesForWorldState`.
+ * World-state temporal validity is enforced inside that call via `WorldStateReference.chronologyIndex`
+ * (shared backbone with P2-C/P2-D), not lexicographic world-state id order. Optional story year is a
+ * separate calendar axis on the same rows. Prompt assembly still uses `NARRATIVE_SOURCES_ALLOWED` in
+ * `scene-generation-llm-adapter`; hash still includes sorted `sourceIdsUsed`.
  */
 export async function loadSceneGenerationInput(
   sceneId: string,

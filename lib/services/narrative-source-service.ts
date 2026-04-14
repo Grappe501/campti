@@ -306,6 +306,9 @@ export async function listNarrativeSources(
  * Sources visible at `worldStateId` without backward contamination from later-validity sources.
  * Optional `year` tightens using `startYear` / `endYear` when set on rows (independent from world-state order).
  *
+ * **P2-E:** sole chronology gate for scene generation’s `narrativeSourcesForScene` / `sourceIdsUsed` (approved
+ * shape); do not add parallel filtering in the loader—only replace implementation here if chronology rules change.
+ *
  * Returns no rows if `worldStateId` is unknown.
  */
 export async function getSourcesForWorldState(

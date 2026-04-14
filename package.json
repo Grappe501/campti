@@ -12,6 +12,7 @@
     "verify:contract-drift": "tsx scripts/check-contract-registry-drift.ts",
     "verify:generation-hash": "tsx --test lib/scene-generation/canonical-scene-generation-hash.test.ts",
     "verify:revision-job-policy": "tsx --test lib/services/revision-job-runner.policy.test.ts",
+    "verify:conversational-identity": "tsx --test lib/conversational-identity/build-conversational-identity-snapshot.test.ts",
     "ops:revision-jobs-once": "tsx scripts/process-revision-jobs-once.ts",
     "postinstall": "node scripts/prisma-generate-optional.mjs",
     "db:generate": "prisma generate",

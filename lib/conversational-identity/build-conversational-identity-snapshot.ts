@@ -4,15 +4,33 @@
  * Assembles **identity**, **knowledge boundary** (P2-F), **relationships**, **reader memory** (P2-G),
  * and **emotional state** into one JSON-safe object for future dialogue / LLM routing. **No generation**
  * here — persistence reads and deterministic merges only.
+ *
+ * **Bounded character conversation mode only:** this module builds the in-world, epistemically bounded
+ * live interaction snapshot. Author / God / omniscient tooling is a separate future mode — separate
+ * builders and contracts; nothing here grants omniscience or out-of-world teaching.
  */
 
 import { FactAssertionStatus } from "@prisma/client";
 
 import { buildCharacterKnowledgeBoundary } from "@/lib/character-knowledge/knowledge-boundary";
-import type { ConversationalIdentitySnapshot } from "@/lib/domain/conversational-identity-snapshot";
-import { getMemoryForConversation } from "@/lib/services/character-reader-memory-service";
+import {
+  BOUNDED_CHARACTER_CONVERSATIONAL_POLICY,
+  type ConversationalIdentitySnapshot,
+} from "@/lib/domain/conversational-identity-snapshot";
+import type { NarrativeSource } from "@/lib/domain/narrative-source";
+import { inferApproximateStoryYearFromScene } from "@/lib/inner-voice/framing/age-band";
+import { getCharacterReaderMemory } from "@/lib/services/character-reader-memory-service";
+import { resolveEffectiveWorldStateForScene } from "@/lib/services/world-state-resolution";
 import { cognitionPrisma } from "@/lib/prisma-cognition-access";
 import { prisma } from "@/lib/prisma";
+
+export type BuildConversationalIdentitySnapshotParams = {
+  characterId: string;
+  readerId: string;
+  sceneId?: string | null;
+  /** Scene-filtered sources from the same P2-E path as scene generation (`getSourcesForWorldState` / temporal discipline). Pass when available; otherwise []. */
+  narrativeSourcesForScene?: NarrativeSource[];
+};
 
 function perceivedRealityFromSlices(
   snap: {
@@ -35,13 +53,35 @@ function perceivedRealityFromSlices(
 
 /**
  * Build the full character state bundle for live interaction with a specific reader.
+ * When `sceneId` is set, prefers scene-local cognition and era metadata when rows exist; otherwise
+ * falls back to the same best-effort global behavior as a scene-less build.
  */
 export async function buildConversationalIdentitySnapshot(
-  characterId: string,
-  readerId: string
+  params: BuildConversationalIdentitySnapshotParams
 ): Promise<ConversationalIdentitySnapshot> {
+  const { characterId, readerId, narrativeSourcesForScene } = params;
+  const sceneId = params.sceneId?.trim() ? params.sceneId.trim() : null;
+
   if (!readerId.trim()) {
     throw new Error("readerId is required (opaque reader key).");
+  }
+
+  const narrativeSources = narrativeSourcesForScene ?? [];
+
+  let approximateStoryYear: number | null = null;
+  let effectiveWorldStateIdFromScene: string | null = null;
+
+  if (sceneId) {
+    const sceneRow = await prisma.scene.findUnique({
+      where: { id: sceneId },
+      select: { structuredDataJson: true, historicalAnchor: true },
+    });
+    if (!sceneRow) {
+      throw new Error(`Scene not found: ${sceneId}`);
+    }
+    approximateStoryYear = inferApproximateStoryYearFromScene(sceneRow.structuredDataJson, sceneRow.historicalAnchor);
+    const resolved = await resolveEffectiveWorldStateForScene(sceneId);
+    effectiveWorldStateIdFromScene = resolved.worldStateId;
   }
 
   const person = await prisma.person.findUnique({
@@ -56,7 +96,32 @@ export async function buildConversationalIdentitySnapshot(
     throw new Error(`Person/character not found: ${characterId}`);
   }
 
-  const [rel, assertions, latestSnap, latestLegacy, readerMemory] = await Promise.all([
+  const [sceneScopedSnap, sceneScopedLegacy] = sceneId
+    ? await Promise.all([
+        cognitionPrisma.characterStateSnapshot.findFirst({
+          where: { characterId, sceneId },
+          orderBy: [{ updatedAt: "desc" }, { createdAt: "desc" }],
+        }),
+        prisma.characterState.findFirst({
+          where: { personId: characterId, sceneId },
+          orderBy: { updatedAt: "desc" },
+        }),
+      ])
+    : [null, null];
+
+  const [fallbackSnap, fallbackLegacy, rel, assertions, readerMemory] = await Promise.all([
+    sceneScopedSnap
+      ? Promise.resolve(null)
+      : cognitionPrisma.characterStateSnapshot.findFirst({
+          where: { characterId },
+          orderBy: [{ updatedAt: "desc" }, { createdAt: "desc" }],
+        }),
+    sceneScopedLegacy
+      ? Promise.resolve(null)
+      : prisma.characterState.findFirst({
+          where: { personId: characterId },
+          orderBy: { updatedAt: "desc" },
+        }),
     prisma.characterRelationship.findMany({
       where: { OR: [{ personAId: characterId }, { personBId: characterId }] },
       take: 48,
@@ -71,16 +136,11 @@ export async function buildConversationalIdentitySnapshot(
       include: { slot: { select: { slotLabel: true } } },
       take: 80,
     }),
-    cognitionPrisma.characterStateSnapshot.findFirst({
-      where: { characterId },
-      orderBy: [{ updatedAt: "desc" }, { createdAt: "desc" }],
-    }),
-    prisma.characterState.findFirst({
-      where: { personId: characterId },
-      orderBy: { updatedAt: "desc" },
-    }),
-    getMemoryForConversation(characterId, readerId),
+    getCharacterReaderMemory(characterId, readerId),
   ]);
+
+  const latestSnap = sceneScopedSnap ?? fallbackSnap;
+  const latestLegacy = sceneScopedLegacy ?? fallbackLegacy;
 
   const otherIds = [...new Set(rel.map((r) => (r.personAId === characterId ? r.personBId : r.personAId)))];
   const otherPeople =
@@ -112,11 +172,14 @@ export async function buildConversationalIdentitySnapshot(
     .map((a) => a.slot?.slotLabel?.trim())
     .filter((x): x is string => Boolean(x));
 
+  const cognitionWorldStateId = latestSnap?.worldStateReferenceId ?? null;
+  const worldStateIdForLabel = cognitionWorldStateId ?? effectiveWorldStateIdFromScene ?? null;
+
   let worldStateLabel: string | null = null;
   let literacyClerical: "rare" | "minority" | "common" | "widespread" | null = null;
-  if (latestSnap?.worldStateReferenceId) {
+  if (worldStateIdForLabel) {
     const ws = await prisma.worldStateReference.findUnique({
-      where: { id: latestSnap.worldStateReferenceId },
+      where: { id: worldStateIdForLabel },
       select: { label: true, languageEnvironmentJson: true },
     });
     worldStateLabel = ws?.label ?? null;
@@ -143,11 +206,11 @@ export async function buildConversationalIdentitySnapshot(
 
   const knowledgeBoundary = buildCharacterKnowledgeBoundary({
     worldStateLabel,
-    approximateStoryYear: null,
+    approximateStoryYear: sceneId ? approximateStoryYear : null,
     socialRoleHint,
     literacyClerical,
     relationshipLines,
-    narrativeSources: [],
+    narrativeSources,
     assertionSlotLabels,
     perceivedReality,
     gossipPressure01: null,
@@ -160,6 +223,8 @@ export async function buildConversationalIdentitySnapshot(
     builtAtIso: new Date().toISOString(),
     characterId,
     readerId: readerId.trim(),
+    sceneId,
+    policy: BOUNDED_CHARACTER_CONVERSATIONAL_POLICY,
     identity: {
       person: {
         id: person.id,

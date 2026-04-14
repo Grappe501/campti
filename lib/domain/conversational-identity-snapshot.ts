@@ -4,12 +4,39 @@ import type { CharacterReaderMemoryDomain } from "@/lib/domain/character-reader-
 /**
  * P2-H — Full conversational bundle for live reader↔character interaction (LLM input shape).
  * Built deterministically from DB rows; does not call generative models.
+ *
+ * **Bounded character conversation mode only:** this snapshot is the canonical in-world,
+ * epistemically bounded view for a character speaking as themselves at a story moment.
+ * Author / God / omniscient access is a separate future mode (different contracts and pipelines);
+ * do not merge those capabilities into this type.
  */
+
+/** Fixed interaction policy for bounded in-world dialogue (always applied in this snapshot). */
+export type ConversationalIdentityPolicy = {
+  inWorldOnly: boolean;
+  noFutureKnowledge: boolean;
+  noOutOfWorldTeaching: boolean;
+  translationIsPresentationOnly: boolean;
+  authorOmniscienceExcluded: boolean;
+};
+
+export const BOUNDED_CHARACTER_CONVERSATIONAL_POLICY: ConversationalIdentityPolicy = {
+  inWorldOnly: true,
+  noFutureKnowledge: true,
+  noOutOfWorldTeaching: true,
+  translationIsPresentationOnly: true,
+  authorOmniscienceExcluded: true,
+};
+
 export type ConversationalIdentitySnapshot = {
   contractVersion: "1";
   builtAtIso: string;
   characterId: string;
   readerId: string;
+  /** Present when the assembly was scoped to a scene; otherwise null (best-effort global slice). */
+  sceneId: string | null;
+
+  policy: ConversationalIdentityPolicy;
 
   identity: ConversationalIdentityBlock;
 
@@ -56,11 +83,11 @@ export type ConversationalRelationshipEdge = {
   relationshipSummary: string | null;
 };
 
-/** Latest cognition snapshot + simulation slice — whichever exists — for affect / pressure. */
+/** Cognition snapshot + simulation slice for affect / pressure (scene-preferred when `sceneId` was set on build). */
 export type ConversationalEmotionalState = {
-  /** Most recent `CharacterStateSnapshot` for this character (any scene). */
+  /** Scene-scoped cognition snapshot when available, else latest for the character (any scene). */
   latestCognitionSnapshot: CognitionSnapshotEmotionalSlice | null;
-  /** Most recent `CharacterState` simulation row for this person. */
+  /** Scene-scoped `CharacterState` when available, else latest for the person. */
   latestLegacyCharacterState: LegacyCharacterEmotionalSlice | null;
 };
 

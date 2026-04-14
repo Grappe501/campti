@@ -121,11 +121,16 @@ export type SceneGenerationInput = {
   narrativeShapingSummary?: NarrativeShapingObserverSummary | null;
 
   /**
-   * P2-E — Narrative sources allowed for this scene’s world state and optional story year.
-   * Populated only via `getSourcesForWorldState` (temporal truth firewall); enforces temporal truth integrity.
+   * P2-E (certified shape — do not redesign): narrative sources allowed for this scene’s world state
+   * and optional story year. Populated only via `getSourcesForWorldState` (P2-B truth firewall).
+   * Temporal validity uses canonical world-state chronology (`WorldStateReference.chronologyIndex`);
+   * it is not derived from lexicographic `WorldStateReference.id` order.
    */
   narrativeSourcesForScene?: NarrativeSource[];
 
-  /** Observability: ids of sources attached for this generation run (matches filtered temporal set). */
+  /**
+   * P2-E (certified shape — do not redesign): observability ids for sources attached this run
+   * (matches the filtered temporal set). Participates in `canonical-scene-generation-hash` (sorted there).
+   */
   sourceIdsUsed: string[];
 };

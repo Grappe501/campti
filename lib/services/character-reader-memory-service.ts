@@ -1,32 +1,40 @@
 /**
- * P2-G — Reader–character relationship memory.
+ * P2-G — **Per-character reader relationship memory** (foundational layer for future conversational identity).
  *
- * **Rules (non-negotiable for trust):**
- * - Memory is **only** learned through recorded interactions (`updateMemoryAfterInteraction`). There is no
- *   sync from global user profiles, marketing data, or narrative ingestion into `knownFacts`.
- * - Characters have **no omniscient knowledge of the reader** — only what this bounded row stores.
- * - Familiarity **grows slowly** with diminishing returns so relationship depth is earned over many turns.
+ * Each row is **exactly one character’s** memory of **exactly one reader** (`characterId` + `readerId`).
+ * This must **never** become a cross-character global reader knowledge cache: there is no shared “reader
+ * profile” table here—only relationship-bounded rows. Characters learn about a reader only through direct
+ * interaction paths that call this service; no omniscient assembly from marketing, analytics, or narrative
+ * corpora into `knownFacts`.
  *
- * `readerId` is an **opaque application id** (e.g. authenticated `userId`, or a stable server-issued reader key).
- * It does not reference the `Person` table (readers are not in-world characters).
+ * **Rules enforced here**
+ * - Memory is per `(characterId, readerId)` only (`@@unique`); no cross-character leakage.
+ * - `knownFacts` / `relationshipNotes` store **interaction-earned** material only (callers must not sync
+ *   external user dossiers wholesale).
+ * - Familiarity grows **incrementally** via `updateMemoryAfterInteraction` (and bounded manual nudges via
+ *   `incrementFamiliarityWithinBounds`); it does not jump to max in one call.
+ *
+ * **Not in scope for this module:** full transcript engine, UI, billing, or global `User` profile modeling.
  */
 
 import type { Prisma } from "@prisma/client";
 
-import type { CharacterReaderMemoryDomain } from "@/lib/domain/character-reader-memory";
+import type { CharacterReaderMemory } from "@/lib/domain/character-reader-memory";
+import {
+  clampFamiliarityLevel,
+  familiarityGainForInteraction,
+  MAX_READER_RELATIONSHIP_FAMILIARITY,
+} from "@/lib/domain/character-reader-memory";
 import { prisma } from "@/lib/prisma";
 
-const MAX_FAMILIARITY = 100;
+function requireReaderId(readerId: string): void {
+  if (!readerId.trim()) {
+    throw new Error("readerId is required for CharacterReaderMemory (opaque reader key).");
+  }
+}
 
-/** Diminishing familiarity gain: stronger early, then +1 with occasional +2 milestones. */
-function computeFamiliarityIncrement(priorFamiliarity: number, interactionCountAfter: number): number {
-  if (priorFamiliarity >= MAX_FAMILIARITY) return 0;
-  let gain = 1;
-  if (interactionCountAfter <= 5) gain = 2;
-  else if (interactionCountAfter <= 20) gain = 1;
-  else if (interactionCountAfter % 10 === 0) gain = 2;
-  else gain = 1;
-  return Math.min(gain, MAX_FAMILIARITY - priorFamiliarity);
+function isPrismaUniqueViolation(e: unknown): boolean {
+  return typeof e === "object" && e !== null && "code" in e && (e as { code: string }).code === "P2002";
 }
 
 function jsonObject(value: Prisma.JsonValue): Record<string, unknown> {
@@ -43,8 +51,11 @@ function toDomain(row: {
   familiarityLevel: number;
   interactionCount: number;
   knownFacts: Prisma.JsonValue;
+  relationshipNotes: Prisma.JsonValue | null;
+  firstInteractionAt: Date | null;
   lastInteractionAt: Date;
-}): CharacterReaderMemoryDomain {
+  metadataJson: Prisma.JsonValue | null;
+}): CharacterReaderMemory {
   return {
     id: row.id,
     characterId: row.characterId,
@@ -52,8 +63,76 @@ function toDomain(row: {
     familiarityLevel: row.familiarityLevel,
     interactionCount: row.interactionCount,
     knownFacts: row.knownFacts,
+    relationshipNotes: row.relationshipNotes,
+    firstInteractionAt: row.firstInteractionAt,
     lastInteractionAt: row.lastInteractionAt,
+    metadataJson: row.metadataJson,
   };
+}
+
+/**
+ * Ensure a memory row exists for the pair (zeros / empty facts). Does **not** count as an interaction.
+ * Use when attaching a session before the first `updateMemoryAfterInteraction`.
+ */
+export async function getOrCreateCharacterReaderMemory(
+  characterId: string,
+  readerId: string
+): Promise<CharacterReaderMemory> {
+  requireReaderId(readerId);
+
+  const existing = await prisma.characterReaderMemory.findUnique({
+    where: { characterId_readerId: { characterId, readerId } },
+  });
+  if (existing) {
+    return toDomain(existing);
+  }
+
+  try {
+    const row = await prisma.characterReaderMemory.create({
+      data: {
+        characterId,
+        readerId,
+        familiarityLevel: 0,
+        interactionCount: 0,
+        knownFacts: {},
+        firstInteractionAt: null,
+        lastInteractionAt: new Date(),
+      },
+    });
+    return toDomain(row);
+  } catch (e: unknown) {
+    if (isPrismaUniqueViolation(e)) {
+      const row = await prisma.characterReaderMemory.findUniqueOrThrow({
+        where: { characterId_readerId: { characterId, readerId } },
+      });
+      return toDomain(row);
+    }
+    throw e;
+  }
+}
+
+/** Load memory for the pair, or `null` if they have never had a row (including no get-or-create yet). */
+export async function getCharacterReaderMemory(
+  characterId: string,
+  readerId: string
+): Promise<CharacterReaderMemory | null> {
+  requireReaderId(readerId);
+  const row = await prisma.characterReaderMemory.findUnique({
+    where: { characterId_readerId: { characterId, readerId } },
+  });
+  return row ? toDomain(row) : null;
+}
+
+/**
+ * @deprecated Use {@link getCharacterReaderMemory} (same behavior).
+ * Load memory for a reader↔character conversation. Returns `null` if they have never interacted
+ * (caller should treat as stranger — no invented backstory).
+ */
+export async function getMemoryForConversation(
+  characterId: string,
+  readerId: string
+): Promise<CharacterReaderMemory | null> {
+  return getCharacterReaderMemory(characterId, readerId);
 }
 
 export type UpdateMemoryAfterInteractionInput = {
@@ -68,11 +147,9 @@ export type UpdateMemoryAfterInteractionInput = {
  */
 export async function updateMemoryAfterInteraction(
   input: UpdateMemoryAfterInteractionInput
-): Promise<CharacterReaderMemoryDomain> {
+): Promise<CharacterReaderMemory> {
   const { characterId, readerId, knownFactsPatch } = input;
-  if (!readerId.trim()) {
-    throw new Error("readerId is required for CharacterReaderMemory (opaque reader key).");
-  }
+  requireReaderId(readerId);
 
   const existing = await prisma.characterReaderMemory.findUnique({
     where: { characterId_readerId: { characterId, readerId } },
@@ -80,13 +157,15 @@ export async function updateMemoryAfterInteraction(
 
   const nextInteraction = (existing?.interactionCount ?? 0) + 1;
   const priorFam = existing?.familiarityLevel ?? 0;
-  const delta = computeFamiliarityIncrement(priorFam, nextInteraction);
-  const nextFamiliarity = Math.min(MAX_FAMILIARITY, priorFam + delta);
+  const delta = familiarityGainForInteraction(priorFam, nextInteraction);
+  const nextFamiliarity = clampFamiliarityLevel(priorFam + delta);
 
   const mergedFacts = {
     ...jsonObject(existing?.knownFacts ?? {}),
     ...(knownFactsPatch && typeof knownFactsPatch === "object" ? knownFactsPatch : {}),
   } as Prisma.InputJsonValue;
+
+  const now = new Date();
 
   const row = await prisma.characterReaderMemory.upsert({
     where: { characterId_readerId: { characterId, readerId } },
@@ -96,13 +175,15 @@ export async function updateMemoryAfterInteraction(
       familiarityLevel: nextFamiliarity,
       interactionCount: nextInteraction,
       knownFacts: mergedFacts,
-      lastInteractionAt: new Date(),
+      firstInteractionAt: now,
+      lastInteractionAt: now,
     },
     update: {
       interactionCount: nextInteraction,
       familiarityLevel: nextFamiliarity,
       knownFacts: mergedFacts,
-      lastInteractionAt: new Date(),
+      lastInteractionAt: now,
+      firstInteractionAt: existing?.firstInteractionAt ?? now,
     },
   });
 
@@ -110,18 +191,34 @@ export async function updateMemoryAfterInteraction(
 }
 
 /**
- * Load memory for a reader↔character conversation. Returns `null` if they have never interacted
- * (caller should treat as stranger — no invented backstory).
+ * Apply a bounded delta to familiarity without incrementing `interactionCount` (e.g. milestone rewards).
+ * Result is always clamped to `[0, MAX_READER_RELATIONSHIP_FAMILIARITY]`.
  */
-export async function getMemoryForConversation(
+export async function incrementFamiliarityWithinBounds(
   characterId: string,
-  readerId: string
-): Promise<CharacterReaderMemoryDomain | null> {
-  if (!readerId.trim()) {
-    throw new Error("readerId is required for CharacterReaderMemory (opaque reader key).");
+  readerId: string,
+  delta: number
+): Promise<CharacterReaderMemory> {
+  requireReaderId(readerId);
+  if (!Number.isFinite(delta)) {
+    throw new Error("incrementFamiliarityWithinBounds: delta must be a finite number.");
   }
-  const row = await prisma.characterReaderMemory.findUnique({
-    where: { characterId_readerId: { characterId, readerId } },
+
+  const current = await getOrCreateCharacterReaderMemory(characterId, readerId);
+  const next = clampFamiliarityLevel(current.familiarityLevel + delta);
+
+  if (next === current.familiarityLevel) {
+    return current;
+  }
+
+  const row = await prisma.characterReaderMemory.update({
+    where: { id: current.id },
+    data: {
+      familiarityLevel: next,
+      lastInteractionAt: new Date(),
+    },
   });
-  return row ? toDomain(row) : null;
+  return toDomain(row);
 }
+
+export { MAX_READER_RELATIONSHIP_FAMILIARITY };

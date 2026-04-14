@@ -4113,6 +4113,7 @@ model ReaderVoiceListen {
 }
 
 /// P2-G — What a **character** (Person) may remember about a **specific reader** (opaque id, e.g. auth user or stable session key).
+/// Relationship-bounded only: one row per (characterId, readerId). Not a global reader profile cache.
 /// Populated only via interaction paths — not from narrative ingestion or global profile sync.
 model CharacterReaderMemory {
   id        String   @id @default(cuid())
@@ -4128,10 +4129,16 @@ model CharacterReaderMemory {
   familiarityLevel Int @default(0)
   interactionCount Int @default(0)
 
-  /// JSON bag of reader-attributed facts learned in dialogue (bounded policy in service layer).
+  /// JSON object of facts this character learned about this reader through direct interaction only.
   knownFacts Json @default("{}")
 
-  lastInteractionAt DateTime @default(now())
+  /// Optional free-form relationship notes (JSON), still scoped to this pair only.
+  relationshipNotes Json?
+
+  firstInteractionAt DateTime?
+  lastInteractionAt  DateTime @default(now())
+
+  metadataJson Json?
 
   @@unique([characterId, readerId])
   @@index([readerId])
