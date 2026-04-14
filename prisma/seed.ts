@@ -28,6 +28,7 @@ import { seedRelationship } from "./seed-relationship";
 import { seedContinuity } from "./seed-continuity";
 import { seedIngestionPacket01 } from "./seed-ingestion-packet-01";
 import { seedIngestionPacketRedRiver } from "./seed-ingestion-packet-red-river";
+import { seedEpicBookSpine } from "./seed-epic-book-spine";
 
 async function main() {
   const people = [
@@ -105,6 +106,8 @@ async function main() {
       status: "draft",
     },
   });
+
+  await seedEpicBookSpine();
 
   await prisma.book.upsert({
     where: { id: DEFAULT_BOOK_ID },

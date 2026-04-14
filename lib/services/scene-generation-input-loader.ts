@@ -1,4 +1,5 @@
 import {
+  applyNarrativeShapingDefaultsToShaping,
   buildAuthorVoiceShaping,
   flattenAuthorVoiceShapingToPromptLines,
 } from "@/lib/author-workflow/author-voice-helpers";
@@ -15,7 +16,14 @@ import {
   resolveCharacterCognitionFrame,
 } from "@/lib/services/character-cognition-resolver";
 import { buildSocialFieldContextFromQuery } from "@/lib/services/social-field-context-service";
+import { validateRegisteredContractPayload } from "@/lib/contracts/contract-registry";
 import { loadSceneGenerationContract } from "@/lib/services/scene-generation-contract-loader";
+import {
+  buildNarrativeShapingObserverSummary,
+  resolveNarrativeShapingDefaultsForScene,
+} from "@/lib/services/narrative-shaping-defaults-service";
+import type { NarrativeShapingOverrideSet } from "@/lib/domain/narrative-shaping-defaults";
+import { getSourcesForWorldState } from "@/lib/services/narrative-source-service";
 
 function parishPlaceIdFromSceneJson(structuredDataJson: unknown): string | null {
   if (!structuredDataJson || typeof structuredDataJson !== "object") return null;
@@ -26,6 +34,10 @@ function parishPlaceIdFromSceneJson(structuredDataJson: unknown): string | null 
 /**
  * Builds `SceneGenerationInput` for the generation boundary (contract + voice + goals + Phase 6 routing).
  * Historical anchor terms: from `AnalyzeProseContext` caller or empty (extend to pull from Place/Registry later).
+ *
+ * **P2-E — Temporal truth integrity:** narrative source material is loaded only through
+ * `getSourcesForWorldState` so scene generation cannot ingest sources from future world states or
+ * out-of-range years relative to the resolved era slice.
  */
 export async function loadSceneGenerationInput(
   sceneId: string,
@@ -42,11 +54,14 @@ export async function loadSceneGenerationInput(
     /** Phase 7 — narrative witness / humanization shaping. */
     narrativeWitnessMode?: NarrativeWitnessMode;
     authorVoiceOverrides?: Partial<AuthorVoiceProfile>;
+    /** Phase 7.1 — skip Epic→Book→Chapter→Scene metadata merge (legacy behavior). */
+    skipHierarchyShaping?: boolean;
+    /** Phase 7.1 — last layer applied on top of hierarchy (e.g. orchestration). */
+    narrativeShapingRuntimeOverride?: NarrativeShapingOverrideSet | null;
+    /** When true, attach full `HierarchyShapingResolution` to the input (debug). */
+    includeNarrativeShapingResolution?: boolean;
   }
 ): Promise<SceneGenerationInput> {
-  const generationMode = options?.generationMode ?? "draft";
-  const generationPurpose = options?.generationPurpose ?? "author_draft";
-
   const baseContract = await loadSceneGenerationContract(sceneId, {
     includePhase6Augmentations: true,
   });
@@ -63,6 +78,25 @@ export async function loadSceneGenerationInput(
       places: { take: 2 },
     },
   });
+
+  let narrativeShapingResolution = null as Awaited<
+    ReturnType<typeof resolveNarrativeShapingDefaultsForScene>
+  > | null;
+  if (!options?.skipHierarchyShaping) {
+    narrativeShapingResolution = await resolveNarrativeShapingDefaultsForScene(
+      sceneId,
+      options?.narrativeShapingRuntimeOverride ?? null
+    );
+  }
+
+  const generationMode =
+    options?.generationMode ??
+    narrativeShapingResolution?.merged.productionMode?.generationMode ??
+    "draft";
+  const generationPurpose =
+    options?.generationPurpose ??
+    narrativeShapingResolution?.merged.productionMode?.generationPurpose ??
+    "author_draft";
 
   const povPersonId = scene.persons[0]?.id;
   const [narrativeVoiceProfile, characterVoiceProfile] = await Promise.all([
@@ -81,12 +115,29 @@ export async function loadSceneGenerationInput(
 
   const historicalAnchorTerms = proseQaContext.historicalAnchorTerms ?? [];
 
+  const worldStateIdForSources = baseContract.effectiveWorldState.worldStateId;
+  const approximateStoryYear = inferApproximateStoryYearFromScene(
+    scene.structuredDataJson,
+    scene.historicalAnchor
+  );
+  let narrativeSourcesForScene: SceneGenerationInput["narrativeSourcesForScene"] = [];
+  if (worldStateIdForSources) {
+    narrativeSourcesForScene = await getSourcesForWorldState(
+      worldStateIdForSources,
+      approximateStoryYear ?? undefined
+    );
+  }
+
+  const sourceIdsUsed = narrativeSourcesForScene.map((s) => s.id);
+
   let cognitionFramePayload: Record<string, unknown> | null = null;
   let pinnedDecisionTracePayload: Record<string, unknown> | null = null;
 
   if (options?.includeCognitionFrame !== false && povPersonId) {
     try {
-      const frame = await resolveCharacterCognitionFrame(povPersonId, sceneId);
+      const frame = await resolveCharacterCognitionFrame(povPersonId, sceneId, {
+        narrativeSourcesForScene,
+      });
       cognitionFramePayload = cognitionFrameToPromptPayload(frame);
     } catch {
       cognitionFramePayload = null;
@@ -118,8 +169,15 @@ export async function loadSceneGenerationInput(
     }
   }
 
-  const authorVoiceShaping = buildAuthorVoiceShaping({
-    narrativeWitnessMode: options?.narrativeWitnessMode,
+  const mergedVoiceOverrides: Partial<AuthorVoiceProfile> = {
+    ...(narrativeShapingResolution?.merged.authorVoiceProfile ?? {}),
+    ...(options?.authorVoiceOverrides ?? {}),
+  };
+  const witnessMode =
+    options?.narrativeWitnessMode ?? narrativeShapingResolution?.merged.narrativeWitnessMode;
+
+  let authorVoiceShaping = buildAuthorVoiceShaping({
+    narrativeWitnessMode: witnessMode,
     narrativeVoice: narrativeVoiceProfile
       ? {
           sentenceRhythm: narrativeVoiceProfile.sentenceRhythm,
@@ -138,9 +196,18 @@ export async function loadSceneGenerationInput(
           silencePatterns: characterVoiceProfile.silencePatterns,
         }
       : null,
-    overrides: options?.authorVoiceOverrides,
+    overrides: Object.keys(mergedVoiceOverrides).length ? mergedVoiceOverrides : undefined,
   });
+  if (narrativeShapingResolution) {
+    authorVoiceShaping = applyNarrativeShapingDefaultsToShaping(
+      authorVoiceShaping,
+      narrativeShapingResolution.merged
+    );
+  }
   const flat = flattenAuthorVoiceShapingToPromptLines(authorVoiceShaping);
+  const narrativeShapingSummary = narrativeShapingResolution
+    ? buildNarrativeShapingObserverSummary(narrativeShapingResolution)
+    : null;
 
   const contract: SceneGenerationInput["contract"] = {
     ...baseContract,
@@ -151,6 +218,8 @@ export async function loadSceneGenerationInput(
     socialFieldGeneration,
     authorVoiceShaping,
   };
+
+  validateRegisteredContractPayload("sceneGenerationInput", contract, "read");
 
   if (options?.includePinnedDecisionTracePayload !== false && povPersonId) {
     const dt = await prisma.characterInnerVoiceSession.findFirst({
@@ -203,5 +272,12 @@ export async function loadSceneGenerationInput(
     prosePresenceHints: flat.prosePresenceHints,
     witnessFrameLines: flat.witnessLines,
     voiceSummaryLines: flat.voiceSummaryLines,
+    narrativeShapingResolution:
+      options?.includeNarrativeShapingResolution && narrativeShapingResolution
+        ? narrativeShapingResolution
+        : null,
+    narrativeShapingSummary,
+    narrativeSourcesForScene,
+    sourceIdsUsed,
   };
 }

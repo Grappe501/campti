@@ -49,6 +49,13 @@ import { comparePressureBreakdownPair } from "@/lib/simulation/simulation-diff";
 import { inferApproximateStoryYearFromScene } from "@/lib/inner-voice/framing/age-band";
 import { prisma } from "@/lib/prisma";
 import { cognitionPrisma } from "@/lib/prisma-cognition-access";
+import {
+  buildNarrativeShapingObserverSummary,
+  buildNarrativeShapingObserverSummaryFromLayers,
+  resolveNarrativeShapingDefaultsForBook,
+  resolveNarrativeShapingDefaultsForChapter,
+  resolveNarrativeShapingDefaultsForScene,
+} from "@/lib/services/narrative-shaping-defaults-service";
 
 function isoNow(): string {
   return new Date().toISOString();
@@ -581,7 +588,8 @@ export async function buildSceneObserverSnapshot(sceneId: string): Promise<Scene
   });
   if (!scene) throw new Error(`Scene not found: ${sceneId}`);
 
-  const [edges, reports, repairPlan, pendingRevisionJobs, lastCompletedRepairJob] = await Promise.all([
+  const [edges, reports, repairPlan, pendingRevisionJobs, lastCompletedRepairJob, shapingRes] =
+    await Promise.all([
     prisma.narrativeDependencyEdge.findMany({
       where: {
         consumerKind: NarrativeDependencyConsumerKind.SCENE,
@@ -601,7 +609,9 @@ export async function buildSceneObserverSnapshot(sceneId: string): Promise<Scene
       orderBy: { completedAt: "desc" },
       select: { payload: true, completedAt: true },
     }),
+    resolveNarrativeShapingDefaultsForScene(sceneId),
   ]);
+  const narrativeShapingSummary = buildNarrativeShapingObserverSummary(shapingRes);
 
   const { text, source } = pickSceneText(scene);
   const textPresence = {
@@ -701,6 +711,7 @@ export async function buildSceneObserverSnapshot(sceneId: string): Promise<Scene
           : null,
       lastRepairCompletedAtIso: lastCompletedRepairJob?.completedAt?.toISOString() ?? null,
     },
+    narrativeShapingSummary,
     builtAtIso: isoNow(),
   };
 }
@@ -784,11 +795,19 @@ export async function buildSimulationObserverSnapshot(runId: string): Promise<Si
 }
 
 export async function buildBookObserverSnapshot(bookId: string): Promise<BookObserverSnapshot> {
-  const report = await buildBookCoherenceReport(bookId);
+  const [report, shaping] = await Promise.all([
+    buildBookCoherenceReport(bookId),
+    resolveNarrativeShapingDefaultsForBook(bookId),
+  ]);
   const plan = buildBookRefinementPlan(report);
   const majorIssueCount = report.coherenceIssues.filter(
     (i) => i.severity === "warning" || i.severity === "blocking"
   ).length;
+  const narrativeShapingSummary = buildNarrativeShapingObserverSummaryFromLayers(
+    shaping.merged,
+    shaping.fieldSources,
+    shaping.layers
+  );
   return {
     contractVersion: BOOK_OBSERVER_CONTRACT_VERSION,
     bookId: report.bookId,
@@ -800,28 +819,38 @@ export async function buildBookObserverSnapshot(bookId: string): Promise<BookObs
     arcPhaseDistribution: report.arcPhaseDistribution,
     majorIssueCount,
     refinementMode: plan.mode,
+    narrativeShapingSummary,
     builtAtIso: isoNow(),
   };
 }
 
 export async function buildChapterObserverSnapshot(chapterId: string): Promise<ChapterObserverSnapshot> {
-  const { plan, report } = await buildChapterRefinementPlan(chapterId);
-  const chapter = await prisma.chapter.findUniqueOrThrow({
-    where: { id: chapterId },
-    select: {
-      id: true,
-      bookId: true,
-      title: true,
-      sequenceInBook: true,
-      narrativeAssemblyStatus: true,
-      continuityState: true,
-    },
-  });
+  const [{ plan, report }, shaping, chapter] = await Promise.all([
+    buildChapterRefinementPlan(chapterId),
+    resolveNarrativeShapingDefaultsForChapter(chapterId),
+    prisma.chapter.findUniqueOrThrow({
+      where: { id: chapterId },
+      select: {
+        id: true,
+        bookId: true,
+        title: true,
+        sequenceInBook: true,
+        narrativeAssemblyStatus: true,
+        continuityState: true,
+      },
+    }),
+  ]);
   const majorIssueCount = report.coherenceIssues.filter(
     (i) => i.severity === "warning" || i.severity === "blocking"
   ).length;
   const reassemblyLikelyEnough =
     plan.mode === "REASSEMBLE_ONLY" || plan.mode === "REORDER_SCENE_SUGGESTION";
+
+  const narrativeShapingSummary = buildNarrativeShapingObserverSummaryFromLayers(
+    shaping.merged,
+    shaping.fieldSources,
+    shaping.layers
+  );
 
   return {
     contractVersion: CHAPTER_OBSERVER_CONTRACT_VERSION,
@@ -836,6 +865,7 @@ export async function buildChapterObserverSnapshot(chapterId: string): Promise<C
     majorIssueCount,
     refinementMode: plan.mode,
     reassemblyLikelyEnough,
+    narrativeShapingSummary,
     builtAtIso: isoNow(),
   };
 }

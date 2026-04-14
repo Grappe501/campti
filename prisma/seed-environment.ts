@@ -13,32 +13,38 @@ import {
  * Safe to re-run; does not overwrite unrelated seed data.
  */
 export async function seedEnvironment(prisma: PrismaClient): Promise<void> {
+  /** Editorial timeline order for truth-firewall chronology (not implied by `id` or seed loop order). */
   const ws = [
     {
+      chronologyIndex: 1,
       id: "seed-ws-ref-ws01",
       eraId: "WS-01-SACRED-TRADE-ARTERY",
       label: "Sacred / trade artery (early colonial)",
       description: "River as sacred artery and corridor before industrial control.",
     },
     {
+      chronologyIndex: 2,
       id: "seed-ws-ref-ws04",
       eraId: "WS-04-EXPANSION-COTTON",
       label: "Expansion / cotton economy",
       description: "Supply nodes and land pressure intensify along the corridor.",
     },
     {
+      chronologyIndex: 3,
       id: "seed-ws-ref-ws06",
       eraId: "WS-06-JIM-CROW-RURAL",
       label: "Jim Crow rural town",
       description: "Stable small-town grid with rigid social control.",
     },
     {
+      chronologyIndex: 5,
       id: "seed-ws-ref-ws08",
       eraId: "WS-08-MODERN-DECLINE-MEMORY",
       label: "Modern decline / memory load",
       description: "Shrinking population; layered oral and documentary memory.",
     },
     {
+      chronologyIndex: 0,
       id: "seed-ws-ref-ws09",
       eraId: "WS-09-RED-RIVER-TRADE-ERA",
       label: "Red River Trade Era (pre-French contact, Caddo trade network)",
@@ -46,6 +52,7 @@ export async function seedEnvironment(prisma: PrismaClient): Promise<void> {
         "Caddoan-speaking trade houses and kin networks along the Red River; reputation is collective; public speech is indirect and risk-aware.",
     },
     {
+      chronologyIndex: 4,
       id: "seed-ws-ref-ws07",
       eraId: "WS-07-ENGINEERED-WATERWAY",
       label: "Engineered waterway",
@@ -56,9 +63,10 @@ export async function seedEnvironment(prisma: PrismaClient): Promise<void> {
   for (const w of ws) {
     await prisma.worldStateReference.upsert({
       where: { eraId: w.eraId },
-      update: { label: w.label, description: w.description },
+      update: { label: w.label, description: w.description, chronologyIndex: w.chronologyIndex },
       create: {
         id: w.id,
+        chronologyIndex: w.chronologyIndex,
         eraId: w.eraId,
         label: w.label,
         description: w.description,

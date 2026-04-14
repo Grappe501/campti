@@ -26,6 +26,7 @@ import type {
   ThoughtFragmentProfile,
 } from "@/lib/domain/thought-realism";
 import type { SocialFieldContext } from "@/lib/domain/population-social-field";
+import type { CharacterKnowledgeBoundary } from "@/lib/character-knowledge/knowledge-boundary";
 
 /** DB: `CharacterCoreProfile` (1:1 Person). */
 export type CharacterCore = {
@@ -171,6 +172,8 @@ export type CharacterCognitionFrame = {
   innerVoiceTextureProfile: InnerVoiceTextureProfile;
   /** Phase 5F — population density / witness / gossip pressures (deterministic, lightweight). */
   socialFieldContext?: SocialFieldContext;
+  /** P2-F — epistemic horizon: what may be stated as known, believed, or unknown (no omniscience). */
+  knowledgeBoundary: CharacterKnowledgeBoundary;
 } & ResolvedCognitionLayer;
 
 export type { RankedCognitionItem };

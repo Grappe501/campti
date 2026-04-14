@@ -120,6 +120,8 @@ export type ResolveCharacterCognitionFrameOptions = {
   simulation?: ResolveCognitionFrameSimulationOptions;
   /** Default true when population tables exist; set false to skip queries. */
   includeSocialField?: boolean;
+  /** P2-E — temporally filtered narrative sources for this scene (feeds P2-F knowledge boundary). */
+  narrativeSourcesForScene?: import("@/lib/domain/narrative-source").NarrativeSource[];
 };
 
 export type SimulationRunInput = {

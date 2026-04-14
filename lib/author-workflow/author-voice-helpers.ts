@@ -6,6 +6,7 @@ import type {
   NarrativeWitnessMode,
   ProsePresenceProfile,
 } from "@/lib/domain/author-voice-humanization";
+import type { NarrativeShapingDefaults } from "@/lib/domain/narrative-shaping-defaults";
 import { AUTHOR_VOICE_SHAPING_VERSION } from "@/lib/domain/author-voice-humanization";
 
 function clamp01(n: number): number {
@@ -259,6 +260,39 @@ export function buildAuthorVoiceShaping(input: {
     detailSelectionProfile,
     humanizationProfile,
     prosePresenceProfile,
+  };
+}
+
+/**
+ * Apply hierarchy metadata defaults on top of DB-derived `AuthorVoiceShapingV1` (later wins per sub-field).
+ */
+export function applyNarrativeShapingDefaultsToShaping(
+  base: AuthorVoiceShapingV1,
+  merged: NarrativeShapingDefaults
+): AuthorVoiceShapingV1 {
+  const av: AuthorVoiceProfile = {
+    ...base.authorVoiceProfile,
+    ...(merged.authorVoiceProfile ?? {}),
+  };
+  const detail: DetailSelectionProfile = {
+    ...base.detailSelectionProfile,
+    ...(merged.detailSelectionProfile ?? {}),
+  };
+  const hum: HumanizationProfile = {
+    ...base.humanizationProfile,
+    ...(merged.humanizationProfile ?? {}),
+  };
+  const prose: ProsePresenceProfile = {
+    ...base.prosePresenceProfile,
+    ...(merged.prosePresenceProfile ?? {}),
+  };
+  return {
+    ...base,
+    narrativeWitnessMode: merged.narrativeWitnessMode ?? base.narrativeWitnessMode,
+    authorVoiceProfile: av,
+    detailSelectionProfile: detail,
+    humanizationProfile: hum,
+    prosePresenceProfile: prose,
   };
 }
 

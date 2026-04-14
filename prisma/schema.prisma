@@ -1089,6 +1089,9 @@ model Person {
   innerVoiceSessions      CharacterInnerVoiceSession[]
   cognitionSimulationRuns SimulationRun[]
 
+  /// P2-G — bounded memory of a human reader as seen from this character (earned through interaction only).
+  characterReaderMemories CharacterReaderMemory[]
+
   /// Phase 5F — optional link from promoted census / population row.
   populationLink PopulationEntity? @relation("PopulationEntityPerson")
 }
@@ -1309,11 +1312,65 @@ model SimulationRun {
   @@index([inputHash])
 }
 
+/// Authored or historical narrative source material with temporal / world-state bounds (truth firewall).
+model NarrativeSource {
+  id        String   @id @default(cuid())
+  title     String
+  authorType String // "steve" | "historical" | "other"
+  createdAt DateTime @default(now())
+
+  effectiveStartWorldStateId String
+  effectiveEndWorldStateId   String?
+
+  effectiveStartWorldState WorldStateReference  @relation("NarrativeSourceEffectiveStart", fields: [effectiveStartWorldStateId], references: [id], onDelete: Restrict)
+  effectiveEndWorldState   WorldStateReference? @relation("NarrativeSourceEffectiveEnd", fields: [effectiveEndWorldStateId], references: [id], onDelete: Restrict)
+
+  startYear Int?
+  endYear   Int?
+
+  scope     String // "global" | "regional" | "family" | "character"
+  truthMode String // "authoritative" | "interpretive" | "fictionalized"
+
+  tags    String[]
+  content String   @db.Text
+
+  metadataJson Json?
+
+  @@index([effectiveStartWorldStateId])
+  @@index([startYear])
+}
+
+/// Canonical epic timeline spine (master build spine): ordered books, time/world-state bounds, narrative role.
+/// Distinct from `Book` (assembly/movement rows); this row is the architecture backbone for filtering and limits.
+model EpicBook {
+  id         String   @id @default(cuid())
+  title      String
+  orderIndex Int
+
+  startYear Int?
+  endYear   Int?
+
+  startWorldStateId String?
+  endWorldStateId   String?
+
+  summary  String?
+  themes   String[]
+
+  isProvisional Boolean @default(true)
+
+  metadataJson Json?
+
+  @@index([orderIndex])
+}
+
 /// Pointer to external / master timeline world-state definitions (era slice). Not full simulation logic.
 model WorldStateReference {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  /// Canonical chronology backbone (lower = earlier). Never inferred from `id` string order.
+  chronologyIndex Int @unique
 
   eraId       String  @unique
   label       String
@@ -1375,6 +1432,9 @@ model WorldStateReference {
   chapterOverrides    Chapter[]       @relation("ChapterToWorldState")
   sceneOverrides      Scene[]         @relation("SceneToWorldState")
   beatOverrides       NarrativeBeat[] @relation("BeatToWorldState")
+
+  narrativeSourcesEffectiveStart NarrativeSource[] @relation("NarrativeSourceEffectiveStart")
+  narrativeSourcesEffectiveEnd   NarrativeSource[] @relation("NarrativeSourceEffectiveEnd")
 
   characterStateSnapshots CharacterStateSnapshot[] @relation("WorldStateToCharacterStateSnapshots")
 
@@ -4050,6 +4110,33 @@ model ReaderVoiceListen {
   @@unique([sessionId, personId])
   @@index([personId])
   @@index([totalListenSeconds])
+}
+
+/// P2-G — What a **character** (Person) may remember about a **specific reader** (opaque id, e.g. auth user or stable session key).
+/// Populated only via interaction paths — not from narrative ingestion or global profile sync.
+model CharacterReaderMemory {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  characterId String
+  character   Person @relation(fields: [characterId], references: [id], onDelete: Cascade)
+
+  /// Opaque reader key (e.g. Supabase `userId`, or app-issued reader id). Not a Person row.
+  readerId String
+
+  familiarityLevel Int @default(0)
+  interactionCount Int @default(0)
+
+  /// JSON bag of reader-attributed facts learned in dialogue (bounded policy in service layer).
+  knownFacts Json @default("{}")
+
+  lastInteractionAt DateTime @default(now())
+
+  @@unique([characterId, readerId])
+  @@index([readerId])
+  @@index([characterId])
+  @@index([lastInteractionAt])
 }
 
 /// System governing law for deterministic simulation (Stage 1). Distinct from `NarrativeRule` (source-extracted DNA).

@@ -6,12 +6,13 @@
 import type { DecisionPressureBreakdown } from "@/lib/domain/decision-trace";
 import type { SimulationDiff, SimulationRunResult } from "@/lib/domain/simulation-run";
 import type { SocialFieldContext } from "@/lib/domain/population-social-field";
+import type { NarrativeShapingObserverSummary } from "@/lib/domain/narrative-shaping-defaults";
 import type { SceneRepairMode, SceneStalenessReason } from "@/lib/domain/scene-repair";
 
-export const WORLD_OBSERVER_CONTRACT_VERSION = "3" as const;
+export const WORLD_OBSERVER_CONTRACT_VERSION = "4" as const;
 
 /** Phase 6.3 — chapter coherence (deterministic score + refinement plan mode). */
-export const CHAPTER_OBSERVER_CONTRACT_VERSION = "1" as const;
+export const CHAPTER_OBSERVER_CONTRACT_VERSION = "2" as const;
 
 export type ChapterObserverSnapshot = {
   contractVersion: typeof CHAPTER_OBSERVER_CONTRACT_VERSION;
@@ -27,11 +28,13 @@ export type ChapterObserverSnapshot = {
   refinementMode: string;
   /** When true, stale assembly or ordering issues dominate—reassembly/metadata before LLM. */
   reassemblyLikelyEnough: boolean;
+  /** Phase 7.1 — inherited narrative shaping defaults (epic→book→chapter). */
+  narrativeShapingSummary: NarrativeShapingObserverSummary | null;
   builtAtIso: string;
 };
 
 /** Phase 6.4 — book-level arc summary (deterministic score + phase map). */
-export const BOOK_OBSERVER_CONTRACT_VERSION = "1" as const;
+export const BOOK_OBSERVER_CONTRACT_VERSION = "2" as const;
 
 export type BookObserverSnapshot = {
   contractVersion: typeof BOOK_OBSERVER_CONTRACT_VERSION;
@@ -44,6 +47,8 @@ export type BookObserverSnapshot = {
   arcPhaseDistribution: Record<string, number>;
   majorIssueCount: number;
   refinementMode: string;
+  /** Phase 7.1 — inherited narrative shaping defaults (epic→book). */
+  narrativeShapingSummary: NarrativeShapingObserverSummary | null;
   builtAtIso: string;
 };
 
@@ -319,6 +324,8 @@ export type SceneObserverSnapshot = {
   };
   textPresence: SceneTextPresence;
   repairSummary: SceneRepairObserverSummary | null;
+  /** Phase 7.1 — full hierarchy resolution summary (epic→book→chapter→scene). */
+  narrativeShapingSummary: NarrativeShapingObserverSummary | null;
   builtAtIso: string;
 };
 

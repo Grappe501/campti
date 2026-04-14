@@ -43,6 +43,7 @@ function buildSystemPrompt(): string {
     "Avoid explanatory tone that tidies the scene for a reader; preserve ambiguity and silence where the witness lines ask for it.",
     "Output ONE JSON object only, matching the schema in the user message. No markdown fences.",
     "The JSON field `generatedText` is MODEL DRAFT ONLY — it must never be described as reader-canonical.",
+    "When NARRATIVE_SOURCES_ALLOWED is present in the user message, treat only that material as temporally valid cited source text for the scene’s era (P2-E).",
   ].join("\n");
 }
 
@@ -63,8 +64,30 @@ function truncateJson(v: unknown, max: number): string {
   return `${s.slice(0, max)}…[truncated]`;
 }
 
+function compactNarrativeSourcesBlock(input: SceneGenerationInput): string | null {
+  const sources = input.narrativeSourcesForScene;
+  if (!sources?.length) return null;
+  const lines: string[] = [
+    "Only the following ingested sources are temporally valid for this scene (P2-E truth firewall).",
+    "Do not treat material outside this list as grounded historical fact for this era.",
+  ];
+  let remaining = 10000;
+  for (const s of sources) {
+    if (remaining <= 0) break;
+    const header = `--- sourceId=${s.id} title=${JSON.stringify(s.title)} truthMode=${s.truthMode} scope=${s.scope} ---\n`;
+    const body =
+      s.content.length > 2000 ? `${s.content.slice(0, 2000)}…[truncated]` : s.content;
+    const chunk = header + body;
+    const take = chunk.slice(0, remaining);
+    lines.push(take);
+    remaining -= take.length;
+  }
+  return lines.join("\n\n");
+}
+
 function buildUserPrompt(input: SceneGenerationInput, basisProse: string | null): string {
   const socialLines = compactSocialGuidanceLines(input);
+  const narrativeSourcesBlock = compactNarrativeSourcesBlock(input);
   return [
     `GENERATION_MODE: ${input.generationMode}`,
     `GENERATION_PURPOSE: ${purposeLabel(input.generationPurpose)}`,
@@ -80,6 +103,10 @@ function buildUserPrompt(input: SceneGenerationInput, basisProse: string | null)
     "",
     "CONTRACT_JSON:",
     truncateJson(input.contract, 28000),
+    "",
+    narrativeSourcesBlock
+      ? `NARRATIVE_SOURCES_ALLOWED (temporal truth — P2-E):\n${narrativeSourcesBlock}`
+      : "",
     "",
     input.cognitionFramePayload
       ? `COGNITION_FRAME_PAYLOAD (respect; do not contradict resolved stacks):\n${truncateJson(input.cognitionFramePayload, 12000)}`

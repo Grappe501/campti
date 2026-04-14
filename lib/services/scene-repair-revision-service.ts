@@ -1,3 +1,7 @@
+/**
+ * Enqueue-only: durable `RevisionJob` rows. **Execution** is separate — see
+ * `lib/services/revision-job-runner.ts` (claim + run + retries).
+ */
 import { RevisionJobKind, RevisionJobStatus } from "@prisma/client";
 
 import type {

@@ -1,11 +1,11 @@
-import { createHash } from "node:crypto";
-
 import { flattenAuthorVoiceShapingToPromptLines } from "@/lib/author-workflow/author-voice-helpers";
+import { validateRegisteredContractPayload } from "@/lib/contracts/contract-registry";
 import type { HumanizationAdvisoryReport } from "@/lib/domain/author-voice-humanization";
 import type { SceneGenerationInput } from "@/lib/domain/scene-generation-input";
 import type { SceneGenerationRunResult } from "@/lib/domain/scene-generation-output";
 import { analyzeProseDeterministic } from "@/lib/prose-quality";
 import { prisma } from "@/lib/prisma";
+import { computeSceneGenerationInputHash } from "@/lib/scene-generation/canonical-scene-generation-hash";
 import { assessProseHumanizationAdvisory } from "@/lib/scene-generation/prose-humanization-advisory";
 import { adviseSocialPressureInGeneratedProse } from "@/lib/scene-generation/social-pressure-qa";
 import { generateSceneProseWithModel } from "@/lib/scene-generation/scene-generation-llm-adapter";
@@ -15,23 +15,14 @@ import {
   registerSceneGenerationDependencies,
   type SceneGenerationDependencyPlan,
 } from "@/lib/services/scene-generation-dependency-service";
+import { assertWorldStateMatchesBook } from "@/lib/services/world-book-mapper";
 
-function hashGenerationInput(input: SceneGenerationInput): string {
-  return createHash("sha256")
-    .update(
-      JSON.stringify({
-        mode: input.generationMode,
-        purpose: input.generationPurpose,
-        contract: input.contract,
-        hasCognition: Boolean(input.cognitionFramePayload),
-        hasDt: Boolean(input.pinnedDecisionTracePayload),
-        hasSocialFieldGeneration: Boolean(input.contract.socialFieldGeneration),
-        hasSocialGuidanceLines: Boolean(input.socialFieldSummaryForGeneration),
-        authorVoiceShaping: input.authorVoiceShaping ?? null,
-      })
-    )
-    .digest("hex");
-}
+/**
+ * Generation input hash (dependency `inputSnapshotHash`) uses
+ * {@link computeSceneGenerationInputHash}: fully resolved `SceneGenerationInput` + same `basisProse`
+ * passed to the model — see `lib/scene-generation/canonical-scene-generation-hash.ts`.
+ * Legacy partial hashing (mode/purpose + booleans) is removed.
+ */
 
 function buildDependencyPlanFromInput(input: SceneGenerationInput): SceneGenerationDependencyPlan {
   const c = input.contract;
@@ -100,6 +91,11 @@ export async function runSceneGeneration(
     ...(params.inputOverride ?? {}),
     proseQaContext: genInput.proseQaContext,
   };
+  merged = {
+    ...merged,
+    sourceIdsUsed: merged.sourceIdsUsed ?? genInput.sourceIdsUsed,
+    narrativeSourcesForScene: merged.narrativeSourcesForScene ?? genInput.narrativeSourcesForScene,
+  };
   if (merged.authorVoiceShaping) {
     const flat = flattenAuthorVoiceShapingToPromptLines(merged.authorVoiceShaping);
     merged = {
@@ -116,12 +112,19 @@ export async function runSceneGeneration(
     };
   }
 
+  /** P2-D — narrative book timeline must contain the scene’s resolved world state (when spine is calibrated). */
+  await assertWorldStateMatchesBook(params.sceneId, merged.contract.book.id);
+
   const basis =
     merged.generationMode === "draft" && merged.generationPurpose === "author_draft"
       ? null
       : await resolveBasisProse(params.sceneId, merged);
 
+  /** After loader merge + basis resolution; same tuple as `generateSceneProseWithModel`. */
+  const inputHash = computeSceneGenerationInputHash(merged, basis);
+
   let output = await generateSceneProseWithModel(merged, basis);
+  output = validateRegisteredContractPayload("sceneGenerationOutput", output, "write");
 
   const socialBundle = merged.contract.socialFieldGeneration ?? null;
   if (params.runSocialPressureAdvisory !== false && socialBundle) {
@@ -162,7 +165,6 @@ export async function runSceneGeneration(
   }
 
   const plan = buildDependencyPlanFromInput(merged);
-  const inputHash = hashGenerationInput(merged);
   let registeredDependencyIds: string[] = [];
   if (params.registerDependencies !== false) {
     registeredDependencyIds = await registerSceneGenerationDependencies(plan, inputHash);

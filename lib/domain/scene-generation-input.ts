@@ -11,7 +11,12 @@ import type {
   AuthorVoiceShapingV1,
   NarrativeWitnessMode,
 } from "@/lib/domain/author-voice-humanization";
+import type {
+  HierarchyShapingResolution,
+  NarrativeShapingObserverSummary,
+} from "@/lib/domain/narrative-shaping-defaults";
 import type { SceneGenerationSocialQaScalars } from "@/lib/domain/scene-generation-social";
+import type { NarrativeSource } from "@/lib/domain/narrative-source";
 
 /** How the model should treat this request (prompt routing only). */
 export type SceneGenerationMode = "draft" | "rewrite" | "repair" | "alternate";
@@ -109,4 +114,18 @@ export type SceneGenerationInput = {
   witnessFrameLines?: string[];
   /** Deterministic axis summary for prompts. */
   voiceSummaryLines?: string[];
+
+  /** Phase 7.1 — resolved hierarchy defaults + field source map (optional full trace). */
+  narrativeShapingResolution?: HierarchyShapingResolution | null;
+  /** Phase 7.1 — slim shaping summary for observers and tooling. */
+  narrativeShapingSummary?: NarrativeShapingObserverSummary | null;
+
+  /**
+   * P2-E — Narrative sources allowed for this scene’s world state and optional story year.
+   * Populated only via `getSourcesForWorldState` (temporal truth firewall); enforces temporal truth integrity.
+   */
+  narrativeSourcesForScene?: NarrativeSource[];
+
+  /** Observability: ids of sources attached for this generation run (matches filtered temporal set). */
+  sourceIdsUsed: string[];
 };

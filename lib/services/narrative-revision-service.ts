@@ -113,6 +113,7 @@ export async function summarizeAffectedScenes(
   }));
 }
 
+/** Persists PENDING jobs only — processing via `revision-job-runner` / `actionProcessRevisionJobsTick`. */
 export async function enqueueRevisionJobsForScenes(
   sceneIds: string[],
   kind: RevisionJobKind = RevisionJobKind.REEVALUATE_SCENE

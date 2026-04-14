@@ -41,6 +41,7 @@ import type {
 import { buildSocialFieldContextFromQuery } from "@/lib/services/social-field-context-service";
 import { applySimulationOverridesToRelationshipContext } from "@/lib/simulation/apply-simulation-overrides";
 import { mergeCharacterStateSnapshot } from "@/lib/simulation/merge-character-state-snapshot";
+import { buildCharacterKnowledgeBoundary } from "@/lib/character-knowledge/knowledge-boundary";
 
 function parishPlaceIdFromSceneJson(structuredDataJson: unknown): string | null {
   if (!structuredDataJson || typeof structuredDataJson !== "object") return null;
@@ -53,7 +54,7 @@ function coerceFrameOptions(
 ): ResolveCharacterCognitionFrameOptions {
   if (third == null) return {};
   const k = third as Record<string, unknown>;
-  if ("simulation" in k || "includeSocialField" in k) {
+  if ("simulation" in k || "includeSocialField" in k || "narrativeSourcesForScene" in k) {
     return third as ResolveCharacterCognitionFrameOptions;
   }
   if ("patch" in k) {
@@ -325,6 +326,48 @@ export async function resolveCharacterCognitionFrame(
     embodiedResolved.fearStack.length * 0.11 + 0.14 + (stress.active ? stress.weight * 0.12 : 0)
   );
 
+  const otherPartyIds = [
+    ...new Set(
+      rel.map((r) => (r.personAId === characterId ? r.personBId : r.personAId))
+    ),
+  ];
+  const otherPeople =
+    otherPartyIds.length > 0
+      ? await prisma.person.findMany({
+          where: { id: { in: otherPartyIds } },
+          select: { id: true, name: true },
+        })
+      : [];
+  const nameById = Object.fromEntries(otherPeople.map((p) => [p.id, p.name]));
+  const relationshipLines = rel.slice(0, 24).map((r) => {
+    const oid = r.personAId === characterId ? r.personBId : r.personAId;
+    const nm = nameById[oid] ?? oid;
+    return `${nm}: ${r.relationshipType}`;
+  });
+
+  const assertionSlotLabels = assertions
+    .map((a) => a.slot?.slotLabel?.trim())
+    .filter((x): x is string => Boolean(x));
+
+  const socialRoleHint =
+    [literaryProfile?.socialPosition, literaryProfile?.roleArchetype]
+      .map((s) => (typeof s === "string" ? s.trim() : ""))
+      .filter(Boolean)
+      .join(" — ") || null;
+
+  const knowledgeBoundary = buildCharacterKnowledgeBoundary({
+    worldStateLabel: worldStateRow?.label ?? null,
+    approximateStoryYear: storyYear ?? null,
+    socialRoleHint,
+    literacyClerical: worldLanguageEnv.literacyNorm?.clericalLiteracy ?? null,
+    relationshipLines,
+    narrativeSources: opts.narrativeSourcesForScene ?? [],
+    assertionSlotLabels,
+    perceivedReality: embodiedResolved.perceivedReality,
+    gossipPressure01: socialFieldContext?.gossipPressure ?? null,
+    witnessRisk01: socialFieldContext?.witnessRisk ?? null,
+  });
+
   const {
     thoughtFragmentProfile,
     cognitiveDistortionProfile,
@@ -390,6 +433,7 @@ export async function resolveCharacterCognitionFrame(
     cognitiveDistortionProfile,
     innerVoiceTextureProfile,
     socialFieldContext,
+    knowledgeBoundary,
     ...embodiedResolved,
   };
 }
@@ -440,6 +484,13 @@ export function cognitionFrameToPromptPayload(frame: CharacterCognitionFrame): R
       innerVoiceTexture: frame.innerVoiceTextureProfile,
     },
     socialField: frame.socialFieldContext ?? null,
+    knowledgeBoundary: {
+      policy:
+        "P2-F epistemic boundary — temporal truth integrity: honor known / believed / unknown lists; no omniscient narrator knowledge or future history.",
+      knownFacts: frame.knowledgeBoundary.knownFacts,
+      believedFacts: frame.knowledgeBoundary.believedFacts,
+      unknownDomains: frame.knowledgeBoundary.unknownDomains,
+    },
     resolved: {
       perceivedReality: frame.perceivedReality,
       activeMotives: frame.activeMotives,
