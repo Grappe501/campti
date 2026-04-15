@@ -1,0 +1,39 @@
+{
+  "contractVersion": "1",
+  "scope": "phase7_live_operations_intelligence_layer",
+  "evaluatedAtIso": "2026-04-15T17:37:45.975Z",
+  "subsystems": [
+    {
+      "subsystem": "operational_telemetry_model",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "reader_behavior_analytics",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "story_health_monitoring",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "experimentation_governance",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "recommendation_intelligence_layer",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "live_safety_moderation_ops",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "operator_author_live_surfaces",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "operations_verification_surface",
+      "status": "acceptable"
+    }
+  ]
+}

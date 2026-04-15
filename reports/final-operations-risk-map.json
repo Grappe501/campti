@@ -1,0 +1,23 @@
+{
+  "contractVersion": "1",
+  "scope": "phase7_live_operations_intelligence_layer",
+  "evaluatedAtIso": "2026-04-15T17:37:45.975Z",
+  "risks": [
+    {
+      "riskId": "narrative_truth_corruption",
+      "severity": "low"
+    },
+    {
+      "riskId": "observability_blind_spots",
+      "severity": "low"
+    },
+    {
+      "riskId": "live_moderation_backlog",
+      "severity": "low"
+    },
+    {
+      "riskId": "operator_visibility_gaps",
+      "severity": "low"
+    }
+  ]
+}

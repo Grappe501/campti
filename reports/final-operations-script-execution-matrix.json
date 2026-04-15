@@ -1,0 +1,127 @@
+{
+  "contractVersion": "1",
+  "certificationScope": "phase7_chunk9_live_operations_certification_run",
+  "executedAtIso": "2026-04-15T17:37:45.975Z",
+  "commands": [
+    {
+      "command": "npx prisma validate",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npx prisma generate",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run typecheck",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run lint",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run build",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:migrations",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:contracts",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:contract-drift",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:interaction-truth-firewall",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:prelaunch:strict",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:full-system:strict",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:telemetry-model",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:reader-analytics",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:story-health",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:experimentation",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:recommendation-layer",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:live-safety",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:operator-surfaces",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:operations-layer",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    }
+  ],
+  "summary": {
+    "total": 19,
+    "passed": 19,
+    "failed": 0,
+    "skipped": 0
+  }
+}
