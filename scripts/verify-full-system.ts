@@ -49,6 +49,7 @@ void (async () => {
     "npm run verify:reader-cockpit-command",
     "npm run verify:platform-scale",
     "npm run verify:operations-layer",
+    "npm run verify:operations-orchestration-depth",
   ];
   if (strict) {
     commands.unshift("npm run verify:migrations");

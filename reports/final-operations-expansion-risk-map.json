@@ -1,0 +1,27 @@
+{
+  "contractVersion": "1",
+  "scope": "phase7_expansion_live_operations_intelligence_depth",
+  "evaluatedAtIso": "2026-04-15T17:50:43.869Z",
+  "risks": [
+    {
+      "riskId": "observability_depth_gap",
+      "severity": "low"
+    },
+    {
+      "riskId": "undetected_operational_anomalies",
+      "severity": "low"
+    },
+    {
+      "riskId": "story_health_misdiagnosis",
+      "severity": "low"
+    },
+    {
+      "riskId": "recommendation_or_experiment_safety_drift",
+      "severity": "low"
+    },
+    {
+      "riskId": "live_safety_operability_gap",
+      "severity": "low"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "contractVersion": "1",
+  "scope": "phase7_expansion_live_operations_intelligence_depth",
+  "evaluatedAtIso": "2026-04-15T17:50:43.869Z",
+  "subsystems": [
+    {
+      "subsystem": "telemetry_depth",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "anomaly_detection",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "story_health_diagnostics",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "experiment_governance_depth",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "recommendation_intelligence_depth",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "live_safety_ops_depth",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "operator_insight_depth",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "operations_orchestration_depth",
+      "status": "acceptable"
+    }
+  ]
+}

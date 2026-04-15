@@ -1,0 +1,127 @@
+{
+  "contractVersion": "1",
+  "certificationScope": "phase7_expansion_workstream9_operations_certification_run",
+  "executedAtIso": "2026-04-15T17:50:43.869Z",
+  "commands": [
+    {
+      "command": "npx prisma validate",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npx prisma generate",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run typecheck",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run lint",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run build",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:migrations",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:contracts",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:contract-drift",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:interaction-truth-firewall",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:prelaunch:strict",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:full-system:strict",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:telemetry-depth",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:anomaly-detection",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:story-health-diagnostics",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:experiment-governance-depth",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:recommendation-intelligence-depth",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:live-safety-ops-depth",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:operator-insight-depth",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:operations-orchestration-depth",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    }
+  ],
+  "summary": {
+    "total": 19,
+    "passed": 19,
+    "failed": 0,
+    "skipped": 0
+  }
+}
