@@ -34,8 +34,8 @@ export default async function AdminSceneDetailPage({ params, searchParams }: Pro
         <h2 className="text-lg font-medium text-stone-900">Edit scene</h2>
         <p className="mt-1 text-sm text-stone-600">
           Use the{" "}
-          <Link href={`/admin/scenes/${scene.id}/workspace`} className="font-medium text-amber-900 hover:underline">
-            Scene workspace
+          <Link href={`/admin/narrative?scope=scene&sceneId=${scene.id}`} className="font-medium text-amber-900 hover:underline">
+            Author cockpit (scene)
           </Link>{" "}
           to write drafts, link entities, generate scaffolds, and view continuity warnings.
         </p>

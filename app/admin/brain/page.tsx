@@ -661,7 +661,7 @@ export default async function BrainDashboardPage() {
           ) : (
             d.recentSceneAssistRuns.map((r) => (
               <li key={r.id} className="flex flex-wrap justify-between gap-2">
-                <Link href={`/admin/scenes/${r.sceneId}/workspace`} className="text-amber-900 hover:underline">
+                <Link href={`/admin/narrative?scope=scene&sceneId=${r.sceneId}`} className="text-amber-900 hover:underline">
                   {r.assistType}
                 </Link>
                 <span className="text-xs text-stone-500">

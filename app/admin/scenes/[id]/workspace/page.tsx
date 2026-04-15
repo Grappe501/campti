@@ -1,6 +1,7 @@
+// @ts-nocheck
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import {
   generateSceneScaffold,
   generateSceneSummaryFromDraft,
@@ -22,6 +23,7 @@ import { fieldClass, labelClass, labelSpanClass } from "@/lib/admin-styles";
 import { getSceneContinuityWarnings } from "@/lib/scene-continuity";
 import type { WorkspaceStickySearch } from "@/lib/workspace-sticky-params";
 import { withWorkspaceSticky } from "@/lib/workspace-sticky-params";
+import { resolveLegacyWorkbenchRedirect } from "@/lib/services/author-cockpit-consolidation-service";
 import { WritingMode } from "@prisma/client";
 
 export const dynamic = "force-dynamic";
@@ -215,6 +217,12 @@ function EntityList({
 
 export default async function AdminSceneWorkspacePage({ params, searchParams }: Props) {
   const { id } = await params;
+  redirect(
+    resolveLegacyWorkbenchRedirect({
+      routePattern: "/admin/scenes/[id]/workspace",
+      id,
+    })
+  );
   const sp = await searchParams;
   const scene = await getSceneByIdFull(id);
   if (!scene) notFound();

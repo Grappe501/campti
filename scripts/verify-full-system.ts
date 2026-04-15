@@ -50,6 +50,9 @@ void (async () => {
     "npm run verify:platform-scale",
     "npm run verify:operations-layer",
     "npm run verify:operations-orchestration-depth",
+    "npm run verify:creator-publishing-layer",
+    "npm run verify:deployment-commercial-layer",
+    "npm run verify:author-command-cockpit",
   ];
   if (strict) {
     commands.unshift("npm run verify:migrations");
