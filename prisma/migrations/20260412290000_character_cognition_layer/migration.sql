@@ -39,8 +39,8 @@ CREATE TABLE "CharacterCognitionCore" (
     "defaultDefensesJson" JSONB,
     "privateDesireThemesJson" JSONB,
     "identityTensionsJson" JSONB,
-    "recordType" "RecordType" NOT NULL DEFAULT 'HYBRID',
-    "visibility" "VisibilityStatus" NOT NULL DEFAULT 'REVIEW',
+    "recordType" "RecordType" NOT NULL DEFAULT 'hybrid',
+    "visibility" "VisibilityStatus" NOT NULL DEFAULT 'review',
     "certainty" TEXT,
     "notes" TEXT,
 
@@ -77,8 +77,8 @@ CREATE TABLE "CharacterCognitionSnapshot" (
     "relationshipsSnapshotJson" JSONB,
     "genealogicalContextRefsJson" JSONB,
     "supersedesId" TEXT,
-    "recordType" "RecordType" NOT NULL DEFAULT 'HYBRID',
-    "visibility" "VisibilityStatus" NOT NULL DEFAULT 'REVIEW',
+    "recordType" "RecordType" NOT NULL DEFAULT 'hybrid',
+    "visibility" "VisibilityStatus" NOT NULL DEFAULT 'review',
     "certainty" TEXT,
 
     CONSTRAINT "CharacterCognitionSnapshot_pkey" PRIMARY KEY ("id")

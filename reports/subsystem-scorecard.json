@@ -1,0 +1,121 @@
+{
+  "generatedAt": "2026-04-15T00:00:00Z",
+  "certificationDecision": {
+    "storyExpansionReadyNow": false,
+    "summary": "Not ready: migration drift and skip-masked certification paths must be hardened first."
+  },
+  "subsystems": [
+    {
+      "family": "truth/genealogy/source ingestion",
+      "status": "acceptable",
+      "confidence": "medium"
+    },
+    {
+      "family": "world-state chronology",
+      "status": "acceptable",
+      "confidence": "medium"
+    },
+    {
+      "family": "epic spine / book mapping",
+      "status": "acceptable",
+      "confidence": "medium"
+    },
+    {
+      "family": "scene generation",
+      "status": "premier",
+      "confidence": "high"
+    },
+    {
+      "family": "repair/revision/job execution",
+      "status": "acceptable",
+      "confidence": "medium"
+    },
+    {
+      "family": "cognition / knowledge boundary",
+      "status": "acceptable",
+      "confidence": "medium"
+    },
+    {
+      "family": "reader memory / relationship progression",
+      "status": "acceptable",
+      "confidence": "medium"
+    },
+    {
+      "family": "emotional continuity / drift",
+      "status": "acceptable",
+      "confidence": "medium"
+    },
+    {
+      "family": "conversation sessions / turns / re-entry",
+      "status": "provisional",
+      "confidence": "medium-low"
+    },
+    {
+      "family": "response generation / guardrails",
+      "status": "premier",
+      "confidence": "high"
+    },
+    {
+      "family": "voice presentation / synthesis",
+      "status": "acceptable",
+      "confidence": "medium"
+    },
+    {
+      "family": "cockpit backend / UI",
+      "status": "provisional",
+      "confidence": "medium-low"
+    },
+    {
+      "family": "entitlements / balances / unit economy",
+      "status": "provisional",
+      "confidence": "low"
+    },
+    {
+      "family": "degraded mode / provider resilience",
+      "status": "acceptable",
+      "confidence": "medium"
+    },
+    {
+      "family": "observability / analytics",
+      "status": "acceptable",
+      "confidence": "medium"
+    },
+    {
+      "family": "author/God mode",
+      "status": "acceptable",
+      "confidence": "medium"
+    },
+    {
+      "family": "contracts / registries / validation",
+      "status": "acceptable",
+      "confidence": "medium"
+    },
+    {
+      "family": "migrations / operational dependencies",
+      "status": "provisional",
+      "confidence": "low"
+    },
+    {
+      "family": "permissions / moderation",
+      "status": "acceptable",
+      "confidence": "medium"
+    },
+    {
+      "family": "performance / background work",
+      "status": "provisional",
+      "confidence": "low"
+    },
+    {
+      "family": "test harnesses / verification scripts",
+      "status": "acceptable",
+      "confidence": "medium"
+    }
+  ],
+  "criticalBlockers": [
+    "30 unapplied Prisma migrations",
+    "deterministic harness blocked by missing ReaderInteractionLedgerEntry table",
+    "prelaunch passes with DB-critical checks skipped",
+    "background maintenance fails on missing CharacterConversationSession table",
+    "partial contract registry coverage for contractVersion payloads"
+  ]
+}
