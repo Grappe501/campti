@@ -1,0 +1,39 @@
+{
+  "contractVersion": "1",
+  "scope": "phase4_narrative_production_layer",
+  "evaluatedAtIso": "2026-04-15T16:09:12.595Z",
+  "subsystems": [
+    {
+      "subsystem": "book_program",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "chapter_assembly",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "scene_sequencing",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "author_steering",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "drafting_revision",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "production_branching",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "manuscript_coherence",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "production_verification_surface",
+      "status": "acceptable"
+    }
+  ]
+}

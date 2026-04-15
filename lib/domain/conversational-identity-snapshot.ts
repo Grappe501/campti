@@ -1,5 +1,6 @@
 import type { CharacterKnowledgeBoundary } from "@/lib/character-knowledge/knowledge-boundary";
 import type { CharacterReaderMemoryDomain } from "@/lib/domain/character-reader-memory";
+import type { ReaderRelationshipProgression } from "@/lib/domain/reader-relationship-progression";
 
 /**
  * P2-H — Full conversational bundle for live reader↔character interaction (LLM input shape).
@@ -28,6 +29,18 @@ export const BOUNDED_CHARACTER_CONVERSATIONAL_POLICY: ConversationalIdentityPoli
   authorOmniscienceExcluded: true,
 };
 
+/** P2-P — Optional bounded session slice (no full transcript; deterministic micro-lines only). */
+export type ConversationalIdentitySessionContext = {
+  sessionId: string;
+  sessionStatus: "ACTIVE" | "PAUSED" | "ENDED";
+  /** P2-G dyadic count from {@link CharacterReaderMemory} on this snapshot (not session row totals). */
+  readerMemoryInteractionCount: number | null;
+  /** Last N turns as short lines (reader text / spoken line excerpts only; capped). */
+  recentTurnSummaries: string[];
+  /** P3-M compressed continuity hash when available on session metadata. */
+  sessionMemorySummaryHash: string | null;
+};
+
 export type ConversationalIdentitySnapshot = {
   contractVersion: "1";
   builtAtIso: string;
@@ -46,7 +59,12 @@ export type ConversationalIdentitySnapshot = {
 
   readerMemory: CharacterReaderMemoryDomain | null;
 
+  readerRelationshipProgression: ReaderRelationshipProgression;
+
   emotionalState: ConversationalEmotionalState;
+
+  /** Null when no session context was requested or session missing; never implies omniscient transcript access. */
+  sessionContext: ConversationalIdentitySessionContext | null;
 };
 
 export type ConversationalIdentityBlock = {

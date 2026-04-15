@@ -1,0 +1,54 @@
+{
+  "generatedAtIso": "2026-04-15T02:46:00.0000000-05:00",
+  "risks": [
+    {
+      "category": "production/runtime failure risk",
+      "severity": "low",
+      "why": "Final strict matrix passed including build, full-system strict, deterministic harness, and maintenance.",
+      "blocksNextStage": false,
+      "recommendedNextAction": "Keep strict matrix in CI and fail on regression."
+    },
+    {
+      "category": "truth contamination risk",
+      "severity": "medium",
+      "why": "Truth-firewall controls are explicit and passing, but safety still depends on continued write-boundary adoption discipline.",
+      "blocksNextStage": false,
+      "recommendedNextAction": "Continue enforcing boundary assertions on newly introduced write paths."
+    },
+    {
+      "category": "payload/schema drift risk",
+      "severity": "medium",
+      "why": "Registry governance and drift checks are passing, but selected nested payload zones remain intentionally loose.",
+      "blocksNextStage": false,
+      "recommendedNextAction": "Progressively tighten high-risk loose schema sections with focused tests."
+    },
+    {
+      "category": "economic/accounting leakage risk",
+      "severity": "low",
+      "why": "Degraded policy and cockpit command verification now explicitly cover non-debit degraded outcomes and pass.",
+      "blocksNextStage": false,
+      "recommendedNextAction": "Keep degraded/debit invariant tests mandatory in strict matrix."
+    },
+    {
+      "category": "degraded/fallback ambiguity risk",
+      "severity": "medium",
+      "why": "Fallback classification is clearer after chunk 7, but policy remains intentionally narrow and heuristic in parts.",
+      "blocksNextStage": false,
+      "recommendedNextAction": "Monitor production signals and refine fallback taxonomy incrementally."
+    },
+    {
+      "category": "ownership/maintainability risk",
+      "severity": "medium",
+      "why": "Chunk 8 improved traceability, but cockpit orchestration still carries dense cross-policy ownership.",
+      "blocksNextStage": false,
+      "recommendedNextAction": "Plan small, safe ownership splits only when new complexity is added."
+    },
+    {
+      "category": "verification blind-spot risk",
+      "severity": "low",
+      "why": "Critical surfaces now have dedicated verify commands and strict umbrella inclusion; final matrix is fully green.",
+      "blocksNextStage": false,
+      "recommendedNextAction": "Require updates to strict umbrella whenever new critical surfaces are introduced."
+    }
+  ]
+}

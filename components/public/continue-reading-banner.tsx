@@ -2,18 +2,20 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { actionReconcileReaderContinuity } from "@/app/actions/reader-continuity";
+import type { ReaderContinuityCacheSnapshot } from "@/lib/domain/reader-continuity";
 import {
   READING_PROGRESS_STORAGE_KEY,
   type ContinueReadingPayload,
 } from "@/lib/reading-progress";
 
 const HEADLINE_POOL = [
-  "Return to where you left it",
-  "The fire is still there",
-  "You were here last",
-  "This moment is waiting",
-  "Return to the river",
-  "Pick up the thread",
+  "The world is still holding this thread",
+  "Return to the same narrative weather",
+  "This passage remembers your last step",
+  "The moment is still alive",
+  "Re-enter the river of the story",
+  "Pick up the unresolved thread",
 ];
 
 function hashPick(seed: string, pool: string[]): string {
@@ -22,18 +24,72 @@ function hashPick(seed: string, pool: string[]): string {
   return pool[h % pool.length]!;
 }
 
+function toContinuityCacheSnapshot(payload: ContinueReadingPayload | null): ReaderContinuityCacheSnapshot | null {
+  if (!payload) return null;
+  return {
+    chapterId: payload.chapterId,
+    sceneId: payload.sceneId,
+    chapterTitle: payload.chapterTitle,
+    sceneLabel: payload.sceneLabel,
+    savedAtEpochMs: payload.savedAt,
+    scrollAnchorY: payload.scrollBySceneId?.[payload.sceneId] ?? null,
+    scrollBySceneId: payload.scrollBySceneId ?? null,
+    lastMode:
+      payload.lastMode === "reading"
+        ? "read"
+        : payload.lastMode === "immersive"
+          ? "feel"
+          : payload.lastMode ?? null,
+    continuationHeadline: payload.continuationHeadline ?? null,
+    mood: payload.mood ?? null,
+    returnHookLine: payload.returnHookLine ?? null,
+  };
+}
+
 export function ContinueReadingBanner() {
   const [payload, setPayload] = useState<ContinueReadingPayload | null>(null);
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(READING_PROGRESS_STORAGE_KEY);
-      if (!raw) return;
-      const p = JSON.parse(raw) as ContinueReadingPayload;
-      if (p?.sceneId && p?.chapterId) queueMicrotask(() => setPayload(p));
-    } catch {
-      /* ignore */
-    }
+    void (async () => {
+      let localPayload: ContinueReadingPayload | null = null;
+      try {
+        const raw = localStorage.getItem(READING_PROGRESS_STORAGE_KEY);
+        if (raw) {
+          const p = JSON.parse(raw) as ContinueReadingPayload;
+          if (p?.sceneId && p?.chapterId) {
+            localPayload = p;
+            queueMicrotask(() => setPayload(p));
+          }
+        }
+      } catch {
+        /* ignore */
+      }
+      try {
+        const reconciliation = await actionReconcileReaderContinuity(
+          toContinuityCacheSnapshot(localPayload)
+        );
+        const canonicalSceneId = reconciliation?.continuity.position.sceneId;
+        if (!canonicalSceneId) return;
+        if (!localPayload || localPayload.sceneId !== canonicalSceneId) {
+          const patched: ContinueReadingPayload = {
+            chapterId: reconciliation.continuity.position.chapterId ?? localPayload?.chapterId ?? "",
+            sceneId: canonicalSceneId,
+            chapterTitle: localPayload?.chapterTitle ?? "Continue reading",
+            sceneLabel: localPayload?.sceneLabel ?? "Return to the latest scene",
+            savedAt: Date.now(),
+            continuationHeadline: localPayload?.continuationHeadline,
+            mood: localPayload?.mood ?? null,
+            returnHookLine: localPayload?.returnHookLine,
+            lastMode: localPayload?.lastMode,
+            scrollBySceneId: localPayload?.scrollBySceneId,
+          };
+          localStorage.setItem(READING_PROGRESS_STORAGE_KEY, JSON.stringify(patched));
+          queueMicrotask(() => setPayload(patched));
+        }
+      } catch {
+        /* ignore */
+      }
+    })();
   }, []);
 
   const headline = useMemo(() => {
@@ -48,7 +104,7 @@ export function ContinueReadingBanner() {
   return (
     <aside className="campti-return-banner rounded-lg border border-amber-900/20 bg-stone-900/35 px-6 py-5 transition duration-500 ease-out sm:px-8">
       <p className="text-[0.6rem] font-medium uppercase tracking-[0.28em] text-stone-500">
-        Return to the experience
+        Return state
       </p>
       <Link
         href={`/read/scenes/${payload.sceneId}`}

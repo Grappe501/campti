@@ -1,0 +1,131 @@
+{
+  "contractVersion": "1",
+  "certificationScope": "phase3_chunk9_storyline_certification_run",
+  "executedAtIso": "2026-04-15T10:29:25.7383984-05:00",
+  "rawLogs": [
+    "C:/Users/User/.cursor/projects/c-Users-User-Desktop-Campti/agent-tools/9121b256-ac30-499d-91d7-1b009c6b2834.txt",
+    "C:/Users/User/.cursor/projects/c-Users-User-Desktop-Campti/agent-tools/c00c241a-aab5-40ea-bb86-641344164963.txt"
+  ],
+  "commands": [
+    {
+      "command": "npx prisma validate",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npx prisma generate",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run typecheck",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run lint",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run build",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:migrations",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:contracts",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:contract-drift",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:interaction-truth-firewall",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:prelaunch:strict",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:full-system:strict",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:arc-engine",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:chapter-progression",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:narrative-pressure",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:branch-governance",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:storyline-orchestrator",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:storyline-wiring",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:storyline-explainability",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:storyline",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    }
+  ],
+  "summary": {
+    "total": 20,
+    "passed": 20,
+    "failed": 0,
+    "skipped": 0
+  }
+}

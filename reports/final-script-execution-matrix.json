@@ -1,0 +1,165 @@
+{
+  "runLabel": "chunk9-final-certification-matrix",
+  "generatedAtIso": "2026-04-15T02:44:03.3193266-05:00",
+  "overallOk": true,
+  "commandCount": 22,
+  "commands": [
+    {
+      "name": "npx prisma validate",
+      "command": "npx prisma validate",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 2629
+    },
+    {
+      "name": "npx prisma generate",
+      "command": "npx prisma generate",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 4709
+    },
+    {
+      "name": "npm run typecheck",
+      "command": "npm run typecheck",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 5429
+    },
+    {
+      "name": "npm run lint",
+      "command": "npm run lint",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 33763
+    },
+    {
+      "name": "npm run build",
+      "command": "npm run build",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 56585
+    },
+    {
+      "name": "npm run verify:migrations",
+      "command": "npm run verify:migrations",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 4633
+    },
+    {
+      "name": "npm run verify:contracts",
+      "command": "npm run verify:contracts",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 1256
+    },
+    {
+      "name": "npm run verify:contract-drift",
+      "command": "npm run verify:contract-drift",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 1112
+    },
+    {
+      "name": "npm run verify:chronology",
+      "command": "npm run verify:chronology",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 835
+    },
+    {
+      "name": "npm run verify:epic-mapping",
+      "command": "npm run verify:epic-mapping",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 1882
+    },
+    {
+      "name": "npm run verify:certification-consistency",
+      "command": "npm run verify:certification-consistency",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 913
+    },
+    {
+      "name": "npm run verify:runtime-dependency-consistency",
+      "command": "npm run verify:runtime-dependency-consistency",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 984
+    },
+    {
+      "name": "npm run verify:interaction-truth-firewall",
+      "command": "npm run verify:interaction-truth-firewall",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 947
+    },
+    {
+      "name": "npm run verify:degraded-interaction-policy",
+      "command": "npm run verify:degraded-interaction-policy",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 834
+    },
+    {
+      "name": "npm run verify:provider-resilience",
+      "command": "npm run verify:provider-resilience",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 860
+    },
+    {
+      "name": "npm run verify:moderation-service",
+      "command": "npm run verify:moderation-service",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 879
+    },
+    {
+      "name": "npm run verify:reader-cockpit-payload",
+      "command": "npm run verify:reader-cockpit-payload",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 6725
+    },
+    {
+      "name": "npm run verify:reader-cockpit-command",
+      "command": "npm run verify:reader-cockpit-command",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 1530
+    },
+    {
+      "name": "npm run verify:prelaunch:strict",
+      "command": "npm run verify:prelaunch:strict",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 9795
+    },
+    {
+      "name": "npm run verify:full-system:strict",
+      "command": "npm run verify:full-system:strict",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 33437
+    },
+    {
+      "name": "npm run verify:deterministic-interaction-harness",
+      "command": "npm run verify:deterministic-interaction-harness",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 5623
+    },
+    {
+      "name": "npm run ops:background-maintenance",
+      "command": "npm run ops:background-maintenance",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 1722
+    }
+  ],
+  "nonBlockingNotes": [
+    "Prisma CLI emitted package.json#prisma deprecation warnings during validate/generate/build."
+  ]
+}

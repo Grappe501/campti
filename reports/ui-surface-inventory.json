@@ -1,0 +1,518 @@
+{
+  "generatedAt": "2026-04-15",
+  "scope": "repo-wide UI discovery pass focused on user-facing and author/debug-facing surfaces",
+  "surfaces": [
+    {
+      "id": "reader-read-layout-shell",
+      "name": "Read Zone Shell",
+      "type": "reader",
+      "routeOrComponentEntrypoint": [
+        "app/read/layout.tsx",
+        "components/read/read-cockpit-frame.tsx",
+        "components/read-nav.tsx"
+      ],
+      "primaryServices": [],
+      "contractsPayloads": [],
+      "stateDependencies": [
+        "none (layout composition only)"
+      ],
+      "status": "premier",
+      "confidence": "high",
+      "notes": "Consistent shell/navigation; depth rail copy is aspirational and not entitlement-wired."
+    },
+    {
+      "id": "reader-read-hub",
+      "name": "Read Hub",
+      "type": "reader",
+      "routeOrComponentEntrypoint": [
+        "app/read/page.tsx",
+        "components/public/return-experience-card.tsx",
+        "components/public/continue-reading-banner.tsx"
+      ],
+      "primaryServices": [
+        "lib/public-data.ts:getPublicReadHubData",
+        "lib/public-data.ts:getPublicReturnExperience"
+      ],
+      "contractsPayloads": [
+        "PublicReturnExperience",
+        "ContinueReadingPayload"
+      ],
+      "stateDependencies": [
+        "prisma.readerState",
+        "localStorage:READING_PROGRESS_STORAGE_KEY"
+      ],
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Dual reentry path (server readerState card vs localStorage banner)."
+    },
+    {
+      "id": "reader-scene-experience",
+      "name": "Scene Reading Experience",
+      "type": "reader",
+      "routeOrComponentEntrypoint": [
+        "app/read/scenes/[id]/page.tsx",
+        "components/public/read-scene-experience.tsx"
+      ],
+      "primaryServices": [
+        "lib/public-data.ts:getPublicSceneById",
+        "lib/public-data.ts:getPublicSceneReaderPack",
+        "lib/public-data.ts:getPublicSceneNavigation",
+        "lib/public-experience-rendering.ts:buildPublicPerceptionPayload"
+      ],
+      "contractsPayloads": [
+        "PublicSceneViewModel",
+        "PublicSceneReaderPack",
+        "PublicSceneNavigation",
+        "PublicPerceptionExperiencePayload"
+      ],
+      "stateDependencies": [
+        "prisma (scene/chapter/meta/audio reads)",
+        "localStorage mode/progress/prefs",
+        "syncReaderStateFromClient -> prisma.readerState"
+      ],
+      "status": "premier",
+      "confidence": "high",
+      "notes": "Primary reader delivery surface with mode switching, audio, progression, and depth gates."
+    },
+    {
+      "id": "reader-immersive-fallback",
+      "name": "Immersive Reader Fallback Boundary",
+      "type": "reader",
+      "routeOrComponentEntrypoint": [
+        "components/public/immersive-error-boundary.tsx",
+        "components/public/ImmersiveSceneReader.tsx",
+        "components/public/scene-reader.tsx"
+      ],
+      "primaryServices": [],
+      "contractsPayloads": [],
+      "stateDependencies": [
+        "client React error boundary only"
+      ],
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Graceful fallback from immersive renderer to simpler reader; no telemetry wiring observed."
+    },
+    {
+      "id": "reader-options-handsfree",
+      "name": "Reader Controls (Options + Hands Free)",
+      "type": "reader",
+      "routeOrComponentEntrypoint": [
+        "components/read/reader-options-bar.tsx",
+        "components/read/hands-free-panel.tsx",
+        "components/public/read-scene-experience.tsx"
+      ],
+      "primaryServices": [
+        "lib/reader-ui-preferences.ts"
+      ],
+      "contractsPayloads": [
+        "ReaderUiPreferences"
+      ],
+      "stateDependencies": [
+        "localStorage (UI preferences and rhythm flags)",
+        "router navigation for chapter/scene jumps"
+      ],
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Strong client control layer; mostly client-state driven."
+    },
+    {
+      "id": "reader-audio-surface",
+      "name": "Public Audio Playback Surface",
+      "type": "reader",
+      "routeOrComponentEntrypoint": [
+        "components/public/public-audio-player.tsx",
+        "components/public/audio-teaser.tsx",
+        "components/public/read-scene-experience.tsx"
+      ],
+      "primaryServices": [
+        "app/actions/reader-memory.ts:recordVoiceListenSeconds"
+      ],
+      "contractsPayloads": [
+        "PublicAudioTab",
+        "PublicSceneAudioTrack"
+      ],
+      "stateDependencies": [
+        "prisma.readerVoiceListen",
+        "published sceneAudioAsset rows"
+      ],
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Audio exists when published assets are present; teaser/fallback path is explicit."
+    },
+    {
+      "id": "reader-cockpit",
+      "name": "Reader Cockpit (Interactive Conversation)",
+      "type": "hybrid",
+      "routeOrComponentEntrypoint": [
+        "app/read/cockpit/page.tsx",
+        "components/read/reader-cockpit-shell.tsx",
+        "app/actions/reader-cockpit.ts"
+      ],
+      "primaryServices": [
+        "lib/services/reader-cockpit-command-service.ts",
+        "lib/services/reader-cockpit-payload-service.ts"
+      ],
+      "contractsPayloads": [
+        "readerCockpitPayload",
+        "conversationalTurnInput",
+        "characterResponse",
+        "voiceSynthesisRequest"
+      ],
+      "stateDependencies": [
+        "prisma.characterConversationSession",
+        "prisma.characterConversationTurn",
+        "reader entitlement/balance tables",
+        "session metadataJson"
+      ],
+      "status": "provisional",
+      "confidence": "high",
+      "notes": "Text-first shell with manual IDs indicates debug/dev orientation despite strong backend orchestration."
+    },
+    {
+      "id": "reader-chapter-index",
+      "name": "Chapter Index",
+      "type": "reader",
+      "routeOrComponentEntrypoint": [
+        "app/read/chapters/page.tsx"
+      ],
+      "primaryServices": [
+        "lib/public-data.ts:getPublicChapterIndex"
+      ],
+      "contractsPayloads": [],
+      "stateDependencies": [
+        "prisma.chapter (visibility public)"
+      ],
+      "status": "premier",
+      "confidence": "high",
+      "notes": "Stable chapter browse surface."
+    },
+    {
+      "id": "reader-chapter-detail",
+      "name": "Chapter Detail",
+      "type": "reader",
+      "routeOrComponentEntrypoint": [
+        "app/read/chapters/[id]/page.tsx"
+      ],
+      "primaryServices": [
+        "lib/public-data.ts:getPublicChapterById",
+        "lib/public-data.ts:getPublicChapterNarrativeHints"
+      ],
+      "contractsPayloads": [],
+      "stateDependencies": [
+        "prisma.chapter/scenes/persons/places/events",
+        "prisma.narrativeBinding"
+      ],
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Delivery surface for chapter-to-scene traversal and hints."
+    },
+    {
+      "id": "reader-character-index",
+      "name": "Character Index",
+      "type": "reader",
+      "routeOrComponentEntrypoint": [
+        "app/read/characters/page.tsx"
+      ],
+      "primaryServices": [
+        "lib/public-data.ts:getPublicCharacterIndex"
+      ],
+      "contractsPayloads": [],
+      "stateDependencies": [
+        "prisma.person"
+      ],
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Reader-facing cast discovery."
+    },
+    {
+      "id": "reader-character-detail",
+      "name": "Character Detail",
+      "type": "reader",
+      "routeOrComponentEntrypoint": [
+        "app/read/characters/[id]/page.tsx",
+        "components/public/character-follow-button.tsx"
+      ],
+      "primaryServices": [
+        "lib/public-data.ts:getPublicCharacterById"
+      ],
+      "contractsPayloads": [],
+      "stateDependencies": [
+        "prisma.person relationships/scenes/voice assets",
+        "localStorage:FOLLOWED_CHARACTERS_KEY"
+      ],
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Follow interaction is local-only and not synced server-side."
+    },
+    {
+      "id": "reader-places-index",
+      "name": "Places Index",
+      "type": "reader",
+      "routeOrComponentEntrypoint": [
+        "app/read/places/page.tsx"
+      ],
+      "primaryServices": [
+        "lib/public-data.ts:getPublicPlacesIndex"
+      ],
+      "contractsPayloads": [],
+      "stateDependencies": [
+        "prisma.place"
+      ],
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Reader-facing location browse surface."
+    },
+    {
+      "id": "reader-place-detail",
+      "name": "Place Detail",
+      "type": "reader",
+      "routeOrComponentEntrypoint": [
+        "app/read/places/[id]/page.tsx"
+      ],
+      "primaryServices": [
+        "lib/public-data.ts:getPublicPlaceById",
+        "lib/public-data.ts:getPublicPlaceSymbolicHints"
+      ],
+      "contractsPayloads": [],
+      "stateDependencies": [
+        "prisma.place/settings/events/scenes",
+        "prisma.narrativeBinding"
+      ],
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Supports relational navigation to scenes/people."
+    },
+    {
+      "id": "reader-timeline",
+      "name": "Timeline Surface",
+      "type": "reader",
+      "routeOrComponentEntrypoint": [
+        "app/read/timeline/page.tsx"
+      ],
+      "primaryServices": [
+        "lib/public-data.ts:getPublicTimelineData"
+      ],
+      "contractsPayloads": [
+        "PublicTimelineEra"
+      ],
+      "stateDependencies": [
+        "prisma.event (public visibility)"
+      ],
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Temporal orientation surface with decade bucketing."
+    },
+    {
+      "id": "reader-symbols",
+      "name": "Symbols Surface",
+      "type": "reader",
+      "routeOrComponentEntrypoint": [
+        "app/read/symbols/page.tsx",
+        "components/public/reader-thread-suggestions.tsx"
+      ],
+      "primaryServices": [
+        "lib/public-data.ts:getPublicSymbolsLivingIndex",
+        "lib/reader-threads.ts:deriveThreadHintsForSession"
+      ],
+      "contractsPayloads": [
+        "PublicSymbolLivingCard"
+      ],
+      "stateDependencies": [
+        "prisma.symbol",
+        "session-driven thread hints"
+      ],
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Mixes static symbols index with session-tailored thread prompts."
+    },
+    {
+      "id": "reader-membership",
+      "name": "Membership / Depth Surface",
+      "type": "reader",
+      "routeOrComponentEntrypoint": [
+        "app/membership/page.tsx",
+        "app/subscribe/page.tsx"
+      ],
+      "primaryServices": [
+        "lib/public-data.ts:getPublicMembershipContent"
+      ],
+      "contractsPayloads": [
+        "PublicMembershipTier"
+      ],
+      "stateDependencies": [
+        "none (static framing content)"
+      ],
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Depth framing exists; billing/access control not surfaced here. /subscribe is redirect."
+    },
+    {
+      "id": "admin-layout-nav",
+      "name": "Admin Shell + Navigation",
+      "type": "author",
+      "routeOrComponentEntrypoint": [
+        "app/admin/layout.tsx",
+        "components/admin-nav.tsx"
+      ],
+      "primaryServices": [
+        "lib/admin-session.ts"
+      ],
+      "contractsPayloads": [],
+      "stateDependencies": [
+        "environment variable CAMPTI_ADMIN_PASSWORD",
+        "admin session cookie when configured"
+      ],
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Large admin surface exists; discoverability drift vs actual route set."
+    },
+    {
+      "id": "admin-page-agent",
+      "name": "Admin Page Specialist Panel",
+      "type": "debug",
+      "routeOrComponentEntrypoint": [
+        "components/admin-page-agent-panel.tsx",
+        "app/api/admin/agent/chat/route.ts"
+      ],
+      "primaryServices": [
+        "lib/admin-page-agents.ts",
+        "lib/admin-auth-api.ts"
+      ],
+      "contractsPayloads": [],
+      "stateDependencies": [
+        "admin API auth gate",
+        "OpenAI-backed assistant route"
+      ],
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Strong internal assist surface; no dedicated UI test coverage found."
+    },
+    {
+      "id": "admin-observer-pages",
+      "name": "Observer Snapshot Pages",
+      "type": "debug",
+      "routeOrComponentEntrypoint": [
+        "app/admin/world-observer/page.tsx",
+        "app/admin/scenes/[id]/observer/page.tsx",
+        "app/admin/characters/[id]/observer/page.tsx",
+        "app/admin/simulations/[id]/page.tsx"
+      ],
+      "primaryServices": [
+        "lib/services/world-observer-service.ts"
+      ],
+      "contractsPayloads": [
+        "worldObserverSnapshot",
+        "chapterObserverSnapshot",
+        "bookObserverSnapshot"
+      ],
+      "stateDependencies": [
+        "prisma world/chapter/scene/simulation state"
+      ],
+      "status": "provisional",
+      "confidence": "high",
+      "notes": "Powerful internal visibility, but some pages are not linked in admin nav."
+    },
+    {
+      "id": "admin-narrative-spine",
+      "name": "Narrative Hub and Chapter Assembly",
+      "type": "author",
+      "routeOrComponentEntrypoint": [
+        "app/admin/narrative/page.tsx",
+        "app/admin/narrative/books/[bookId]/page.tsx",
+        "app/admin/narrative/chapters/[chapterId]/assembly/page.tsx"
+      ],
+      "primaryServices": [
+        "lib/services/chapter-assembly-service.ts"
+      ],
+      "contractsPayloads": [],
+      "stateDependencies": [
+        "book/chapter/scenes persistence"
+      ],
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Author-facing build surfaces exist but have low visibility from main nav."
+    },
+    {
+      "id": "admin-workspace-debug",
+      "name": "Scene Workspace Debug Surface",
+      "type": "debug",
+      "routeOrComponentEntrypoint": [
+        "app/admin/scenes/[id]/workspace/page.tsx",
+        "components/scene-readiness-panel.tsx"
+      ],
+      "primaryServices": [
+        "app/actions/scenes.ts"
+      ],
+      "contractsPayloads": [],
+      "stateDependencies": [
+        "query flags ?debug=1 and sticky workspace params"
+      ],
+      "status": "acceptable",
+      "confidence": "medium",
+      "notes": "Debug state is query-param driven and developer-oriented."
+    },
+    {
+      "id": "author-inspection-action-only",
+      "name": "Authorial Inspection (Action/Service Only)",
+      "type": "internal",
+      "routeOrComponentEntrypoint": [
+        "app/actions/author-inspection.ts"
+      ],
+      "primaryServices": [
+        "lib/services/authorial-inspection-service.ts"
+      ],
+      "contractsPayloads": [
+        "authorInspectionPayload"
+      ],
+      "stateDependencies": [
+        "conversation snapshots and storyline explainability services"
+      ],
+      "status": "provisional",
+      "confidence": "high",
+      "notes": "Contracted capability exists but no direct UI consumer found."
+    },
+    {
+      "id": "conversation-observer-action-only",
+      "name": "Conversation Observer (Action/Service Only)",
+      "type": "internal",
+      "routeOrComponentEntrypoint": [
+        "app/actions/conversation-observer.ts"
+      ],
+      "primaryServices": [
+        "lib/services/conversation-observer-service.ts"
+      ],
+      "contractsPayloads": [
+        "conversationObservabilitySnapshot"
+      ],
+      "stateDependencies": [
+        "conversation session/turn metadata"
+      ],
+      "status": "provisional",
+      "confidence": "high",
+      "notes": "Explicitly marked as debug/tooling with no direct UI."
+    },
+    {
+      "id": "story-reentry-action-only",
+      "name": "Story Reentry Continuity (Action/Service Only)",
+      "type": "internal",
+      "routeOrComponentEntrypoint": [
+        "app/actions/story-reentry.ts"
+      ],
+      "primaryServices": [
+        "lib/services/story-reentry-continuity-service.ts"
+      ],
+      "contractsPayloads": [
+        "StoryReentryContinuityPayload",
+        "readerCockpitPayload"
+      ],
+      "stateDependencies": [
+        "conversation sessions",
+        "anchor metadata",
+        "cockpit payload stack"
+      ],
+      "status": "provisional",
+      "confidence": "high",
+      "notes": "Continuity logic is implemented and tested but not yet attached to reader UI."
+    }
+  ]
+}

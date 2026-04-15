@@ -7,7 +7,17 @@
 
 export const CHARACTER_RESPONSE_CONTRACT_VERSION = "1" as const;
 
-/** How the character is treating the informational basis of the spoken line (inspectable, not legal truth). */
+/**
+ * Bounded-character **epistemic** label (in-world knowledge stance), not prose quality, confidence in
+ * wording, or stylistic strength.
+ *
+ * - **known** — grounded in what the character can know in-world.
+ * - **belief** — grounded in interpretation, rumor, gossip, or uncertain social knowledge.
+ * - **uncertain** — safe fallback when grounding is weak or policy risk exists.
+ *
+ * Downstream steps must not treat `known` as “writes well” or “high tone confidence”; it classifies
+ * knowledge basis only.
+ */
 export type CharacterResponseKnowledgeSource = "known" | "belief" | "uncertain";
 
 /**
@@ -20,7 +30,7 @@ export type CharacterResponse = {
   spokenResponse: string;
   /** Inner monologue or pre-speech cognition (not shown to reader unless UI exposes it). */
   internalThought: string;
-  /** Epistemic tagging — aligns with P2-F knowledge boundary buckets. */
+  /** See {@link CharacterResponseKnowledgeSource} — epistemic stance only, not literary quality. */
   knowledgeSource: CharacterResponseKnowledgeSource;
   /** Short affect label for routing and analytics (e.g. "guarded", "warm", "flat"). */
   emotionalTone: string;

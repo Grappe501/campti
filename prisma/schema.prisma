@@ -1055,8 +1055,9 @@ model Person {
   characterConstraints       CharacterConstraint[]
   characterTriggers          CharacterTrigger[]
   characterPerceptionProfile CharacterPerceptionProfile?
-  characterVoiceProfile      CharacterVoiceProfile?
-  characterChoiceProfile     CharacterChoiceProfile?
+  characterVoiceProfile       CharacterVoiceProfile?
+  characterTtsVoiceProfile    CharacterTtsVoiceProfile?
+  characterChoiceProfile      CharacterChoiceProfile?
 
   governanceImpacts             CharacterGovernanceImpact[]
   socioEconomicProfiles         CharacterSocioEconomicProfile[]
@@ -1091,6 +1092,9 @@ model Person {
 
   /// P2-G — bounded memory of a human reader as seen from this character (earned through interaction only).
   characterReaderMemories CharacterReaderMemory[]
+
+  /// P2-M — conversation sessions with readers (opaque reader id).
+  characterConversationSessions CharacterConversationSession[]
 
   /// Phase 5F — optional link from promoted census / population row.
   populationLink PopulationEntity? @relation("PopulationEntityPerson")
@@ -3111,6 +3115,30 @@ model CharacterVoiceProfile {
   certainty  String?
 }
 
+/// P2-T — External speech/TTS voice binding (provider id, display label). **Not** prose texture — that is {@link CharacterVoiceProfile}.
+enum CharacterVoiceProviderKind {
+  elevenlabs
+  other
+}
+
+model CharacterTtsVoiceProfile {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  characterId String @unique
+  character   Person @relation(fields: [characterId], references: [id], onDelete: Cascade)
+
+  provider          CharacterVoiceProviderKind
+  externalVoiceId String
+  displayLabel      String
+  emotionalRangeJson Json?
+  metadataJson       Json?
+
+  @@index([characterId])
+  @@index([provider])
+}
+
 /// Choice bandwidth — bounded decision system inputs for branch/scene engines.
 model CharacterChoiceProfile {
   id        String   @id @default(cuid())
@@ -3619,6 +3647,9 @@ model Scene {
   characterStateSnapshots CharacterStateSnapshot[]
   innerVoiceSessions      CharacterInnerVoiceSession[]
   simulationScenarios     SimulationScenario[]
+
+  /// P2-M — reader–character conversation sessions anchored to this scene when set.
+  characterConversationSessions CharacterConversationSession[]
 
   @@index([chapterId])
   @@index([orderInChapter])
@@ -4144,6 +4175,153 @@ model CharacterReaderMemory {
   @@index([readerId])
   @@index([characterId])
   @@index([lastInteractionAt])
+}
+
+/// P2-M — Durable session envelope for reader–character dialogue (no transcript blobs here).
+enum CharacterConversationSessionStatus {
+  ACTIVE
+  PAUSED
+  ENDED
+}
+
+model CharacterConversationSession {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  characterId String
+  character   Person @relation(fields: [characterId], references: [id], onDelete: Cascade)
+
+  /// Opaque reader key (same convention as `CharacterReaderMemory.readerId`).
+  readerId String
+
+  sceneId String?
+  scene   Scene? @relation(fields: [sceneId], references: [id], onDelete: SetNull)
+
+  status CharacterConversationSessionStatus
+
+  interactionCount Int @default(0)
+
+  startedAt         DateTime @default(now())
+  lastInteractionAt DateTime @default(now())
+  endedAt           DateTime?
+
+  metadataJson Json?
+
+  turns              CharacterConversationTurn[]
+  ledgerEntries      ReaderInteractionLedgerEntry[]
+
+  @@index([characterId])
+  @@index([readerId])
+  @@index([status])
+  @@index([lastInteractionAt])
+}
+
+/// P2-V — Per-reader interaction cost ledger (opaque `readerId`; optional session link). Accounting only — no payments.
+enum ReaderInteractionLedgerEntryType {
+  text_turn
+  voice_render
+  other
+}
+
+/// P4-A — Product-level entitlement tier for usage and feature controls.
+enum ReaderEntitlementPlanType {
+  free
+  standard
+  premium
+  admin
+  internal
+}
+
+model ReaderInteractionLedgerEntry {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  /// Opaque reader key (same convention as `CharacterReaderMemory.readerId`).
+  readerId String
+
+  sessionId String?
+  session   CharacterConversationSession? @relation(fields: [sessionId], references: [id], onDelete: SetNull)
+
+  entryType ReaderInteractionLedgerEntryType
+
+  /// Raw unit counted (e.g. tokens, characters — product-defined).
+  unitCount Int
+  /// Normalized cost units for aggregation (integer scale; not currency).
+  estimatedCostUnits Int
+
+  metadataJson Json?
+
+  @@index([readerId])
+  @@index([sessionId])
+  @@index([createdAt])
+  @@index([readerId, createdAt])
+}
+
+/// P3-H — Reader interaction unit balance (opaque `readerId`). Generic units; not currency.
+model ReaderInteractionBalance {
+  readerId       String   @id
+  availableUnits Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+/// P4-A — Product/account entitlement envelope (never character cognition).
+model ReaderEntitlement {
+  id                   String                    @id @default(cuid())
+  readerId             String                    @unique
+  planType             ReaderEntitlementPlanType @default(free)
+  monthlyUnitAllowance Int
+  remainingUnitBalance Int
+  featureFlagsJson     Json?
+  entitlementStartAt   DateTime                  @default(now())
+  entitlementEndAt     DateTime?
+  createdAt            DateTime                  @default(now())
+  updatedAt            DateTime                  @updatedAt
+
+  @@index([planType])
+  @@index([entitlementEndAt])
+}
+
+/// P3-L — Product/session preference context for a reader (not canon, not character cognition, not interaction memory).
+model ReaderContextPreference {
+  /// Opaque reader key (same convention as CharacterReaderMemory.readerId).
+  readerId String @id
+
+  preferredPresentationLanguageCode String  @default("en")
+  preferredAudioEnabled             Boolean @default(true)
+  preferredNativeTongueToggleDefault Boolean @default(false)
+  preferredVoicePlaybackSpeed       Float   @default(1.0)
+
+  /// Product-only metadata (e.g. lightweight UI defaults). Must not be used as canonical story truth.
+  metadataJson Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+/// P2-N — Single persisted turn in a reader–character session (`payloadJson` holds registry-validated contracts).
+enum CharacterConversationTurnSpeaker {
+  reader
+  character
+}
+
+model CharacterConversationTurn {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  sessionId String
+  session   CharacterConversationSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  orderIndex Int
+
+  speakerType CharacterConversationTurnSpeaker
+
+  /// Typically `conversationalTurnInput` (reader) or `characterResponse` (character) — validate at write.
+  payloadJson Json
+
+  @@unique([sessionId, orderIndex])
+  @@index([sessionId])
 }
 
 /// System governing law for deterministic simulation (Stage 1). Distinct from `NarrativeRule` (source-extracted DNA).

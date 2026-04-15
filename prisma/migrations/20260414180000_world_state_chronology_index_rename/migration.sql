@@ -1,0 +1,4 @@
+-- Placeholder migration file restored to unblock Prisma migrate deploy.
+-- Canonical chronology column rename is handled by:
+--   20260416150000_world_state_chronology_index_rename
+-- This migration intentionally performs no schema changes.

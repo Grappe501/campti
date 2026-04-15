@@ -20,6 +20,7 @@ import {
 import type { NarrativeSource } from "@/lib/domain/narrative-source";
 import { inferApproximateStoryYearFromScene } from "@/lib/inner-voice/framing/age-band";
 import { getCharacterReaderMemory } from "@/lib/services/character-reader-memory-service";
+import { deriveReaderRelationshipProgression } from "@/lib/services/reader-relationship-progression-service";
 import { resolveEffectiveWorldStateForScene } from "@/lib/services/world-state-resolution";
 import { cognitionPrisma } from "@/lib/prisma-cognition-access";
 import { prisma } from "@/lib/prisma";
@@ -258,6 +259,10 @@ export async function buildConversationalIdentitySnapshot(
     knowledgeBoundary,
     relationships: relationshipEdges,
     readerMemory,
+    readerRelationshipProgression: deriveReaderRelationshipProgression({
+      readerMemory,
+      sessionMemorySummary: null,
+    }),
     emotionalState: {
       latestCognitionSnapshot: latestSnap
         ? {
@@ -294,6 +299,7 @@ export async function buildConversationalIdentitySnapshot(
           }
         : null,
     },
+    sessionContext: null,
   };
 
   return snapshot;

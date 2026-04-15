@@ -1,0 +1,63 @@
+{
+  "contractVersion": "1",
+  "scope": "phase3_storyline_layer",
+  "evaluatedAtIso": "2026-04-15T10:29:25.7383984-05:00",
+  "risks": [
+    {
+      "name": "arc incoherence risk",
+      "currentSeverity": "low",
+      "why": "Arc lifecycle transitions are deterministic and verified by dedicated engine tests plus storyline umbrella execution.",
+      "classification": "non-blocker",
+      "recommendedNextAction": "Continue adding scenario fixtures as new arc patterns are introduced."
+    },
+    {
+      "name": "chapter progression brittleness risk",
+      "currentSeverity": "medium-low",
+      "why": "Progression logic is verified, but blocker/readiness behavior can still be sensitive to edge-case input distributions.",
+      "classification": "non-blocker",
+      "recommendedNextAction": "Add curated regression fixtures for chapter transition edge cases in the next maintenance cycle."
+    },
+    {
+      "name": "pressure overreach risk",
+      "currentSeverity": "medium-low",
+      "why": "Pressure is bounded and non-overriding by test, but weighting behavior can still drift qualitatively in downstream generation prompts.",
+      "classification": "non-blocker",
+      "recommendedNextAction": "Track pressure-to-output drift signals during integration runs and recalibrate category weights if needed."
+    },
+    {
+      "name": "branch explosion / governance failure risk",
+      "currentSeverity": "low",
+      "why": "Governance limits and reconvergence recommendations are enforced and validated through deterministic tests.",
+      "classification": "non-blocker",
+      "recommendedNextAction": "Add higher-depth synthetic branch tree tests when branch complexity increases."
+    },
+    {
+      "name": "epistemic leakage risk",
+      "currentSeverity": "low",
+      "why": "Reader-facing separation and truth firewall checks pass in strict flows; author/debug explainability is isolated from reader payloads.",
+      "classification": "non-blocker",
+      "recommendedNextAction": "Preserve explicit reader-surface exclusion tests whenever explainability payloads evolve."
+    },
+    {
+      "name": "storyline bundle boundedness risk",
+      "currentSeverity": "low",
+      "why": "Bundle capping and bounded outputs are enforced by orchestrator and wiring tests.",
+      "classification": "non-blocker",
+      "recommendedNextAction": "Keep cap assertions in place and add drift checks if additional fields are introduced."
+    },
+    {
+      "name": "verification blind-spot risk",
+      "currentSeverity": "medium-low",
+      "why": "Chunk 8 reduced blind spots with verify:storyline and strict-flow inclusion, but test quality remains tied to subsystem fixture depth.",
+      "classification": "non-blocker",
+      "recommendedNextAction": "Expand subsystem fixture diversity and periodically review storyline umbrella membership."
+    },
+    {
+      "name": "maintainability/ownership risk",
+      "currentSeverity": "medium-low",
+      "why": "Verification surface is now broad and explicit, but ongoing ownership discipline is required to keep command mappings and docs synchronized.",
+      "classification": "non-blocker",
+      "recommendedNextAction": "Assign routine ownership for storyline verification docs and command map updates during release prep."
+    }
+  ]
+}

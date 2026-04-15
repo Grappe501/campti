@@ -1,0 +1,33 @@
+{
+  "generatedAt": "2026-04-15T05:31:18.929Z",
+  "decision": {
+    "storyExpansionReadyNow": false,
+    "reason": "Certification blocked by unapplied migrations and skip-masked runtime checks."
+  },
+  "executionSummary": {
+    "scriptMatrixFile": "reports/script-execution-matrix.json",
+    "scriptMatrixCounts": {
+      "passed": 16,
+      "blocked": 1
+    },
+    "additionalChecks": [
+      {
+        "command": "npm run ops:background-maintenance",
+        "result": "failed",
+        "reason": "P2021 missing table public.CharacterConversationSession"
+      },
+      {
+        "command": "npx prisma migrate status",
+        "result": "failed",
+        "reason": "30 unapplied migrations"
+      }
+    ]
+  },
+  "criticalFindings": [
+    "30 unapplied Prisma migrations in runtime database",
+    "Deterministic harness blocked by missing ReaderInteractionLedgerEntry table",
+    "Prelaunch can pass while skipping DB-critical checks",
+    "Background maintenance fails due to missing CharacterConversationSession table",
+    "Contract registry coverage is partial for contractVersion payload surfaces"
+  ]
+}

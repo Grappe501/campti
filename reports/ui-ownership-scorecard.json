@@ -1,0 +1,246 @@
+{
+  "generatedAt": "2026-04-15",
+  "scale": {
+    "ownershipClarityScore": "1 (unclear) to 5 (clear)",
+    "verificationStrengthScore": "1 (unverified) to 5 (strongly verified)"
+  },
+  "subsystems": [
+    {
+      "subsystem": "Public Reader Delivery",
+      "surfaceIds": [
+        "reader-read-layout-shell",
+        "reader-read-hub",
+        "reader-scene-experience",
+        "reader-chapter-index",
+        "reader-character-index",
+        "reader-places-index",
+        "reader-timeline",
+        "reader-symbols"
+      ],
+      "authoritativeModules": [
+        "lib/public-data.ts",
+        "app/read/**/page.tsx"
+      ],
+      "supportingServices": [
+        "lib/public-experience-rendering.ts",
+        "lib/public-scene-immersion.ts",
+        "app/actions/reader-memory.ts"
+      ],
+      "contractsPayloads": [
+        "PublicSceneViewModel",
+        "PublicSceneReaderPack",
+        "PublicReturnExperience"
+      ],
+      "truthPlanesTouched": [
+        "public narrative delivery",
+        "reader interaction memory"
+      ],
+      "ownershipClarityScore": 4,
+      "verificationStrengthScore": 3,
+      "status": "acceptable",
+      "confidence": "high",
+      "risks": [
+        "Server continuity state and localStorage continuity can drift temporarily.",
+        "Public page/component-level tests are relatively sparse compared to service tests."
+      ]
+    },
+    {
+      "subsystem": "Reader Cockpit Interaction UX",
+      "surfaceIds": [
+        "reader-cockpit"
+      ],
+      "authoritativeModules": [
+        "lib/services/reader-cockpit-command-service.ts",
+        "lib/services/reader-cockpit-payload-service.ts",
+        "components/read/reader-cockpit-shell.tsx"
+      ],
+      "supportingServices": [
+        "lib/services/moderation-service.ts",
+        "lib/services/degraded-interaction-policy-service.ts",
+        "lib/services/reader-entitlement-service.ts",
+        "lib/services/interaction-truth-firewall-service.ts"
+      ],
+      "contractsPayloads": [
+        "readerCockpitPayload",
+        "conversationalTurnInput",
+        "characterResponse",
+        "voiceSynthesisRequest"
+      ],
+      "truthPlanesTouched": [
+        "bounded character conversation",
+        "reader interaction memory",
+        "policy/moderation enforcement"
+      ],
+      "ownershipClarityScore": 4,
+      "verificationStrengthScore": 5,
+      "status": "acceptable",
+      "confidence": "high",
+      "risks": [
+        "UI shell remains debug-oriented (manual IDs) despite mature backend services.",
+        "Contract schema has permissive unknown fields in nested cockpit payload sections."
+      ]
+    },
+    {
+      "subsystem": "Reader Personalization and Session Continuity",
+      "surfaceIds": [
+        "reader-options-handsfree",
+        "reader-read-hub",
+        "reader-scene-experience",
+        "story-reentry-action-only"
+      ],
+      "authoritativeModules": [
+        "components/public/read-scene-experience.tsx",
+        "app/actions/reader-memory.ts",
+        "lib/services/story-reentry-continuity-service.ts"
+      ],
+      "supportingServices": [
+        "lib/reader-ui-preferences.ts",
+        "lib/reading-progress.ts",
+        "lib/services/conversation-anchor-service.ts"
+      ],
+      "contractsPayloads": [
+        "ContinueReadingPayload",
+        "StoryReentryContinuityPayload"
+      ],
+      "truthPlanesTouched": [
+        "client local persistence",
+        "readerState persistence",
+        "conversation continuity"
+      ],
+      "ownershipClarityScore": 3,
+      "verificationStrengthScore": 3,
+      "status": "provisional",
+      "confidence": "high",
+      "risks": [
+        "Two continuity systems (localStorage and server readerState) are parallel.",
+        "Story reentry continuity action is not wired into reader routes."
+      ]
+    },
+    {
+      "subsystem": "Membership and Depth Framing",
+      "surfaceIds": [
+        "reader-membership"
+      ],
+      "authoritativeModules": [
+        "app/membership/page.tsx",
+        "lib/public-data.ts:getPublicMembershipContent"
+      ],
+      "supportingServices": [],
+      "contractsPayloads": [
+        "PublicMembershipTier"
+      ],
+      "truthPlanesTouched": [
+        "public marketing/depth framing"
+      ],
+      "ownershipClarityScore": 4,
+      "verificationStrengthScore": 2,
+      "status": "acceptable",
+      "confidence": "high",
+      "risks": [
+        "Depth and premium messaging can imply capability ahead of fully surfaced entitlement UX."
+      ]
+    },
+    {
+      "subsystem": "Admin Navigation and Shell",
+      "surfaceIds": [
+        "admin-layout-nav"
+      ],
+      "authoritativeModules": [
+        "app/admin/layout.tsx",
+        "components/admin-nav.tsx"
+      ],
+      "supportingServices": [
+        "lib/admin-session.ts"
+      ],
+      "contractsPayloads": [],
+      "truthPlanesTouched": [
+        "author/admin operational surfaces"
+      ],
+      "ownershipClarityScore": 3,
+      "verificationStrengthScore": 2,
+      "status": "acceptable",
+      "confidence": "high",
+      "risks": [
+        "Navigation list does not cover all existing admin routes.",
+        "Page-level auth posture depends on environment configuration."
+      ]
+    },
+    {
+      "subsystem": "Admin/Debug Explainability and Observer Surfaces",
+      "surfaceIds": [
+        "admin-page-agent",
+        "admin-observer-pages",
+        "admin-workspace-debug"
+      ],
+      "authoritativeModules": [
+        "components/admin-page-agent-panel.tsx",
+        "lib/services/world-observer-service.ts",
+        "app/admin/scenes/[id]/workspace/page.tsx"
+      ],
+      "supportingServices": [
+        "lib/admin-page-agents.ts",
+        "app/actions/world-observer.ts"
+      ],
+      "contractsPayloads": [
+        "worldObserverSnapshot",
+        "chapterObserverSnapshot",
+        "bookObserverSnapshot"
+      ],
+      "truthPlanesTouched": [
+        "internal observational read models"
+      ],
+      "ownershipClarityScore": 3,
+      "verificationStrengthScore": 3,
+      "status": "provisional",
+      "confidence": "high",
+      "risks": [
+        "Observer pages and action APIs are split entrypoints with uneven discoverability.",
+        "Some debug behavior is query-parameter driven and weakly governed."
+      ]
+    },
+    {
+      "subsystem": "Author Inspection and Conversation Observability APIs",
+      "surfaceIds": [
+        "author-inspection-action-only",
+        "conversation-observer-action-only"
+      ],
+      "authoritativeModules": [
+        "app/actions/author-inspection.ts",
+        "app/actions/conversation-observer.ts"
+      ],
+      "supportingServices": [
+        "lib/services/authorial-inspection-service.ts",
+        "lib/services/conversation-observer-service.ts"
+      ],
+      "contractsPayloads": [
+        "authorInspectionPayload",
+        "conversationObservabilitySnapshot"
+      ],
+      "truthPlanesTouched": [
+        "author/debug inspection truth surfaces"
+      ],
+      "ownershipClarityScore": 2,
+      "verificationStrengthScore": 4,
+      "status": "provisional",
+      "confidence": "high",
+      "risks": [
+        "Strongly tested service layer but no direct UI ownership surface.",
+        "Risk of duplicate future UI entrypoints if not consolidated."
+      ]
+    }
+  ],
+  "globalFindings": {
+    "strongOwnershipAreas": [
+      "Reader cockpit service and contract stack",
+      "Public read-model assembly in lib/public-data.ts"
+    ],
+    "weakOwnershipAreas": [
+      "Unwired author/debug action surfaces",
+      "Admin route discoverability and nav completeness"
+    ],
+    "duplicateOrDriftSignals": [
+      "Parallel continuity state surfaces (localStorage and prisma.readerState).",
+      "Observer capability available via both pages and action APIs without one declared UI owner."
+    ]
+  }
+}

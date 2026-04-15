@@ -1,0 +1,156 @@
+{
+  "generatedAtIso": "2026-04-15T02:45:30.0000000-05:00",
+  "scale": {
+    "status": ["premier", "acceptable", "provisional", "duplicate", "deprecated"],
+    "confidence": ["high", "medium", "low"]
+  },
+  "subsystems": [
+    {
+      "name": "truth/genealogy/source ingestion",
+      "status": "acceptable",
+      "confidence": "medium",
+      "why": "Temporal filtering and source applicability enforcement are present and stable.",
+      "residualRisk": "Coverage remains mostly service-level rather than end-to-end scenario-heavy."
+    },
+    {
+      "name": "world-state chronology",
+      "status": "acceptable",
+      "confidence": "high",
+      "why": "Dedicated chronology verification command exists and passed.",
+      "residualRisk": "Future chronology schema changes may need additional edge fixtures."
+    },
+    {
+      "name": "epic spine / book mapping",
+      "status": "acceptable",
+      "confidence": "high",
+      "why": "Dedicated epic mapping verification command exists and passed.",
+      "residualRisk": "Operational risk is mainly future content-data calibration, not current logic stability."
+    },
+    {
+      "name": "scene generation",
+      "status": "premier",
+      "confidence": "high",
+      "why": "Build and strict full-system verification pass with deterministic generation governance retained.",
+      "residualRisk": "Model/provider behavior drift remains external and monitored via resilience controls."
+    },
+    {
+      "name": "repair/revision/job execution",
+      "status": "acceptable",
+      "confidence": "medium",
+      "why": "Verification umbrella includes quality/reentry checks and strict certification passes.",
+      "residualRisk": "Long-run queue pressure scenarios are not fully simulated in this certification run."
+    },
+    {
+      "name": "cognition / knowledge boundary",
+      "status": "acceptable",
+      "confidence": "medium",
+      "why": "Truth-boundary and contract surfaces remain enforced and green.",
+      "residualRisk": "Boundary integrity still depends on explicit write-boundary adoption discipline."
+    },
+    {
+      "name": "reader memory / relationship progression",
+      "status": "acceptable",
+      "confidence": "medium",
+      "why": "Reader-memory writeback and interaction harness flows pass under strict run.",
+      "residualRisk": "Policy remains intentionally conservative and could need expansion with future product scope."
+    },
+    {
+      "name": "emotional continuity / drift",
+      "status": "acceptable",
+      "confidence": "medium",
+      "why": "Continuity is integrated across cockpit/observability and strict full-system checks passed.",
+      "residualRisk": "No dedicated stress suite for very long sessions in this run."
+    },
+    {
+      "name": "session/turn/re-entry",
+      "status": "premier",
+      "confidence": "high",
+      "why": "Deterministic interaction harness and strict prelaunch/full-system both pass.",
+      "residualRisk": "Low; mainly dependent on migration discipline staying enforced."
+    },
+    {
+      "name": "response generation / guardrails",
+      "status": "premier",
+      "confidence": "high",
+      "why": "Guardrail and response flows continue passing in strict umbrella execution.",
+      "residualRisk": "Provider/model-side policy adversarial variance remains a monitoring concern."
+    },
+    {
+      "name": "voice presentation / synthesis",
+      "status": "acceptable",
+      "confidence": "medium",
+      "why": "Voice-related contract/presentation paths remain green and bounded by policy.",
+      "residualRisk": "Provider-specific runtime differences can still affect synthesis quality."
+    },
+    {
+      "name": "cockpit backend / UI",
+      "status": "acceptable",
+      "confidence": "medium",
+      "why": "Cockpit payload and command verification both pass; degraded handling was tightened in prior chunk.",
+      "residualRisk": "Orchestration ownership density remains high in one service."
+    },
+    {
+      "name": "entitlements / balances / unit economy",
+      "status": "acceptable",
+      "confidence": "high",
+      "why": "Strict run confirms no degraded debit leakage and harness accounting remains coherent.",
+      "residualRisk": "Economic policy tuning thresholds may require future calibration."
+    },
+    {
+      "name": "degraded mode / provider resilience",
+      "status": "acceptable",
+      "confidence": "high",
+      "why": "Dedicated degraded/resilience/moderation verify commands pass; fallback classification is explicit.",
+      "residualRisk": "Policy remains intentionally narrow and should evolve cautiously with traffic patterns."
+    },
+    {
+      "name": "observability / analytics",
+      "status": "acceptable",
+      "confidence": "medium",
+      "why": "Observability payloads remain contract-validated and integrated in full-system checks.",
+      "residualRisk": "Some observability substructures still rely on partially loose schema zones."
+    },
+    {
+      "name": "author/God mode",
+      "status": "acceptable",
+      "confidence": "medium",
+      "why": "Authorial inspection remains role-gated and contract-governed.",
+      "residualRisk": "Separation relies on maintaining strict mode boundary discipline as features grow."
+    },
+    {
+      "name": "contracts / registries / validation",
+      "status": "premier",
+      "confidence": "high",
+      "why": "Contracts, drift, and strict certification consistency all pass with expanded coverage.",
+      "residualRisk": "Remaining loose nested schema segments are known and documented."
+    },
+    {
+      "name": "migrations / operational dependencies",
+      "status": "acceptable",
+      "confidence": "high",
+      "why": "Migration readiness command and strict certification run pass.",
+      "residualRisk": "Prisma config deprecation warning is non-blocking but should be modernized."
+    },
+    {
+      "name": "permissions / moderation",
+      "status": "acceptable",
+      "confidence": "high",
+      "why": "Moderation verification passes and degraded/fallback routing remains explicit.",
+      "residualRisk": "Heuristic moderation patterns remain intentionally lightweight."
+    },
+    {
+      "name": "performance / background work",
+      "status": "acceptable",
+      "confidence": "medium",
+      "why": "Background maintenance command passes in final run.",
+      "residualRisk": "No high-volume performance soak evidence in this certification pass."
+    },
+    {
+      "name": "test harnesses / verification scripts",
+      "status": "premier",
+      "confidence": "high",
+      "why": "Full matrix (22 commands) passed including strict prelaunch/full-system and deterministic harness.",
+      "residualRisk": "Umbrella script scope still depends on maintainers keeping command list aligned with critical surfaces."
+    }
+  ]
+}

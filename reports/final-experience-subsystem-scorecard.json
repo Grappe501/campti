@@ -1,0 +1,39 @@
+{
+  "contractVersion": "1",
+  "scope": "phase5_reader_experience",
+  "evaluatedAtIso": "2026-04-15T16:40:05.225Z",
+  "subsystems": [
+    {
+      "subsystem": "continuity_unification",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "reader_session_model",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "story_reentry_surface",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "interaction_productization",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "reader_modes",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "degraded_ux",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "ui_ownership",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "reader_experience_bundle",
+      "status": "acceptable"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "contractVersion": "1",
+  "scope": "phase6_ecosystem_scale_layer",
+  "evaluatedAtIso": "2026-04-15T17:09:37.865Z",
+  "risks": [
+    {
+      "riskId": "cross_story_contamination",
+      "severity": "low"
+    },
+    {
+      "riskId": "identity_leakage",
+      "severity": "low"
+    },
+    {
+      "riskId": "session_bleed",
+      "severity": "low"
+    },
+    {
+      "riskId": "draft_leak_to_reader",
+      "severity": "low"
+    }
+  ]
+}

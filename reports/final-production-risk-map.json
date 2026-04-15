@@ -1,0 +1,23 @@
+{
+  "contractVersion": "1",
+  "scope": "phase4_narrative_production_layer",
+  "evaluatedAtIso": "2026-04-15T16:09:12.595Z",
+  "risks": [
+    {
+      "riskId": "chapter_brittleness",
+      "severity": "low"
+    },
+    {
+      "riskId": "pressure_drift",
+      "severity": "low"
+    },
+    {
+      "riskId": "branch_explosion",
+      "severity": "low"
+    },
+    {
+      "riskId": "manuscript_contradiction",
+      "severity": "low"
+    }
+  ]
+}

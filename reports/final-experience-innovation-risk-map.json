@@ -1,0 +1,32 @@
+{
+  "contractVersion": "1",
+  "scope": "experience_innovation_pass",
+  "evaluatedAtIso": "2026-04-15T17:25:56.878Z",
+  "risks": [
+    {
+      "riskId": "epistemic_leakage_from_presence_layers",
+      "severity": "low",
+      "source": "verify:narrative-overlays"
+    },
+    {
+      "riskId": "mode_fork_behavioral_divergence",
+      "severity": "low",
+      "source": "verify:experience-modes-reinvention"
+    },
+    {
+      "riskId": "voice_presence_regression",
+      "severity": "low",
+      "source": "verify:voice-presence-upgrade"
+    },
+    {
+      "riskId": "orchestration_state_fragmentation",
+      "severity": "low",
+      "source": "verify:experience-orchestration-v2"
+    },
+    {
+      "riskId": "interaction_surface_still_tool_like",
+      "severity": "medium",
+      "source": "explicit_finding"
+    }
+  ]
+}

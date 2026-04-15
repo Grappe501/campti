@@ -1,0 +1,127 @@
+{
+  "contractVersion": "1",
+  "certificationScope": "experience_innovation_pass",
+  "executedAtIso": "2026-04-15T17:25:56.878Z",
+  "commands": [
+    {
+      "command": "npx prisma validate",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByInnovationPass": true
+    },
+    {
+      "command": "npx prisma generate",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByInnovationPass": true
+    },
+    {
+      "command": "npm run typecheck",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByInnovationPass": true
+    },
+    {
+      "command": "npm run lint",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByInnovationPass": true
+    },
+    {
+      "command": "npm run build",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByInnovationPass": true
+    },
+    {
+      "command": "npm run verify:migrations",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByInnovationPass": true
+    },
+    {
+      "command": "npm run verify:contracts",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByInnovationPass": true
+    },
+    {
+      "command": "npm run verify:contract-drift",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByInnovationPass": true
+    },
+    {
+      "command": "npm run verify:interaction-truth-firewall",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByInnovationPass": true
+    },
+    {
+      "command": "npm run verify:prelaunch:strict",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByInnovationPass": true
+    },
+    {
+      "command": "npm run verify:full-system:strict",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByInnovationPass": true
+    },
+    {
+      "command": "npm run verify:living-entry-experience",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByInnovationPass": true
+    },
+    {
+      "command": "npm run verify:experience-canvas",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByInnovationPass": true
+    },
+    {
+      "command": "npm run verify:experience-modes-reinvention",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByInnovationPass": true
+    },
+    {
+      "command": "npm run verify:voice-presence-upgrade",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByInnovationPass": true
+    },
+    {
+      "command": "npm run verify:narrative-overlays",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByInnovationPass": true
+    },
+    {
+      "command": "npm run verify:interaction-presence",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByInnovationPass": true
+    },
+    {
+      "command": "npm run verify:ambient-transitions",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByInnovationPass": true
+    },
+    {
+      "command": "npm run verify:experience-orchestration-v2",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByInnovationPass": true
+    }
+  ],
+  "summary": {
+    "total": 19,
+    "passed": 19,
+    "failed": 0,
+    "skipped": 0
+  }
+}

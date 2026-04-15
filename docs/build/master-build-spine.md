@@ -79,6 +79,24 @@ These rules are **binding** for every new subsystem, integration, and refactor. 
 
 ---
 
+## 2b. Narration interaction modes (P2-Z scaffolding)
+
+The codebase distinguishes **two named interaction modes** in `lib/domain/narration-modes.ts`. This is **separation scaffolding** — not an implementation of privileged tooling.
+
+| Mode (code id) | Meaning |
+|----------------|--------|
+| **`bounded_character_conversation`** | The implemented path for reader↔character dialogue: identity snapshots, knowledge boundaries (P2-F), relationship memory (P2-G), contracts, guardrails. The character does **not** receive omniscient access to other minds, off-stage truth, or author knowledge **beyond what the allowed snapshot and policy surfaces** — there is no hidden “see everything” channel on this pipe. |
+| **`future_author_god_mode`** | **Reserved** for a **separate future layer** (different contracts and pipelines): author-facing or privileged narrative access, if ever built. **Not implemented today.** Must not be conflated with “turning off” bounds on the same character chat stack. |
+
+**Rules**
+
+1. **Bounded mode** — Cannot grant omniscient interior access or narrator-grade truth beyond the bounded snapshot context and global directives; violations are governance failures, not UX toggles.
+2. **Author / God mode** — When implemented, must remain a **distinct surface** from bounded conversation (not a flag that silently widens character epistemics).
+
+**Enforcement:** New interactive features default to `bounded_character_conversation` unless explicitly designed for the future layer.
+
+---
+
 ## 3. Layered architecture
 
 Layers are **ordered** from substrate to surface. Lower layers constrain higher ones.
@@ -125,6 +143,25 @@ Major phases in **sequence** (names are architectural; calendar dates are not fi
 | 12 | **Operational scaling** — performance, observability, cost controls after the spine is stable. |
 
 Later phases **depend** on earlier truth and contract discipline; skipping hardening to chase features is disallowed for production-grade releases.
+
+---
+
+## 4a. Phase 3 execution index
+
+Use this index as the execution and evidence trail for the Phase 3 storyline build:
+
+1. [Phase 3 - Chunk 1 - Arc Engine Core Inventory](./phase3-chunk1-arc-engine-core-inventory.md)
+2. [Phase 3 - Chunk 2 - Chapter / Movement Progression Inventory](./phase3-chunk2-chapter-movement-progression-inventory.md)
+3. [Phase 3 - Chunk 3 - Narrative Pressure Engine Inventory](./phase3-chunk3-narrative-pressure-engine-inventory.md)
+4. [Phase 3 - Chunk 4 - Branch Governance Core Inventory](./phase3-chunk4-branch-governance-core-inventory.md)
+5. [Phase 3 - Chunk 5 - Storyline Orchestrator Integration Inventory](./phase3-chunk5-storyline-orchestrator-integration-inventory.md)
+6. [Phase 3 - Chunk 6 - Scene / Interaction Storyline Wiring Inventory](./phase3-chunk6-scene-interaction-storyline-wiring-inventory.md)
+7. [Phase 3 - Chunk 7 - Author / Debug Storyline Explainability Inventory](./phase3-chunk7-author-debug-storyline-explainability-inventory.md)
+8. [Phase 3 - Chunk 8 - Storyline Verification Surface Inventory](./phase3-chunk8-storyline-verification-surface-inventory.md)
+9. [Phase 3 - Chunk 9 - Storyline Certification Run Inventory](./phase3-chunk9-storyline-certification-run-inventory.md)
+10. [Final Storyline Certification Report (Phase 3)](./final-storyline-certification-report.md)
+
+Gate rule: do not advance to the next chunk until the current chunk's DoD gate and evidence checklist are fully satisfied.
 
 ---
 

@@ -17,6 +17,7 @@ import type {
 } from "@/lib/domain/narrative-shaping-defaults";
 import type { SceneGenerationSocialQaScalars } from "@/lib/domain/scene-generation-social";
 import type { NarrativeSource } from "@/lib/domain/narrative-source";
+import type { StorylineGuidanceBundle } from "@/lib/domain/storyline-guidance-bundle";
 
 /** How the model should treat this request (prompt routing only). */
 export type SceneGenerationMode = "draft" | "rewrite" | "repair" | "alternate";
@@ -55,6 +56,21 @@ export type SceneGenerationInput = {
 
   /** Deterministic scalars for post-gen advisory only (not narrated to the model as numbers). */
   socialFieldQaScalars?: SceneGenerationSocialQaScalars | null;
+
+  /**
+   * Phase 3 / Chunk 6 — compact storyline guidance for scene planning influence.
+   * This remains advisory-only and must never force structurally invalid outcomes.
+   */
+  storylineGuidanceSummary?: {
+    storylineBundle: StorylineGuidanceBundle;
+    allowedSceneTendencies: string[];
+    discouragedSceneTendencies: string[];
+    topTensionWeights: Array<{
+      pressureCategory: string;
+      weight: number;
+    }>;
+    reconvergenceRecommendation: string;
+  } | null;
 
   /**
    * When rewriting/repairing, which stored column to treat as baseline if `basisProseOverride` is absent.

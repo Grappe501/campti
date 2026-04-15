@@ -1,0 +1,157 @@
+{
+  "contractVersion": "1",
+  "certificationScope": "phase6_chunk9_ecosystem_certification_run",
+  "executedAtIso": "2026-04-15T17:09:37.865Z",
+  "commands": [
+    {
+      "command": "npx prisma validate",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npx prisma generate",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run typecheck",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run lint",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run build",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:migrations",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:contracts",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:contract-drift",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:interaction-truth-firewall",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:prelaunch:strict",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:full-system:strict",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:multi-book-architecture",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:reader-identity",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:library-system",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:cross-story-continuity",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:multi-session",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:author-workflow",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:release-governance",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:multi-book",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:identity-isolation",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:library-integrity",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:session-isolation",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:versioning-integrity",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:platform-scale",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    }
+  ],
+  "summary": {
+    "total": 24,
+    "passed": 24,
+    "failed": 0,
+    "skipped": 0
+  }
+}

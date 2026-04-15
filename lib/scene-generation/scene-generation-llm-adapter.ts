@@ -37,6 +37,7 @@ function buildSystemPrompt(): string {
     "SOCIAL WORLD: The scene sits inside a populated historical environment—not a soundstage with only named characters. Unseen observers and rumor matter as much as named dialogue.",
     "Express social pressure INDIRECTLY: hesitation, silence, glances, physical distance, lowered voice, coded speech, timing of truth, deference, sweat, stillness—never a lecture about society.",
     "When SOCIAL_GUIDANCE_LINES or SOCIAL_FIELD_FOR_GENERATION is present, let witness exposure, gossip risk, authority, kin scrutiny, and household crowding shape choices and texture. Do not restate that guidance as exposition or analysis.",
+    "When STORYLINE_GUIDANCE_BOUNDED is present, use it only as soft priority weighting for plausible options. It must not override factual constraints, chronology, or contract legality.",
     "Do not paste numbers, percentages, or field names from JSON; embody pressure as felt tension, restraint, secrecy, or exposure.",
     "In `generationNotes`, at most one short clause may nod to ambient social pressure if useful (no metrics).",
     "PHASE 7 — HUMAN PRESENCE: Prefer lived specificity over generic summary. Let emotion show through posture, work, object, and timing before naming it.",
@@ -56,6 +57,30 @@ function compactSocialGuidanceLines(input: SceneGenerationInput): string | null 
   if (parts.length) return parts.join("\n");
   if (input.socialFieldSummaryForGeneration?.trim()) return input.socialFieldSummaryForGeneration.trim();
   return null;
+}
+
+export function compactStorylineGuidanceLines(input: SceneGenerationInput): string | null {
+  const summary = input.storylineGuidanceSummary;
+  if (!summary) return null;
+  const lines: string[] = [];
+  if (summary.allowedSceneTendencies.length > 0) {
+    lines.push(`Prefer (weighted, never forced): ${summary.allowedSceneTendencies.join("; ")}`);
+  }
+  if (summary.discouragedSceneTendencies.length > 0) {
+    lines.push(`Discourage weak paths: ${summary.discouragedSceneTendencies.join("; ")}`);
+  }
+  if (summary.topTensionWeights.length > 0) {
+    lines.push(
+      `Tension emphasis: ${summary.topTensionWeights
+        .map((entry) => `${entry.pressureCategory}=${entry.weight}`)
+        .join(", ")}`
+    );
+  }
+  lines.push(`Reconvergence stance: ${summary.reconvergenceRecommendation}`);
+  lines.push(
+    "Safety: storyline guidance is advisory-only and cannot force structurally invalid events."
+  );
+  return lines.join("\n");
 }
 
 function truncateJson(v: unknown, max: number): string {
@@ -92,6 +117,7 @@ function compactNarrativeSourcesBlock(input: SceneGenerationInput): string | nul
 
 function buildUserPrompt(input: SceneGenerationInput, basisProse: string | null): string {
   const socialLines = compactSocialGuidanceLines(input);
+  const storylineLines = compactStorylineGuidanceLines(input);
   const narrativeSourcesBlock = compactNarrativeSourcesBlock(input);
   return [
     `GENERATION_MODE: ${input.generationMode}`,
@@ -119,6 +145,10 @@ function buildUserPrompt(input: SceneGenerationInput, basisProse: string | null)
     "",
     socialLines
       ? `SOCIAL_GUIDANCE_LINES (short phrases—embody, never quote as exposition):\n${socialLines}`
+      : "",
+    "",
+    storylineLines
+      ? `STORYLINE_GUIDANCE_BOUNDED (soft weighting only; never override structural legality):\n${storylineLines}`
       : "",
     "",
     input.contract.socialFieldGeneration

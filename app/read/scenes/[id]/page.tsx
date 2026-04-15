@@ -11,6 +11,7 @@ import {
 import { resolvePublicSceneImmersion } from "@/lib/public-scene-immersion";
 import { buildPublicPerceptionPayload } from "@/lib/public-experience-rendering";
 import { getCamptiSessionId } from "@/lib/campti-session";
+import { buildReaderExperienceBundle } from "@/lib/services/reader-experience-orchestrator-service";
 
 export const dynamic = "force-dynamic";
 
@@ -62,6 +63,14 @@ export default async function ReadScenePage({ params }: Props) {
 
   const perceptionPayload = await buildPublicPerceptionPayload(data);
   const chapterIndex = await getPublicChapterIndex();
+  const experienceBundle = sessionId
+    ? await buildReaderExperienceBundle({
+        sessionId,
+        sceneId: data.scene.id,
+        readerId: sessionId,
+        characterId: data.povPerson?.id ?? null,
+      })
+    : null;
 
   return (
     <ReadSceneExperience
@@ -72,6 +81,7 @@ export default async function ReadScenePage({ params }: Props) {
       title={title}
       perceptionPayload={perceptionPayload}
       chapterIndex={chapterIndex}
+      experienceBundle={experienceBundle}
     />
   );
 }

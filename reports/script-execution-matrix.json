@@ -1,0 +1,158 @@
+{
+  "generatedAt": "2026-04-15T05:31:18.929Z",
+  "scripts": [
+    {
+      "script": "typecheck",
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "result": "passed",
+      "durationMs": 5328,
+      "blockingReason": "",
+      "outputTail": "> campti@0.1.0 typecheck\n> tsc --noEmit"
+    },
+    {
+      "script": "verify:contracts",
+      "command": "npm run verify:contracts",
+      "exitCode": 0,
+      "result": "passed",
+      "durationMs": 1192,
+      "blockingReason": "",
+      "outputTail": "      duration_ms: 0.2461\n      type: 'test'\n      ...\n    # Subtest: runs schema for sceneGenerationOutput write\n    ok 2 - runs schema for sceneGenerationOutput write\n      ---\n      duration_ms: 1.8413\n      type: 'test'\n      ...\n    # Subtest: write mode rejects legacy readable-only version for decisionTrace\n    ok 3 - write mode rejects legacy readable-only version for decisionTrace\n      ---\n      duration_ms: 0.1712\n      type: 'test'\n      ...\n    1..3\nok 4 - validateRegisteredContractPayload\n  ---\n  duration_ms: 2.3821\n  type: 'suite'\n  ...\n1..4\n# tests 14\n# suites 4\n# pass 14\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 583.8046"
+    },
+    {
+      "script": "verify:contract-drift",
+      "command": "npm run verify:contract-drift",
+      "exitCode": 0,
+      "result": "passed",
+      "durationMs": 1183,
+      "blockingReason": "",
+      "outputTail": "> campti@0.1.0 verify:contract-drift\n> tsx scripts/check-contract-registry-drift.ts\nContract registry drift check\nRegistered contracts: bookCoherenceReport, bookObserverSnapshot, chapterCoherenceReport, chapterObserverSnapshot, characterResponse, cognitionFrame, conversationalTurnInput, decisionTrace, innerVoice, narrativeShapingDefaults, sceneGenerationInput, sceneGenerationOutput, socialFieldContext, voiceSynthesisRequest, worldObserverSnapshot\nReadable version token count: 5\nNo suspected unregistered contractVersion literals (heuristic)."
+    },
+    {
+      "script": "verify:generation-hash",
+      "command": "npm run verify:generation-hash",
+      "exitCode": 0,
+      "result": "passed",
+      "durationMs": 1502,
+      "blockingReason": "",
+      "outputTail": "      type: 'test'\n      ...\n    1..1\nok 3 - serializeCanonicalSceneGenerationHashInput\n  ---\n  duration_ms: 1.8634\n  type: 'suite'\n  ...\n# Subtest: hashCanonicalSceneGenerationHashInput\n    # Subtest: matches sha256 of serialized canonical payload\n    ok 1 - matches sha256 of serialized canonical payload\n      ---\n      duration_ms: 0.3368\n      type: 'test'\n      ...\n    1..1\nok 4 - hashCanonicalSceneGenerationHashInput\n  ---\n  duration_ms: 0.4788\n  type: 'suite'\n  ...\n1..4\n# tests 12\n# suites 4\n# pass 12\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 874.9121"
+    },
+    {
+      "script": "verify:revision-job-policy",
+      "command": "npm run verify:revision-job-policy",
+      "exitCode": 0,
+      "result": "passed",
+      "durationMs": 1865,
+      "blockingReason": "",
+      "outputTail": "> tsx --test lib/services/revision-job-runner.policy.test.ts\nTAP version 13\n# Subtest: shouldRequeueAfterFailure\n    # Subtest: requeues when below max attempts\n    ok 1 - requeues when below max attempts\n      ---\n      duration_ms: 25.9746\n      type: 'test'\n      ...\n    # Subtest: terminal when at or past max attempts\n    ok 2 - terminal when at or past max attempts\n      ---\n      duration_ms: 0.2132\n      type: 'test'\n      ...\n    1..2\nok 1 - shouldRequeueAfterFailure\n  ---\n  duration_ms: 27.2229\n  type: 'suite'\n  ...\n1..1\n# tests 2\n# suites 1\n# pass 2\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 1238.943"
+    },
+    {
+      "script": "verify:conversational-turn-input",
+      "command": "npm run verify:conversational-turn-input",
+      "exitCode": 0,
+      "result": "passed",
+      "durationMs": 1297,
+      "blockingReason": "",
+      "outputTail": "      type: 'test'\n      ...\n    1..4\nok 1 - conversationalTurnInputSchemaV1\n  ---\n  duration_ms: 5.065\n  type: 'suite'\n  ...\n# Subtest: conversationalTurnInput registry\n    # Subtest: validates write payload through contract registry\n    ok 1 - validates write payload through contract registry\n      ---\n      duration_ms: 1.0233\n      type: 'test'\n      ...\n    1..1\nok 2 - conversationalTurnInput registry\n  ---\n  duration_ms: 1.1854\n  type: 'suite'\n  ...\n1..2\n# tests 5\n# suites 2\n# pass 5\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 678.9097"
+    },
+    {
+      "script": "verify:character-reply-generation",
+      "command": "npm run verify:character-reply-generation",
+      "exitCode": 0,
+      "result": "passed",
+      "durationMs": 1536,
+      "blockingReason": "",
+      "outputTail": "      type: 'test'\n      ...\n    1..3\nok 1 - generateCharacterReplyFromTurn\n  ---\n  duration_ms: 11.8206\n  type: 'suite'\n  ...\n# Subtest: buildConservativeBoundedCharacterResponse\n    # Subtest: produces contract-valid bounded shape without omniscient phrasing\n    ok 1 - produces contract-valid bounded shape without omniscient phrasing\n      ---\n      duration_ms: 0.6545\n      type: 'test'\n      ...\n    1..1\nok 2 - buildConservativeBoundedCharacterResponse\n  ---\n  duration_ms: 0.8312\n  type: 'suite'\n  ...\n1..2\n# tests 4\n# suites 2\n# pass 4\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 928.3337"
+    },
+    {
+      "script": "verify:character-conversation-session",
+      "command": "npm run verify:character-conversation-session",
+      "exitCode": 0,
+      "result": "passed",
+      "durationMs": 1601,
+      "blockingReason": "",
+      "outputTail": "      duration_ms: 0.1675\n      type: 'test'\n      ...\n    # Subtest: markPaused and markEnded update status and timestamps\n    ok 3 - markPaused and markEnded update status and timestamps\n      ---\n      duration_ms: 0.1549\n      type: 'test'\n      ...\n    # Subtest: bumpSessionInteractionCount increments and touches lastInteractionAt\n    ok 4 - bumpSessionInteractionCount increments and touches lastInteractionAt\n      ---\n      duration_ms: 0.2116\n      type: 'test'\n      ...\n    1..4\nok 1 - CharacterConversationSession service (integration)\n  ---\n  duration_ms: 598.5133\n  type: 'suite'\n  ...\n1..1\n# tests 4\n# suites 1\n# pass 4\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 984.7132"
+    },
+    {
+      "script": "verify:character-conversation-turn",
+      "command": "npm run verify:character-conversation-turn",
+      "exitCode": 0,
+      "result": "passed",
+      "durationMs": 2054,
+      "blockingReason": "",
+      "outputTail": "# prisma:error \n# Invalid `prisma.characterConversationSession.deleteMany()` invocation in\n# C:\\\\Users\\\\User\\\\Desktop\\\\Campti\\\\lib\\\\services\\\\character-conversation-turn-service.test.ts:48:49\n#   45 });\n#   46 if (!p) return;\n#   47 characterId = p.id;\n# → 48 await prisma.characterConversationSession.deleteMany(\n# The table `public.CharacterConversationSession` does not exist in the current database.\n# Subtest: CharacterConversationTurn service (integration)\n    # Subtest: orders turns by orderIndex and isolates sessions\n    ok 1 - orders turns by orderIndex and isolates sessions\n      ---\n      duration_ms: 1.783\n      type: 'test'\n      ...\n    1..1\nok 1 - CharacterConversationTurn service (integration)\n  ---\n  duration_ms: 767.3474\n  type: 'suite'\n  ...\n1..1\n# tests 1\n# suites 1\n# pass 1\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 1430.6278"
+    },
+    {
+      "script": "verify:reader-cockpit-payload",
+      "command": "npm run verify:reader-cockpit-payload",
+      "exitCode": 0,
+      "result": "passed",
+      "durationMs": 2087,
+      "blockingReason": "",
+      "outputTail": "# The table `public.CharacterConversationSession` does not exist in the current database.\n    # Subtest: returns null session slice when no active session and no sessionId\n    ok 2 - returns null session slice when no active session and no sessionId\n      ---\n      duration_ms: 47.4629\n      type: 'test'\n      ...\n# prisma:error \n# Invalid `prisma.characterConversationSession.deleteMany()` invocation in\n# C:\\\\Users\\\\User\\\\Desktop\\\\Campti\\\\lib\\\\services\\\\reader-cockpit-payload-service.test.ts:58:49\n#   55 after(async () => {\n#   56   if (!enabled) return;\n#   57   try {\n# → 58     await prisma.characterConversationSession.deleteMany(\n# The table `public.CharacterConversationSession` does not exist in the current database.\n    1..2\nok 2 - buildReaderCockpitPayload (integration)\n  ---\n  duration_ms: 782.4709\n  type: 'suite'\n  ...\n1..2\n# tests 3\n# suites 2\n# pass 3\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 1479.6785"
+    },
+    {
+      "script": "verify:reader-cockpit-command",
+      "command": "npm run verify:reader-cockpit-command",
+      "exitCode": 0,
+      "result": "passed",
+      "durationMs": 1742,
+      "blockingReason": "",
+      "outputTail": "      type: 'test'\n      ...\n    1..1\nok 3 - cockpitStartConversationFromScene (validation only)\n  ---\n  duration_ms: 0.3826\n  type: 'suite'\n  ...\n# Subtest: degraded interaction debit policy\n    # Subtest: never debits units in degraded free/fallback policies\n    ok 1 - never debits units in degraded free/fallback policies\n      ---\n      duration_ms: 0.2579\n      type: 'test'\n      ...\n    1..1\nok 4 - degraded interaction debit policy\n  ---\n  duration_ms: 0.6823\n  type: 'suite'\n  ...\n1..4\n# tests 5\n# suites 4\n# pass 5\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 1143.3687"
+    },
+    {
+      "script": "verify:voice-presentation",
+      "command": "npm run verify:voice-presentation",
+      "exitCode": 0,
+      "result": "passed",
+      "durationMs": 948,
+      "blockingReason": "",
+      "outputTail": "      duration_ms: 0.4095\n      type: 'test'\n      ...\n    # Subtest: strips bracket asides and collapses space\n    ok 2 - strips bracket asides and collapses space\n      ---\n      duration_ms: 0.3375\n      type: 'test'\n      ...\n    # Subtest: maps knowledgeSource to stance via pauseHints reflected in cues\n    ok 3 - maps knowledgeSource to stance via pauseHints reflected in cues\n      ---\n      duration_ms: 0.3561\n      type: 'test'\n      ...\n    1..3\nok 2 - toVoiceReadyText (legacy adapter)\n  ---\n  duration_ms: 1.4788\n  type: 'suite'\n  ...\n1..2\n# tests 10\n# suites 2\n# pass 10\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 326.0572"
+    },
+    {
+      "script": "verify:degraded-interaction-policy",
+      "command": "npm run verify:degraded-interaction-policy",
+      "exitCode": 0,
+      "result": "passed",
+      "durationMs": 920,
+      "blockingReason": "",
+      "outputTail": "> tsx --test lib/services/degraded-interaction-policy-service.test.ts\nTAP version 13\n# Subtest: resolveDegradedInteractionPolicy\n    # Subtest: maps schema_missing to allow_read_only\n    ok 1 - maps schema_missing to allow_read_only\n      ---\n      duration_ms: 0.8759\n      type: 'test'\n      ...\n    # Subtest: maps provider_failure to allow_system_fallback_only\n    ok 2 - maps provider_failure to allow_system_fallback_only\n      ---\n      duration_ms: 0.1755\n      type: 'test'\n      ...\n    1..2\nok 1 - resolveDegradedInteractionPolicy\n  ---\n  duration_ms: 2.0699\n  type: 'suite'\n  ...\n1..1\n# tests 2\n# suites 1\n# pass 2\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 310.2487"
+    },
+    {
+      "script": "verify:interaction-truth-firewall",
+      "command": "npm run verify:interaction-truth-firewall",
+      "exitCode": 0,
+      "result": "passed",
+      "durationMs": 935,
+      "blockingReason": "",
+      "outputTail": "      duration_ms: 0.8442\n      type: 'test'\n      ...\n    # Subtest: blocks interaction summaries being treated as historical truth\n    ok 3 - blocks interaction summaries being treated as historical truth\n      ---\n      duration_ms: 0.2603\n      type: 'test'\n      ...\n    # Subtest: detects conversation artifacts injected into world-state truth sources\n    ok 4 - detects conversation artifacts injected into world-state truth sources\n      ---\n      duration_ms: 0.2338\n      type: 'test'\n      ...\n    1..4\nok 1 - interaction truth firewall\n  ---\n  duration_ms: 4.9182\n  type: 'suite'\n  ...\n1..1\n# tests 4\n# suites 1\n# pass 4\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 308.0844"
+    },
+    {
+      "script": "verify:deterministic-interaction-harness",
+      "command": "npm run verify:deterministic-interaction-harness",
+      "exitCode": 1,
+      "result": "blocked",
+      "durationMs": 1821,
+      "blockingReason": "database schema not fully migrated or table missing",
+      "outputTail": "> campti@0.1.0 verify:deterministic-interaction-harness\n> tsx scripts/run-deterministic-interaction-harness.ts\nprisma:error \nInvalid `prisma.readerInteractionLedgerEntry.deleteMany()` invocation in\nC:\\Users\\User\\Desktop\\Campti\\lib\\testing\\interaction-harness.ts:90:45\n  87 };\n  88 \n  89 async function cleanupHarnessData(readerId: string): Promise<void> {\n→ 90   await prisma.readerInteractionLedgerEntry.deleteMany(\nThe table `public.ReaderInteractionLedgerEntry` does not exist in the current database.\n{\n  \"success\": false,\n  \"readerId\": \"p3b-deterministic-harness-reader\",\n  \"sceneId\": \"\",\n  \"characterId\": \"\",\n  \"sessionId\": \"\",\n  \"steps\": [\n    {\n      \"name\": \"harness_error\",\n      \"ok\": false,\n      \"details\": {\n        \"message\": \"\\nInvalid `prisma.readerInteractionLedgerEntry.deleteMany()` invocation in\\nC:\\\\Users\\\\User\\\\Desktop\\\\Campti\\\\lib\\\\testing\\\\interaction-harness.ts:90:45\\n\\n  87 };\\n  88 \\n  89 async function cleanupHarnessData(readerId: string): Promise<void> {\\n→ 90   await prisma.readerInteractionLedgerEntry.deleteMany(\\nThe table `public.ReaderInteractionLedgerEntry` does not exist in the current database.\"\n      }\n    }\n  ],\n  \"error\": \"\\nInvalid `prisma.readerInteractionLedgerEntry.deleteMany()` invocation in\\nC:\\\\Users\\\\User\\\\Desktop\\\\Campti\\\\lib\\\\testing\\\\interaction-harness.ts:90:45\\n\\n  87 };\\n  88 \\n  89 async function cleanupHarnessData(readerId: string): Promise<void> {\\n→ 90   await prisma.readerInteractionLedgerEntry.deleteMany(\\nThe table `public.ReaderInteractionLedgerEntry` does not exist in the current database.\"\n}"
+    },
+    {
+      "script": "verify:prelaunch",
+      "command": "npm run verify:prelaunch",
+      "exitCode": 0,
+      "result": "passed",
+      "durationMs": 1986,
+      "blockingReason": "",
+      "outputTail": "      }\n    },\n    {\n      \"name\": \"entitlement_enforcement_present\",\n      \"ok\": true,\n      \"details\": {\n        \"skipped\": true,\n        \"error\": \"\\nInvalid `prisma.readerEntitlement.upsert()` invocation in\\nC:\\\\Users\\\\User\\\\Desktop\\\\Campti\\\\lib\\\\services\\\\reader-entitlement-service.ts:177:46\\n\\n  174 const monthlyAllowance = getEffectiveUnitAllowance(planType);\\n  175 const now = new Date();\\n  176 const cycle = buildCycleFromStart(now);\\n→ 177 const row = await prisma.readerEntitlement.upsert(\\nThe table `public.ReaderEntitlement` does not exist in the current database.\"\n      }\n    },\n    {\n      \"name\": \"no_role_leakage\",\n      \"ok\": true\n    },\n    {\n      \"name\": \"no_internalThought_leakage\",\n      \"ok\": true,\n      \"details\": {\n        \"cleanedSpokenText\": \"I can answer only from my own memory.\"\n      }\n    },\n    {\n      \"name\": \"canonical_truth_mutation_guard\",\n      \"ok\": true,\n      \"details\": {\n        \"assertion\": \"prelaunch harness performs product-layer checks only; no canonical truth writes.\"\n      }\n    }\n  ]\n}"
+    },
+    {
+      "script": "verify:full-system",
+      "command": "npm run verify:full-system",
+      "exitCode": 0,
+      "result": "passed",
+      "durationMs": 7637,
+      "blockingReason": "",
+      "outputTail": "        \"ok\": true,\n        \"details\": {\n          \"assertion\": \"prelaunch harness performs product-layer checks only; no canonical truth writes.\"\n        }\n      }\n    ]\n  },\n  \"commandResults\": [\n    {\n      \"command\": \"npm run verify:story-reentry-continuity\",\n      \"ok\": true\n    },\n    {\n      \"command\": \"npm run verify:conversation-quality-review\",\n      \"ok\": true\n    },\n    {\n      \"command\": \"npm run verify:reader-entitlement\",\n      \"ok\": true\n    },\n    {\n      \"command\": \"npm run verify:provider-resilience\",\n      \"ok\": true\n    },\n    {\n      \"command\": \"npm run verify:moderation-service\",\n      \"ok\": true\n    }\n  ]\n}"
+    }
+  ]
+}

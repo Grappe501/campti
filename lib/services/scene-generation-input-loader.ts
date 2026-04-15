@@ -24,11 +24,52 @@ import {
 } from "@/lib/services/narrative-shaping-defaults-service";
 import type { NarrativeShapingOverrideSet } from "@/lib/domain/narrative-shaping-defaults";
 import { getSourcesForWorldState } from "@/lib/services/narrative-source-service";
+import {
+  assembleStorylineGuidanceBundle,
+  buildStorylineOrchestrationInputsFromSeamContext,
+} from "@/lib/services/storyline-orchestrator-integration-service";
 
 function parishPlaceIdFromSceneJson(structuredDataJson: unknown): string | null {
   if (!structuredDataJson || typeof structuredDataJson !== "object") return null;
   const v = (structuredDataJson as Record<string, unknown>).parishPlaceId;
   return typeof v === "string" && v.length ? v : null;
+}
+
+function buildSceneStorylineGuidanceSummary(input: {
+  sceneId: string;
+  povPersonId: string | null;
+  narrativeIntent: string | null;
+  emotionalTone: string | null;
+  socialFieldSummaryForGeneration?: string | null;
+}): SceneGenerationInput["storylineGuidanceSummary"] {
+  const relationshipSignalCodes = [
+    input.narrativeIntent?.trim() ? `scene_intent:${input.narrativeIntent.trim()}` : null,
+    input.emotionalTone?.trim() ? `scene_emotional_tone:${input.emotionalTone.trim()}` : null,
+    input.socialFieldSummaryForGeneration?.trim()
+      ? `social_field_present:${input.socialFieldSummaryForGeneration.trim().slice(0, 48)}`
+      : null,
+  ].filter((entry): entry is string => Boolean(entry));
+
+  const orchestration = buildStorylineOrchestrationInputsFromSeamContext({
+    mode: "scene_mode",
+    channel: "canonical_dyad",
+    seamId: input.povPersonId ? `scene:${input.sceneId}:pov:${input.povPersonId}` : `scene:${input.sceneId}`,
+    relationshipSignalCodes:
+      relationshipSignalCodes.length > 0 ? relationshipSignalCodes : [`scene:${input.sceneId}:baseline`],
+  });
+  const storylineBundle = assembleStorylineGuidanceBundle({
+    mode: "scene_mode",
+    channel: "canonical_dyad",
+    orchestration,
+  });
+
+  return {
+    storylineBundle,
+    allowedSceneTendencies: storylineBundle.sceneTendencyGuidance.allowedSceneTendencies.slice(0, 6),
+    discouragedSceneTendencies: storylineBundle.sceneTendencyGuidance.discouragedSceneTendencies.slice(0, 6),
+    topTensionWeights: storylineBundle.tensionEmphasisWeights.slice(0, 4),
+    reconvergenceRecommendation: storylineBundle.branchConstraints.reconvergenceRecommendation,
+  };
 }
 
 /**
@@ -211,6 +252,13 @@ export async function loadSceneGenerationInput(
   const narrativeShapingSummary = narrativeShapingResolution
     ? buildNarrativeShapingObserverSummary(narrativeShapingResolution)
     : null;
+  const storylineGuidanceSummary = buildSceneStorylineGuidanceSummary({
+    sceneId,
+    povPersonId: povPersonId ?? null,
+    narrativeIntent: scene.narrativeIntent,
+    emotionalTone: scene.emotionalTone,
+    socialFieldSummaryForGeneration: socialFieldGeneration?.socialFieldSummaryForGeneration ?? null,
+  });
 
   const contract: SceneGenerationInput["contract"] = {
     ...baseContract,
@@ -257,6 +305,7 @@ export async function loadSceneGenerationInput(
           authorityPressure01: sfResolved.authorityPressure,
         }
       : null,
+    storylineGuidanceSummary,
     proseBasis: options?.proseBasis,
     basisProseOverride: options?.basisProseOverride ?? null,
     narrativeVoiceProfile,

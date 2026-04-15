@@ -40,6 +40,7 @@ import type {
 } from "@/lib/public-data";
 import type { PublicPerceptionExperiencePayload } from "@/lib/public-experience-rendering";
 import { placeTypeReaderLabel } from "@/lib/read-labels";
+import type { ReaderExperienceBundle } from "@/lib/domain/reader-experience-bundle";
 import {
   EXPERIENCE_MODE_STORAGE_KEY,
   IMMERSIVE_MODE_STORAGE_KEY,
@@ -71,6 +72,7 @@ type ReadSceneExperienceProps = {
   perceptionPayload?: PublicPerceptionExperiencePayload | null;
   /** Public chapter list for voice “go to chapter N”. */
   chapterIndex?: { id: string; title: string; chapterNumber: number | null }[];
+  experienceBundle?: ReaderExperienceBundle | null;
 };
 
 /** Matches Prisma `ReaderLastMode` string values (avoid client import of generated enum). */
@@ -78,8 +80,15 @@ function mapModeToReaderLastMode(m: PublicExperienceMode): PublicExperienceMode 
   return m;
 }
 
-function readStoredMode(): PublicExperienceMode {
-  if (typeof window === "undefined") return "reading";
+function toPublicExperienceMode(mode: ReaderExperienceBundle["personalizationState"]["mode"]): PublicExperienceMode {
+  if (mode === "feel") return "immersive";
+  if (mode === "guided") return "guided";
+  if (mode === "listen") return "listen";
+  return "reading";
+}
+
+function readStoredMode(fallback: PublicExperienceMode): PublicExperienceMode {
+  if (typeof window === "undefined") return fallback;
   try {
     const v = localStorage.getItem(EXPERIENCE_MODE_STORAGE_KEY);
     if (v === "reading" || v === "immersive" || v === "guided" || v === "listen") {
@@ -90,7 +99,7 @@ function readStoredMode(): PublicExperienceMode {
   } catch {
     /* ignore */
   }
-  return "reading";
+  return fallback;
 }
 
 function buildAudioTabs(
@@ -141,6 +150,7 @@ export function ReadSceneExperience({
   title,
   perceptionPayload = null,
   chapterIndex = [],
+  experienceBundle = null,
 }: ReadSceneExperienceProps) {
   const router = useRouter();
   const [mode, setMode] = useState<PublicExperienceMode>("reading");
@@ -159,14 +169,24 @@ export function ReadSceneExperience({
   const scrollPersistRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastListenImprintAtRef = useRef(0);
   const firstRelatedSymbolId = data.relatedSymbols[0]?.id ?? null;
+  const fallbackModeFromBundle = experienceBundle
+    ? toPublicExperienceMode(experienceBundle.personalizationState.mode)
+    : "reading";
+  const entryState = experienceBundle?.entryState ?? null;
+  const canvasState = experienceBundle?.canvasState ?? null;
+  const modeState = experienceBundle?.modeState ?? null;
+  const voiceState = experienceBundle?.voiceState ?? null;
+  const overlayState = experienceBundle?.overlayState ?? null;
+  const interactionState = experienceBundle?.interactionState ?? null;
+  const transitionState = experienceBundle?.transitionState ?? null;
 
   useEffect(() => {
     queueMicrotask(() => {
-      setMode(readStoredMode());
+      setMode(readStoredMode(fallbackModeFromBundle));
       setReaderPrefs(loadReaderUiPreferences());
       setHydrated(true);
     });
-  }, []);
+  }, [fallbackModeFromBundle]);
 
   useEffect(() => {
     saveReaderUiPreferences(readerPrefs);
@@ -642,6 +662,43 @@ export function ReadSceneExperience({
       <article
         className={`campti-scene-enter mx-auto w-full max-w-[min(100%,42rem)] space-y-12 pb-24 xl:max-w-[48rem] ${showAtmosphere || mode === "listen" ? "relative z-10" : ""}`}
       >
+        {entryState ? (
+          <section className="rounded-xl border border-amber-900/20 bg-stone-900/35 px-5 py-4 sm:px-6">
+            <p className="text-[0.58rem] uppercase tracking-[0.26em] text-stone-500">
+              {entryState.entryKind === "fresh_entry"
+                ? "Story entry"
+                : entryState.entryKind === "interaction_reentry"
+                  ? "World return"
+                  : entryState.entryKind === "time_gap_reentry"
+                    ? "After time away"
+                    : "Return state"}
+            </p>
+            <p className="mt-2 font-serif text-lg leading-snug text-amber-100/85">
+              {entryState.worldLine}
+            </p>
+            {(entryState.emotionallyNear || entryState.unresolvedThread) && (
+              <div className="mt-3 space-y-1 text-xs text-stone-500">
+                {entryState.emotionallyNear ? (
+                  <p>
+                    <span className="text-stone-400">Emotionally near · </span>
+                    {entryState.emotionallyNear}
+                  </p>
+                ) : null}
+                {entryState.unresolvedThread ? (
+                  <p>
+                    <span className="text-stone-400">Unresolved thread · </span>
+                    {entryState.unresolvedThread}
+                  </p>
+                ) : null}
+                <p>
+                  <span className="text-stone-400">Entering mode · </span>
+                  {mode === "immersive" ? "Feel" : mode === "guided" ? "Guided" : mode === "listen" ? "Listen" : "Read"}
+                </p>
+              </div>
+            )}
+          </section>
+        ) : null}
+
         <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0 flex-1">
             <div
@@ -751,18 +808,27 @@ export function ReadSceneExperience({
               {modeButton("listen", "Listen")}
             </div>
             <p className="max-w-[14rem] text-right text-[0.55rem] leading-snug tracking-[0.06em] text-stone-600">
-              {mode === "reading"
-                ? "Calm, continuous reading."
-                : mode === "immersive"
-                  ? "Immersive consciousness pace."
-                  : mode === "guided"
-                    ? "Deeper interpretive entry—cues stay inside the text."
-                    : hasReadWithVoice
-                      ? "Listen: audio leads; the text moves with the voice when sync is published."
-                      : "Audio-led; text follows the listening thread."}
+              {modeState?.transitionHint ??
+                (mode === "reading"
+                  ? "Calm, continuous reading."
+                  : mode === "immersive"
+                    ? "Immersive consciousness pace."
+                    : mode === "guided"
+                      ? "Deeper interpretive entry—cues stay inside the text."
+                      : hasReadWithVoice
+                        ? "Listen: audio leads; the text moves with the voice when sync is published."
+                        : "Audio-led; text follows the listening thread.")}
             </p>
             {!hydrated ? (
               <span className="sr-only">Loading your saved mode preference</span>
+            ) : null}
+            {canvasState ? (
+              <p className="max-w-[14rem] text-right text-[0.52rem] uppercase tracking-[0.1em] text-stone-700">
+                Layered canvas · {canvasState.optionalLayers.voice ? "voice " : ""}
+                {canvasState.optionalLayers.guidance ? "guidance " : ""}
+                {canvasState.optionalLayers.memoryContext ? "memory " : ""}
+                {canvasState.optionalLayers.interactionAccess ? "interaction" : ""}
+              </p>
             ) : null}
           </div>
         </div>
@@ -784,21 +850,26 @@ export function ReadSceneExperience({
         ) : null}
 
         {listenFirst ? (
-          <PublicAudioPlayer
-            tabs={audioTabs}
-            title="Listen to this moment"
-            contextLine={contextLine}
-            loop={audioTabs.length === 1 && audioTabs[0]?.id === "ambient"}
-            initialVolume={audioTabs.length === 1 && audioTabs[0]?.id === "ambient" ? 0.35 : 0.78}
-            fadeMs={audioTabs.length === 1 && audioTabs[0]?.id === "ambient" ? 1200 : 880}
-            experienceCueHints={perceptionPayload?.audioCueHints ?? null}
-            excerptPreview={
-              narrationTab?.transcript?.trim() && !hasReadWithVoice
-                ? narrationTab.transcript.trim().slice(0, 200)
-                : null
-            }
-            onListenDelta={onListenDelta}
-          />
+          <>
+            <PublicAudioPlayer
+              tabs={audioTabs}
+              title="Listen to this moment"
+              contextLine={contextLine}
+              loop={audioTabs.length === 1 && audioTabs[0]?.id === "ambient"}
+              initialVolume={audioTabs.length === 1 && audioTabs[0]?.id === "ambient" ? 0.35 : 0.78}
+              fadeMs={audioTabs.length === 1 && audioTabs[0]?.id === "ambient" ? 1200 : 880}
+              experienceCueHints={perceptionPayload?.audioCueHints ?? null}
+              excerptPreview={
+                narrationTab?.transcript?.trim() && !hasReadWithVoice
+                  ? narrationTab.transcript.trim().slice(0, 200)
+                  : null
+              }
+              onListenDelta={onListenDelta}
+            />
+            {voiceState?.transitionCue ? (
+              <p className="text-xs italic text-stone-500">{voiceState.transitionCue}</p>
+            ) : null}
+          </>
         ) : null}
 
         <div className={readerShellClass} style={readerStageStyle}>
@@ -958,6 +1029,50 @@ export function ReadSceneExperience({
           </button>
           {depthOpen ? (
             <div className="space-y-4 border-t border-stone-800/80 px-5 py-5 sm:px-6">
+              {overlayState &&
+              (overlayState.relationshipTension ||
+                overlayState.memoryEcho ||
+                overlayState.emotionalClimate ||
+                overlayState.sceneSignificance ||
+                overlayState.unresolvedPressure) ? (
+                <details className="group rounded-lg border border-amber-900/30 bg-amber-950/10 px-4 py-3" open>
+                  <summary className="cursor-pointer text-xs uppercase tracking-[0.18em] text-amber-200/70">
+                    Resonance
+                  </summary>
+                  <div className="mt-3 space-y-2 text-sm leading-relaxed text-stone-300">
+                    {overlayState.relationshipTension ? (
+                      <p>
+                        <span className="text-stone-500">Relationship tension · </span>
+                        {overlayState.relationshipTension}
+                      </p>
+                    ) : null}
+                    {overlayState.memoryEcho ? (
+                      <p>
+                        <span className="text-stone-500">Memory echo · </span>
+                        {overlayState.memoryEcho}
+                      </p>
+                    ) : null}
+                    {overlayState.emotionalClimate ? (
+                      <p>
+                        <span className="text-stone-500">Emotional climate · </span>
+                        {overlayState.emotionalClimate}
+                      </p>
+                    ) : null}
+                    {overlayState.sceneSignificance ? (
+                      <p>
+                        <span className="text-stone-500">Scene significance · </span>
+                        {overlayState.sceneSignificance}
+                      </p>
+                    ) : null}
+                    {overlayState.unresolvedPressure ? (
+                      <p>
+                        <span className="text-stone-500">Unresolved pressure · </span>
+                        {overlayState.unresolvedPressure}
+                      </p>
+                    ) : null}
+                  </div>
+                </details>
+              ) : null}
               <details className="group rounded-lg border border-stone-800/60 bg-black/20 px-4 py-3">
                 <summary className="cursor-pointer text-xs uppercase tracking-[0.18em] text-stone-500">
                   Story
@@ -1053,16 +1168,59 @@ export function ReadSceneExperience({
           ) : null}
         </section>
 
+        {data.povPerson ? (
+          <section className="rounded-xl border border-stone-800/80 bg-stone-950/25 px-5 py-5 sm:px-6">
+            <p className="text-[0.65rem] font-medium uppercase tracking-[0.28em] text-stone-500">
+              Interaction
+            </p>
+            <p className="mt-2 text-sm text-stone-400">
+              {interactionState?.entryLine ??
+                `Pause the thread and interact with ${data.povPerson.name} from this scene anchor.`}
+            </p>
+            {interactionState?.returnLine ? (
+              <p className="mt-2 text-xs text-stone-500">{interactionState.returnLine}</p>
+            ) : null}
+            {experienceBundle?.storyReentry?.available ? (
+              <p className="mt-2 text-xs text-amber-200/80">
+                Resume available: {experienceBundle.storyReentry.rationale}
+              </p>
+            ) : null}
+            <Link
+              href={`/read/cockpit?characterId=${encodeURIComponent(data.povPerson.id)}&sceneId=${encodeURIComponent(data.scene.id)}`}
+              className={`mt-3 inline-block text-xs uppercase tracking-[0.2em] transition duration-300 ${
+                interactionState?.canEnter === false
+                  ? "pointer-events-none text-stone-600"
+                  : "text-amber-200/75 hover:text-amber-50"
+              }`}
+            >
+              {interactionState?.resumeAvailable ? "Resume interaction →" : "Open interaction →"}
+            </Link>
+          </section>
+        ) : null}
+
         <nav
           className={`space-y-8 border-t pt-10 transition-colors duration-500 ${
             immersiveReader ? "border-stone-700/40" : "border-stone-800"
           }`}
           aria-label="Continue the experience"
         >
+          {transitionState?.ambientCue ? (
+            <p className="text-xs uppercase tracking-[0.18em] text-stone-600">
+              Ambient cue · {transitionState.ambientCue}
+            </p>
+          ) : null}
           {readerPack.sceneExitBridge ? (
             <p className="font-serif text-sm italic leading-relaxed text-stone-500">
               {readerPack.sceneExitBridge}
             </p>
+          ) : null}
+          {transitionState?.sceneBridge && transitionState.sceneBridge !== readerPack.sceneExitBridge ? (
+            <p className="font-serif text-sm italic leading-relaxed text-stone-600">
+              {transitionState.sceneBridge}
+            </p>
+          ) : null}
+          {transitionState?.continuityCue ? (
+            <p className="text-xs text-stone-600">{transitionState.continuityCue}</p>
           ) : null}
           <div>
             <h2 className="text-[0.65rem] font-medium uppercase tracking-[0.28em] text-stone-500">

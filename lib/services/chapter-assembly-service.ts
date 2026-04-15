@@ -1,3 +1,72 @@
+import {
+  CHAPTER_ASSEMBLY_CONTRACT_VERSION,
+  type ChapterAssemblyOutputSurface,
+  type ChapterAssemblyState,
+} from "@/lib/domain/chapter-assembly";
+
+function uniqueNonEmpty(values: string[]): string[] {
+  return [...new Set(values.map((value) => value.trim()).filter(Boolean))];
+}
+
+export function evaluateChapterAssembly(input: {
+  chapterId: string;
+  dependencies: string[];
+  entryConditions: ChapterAssemblyState["entryConditions"];
+  completionConditions: ChapterAssemblyState["completionConditions"];
+  transitionBurden: ChapterAssemblyState["transitionBurden"];
+}): {
+  state: ChapterAssemblyState;
+  output: ChapterAssemblyOutputSurface;
+} {
+  const chapterId = input.chapterId.trim();
+  if (!chapterId) throw new Error("[chapter-assembly] chapterId is required.");
+
+  const unresolvedDependencies = uniqueNonEmpty(input.dependencies);
+  const unresolvedCarryover = uniqueNonEmpty(input.transitionBurden.unresolvedCarryover);
+  const entryBlocked = input.entryConditions.some((condition) => !condition.satisfied);
+  const completionSatisfied = input.completionConditions.every((condition) => condition.satisfied);
+
+  const structuralReadiness: ChapterAssemblyState["structuralReadiness"] =
+    entryBlocked || unresolvedDependencies.length > 0 ? "blocked" : "ready";
+
+  // Hardening: completion requires structural readiness and explicit no unresolved carryover.
+  const complete = structuralReadiness === "ready" && completionSatisfied && unresolvedCarryover.length === 0;
+  const justificationCodes: string[] = [];
+  if (entryBlocked) justificationCodes.push("entry_conditions_unsatisfied");
+  if (unresolvedDependencies.length > 0) justificationCodes.push("dependencies_unresolved");
+  if (!completionSatisfied) justificationCodes.push("completion_conditions_unsatisfied");
+  if (unresolvedCarryover.length > 0) justificationCodes.push("carryover_unresolved_explicit");
+  if (complete) justificationCodes.push("structural_completion_justified");
+
+  const state: ChapterAssemblyState = {
+    contractVersion: CHAPTER_ASSEMBLY_CONTRACT_VERSION,
+    chapterId,
+    entryConditions: input.entryConditions,
+    completionConditions: input.completionConditions,
+    dependencies: unresolvedDependencies,
+    transitionBurden: {
+      ...input.transitionBurden,
+      unresolvedCarryover,
+    },
+    structuralReadiness,
+    complete,
+    justificationCodes,
+  };
+
+  const output: ChapterAssemblyOutputSurface = {
+    chapterId: state.chapterId,
+    entryStatus: state.structuralReadiness,
+    completionStatus: state.complete ? "complete" : "incomplete",
+    unresolvedDependencies,
+    unresolvedCarryover,
+    transitionBurdenSummary: {
+      mustResolveNowCount: state.transitionBurden.mustResolveNow.length,
+      mustCarryForwardCount: state.transitionBurden.mustCarryForward.length,
+    },
+  };
+
+  return { state, output };
+}
 import { createHash } from "crypto";
 
 import {

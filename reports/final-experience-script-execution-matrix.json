@@ -1,0 +1,127 @@
+{
+  "contractVersion": "1",
+  "certificationScope": "phase5_chunk9_experience_certification_run",
+  "executedAtIso": "2026-04-15T16:40:05.225Z",
+  "commands": [
+    {
+      "command": "npx prisma validate",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npx prisma generate",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run typecheck",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run lint",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run build",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:migrations",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:contracts",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:contract-drift",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:interaction-truth-firewall",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:prelaunch:strict",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:full-system:strict",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:continuity-unification",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:reader-session",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:story-reentry",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:interaction-ux",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:reader-modes",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:degraded-ux",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:ui-ownership",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    },
+    {
+      "command": "npm run verify:reader-experience",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByChunk9": true
+    }
+  ],
+  "summary": {
+    "total": 19,
+    "passed": 19,
+    "failed": 0,
+    "skipped": 0
+  }
+}

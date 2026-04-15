@@ -1,0 +1,39 @@
+{
+  "contractVersion": "1",
+  "scope": "experience_innovation_pass",
+  "evaluatedAtIso": "2026-04-15T17:25:56.878Z",
+  "subsystems": [
+    {
+      "subsystem": "living_entry_experience",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "experience_canvas",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "mode_reinvention",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "voice_presence",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "narrative_overlays",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "interaction_presence",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "ambient_transitions",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "experience_orchestration_v2",
+      "status": "acceptable"
+    }
+  ]
+}

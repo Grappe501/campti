@@ -1,0 +1,11 @@
+{
+  "contractVersion": "1",
+  "scope": "phase5_reader_experience",
+  "evaluatedAtIso": "2026-04-15T16:40:05.225Z",
+  "decision": "READY",
+  "trueBlockers": [],
+  "nonBlockingFollowUps": [
+    "Add end-to-end browser automation for continuity reconciliation and reentry routing.",
+    "Expand degraded-policy regression fixtures for entitlement transitions."
+  ]
+}

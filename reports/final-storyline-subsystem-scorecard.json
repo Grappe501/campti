@@ -1,0 +1,77 @@
+{
+  "contractVersion": "1",
+  "scope": "phase3_storyline_layer",
+  "evaluatedAtIso": "2026-04-15T10:29:25.7383984-05:00",
+  "subsystems": [
+    {
+      "name": "arc engine core",
+      "status": "acceptable",
+      "confidence": "high",
+      "why": "Lifecycle determinism, bounded transitions, and truth-plane protections are covered by dedicated verification and passed in certification matrix.",
+      "residualRisk": "Threshold tuning may need future iteration when broader narrative datasets increase."
+    },
+    {
+      "name": "chapter / movement progression",
+      "status": "acceptable",
+      "confidence": "high",
+      "why": "Progression legitimacy and readiness behavior are explicitly tested and now reachable through standardized verification alias and storyline umbrella.",
+      "residualRisk": "Edge-case blocker semantics could require refinement under larger chapter variance."
+    },
+    {
+      "name": "narrative pressure engine",
+      "status": "acceptable",
+      "confidence": "high",
+      "why": "Bounded pressure outputs, blocked/reinforced behavior, and non-override constraints are covered and green.",
+      "residualRisk": "Category balancing may need calibration to avoid over/under-emphasis across novel narrative contexts."
+    },
+    {
+      "name": "branch governance engine",
+      "status": "acceptable",
+      "confidence": "high",
+      "why": "Depth/sibling limits, legality, risk, and reconvergence logic have deterministic tests and passed strict verification flow.",
+      "residualRisk": "Complex branch topologies may expose additional warning-tuning needs."
+    },
+    {
+      "name": "storyline orchestrator",
+      "status": "acceptable",
+      "confidence": "high",
+      "why": "Compact bundle assembly and mode restrictions are covered and included in aggregate storyline verification.",
+      "residualRisk": "Future additional input sources could increase merge-surface complexity."
+    },
+    {
+      "name": "scene / interaction storyline wiring",
+      "status": "acceptable",
+      "confidence": "medium",
+      "why": "Bounded consumption seams are tested and included in umbrella verification without forcing behavior.",
+      "residualRisk": "Prompt-level weighting effects can drift subtly over time even when structural tests remain green."
+    },
+    {
+      "name": "storyline explainability surface",
+      "status": "acceptable",
+      "confidence": "high",
+      "why": "Author/debug explainability payloads are bounded, contract-governed, and tested for reader-surface separation.",
+      "residualRisk": "Explainability reason-code quality may require iterative refinement for operator ergonomics."
+    },
+    {
+      "name": "storyline verification surface",
+      "status": "premier",
+      "confidence": "high",
+      "why": "Chunk 8 centralized proof coverage via verify:storyline and integrated it into strict full-system verification flow.",
+      "residualRisk": "Coverage breadth still depends on continued maintenance of underlying subsystem tests."
+    },
+    {
+      "name": "truth-boundary safety across storyline paths",
+      "status": "acceptable",
+      "confidence": "high",
+      "why": "Interaction truth firewall checks remain strict and green in standalone and strict system runs.",
+      "residualRisk": "New future storyline pathways must preserve explicit boundary assertions."
+    },
+    {
+      "name": "contract governance for storyline payloads",
+      "status": "acceptable",
+      "confidence": "high",
+      "why": "Contract registry, strict payload schemas, and drift checks passed with storyline additions included.",
+      "residualRisk": "Schema growth may increase maintenance overhead if ownership boundaries are unclear."
+    }
+  ]
+}

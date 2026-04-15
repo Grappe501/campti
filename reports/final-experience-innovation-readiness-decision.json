@@ -1,0 +1,11 @@
+{
+  "contractVersion": "1",
+  "scope": "experience_innovation_pass",
+  "evaluatedAtIso": "2026-04-15T17:25:56.878Z",
+  "decision": "READY",
+  "trueBlockers": [],
+  "nonBlockingFollowUps": [
+    "Further simplify reader cockpit shell to hide operational IDs and expose a pure narrative conversation shell.",
+    "Add browser-level e2e tests for mode transitions and pause/resume continuity cues."
+  ]
+}

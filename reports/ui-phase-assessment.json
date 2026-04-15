@@ -1,0 +1,116 @@
+{
+  "generatedAt": "2026-04-15",
+  "currentUiPhase": {
+    "label": "Phase 3.5 - Delivery-rich reader experience with partially productized interaction and tooling-heavy author surfaces",
+    "confidence": "high",
+    "rationale": [
+      "Reader delivery surfaces are broad and coherent across chapters/scenes/characters/places/timeline/symbols.",
+      "Interactive conversation stack is service-mature and strongly verified but UI remains debug-oriented.",
+      "Author/debug capabilities are substantial in backend/actions/tests, but several remain unwired to first-class UI."
+    ]
+  },
+  "readinessForReaderExperienceExpansion": {
+    "status": "conditional_ready",
+    "confidence": "high",
+    "strengths": [
+      "Comprehensive scene reading surface with mode/audio/personalization hooks.",
+      "Strong contract and verification backbone around reader cockpit and interaction boundaries.",
+      "Strict full-system certification currently passes."
+    ],
+    "gaps": [
+      "Continuity logic split between localStorage and server reader state.",
+      "Story reentry continuity is not surfaced in reader UX.",
+      "Moderation/degraded/fallback states are better represented in cockpit than in the public scene UX."
+    ]
+  },
+  "majorStrengths": [
+    {
+      "area": "Reader delivery surfaces",
+      "classification": "blocking_strength",
+      "evidence": [
+        "app/read/* routes mapped and build successfully",
+        "components/public/read-scene-experience.tsx multi-mode stack"
+      ]
+    },
+    {
+      "area": "Interaction contract governance",
+      "classification": "blocking_strength",
+      "evidence": [
+        "lib/contracts/contract-registry.ts",
+        "verify:reader-cockpit-payload, verify:reader-cockpit-command pass",
+        "verify:full-system:strict pass"
+      ]
+    },
+    {
+      "area": "Truth-boundary enforcement",
+      "classification": "blocking_strength",
+      "evidence": [
+        "lib/services/interaction-truth-firewall-service.ts",
+        "verify:interaction-truth-firewall included in strict run"
+      ]
+    }
+  ],
+  "majorGaps": [
+    {
+      "area": "Unwired continuity and inspection surfaces",
+      "classification": "blocker",
+      "details": "story-reentry, author-inspection, and conversation-observer actions/services exist without mapped product surfaces."
+    },
+    {
+      "area": "Continuity truth-source split",
+      "classification": "blocker",
+      "details": "return/continue UX currently uses both localStorage and prisma.readerState paths."
+    },
+    {
+      "area": "Admin discoverability and ownership clarity",
+      "classification": "non_blocking_follow_up",
+      "details": "AdminNav omits some existing routes (for example narrative hub and observer paths)."
+    },
+    {
+      "area": "Runtime schema strictness for nested cockpit payload fields",
+      "classification": "non_blocking_follow_up",
+      "details": "Several nested readerCockpitPayload regions are validated as z.unknown() at registry level."
+    }
+  ],
+  "blockerVsNonBlockingFollowUps": {
+    "blockers": [
+      "Define one authoritative continuity path for UI return/resume behavior.",
+      "Surface story reentry continuity in reader UX or explicitly retire unused action path.",
+      "Attach or explicitly scope author/debug action-only capabilities to avoid shadow UX."
+    ],
+    "nonBlockingFollowUps": [
+      "Tighten cockpit payload nested runtime schemas where currently unknown.",
+      "Improve admin route discoverability/ownership documentation.",
+      "Add focused page/component verification for public reader routes."
+    ]
+  },
+  "verificationEvidence": {
+    "commandsRequestedByAudit": [
+      {
+        "command": "npm run typecheck",
+        "available": true,
+        "result": "pass"
+      },
+      {
+        "command": "npm run build",
+        "available": true,
+        "result": "pass"
+      },
+      {
+        "command": "npm run verify:reader-cockpit-payload",
+        "available": true,
+        "result": "pass"
+      },
+      {
+        "command": "npm run verify:reader-cockpit-command",
+        "available": true,
+        "result": "pass"
+      },
+      {
+        "command": "npm run verify:full-system:strict",
+        "available": true,
+        "result": "pass"
+      }
+    ]
+  }
+}

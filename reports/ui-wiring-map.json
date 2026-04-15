@@ -1,0 +1,292 @@
+{
+  "generatedAt": "2026-04-15",
+  "chains": [
+    {
+      "id": "reader-scene-state-sync",
+      "uiSurfaceId": "reader-scene-experience",
+      "path": {
+        "ui": "components/public/read-scene-experience.tsx",
+        "action": "app/actions/reader-memory.ts:syncReaderStateFromClient",
+        "service": "lib/reader-memory.ts:refreshReaderEmotionalFields",
+        "contractOrPayload": "readerState write payload (lastSceneId/lastMode/continuation fields)",
+        "persistence": [
+          "prisma.readerState"
+        ]
+      },
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Server-backed continuity write executed shortly after scene load."
+    },
+    {
+      "id": "reader-scene-imprint",
+      "uiSurfaceId": "reader-scene-experience",
+      "path": {
+        "ui": "components/public/read-scene-experience.tsx",
+        "action": "app/actions/reader-memory.ts:recordReaderImprintAction",
+        "service": "lib/reader-memory.ts:recordReaderImprint",
+        "contractOrPayload": "reader imprint action payload",
+        "persistence": [
+          "reader imprint table via prisma"
+        ]
+      },
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Triggered by visibility/listen behaviors."
+    },
+    {
+      "id": "reader-scene-voice-listen",
+      "uiSurfaceId": "reader-audio-surface",
+      "path": {
+        "ui": "components/public/public-audio-player.tsx (via read-scene-experience callback)",
+        "action": "app/actions/reader-memory.ts:recordVoiceListenSeconds",
+        "service": "inline action logic",
+        "contractOrPayload": "voice listen delta payload",
+        "persistence": [
+          "prisma.readerVoiceListen"
+        ]
+      },
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Audio engagement is persisted even when playback UI is optional."
+    },
+    {
+      "id": "reader-cockpit-start",
+      "uiSurfaceId": "reader-cockpit",
+      "path": {
+        "ui": "components/read/reader-cockpit-shell.tsx:start()",
+        "action": "app/actions/reader-cockpit.ts:cockpitStartConversationFromScene",
+        "service": "lib/services/reader-cockpit-command-service.ts:cockpitStartConversationFromScene",
+        "contractOrPayload": "readerCockpitPayload",
+        "persistence": [
+          "prisma.characterConversationSession",
+          "session metadataJson"
+        ]
+      },
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Creates interactive pause session and returns narrativeResumeToken."
+    },
+    {
+      "id": "reader-cockpit-submit-turn",
+      "uiSurfaceId": "reader-cockpit",
+      "path": {
+        "ui": "components/read/reader-cockpit-shell.tsx:submit()",
+        "action": "app/actions/reader-cockpit.ts:cockpitSubmitReaderTurn",
+        "service": "lib/services/reader-cockpit-command-service.ts:cockpitSubmitReaderTurn",
+        "contractOrPayload": [
+          "conversationalTurnInput",
+          "characterResponse",
+          "readerCockpitPayload"
+        ],
+        "persistence": [
+          "prisma.characterConversationTurn",
+          "reader interaction ledger/balance",
+          "session memory summary metadata"
+        ]
+      },
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Includes moderation, degraded-policy decisions, provider resilience, and entitlement checks."
+    },
+    {
+      "id": "reader-cockpit-fetch-state",
+      "uiSurfaceId": "reader-cockpit",
+      "path": {
+        "ui": "components/read/reader-cockpit-shell.tsx:refresh()",
+        "action": "app/actions/reader-cockpit.ts:cockpitFetchLatestState",
+        "service": "lib/services/reader-cockpit-command-service.ts:cockpitFetchLatestState",
+        "contractOrPayload": [
+          "readerCockpitPayload",
+          "characterResponse"
+        ],
+        "persistence": [
+          "prisma.characterConversationSession",
+          "prisma.characterConversationTurn"
+        ]
+      },
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Read path into cockpit aggregate; used heavily by shell."
+    },
+    {
+      "id": "reader-cockpit-pause-resume-end",
+      "uiSurfaceId": "reader-cockpit",
+      "path": {
+        "ui": "components/read/reader-cockpit-shell.tsx pause/resume/end controls",
+        "action": [
+          "app/actions/reader-cockpit.ts:cockpitPauseConversation",
+          "app/actions/reader-cockpit.ts:cockpitResumeConversation",
+          "app/actions/reader-cockpit.ts:cockpitEndConversation"
+        ],
+        "service": "lib/services/reader-cockpit-command-service.ts",
+        "contractOrPayload": "readerCockpitPayload",
+        "persistence": [
+          "session status + orchestration metadata",
+          "analytics events"
+        ]
+      },
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Implements explicit start/pause/resume/end flow."
+    },
+    {
+      "id": "reader-cockpit-playback-preference",
+      "uiSurfaceId": "reader-cockpit",
+      "path": {
+        "ui": "components/read/reader-cockpit-shell.tsx:setPresentation()",
+        "action": "app/actions/reader-cockpit.ts:cockpitSetPresentationPlaybackPreference",
+        "service": "lib/services/reader-cockpit-command-service.ts:cockpitSetPresentationPlaybackPreference",
+        "contractOrPayload": "ReaderCockpitPresentationPlaybackPreference",
+        "persistence": [
+          "characterConversationSession.metadataJson.presentationPlaybackPreference"
+        ]
+      },
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Premium gate enforced for native preference branch."
+    },
+    {
+      "id": "reader-cockpit-aggregate-build",
+      "uiSurfaceId": "reader-cockpit",
+      "path": {
+        "ui": "read/cockpit page and shell render paths",
+        "action": "app/actions/reader-cockpit.ts (all read operations)",
+        "service": "lib/services/reader-cockpit-payload-service.ts:buildReaderCockpitPayload",
+        "contractOrPayload": "readerCockpitPayload (contract-registry validated)",
+        "persistence": [
+          "conversation session/turns",
+          "reader context/balance/entitlement",
+          "session metadata",
+          "provider resilience snapshot"
+        ]
+      },
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Central read-model builder; 1.5s in-process cache exists."
+    },
+    {
+      "id": "reader-return-experience",
+      "uiSurfaceId": "reader-read-hub",
+      "path": {
+        "ui": "app/read/page.tsx:returnExperience card",
+        "action": "none",
+        "service": "lib/public-data.ts:getPublicReturnExperience",
+        "contractOrPayload": "PublicReturnExperience",
+        "persistence": [
+          "prisma.readerState",
+          "scene/chapter public reads"
+        ]
+      },
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Server continuity card competes with localStorage fallback banner."
+    },
+    {
+      "id": "reader-scene-view-model-load",
+      "uiSurfaceId": "reader-scene-experience",
+      "path": {
+        "ui": "app/read/scenes/[id]/page.tsx",
+        "action": "none",
+        "service": "lib/public-data.ts:getPublicSceneById + getPublicSceneReaderPack + getPublicSceneNavigation",
+        "contractOrPayload": [
+          "PublicSceneViewModel",
+          "PublicSceneReaderPack",
+          "PublicSceneNavigation"
+        ],
+        "persistence": [
+          "prisma scene/chapter/person/place/symbol/meta/audio tables"
+        ]
+      },
+      "status": "premier",
+      "confidence": "high",
+      "notes": "Main reader rendering pipeline is server component + client experience shell."
+    },
+    {
+      "id": "admin-page-agent-chat",
+      "uiSurfaceId": "admin-page-agent",
+      "path": {
+        "ui": "components/admin-page-agent-panel.tsx",
+        "action": "HTTP POST /api/admin/agent/chat",
+        "service": "app/api/admin/agent/chat/route.ts + lib/admin-page-agents.ts",
+        "contractOrPayload": "chat request/response JSON body",
+        "persistence": [
+          "none persistent observed; request-scoped generation"
+        ]
+      },
+      "status": "acceptable",
+      "confidence": "high",
+      "notes": "Internal explainability surface with API auth dependency."
+    },
+    {
+      "id": "observer-snapshot-pages",
+      "uiSurfaceId": "admin-observer-pages",
+      "path": {
+        "ui": "app/admin/*observer* pages",
+        "action": "none (server page fetch path)",
+        "service": "lib/services/world-observer-service.ts",
+        "contractOrPayload": [
+          "worldObserverSnapshot",
+          "chapterObserverSnapshot",
+          "bookObserverSnapshot"
+        ],
+        "persistence": [
+          "world/chapter/book/scenes graph in prisma"
+        ]
+      },
+      "status": "provisional",
+      "confidence": "high",
+      "notes": "JSON debug surfaces present but nav discoverability is inconsistent."
+    },
+    {
+      "id": "author-inspection-unwired",
+      "uiSurfaceId": "author-inspection-action-only",
+      "path": {
+        "ui": "none found",
+        "action": "app/actions/author-inspection.ts:actionRunAuthorialInspection",
+        "service": "lib/services/authorial-inspection-service.ts",
+        "contractOrPayload": "authorInspectionPayload",
+        "persistence": [
+          "conversation/session/identity reads",
+          "storyline explainability reads"
+        ]
+      },
+      "status": "provisional",
+      "confidence": "high",
+      "notes": "Implemented capability without mapped route/component consumer."
+    },
+    {
+      "id": "conversation-observer-unwired",
+      "uiSurfaceId": "conversation-observer-action-only",
+      "path": {
+        "ui": "none found",
+        "action": "app/actions/conversation-observer.ts:actionBuildConversationObservabilitySnapshot",
+        "service": "lib/services/conversation-observer-service.ts",
+        "contractOrPayload": "conversationObservabilitySnapshot",
+        "persistence": [
+          "session/turn snapshots and metadata"
+        ]
+      },
+      "status": "provisional",
+      "confidence": "high",
+      "notes": "Action file labels this as debug/tooling with no UI."
+    },
+    {
+      "id": "story-reentry-unwired",
+      "uiSurfaceId": "story-reentry-action-only",
+      "path": {
+        "ui": "none found",
+        "action": "app/actions/story-reentry.ts:actionBuildStoryReentryContinuity",
+        "service": "lib/services/story-reentry-continuity-service.ts",
+        "contractOrPayload": "StoryReentryContinuityPayload",
+        "persistence": [
+          "conversation sessions",
+          "metadata anchors",
+          "cockpit aggregate dependencies"
+        ]
+      },
+      "status": "provisional",
+      "confidence": "high",
+      "notes": "Service is tested and present; no current reader flow hook detected."
+    }
+  ]
+}

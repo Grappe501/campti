@@ -1,0 +1,23 @@
+{
+  "contractVersion": "1",
+  "scope": "phase5_reader_experience",
+  "evaluatedAtIso": "2026-04-15T16:40:05.225Z",
+  "risks": [
+    {
+      "riskId": "continuity_authority_split",
+      "severity": "low"
+    },
+    {
+      "riskId": "hidden_reentry_paths",
+      "severity": "low"
+    },
+    {
+      "riskId": "degraded_state_silence",
+      "severity": "low"
+    },
+    {
+      "riskId": "interaction_truth_override",
+      "severity": "low"
+    }
+  ]
+}
