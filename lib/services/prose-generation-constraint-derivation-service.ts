@@ -5,12 +5,18 @@ import {
   ProseGenerationConstraintsSchema,
   type ProseGenerationConstraints,
 } from "@/lib/domain/prose-generation-constraints";
+import { NarratorPresenceDerivationService } from "@/lib/services/narrator-presence-derivation-service";
+import { NarratorPresenceToProseService } from "@/lib/services/narrator-presence-to-prose-service";
 
 function clamp01(value: number): number {
   return Math.max(0, Math.min(1, Number(value.toFixed(2))));
 }
 
 export class ProseGenerationConstraintDerivationService {
+  private readonly narratorPresence = new NarratorPresenceDerivationService();
+
+  private readonly narratorToProse = new NarratorPresenceToProseService();
+
   derive(input: {
     chapterPsychology: ChapterNarrativePsychology;
     chapterState: ChapterState;
@@ -22,7 +28,7 @@ export class ProseGenerationConstraintDerivationService {
     const attachment = input.chapterPsychology.axisTargets.attachment_intensity;
     const signalNoise = 1 - input.chapterState.stateAxes.signal_integrity.score / 100;
 
-    return ProseGenerationConstraintsSchema.parse({
+    const baseConstraints = ProseGenerationConstraintsSchema.parse({
       artifact: "prose_generation_constraints",
       proseConstraintId: `${input.chapterPsychology.chapterId}-constraints-v1`,
       chapterId: input.chapterPsychology.chapterId,
@@ -104,6 +110,17 @@ export class ProseGenerationConstraintDerivationService {
       attachmentTarget: clamp01(0.45 + attachment * 0.4),
       driftFlags: [],
       validationFlags: ["observer_bounded", "native_cognition_first", "beat_fidelity_required"],
+    });
+
+    const narratorPack = this.narratorPresence.deriveCamptiPack({
+      chapterId: input.chapterPsychology.chapterId,
+      chapterSequence: input.chapterState.sequenceNumber ?? 1,
+      sceneIds: [],
+    });
+
+    return this.narratorToProse.applyToChapterConstraints({
+      constraints: baseConstraints,
+      modeProfile: narratorPack.chapterPresencePlan.modeProfile,
     });
   }
 }

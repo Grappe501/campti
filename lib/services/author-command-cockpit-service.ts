@@ -4,6 +4,7 @@ import {
   type AuthorCommandCockpitBundle,
   type CockpitScopeContext,
 } from "@/lib/domain/author-command-cockpit";
+import { createRuntimeAuthorityStamp } from "@/lib/services/runtime-authority-registry-service";
 import { deriveCenteredSurfaceTitle } from "@/lib/services/cockpit-shell-architecture-service";
 import { deriveGuidedSignals } from "@/lib/services/guided-signals-service";
 import { buildIndicatorBank } from "@/lib/services/indicator-bank-model-service";
@@ -11,6 +12,7 @@ import { listAvailableScopeEscalations } from "@/lib/services/cockpit-scope-mode
 import { buildToolRailSystem } from "@/lib/services/tool-rail-system-service";
 
 export function buildAuthorCommandCockpitBundle(input: {
+  runtimeId: string;
   context: CockpitScopeContext;
   labels?: {
     sceneLabel?: string;
@@ -114,8 +116,14 @@ export function buildAuthorCommandCockpitBundle(input: {
     chapterClosureProfile: string;
     carryForwardUnresolvedPressureSummary: string[];
   };
+  sequenceArchitecture?: AuthorCommandCockpitBundle["sequenceArchitecture"];
+  sceneGeneration?: AuthorCommandCockpitBundle["sceneGeneration"];
   literaryDevices?: AuthorCommandCockpitBundle["literaryDevices"];
+  epicContinuity?: AuthorCommandCockpitBundle["epicContinuity"];
+  emotionalGravity?: AuthorCommandCockpitBundle["emotionalGravity"];
+  narratorPresence?: AuthorCommandCockpitBundle["narratorPresence"];
 }): AuthorCommandCockpitBundle {
+  const runtimeAuthority = createRuntimeAuthorityStamp(input.runtimeId);
   const centered = deriveCenteredSurfaceTitle({
     scope: input.context.scope,
     ...input.labels,
@@ -141,6 +149,7 @@ export function buildAuthorCommandCockpitBundle(input: {
     indicatorBank,
     guidedSignals,
     availableActions,
+    runtimeAuthority,
     beatAssembly: input.beatAssembly,
     chapterState: input.chapterState,
     narrativePsychology: input.narrativePsychology,
@@ -148,7 +157,12 @@ export function buildAuthorCommandCockpitBundle(input: {
     beatGating: input.beatGating,
     narrativeThreads: input.narrativeThreads,
     chapterComposition: input.chapterComposition,
+    sequenceArchitecture: input.sequenceArchitecture,
+    sceneGeneration: input.sceneGeneration,
     literaryDevices: input.literaryDevices,
+    epicContinuity: input.epicContinuity,
+    emotionalGravity: input.emotionalGravity,
+    narratorPresence: input.narratorPresence,
     bounded: true,
     explainable: true,
     nonOmniscient: true,

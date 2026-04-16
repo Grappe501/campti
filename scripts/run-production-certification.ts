@@ -5,6 +5,13 @@ import { execSync } from "node:child_process";
 import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
+import {
+  RUNTIME_ID_REPORT_CERTIFICATION,
+  assertRuntimeCanGateReadiness,
+  createRuntimeAuthorityStamp,
+  getDemoSafetyWarningBanner,
+} from "@/lib/services/runtime-authority-registry-service";
+
 type CommandExecution = {
   command: string;
   status: "pass" | "fail";
@@ -37,13 +44,31 @@ function runCommand(command: string): CommandExecution {
 function writeJsonArtifact(relativePath: string, payload: unknown): void {
   const targetPath = path.resolve(process.cwd(), relativePath);
   mkdirSync(path.dirname(targetPath), { recursive: true });
-  writeFileSync(targetPath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
+  writeFileSync(targetPath, `${JSON.stringify(withAuthority(payload), null, 2)}\n`, "utf8");
 }
 
 function writeTextArtifact(relativePath: string, contents: string): void {
   const targetPath = path.resolve(process.cwd(), relativePath);
   mkdirSync(path.dirname(targetPath), { recursive: true });
   writeFileSync(targetPath, `${contents}\n`, "utf8");
+}
+
+const runtimeAuthority = createRuntimeAuthorityStamp(RUNTIME_ID_REPORT_CERTIFICATION);
+if (runtimeAuthority.requiresNonCanonicalDemoWarningBanner) {
+  console.warn(getDemoSafetyWarningBanner(RUNTIME_ID_REPORT_CERTIFICATION));
+}
+
+function withAuthority(payload: unknown): unknown {
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    return {
+      payload,
+      runtimeAuthority,
+    };
+  }
+  return {
+    ...(payload as Record<string, unknown>),
+    runtimeAuthority,
+  };
 }
 
 function toMarkdownReport(input: {
@@ -108,6 +133,7 @@ function toMarkdownReport(input: {
 }
 
 void (async () => {
+  assertRuntimeCanGateReadiness(RUNTIME_ID_REPORT_CERTIFICATION);
   const executedAtIso = new Date().toISOString();
   const matrixCommands = [
     "npx prisma validate",
@@ -225,6 +251,7 @@ void (async () => {
       failed: failures.length,
       skipped: 0,
     },
+    runtimeAuthority,
   };
 
   writeJsonArtifact("reports/final-production-script-execution-matrix.json", executionMatrixArtifact);

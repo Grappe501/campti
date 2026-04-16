@@ -14,6 +14,7 @@
     "verify:epic-mapping": "tsx --test lib/domain/epic-book.test.ts && tsx --test lib/services/world-book-mapper.test.ts && tsx --test lib/services/epic-book-service.test.ts",
     "verify:certification-consistency": "tsx --test lib/certification/certification-consistency.test.ts",
     "verify:runtime-dependency-consistency": "tsx --test lib/services/runtime-dependency-guard.test.ts",
+    "verify:runtime-authority-lock": "tsx --test lib/services/runtime-authority-registry-service.test.ts",
     "verify:generation-hash": "tsx --test lib/scene-generation/canonical-scene-generation-hash.test.ts",
     "verify:revision-job-policy": "tsx --test lib/services/revision-job-runner.policy.test.ts",
     "verify:conversational-identity": "tsx --test lib/conversational-identity/build-conversational-identity-snapshot.test.ts",

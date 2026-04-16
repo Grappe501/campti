@@ -3,10 +3,12 @@ import { describe, it } from "node:test";
 
 import { buildAuthorCommandCockpitBundle } from "@/lib/services/author-command-cockpit-service";
 import { resolveCockpitScopeContext } from "@/lib/services/cockpit-scope-model-service";
+import { RUNTIME_ID_SCENE_CHAPTER_PRODUCTION } from "@/lib/services/runtime-authority-registry-service";
 
 describe("author-command-cockpit-service", () => {
   it("builds bounded cockpit bundle with contextual actions", () => {
     const bundle = buildAuthorCommandCockpitBundle({
+      runtimeId: RUNTIME_ID_SCENE_CHAPTER_PRODUCTION,
       context: resolveCockpitScopeContext({ scope: "chapter", chapterId: "chapter-1" }),
       labels: { chapterLabel: "Chapter One" },
       metrics: {
@@ -97,6 +99,34 @@ describe("author-command-cockpit-service", () => {
         chapterClosureProfile: "convergence_teased",
         carryForwardUnresolvedPressureSummary: ["Keep route pressure unresolved at chapter close."],
       },
+      sequenceArchitecture: {
+        chapterId: "book1-chapter-01",
+        dominantFunction: "grounding",
+        secondaryFunctions: ["disturbance"],
+        readerEnergyRole: "expansion_push",
+        functionTimeline: [
+          { chapterId: "book1-chapter-01", dominantFunction: "grounding" },
+          { chapterId: "book1-chapter-02", dominantFunction: "disturbance" },
+        ],
+        convergenceWindows: ["chapter-07", "chapter-08"],
+        recallWindows: ["chapter-03", "chapter-06"],
+        sequenceWarnings: [],
+        sequenceScore: 0.84,
+      },
+      sceneGeneration: {
+        generatedSceneCount: 4,
+        sceneRolesInRuntimeOrder: ["grounding_scene", "warning_scene", "rumor_scene", "closure_scene"],
+        sceneThreadMix: [{ scenePlanId: "book1-chapter-01-scene-01", activeThreadCount: 2, latentThreadCount: 1 }],
+        sceneRoutePresence: [{ scenePlanId: "book1-chapter-01-scene-01", routeBindings: ["natchitoches"] }],
+        sceneProseModes: [{ scenePlanId: "book1-chapter-01-scene-01", proseConstraintId: "constraints-scene-01" }],
+        sceneLiteraryProfiles: [{ scenePlanId: "book1-chapter-01-scene-01", literaryPlanId: "literary-scene-01" }],
+        transitionTypes: ["soft_echo", "delayed_bind_cut", "closure_open_cut"],
+        callbackMarkersTriggered: ["book1-chapter-01-scene-02:seed"],
+        delayedConvergenceMarkersPresent: ["book1-chapter-01-scene-02:key"],
+        reinterpretationAnchorsPresent: ["book1-chapter-01:anchor"],
+        sceneBundleWarnings: [],
+        chapterRuntimeDensitySummary: "threads=0.7,routes=0.5,flattening=0.2",
+      },
       literaryDevices: {
         chapterId: "book1-chapter-01",
         activeDevicePanel: [
@@ -154,9 +184,53 @@ describe("author-command-cockpit-service", () => {
         perSceneDeviceDistribution: [{ sceneId: "book1-ch01-sc01", activeDeviceCount: 4, overloadRisk: "moderate" }],
         literaryDriftWarnings: [],
       },
+      epicContinuity: {
+        epicId: "campti-epic",
+        chapterId: "book1-chapter-01",
+        currentQuestionExpression: "How do people preserve belonging when place destabilizes?",
+        activeAnchorIds: ["anchor-river-witness", "anchor-phrase-warning"],
+        anchorRecurrenceHealth: 0.84,
+        identityPersistenceStatus: "strained_but_persistent",
+        meaningEscalationStatus: "early-book-seeding-active",
+        readerMemoryTargets: ["memory-target-warning-phrase"],
+        hookLayerStatus: ["line_scene_curiosity:active", "epic_question_curiosity:active"],
+        temporalTransitionHealth: "transition-continuity-healthy",
+        disconnectionWarnings: [],
+        unresolvedEpicContinuityRisks: [],
+      },
+      emotionalGravity: {
+        epicId: "campti-epic",
+        chapterId: "book1-chapter-01",
+        attachmentStatusByCharacter: ["natchitoches-matriarch-keeper:bond=protectiveness|grief_attachment:intensity=0.9"],
+        activeFearDesireVulnerabilityLines: ["fear-mk-1", "desire-mk-1", "exposure-mk-1"],
+        consequenceIrreversibilityMarkers: ["irr-1:emotionally_irreversible:trust fracture shadow"],
+        fateAgencyPressureMap: ["patterns=2", "break_attempts=1"],
+        relationalStakesMap: ["bond-keeper-younger:strength=0.86"],
+        generationalBurdenStatus: ["burdens=2", "silences=1", "reclaims=1"],
+        emotionalCarryForwardSummary: ["carry-era-1650-1960:dread=0.7:hope=0.49:ache=0.78"],
+        temporalEmotionalContinuityHealth: "temporal-emotional-continuity-healthy",
+        emotionallyThinWarnings: [],
+        resetHeavyWarnings: [],
+        epicEmotionalGravityScore: 0.82,
+        diagnostics: ["attachment lines active", "consequence shadow tracked"],
+      },
+      narratorPresence: {
+        chapterId: "book1-chapter-01",
+        currentNarratorPresenceLevel: "reflective",
+        narratorAuthorityMode: "lineage_aware",
+        narratorKnowledgeMode: "inherited",
+        convergenceStage: "lineage_aware_guide",
+        upcomingConvergenceTriggers: ["approaching_grandfather_line", "approaching_father_line"],
+        narratorHookContinuityContribution: 0.67,
+        narratorCharacterBoundaryWarnings: [],
+        temporalBridgeStatus: "narrator-bridge-healthy",
+        firstPersonReadinessStatus: "not-yet-ready",
+        voiceShiftRisks: ["avoid abrupt first-person jump without trigger chain"],
+      },
     });
 
     assert.equal(bundle.context.scope, "chapter");
+    assert.equal(bundle.runtimeAuthority.runtimeId, RUNTIME_ID_SCENE_CHAPTER_PRODUCTION);
     assert.equal(bundle.bounded, true);
     assert.equal(bundle.explainable, true);
     assert.equal(bundle.availableActions.includes("escalate_scope"), true);
@@ -170,6 +244,14 @@ describe("author-command-cockpit-service", () => {
     assert.equal(bundle.narrativeThreads?.sceneDensity.length, 2);
     assert.equal(bundle.chapterComposition?.compositionMode, "delayed_convergence");
     assert.equal(bundle.chapterComposition?.sceneCount, 4);
+    assert.equal(bundle.sequenceArchitecture?.dominantFunction, "grounding");
+    assert.equal(bundle.sceneGeneration?.generatedSceneCount, 4);
     assert.equal(bundle.literaryDevices?.activeDevicePanel.length, 1);
+    assert.equal(bundle.epicContinuity?.epicId, "campti-epic");
+    assert.equal(bundle.epicContinuity?.anchorRecurrenceHealth, 0.84);
+    assert.equal(bundle.emotionalGravity?.epicId, "campti-epic");
+    assert.equal(bundle.emotionalGravity?.epicEmotionalGravityScore, 0.82);
+    assert.equal(bundle.narratorPresence?.currentNarratorPresenceLevel, "reflective");
+    assert.equal(bundle.narratorPresence?.convergenceStage, "lineage_aware_guide");
   });
 });

@@ -1,3 +1,5 @@
+import type { RuntimeAuthorityStamp } from "@/lib/domain/runtime-authority";
+
 export const AUTHOR_COMMAND_COCKPIT_CONTRACT_VERSION = "1" as const;
 
 export const AUTHOR_COCKPIT_SCOPES = ["scene", "chapter", "book", "epic"] as const;
@@ -74,6 +76,7 @@ export type AuthorCommandCockpitBundle = {
   indicatorBank: ScopeIndicatorBank;
   guidedSignals: GuidedSignal[];
   availableActions: AuthorCommandAction[];
+  runtimeAuthority: RuntimeAuthorityStamp;
   beatAssembly?: {
     chapter: number;
     beatCount: number;
@@ -223,6 +226,74 @@ export type AuthorCommandCockpitBundle = {
     thinnessWarnings: string[];
     chapterClosureProfile: string;
     carryForwardUnresolvedPressureSummary: string[];
+  };
+  sequenceArchitecture?: {
+    chapterId: string;
+    dominantFunction: string;
+    secondaryFunctions: string[];
+    readerEnergyRole: string;
+    functionTimeline: Array<{ chapterId: string; dominantFunction: string }>;
+    convergenceWindows: string[];
+    recallWindows: string[];
+    sequenceWarnings: string[];
+    sequenceScore: number;
+  };
+  sceneGeneration?: {
+    generatedSceneCount: number;
+    sceneRolesInRuntimeOrder: string[];
+    sceneThreadMix: Array<{ scenePlanId: string; activeThreadCount: number; latentThreadCount: number }>;
+    sceneRoutePresence: Array<{ scenePlanId: string; routeBindings: string[] }>;
+    sceneProseModes: Array<{ scenePlanId: string; proseConstraintId: string }>;
+    sceneLiteraryProfiles: Array<{ scenePlanId: string; literaryPlanId: string }>;
+    transitionTypes: string[];
+    callbackMarkersTriggered: string[];
+    delayedConvergenceMarkersPresent: string[];
+    reinterpretationAnchorsPresent: string[];
+    sceneBundleWarnings: string[];
+    chapterRuntimeDensitySummary: string;
+  };
+  epicContinuity?: {
+    epicId: string;
+    chapterId: string;
+    currentQuestionExpression: string;
+    activeAnchorIds: string[];
+    anchorRecurrenceHealth: number;
+    identityPersistenceStatus: string;
+    meaningEscalationStatus: string;
+    readerMemoryTargets: string[];
+    hookLayerStatus: string[];
+    temporalTransitionHealth: string;
+    disconnectionWarnings: string[];
+    unresolvedEpicContinuityRisks: string[];
+  };
+  emotionalGravity?: {
+    epicId: string;
+    chapterId: string;
+    attachmentStatusByCharacter: string[];
+    activeFearDesireVulnerabilityLines: string[];
+    consequenceIrreversibilityMarkers: string[];
+    fateAgencyPressureMap: string[];
+    relationalStakesMap: string[];
+    generationalBurdenStatus: string[];
+    emotionalCarryForwardSummary: string[];
+    temporalEmotionalContinuityHealth: string;
+    emotionallyThinWarnings: string[];
+    resetHeavyWarnings: string[];
+    epicEmotionalGravityScore: number;
+    diagnostics: string[];
+  };
+  narratorPresence?: {
+    chapterId: string;
+    currentNarratorPresenceLevel: string;
+    narratorAuthorityMode: string;
+    narratorKnowledgeMode: string;
+    convergenceStage: string;
+    upcomingConvergenceTriggers: string[];
+    narratorHookContinuityContribution: number;
+    narratorCharacterBoundaryWarnings: string[];
+    temporalBridgeStatus: string;
+    firstPersonReadinessStatus: string;
+    voiceShiftRisks: string[];
   };
   bounded: true;
   explainable: true;

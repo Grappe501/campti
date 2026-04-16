@@ -5,6 +5,12 @@ import type { Chapter1DeepOutline } from "@/lib/services/book1-chapter1-deep-out
 import { Book1CriticFeedbackMapperService } from "@/lib/services/book1-critic-feedback-mapper-service";
 import { Book1HighFindingReducerService } from "@/lib/services/book1-high-finding-reducer-service";
 import { Book1RegenerationLoopService } from "@/lib/services/book1-regeneration-loop-service";
+import {
+  RUNTIME_ID_BOOK1_REGENERATION,
+  assertClaimedAuthorityClass,
+  createRuntimeAuthorityStamp,
+  getDemoSafetyWarningBanner,
+} from "@/lib/services/runtime-authority-registry-service";
 
 async function readJson<T>(filePath: string): Promise<T> {
   const raw = await readFile(filePath, "utf-8");
@@ -12,6 +18,11 @@ async function readJson<T>(filePath: string): Promise<T> {
 }
 
 async function main() {
+  assertClaimedAuthorityClass(RUNTIME_ID_BOOK1_REGENERATION, "advisory_runtime");
+  const runtimeAuthority = createRuntimeAuthorityStamp(RUNTIME_ID_BOOK1_REGENERATION);
+  if (runtimeAuthority.requiresNonCanonicalDemoWarningBanner) {
+    console.warn(getDemoSafetyWarningBanner(RUNTIME_ID_BOOK1_REGENERATION));
+  }
   const reportsDir = path.join(process.cwd(), "reports");
   await mkdir(reportsDir, { recursive: true });
 
@@ -128,9 +139,26 @@ async function main() {
   const literaryDeviceApplicationPlanPath = path.join(reportsDir, "book1-chapter-01-literary-device-application-plan.json");
   const literaryDeviceValidationPath = path.join(reportsDir, "book1-chapter-01-literary-device-validation.json");
   const literaryDeviceCockpitSummaryPath = path.join(reportsDir, "book1-chapter-01-literary-device-cockpit-summary.json");
+  const epicSequencePlanPath = path.join(reportsDir, "book1-epic-sequence-plan.json");
+  const bookSequencePlanPath = path.join(reportsDir, "book1-sequence-plan.json");
+  const chapterSequencePlanPath = path.join(reportsDir, "book1-chapter-01-sequence-plan.json");
+  const chapterFunctionMatrixPath = path.join(reportsDir, "book1-chapter-function-matrix.json");
+  const recallReframingPlansPath = path.join(reportsDir, "book1-chapter-01-recall-reframing-plans.json");
+  const sequenceValidationPath = path.join(reportsDir, "book1-chapter-01-sequence-validation.json");
+  const sceneGenerationRequestPath = path.join(reportsDir, "book1-chapter-01-scene-generation-request.json");
+  const generatedSceneBundlePath = path.join(reportsDir, "book1-chapter-01-generated-scene-bundle.json");
+  const sceneGenerationValidationPath = path.join(reportsDir, "book1-chapter-01-scene-generation-validation.json");
   const chapter1ProsePacketPath = path.join(reportsDir, "book1-chapter-01-prose-generation-packet.json");
   const chapter1ProseOutputPathReportPath = path.join(reportsDir, "book1-chapter-01-prose-output-path-report.json");
   const authorCockpitBundlePath = path.join(reportsDir, "book1-chapter-01-author-cockpit-bundle.json");
+  const epicContinuityPackPath = path.join(reportsDir, "book1-chapter-01-epic-continuity-pack.json");
+  const epicContinuityValidationPath = path.join(reportsDir, "book1-chapter-01-epic-continuity-validation.json");
+  const epicEmotionalGravityPackPath = path.join(reportsDir, "book1-chapter-01-epic-emotional-gravity-pack.json");
+  const epicEmotionalGravityValidationPath = path.join(
+    reportsDir,
+    "book1-chapter-01-epic-emotional-gravity-validation.json",
+  );
+  const authorityLockPath = path.join(reportsDir, "book1-chapter-01-runtime-authority.json");
 
   const regeneratedFromReview = (result.regenerationReview as { regenerated?: Record<string, unknown> }).regenerated ?? {};
   const regeneratedConsistencyReport = regeneratedFromReview.consistencyReport;
@@ -209,9 +237,41 @@ async function main() {
     writeFile(literaryDeviceApplicationPlanPath, `${JSON.stringify(result.literaryDeviceApplicationPlan, null, 2)}\n`, "utf-8"),
     writeFile(literaryDeviceValidationPath, `${JSON.stringify(result.literaryDeviceValidation, null, 2)}\n`, "utf-8"),
     writeFile(literaryDeviceCockpitSummaryPath, `${JSON.stringify(result.literaryDeviceCockpitSummary, null, 2)}\n`, "utf-8"),
+    writeFile(epicSequencePlanPath, `${JSON.stringify(result.epicSequencePlan, null, 2)}\n`, "utf-8"),
+    writeFile(bookSequencePlanPath, `${JSON.stringify(result.bookSequencePlan, null, 2)}\n`, "utf-8"),
+    writeFile(chapterSequencePlanPath, `${JSON.stringify(result.chapterSequencePlan, null, 2)}\n`, "utf-8"),
+    writeFile(chapterFunctionMatrixPath, `${JSON.stringify(result.chapterFunctionMatrix, null, 2)}\n`, "utf-8"),
+    writeFile(recallReframingPlansPath, `${JSON.stringify(result.recallReframingPlans, null, 2)}\n`, "utf-8"),
+    writeFile(sequenceValidationPath, `${JSON.stringify(result.sequenceValidation, null, 2)}\n`, "utf-8"),
+    writeFile(sceneGenerationRequestPath, `${JSON.stringify(result.sceneGenerationRequest, null, 2)}\n`, "utf-8"),
+    writeFile(generatedSceneBundlePath, `${JSON.stringify(result.generatedChapterSceneBundle, null, 2)}\n`, "utf-8"),
+    writeFile(sceneGenerationValidationPath, `${JSON.stringify(result.sceneGenerationValidation, null, 2)}\n`, "utf-8"),
     writeFile(chapter1ProsePacketPath, `${JSON.stringify(result.chapter1ProseGenerationPacket, null, 2)}\n`, "utf-8"),
     writeFile(chapter1ProseOutputPathReportPath, `${JSON.stringify(result.chapter1ProseOutputPathReport, null, 2)}\n`, "utf-8"),
     writeFile(authorCockpitBundlePath, `${JSON.stringify(result.authorCockpitBundle, null, 2)}\n`, "utf-8"),
+    writeFile(epicContinuityPackPath, `${JSON.stringify(result.epicContinuityPack, null, 2)}\n`, "utf-8"),
+    writeFile(epicContinuityValidationPath, `${JSON.stringify(result.epicContinuityValidation, null, 2)}\n`, "utf-8"),
+    writeFile(epicEmotionalGravityPackPath, `${JSON.stringify(result.epicEmotionalGravityPack, null, 2)}\n`, "utf-8"),
+    writeFile(
+      epicEmotionalGravityValidationPath,
+      `${JSON.stringify(result.epicEmotionalGravityValidation, null, 2)}\n`,
+      "utf-8",
+    ),
+    writeFile(
+      authorityLockPath,
+      `${JSON.stringify(
+        {
+          runtimeAuthority,
+          artifactScope: "chapter_regeneration_outputs",
+          canonicalArtifact: false,
+          warning:
+            "This runtime is advisory-only. Outputs must not be used as canonical production truth without explicit promotion in canonical production runtime.",
+        },
+        null,
+        2,
+      )}\n`,
+      "utf-8",
+    ),
   ]);
 
   console.log(
@@ -284,12 +344,27 @@ async function main() {
           path.relative(process.cwd(), literaryDeviceApplicationPlanPath).replace(/\\/g, "/"),
           path.relative(process.cwd(), literaryDeviceValidationPath).replace(/\\/g, "/"),
           path.relative(process.cwd(), literaryDeviceCockpitSummaryPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), epicSequencePlanPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), bookSequencePlanPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), chapterSequencePlanPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), chapterFunctionMatrixPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), recallReframingPlansPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), sequenceValidationPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), sceneGenerationRequestPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), generatedSceneBundlePath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), sceneGenerationValidationPath).replace(/\\/g, "/"),
           path.relative(process.cwd(), chapter1ProsePacketPath).replace(/\\/g, "/"),
           path.relative(process.cwd(), chapter1ProseOutputPathReportPath).replace(/\\/g, "/"),
           path.relative(process.cwd(), authorCockpitBundlePath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), epicContinuityPackPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), epicContinuityValidationPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), epicEmotionalGravityPackPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), epicEmotionalGravityValidationPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), authorityLockPath).replace(/\\/g, "/"),
         ],
         recommendation: result.regenerationSummary.recommendation,
         changedSystems: result.regenerationSummary.changedSystems,
+        runtimeAuthority,
       },
       null,
       2,

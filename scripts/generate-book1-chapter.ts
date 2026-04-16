@@ -6,6 +6,12 @@ import { PrismaClient } from "@prisma/client";
 import type { Chapter1DeepOutline } from "@/lib/services/book1-chapter1-deep-outline-generator";
 import type { Book1EpicOutline } from "@/lib/services/book1-epic-outline-builder";
 import { Book1OutlineDrivenChapterComposer } from "@/lib/services/book1-outline-driven-chapter-composer";
+import {
+  RUNTIME_ID_BOOK1_OUTLINE_DRAFT,
+  assertClaimedAuthorityClass,
+  createRuntimeAuthorityStamp,
+  getDemoSafetyWarningBanner,
+} from "@/lib/services/runtime-authority-registry-service";
 
 function parseChapter(argv: string[]): number {
   const index = argv.indexOf("--chapter");
@@ -17,6 +23,11 @@ function parseChapter(argv: string[]): number {
 }
 
 async function main() {
+  assertClaimedAuthorityClass(RUNTIME_ID_BOOK1_OUTLINE_DRAFT, "simulation_only");
+  const runtimeAuthority = createRuntimeAuthorityStamp(RUNTIME_ID_BOOK1_OUTLINE_DRAFT);
+  if (runtimeAuthority.requiresNonCanonicalDemoWarningBanner) {
+    console.warn(getDemoSafetyWarningBanner(RUNTIME_ID_BOOK1_OUTLINE_DRAFT));
+  }
   const prisma = new PrismaClient();
   try {
     const chapter = parseChapter(process.argv);
@@ -49,8 +60,22 @@ async function main() {
     const chapterLabel = String(chapter).padStart(2, "0");
     const jsonPath = path.join(reportsDir, `book1-chapter-${chapterLabel}-draft.json`);
     const textPath = path.join(reportsDir, `book1-chapter-${chapterLabel}-draft.txt`);
+    const authorityPath = path.join(reportsDir, `book1-chapter-${chapterLabel}-runtime-authority.json`);
     await writeFile(jsonPath, `${JSON.stringify(draft, null, 2)}\n`, "utf-8");
     await writeFile(textPath, `${draft.fullText}\n`, "utf-8");
+    await writeFile(
+      authorityPath,
+      `${JSON.stringify(
+        {
+          runtimeAuthority,
+          artifactScope: "draft_generation_output",
+          canonicalArtifact: false,
+        },
+        null,
+        2,
+      )}\n`,
+      "utf-8",
+    );
 
     console.log(
       JSON.stringify(
@@ -58,8 +83,10 @@ async function main() {
           chapter,
           jsonPath: path.relative(process.cwd(), jsonPath).replace(/\\/g, "/"),
           textPath: path.relative(process.cwd(), textPath).replace(/\\/g, "/"),
+          authorityPath: path.relative(process.cwd(), authorityPath).replace(/\\/g, "/"),
           segmentDrafts: draft.segmentDrafts.length,
           title: draft.title,
+          runtimeAuthority,
         },
         null,
         2,

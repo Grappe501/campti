@@ -2,6 +2,7 @@ import { AuthorCommandCockpit } from "@/components/admin/author-command-cockpit"
 import { prisma } from "@/lib/prisma";
 import { buildAuthorCommandCockpitBundle } from "@/lib/services/author-command-cockpit-service";
 import { resolveCockpitScopeContext } from "@/lib/services/cockpit-scope-model-service";
+import { RUNTIME_ID_COCKPIT_INSPECTION } from "@/lib/services/runtime-authority-registry-service";
 
 export const dynamic = "force-dynamic";
 
@@ -70,6 +71,7 @@ export default async function NarrativeHubPage({ searchParams }: NarrativePagePr
   });
 
   const bundle = buildAuthorCommandCockpitBundle({
+    runtimeId: RUNTIME_ID_COCKPIT_INSPECTION,
     context,
     labels: {
       sceneLabel: selectedScene?.description,

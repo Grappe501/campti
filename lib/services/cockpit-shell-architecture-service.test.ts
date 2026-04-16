@@ -4,10 +4,12 @@ import { describe, it } from "node:test";
 import { buildAuthorCommandCockpitBundle } from "@/lib/services/author-command-cockpit-service";
 import { assertCockpitShellArchitecture } from "@/lib/services/cockpit-shell-architecture-service";
 import { resolveCockpitScopeContext } from "@/lib/services/cockpit-scope-model-service";
+import { RUNTIME_ID_SCENE_CHAPTER_PRODUCTION } from "@/lib/services/runtime-authority-registry-service";
 
 describe("cockpit-shell-architecture-service", () => {
   it("enforces centered surface and populated rails", () => {
     const bundle = buildAuthorCommandCockpitBundle({
+      runtimeId: RUNTIME_ID_SCENE_CHAPTER_PRODUCTION,
       context: resolveCockpitScopeContext({ scope: "scene", sceneId: "scene-1" }),
       labels: { sceneLabel: "Opening beat" },
       metrics: {

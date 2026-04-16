@@ -76,11 +76,22 @@ import { SettingThreadCoverageService } from "@/lib/services/setting-thread-cove
 import { Book1BeatAssemblyService } from "@/lib/services/book1-beat-assembly-service";
 import { ThreadCallbackReentryService } from "@/lib/services/thread-callback-reentry-service";
 import { ProseGenerationConstraintsSchema } from "@/lib/domain/prose-generation-constraints";
+import { ChapterCompositionPlanSchema } from "@/lib/domain/chapter-composition";
 import { LiteraryDeviceCockpitService } from "@/lib/services/literary-device-cockpit-service";
 import { LiteraryDeviceDerivationService } from "@/lib/services/literary-device-derivation-service";
 import { LiteraryDeviceToProseConstraintsService } from "@/lib/services/literary-device-to-prose-constraints-service";
 import { LiteraryDeviceValidationService } from "@/lib/services/literary-device-validation-service";
 import { LiterarySymbolRegistryService } from "@/lib/services/literary-symbol-registry-service";
+import { NarrativeSequenceDerivationService } from "@/lib/services/narrative-sequence-derivation-service";
+import { NarrativeSequenceValidationService } from "@/lib/services/narrative-sequence-validation-service";
+import { SceneGenerationEngineService } from "@/lib/services/scene-generation-engine-service";
+import { EpicContinuityDerivationService } from "@/lib/services/epic-continuity-derivation-service";
+import { EpicContinuityValidationService } from "@/lib/services/epic-continuity-validation-service";
+import { EpicEmotionalGravityDerivationService } from "@/lib/services/epic-emotional-gravity-derivation-service";
+import { EpicEmotionalGravityValidationService } from "@/lib/services/epic-emotional-gravity-validation-service";
+import { NarratorPresenceDerivationService } from "@/lib/services/narrator-presence-derivation-service";
+import { NarratorPresenceValidationService } from "@/lib/services/narrator-presence-validation-service";
+import { RUNTIME_ID_BOOK1_REGENERATION } from "@/lib/services/runtime-authority-registry-service";
 
 const ChapterEvidencePackSchema = z.object({
   artifact: z.literal("chapter_evidence_pack"),
@@ -2524,9 +2535,22 @@ export class Book1RegenerationLoopService {
     literaryDeviceApplicationPlan: Record<string, unknown>;
     literaryDeviceValidation: Record<string, unknown>;
     literaryDeviceCockpitSummary: Record<string, unknown>;
+    epicSequencePlan: Record<string, unknown>;
+    bookSequencePlan: Record<string, unknown>;
+    chapterSequencePlan: Record<string, unknown>;
+    chapterFunctionMatrix: Record<string, unknown>;
+    recallReframingPlans: unknown[];
+    sequenceValidation: Record<string, unknown>;
+    sceneGenerationRequest: Record<string, unknown>;
+    generatedChapterSceneBundle: Record<string, unknown>;
+    sceneGenerationValidation: Record<string, unknown>;
     chapter1ProseGenerationPacket: Record<string, unknown>;
     chapter1ProseOutputPathReport: Record<string, unknown>;
     authorCockpitBundle: Record<string, unknown>;
+    epicContinuityPack: Record<string, unknown>;
+    epicContinuityValidation: Record<string, unknown>;
+    epicEmotionalGravityPack: Record<string, unknown>;
+    epicEmotionalGravityValidation: Record<string, unknown>;
     thoughtRecurrenceGuard: Record<string, unknown>;
     motiveCompression: Record<string, unknown>;
     characterDistinctionPlan: Record<string, unknown>;
@@ -2993,6 +3017,175 @@ export class Book1RegenerationLoopService {
       validation: literaryDeviceValidation,
       sceneIds: chapterComposition.sceneSequence.map((scene) => scene.sceneId),
     });
+    const chapterCompositionPlan = ChapterCompositionPlanSchema.parse({
+      artifact: "chapter_composition_plan",
+      schemaVersion: "1.0.0",
+      compositionPlanId: `${chapterState.chapterId}-composition-plan`,
+      chapterId: chapterState.chapterId,
+      parentBookId: "book1",
+      parentNarrativePsychologyId: chapterNarrativePsychology.parentBookId,
+      parentChapterStateId: chapterState.chapterId,
+      activeThreadIds: narrativeThreadInspection.activeThreadIds,
+      latentThreadIds: narrativeThreadInspection.latentThreadIds,
+      callbackThreadIds: narrativeThreadPack.threads.filter((thread) => thread.callbackPotential > 0.35).map((thread) => thread.threadId),
+      routeRequirementStatus: {
+        requiredLocationIds: settingCoverageReport.requiredLocationIds,
+        missingLocationIds: settingCoverageReport.missingLocationIds,
+        recurrenceSatisfied: settingCoverageReport.missingLocationIds.length === 0,
+        enforcementNotes: settingCoverageReport.recommendations,
+      },
+      philosophyRequirementStatus: {
+        activePhilosophyThreadIds: narrativeThreadInspection.philosophyThreadIds,
+        explicitnessCeiling: 0.28,
+        satisfied: narrativeThreadInspection.philosophyThreadIds.length > 0,
+        warnings: narrativeThreadInspection.philosophyThreadIds.length > 0 ? [] : ["No active philosophy thread in chapter."],
+      },
+      compositionMode: "delayed_convergence",
+      sceneCountTarget: Math.max(2, Math.min(6, chapterComposition.sceneSequence.length)),
+      sceneSequence: chapterComposition.sceneSequence.map((scene, index) => ({
+        scenePlanId: `${chapterState.chapterId}-scene-${String(index + 1).padStart(2, "0")}`,
+        chapterId: chapterState.chapterId,
+        sceneOrder: index + 1,
+        sceneRole:
+          index === 0
+            ? "grounding_scene"
+            : index === chapterComposition.sceneSequence.length - 1
+              ? "closure_scene"
+              : index === 1
+                ? "warning_scene"
+                : "rumor_scene",
+        povCandidateWeights: chapterState.povWeightingCandidates.map((candidate) => ({
+          povId: candidate.characterId,
+          weight: Number(candidate.weight.toFixed(2)),
+        })),
+        dominantThreadIds: scene.activeThreadIds,
+        secondaryThreadIds: scene.callbackThreadIds,
+        latentThreadIds: scene.latentThreadIds,
+        settingBindings: [scene.locationId],
+        routeBindings: [scene.locationId],
+        philosophyBindings: narrativeThreadInspection.philosophyThreadIds.slice(0, 2),
+        callbackSeeds: scene.seededThreadIds.map((threadId) => `${scene.sceneId}:${threadId}`),
+        delayedConvergenceKeys: scene.hiddenConvergenceKeys,
+        requiredBeatBiases: {
+          salience_lock_beat: index === 0 ? 0.6 : 0.3,
+          consequence_seed_beat: index > 0 ? 0.5 : 0.2,
+        },
+        requiredStateBiases: {
+          unresolved_pull: index === chapterComposition.sceneSequence.length - 1 ? 0.65 : 0.45,
+          external_awareness: 0.5,
+        },
+        apparentConnectionLevel: scene.hiddenConvergenceKeys.length > 0 ? "apparently_isolated" : "indirectly_linked",
+        actualConnectionLevel: scene.hiddenConvergenceKeys.length > 0 ? "convergent_later" : "hidden_linked",
+        transitionStrategy: scene.transitionToNextScene,
+        carryForwardPressureType: "threaded_pressure",
+        sceneClosureType: index === chapterComposition.sceneSequence.length - 1 ? "pressure_forward" : "open_knot",
+        validationFlags: [],
+      })),
+      sceneContrastProfile: {
+        tonalContrast: 0.58,
+        pressureContrast: 0.62,
+        threadMixContrast: 0.55,
+        settingContrast: 0.47,
+        notes: chapterComposition.sceneContrastLogic,
+      },
+      delayedConvergenceBindings: chapterComposition.sceneSequence
+        .flatMap((scene) =>
+          scene.hiddenConvergenceKeys.map((key) => ({
+            delayedConvergenceKey: key,
+            hiddenConvergenceBinding: scene.delayedConvergenceBindings.length > 0 ? scene.delayedConvergenceBindings : [scene.sceneId],
+            convergenceWindow: "chapter-04-to-07",
+            convergencePayoffTarget: "book1-mid-convergence",
+            connectionVisibilityNow: "apparently_isolated",
+            connectionVisibilityLater: "convergent_later",
+          })),
+        ),
+      callbackMarkers: callbackEvents.map((event) => ({
+        callbackId: event.callbackEventId,
+        sourceSceneId: event.sourceNodeId,
+        sourceThreadId: event.threadId,
+        callbackStrength: Number(Math.min(1, event.addedMeaningLoad).toFixed(2)),
+        callbackWindow: event.reentryChapterId,
+        callbackType: "warning_pattern",
+        laterTargetOptions: [event.reentrySceneId],
+      })),
+      reinterpretationAnchors: narrativeThreadPack.reinterpretations.map((reinterpretation) => ({
+        reinterpretationAnchorId: reinterpretation.reinterpretationId,
+        sourceSceneId: reinterpretation.eventAnchorId,
+        sourceThreadIds: [reinterpretation.threadId],
+        originalPovId: reinterpretation.sourcePov,
+        alternatePovCandidates: [reinterpretation.targetPov],
+        reinterpretableElements: [reinterpretation.reinterpretationDelta],
+        likelyMeaningShift: reinterpretation.reinterpretationDelta,
+        hiddenInformationDelta: `memory-distortion=${reinterpretation.memoryDistortionFactor}`,
+        reentryEligibilityWindow: "chapter-03+",
+        validationFlags: [],
+      })),
+      densityScore:
+        narrativeThreadInspection.sceneDensity.reduce((acc, row) => acc + row.densityScore, 0) /
+        Math.max(1, narrativeThreadInspection.sceneDensity.length),
+      densityWarnings: narrativeThreadInspection.warnings,
+      routeCoverageNotes: settingCoverageReport.recommendations,
+      continuityCarryForwardPlan: chapterComposition.sceneTransitions.slice(-2),
+      unresolvedPressurePlan: [chapterComposition.chapterCarryForwardProfile, chapterComposition.chapterClosureProfile],
+      chapterClosureProfile: "convergence_teased",
+      validationFlags: [],
+    });
+    const sequenceDerivation = new NarrativeSequenceDerivationService().derive({
+      epicId: "book1-epic",
+      bookId: "book1",
+      chapterId: chapterState.chapterId,
+      chapterCompositionPlan,
+      threads: narrativeThreadPack.threads,
+      settingCoverageReport,
+    });
+    const sequenceValidation = new NarrativeSequenceValidationService().validate({
+      bookPlan: sequenceDerivation.bookSequencePlan,
+      chapterPlan: sequenceDerivation.chapterSequencePlan,
+    });
+    const epicContinuityPack = new EpicContinuityDerivationService().deriveCamptiPack({
+      chapterId: chapterState.chapterId,
+      chapterSequence: chapterState.sequenceNumber,
+      chapterMode: chapterState.chapterMode,
+      chapterPsychologyMode: chapterNarrativePsychology.chapterPsychologyMode,
+      activeThreadIds: narrativeThreadInspection.activeThreadIds,
+      recallWindows: sequenceDerivation.bookSequencePlan.recallWindows,
+    });
+    const epicContinuityValidation = new EpicContinuityValidationService().validatePack(epicContinuityPack);
+    const epicEmotionalGravityPack = new EpicEmotionalGravityDerivationService().deriveCamptiPack({
+      chapterId: chapterState.chapterId,
+      chapterSequence: chapterState.sequenceNumber,
+      chapterMode: chapterState.chapterMode,
+      chapterPsychologyMode: chapterNarrativePsychology.chapterPsychologyMode,
+      activeThreadIds: narrativeThreadInspection.activeThreadIds,
+      recallWindows: sequenceDerivation.bookSequencePlan.recallWindows,
+      sceneIds: chapterComposition.sceneSequence.map((scene) => scene.sceneId),
+    });
+    const epicEmotionalGravityValidation = new EpicEmotionalGravityValidationService().validatePack(epicEmotionalGravityPack);
+    const narratorPresencePack = new NarratorPresenceDerivationService().deriveCamptiPack({
+      chapterId: chapterState.chapterId,
+      chapterSequence: chapterState.sequenceNumber,
+      sceneIds: chapterComposition.sceneSequence.map((scene) => scene.sceneId),
+    });
+    const narratorPresenceValidation = new NarratorPresenceValidationService().validatePack(narratorPresencePack);
+    const sceneGeneration = new SceneGenerationEngineService().run({
+      chapterId: chapterState.chapterId,
+      parentBookId: "book1",
+      parentChapterStateId: chapterState.chapterId,
+      parentNarrativePsychologyId: chapterNarrativePsychology.parentBookId,
+      chapterCompositionPlan,
+      sequencePlanId: sequenceDerivation.bookSequencePlan.bookId,
+      activeThreadPackId: "book1-thread-pack",
+      routeLedgerSnapshot: settingCoverageReport,
+      philosophyPropagationPlanId: `${chapterState.chapterId}:philosophy`,
+      callbackPlanId: `${chapterState.chapterId}:callbacks`,
+      reinterpretationAnchorSetId: `${chapterState.chapterId}:reinterpretation`,
+      chapterLevelProseConstraints: proseConstraints,
+      chapterMode: chapterState.chapterMode,
+      chapterPsychologyMode: chapterNarrativePsychology.chapterPsychologyMode,
+      chapterLevelLiteraryControlSettings: literaryDevicePack.controlSettings,
+      chapterLevelLiteraryDevicePlan: literaryDeviceApplicationPlan,
+      beatChain: beatAssemblyChain,
+    });
     const prosePreflight = new ProseGenerationPreflightService().build({ constraints: proseConstraints });
     const proseOutputPathService = new ProseGenerationOutputPathService();
     const chapter1ProseGenerationPacket = proseOutputPathService.buildChapter1Packet({
@@ -3414,9 +3607,18 @@ export class Book1RegenerationLoopService {
       "literary_device_validation",
       "literary_device_to_prose_constraints",
       "literary_device_cockpit",
+      "narrative_sequence_architecture",
+      "scene_generation_engine",
+      "epic_narrative_continuity",
+      "epic_continuity_validation",
+      "epic_emotional_gravity",
+      "epic_emotional_gravity_validation",
+      "narrator_presence_engine",
+      "narrator_convergence_engine",
     );
     if (beatAssemblyBlocked) {
       const authorCockpitBundle = buildAuthorCommandCockpitBundle({
+        runtimeId: RUNTIME_ID_BOOK1_REGENERATION,
         context: resolveCockpitScopeContext({ scope: "chapter", chapterId: chapterState.chapterId }),
         metrics: {
           chapterProgressionState: 0.62,
@@ -3538,6 +3740,55 @@ export class Book1RegenerationLoopService {
           perSceneDeviceDistribution: literaryDeviceCockpitSummary.sceneDistributionSummary,
           literaryDriftWarnings: literaryDeviceCockpitSummary.driftWarnings,
         },
+        epicContinuity: {
+          epicId: epicContinuityPack.epicContinuityProfile.epicId,
+          chapterId: epicContinuityPack.cockpitSummary.chapterId,
+          currentQuestionExpression: epicContinuityPack.cockpitSummary.currentQuestionExpression,
+          activeAnchorIds: epicContinuityPack.cockpitSummary.activeAnchorIds,
+          anchorRecurrenceHealth: epicContinuityPack.cockpitSummary.anchorRecurrenceHealth,
+          identityPersistenceStatus: epicContinuityPack.cockpitSummary.identityPersistenceStatus,
+          meaningEscalationStatus: epicContinuityPack.cockpitSummary.meaningEscalationStatus,
+          readerMemoryTargets: epicContinuityPack.cockpitSummary.readerMemoryTargets,
+          hookLayerStatus: epicContinuityPack.cockpitSummary.hookLayerStatus,
+          temporalTransitionHealth: epicContinuityPack.cockpitSummary.temporalTransitionHealth,
+          disconnectionWarnings: epicContinuityPack.cockpitSummary.disconnectionWarnings,
+          unresolvedEpicContinuityRisks: epicContinuityPack.cockpitSummary.unresolvedEpicContinuityRisks.concat(
+            epicContinuityValidation.risks,
+          ),
+        },
+        emotionalGravity: {
+          epicId: epicEmotionalGravityPack.epicEmotionalGravityProfile.epicId,
+          chapterId: epicEmotionalGravityPack.cockpitSummary.chapterId,
+          attachmentStatusByCharacter: epicEmotionalGravityPack.cockpitSummary.attachmentStatusByCharacter,
+          activeFearDesireVulnerabilityLines: epicEmotionalGravityPack.cockpitSummary.activeFearDesireVulnerabilityLines,
+          consequenceIrreversibilityMarkers: epicEmotionalGravityPack.cockpitSummary.consequenceIrreversibilityMarkers,
+          fateAgencyPressureMap: epicEmotionalGravityPack.cockpitSummary.fateAgencyPressureMap,
+          relationalStakesMap: epicEmotionalGravityPack.cockpitSummary.relationalStakesMap,
+          generationalBurdenStatus: epicEmotionalGravityPack.cockpitSummary.generationalBurdenStatus,
+          emotionalCarryForwardSummary: epicEmotionalGravityPack.cockpitSummary.emotionalCarryForwardSummary,
+          temporalEmotionalContinuityHealth: epicEmotionalGravityPack.cockpitSummary.temporalEmotionalContinuityHealth,
+          emotionallyThinWarnings: epicEmotionalGravityPack.cockpitSummary.emotionallyThinWarnings,
+          resetHeavyWarnings: epicEmotionalGravityPack.cockpitSummary.resetHeavyWarnings,
+          epicEmotionalGravityScore: epicEmotionalGravityPack.cockpitSummary.epicEmotionalGravityScore,
+          diagnostics: epicEmotionalGravityPack.cockpitSummary.diagnostics.concat(epicEmotionalGravityValidation.risks),
+        },
+        narratorPresence: {
+          chapterId: narratorPresencePack.cockpitSummary.chapterId,
+          currentNarratorPresenceLevel: narratorPresencePack.cockpitSummary.currentNarratorPresenceLevel,
+          narratorAuthorityMode: narratorPresencePack.cockpitSummary.narratorAuthorityMode,
+          narratorKnowledgeMode: narratorPresencePack.cockpitSummary.narratorKnowledgeMode,
+          convergenceStage: narratorPresencePack.cockpitSummary.convergenceStage,
+          upcomingConvergenceTriggers: narratorPresencePack.cockpitSummary.upcomingConvergenceTriggers,
+          narratorHookContinuityContribution: narratorPresencePack.cockpitSummary.narratorHookContinuityContribution,
+          narratorCharacterBoundaryWarnings: narratorPresencePack.cockpitSummary.narratorCharacterBoundaryWarnings.concat(
+            narratorPresenceValidation.softWarnings.map((row) => row.message),
+          ),
+          temporalBridgeStatus: narratorPresencePack.cockpitSummary.temporalBridgeStatus,
+          firstPersonReadinessStatus: narratorPresencePack.cockpitSummary.firstPersonReadinessStatus,
+          voiceShiftRisks: narratorPresencePack.cockpitSummary.voiceShiftRisks.concat(
+            narratorPresenceValidation.hardFailures.map((row) => row.message),
+          ),
+        },
       });
       const blockedResult = {
         artifact: "book1_chapter_01_regeneration_blocked",
@@ -3574,9 +3825,22 @@ export class Book1RegenerationLoopService {
         literaryDeviceApplicationPlan,
         literaryDeviceValidation,
         literaryDeviceCockpitSummary,
+        epicSequencePlan: sequenceDerivation.epicSequencePlan,
+        bookSequencePlan: sequenceDerivation.bookSequencePlan,
+        chapterSequencePlan: sequenceDerivation.chapterSequencePlan,
+        chapterFunctionMatrix: sequenceDerivation.chapterFunctionMatrix,
+        recallReframingPlans: sequenceDerivation.recallReframingPlans,
+        sequenceValidation,
+        sceneGenerationRequest: sceneGeneration.request,
+        generatedChapterSceneBundle: sceneGeneration.bundle,
+        sceneGenerationValidation: sceneGeneration.validation,
         chapter1ProseGenerationPacket,
         chapter1ProseOutputPathReport,
         authorCockpitBundle,
+        epicContinuityPack,
+        epicContinuityValidation,
+        epicEmotionalGravityPack,
+        epicEmotionalGravityValidation,
         thoughtRecurrenceGuard,
         motiveCompression: motiveCompressionWithMediation,
         characterDistinctionPlan: characterDistinctionPlanWithMediation,
@@ -4116,6 +4380,9 @@ export class Book1RegenerationLoopService {
       "chapter_embodiment_packets",
       "chapter_enneagram_mediation_layer",
       "chapter_developmental_intimacy_engine",
+      "chapter_sequence_plan",
+      "chapter_scene_generation_request",
+      "chapter_scene_generation_bundle",
     ];
     const regeneratedChapterDraftForCritics: ChapterDraft = {
       artifact: "chapter_draft",
@@ -4400,6 +4667,7 @@ export class Book1RegenerationLoopService {
           ? "accept new draft"
           : "iterate again";
     const authorCockpitBundle = buildAuthorCommandCockpitBundle({
+      runtimeId: RUNTIME_ID_BOOK1_REGENERATION,
       context: resolveCockpitScopeContext({ scope: "chapter", chapterId: chapterState.chapterId }),
       metrics: {
         chapterProgressionState: 0.73,
@@ -4491,6 +4759,49 @@ export class Book1RegenerationLoopService {
           chapterComposition.chapterClosureProfile,
         ],
       },
+      sequenceArchitecture: {
+        chapterId: sequenceDerivation.chapterSequencePlan.chapterId,
+        dominantFunction: sequenceDerivation.chapterSequencePlan.dominantFunction,
+        secondaryFunctions: sequenceDerivation.chapterSequencePlan.secondaryFunctions,
+        readerEnergyRole: sequenceDerivation.chapterSequencePlan.readerEnergyRole,
+        functionTimeline: sequenceDerivation.bookSequencePlan.chapterFunctionSequence.map((row) => ({
+          chapterId: row.chapterId,
+          dominantFunction: row.dominantFunction,
+        })),
+        convergenceWindows: sequenceDerivation.bookSequencePlan.convergenceWindows,
+        recallWindows: sequenceDerivation.bookSequencePlan.recallWindows,
+        sequenceWarnings: sequenceValidation.sequenceWarnings,
+        sequenceScore: sequenceValidation.sequenceScore,
+      },
+      sceneGeneration: {
+        generatedSceneCount: sceneGeneration.bundle.generatedScenes.length,
+        sceneRolesInRuntimeOrder: sceneGeneration.bundle.generatedScenes.map((scene) => scene.sceneRole),
+        sceneThreadMix: sceneGeneration.bundle.generatedScenes.map((scene) => ({
+          scenePlanId: scene.scenePlanId,
+          activeThreadCount: scene.activeThreads.length,
+          latentThreadCount: scene.latentThreads.length,
+        })),
+        sceneRoutePresence: sceneGeneration.bundle.generatedScenes.map((scene) => ({
+          scenePlanId: scene.scenePlanId,
+          routeBindings: scene.routeBindings,
+        })),
+        sceneProseModes: sceneGeneration.bundle.generatedScenes.map((scene) => ({
+          scenePlanId: scene.scenePlanId,
+          proseConstraintId: scene.appliedProseConstraintsId,
+        })),
+        sceneLiteraryProfiles: sceneGeneration.bundle.generatedScenes.map((scene) => ({
+          scenePlanId: scene.scenePlanId,
+          literaryPlanId: scene.appliedLiteraryDevicePlanId,
+        })),
+        transitionTypes: sceneGeneration.bundle.generatedScenes.flatMap((scene) =>
+          scene.sceneTransitionOut?.strategy ? [scene.sceneTransitionOut.strategy] : [],
+        ),
+        callbackMarkersTriggered: sceneGeneration.bundle.callbackSummary,
+        delayedConvergenceMarkersPresent: sceneGeneration.bundle.delayedConvergenceSummary,
+        reinterpretationAnchorsPresent: sceneGeneration.bundle.reinterpretationSummary,
+        sceneBundleWarnings: sceneGeneration.bundle.generationWarnings.concat(sceneGeneration.validation.softWarnings),
+        chapterRuntimeDensitySummary: `threads=${sceneGeneration.bundle.densitySummary.averageThreadDensity},routes=${sceneGeneration.bundle.densitySummary.averageRouteDensity},flattening=${sceneGeneration.bundle.densitySummary.flatteningRisk}`,
+      },
       literaryDevices: {
         chapterId: chapterState.chapterId,
         activeDevicePanel: literaryDeviceCockpitSummary.activeDevices.map((row) => ({
@@ -4534,6 +4845,55 @@ export class Book1RegenerationLoopService {
         chapterLiteraryProfileSummary: literaryDeviceCockpitSummary.chapterProfileSummary,
         perSceneDeviceDistribution: literaryDeviceCockpitSummary.sceneDistributionSummary,
         literaryDriftWarnings: literaryDeviceCockpitSummary.driftWarnings,
+      },
+      epicContinuity: {
+        epicId: epicContinuityPack.epicContinuityProfile.epicId,
+        chapterId: epicContinuityPack.cockpitSummary.chapterId,
+        currentQuestionExpression: epicContinuityPack.cockpitSummary.currentQuestionExpression,
+        activeAnchorIds: epicContinuityPack.cockpitSummary.activeAnchorIds,
+        anchorRecurrenceHealth: epicContinuityPack.cockpitSummary.anchorRecurrenceHealth,
+        identityPersistenceStatus: epicContinuityPack.cockpitSummary.identityPersistenceStatus,
+        meaningEscalationStatus: epicContinuityPack.cockpitSummary.meaningEscalationStatus,
+        readerMemoryTargets: epicContinuityPack.cockpitSummary.readerMemoryTargets,
+        hookLayerStatus: epicContinuityPack.cockpitSummary.hookLayerStatus,
+        temporalTransitionHealth: epicContinuityPack.cockpitSummary.temporalTransitionHealth,
+        disconnectionWarnings: epicContinuityPack.cockpitSummary.disconnectionWarnings,
+        unresolvedEpicContinuityRisks: epicContinuityPack.cockpitSummary.unresolvedEpicContinuityRisks.concat(
+          epicContinuityValidation.risks,
+        ),
+      },
+      emotionalGravity: {
+        epicId: epicEmotionalGravityPack.epicEmotionalGravityProfile.epicId,
+        chapterId: epicEmotionalGravityPack.cockpitSummary.chapterId,
+        attachmentStatusByCharacter: epicEmotionalGravityPack.cockpitSummary.attachmentStatusByCharacter,
+        activeFearDesireVulnerabilityLines: epicEmotionalGravityPack.cockpitSummary.activeFearDesireVulnerabilityLines,
+        consequenceIrreversibilityMarkers: epicEmotionalGravityPack.cockpitSummary.consequenceIrreversibilityMarkers,
+        fateAgencyPressureMap: epicEmotionalGravityPack.cockpitSummary.fateAgencyPressureMap,
+        relationalStakesMap: epicEmotionalGravityPack.cockpitSummary.relationalStakesMap,
+        generationalBurdenStatus: epicEmotionalGravityPack.cockpitSummary.generationalBurdenStatus,
+        emotionalCarryForwardSummary: epicEmotionalGravityPack.cockpitSummary.emotionalCarryForwardSummary,
+        temporalEmotionalContinuityHealth: epicEmotionalGravityPack.cockpitSummary.temporalEmotionalContinuityHealth,
+        emotionallyThinWarnings: epicEmotionalGravityPack.cockpitSummary.emotionallyThinWarnings,
+        resetHeavyWarnings: epicEmotionalGravityPack.cockpitSummary.resetHeavyWarnings,
+        epicEmotionalGravityScore: epicEmotionalGravityPack.cockpitSummary.epicEmotionalGravityScore,
+        diagnostics: epicEmotionalGravityPack.cockpitSummary.diagnostics.concat(epicEmotionalGravityValidation.risks),
+      },
+      narratorPresence: {
+        chapterId: narratorPresencePack.cockpitSummary.chapterId,
+        currentNarratorPresenceLevel: narratorPresencePack.cockpitSummary.currentNarratorPresenceLevel,
+        narratorAuthorityMode: narratorPresencePack.cockpitSummary.narratorAuthorityMode,
+        narratorKnowledgeMode: narratorPresencePack.cockpitSummary.narratorKnowledgeMode,
+        convergenceStage: narratorPresencePack.cockpitSummary.convergenceStage,
+        upcomingConvergenceTriggers: narratorPresencePack.cockpitSummary.upcomingConvergenceTriggers,
+        narratorHookContinuityContribution: narratorPresencePack.cockpitSummary.narratorHookContinuityContribution,
+        narratorCharacterBoundaryWarnings: narratorPresencePack.cockpitSummary.narratorCharacterBoundaryWarnings.concat(
+          narratorPresenceValidation.softWarnings.map((row) => row.message),
+        ),
+        temporalBridgeStatus: narratorPresencePack.cockpitSummary.temporalBridgeStatus,
+        firstPersonReadinessStatus: narratorPresencePack.cockpitSummary.firstPersonReadinessStatus,
+        voiceShiftRisks: narratorPresencePack.cockpitSummary.voiceShiftRisks.concat(
+          narratorPresenceValidation.hardFailures.map((row) => row.message),
+        ),
       },
     });
 
@@ -4607,6 +4967,10 @@ export class Book1RegenerationLoopService {
         proseShapeSummary,
         adversarialReview: adversarial,
         authorCockpitBundle,
+        epicContinuityPack,
+        epicContinuityValidation,
+        epicEmotionalGravityPack,
+        epicEmotionalGravityValidation,
       },
       provenance: {
         sourceArtifacts: unique([
@@ -4615,6 +4979,9 @@ export class Book1RegenerationLoopService {
           "reports/book1-chapter-01-chapter_voice_report.json",
           "reports/book1-chapter-01-chapter_gap_report.json",
           "reports/book1-chapter-01-adversarial-summary.json",
+          "reports/book1-chapter-01-scene-generation-request.json",
+          "reports/book1-chapter-01-generated-scene-bundle.json",
+          "reports/book1-chapter-01-scene-generation-validation.json",
           "reports/book1-character-console-session.json",
           "reports/book1-law-console-session.json",
           ...provenanceRefs,
@@ -4633,6 +5000,8 @@ export class Book1RegenerationLoopService {
         voice: "reports/book1-chapter-01-chapter_voice_report.json",
         gap: "reports/book1-chapter-01-chapter_gap_report.json",
         adversarialSummary: "reports/book1-chapter-01-adversarial-summary.json",
+        sequenceValidation: "reports/book1-chapter-01-sequence-validation.json",
+        sceneBundle: "reports/book1-chapter-01-generated-scene-bundle.json",
       },
       metrics: diffMetrics,
       lockEnforcement: {
@@ -4707,9 +5076,22 @@ export class Book1RegenerationLoopService {
       literaryDeviceApplicationPlan,
       literaryDeviceValidation,
       literaryDeviceCockpitSummary,
+      epicSequencePlan: sequenceDerivation.epicSequencePlan,
+      bookSequencePlan: sequenceDerivation.bookSequencePlan,
+      chapterSequencePlan: sequenceDerivation.chapterSequencePlan,
+      chapterFunctionMatrix: sequenceDerivation.chapterFunctionMatrix,
+      recallReframingPlans: sequenceDerivation.recallReframingPlans,
+      sequenceValidation,
+      sceneGenerationRequest: sceneGeneration.request,
+      generatedChapterSceneBundle: sceneGeneration.bundle,
+      sceneGenerationValidation: sceneGeneration.validation,
       chapter1ProseGenerationPacket,
       chapter1ProseOutputPathReport,
       authorCockpitBundle,
+      epicContinuityPack,
+      epicContinuityValidation,
+      epicEmotionalGravityPack,
+      epicEmotionalGravityValidation,
       thoughtRecurrenceGuard,
       motiveCompression: motiveCompressionWithMediation,
       characterDistinctionPlan: characterDistinctionPlanWithMediation,

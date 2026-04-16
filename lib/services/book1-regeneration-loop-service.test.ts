@@ -158,6 +158,12 @@ describe("book1-regeneration-loop-service", () => {
     assert.equal((result.chapter1ProseGenerationPacket as { artifact: string }).artifact, "book1_chapter1_prose_generation_packet");
     assert.equal((result.chapter1ProseOutputPathReport as { artifact: string }).artifact, "prose_generation_output_path_report");
     assert.equal(typeof (result.authorCockpitBundle as { beatGating?: { blocked: boolean } }).beatGating?.blocked, "boolean");
+    assert.equal(
+      (result.authorCockpitBundle as { runtimeAuthority?: { authorityClass?: string } }).runtimeAuthority?.authorityClass,
+      "advisory_runtime",
+    );
+    assert.equal((result.epicEmotionalGravityPack as { artifact: string }).artifact, "campti_epic_emotional_gravity_pack");
+    assert.equal(typeof (result.epicEmotionalGravityValidation as { score?: number }).score, "number");
     assert.equal(result.thoughtRecurrenceGuard.artifact, "chapter_thought_recurrence_guard");
     assert.equal(result.motiveCompression.artifact, "chapter_motive_compression");
     assert.equal(result.characterDistinctionPlan.artifact, "chapter_character_distinction_plan");
