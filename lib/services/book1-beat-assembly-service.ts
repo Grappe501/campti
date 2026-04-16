@@ -29,6 +29,10 @@ function makeBeat(beat: BeatSeed, previousBeat: BeatAssemblyBeat | null): BeatAs
   };
 }
 
+function buildArtifactId(chapter: number): string {
+  return `book1_chapter${String(chapter).padStart(2, "0")}_beat_assembly_chain`;
+}
+
 function chapter1Beats(): BeatSeed[] {
   return [
     {
@@ -285,21 +289,19 @@ function chapter1Beats(): BeatSeed[] {
 }
 
 export class Book1BeatAssemblyService {
-  buildChapter1BeatAssembly(): {
+  finalizeAssembly(input: {
+    chapter: number;
+    beats: BeatAssemblyBeat[];
+    summaryLine: string;
+    sourceArtifacts: string[];
+  }): {
     chain: BeatAssemblyChain;
     cockpitSummary: BeatAssemblyCockpitSummary;
   } {
-    const seeded = chapter1Beats();
-    const beats: BeatAssemblyBeat[] = [];
-    for (const beat of seeded) {
-      const previous = beats.length > 0 ? beats[beats.length - 1] : null;
-      beats.push(makeBeat(beat, previous));
-    }
-
     const chainDraft: BeatAssemblyChain = {
-      artifact: "book1_chapter1_beat_assembly_chain",
+      artifact: buildArtifactId(input.chapter),
       schemaVersion: "1.0.0",
-      chapter: 1,
+      chapter: input.chapter,
       generatedAt: new Date().toISOString(),
       worldviewFrame: {
         storyLocale: "Natchitoches-centered Red River settlements",
@@ -311,22 +313,13 @@ export class Book1BeatAssemblyService {
         allowed: BEAT_ALLOWED_TRANSITIONS,
         disallowed: BEAT_DISALLOWED_TRANSITIONS,
       },
-      beats,
+      beats: input.beats,
       chainValidation: {
         passed: true,
         invalidReasons: [],
       },
       provenance: {
-        sourceArtifacts: [
-          "reports/book1-chapter-01-segment-simulation-state.json",
-          "reports/book1-chapter-01-cognition-signatures.json",
-          "reports/book1-chapter-01-voice-cognition-map.json",
-          "reports/book1-chapter-01-developmental-intimacy-engine.json",
-          "reports/book1-chapter-01-chapter_law.json",
-          "reports/book1-chapter-01-chapter_relationship_pressure_map.json",
-          "reports/book1-chapter-01-chapter_character_hidden_histories.json",
-          "reports/book1-chapter-01-chapter_epic_simulation.json",
-        ],
+        sourceArtifacts: input.sourceArtifacts,
       },
     };
 
@@ -347,7 +340,7 @@ export class Book1BeatAssemblyService {
     const highestPressureLoad = Math.max(...chain.beats.map((beat) => beat.pressureLoad));
 
     const cockpitSummary = BeatAssemblyCockpitSummarySchema.parse({
-      chapter: 1,
+      chapter: input.chapter,
       beatCount: chain.beats.length,
       validationPassed: chain.chainValidation.passed,
       highestPressureLoad,
@@ -356,14 +349,42 @@ export class Book1BeatAssemblyService {
       memoryLinkedBeats,
       socialFeedbackBeats,
       meaningTraceBeats,
-      summaryLine:
-        "Chapter 1 beat assembly holds order-under-pressure arc with salience-led work opening and continuity-seeded consequence exit.",
+      summaryLine: input.summaryLine,
     });
 
     return {
       chain,
       cockpitSummary,
     };
+  }
+
+  buildChapter1BeatAssembly(): {
+    chain: BeatAssemblyChain;
+    cockpitSummary: BeatAssemblyCockpitSummary;
+  } {
+    const seeded = chapter1Beats();
+    const beats: BeatAssemblyBeat[] = [];
+    for (const beat of seeded) {
+      const previous = beats.length > 0 ? beats[beats.length - 1] : null;
+      beats.push(makeBeat(beat, previous));
+    }
+
+    return this.finalizeAssembly({
+      chapter: 1,
+      beats,
+      sourceArtifacts: [
+        "reports/book1-chapter-01-segment-simulation-state.json",
+        "reports/book1-chapter-01-cognition-signatures.json",
+        "reports/book1-chapter-01-voice-cognition-map.json",
+        "reports/book1-chapter-01-developmental-intimacy-engine.json",
+        "reports/book1-chapter-01-chapter_law.json",
+        "reports/book1-chapter-01-chapter_relationship_pressure_map.json",
+        "reports/book1-chapter-01-chapter_character_hidden_histories.json",
+        "reports/book1-chapter-01-chapter_epic_simulation.json",
+      ],
+      summaryLine:
+        "Chapter 1 beat assembly holds order-under-pressure arc with salience-led work opening and continuity-seeded consequence exit.",
+    });
   }
 }
 

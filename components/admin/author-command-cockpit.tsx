@@ -178,6 +178,191 @@ export function AuthorCommandCockpit({ bundle, scopeOptions }: Props) {
             </div>
           ) : null}
 
+          {bundle.narrativePsychology ? (
+            <div className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm">
+              <p className="text-xs uppercase tracking-widest text-stone-500">Narrative psychology</p>
+              <p className="mt-2 text-sm font-medium text-stone-800">
+                {bundle.narrativePsychology.chapterId} · {bundle.narrativePsychology.chapterPsychologyMode.replaceAll("_", " ")}
+              </p>
+              <ul className="mt-2 space-y-1 text-xs text-stone-600">
+                <li>Pull score: {bundle.narrativePsychology.pullScore.toFixed(2)}</li>
+                <li>Carry-forward hook: {bundle.narrativePsychology.carryForwardHook.replaceAll("_", " ")}</li>
+              </ul>
+              <p className="mt-2 text-xs text-stone-500">{bundle.narrativePsychology.emotionalObjective}</p>
+              {bundle.narrativePsychology.driftWarnings.length > 0 ? (
+                <ul className="mt-2 space-y-1 text-xs text-amber-700">
+                  {bundle.narrativePsychology.driftWarnings.map((warning) => (
+                    <li key={warning}>- {warning}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          ) : null}
+
+          {bundle.proseConstraints ? (
+            <div className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm">
+              <p className="text-xs uppercase tracking-widest text-stone-500">Prose constraints</p>
+              <ul className="mt-2 space-y-1 text-xs text-stone-600">
+                <li>Mode: {bundle.proseConstraints.proseMode.replaceAll("_", " ")}</li>
+                <li>Narrative distance: {bundle.proseConstraints.narrativeDistance.replaceAll("_", " ")}</li>
+                <li>Sensory density: {bundle.proseConstraints.sensoryDensityTarget}</li>
+                <li>Exposition allowance: {bundle.proseConstraints.expositionAllowance.toFixed(2)}</li>
+                <li>Ambiguity allowance: {bundle.proseConstraints.ambiguityAllowance.toFixed(2)}</li>
+                <li>Ending momentum: {bundle.proseConstraints.endingMomentumProfile}</li>
+                <li>Compliance: {bundle.proseConstraints.compliant ? "pass" : "drift detected"}</li>
+              </ul>
+              {bundle.proseConstraints.driftWarnings.length > 0 ? (
+                <ul className="mt-2 space-y-1 text-xs text-amber-700">
+                  {bundle.proseConstraints.driftWarnings.map((warning) => (
+                    <li key={warning}>- {warning}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          ) : null}
+
+          {bundle.beatGating ? (
+            <div className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm">
+              <p className="text-xs uppercase tracking-widest text-stone-500">Beat gating</p>
+              <p className="mt-2 text-xs text-stone-700">
+                Required: {bundle.beatGating.required ? "yes" : "no"} · Blocked: {bundle.beatGating.blocked ? "yes" : "no"}
+              </p>
+              <p className="mt-1 text-xs text-stone-500">{bundle.beatGating.reason}</p>
+            </div>
+          ) : null}
+
+          {bundle.narrativeThreads ? (
+            <div className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm">
+              <p className="text-xs uppercase tracking-widest text-stone-500">Narrative threads</p>
+              <p className="mt-2 text-xs text-stone-700">
+                Active: {bundle.narrativeThreads.activeThreadIds.length} · Latent: {bundle.narrativeThreads.latentThreadIds.length}
+              </p>
+              <p className="mt-1 text-xs text-stone-700">
+                Unresolved: {bundle.narrativeThreads.unresolvedThreadCount} · Resolved: {bundle.narrativeThreads.resolvedThreadCount}
+              </p>
+              <ul className="mt-2 space-y-1 text-xs text-stone-600">
+                <li>Callback markers: {bundle.narrativeThreads.callbackMarkers.length}</li>
+                <li>Delayed convergence keys: {bundle.narrativeThreads.delayedConvergenceMarkers.length}</li>
+                <li>Reinterpretation candidates: {bundle.narrativeThreads.reinterpretationCandidates.length}</li>
+                <li>Philosophy threads: {bundle.narrativeThreads.philosophyThreadIds.length}</li>
+              </ul>
+              <div className="mt-2 rounded-lg border border-stone-200 bg-stone-50 p-2">
+                <p className="text-[11px] font-medium text-stone-700">Scene density</p>
+                <ul className="mt-1 space-y-1 text-[11px] text-stone-600">
+                  {bundle.narrativeThreads.sceneDensity.map((scene) => (
+                    <li key={scene.sceneId}>
+                      {scene.sceneId}: {scene.activeThreadCount} active / {scene.latentThreadCount} latent (density{" "}
+                      {scene.densityScore.toFixed(2)})
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {bundle.narrativeThreads.warnings.length > 0 ? (
+                <ul className="mt-2 space-y-1 text-xs text-amber-700">
+                  {bundle.narrativeThreads.warnings.map((warning) => (
+                    <li key={warning}>- {warning}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          ) : null}
+
+          {bundle.chapterComposition ? (
+            <div className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm">
+              <p className="text-xs uppercase tracking-widest text-stone-500">Chapter composition</p>
+              <p className="mt-2 text-xs text-stone-700">
+                Mode: {bundle.chapterComposition.compositionMode.replaceAll("_", " ")} · Scenes: {bundle.chapterComposition.sceneCount}
+              </p>
+              <ul className="mt-2 space-y-1 text-xs text-stone-600">
+                <li>Role spread: {bundle.chapterComposition.sceneRoleSpread.length}</li>
+                <li>Dominant thread families: {bundle.chapterComposition.dominantThreadFamilies.length}</li>
+                <li>Latent thread families: {bundle.chapterComposition.latentThreadFamilies.length}</li>
+                <li>Delayed convergence markers: {bundle.chapterComposition.delayedConvergenceMarkers.length}</li>
+                <li>Callback markers: {bundle.chapterComposition.callbackMarkers.length}</li>
+                <li>Reinterpretation anchors: {bundle.chapterComposition.reinterpretationAnchorIds.length}</li>
+                <li>Route coverage: {bundle.chapterComposition.routeCoverageStatus.replaceAll("_", " ")}</li>
+                <li>Philosophy propagation: {bundle.chapterComposition.philosophyPropagationStatus.replaceAll("_", " ")}</li>
+                <li>Density score: {bundle.chapterComposition.densityScore.toFixed(2)}</li>
+                <li>Closure profile: {bundle.chapterComposition.chapterClosureProfile.replaceAll("_", " ")}</li>
+              </ul>
+              {bundle.chapterComposition.thinnessWarnings.length > 0 ? (
+                <ul className="mt-2 space-y-1 text-xs text-amber-700">
+                  {bundle.chapterComposition.thinnessWarnings.map((warning) => (
+                    <li key={warning}>- {warning}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          ) : null}
+
+          {bundle.literaryDevices ? (
+            <div className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm">
+              <p className="text-xs uppercase tracking-widest text-stone-500">Literary Devices</p>
+              <p className="mt-2 text-xs text-stone-700">{bundle.literaryDevices.chapterLiteraryProfileSummary}</p>
+
+              <div className="mt-3 rounded-lg border border-stone-200 bg-stone-50 p-2">
+                <p className="text-[11px] font-medium text-stone-700">Alliteration control (semantic mapped)</p>
+                <ul className="mt-1 space-y-1 text-[11px] text-stone-600">
+                  <li>Activation: {bundle.literaryDevices.alliterationControl.activationMode}</li>
+                  <li>Density: {bundle.literaryDevices.alliterationControl.densityBand}</li>
+                  <li>
+                    Numeric input {bundle.literaryDevices.alliterationControl.numericInput} to mapped band{" "}
+                    {bundle.literaryDevices.alliterationControl.mappedDensityBand}
+                  </li>
+                  <li>Allowed zones: {bundle.literaryDevices.alliterationControl.allowedLineZones.join(", ") || "none"}</li>
+                  <li>Forbidden zones: {bundle.literaryDevices.alliterationControl.forbiddenLineZones.join(", ") || "none"}</li>
+                </ul>
+              </div>
+
+              <div className="mt-3 rounded-lg border border-stone-200 bg-stone-50 p-2">
+                <p className="text-[11px] font-medium text-stone-700">Active device panel</p>
+                <ul className="mt-1 space-y-1 text-[11px] text-stone-600">
+                  {bundle.literaryDevices.activeDevicePanel.map((device) => (
+                    <li key={device.deviceId}>
+                      {device.deviceId}: {device.activationMode} / {device.densityBand} / {device.scope} / risk {device.misuseRisk} /{" "}
+                      {device.currentChapterApplicationStatus}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-3 rounded-lg border border-stone-200 bg-stone-50 p-2">
+                <p className="text-[11px] font-medium text-stone-700">Symbol registry editor</p>
+                <ul className="mt-1 space-y-1 text-[11px] text-stone-600">
+                  {bundle.literaryDevices.symbolRegistry.map((symbol) => (
+                    <li key={symbol.symbolId}>
+                      {symbol.symbolName} ({symbol.symbolId}) carriers={symbol.carriers.join(", ")} threads=
+                      {symbol.threadBindings.join(", ") || "none"} settings={symbol.settingBindings.join(", ") || "none"}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <p className="mt-3 text-[11px] text-stone-600">
+                Route echo: {bundle.literaryDevices.routeEchoControls.activationMode} / {bundle.literaryDevices.routeEchoControls.densityBand}
+              </p>
+              <p className="text-[11px] text-stone-600">
+                Philosophy echo: {bundle.literaryDevices.philosophyEchoControls.activationMode} / ceiling{" "}
+                {bundle.literaryDevices.philosophyEchoControls.explicitnessCeiling}
+              </p>
+
+              {bundle.literaryDevices.densityWarnings.length > 0 ? (
+                <ul className="mt-2 space-y-1 text-xs text-amber-700">
+                  {bundle.literaryDevices.densityWarnings.map((warning) => (
+                    <li key={warning}>- {warning}</li>
+                  ))}
+                </ul>
+              ) : null}
+              {bundle.literaryDevices.misuseWarnings.length > 0 ? (
+                <ul className="mt-2 space-y-1 text-xs text-red-700">
+                  {bundle.literaryDevices.misuseWarnings.map((warning) => (
+                    <li key={warning}>- {warning}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          ) : null}
+
           <div className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm">
             <p className="text-xs uppercase tracking-widest text-stone-500">Command actions</p>
             <div className="mt-2 flex flex-wrap gap-2">

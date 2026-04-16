@@ -20,7 +20,7 @@ export function buildAuthorCommandCockpitBundle(input: {
   };
   metrics: Record<string, number>;
   beatAssembly?: {
-    chapter: 1;
+    chapter: number;
     beatCount: number;
     validationPassed: boolean;
     highestPressureLoad: number;
@@ -43,6 +43,78 @@ export function buildAuthorCommandCockpitBundle(input: {
     riskFlags: string[];
     summaryLine: string;
   };
+  narrativePsychology?: {
+    chapterId: string;
+    chapterPsychologyMode: string;
+    emotionalObjective: string;
+    pullScore: number;
+    carryForwardHook: string;
+    driftWarnings: string[];
+  };
+  proseConstraints?: {
+    proseMode: string;
+    narrativeDistance: string;
+    sensoryDensityTarget: string;
+    expositionAllowance: number;
+    emotionalExplicitnessCeiling: number;
+    ambiguityAllowance: number;
+    endingMomentumProfile: string;
+    attachmentTarget: number;
+    placeImmersionTarget: number;
+    compliant: boolean;
+    driftWarnings: string[];
+  };
+  beatGating?: {
+    required: boolean;
+    blocked: boolean;
+    reason: string;
+  };
+  narrativeThreads?: {
+    chapterId: string;
+    activeThreadIds: string[];
+    latentThreadIds: string[];
+    callbackMarkers: string[];
+    delayedConvergenceMarkers: string[];
+    reinterpretationCandidates: string[];
+    philosophyThreadIds: string[];
+    unresolvedThreadCount: number;
+    resolvedThreadCount: number;
+    sceneDensity: Array<{
+      sceneId: string;
+      activeThreadCount: number;
+      latentThreadCount: number;
+      densityScore: number;
+    }>;
+    warnings: string[];
+  };
+  chapterComposition?: {
+    chapterId: string;
+    compositionMode:
+      | "braided_continuity"
+      | "signal_clustered"
+      | "contrast_composition"
+      | "delayed_convergence"
+      | "memory_echo"
+      | "route_braided"
+      | "relational_spread"
+      | "layered_pressure"
+      | "fracture_spread"
+      | "adaptation_braid";
+    sceneCount: number;
+    sceneRoleSpread: string[];
+    dominantThreadFamilies: string[];
+    latentThreadFamilies: string[];
+    delayedConvergenceMarkers: string[];
+    callbackMarkers: string[];
+    reinterpretationAnchorIds: string[];
+    routeCoverageStatus: string;
+    philosophyPropagationStatus: string;
+    densityScore: number;
+    thinnessWarnings: string[];
+    chapterClosureProfile: string;
+    carryForwardUnresolvedPressureSummary: string[];
+  };
+  literaryDevices?: AuthorCommandCockpitBundle["literaryDevices"];
 }): AuthorCommandCockpitBundle {
   const centered = deriveCenteredSurfaceTitle({
     scope: input.context.scope,
@@ -71,6 +143,12 @@ export function buildAuthorCommandCockpitBundle(input: {
     availableActions,
     beatAssembly: input.beatAssembly,
     chapterState: input.chapterState,
+    narrativePsychology: input.narrativePsychology,
+    proseConstraints: input.proseConstraints,
+    beatGating: input.beatGating,
+    narrativeThreads: input.narrativeThreads,
+    chapterComposition: input.chapterComposition,
+    literaryDevices: input.literaryDevices,
     bounded: true,
     explainable: true,
     nonOmniscient: true,

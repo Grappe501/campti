@@ -75,7 +75,7 @@ export type AuthorCommandCockpitBundle = {
   guidedSignals: GuidedSignal[];
   availableActions: AuthorCommandAction[];
   beatAssembly?: {
-    chapter: 1;
+    chapter: number;
     beatCount: number;
     validationPassed: boolean;
     highestPressureLoad: number;
@@ -97,6 +97,132 @@ export type AuthorCommandCockpitBundle = {
     validationPassed: boolean;
     riskFlags: string[];
     summaryLine: string;
+  };
+  narrativePsychology?: {
+    chapterId: string;
+    chapterPsychologyMode: string;
+    emotionalObjective: string;
+    pullScore: number;
+    carryForwardHook: string;
+    driftWarnings: string[];
+  };
+  proseConstraints?: {
+    proseMode: string;
+    narrativeDistance: string;
+    sensoryDensityTarget: string;
+    expositionAllowance: number;
+    emotionalExplicitnessCeiling: number;
+    ambiguityAllowance: number;
+    endingMomentumProfile: string;
+    attachmentTarget: number;
+    placeImmersionTarget: number;
+    compliant: boolean;
+    driftWarnings: string[];
+  };
+  literaryDevices?: {
+    chapterId: string;
+    activeDevicePanel: Array<{
+      deviceId: string;
+      activationMode: "off" | "subtle" | "moderate" | "strong" | "required";
+      densityBand: "rare" | "occasional" | "patterned" | "motif_driven";
+      scope: "line" | "paragraph" | "scene" | "chapter" | "thread" | "pov" | "character" | "book";
+      contexts: string[];
+      misuseRisk: "low" | "moderate" | "high" | "critical";
+      currentChapterApplicationStatus: "suppressed" | "allowed" | "active" | "required";
+    }>;
+    symbolRegistry: Array<{
+      symbolId: string;
+      symbolName: string;
+      carriers: string[];
+      threadBindings: string[];
+      settingBindings: string[];
+      payoffWindow: string;
+      callbackWindow: string;
+    }>;
+    motifRegistry: Array<{
+      motifId: string;
+      motifName: string;
+      boundThreadIds: string[];
+      recurrenceTarget: "rare" | "occasional" | "patterned" | "motif_driven";
+    }>;
+    routeEchoControls: {
+      activationMode: string;
+      densityBand: string;
+      boundRoutes: string[];
+    };
+    philosophyEchoControls: {
+      activationMode: string;
+      explicitnessCeiling: "implicit" | "low" | "moderate" | "high";
+      carrierModes: string[];
+    };
+    alliterationControl: {
+      activationMode: "off" | "subtle" | "moderate" | "strong" | "required";
+      densityBand: "rare" | "occasional" | "patterned" | "motif_driven";
+      numericInput: number;
+      mappedDensityBand: "rare" | "occasional" | "patterned" | "motif_driven";
+      allowedLineZones: string[];
+      forbiddenLineZones: string[];
+      consonantClusteringTolerance: number;
+    };
+    densityWarnings: string[];
+    misuseWarnings: string[];
+    chapterLiteraryProfileSummary: string;
+    perSceneDeviceDistribution: Array<{
+      sceneId: string;
+      activeDeviceCount: number;
+      overloadRisk: "low" | "moderate" | "high";
+    }>;
+    literaryDriftWarnings: string[];
+  };
+  beatGating?: {
+    required: boolean;
+    blocked: boolean;
+    reason: string;
+  };
+  narrativeThreads?: {
+    chapterId: string;
+    activeThreadIds: string[];
+    latentThreadIds: string[];
+    callbackMarkers: string[];
+    delayedConvergenceMarkers: string[];
+    reinterpretationCandidates: string[];
+    philosophyThreadIds: string[];
+    unresolvedThreadCount: number;
+    resolvedThreadCount: number;
+    sceneDensity: Array<{
+      sceneId: string;
+      activeThreadCount: number;
+      latentThreadCount: number;
+      densityScore: number;
+    }>;
+    warnings: string[];
+  };
+  chapterComposition?: {
+    chapterId: string;
+    compositionMode:
+      | "braided_continuity"
+      | "signal_clustered"
+      | "contrast_composition"
+      | "delayed_convergence"
+      | "memory_echo"
+      | "route_braided"
+      | "relational_spread"
+      | "layered_pressure"
+      | "fracture_spread"
+      | "adaptation_braid";
+    sceneCount: number;
+    sceneRoleSpread: string[];
+    dominantThreadFamilies: string[];
+    latentThreadFamilies: string[];
+    delayedConvergenceMarkers: string[];
+    callbackMarkers: string[];
+    reinterpretationAnchorIds: string[];
+    routeCoverageStatus: string;
+    philosophyPropagationStatus: string;
+    densityScore: number;
+    thinnessWarnings: string[];
+    chapterClosureProfile: string;
+    carryForwardUnresolvedPressureSummary: string[];
   };
   bounded: true;
   explainable: true;

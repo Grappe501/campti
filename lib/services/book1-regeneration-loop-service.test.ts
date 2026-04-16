@@ -146,6 +146,18 @@ describe("book1-regeneration-loop-service", () => {
     assert.equal(result.segmentSimulationState.artifact, "chapter_segment_simulation_state");
     assert.equal(result.chapterState.artifact, "chapter_state_model");
     assert.equal(result.chapterBeatProfileRecommendation.artifact, "chapter_state_beat_profile_recommendation");
+    const beatAssemblyResult = result.beatAssemblyResult as { status?: string; chain?: { chainValidation?: { passed: boolean } } };
+    const beatAssemblyPreflight = result.beatAssemblyPreflight as { orderedBeatTypes?: string[] };
+    assert.equal(result.beatAssemblyBlocked, false);
+    assert.equal(beatAssemblyResult.status, "ready");
+    assert.equal(beatAssemblyResult.chain?.chainValidation?.passed, true);
+    assert.equal((beatAssemblyPreflight.orderedBeatTypes?.length ?? 0) >= 8, true);
+    assert.equal((result.narrativePsychologyArchitecture as { artifact: string }).artifact, "narrative_psychology_architecture");
+    assert.equal((result.proseGenerationConstraints as { artifact: string }).artifact, "prose_generation_constraints");
+    assert.equal((result.proseGenerationPreflight as { artifact: string }).artifact, "prose_generation_preflight");
+    assert.equal((result.chapter1ProseGenerationPacket as { artifact: string }).artifact, "book1_chapter1_prose_generation_packet");
+    assert.equal((result.chapter1ProseOutputPathReport as { artifact: string }).artifact, "prose_generation_output_path_report");
+    assert.equal(typeof (result.authorCockpitBundle as { beatGating?: { blocked: boolean } }).beatGating?.blocked, "boolean");
     assert.equal(result.thoughtRecurrenceGuard.artifact, "chapter_thought_recurrence_guard");
     assert.equal(result.motiveCompression.artifact, "chapter_motive_compression");
     assert.equal(result.characterDistinctionPlan.artifact, "chapter_character_distinction_plan");
@@ -198,5 +210,21 @@ describe("book1-regeneration-loop-service", () => {
     assert.equal(typeof result.regenerationSummary.enneagramOverexposureRisk, "string");
     assert.equal(typeof result.regenerationSummary.behaviorMediationQuality, "string");
     assert.equal(typeof result.regenerationSummary.proseTheorizationRisk, "string");
+  });
+
+  it("blocks regeneration when beat assembly validation fails", () => {
+    const service = new Book1RegenerationLoopService();
+    const result = service.run({
+      ...sampleInput(),
+      forceBeatChainValidationFailure: true,
+    });
+
+    assert.equal(result.beatAssemblyBlocked, true);
+    assert.equal(result.regeneratedDraftJson.chapter, 1);
+    const failure = result.beatAssemblyFailure as { failureStage?: string; reasons?: string[] };
+    assert.equal(failure.failureStage, "validation");
+    assert.equal((failure.reasons?.[0] ?? "").includes("Forced failure path"), true);
+    const gate = result.regenerationSummary as { recommendation?: string };
+    assert.equal(gate.recommendation, "reject new draft");
   });
 });

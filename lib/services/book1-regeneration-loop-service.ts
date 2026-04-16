@@ -57,6 +57,30 @@ import {
 } from "@/lib/services/book1-embodied-inner-life-router-service";
 import { deriveChapterState } from "@/lib/chapter-state/chapter-state-derivation";
 import { deriveBeatProfileRecommendation } from "@/lib/chapter-state/chapter-state-to-beat-profile";
+import { buildAuthorCommandCockpitBundle } from "@/lib/services/author-command-cockpit-service";
+import { resolveCockpitScopeContext } from "@/lib/services/cockpit-scope-model-service";
+import { ChapterStateToBeatAssemblyChainService } from "@/lib/services/chapter-state-to-beat-assembly-chain-service";
+import { NarrativePsychologyDerivationService } from "@/lib/services/narrative-psychology-derivation-service";
+import { mapNarrativePsychologyToBeatProfile } from "@/lib/services/narrative-psychology-to-beat-profile-service";
+import { mapNarrativePsychologyToChapterState } from "@/lib/services/narrative-psychology-to-chapter-state-service";
+import { validateNarrativePsychologyArchitecture } from "@/lib/services/narrative-psychology-validation-service";
+import { ChapterCompositionService } from "@/lib/services/chapter-composition-service";
+import { NarrativeThreadDerivationService } from "@/lib/services/narrative-thread-derivation-service";
+import { NarrativeThreadToBeatProfileService } from "@/lib/services/narrative-thread-to-beat-profile-service";
+import { NarrativeThreadToChapterStateService } from "@/lib/services/narrative-thread-to-chapter-state-service";
+import { ProseGenerationConstraintDerivationService } from "@/lib/services/prose-generation-constraint-derivation-service";
+import { ProseGenerationOutputPathService } from "@/lib/services/prose-generation-output-path-service";
+import { ProseGenerationPreflightService } from "@/lib/services/prose-generation-preflight-service";
+import { ProseGenerationValidationService } from "@/lib/services/prose-generation-validation-service";
+import { SettingThreadCoverageService } from "@/lib/services/setting-thread-coverage-service";
+import { Book1BeatAssemblyService } from "@/lib/services/book1-beat-assembly-service";
+import { ThreadCallbackReentryService } from "@/lib/services/thread-callback-reentry-service";
+import { ProseGenerationConstraintsSchema } from "@/lib/domain/prose-generation-constraints";
+import { LiteraryDeviceCockpitService } from "@/lib/services/literary-device-cockpit-service";
+import { LiteraryDeviceDerivationService } from "@/lib/services/literary-device-derivation-service";
+import { LiteraryDeviceToProseConstraintsService } from "@/lib/services/literary-device-to-prose-constraints-service";
+import { LiteraryDeviceValidationService } from "@/lib/services/literary-device-validation-service";
+import { LiterarySymbolRegistryService } from "@/lib/services/literary-symbol-registry-service";
 
 const ChapterEvidencePackSchema = z.object({
   artifact: z.literal("chapter_evidence_pack"),
@@ -776,6 +800,7 @@ export type Book1RegenerationLoopInput = {
   criticFeedbackMap?: unknown;
   highFindingReductionPlan?: unknown;
   commitCanonical?: boolean;
+  forceBeatChainValidationFailure?: boolean;
 };
 
 type CanonRisk = "low" | "moderate" | "high" | "critical";
@@ -2484,6 +2509,24 @@ export class Book1RegenerationLoopService {
     segmentSimulationState: Record<string, unknown>;
     chapterState: Record<string, unknown>;
     chapterBeatProfileRecommendation: Record<string, unknown>;
+    beatAssemblyResult: Record<string, unknown>;
+    beatAssemblyPreflight: Record<string, unknown>;
+    beatAssemblyBlocked: boolean;
+    beatAssemblyFailure: Record<string, unknown> | null;
+    narrativePsychologyArchitecture: Record<string, unknown>;
+    narrativePsychologyValidation: Record<string, unknown>;
+    narrativePsychologyChapterStateBias: Record<string, unknown>;
+    narrativePsychologyBeatBias: Record<string, unknown>;
+    proseGenerationConstraints: Record<string, unknown>;
+    proseGenerationPreflight: Record<string, unknown>;
+    proseGenerationValidation: Record<string, unknown>;
+    literaryDevicePack: Record<string, unknown>;
+    literaryDeviceApplicationPlan: Record<string, unknown>;
+    literaryDeviceValidation: Record<string, unknown>;
+    literaryDeviceCockpitSummary: Record<string, unknown>;
+    chapter1ProseGenerationPacket: Record<string, unknown>;
+    chapter1ProseOutputPathReport: Record<string, unknown>;
+    authorCockpitBundle: Record<string, unknown>;
     thoughtRecurrenceGuard: Record<string, unknown>;
     motiveCompression: Record<string, unknown>;
     characterDistinctionPlan: Record<string, unknown>;
@@ -2594,6 +2637,73 @@ export class Book1RegenerationLoopService {
         chapterLaw,
       }),
     );
+    const narrativeThreadDerivationService = new NarrativeThreadDerivationService();
+    const chapterCompositionService = new ChapterCompositionService();
+    const threadToChapterStateService = new NarrativeThreadToChapterStateService();
+    const threadToBeatProfileService = new NarrativeThreadToBeatProfileService();
+    const callbackReentryService = new ThreadCallbackReentryService();
+    const settingThreadCoverageService = new SettingThreadCoverageService();
+    const narrativeThreadPack = narrativeThreadDerivationService.buildBook1SampleThreadPack();
+    const chapterComposition =
+      narrativeThreadPack.chapterCompositions[0] ??
+      chapterCompositionService.compose({
+        chapterId: "book1-chapter-01",
+        chapterStateId: "book1-chapter-01",
+        scenes: [
+          {
+            sceneId: "book1-ch01-fallback-sc01",
+            sceneLabel: "Fallback scene",
+            locationId: "natchitoches",
+            activeThreadIds: ["book1-continuity-survival"],
+            latentThreadIds: [],
+            callbackThreadIds: [],
+            distortedThreadIds: [],
+            seededThreadIds: ["book1-continuity-survival"],
+            echoNodeIds: [],
+            hiddenConvergenceKeys: [],
+            delayedConvergenceBindings: [],
+            transitionToNextScene: "Fallback transition.",
+          },
+        ],
+        chapterClosureProfile: "Fallback chapter composition.",
+        chapterCarryForwardProfile: "Fallback carry-forward profile.",
+      });
+    const threadContinuityProjection = threadToChapterStateService.projectContinuityThreads(narrativeThreadPack.threads);
+    const callbackEvents = callbackReentryService.deriveCallbackEvents(narrativeThreadPack.threads);
+    const delayedConvergenceEvents = callbackReentryService.deriveDelayedConvergenceEvents(
+      narrativeThreadPack.threads,
+      "book1-chapter-04",
+      "book1-ch04-sc01",
+    );
+    const settingCoverageReport = settingThreadCoverageService.buildCoverageReport({
+      bookId: "book1",
+      requiredLocationIds: ["natchitoches", "alexandria-portage", "atchafalaya-fork", "lower-river-market"],
+      seeds: [
+        {
+          locationId: "natchitoches",
+          locationName: "Natchitoches",
+          routeRole: "source",
+          appearanceMode: "direct_scene",
+          associatedThreads: ["book1-continuity-survival", "book1-philosophy-reading-signs"],
+          associatedCharacters: ["natchitoches-matriarch-keeper", "elder-memory-holder"],
+          currentMeaning: "Continuity anchor and memory authority locus.",
+          callbackLinks: ["storage-knot-gesture"],
+          nextRecommendedAppearanceWindow: "chapter-02 direct scene",
+        },
+        {
+          locationId: "lower-river-market",
+          locationName: "Lower River Market",
+          routeRole: "destination",
+          appearanceMode: "rumor",
+          associatedThreads: ["book1-red-river-route-setting"],
+          associatedCharacters: ["household-runner"],
+          currentMeaning: "Rumor corridor and trade disturbance signal source.",
+          callbackLinks: ["double-harbor-rumor"],
+          nextRecommendedAppearanceWindow: "chapter-03 report mention",
+        },
+      ],
+      threads: narrativeThreadPack.threads,
+    });
     const chapterState = deriveChapterState({
       chapterId: "book1-chapter-01",
       bookId: "book1",
@@ -2670,14 +2780,8 @@ export class Book1RegenerationLoopService {
           rationale: "Meaning rises where continuity obligations are pressured by uncertain signals.",
         },
       },
-      activeContinuityThreads: [
-        { threadId: "lineage-memory-transfer", label: "Lineage memory transfer", strength: 86 },
-        { threadId: "work-rhythm-coordination", label: "Work rhythm coordination", strength: 76 },
-      ],
-      threatenedContinuityThreads: [
-        { threadId: "storage-reliability", label: "Storage reliability", strength: 44 },
-        { threadId: "signal-readability", label: "Signal readability", strength: 41 },
-      ],
+      activeContinuityThreads: threadContinuityProjection.activeContinuityThreads,
+      threatenedContinuityThreads: threadContinuityProjection.threatenedContinuityThreads,
       sourceBasis: [
         "chapter_segment_simulation_state",
         "chapter_law",
@@ -2686,6 +2790,230 @@ export class Book1RegenerationLoopService {
       ],
     });
     const chapterBeatProfileRecommendation = deriveBeatProfileRecommendation(chapterState);
+    const narrativePsychologyArchitecture = new NarrativePsychologyDerivationService().buildBook1Architecture();
+    const narrativePsychologyValidation = validateNarrativePsychologyArchitecture(narrativePsychologyArchitecture);
+    const chapterNarrativePsychology =
+      narrativePsychologyArchitecture.chapters.find((row) => row.sequence === chapterState.sequenceNumber) ??
+      narrativePsychologyArchitecture.chapters[0];
+    const narrativePsychologyChapterStateBias = mapNarrativePsychologyToChapterState({
+      chapterPsychology: chapterNarrativePsychology,
+      chapterState,
+    });
+    const narrativePsychologyBeatBias = mapNarrativePsychologyToBeatProfile({
+      chapterStateBias: narrativePsychologyChapterStateBias,
+      recommendation: chapterBeatProfileRecommendation,
+    });
+    const threadChapterStateInfluence = threadToChapterStateService.deriveInfluence({
+      chapterState,
+      threads: narrativeThreadPack.threads,
+    });
+    const threadBeatInfluence = threadToBeatProfileService.deriveInfluence({
+      chapterId: chapterState.chapterId,
+      threads: narrativeThreadPack.threads,
+    });
+    const narrativeThreadInspection = narrativeThreadDerivationService.deriveInspection({
+      chapterId: chapterState.chapterId,
+      threads: narrativeThreadPack.threads,
+      chapterComposition,
+      reinterpretations: narrativeThreadPack.reinterpretations,
+      delayedConvergenceEvents: narrativeThreadPack.delayedConvergenceEvents.concat(delayedConvergenceEvents),
+    });
+    const beatProfileWithPsychologyBias = {
+      ...chapterBeatProfileRecommendation,
+      topWeightedBeatTypes: chapterBeatProfileRecommendation.topWeightedBeatTypes
+        .map((row) => ({
+          beatType: row.beatType,
+          weight: Math.max(
+            0,
+            Math.min(
+              1,
+              Number(
+                (
+                  row.weight +
+                  (narrativePsychologyBeatBias.beatWeightBias[row.beatType] ?? 0) * 0.2 +
+                  (threadBeatInfluence.beatWeightBias[row.beatType] ?? 0) * 0.2
+                ).toFixed(4),
+              ),
+            ),
+          ),
+        }))
+        .sort((a, b) => b.weight - a.weight),
+      transitionBiasNotes: chapterBeatProfileRecommendation.transitionBiasNotes.concat(
+        narrativePsychologyBeatBias.emphasisNotes,
+        threadBeatInfluence.emphasisNotes,
+      ),
+    };
+    const beatAssemblyAdapter = new ChapterStateToBeatAssemblyChainService();
+    const beatAssemblyResultSeed = beatAssemblyAdapter.run({
+      chapterState,
+      beatProfileRecommendation: beatProfileWithPsychologyBias,
+    });
+    const beatAssemblyResult = input.forceBeatChainValidationFailure
+      ? {
+          status: "blocked" as const,
+          failure: {
+            artifact: "chapter_state_beat_assembly_failure" as const,
+            chapterId: chapterState.chapterId,
+            chapter: chapterState.sequenceNumber,
+            failureStage: "validation" as const,
+            reasons: ["Forced failure path for gating regression test."],
+            actionableNextSteps: ["Disable forceBeatChainValidationFailure for production runs."],
+          },
+        }
+      : beatAssemblyResultSeed;
+    const beatAssemblyBlocked = beatAssemblyResult.status === "blocked";
+    const beatAssemblyFailure = beatAssemblyResult.status === "blocked" ? beatAssemblyResult.failure : null;
+    const beatAssemblyPreflight =
+      beatAssemblyResult.status === "ready"
+        ? beatAssemblyResult.preflight
+        : {
+            artifact: "chapter_state_beat_preflight",
+            chapterId: chapterState.chapterId,
+            orderedBeatTypes: [] as string[],
+            dominantPressures: chapterState.dominantPressures,
+            suppressedPressures: chapterState.suppressedPressures,
+          };
+    const beatAssemblyChain =
+      beatAssemblyResult.status === "ready"
+        ? beatAssemblyResult.chain
+        : new Book1BeatAssemblyService().buildChapter1BeatAssembly().chain;
+    const blockedProseConstraints = ProseGenerationConstraintsSchema.parse({
+      artifact: "prose_generation_constraints",
+      proseConstraintId: `${chapterState.chapterId}-constraints-blocked`,
+      chapterId: chapterState.chapterId,
+      parentBeatChainId: beatAssemblyChain.artifact,
+      parentChapterStateId: chapterState.chapterId,
+      parentNarrativePsychologyId: chapterNarrativePsychology.parentBookId,
+      povCharacterId: chapterState.povWeightingCandidates[0]?.characterId ?? "natchitoches-observer",
+      proseMode: chapterNarrativePsychology.chapterPsychologyMode,
+      narrativeDistance: "close_externalized_embodied",
+      cognitionMode: ["native_relational", "place_linked"],
+      sentencePressureProfile: { level: "medium", compressionBias: 0.5 },
+      sensoryDensityProfile: { requiredDensity: "high", requiredChannels: ["touch"] },
+      environmentalGroundingFloor: 0.8,
+      relationalSignalDensity: 0.6,
+      memoryInvocationAllowance: 0.4,
+      expositionAllowance: 0.1,
+      interpretationAllowance: 0.3,
+      ambiguityAllowance: 0.4,
+      revelationAllowance: 0.2,
+      emotionalLabelAllowance: 0.1,
+      meaningReflectionAllowance: 0.2,
+      lineTensionProfile: { target: "steady", unresolvedCarryForward: 0.5 },
+      paragraphBreathProfile: { averageSentences: 4, allowedLongParagraphRatio: 0.2 },
+      cadenceProfile: ["Beat chain blocked; prose path constrained to diagnostics."],
+      dictionGuardrails: ["No generation while beat gate blocked."],
+      syntaxGuardrails: ["No generation while beat gate blocked."],
+      forbiddenPatterns: ["free writing without validated beat chain"],
+      requiredPatterns: ["emit blocking diagnostics for cockpit"],
+      endingMomentumProfile: { vector: "blocked", carryForwardPressureType: "gating_failure" },
+      literaryDeviceConstraints: {
+        activeDeviceIds: [],
+        suppressedDeviceIds: [],
+        soundPatternAllowance: "minimal",
+        symbolismAllowance: "minimal",
+        metaphorSimileAllowance: "minimal",
+        explicitnessCeiling: "implicit",
+        closurePressureStyle: "state_pressure_seeded",
+        callbackPhraseAllowance: false,
+        placeMemoryInsertionOpportunities: [],
+        repetitionAllowance: "rare_only",
+      },
+      continuityEmphasis: 0.7,
+      placeImmersionTarget: 0.8,
+      attachmentTarget: 0.7,
+      driftFlags: ["beat_gating_blocked"],
+      validationFlags: ["blocked"],
+    });
+    const baseProseConstraints = beatAssemblyResult.status === "ready"
+      ? new ProseGenerationConstraintDerivationService().derive({
+          chapterPsychology: chapterNarrativePsychology,
+          chapterState,
+          beatChain: beatAssemblyChain,
+        })
+      : blockedProseConstraints;
+    const literaryDeviceDerivationService = new LiteraryDeviceDerivationService();
+    const literaryValidationService = new LiteraryDeviceValidationService();
+    const literaryToProseService = new LiteraryDeviceToProseConstraintsService();
+    const literaryCockpitService = new LiteraryDeviceCockpitService();
+    const symbolRegistryService = new LiterarySymbolRegistryService();
+    const literaryDevicePack = literaryDeviceDerivationService.buildBook1SamplePack({
+      chapterId: chapterState.chapterId,
+      sceneId: chapterComposition.sceneSequence[0]?.sceneId ?? "book1-ch01-sc01",
+      sceneRoles: chapterComposition.sceneSequence.map((_, index) =>
+        index === chapterComposition.sceneSequence.length - 1 ? "closure_scene" : index === 0 ? "grounding_scene" : "warning_scene",
+      ),
+      beatTypes: beatAssemblyChain.beats.map((beat) => beat.beatType),
+      chapterPsychologyMode: chapterNarrativePsychology.chapterPsychologyMode,
+      chapterMode: chapterState.chapterMode,
+    });
+    const literaryDeviceApplicationPlan = literaryDeviceDerivationService.deriveApplicationPlan({
+      chapterId: chapterState.chapterId,
+      sceneId: chapterComposition.sceneSequence[0]?.sceneId,
+      chapterPsychologyMode: chapterNarrativePsychology.chapterPsychologyMode,
+      chapterMode: chapterState.chapterMode,
+      psychologyAxes: {
+        placeImmersion: chapterNarrativePsychology.axisTargets.place_immersion,
+        unresolvedPull: chapterNarrativePsychology.axisTargets.unresolved_pull,
+        signalIntegrity: chapterState.stateAxes.signal_integrity.score / 100,
+        relationalHeat: chapterNarrativePsychology.axisTargets.relational_heat,
+        laborPressure: chapterState.stateAxes.labor_pressure.score / 100,
+      },
+      activeThreadIds: narrativeThreadInspection.activeThreadIds,
+      settingThreadIds: narrativeThreadPack.threads.filter((thread) => thread.threadType === "setting_thread").map((thread) => thread.threadId),
+      philosophyThreadIds: narrativeThreadInspection.philosophyThreadIds,
+      compositionMode: "delayed_convergence",
+      sceneRoles: chapterComposition.sceneSequence.map((_, index) =>
+        index === chapterComposition.sceneSequence.length - 1 ? "closure_scene" : index === 0 ? "grounding_scene" : "warning_scene",
+      ),
+      beatTypes: beatAssemblyChain.beats.map((beat) => beat.beatType),
+      controlSettings: literaryDevicePack.controlSettings,
+    });
+    const literaryDeviceValidation = literaryValidationService.validate({
+      plan: literaryDeviceApplicationPlan,
+      controls: literaryDevicePack.controlSettings,
+      activeThreadIds: narrativeThreadInspection.activeThreadIds,
+      chapterMode: chapterState.chapterMode,
+      chapterToneCeiling: chapterState.allowedMeaningIntensity,
+    });
+    const boundSymbols = symbolRegistryService.upsertSymbols({
+      current: literaryDevicePack.symbolRegistry,
+      updates: [],
+    });
+    const proseConstraints = literaryToProseService.apply({
+      constraints: baseProseConstraints,
+      plan: literaryDeviceApplicationPlan,
+      validation: literaryDeviceValidation,
+    });
+    const literaryDeviceCockpitSummary = literaryCockpitService.buildSummary({
+      chapterId: chapterState.chapterId,
+      plan: literaryDeviceApplicationPlan,
+      controls: literaryDevicePack.controlSettings,
+      symbols: boundSymbols,
+      validation: literaryDeviceValidation,
+      sceneIds: chapterComposition.sceneSequence.map((scene) => scene.sceneId),
+    });
+    const prosePreflight = new ProseGenerationPreflightService().build({ constraints: proseConstraints });
+    const proseOutputPathService = new ProseGenerationOutputPathService();
+    const chapter1ProseGenerationPacket = proseOutputPathService.buildChapter1Packet({
+      chapterPsychology: chapterNarrativePsychology,
+      chapterState,
+      beatChain: beatAssemblyChain,
+      proseConstraints,
+    });
+    const chapter1ProseOutputPathReport = proseOutputPathService.runConstrainedOutputPath({
+      chapterPsychology: chapterNarrativePsychology,
+      chapterState,
+      beatChain: beatAssemblyChain,
+      proseConstraints,
+    });
+    const proseGenerationValidation = beatAssemblyResult.status === "ready"
+      ? new ProseGenerationValidationService().validate({
+          constraints: proseConstraints,
+          beatChain: beatAssemblyChain,
+          proseBySegment: chapter1ProseOutputPathReport.generatedParagraphs,
+        })
+      : chapter1ProseOutputPathReport.validation;
     const thoughtRecurrenceGuard = Book1ThoughtRecurrenceGuardSchema.parse(
       new Book1ThoughtRecurrenceGuardService().build({
         segmentSimulationState,
@@ -3073,6 +3401,259 @@ export class Book1RegenerationLoopService {
     const blockedMutations: string[] = [];
     let blockedAnchorViolations = 0;
     const provenanceRefs: string[] = [];
+    changedSystems.push(
+      "narrative_psychology_architecture",
+      "narrative_psychology_to_chapter_state",
+      "narrative_psychology_to_beat_profile",
+      "chapter_state_to_beat_assembly_chain",
+      "prose_generation_constraints",
+      "prose_generation_preflight",
+      "prose_generation_validation",
+      "literary_device_control_system",
+      "literary_device_derivation",
+      "literary_device_validation",
+      "literary_device_to_prose_constraints",
+      "literary_device_cockpit",
+    );
+    if (beatAssemblyBlocked) {
+      const authorCockpitBundle = buildAuthorCommandCockpitBundle({
+        context: resolveCockpitScopeContext({ scope: "chapter", chapterId: chapterState.chapterId }),
+        metrics: {
+          chapterProgressionState: 0.62,
+          contradictionRisk: Math.min(0.95, Number((0.66 + threadChapterStateInfluence.influencedAxes.length * 0.01).toFixed(2))),
+          chapterReadiness: 0.21,
+        },
+        chapterState: {
+          chapterId: chapterState.chapterId,
+          chapterMode: chapterState.chapterMode,
+          dominantPressures: chapterState.dominantPressures,
+          suppressedPressures: chapterState.suppressedPressures,
+          movementPressure: chapterState.stateAxes.movement_pressure.score,
+          decisionPressure: chapterState.stateAxes.decision_pressure.score,
+          meaningLoad: chapterState.stateAxes.meaning_load.score,
+          allowedMeaningIntensity: chapterState.allowedMeaningIntensity,
+          validationPassed: chapterState.validationFlags.passesAll,
+          riskFlags: chapterState.chapterRiskFlags,
+          summaryLine: chapterState.chapterStateSummary,
+        },
+        narrativePsychology: {
+          chapterId: chapterNarrativePsychology.chapterId,
+          chapterPsychologyMode: chapterNarrativePsychology.chapterPsychologyMode,
+          emotionalObjective: chapterNarrativePsychology.chapterEmotionalObjective,
+          pullScore: chapterNarrativePsychology.pullProfile.pullScore,
+          carryForwardHook: chapterNarrativePsychology.chapterCarryForwardHookType,
+          driftWarnings: narrativePsychologyChapterStateBias.driftWarnings,
+        },
+        proseConstraints: {
+          proseMode: proseConstraints.proseMode,
+          narrativeDistance: proseConstraints.narrativeDistance,
+          sensoryDensityTarget: proseConstraints.sensoryDensityProfile.requiredDensity,
+          expositionAllowance: proseConstraints.expositionAllowance,
+          emotionalExplicitnessCeiling: proseConstraints.emotionalLabelAllowance,
+          ambiguityAllowance: proseConstraints.ambiguityAllowance,
+          endingMomentumProfile: proseConstraints.endingMomentumProfile.vector,
+          attachmentTarget: proseConstraints.attachmentTarget,
+          placeImmersionTarget: proseConstraints.placeImmersionTarget,
+          compliant: false,
+          driftWarnings: beatAssemblyFailure?.reasons ?? [],
+        },
+        beatGating: {
+          required: true,
+          blocked: true,
+          reason: (beatAssemblyFailure?.reasons ?? []).join(" | ") || "Beat assembly validation failed.",
+        },
+        narrativeThreads: {
+          ...narrativeThreadInspection,
+          warnings: narrativeThreadInspection.warnings.concat(
+            settingCoverageReport.recommendations.slice(0, 1),
+            callbackEvents.length === 0 ? ["No callback events detected in active chapter thread set."] : [],
+          ),
+        },
+        chapterComposition: {
+          chapterId: chapterComposition.chapterId,
+          compositionMode: "delayed_convergence",
+          sceneCount: chapterComposition.sceneSequence.length,
+          sceneRoleSpread: chapterComposition.sceneSequence.map((_, index) =>
+            index === chapterComposition.sceneSequence.length - 1 ? "closure_scene" : index === 0 ? "grounding_scene" : "rumor_scene",
+          ),
+          dominantThreadFamilies: chapterComposition.dominantThreads,
+          latentThreadFamilies: chapterComposition.latentThreads,
+          delayedConvergenceMarkers: Array.from(new Set(chapterComposition.sceneSequence.flatMap((scene) => scene.delayedConvergenceBindings))),
+          callbackMarkers: narrativeThreadInspection.callbackMarkers,
+          reinterpretationAnchorIds: narrativeThreadInspection.reinterpretationCandidates,
+          routeCoverageStatus: settingCoverageReport.missingLocationIds.length === 0 ? "satisfied" : "missing_required_presence",
+          philosophyPropagationStatus:
+            narrativeThreadInspection.philosophyThreadIds.length > 0 ? "active_non_preachy" : "not_applicable_for_this_chapter",
+          densityScore:
+            narrativeThreadInspection.sceneDensity.reduce((acc, row) => acc + row.densityScore, 0) /
+            Math.max(1, narrativeThreadInspection.sceneDensity.length),
+          thinnessWarnings: narrativeThreadInspection.warnings,
+          chapterClosureProfile: "convergence_teased",
+          carryForwardUnresolvedPressureSummary: [
+            chapterComposition.chapterCarryForwardProfile,
+            chapterComposition.chapterClosureProfile,
+          ],
+        },
+        literaryDevices: {
+          chapterId: chapterState.chapterId,
+          activeDevicePanel: literaryDeviceCockpitSummary.activeDevices.map((row) => ({
+            deviceId: row.deviceId,
+            activationMode: row.activationMode,
+            densityBand: row.densityBand,
+            scope: row.scope,
+            contexts: row.contexts,
+            misuseRisk: row.misuseRisk,
+            currentChapterApplicationStatus: row.chapterApplicationStatus,
+          })),
+          symbolRegistry: literaryDeviceCockpitSummary.symbolRegistry.map((row) => ({
+            symbolId: row.symbolId,
+            symbolName: row.symbolName,
+            carriers: row.carriers,
+            threadBindings: row.threadBindings,
+            settingBindings: row.settingBindings,
+            payoffWindow: row.payoffWindow,
+            callbackWindow: row.callbackWindow,
+          })),
+          motifRegistry: literaryDeviceCockpitSummary.motifRegistry,
+          routeEchoControls: {
+            activationMode:
+              literaryDevicePack.controlSettings.find((row) => row.deviceId === "route_echo")?.activationMode ?? "off",
+            densityBand: literaryDevicePack.controlSettings.find((row) => row.deviceId === "route_echo")?.densityBand ?? "rare",
+            boundRoutes: literaryDevicePack.controlSettings
+              .find((row) => row.deviceId === "route_echo")
+              ?.settingBindings.filter((settingId) => settingId.includes("river")) ?? [],
+          },
+          philosophyEchoControls: {
+            activationMode:
+              literaryDevicePack.controlSettings.find((row) => row.deviceId === "philosophy_echo")?.activationMode ?? "off",
+            explicitnessCeiling:
+              literaryDevicePack.controlSettings.find((row) => row.deviceId === "philosophy_echo")?.explicitnessBand ?? "implicit",
+            carrierModes:
+              literaryDevicePack.controlSettings.find((row) => row.deviceId === "philosophy_echo")?.targetCarrierModes ?? [],
+          },
+          alliterationControl: literaryDeviceCockpitSummary.alliterationControl,
+          densityWarnings: literaryDeviceCockpitSummary.densityWarnings,
+          misuseWarnings: literaryDeviceCockpitSummary.misuseWarnings,
+          chapterLiteraryProfileSummary: literaryDeviceCockpitSummary.chapterProfileSummary,
+          perSceneDeviceDistribution: literaryDeviceCockpitSummary.sceneDistributionSummary,
+          literaryDriftWarnings: literaryDeviceCockpitSummary.driftWarnings,
+        },
+      });
+      const blockedResult = {
+        artifact: "book1_chapter_01_regeneration_blocked",
+        schemaVersion: "1.0.0",
+        chapter: 1,
+        generatedAt,
+        gate: {
+          beatAssemblyRequired: true,
+          blocked: true,
+          failure: beatAssemblyFailure,
+        },
+        nextActions: beatAssemblyFailure?.actionableNextSteps ?? [],
+      };
+      return {
+        voiceContract,
+        proseBriefs,
+        livedHistory,
+        cognitionSignatures,
+        segmentSimulationState,
+        chapterState,
+        chapterBeatProfileRecommendation: beatProfileWithPsychologyBias,
+        beatAssemblyResult: blockedResult,
+        beatAssemblyPreflight,
+        beatAssemblyBlocked: true,
+        beatAssemblyFailure,
+        narrativePsychologyArchitecture,
+        narrativePsychologyValidation,
+        narrativePsychologyChapterStateBias,
+        narrativePsychologyBeatBias,
+        proseGenerationConstraints: proseConstraints,
+        proseGenerationPreflight: prosePreflight,
+        proseGenerationValidation,
+        literaryDevicePack,
+        literaryDeviceApplicationPlan,
+        literaryDeviceValidation,
+        literaryDeviceCockpitSummary,
+        chapter1ProseGenerationPacket,
+        chapter1ProseOutputPathReport,
+        authorCockpitBundle,
+        thoughtRecurrenceGuard,
+        motiveCompression: motiveCompressionWithMediation,
+        characterDistinctionPlan: characterDistinctionPlanWithMediation,
+        enneagramOperatingLayer,
+        enneagramConsciousnessEngine,
+        enneagramMediationLayer,
+        developmentalIntimacyEngine,
+        abstractFearSuppression,
+        entryStrategyPlan,
+        paragraphShapePlan,
+        embodimentAssemblyAdjustments,
+        transitionTexturePlan,
+        segment24OpenerPolicy,
+        segment24EmbodimentPolicy,
+        openingFamilyAudit,
+        openingParagraphFamilyPlan,
+        openerTokenAudit: { artifact: "chapter_opener_token_audit", chapter: 1, entries: [] },
+        firstTwoSentencePlan,
+        openerFamilyMemory: { artifact: "chapter_opener_family_memory", chapter: 1, entries: [] },
+        segment1OpenerIsolation,
+        earlyParagraphAntiSymmetry: { artifact: "chapter_early_paragraph_anti_symmetry", chapter: 1, entries: [] },
+        voiceEngineRulebook,
+        narrativeDistancePlan,
+        abstractionSuppression,
+        voiceCognitionMap,
+        perspectiveRoutingPlan,
+        voiceLawEngine,
+        languageSuppressionMap,
+        renderDirectives,
+        consciousnessCohesionRouter,
+        voiceIdentityStabilizer,
+        embodiedInnerLifeRouter,
+        sentencePatternPlan,
+        segmentEnergy,
+        embodiment,
+        proseShapeCritic: {
+          artifact: "chapter_prose_shape_critic",
+          chapter: 1,
+          findings: [],
+          summary: "Regeneration blocked before prose-shape critic stage.",
+        },
+        proseShapeSummary: {
+          artifact: "chapter_prose_shape_summary",
+          schemaVersion: "1.0.0",
+          chapter: 1,
+          generatedAt,
+          mostCommonFailurePattern: null,
+          segmentsWithMostFailures: [],
+          failureCluster: "blocked_by_beat_gating",
+          totalsByCategory: {},
+        },
+        regeneratedDraftJson: previousDraft,
+        regeneratedDraftText: previousDraft.fullText,
+        regenerationReview: blockedResult,
+        regenerationDiff: {
+          artifact: "book1_chapter_01_regeneration_diff",
+          chapter: 1,
+          lockEnforcement: { lockedAnchorViolations: 0, blockedMutations: [] },
+        },
+        regenerationSummary: {
+          artifact: "book1_chapter_01_regeneration_summary",
+          chapter: 1,
+          generatedAt,
+          changedSystems: unique(changedSystems),
+          changedChapterLawConditions,
+          changedCharacterStateConditions,
+          whatImproved: [],
+          whatWorsened: ["beat_assembly_validation"],
+          unchangedRisks: ["regeneration_blocked"],
+          recommendation: "reject new draft",
+          canonRisk: "high",
+          lockedAnchorsEnforced: true,
+          canonicalOverwritePerformed: false,
+          provenance: { sourceArtifacts: ["chapter_state_to_beat_assembly_chain_service"] },
+        },
+      };
+    }
     const characterStateOverrides = new Map<string, Record<string, unknown>>();
     for (const mutation of approvedCharacterMutations) {
       const isAnchorMutation = mutation.mutationKind === "anchor";
@@ -3239,6 +3820,13 @@ export class Book1RegenerationLoopService {
         throw new Error(`Missing composition artifact for segment ${scene.segment}.`);
       }
       const sceneEvidence = evidenceSnippets.slice(index * 2, index * 2 + 2);
+      const beatForSegment =
+        beatAssemblyChain.beats[index] ??
+        beatAssemblyChain.beats[Math.max(0, beatAssemblyChain.beats.length - 2)] ??
+        null;
+      const beatConstraintLine = beatForSegment
+        ? `beat:${beatForSegment.beatType} purpose=${beatForSegment.beatPurpose} state_update=${beatForSegment.stateUpdate}`
+        : "beat:none available";
       const lead = scene.characters[0] ?? cast[0] ?? "Household witness";
       const statePatch = characterStateOverrides.get(lead.toLowerCase()) ?? characterStateOverrides.get(lead) ?? {};
       const futureConstraint =
@@ -3308,7 +3896,7 @@ export class Book1RegenerationLoopService {
         embodiment: embodimentPacket,
         segmentEnergy: energy,
         sentencePattern: pattern,
-        evidenceLines: sceneEvidence.map((row) => compact(row.statement)),
+        evidenceLines: sceneEvidence.map((row) => compact(row.statement)).concat(beatConstraintLine),
         voiceContract,
         voiceCognition:
           voiceCognitionMap.characters.find((row) => row.character.toLowerCase() === lead.toLowerCase()) ??
@@ -3480,6 +4068,13 @@ export class Book1RegenerationLoopService {
       fullText,
     });
     const regeneratedDraftText = regeneratedDraftJson.fullText;
+    const postGenerationProseValidation = beatAssemblyResult.status === "ready"
+      ? new ProseGenerationValidationService().validate({
+          constraints: proseConstraints,
+          beatChain: beatAssemblyChain,
+          proseBySegment: regeneratedSegments.map((segment) => segment.text),
+        })
+      : proseGenerationValidation;
 
     const expectedInputs = [
       "chapter_law",
@@ -3804,6 +4399,143 @@ export class Book1RegenerationLoopService {
         : improved.length >= 3
           ? "accept new draft"
           : "iterate again";
+    const authorCockpitBundle = buildAuthorCommandCockpitBundle({
+      context: resolveCockpitScopeContext({ scope: "chapter", chapterId: chapterState.chapterId }),
+      metrics: {
+        chapterProgressionState: 0.73,
+        contradictionRisk:
+          recommendation === "reject new draft"
+            ? Math.min(0.95, Number((0.78 + threadChapterStateInfluence.recommendedActivations.length * 0.01).toFixed(2)))
+            : 0.44,
+        chapterReadiness: recommendation === "accept new draft" ? 0.86 : recommendation === "iterate again" ? 0.51 : 0.28,
+      },
+      beatAssembly:
+        beatAssemblyResult.status === "ready"
+          ? beatAssemblyResult.cockpitSummary
+          : {
+              chapter: chapterState.sequenceNumber,
+              beatCount: 0,
+              validationPassed: false,
+              highestPressureLoad: 0,
+              salienceCoverage: 0,
+              memoryLinkedBeats: 0,
+              socialFeedbackBeats: 0,
+              meaningTraceBeats: 0,
+              summaryLine: "Beat assembly blocked by validation gate.",
+            },
+      chapterState: {
+        chapterId: chapterState.chapterId,
+        chapterMode: chapterState.chapterMode,
+        dominantPressures: chapterState.dominantPressures,
+        suppressedPressures: chapterState.suppressedPressures,
+        movementPressure: chapterState.stateAxes.movement_pressure.score,
+        decisionPressure: chapterState.stateAxes.decision_pressure.score,
+        meaningLoad: chapterState.stateAxes.meaning_load.score,
+        allowedMeaningIntensity: chapterState.allowedMeaningIntensity,
+        validationPassed: chapterState.validationFlags.passesAll,
+        riskFlags: chapterState.chapterRiskFlags,
+        summaryLine: chapterState.chapterStateSummary,
+      },
+      narrativePsychology: {
+        chapterId: chapterNarrativePsychology.chapterId,
+        chapterPsychologyMode: chapterNarrativePsychology.chapterPsychologyMode,
+        emotionalObjective: chapterNarrativePsychology.chapterEmotionalObjective,
+        pullScore: chapterNarrativePsychology.pullProfile.pullScore,
+        carryForwardHook: chapterNarrativePsychology.chapterCarryForwardHookType,
+        driftWarnings: narrativePsychologyChapterStateBias.driftWarnings,
+      },
+      proseConstraints: {
+        proseMode: proseConstraints.proseMode,
+        narrativeDistance: proseConstraints.narrativeDistance,
+        sensoryDensityTarget: proseConstraints.sensoryDensityProfile.requiredDensity,
+        expositionAllowance: proseConstraints.expositionAllowance,
+        emotionalExplicitnessCeiling: proseConstraints.emotionalLabelAllowance,
+        ambiguityAllowance: proseConstraints.ambiguityAllowance,
+        endingMomentumProfile: proseConstraints.endingMomentumProfile.vector,
+        attachmentTarget: proseConstraints.attachmentTarget,
+        placeImmersionTarget: proseConstraints.placeImmersionTarget,
+        compliant: postGenerationProseValidation.passed,
+        driftWarnings: postGenerationProseValidation.cockpitSummary.driftWarnings,
+      },
+      beatGating: {
+        required: true,
+        blocked: false,
+        reason: "State-driven beat chain validated and handed to segment preflight.",
+      },
+      narrativeThreads: {
+        ...narrativeThreadInspection,
+        warnings: narrativeThreadInspection.warnings.concat(settingCoverageReport.recommendations.slice(0, 2)),
+      },
+      chapterComposition: {
+        chapterId: chapterComposition.chapterId,
+        compositionMode: "delayed_convergence",
+        sceneCount: chapterComposition.sceneSequence.length,
+        sceneRoleSpread: chapterComposition.sceneSequence.map((_, index) =>
+          index === chapterComposition.sceneSequence.length - 1 ? "closure_scene" : index === 0 ? "grounding_scene" : "rumor_scene",
+        ),
+        dominantThreadFamilies: chapterComposition.dominantThreads,
+        latentThreadFamilies: chapterComposition.latentThreads,
+        delayedConvergenceMarkers: Array.from(new Set(chapterComposition.sceneSequence.flatMap((scene) => scene.delayedConvergenceBindings))),
+        callbackMarkers: narrativeThreadInspection.callbackMarkers,
+        reinterpretationAnchorIds: narrativeThreadInspection.reinterpretationCandidates,
+        routeCoverageStatus: settingCoverageReport.missingLocationIds.length === 0 ? "satisfied" : "missing_required_presence",
+        philosophyPropagationStatus:
+          narrativeThreadInspection.philosophyThreadIds.length > 0 ? "active_non_preachy" : "not_applicable_for_this_chapter",
+        densityScore:
+          narrativeThreadInspection.sceneDensity.reduce((acc, row) => acc + row.densityScore, 0) /
+          Math.max(1, narrativeThreadInspection.sceneDensity.length),
+        thinnessWarnings: narrativeThreadInspection.warnings,
+        chapterClosureProfile: "convergence_teased",
+        carryForwardUnresolvedPressureSummary: [
+          chapterComposition.chapterCarryForwardProfile,
+          chapterComposition.chapterClosureProfile,
+        ],
+      },
+      literaryDevices: {
+        chapterId: chapterState.chapterId,
+        activeDevicePanel: literaryDeviceCockpitSummary.activeDevices.map((row) => ({
+          deviceId: row.deviceId,
+          activationMode: row.activationMode,
+          densityBand: row.densityBand,
+          scope: row.scope,
+          contexts: row.contexts,
+          misuseRisk: row.misuseRisk,
+          currentChapterApplicationStatus: row.chapterApplicationStatus,
+        })),
+        symbolRegistry: literaryDeviceCockpitSummary.symbolRegistry.map((row) => ({
+          symbolId: row.symbolId,
+          symbolName: row.symbolName,
+          carriers: row.carriers,
+          threadBindings: row.threadBindings,
+          settingBindings: row.settingBindings,
+          payoffWindow: row.payoffWindow,
+          callbackWindow: row.callbackWindow,
+        })),
+        motifRegistry: literaryDeviceCockpitSummary.motifRegistry,
+        routeEchoControls: {
+          activationMode:
+            literaryDevicePack.controlSettings.find((row) => row.deviceId === "route_echo")?.activationMode ?? "off",
+          densityBand: literaryDevicePack.controlSettings.find((row) => row.deviceId === "route_echo")?.densityBand ?? "rare",
+          boundRoutes: literaryDevicePack.controlSettings
+            .find((row) => row.deviceId === "route_echo")
+            ?.settingBindings.filter((settingId) => settingId.includes("river")) ?? [],
+        },
+        philosophyEchoControls: {
+          activationMode:
+            literaryDevicePack.controlSettings.find((row) => row.deviceId === "philosophy_echo")?.activationMode ?? "off",
+          explicitnessCeiling:
+            literaryDevicePack.controlSettings.find((row) => row.deviceId === "philosophy_echo")?.explicitnessBand ?? "implicit",
+          carrierModes:
+            literaryDevicePack.controlSettings.find((row) => row.deviceId === "philosophy_echo")?.targetCarrierModes ?? [],
+        },
+        alliterationControl: literaryDeviceCockpitSummary.alliterationControl,
+        densityWarnings: literaryDeviceCockpitSummary.densityWarnings,
+        misuseWarnings: literaryDeviceCockpitSummary.misuseWarnings,
+        chapterLiteraryProfileSummary: literaryDeviceCockpitSummary.chapterProfileSummary,
+        perSceneDeviceDistribution: literaryDeviceCockpitSummary.sceneDistributionSummary,
+        literaryDriftWarnings: literaryDeviceCockpitSummary.driftWarnings,
+      },
+    });
 
     const regenerationReview = {
       artifact: "book1_chapter_01_regeneration_review",
@@ -3817,7 +4549,22 @@ export class Book1RegenerationLoopService {
         cognitionSignatures,
         segmentSimulationState,
         chapterState,
-        chapterBeatProfileRecommendation,
+        chapterBeatProfileRecommendation: beatProfileWithPsychologyBias,
+        beatAssemblyResult,
+        beatAssemblyPreflight,
+        narrativePsychologyArchitecture,
+        narrativePsychologyValidation,
+        narrativePsychologyChapterStateBias,
+        narrativePsychologyBeatBias,
+        proseGenerationConstraints: proseConstraints,
+        proseGenerationPreflight: prosePreflight,
+        proseGenerationValidation: postGenerationProseValidation,
+        literaryDevicePack,
+        literaryDeviceApplicationPlan,
+        literaryDeviceValidation,
+        literaryDeviceCockpitSummary,
+        chapter1ProseGenerationPacket,
+        chapter1ProseOutputPathReport,
         thoughtRecurrenceGuard,
         motiveCompression: motiveCompressionWithMediation,
         characterDistinctionPlan: characterDistinctionPlanWithMediation,
@@ -3859,6 +4606,7 @@ export class Book1RegenerationLoopService {
         proseShapeCritic,
         proseShapeSummary,
         adversarialReview: adversarial,
+        authorCockpitBundle,
       },
       provenance: {
         sourceArtifacts: unique([
@@ -3916,6 +4664,16 @@ export class Book1RegenerationLoopService {
       proseTheorizationRisk:
         newProseTheorization >= 10 ? "critical" : newProseTheorization >= 6 ? "high" : newProseTheorization >= 3 ? "moderate" : "low",
       recommendation,
+      beatAssemblyGate: {
+        required: true,
+        blocked: false,
+        validationPassed: beatAssemblyChain.chainValidation.passed,
+      },
+      proseConstraintCompliance: {
+        passed: postGenerationProseValidation.passed,
+        hardFailures: postGenerationProseValidation.hardFailureCount,
+        softFailures: postGenerationProseValidation.softFailureCount,
+      },
       canonRisk: canonRiskFromSeverity({
         critical: adversarial.summary.severityTotals.critical,
         high: adversarial.summary.severityTotals.high,
@@ -3933,7 +4691,25 @@ export class Book1RegenerationLoopService {
       cognitionSignatures,
       segmentSimulationState,
       chapterState,
-      chapterBeatProfileRecommendation,
+      chapterBeatProfileRecommendation: beatProfileWithPsychologyBias,
+      beatAssemblyResult,
+      beatAssemblyPreflight,
+      beatAssemblyBlocked: false,
+      beatAssemblyFailure: null,
+      narrativePsychologyArchitecture,
+      narrativePsychologyValidation,
+      narrativePsychologyChapterStateBias,
+      narrativePsychologyBeatBias,
+      proseGenerationConstraints: proseConstraints,
+      proseGenerationPreflight: prosePreflight,
+      proseGenerationValidation: postGenerationProseValidation,
+      literaryDevicePack,
+      literaryDeviceApplicationPlan,
+      literaryDeviceValidation,
+      literaryDeviceCockpitSummary,
+      chapter1ProseGenerationPacket,
+      chapter1ProseOutputPathReport,
+      authorCockpitBundle,
       thoughtRecurrenceGuard,
       motiveCompression: motiveCompressionWithMediation,
       characterDistinctionPlan: characterDistinctionPlanWithMediation,

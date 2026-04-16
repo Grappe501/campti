@@ -8,7 +8,7 @@ describe("book1-beat-assembly-service", () => {
     const service = new Book1BeatAssemblyService();
     const { chain, cockpitSummary } = service.buildChapter1BeatAssembly();
 
-    assert.equal(chain.artifact, "book1_chapter1_beat_assembly_chain");
+    assert.equal(chain.artifact, "book1_chapter01_beat_assembly_chain");
     assert.equal(chain.chapter, 1);
     assert.equal(chain.beats.length, 10);
     assert.equal(chain.chainValidation.passed, true);

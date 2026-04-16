@@ -115,6 +115,22 @@ async function main() {
   const regenerationSummaryPath = path.join(reportsDir, "book1-chapter-01-regeneration-summary.json");
   const criticFeedbackMapPath = path.join(reportsDir, "book1-chapter-01-critic-feedback-map.json");
   const highFindingReductionPlanPath = path.join(reportsDir, "book1-chapter-01-high-finding-reduction-plan.json");
+  const beatAssemblyResultPath = path.join(reportsDir, "book1-chapter-01-beat-assembly-result.json");
+  const beatAssemblyPreflightPath = path.join(reportsDir, "book1-chapter-01-beat-assembly-preflight.json");
+  const narrativePsychologyArchitecturePath = path.join(reportsDir, "book1-narrative-psychology-architecture.json");
+  const narrativePsychologyValidationPath = path.join(reportsDir, "book1-chapter-01-narrative-psychology-validation.json");
+  const narrativePsychologyChapterStateBiasPath = path.join(reportsDir, "book1-chapter-01-narrative-psychology-chapter-state-bias.json");
+  const narrativePsychologyBeatBiasPath = path.join(reportsDir, "book1-chapter-01-narrative-psychology-beat-bias.json");
+  const proseGenerationConstraintsPath = path.join(reportsDir, "book1-chapter-01-prose-generation-constraints.json");
+  const proseGenerationPreflightPath = path.join(reportsDir, "book1-chapter-01-prose-generation-preflight.json");
+  const proseGenerationValidationPath = path.join(reportsDir, "book1-chapter-01-prose-generation-validation.json");
+  const literaryDevicePackPath = path.join(reportsDir, "book1-chapter-01-literary-device-pack.json");
+  const literaryDeviceApplicationPlanPath = path.join(reportsDir, "book1-chapter-01-literary-device-application-plan.json");
+  const literaryDeviceValidationPath = path.join(reportsDir, "book1-chapter-01-literary-device-validation.json");
+  const literaryDeviceCockpitSummaryPath = path.join(reportsDir, "book1-chapter-01-literary-device-cockpit-summary.json");
+  const chapter1ProsePacketPath = path.join(reportsDir, "book1-chapter-01-prose-generation-packet.json");
+  const chapter1ProseOutputPathReportPath = path.join(reportsDir, "book1-chapter-01-prose-output-path-report.json");
+  const authorCockpitBundlePath = path.join(reportsDir, "book1-chapter-01-author-cockpit-bundle.json");
 
   const regeneratedFromReview = (result.regenerationReview as { regenerated?: Record<string, unknown> }).regenerated ?? {};
   const regeneratedConsistencyReport = regeneratedFromReview.consistencyReport;
@@ -180,6 +196,22 @@ async function main() {
     writeFile(regenerationSummaryPath, `${JSON.stringify(result.regenerationSummary, null, 2)}\n`, "utf-8"),
     writeFile(criticFeedbackMapPath, `${JSON.stringify(criticFeedbackMap, null, 2)}\n`, "utf-8"),
     writeFile(highFindingReductionPlanPath, `${JSON.stringify(highFindingReductionPlan, null, 2)}\n`, "utf-8"),
+    writeFile(beatAssemblyResultPath, `${JSON.stringify(result.beatAssemblyResult, null, 2)}\n`, "utf-8"),
+    writeFile(beatAssemblyPreflightPath, `${JSON.stringify(result.beatAssemblyPreflight, null, 2)}\n`, "utf-8"),
+    writeFile(narrativePsychologyArchitecturePath, `${JSON.stringify(result.narrativePsychologyArchitecture, null, 2)}\n`, "utf-8"),
+    writeFile(narrativePsychologyValidationPath, `${JSON.stringify(result.narrativePsychologyValidation, null, 2)}\n`, "utf-8"),
+    writeFile(narrativePsychologyChapterStateBiasPath, `${JSON.stringify(result.narrativePsychologyChapterStateBias, null, 2)}\n`, "utf-8"),
+    writeFile(narrativePsychologyBeatBiasPath, `${JSON.stringify(result.narrativePsychologyBeatBias, null, 2)}\n`, "utf-8"),
+    writeFile(proseGenerationConstraintsPath, `${JSON.stringify(result.proseGenerationConstraints, null, 2)}\n`, "utf-8"),
+    writeFile(proseGenerationPreflightPath, `${JSON.stringify(result.proseGenerationPreflight, null, 2)}\n`, "utf-8"),
+    writeFile(proseGenerationValidationPath, `${JSON.stringify(result.proseGenerationValidation, null, 2)}\n`, "utf-8"),
+    writeFile(literaryDevicePackPath, `${JSON.stringify(result.literaryDevicePack, null, 2)}\n`, "utf-8"),
+    writeFile(literaryDeviceApplicationPlanPath, `${JSON.stringify(result.literaryDeviceApplicationPlan, null, 2)}\n`, "utf-8"),
+    writeFile(literaryDeviceValidationPath, `${JSON.stringify(result.literaryDeviceValidation, null, 2)}\n`, "utf-8"),
+    writeFile(literaryDeviceCockpitSummaryPath, `${JSON.stringify(result.literaryDeviceCockpitSummary, null, 2)}\n`, "utf-8"),
+    writeFile(chapter1ProsePacketPath, `${JSON.stringify(result.chapter1ProseGenerationPacket, null, 2)}\n`, "utf-8"),
+    writeFile(chapter1ProseOutputPathReportPath, `${JSON.stringify(result.chapter1ProseOutputPathReport, null, 2)}\n`, "utf-8"),
+    writeFile(authorCockpitBundlePath, `${JSON.stringify(result.authorCockpitBundle, null, 2)}\n`, "utf-8"),
   ]);
 
   console.log(
@@ -239,6 +271,22 @@ async function main() {
           path.relative(process.cwd(), regenerationSummaryPath).replace(/\\/g, "/"),
           path.relative(process.cwd(), criticFeedbackMapPath).replace(/\\/g, "/"),
           path.relative(process.cwd(), highFindingReductionPlanPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), beatAssemblyResultPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), beatAssemblyPreflightPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), narrativePsychologyArchitecturePath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), narrativePsychologyValidationPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), narrativePsychologyChapterStateBiasPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), narrativePsychologyBeatBiasPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), proseGenerationConstraintsPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), proseGenerationPreflightPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), proseGenerationValidationPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), literaryDevicePackPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), literaryDeviceApplicationPlanPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), literaryDeviceValidationPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), literaryDeviceCockpitSummaryPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), chapter1ProsePacketPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), chapter1ProseOutputPathReportPath).replace(/\\/g, "/"),
+          path.relative(process.cwd(), authorCockpitBundlePath).replace(/\\/g, "/"),
         ],
         recommendation: result.regenerationSummary.recommendation,
         changedSystems: result.regenerationSummary.changedSystems,

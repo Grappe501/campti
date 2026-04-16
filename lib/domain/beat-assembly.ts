@@ -120,9 +120,9 @@ export function isBeatTransitionAllowed(from: BeatType, to: BeatType): boolean {
 }
 
 export const BeatAssemblyChainSchema = z.object({
-  artifact: z.literal("book1_chapter1_beat_assembly_chain"),
+  artifact: z.string().min(1),
   schemaVersion: z.literal("1.0.0"),
-  chapter: z.literal(1),
+  chapter: z.number().int().positive(),
   generatedAt: z.string(),
   worldviewFrame: z.object({
     storyLocale: z.string(),
@@ -143,7 +143,7 @@ export const BeatAssemblyChainSchema = z.object({
 export type BeatAssemblyChain = z.infer<typeof BeatAssemblyChainSchema>;
 
 export const BeatAssemblyCockpitSummarySchema = z.object({
-  chapter: z.literal(1),
+  chapter: z.number().int().positive(),
   beatCount: z.number().int().positive(),
   validationPassed: z.boolean(),
   highestPressureLoad: z.number().min(0).max(1),
