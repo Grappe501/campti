@@ -518,6 +518,7 @@ export class Book1CharacterConsoleService {
         sourceState.chapterLaw.futureArcConstraints.map((row) => ({
           id: row.id,
           constraint: `${row.mustPreserve} | Forbidden: ${row.forbiddenResolution}`,
+          enforcement: "future_arc",
         })),
       );
     const sceneLawConstraints = buildSceneLawConstraints({

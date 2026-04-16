@@ -77,8 +77,8 @@ export function annotateLineageConduitEntities(entities: Book1OutlineEntity[]): 
   return annotated;
 }
 
-export function isFutureDescendantOnlyEntity(entity: Book1LineageConduitEntity): boolean {
-  if (entity.direct_lineage_conduit) return false;
+export function isFutureDescendantOnlyEntity(entity: Book1OutlineEntity): boolean {
+  if ("direct_lineage_conduit" in entity && entity.direct_lineage_conduit) return false;
   return isLikelyFutureDescendant(entity);
 }
 

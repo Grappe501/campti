@@ -171,28 +171,32 @@ export class PrismaBook1SourcePersistenceWriter implements Book1SourcePersistenc
   }
 }
 
+const SOURCE_KIND_TO_DB = {
+  uploaded_chunk: "UPLOADED_CHUNK",
+  research_note: "RESEARCH_NOTE",
+  synthesis_note: "SYNTHESIS_NOTE",
+  scene_draft: "SCENE_DRAFT",
+  character_note: "CHARACTER_NOTE",
+} as const satisfies Record<Book1SourceKind, PersistBook1SourceInput["source_kind"]>;
+
 function sourceKindToDb(kind: Book1SourceKind): PersistBook1SourceInput["source_kind"] {
-  return {
-    uploaded_chunk: "UPLOADED_CHUNK",
-    research_note: "RESEARCH_NOTE",
-    synthesis_note: "SYNTHESIS_NOTE",
-    scene_draft: "SCENE_DRAFT",
-    character_note: "CHARACTER_NOTE",
-  }[kind];
+  return SOURCE_KIND_TO_DB[kind];
 }
 
+const CONTENT_MODE_TO_DB = {
+  history: "HISTORY",
+  lineage: "LINEAGE",
+  worldbuilding: "WORLDBUILDING",
+  scene_text: "SCENE_TEXT",
+  pov_text: "POV_TEXT",
+  setting_text: "SETTING_TEXT",
+  symbolic_text: "SYMBOLIC_TEXT",
+  timeline_text: "TIMELINE_TEXT",
+  interpretive_text: "INTERPRETIVE_TEXT",
+} as const satisfies Record<Book1ContentMode, PersistBook1SourceInput["dominant_content_mode"]>;
+
 function contentModeToDb(mode: Book1ContentMode): PersistBook1SourceInput["dominant_content_mode"] {
-  return {
-    history: "HISTORY",
-    lineage: "LINEAGE",
-    worldbuilding: "WORLDBUILDING",
-    scene_text: "SCENE_TEXT",
-    pov_text: "POV_TEXT",
-    setting_text: "SETTING_TEXT",
-    symbolic_text: "SYMBOLIC_TEXT",
-    timeline_text: "TIMELINE_TEXT",
-    interpretive_text: "INTERPRETIVE_TEXT",
-  }[mode];
+  return CONTENT_MODE_TO_DB[mode];
 }
 
 export function buildBook1SourceKey(input: RegisterBook1SourceInput): string {

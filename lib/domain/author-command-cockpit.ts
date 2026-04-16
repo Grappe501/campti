@@ -1,6 +1,36 @@
+import type { EnforcementClass, ReadinessEvidenceTrustClass } from "@/lib/domain/enforcement-contract";
 import type { RuntimeAuthorityStamp } from "@/lib/domain/runtime-authority";
 
 export const AUTHOR_COMMAND_COCKPIT_CONTRACT_VERSION = "1" as const;
+
+export const COCKPIT_ENFORCEMENT_SEMANTIC_TRUTH_VERSION = "1" as const;
+
+export type CockpitEnforcementPanelTruth = {
+  panelKey: string;
+  subsystemId: string;
+  enforcementClass: EnforcementClass;
+  participatesInCanonicalRuntime: boolean;
+  affectsCanonicalOutput: boolean;
+  canBlockInvalidExecution: boolean;
+  demoSafeStatus: "demo_safe" | "demo_with_warnings" | "non_demo_safe";
+  deterministicOrSampleSeeded: "neither" | "deterministic" | "sample_seeded" | "mixed";
+  /** Cockpit panels are observational aggregates unless explicitly tied to canonical mutation paths. */
+  observationalOnly: true;
+  readinessEvidenceTrustClass: ReadinessEvidenceTrustClass;
+  mayCountAsAuthoritativeProductionReadinessEvidence: boolean;
+  readinessTrustAllowanceRuleId: string | null;
+};
+
+export type CockpitEnforcementSemanticTruth = {
+  contractVersion: typeof COCKPIT_ENFORCEMENT_SEMANTIC_TRUTH_VERSION;
+  canonicalRuntimeId: string;
+  cockpitRuntimeId: string;
+  /** The cockpit bundle never mutates canonical narrative truth. */
+  cockpitBundleObservationalOnly: true;
+  panelTruth: CockpitEnforcementPanelTruth[];
+  globalWarnings: string[];
+  ambiguousSubsystemReferences: string[];
+};
 
 export const AUTHOR_COCKPIT_SCOPES = ["scene", "chapter", "book", "epic"] as const;
 export type AuthorCockpitScope = (typeof AUTHOR_COCKPIT_SCOPES)[number];
@@ -295,6 +325,8 @@ export type AuthorCommandCockpitBundle = {
     firstPersonReadinessStatus: string;
     voiceShiftRisks: string[];
   };
+  /** Cluster 2 — machine-readable enforcement truth for populated panels (optional when not computed). */
+  enforcementSemanticTruth?: CockpitEnforcementSemanticTruth;
   bounded: true;
   explainable: true;
   nonOmniscient: true;

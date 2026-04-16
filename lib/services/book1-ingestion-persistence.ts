@@ -656,7 +656,8 @@ export class PrismaBook1IngestionRepository implements Book1IngestionRepository 
       existingComponents.filter((row) => row.componentKey).map((row) => [row.componentKey as string, row.id]),
     );
 
-    const creates: Parameters<PrismaClient["book1SceneComponent"]["createMany"]>[0]["data"] = [];
+    type Book1SceneComponentCreateMany = NonNullable<Parameters<PrismaClient["book1SceneComponent"]["createMany"]>[0]>;
+    const creates: Book1SceneComponentCreateMany["data"] = [];
     const updates: Array<{ id: string; input: Book1SceneComponentInput }> = [];
     for (const input of allowedInputs) {
       const sceneAnchorId = existingByNumber.get(input.sceneAnchorNumber);
@@ -894,8 +895,8 @@ export class PrismaBook1IngestionRepository implements Book1IngestionRepository 
           },
         }),
     });
-    const existingByKey = new Map(
-      existing.map((row) => [`${String(row.objectType)}|${row.objectId}`, row] as const),
+    const existingByKey = new Map<string, (typeof existing)[number]>(
+      existing.map((row) => [`${String(row.objectType)}|${row.objectId}`, row]),
     );
 
     const creates: typeof desired = [];

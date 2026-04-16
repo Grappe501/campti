@@ -43,7 +43,8 @@ describe("book1-epic-outline-builder lineage conduit weighting", () => {
       thematicVision: ["power", "identity", "faith", "survival"],
     });
     const chapter1 = outline.phases[0].chapters[0];
-    assert.equal(chapter1.characters.includes("First Matriarch"), true);
-    assert.equal(chapter1.characters.includes("Alexis"), false);
+    const chapterNames = "characters" in chapter1 ? chapter1.characters : chapter1.keyCharacters;
+    assert.equal(chapterNames.includes("First Matriarch"), true);
+    assert.equal(chapterNames.includes("Alexis"), false);
   });
 });

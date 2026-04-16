@@ -24,8 +24,9 @@ export class SceneToBeatPacketService {
       : input.beatChain.beats.slice(0, 1).map((beat) => beat.beatType);
     const warnings: string[] = [];
     if (selectedBeatTypes.length === 0) warnings.push("No beat mapping available for scene.");
+    const selectedKeys = selectedBeatTypes as readonly string[];
     for (const required of Object.keys(input.scene.requiredBeatBiases)) {
-      if (!selectedBeatTypes.includes(required)) warnings.push(`Missing required beat bias alignment: ${required}`);
+      if (!selectedKeys.includes(required)) warnings.push(`Missing required beat bias alignment: ${required}`);
     }
     return {
       packetId: `${input.scene.scenePlanId}:beat-packet`,

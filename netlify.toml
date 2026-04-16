@@ -1,3 +1,6 @@
+# Canonical production path (matches package.json "build"):
+# prisma generate (fail-closed on Linux/CI; Windows may tolerate lock errors) → next build (typecheck + bundle).
+# Node: .nvmrc and [build.environment] NODE_VERSION should stay aligned (20.x LTS).
 [build]
   command = "npm run build"
 

@@ -27,7 +27,7 @@ export function buildRuntimeAuthorityRegistry(): RuntimeAuthorityRegistry {
       authorityClass: "canonical_production",
       entrypoints: [
         "lib/services/scene-generation-service.ts::runSceneGeneration",
-        "lib/services/scene-generation-engine-service.ts::SceneGenerationEngineService.run",
+        "lib/scene-generation/scene-generation-llm-adapter.ts::generateSceneProseWithModel",
         "lib/services/chapter-assembly-service.ts::assembleChapterReaderText",
       ],
       downstreamConsumers: [

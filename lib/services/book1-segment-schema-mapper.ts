@@ -442,7 +442,8 @@ export class DeterministicBook1SegmentSchemaMapper {
           output.manualReviewQueue.push(warning);
         }
         for (const anchor of anchors) {
-          const layerTypes = layers.length > 0 ? layers : ["environmental_layer"];
+          const layerTypes: Book1SceneComponentType[] =
+            layers.length > 0 ? layers : ["environmental_layer"];
           for (const layer of layerTypes) {
             output.sceneComponents.push({
               componentKey: `book1-scene-component-${shortHash(`${segment.provisionalKey}|${anchor}|${layer}`)}`,

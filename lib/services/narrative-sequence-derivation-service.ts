@@ -10,7 +10,7 @@ import {
   type ChapterSequencePlan,
   type EpicSequencePlan,
 } from "@/lib/domain/narrative-sequence";
-import type { NarrativeThread } from "@/lib/domain/narrative-thread";
+import type { NarrativeThread, SettingCoverageReport } from "@/lib/domain/narrative-thread";
 import { RecallReframingService } from "@/lib/services/recall-reframing-service";
 import { RouteCadenceService } from "@/lib/services/route-cadence-service";
 import { ThreadCadenceService } from "@/lib/services/thread-cadence-service";
@@ -39,22 +39,7 @@ export class NarrativeSequenceDerivationService {
     chapterId: string;
     chapterCompositionPlan: ChapterCompositionPlan;
     threads: NarrativeThread[];
-    settingCoverageReport: {
-      records: Array<{
-        locationId: string;
-        locationName: string;
-        routeRole: string;
-        appearanceCount: number;
-        directSceneCount: number;
-        indirectMentionCount: number;
-        associatedThreads: string[];
-        associatedCharacters: string[];
-        currentMeaning: string;
-        callbackLinks: string[];
-        nextRecommendedAppearanceWindow: string;
-      }>;
-      missingLocationIds: string[];
-    };
+    settingCoverageReport: Pick<SettingCoverageReport, "records" | "missingLocationIds">;
   }): {
     epicSequencePlan: EpicSequencePlan;
     bookSequencePlan: BookSequencePlan;

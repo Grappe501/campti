@@ -4,6 +4,10 @@ import {
   type AuthorCommandCockpitBundle,
   type CockpitScopeContext,
 } from "@/lib/domain/author-command-cockpit";
+import {
+  buildCockpitEnforcementSemanticTruth,
+  collectPopulatedAuthorCockpitPanelKeys,
+} from "@/lib/services/enforcement-cockpit-truth-service";
 import { createRuntimeAuthorityStamp } from "@/lib/services/runtime-authority-registry-service";
 import { deriveCenteredSurfaceTitle } from "@/lib/services/cockpit-shell-architecture-service";
 import { deriveGuidedSignals } from "@/lib/services/guided-signals-service";
@@ -135,6 +139,10 @@ export function buildAuthorCommandCockpitBundle(input: {
   });
   const guidedSignals = deriveGuidedSignals({ indicatorBank, threshold: "medium" });
   const availableActions = deriveAvailableActions(input.context);
+  const enforcementSemanticTruth = buildCockpitEnforcementSemanticTruth({
+    runtimeId: input.runtimeId,
+    populatedPanelKeys: collectPopulatedAuthorCockpitPanelKeys(input),
+  });
 
   return {
     contractVersion: AUTHOR_COMMAND_COCKPIT_CONTRACT_VERSION,
@@ -163,6 +171,7 @@ export function buildAuthorCommandCockpitBundle(input: {
     epicContinuity: input.epicContinuity,
     emotionalGravity: input.emotionalGravity,
     narratorPresence: input.narratorPresence,
+    enforcementSemanticTruth,
     bounded: true,
     explainable: true,
     nonOmniscient: true,

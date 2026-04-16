@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
 import { ChapterCompositionPlanSchema } from "@/lib/domain/chapter-composition";
+import { LiteraryDeviceApplicationPlanSchema } from "@/lib/domain/literary-device-control";
 import { ProseGenerationConstraintsSchema } from "@/lib/domain/prose-generation-constraints";
 import { SceneGenerationRequestDerivationService } from "@/lib/services/scene-generation-request-derivation-service";
 
@@ -160,7 +161,23 @@ describe("scene-generation-request-derivation-service", () => {
       callbackPlanId: "cb-1",
       reinterpretationAnchorSetId: "re-1",
       chapterLevelProseConstraints: constraints,
-      chapterLevelLiteraryDevicePlan: { activeDeviceIds: [] },
+      chapterLevelLiteraryDevicePlan: LiteraryDeviceApplicationPlanSchema.parse({
+        artifact: "literary_device_application_plan",
+        schemaVersion: "1.0.0",
+        applicationPlanId: "literary-plan-test",
+        chapterId: "book1-chapter-01",
+        paragraphTargets: [],
+        activeDeviceIds: [],
+        allowedDeviceSet: [],
+        suppressedDeviceSet: [],
+        requiredBindingSet: [],
+        deviceContextMatrix: {},
+        recommendedPlacementZones: [],
+        restrictedPlacementZones: [],
+        densityWarnings: [],
+        misuseWarnings: [],
+        validationFlags: [],
+      }),
     });
 
     assert.equal(request.chapterId, "book1-chapter-01");

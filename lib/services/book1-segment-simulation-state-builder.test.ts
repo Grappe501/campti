@@ -23,7 +23,6 @@ describe("book1-segment-simulation-state-builder", () => {
         packets: [
           {
             segment: 1,
-            sourceSceneFocus: "focus",
             environment: "River weather cuts movement windows.",
             socialOrder: "Kin rank governs who speaks first.",
             materialLife: "Wet grain and ash cling to tools.",
@@ -34,7 +33,6 @@ describe("book1-segment-simulation-state-builder", () => {
           },
           {
             segment: 2,
-            sourceSceneFocus: "focus2",
             environment: "Air is dense and hot near the threshold.",
             socialOrder: "Household rank stays formal in public.",
             materialLife: "Clay bowls pass hand to hand without comment.",
