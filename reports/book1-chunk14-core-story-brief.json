@@ -1,0 +1,113 @@
+{
+  "generatedAt": "2026-04-16T01:52:35.693Z",
+  "source": {
+    "id": "book1-source-chunk-14",
+    "title": "Book 1 Research Chunk 14",
+    "filePath": "docs/book1/chunk14.txt",
+    "rawChars": 27173,
+    "normalizedChars": 20972,
+    "chunkCount": 7
+  },
+  "counts": {
+    "claims": 5,
+    "events": 0,
+    "places": 1,
+    "fragments": 3,
+    "openQuestions": 3
+  },
+  "chronology": [],
+  "coreTruthSet": [
+    {
+      "id": "book14-claim-listen-before-look-method",
+      "description": "Meaning extraction begins with listening (tone, spacing, breath) prior to visual confirmation.",
+      "confidence": 5,
+      "quoteExcerpt": "She listened first. Before she looked. ... Tone. Spacing. Breath. That was where meaning lived.",
+      "needsReview": true
+    },
+    {
+      "id": "book14-claim-low-signature-fire-design",
+      "description": "Fire configuration is intentionally low-signature (coal-heavy, low-flame) to minimize distant visibility while preserving close-range utility.",
+      "confidence": 5,
+      "quoteExcerpt": "The fire was not meant to be seen from far away ... more coal than flame, more glow than brightness.",
+      "needsReview": true
+    },
+    {
+      "id": "book14-claim-observer-position-selection-discipline",
+      "description": "Observer intelligence depends on deliberate body-position and silhouette control to gather signal without drawing notice.",
+      "confidence": 5,
+      "quoteExcerpt": "She had chosen this place carefully ... not forward ... forward would break her outline.",
+      "needsReview": true
+    },
+    {
+      "id": "book14-claim-preverbal-authority-control",
+      "description": "Authority is legible before speech through interruption suppression and group behavioral accommodation.",
+      "confidence": 5,
+      "quoteExcerpt": "The woman did not speak immediately ... she controlled the space ... no one interrupted her.",
+      "needsReview": true
+    },
+    {
+      "id": "book14-claim-movement-over-face-reading",
+      "description": "Under constrained light, movement-pattern reading substitutes for facial interpretation and remains decision-relevant.",
+      "confidence": 4,
+      "quoteExcerpt": "Faces were harder ... But she did not need faces. She watched movement.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book14-place-low-signature-forest-clearing",
+      "name": "Low-Signature Forest Clearing",
+      "placeType": "FIELD",
+      "description": "Depressed fire pit council edge where acoustic containment, light discipline, and silhouette management shape conflict observation."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book14-frag-signature-management-protocol",
+      "title": "Signature Management Protocol",
+      "summary": "Operational stealth constraint.",
+      "text": "Councils under risk use heat/light/acoustic controls to reduce detectability while retaining enough signal for internal coordination.",
+      "confidence": 5,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book14-frag-edge-observer-intelligence-discipline",
+      "title": "Edge Observer Intelligence Discipline",
+      "summary": "Observer tradecraft constraint.",
+      "text": "Edge-position observers prioritize auditory and kinetic cues, preserving concealment while extracting high-value relational signals.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book14-frag-preverbal-power-recognition",
+      "title": "Preverbal Power Recognition",
+      "summary": "Authority-legibility constraint.",
+      "text": "Power enters the scene before speech through interruption patterns, body stillness, and collective self-limitation.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book14-oq-low-signature-council-standards",
+      "title": "What material and procedural standards define low-signature council setup across terrain types?",
+      "description": "Needed to keep stealth gathering scenes operationally consistent.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book14-oq-observer-role-authorization-boundaries",
+      "title": "When is edge observation tolerated versus sanctioned in sensitive gatherings?",
+      "description": "Needed to govern watcher participation realism and risk consequences.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book14-oq-preverbal-authority-cue-catalog",
+      "title": "Which nonverbal cues most reliably indicate authority before speech in this system?",
+      "description": "Needed for consistent power-legibility writing under low-visibility conditions.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

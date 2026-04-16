@@ -1,0 +1,24 @@
+{
+  "artifact": "chapter_character_distinction_plan",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.062Z",
+  "characters": [
+    {
+      "character": "Alexis",
+      "noticesFirst": "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses",
+      "neverNamesDirectly": "withholds fear of being misread",
+      "emotionalPressurePhysicalization": "Alexis shows pressure through sound and pace changes when assumes silence means consent rather than tactical delay.. Stress tell: worst-case chaining and rapid doubt loops. Developmental conversion: desire converts to increased attentiveness to partner's spatial position and task pace.",
+      "sentenceTexture": "short-to-medium clauses with interrupted cadence and concrete pivots; silence mode: uses silence as control gate before speech clears social risk; developmental silence: silence after partner speaks carries evaluative weight; duration encodes trust level",
+      "dominantInteriorChannel": "suspicion"
+    },
+    {
+      "character": "Augustin",
+      "noticesFirst": "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses",
+      "neverNamesDirectly": "withholds fear of being misread",
+      "emotionalPressurePhysicalization": "Augustin shows pressure through sound and pace changes when reads caution as weakness and misses hidden agreement patterns.. Stress tell: worst-case chaining and rapid doubt loops. Developmental conversion: attraction converts to postural adjustment: shoulders squared, chin-angle recalibrated, grip tightened.",
+      "sentenceTexture": "short-to-medium clauses with interrupted cadence and concrete pivots; silence mode: uses silence as control gate before speech clears social risk; developmental silence: silence in the presence of a potential partner signals active processing disguised as indifference",
+      "dominantInteriorChannel": "suspicion"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-04-16T14:44:46.881Z",
+  "resolutionFile": "reports/book1-manual-review-resolutions.autofill.json",
+  "requested": 2,
+  "appliedCount": 2,
+  "skippedCount": 0,
+  "failedCount": 0,
+  "applied": [
+    {
+      "action": "set_preferred_with_retype",
+      "description": "scene 4 observer_layer preferred book1-scene-component-25f45d8475 (others CANDIDATE)"
+    },
+    {
+      "action": "set_preferred_with_retype",
+      "description": "scene 11 environmental_layer preferred book1-scene-component-0a5d08f71c (others CANDIDATE)"
+    }
+  ],
+  "skipped": [],
+  "failed": []
+}

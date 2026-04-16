@@ -1,0 +1,134 @@
+{
+  "generatedAt": "2026-04-16T02:17:16.360Z",
+  "source": {
+    "id": "book1-source-chunk-22",
+    "title": "Book 1 Research Chunk 22",
+    "filePath": "docs/book1/chunk22.txt",
+    "rawChars": 64789,
+    "normalizedChars": 62659,
+    "chunkCount": 20
+  },
+  "counts": {
+    "claims": 5,
+    "events": 4,
+    "places": 1,
+    "fragments": 3,
+    "openQuestions": 3
+  },
+  "chronology": [
+    {
+      "year": 1542,
+      "title": "First Spanish Echo in Caddo World (1542)",
+      "description": "Early recorded Spanish contact memory in Caddo-region narratives."
+    },
+    {
+      "year": 1682,
+      "title": "French Claim Date Anchor (1682)",
+      "description": "Symbolic opening threshold for imperial claim versus lived local continuity."
+    },
+    {
+      "year": 1714,
+      "title": "Natchitoches Founded (1714)",
+      "description": "French trade-post foundation in Native Red River landscape."
+    },
+    {
+      "year": 1729,
+      "title": "Los Adaes as Capital of Spanish Texas (1729)",
+      "description": "Spanish frontier governance consolidation near French borderland."
+    }
+  ],
+  "coreTruthSet": [
+    {
+      "id": "book22-claim-los-adaes-frontier-counterweight",
+      "description": "Los Adaes is treated as key Spanish counterweight node to French Natchitoches and central borderland hinge.",
+      "confidence": 5,
+      "quoteExcerpt": "Los Adaes ... mission-presidio complex specifically to counter the nearby French presence at Natchitoches.",
+      "needsReview": true
+    },
+    {
+      "id": "book22-claim-opening-1682-haunting-contrast",
+      "description": "The proposed 1682 opening is framed as contrast between European legal claim and a Native world still living by its own rhythms.",
+      "confidence": 5,
+      "quoteExcerpt": "A haunting contrast: a European legal act on paper versus a Native world still living by its own rhythms.",
+      "needsReview": true
+    },
+    {
+      "id": "book22-claim-spanish-present-as-background-pressure",
+      "description": "Spanish presence is modeled as background pressure from the beginning rather than late-stage surprise.",
+      "confidence": 5,
+      "quoteExcerpt": "Spanish story ... present from the beginning as a pressure in the background.",
+      "needsReview": true
+    },
+    {
+      "id": "book22-claim-frontier-never-clean-lived-border",
+      "description": "Borderland is framed as lived, mixed, and negotiated rather than cleanly divided by imperial lines.",
+      "confidence": 4,
+      "quoteExcerpt": "The border was never clean. It was a lived frontier.",
+      "needsReview": true
+    },
+    {
+      "id": "book22-claim-native-experience-sequence-of-empires",
+      "description": "Native experience sequence is framed as contact shocks, then competing empires, then paper transfers not matching lived reality.",
+      "confidence": 4,
+      "quoteExcerpt": "First feels Europeans as disease/rumor/... then competing empires ... then one empire replacing another on paper.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book22-place-natchitoches-los-adaes-borderland-corridor",
+      "name": "Natchitoches-Los Adaes Borderland Corridor",
+      "placeType": "REGION",
+      "description": "Core French-Spanish-Native interaction corridor linking missions, presidios, trade, and diplomacy."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book22-frag-background-pressure-reveal-structure",
+      "title": "Background Pressure Reveal Structure",
+      "summary": "Narrative-pressure pacing constraint.",
+      "text": "Spanish pressure should be seeded as ambient force early, then progressively clarified as frontier institutions tighten.",
+      "confidence": 5,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book22-frag-master-timeline-engine-five-column",
+      "title": "Master Timeline Engine (Five-Column Model)",
+      "summary": "Research-to-story engine constraint.",
+      "text": "Story planning should map date/action/affected groups/lived impact/story use for each turning point in the borderland sequence.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book22-frag-native-viewpoint-over-imperial-paper",
+      "title": "Native Viewpoint Over Imperial Paper",
+      "summary": "Perspective-priority constraint.",
+      "text": "Chapter framing should privilege lived Native impacts over formal imperial claims when sequencing historical turns.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book22-oq-borderland-smuggling-diplomacy-balance",
+      "title": "How should legal trade, illicit exchange, and diplomatic necessity be balanced scene-by-scene in the corridor?",
+      "description": "Needed to keep frontier realism without flattening political complexity.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book22-oq-native-knowledge-by-decade",
+      "title": "What would local Red River communities plausibly know in each decade about Spanish and French movements?",
+      "description": "Needed to prevent anachronistic awareness in character dialogue and decisions.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book22-oq-spanish-census-source-chain",
+      "title": "Which Spanish/French census and census-substitute sources are strongest for Natchitoches-Los Adaes family-level reconstruction?",
+      "description": "Needed to harden population and household claims used in chapter scaffolding.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

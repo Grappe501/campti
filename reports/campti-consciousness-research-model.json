@@ -1,0 +1,84 @@
+{
+  "generatedAt": "2026-04-16T19:58:57.238Z",
+  "ingestBatchId": "campti-consciousness-1776369537238",
+  "category": "conceptual_philosophical_research",
+  "policy": {
+    "research_only": true,
+    "not_direct_runtime_prose_controls": true,
+    "separationEnforced": true
+  },
+  "concepts": [
+    {
+      "conceptId": "observer_dependent_rendering",
+      "conceptLabel": "observer-dependent rendering",
+      "research_only": true,
+      "not_direct_runtime_prose_controls": true,
+      "evidence": [],
+      "extractionStatus": "not_found"
+    },
+    {
+      "conceptId": "local_vs_global_state",
+      "conceptLabel": "local perceived state vs global state",
+      "research_only": true,
+      "not_direct_runtime_prose_controls": true,
+      "evidence": [],
+      "extractionStatus": "not_found"
+    },
+    {
+      "conceptId": "limited_attention_budget",
+      "conceptLabel": "limited attention budget",
+      "research_only": true,
+      "not_direct_runtime_prose_controls": true,
+      "evidence": [],
+      "extractionStatus": "not_found"
+    },
+    {
+      "conceptId": "hidden_variables",
+      "conceptLabel": "hidden variables",
+      "research_only": true,
+      "not_direct_runtime_prose_controls": true,
+      "evidence": [],
+      "extractionStatus": "not_found"
+    },
+    {
+      "conceptId": "meaning_generation_engine",
+      "conceptLabel": "meaning generation engine",
+      "research_only": true,
+      "not_direct_runtime_prose_controls": true,
+      "evidence": [],
+      "extractionStatus": "not_found"
+    },
+    {
+      "conceptId": "deterministic_vs_probabilistic_modes",
+      "conceptLabel": "deterministic vs probabilistic modes",
+      "research_only": true,
+      "not_direct_runtime_prose_controls": true,
+      "evidence": [],
+      "extractionStatus": "not_found"
+    },
+    {
+      "conceptId": "social_feedback_loops",
+      "conceptLabel": "social feedback loops",
+      "research_only": true,
+      "not_direct_runtime_prose_controls": true,
+      "evidence": [],
+      "extractionStatus": "not_found"
+    },
+    {
+      "conceptId": "memory_persistence",
+      "conceptLabel": "memory persistence",
+      "research_only": true,
+      "not_direct_runtime_prose_controls": true,
+      "evidence": [],
+      "extractionStatus": "not_found"
+    },
+    {
+      "conceptId": "entanglement_observer_metaphors",
+      "conceptLabel": "entanglement/observer metaphors",
+      "research_only": true,
+      "not_direct_runtime_prose_controls": true,
+      "evidence": [],
+      "extractionStatus": "not_found"
+    }
+  ]
+}

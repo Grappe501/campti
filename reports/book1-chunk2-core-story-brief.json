@@ -1,0 +1,106 @@
+{
+  "generatedAt": "2026-04-16T01:19:48.888Z",
+  "source": {
+    "id": "book1-source-chunk-2",
+    "title": "Book 1 Research Chunk 2",
+    "filePath": "docs/book1/chunk2.txt",
+    "rawChars": 90084,
+    "normalizedChars": 29401,
+    "chunkCount": 9
+  },
+  "counts": {
+    "claims": 4,
+    "events": 0,
+    "places": 1,
+    "fragments": 3,
+    "openQuestions": 3
+  },
+  "chronology": [],
+  "coreTruthSet": [
+    {
+      "id": "book2-claim-material-culture-frozen-behavior",
+      "description": "Material culture is framed as preserved behavior carrying evidence of skill, belief, and social necessity.",
+      "confidence": 4,
+      "quoteExcerpt": "Material culture isn’t just “objects.” It’s frozen behavior...",
+      "needsReview": true
+    },
+    {
+      "id": "book2-claim-caddoan-pottery-refinement",
+      "description": "Caddoan pottery in the Natchitoches world is represented as highly refined, thin-walled, and design-rich.",
+      "confidence": 3,
+      "quoteExcerpt": "Caddoan pottery—used by the Natchitoches—was among the most refined in North America.",
+      "needsReview": true
+    },
+    {
+      "id": "book2-claim-local-efficient-tool-infrastructure",
+      "description": "Tool systems are presented as local, efficient, and category-diverse across food, hunting, craft, and woodworking.",
+      "confidence": 3,
+      "quoteExcerpt": "The Natchitoches tool system was efficient, adaptable, and local.",
+      "needsReview": true
+    },
+    {
+      "id": "book2-claim-pottery-generational-knowledge",
+      "description": "Pottery production is described as multigenerational technical knowledge, likely transmitted heavily through women’s labor systems.",
+      "confidence": 3,
+      "quoteExcerpt": "This knowledge was passed down through generations... likely held primarily by women.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book2-place-natchitoches-material-culture-zone",
+      "name": "Natchitoches Material-Culture Zone",
+      "placeType": "REGION",
+      "description": "Research scope for production, use, and meaning of pottery, tools, and housing materials in the Natchitoches world."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book2-frag-function-identity-object-logic",
+      "title": "Function and Identity Object Logic",
+      "summary": "Interpretive rule for object-centered scenes.",
+      "text": "Objects carry functional and identity load at once; utility, beauty, and meaning are not separable in cultural analysis.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book2-frag-local-material-housing-adaptation",
+      "title": "Local Material Housing Adaptation",
+      "summary": "Setting-construction constraint.",
+      "text": "Housing form follows local ecological materials and maintenance logic, emphasizing adaptation and repairability.",
+      "confidence": 3,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book2-frag-pottery-knowledge-transmission",
+      "title": "Pottery as Knowledge Transmission",
+      "summary": "Craft continuity constraint.",
+      "text": "Pottery craft reflects stored technical memory (materials, firing, design) transmitted through generational practice.",
+      "confidence": 3,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book2-oq-housing-seasonal-variation",
+      "title": "What seasonal or status variation existed in housing materials and construction patterns?",
+      "description": "Needed to avoid over-uniform dwelling descriptions in chapter environments.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book2-oq-pottery-design-taxonomy",
+      "title": "Which specific pottery design motifs can be tied to identifiable Natchitoches or related Caddoan communities?",
+      "description": "Need source-anchored motif taxonomy before assigning symbolic meanings to named lineages or locations.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book2-oq-tool-diffusion-trade",
+      "title": "How much of the described tool kit reflects local production versus trade diffusion?",
+      "description": "Differentiate locally fabricated technologies from imported/adapted tools for scene-level material realism.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "generatedAt": "2026-04-16T20:14:46.669Z",
+  "framing": "Campti-native fit map for harvested concepts.",
+  "mappings": [
+    {
+      "conceptName": "Global State vs Perceived State",
+      "mappings": [
+        {
+          "destinationSubsystem": "character console",
+          "expectedBenefit": "Explicit misread/perceived tracks improve explainability and tension design.",
+          "implementationComplexity": "medium",
+          "usageMode": "runtime-safe"
+        },
+        {
+          "destinationSubsystem": "chapter_perspective_routing_plan",
+          "expectedBenefit": "Perspective routing can select narrators by perceptual mismatch impact.",
+          "implementationComplexity": "medium",
+          "usageMode": "runtime-safe"
+        }
+      ]
+    },
+    {
+      "conceptName": "Limited Attention / Salience Budget",
+      "mappings": [
+        {
+          "destinationSubsystem": "consciousness engine",
+          "expectedBenefit": "Character cognition processes only salient inputs, reducing over-reasoned prose behavior.",
+          "implementationComplexity": "medium",
+          "usageMode": "runtime-safe"
+        },
+        {
+          "destinationSubsystem": "chapter_render_directives",
+          "expectedBenefit": "Render directives can emphasize what characters notice vs miss in each scene beat.",
+          "implementationComplexity": "low",
+          "usageMode": "runtime-safe"
+        }
+      ]
+    },
+    {
+      "conceptName": "Memory Persistence and State Accumulation",
+      "mappings": [
+        {
+          "destinationSubsystem": "regeneration loop",
+          "expectedBenefit": "Persistent cognition deltas strengthen chapter continuity and reduce resets.",
+          "implementationComplexity": "medium",
+          "usageMode": "runtime-safe"
+        },
+        {
+          "destinationSubsystem": "chapter_voice_cognition_map",
+          "expectedBenefit": "Voice shifts stay tethered to accumulated memory-state changes.",
+          "implementationComplexity": "medium",
+          "usageMode": "runtime-safe"
+        }
+      ]
+    },
+    {
+      "conceptName": "Social Feedback Loops",
+      "mappings": [
+        {
+          "destinationSubsystem": "decision panel",
+          "expectedBenefit": "Decision outcomes can include predicted social pressure feedback consequences.",
+          "implementationComplexity": "medium",
+          "usageMode": "runtime-safe"
+        },
+        {
+          "destinationSubsystem": "author cockpit simulation controls",
+          "expectedBenefit": "Cockpit controls can surface relationship pressure deltas before chapter lock.",
+          "implementationComplexity": "low",
+          "usageMode": "cockpit-only"
+        }
+      ]
+    },
+    {
+      "conceptName": "Meaning Generation / Self-Narrative",
+      "mappings": [
+        {
+          "destinationSubsystem": "character console",
+          "expectedBenefit": "Author review can inspect why characters assign meaning to events.",
+          "implementationComplexity": "medium",
+          "usageMode": "review-only"
+        },
+        {
+          "destinationSubsystem": "chapter_voice_cognition_map",
+          "expectedBenefit": "Voice shaping can follow internal meaning frames without exposing theory labels.",
+          "implementationComplexity": "medium",
+          "usageMode": "review-only"
+        }
+      ]
+    },
+    {
+      "conceptName": "Observer-Dependent Rendering",
+      "mappings": [
+        {
+          "destinationSubsystem": "author cockpit simulation controls",
+          "expectedBenefit": "Cockpit can compare observer variants without changing runtime prose policy.",
+          "implementationComplexity": "low",
+          "usageMode": "cockpit-only"
+        }
+      ]
+    },
+    {
+      "conceptName": "Hidden Variables in Character Judgement",
+      "mappings": [
+        {
+          "destinationSubsystem": "decision panel",
+          "expectedBenefit": "Decision reasoning can mark uncertainty factors as latent instead of deterministic claims.",
+          "implementationComplexity": "medium",
+          "usageMode": "review-only"
+        }
+      ]
+    },
+    {
+      "conceptName": "Deterministic vs Probabilistic Modes",
+      "mappings": [
+        {
+          "destinationSubsystem": "author cockpit simulation controls",
+          "expectedBenefit": "Enables reproducible testing mode vs exploratory mode in cockpit simulations.",
+          "implementationComplexity": "low",
+          "usageMode": "cockpit-only"
+        }
+      ]
+    },
+    {
+      "conceptName": "Cosmic/Nested Simulation Metaphysics",
+      "mappings": [
+        {
+          "destinationSubsystem": "law console",
+          "expectedBenefit": "Explicitly tracked as non-runtime theory to prevent renderer leakage.",
+          "implementationComplexity": "low",
+          "usageMode": "review-only"
+        }
+      ]
+    }
+  ]
+}

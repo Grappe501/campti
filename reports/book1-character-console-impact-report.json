@@ -1,0 +1,85 @@
+{
+  "artifact": "book1_character_console_impact_report",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "scene": 1,
+  "character": "Alexis",
+  "generatedAt": "2026-04-16T15:40:50.211Z",
+  "simulationMode": "god",
+  "interventionTotals": {
+    "submitted": 1,
+    "allowed": 1,
+    "denied": 0,
+    "sandboxApplied": 1,
+    "canonicalApplied": 0
+  },
+  "interventions": [
+    {
+      "turnId": "turn-3",
+      "mutationId": "mutation-1",
+      "mutationKind": "dialogue",
+      "allowed": true,
+      "sandboxApplied": true,
+      "canonicalApplied": false,
+      "downstreamImpact": {
+        "scenes": [
+          "chapter1-scene-01"
+        ],
+        "characters": [
+          "Alexis",
+          "Augustin",
+          "Alexis Grappe"
+        ],
+        "constraints": [
+          "SL-1-focus",
+          "SL-1-foreshadowing",
+          "SL-1-handoff",
+          "SL-1-objective",
+          "CI-1",
+          "CI-2",
+          "FA-1",
+          "FA-2"
+        ],
+        "themes": [
+          "faith",
+          "power"
+        ]
+      }
+    }
+  ],
+  "impactedSurfaceSummary": {
+    "scenes": [
+      "chapter1-scene-01"
+    ],
+    "characters": [
+      "Alexis",
+      "Augustin",
+      "Alexis Grappe"
+    ],
+    "constraints": [
+      "SL-1-focus",
+      "SL-1-foreshadowing",
+      "SL-1-handoff",
+      "SL-1-objective",
+      "CI-1",
+      "CI-2",
+      "FA-1",
+      "FA-2"
+    ],
+    "themes": [
+      "faith",
+      "power"
+    ]
+  },
+  "branchIsolation": {
+    "sandboxId": "book1-character-console-2026-04-16T15-40-50-211Z",
+    "canonicalStateMutated": false,
+    "approvedMutationIds": []
+  },
+  "provenanceRetained": true,
+  "recommendations": [
+    "Run Chapter 1 scene integrity and anchor guard checks before promoting any sandbox mutation to canon.",
+    "Keep observer mode as default for exploratory author probes; only switch to god mode for governed interventions.",
+    "Require explicit approval ledger entries for every canonical mutation id to preserve provenance."
+  ]
+}

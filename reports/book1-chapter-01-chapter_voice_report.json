@@ -1,0 +1,24 @@
+{
+  "artifact": "chapter_voice_report",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T16:25:48.257Z",
+  "checks": [
+    {
+      "check": "meta-language-block",
+      "passed": true,
+      "detail": "metaHits=0"
+    },
+    {
+      "check": "sensory-grounding",
+      "passed": true,
+      "detail": "sensoryHits=37"
+    },
+    {
+      "check": "kinship-signal-density",
+      "passed": true,
+      "detail": "kinshipHits=12"
+    }
+  ],
+  "passRate": 1
+}

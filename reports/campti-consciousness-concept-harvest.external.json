@@ -1,0 +1,464 @@
+{
+  "generatedAt": "2026-04-16T20:14:22.567Z",
+  "framing": "Design-harvest pass only. No external simulator ingestion.",
+  "provenance": {
+    "sourceRootPaths": [
+      "uploads/incoming/campti-consciousness-focused-external"
+    ],
+    "sourceArtifacts": [
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+        "sourceTitle": "campti-system-map.json",
+        "extension": ".json",
+        "byteSize": 16267,
+        "sha256": "fc6422522c47bbf2a7d9fff910224231917bdc7cafae9890851d068c2dc31d6e",
+        "modifiedAt": "2026-04-10T19:04:46.953Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-external/campti_ingest_plan.md",
+        "sourceTitle": "campti_ingest_plan.md",
+        "extension": ".md",
+        "byteSize": 2255,
+        "sha256": "e1a36ab3b1265098c2311b2c6f5c1f5996efb8ba54ca5bb28b708c492e0daff6",
+        "modifiedAt": "2026-04-11T22:47:11.351Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-external/comprehensive_master_build_plan.md",
+        "sourceTitle": "comprehensive_master_build_plan.md",
+        "extension": ".md",
+        "byteSize": 1799,
+        "sha256": "c927adb8d0668c120717e7a78a78cea0c28c87dce6539f8dc7458b316b56add6",
+        "modifiedAt": "2026-03-25T23:59:44.114Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-external/deep_build_map (1).json",
+        "sourceTitle": "deep_build_map (1).json",
+        "extension": ".json",
+        "byteSize": 101034,
+        "sha256": "011deafb3a3167afb87d1ecc32d9f928d7c01dd18f17816c2d385fee75e8e710",
+        "modifiedAt": "2026-03-26T00:21:48.166Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-external/deep_build_map (1).md",
+        "sourceTitle": "deep_build_map (1).md",
+        "extension": ".md",
+        "byteSize": 20438,
+        "sha256": "14c8413f057c2540310c3608bb8a093a01551093214477e4143a0c246eef34ce",
+        "modifiedAt": "2026-03-26T00:21:42.565Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-external/deep_build_map (2).json",
+        "sourceTitle": "deep_build_map (2).json",
+        "extension": ".json",
+        "byteSize": 101034,
+        "sha256": "011deafb3a3167afb87d1ecc32d9f928d7c01dd18f17816c2d385fee75e8e710",
+        "modifiedAt": "2026-03-26T00:21:55.015Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-external/deep_build_map (2).md",
+        "sourceTitle": "deep_build_map (2).md",
+        "extension": ".md",
+        "byteSize": 17010,
+        "sha256": "72ec559adb551bff5ad44b7cdd7631b0a5370eba7a626de102a6f207af968af1",
+        "modifiedAt": "2026-03-26T00:31:42.255Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-external/deep_build_map (3).json",
+        "sourceTitle": "deep_build_map (3).json",
+        "extension": ".json",
+        "byteSize": 98101,
+        "sha256": "a3fa8397f62c568d85bfa53c29ede4bbf2db64f91c709be9dfdef728ea44a2fb",
+        "modifiedAt": "2026-03-26T00:31:46.991Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-external/deep_build_map (3).md",
+        "sourceTitle": "deep_build_map (3).md",
+        "extension": ".md",
+        "byteSize": 16970,
+        "sha256": "9cf94ec7edd190993ead5cf3efeb51dd0625e132ae6b7698f66bc27552af6d9f",
+        "modifiedAt": "2026-03-27T23:24:15.182Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-external/deep_build_map (4).md",
+        "sourceTitle": "deep_build_map (4).md",
+        "extension": ".md",
+        "byteSize": 16970,
+        "sha256": "9cf94ec7edd190993ead5cf3efeb51dd0625e132ae6b7698f66bc27552af6d9f",
+        "modifiedAt": "2026-03-27T23:24:19.799Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-external/deep_build_map.json",
+        "sourceTitle": "deep_build_map.json",
+        "extension": ".json",
+        "byteSize": 82312,
+        "sha256": "6266ed74086e62d5024a5f8242455a71d2feb4d8cd64de9018b02deb548b92b4",
+        "modifiedAt": "2026-03-26T00:15:56.679Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-external/deep_build_map.md",
+        "sourceTitle": "deep_build_map.md",
+        "extension": ".md",
+        "byteSize": 11156,
+        "sha256": "a8234c6c67034cce2f1673832e2a54c05ca6577a271a3287246b78c1fe4b781e",
+        "modifiedAt": "2026-03-26T00:15:51.898Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-external/master_build_explainer.json",
+        "sourceTitle": "master_build_explainer.json",
+        "extension": ".json",
+        "byteSize": 20831,
+        "sha256": "c3f2783f46aadd2b578cff859e6b99153ce00d5a21635cbf1cd199656151bbe8",
+        "modifiedAt": "2026-03-26T21:03:38.446Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-external/master_build_explainer.md",
+        "sourceTitle": "master_build_explainer.md",
+        "extension": ".md",
+        "byteSize": 15946,
+        "sha256": "aaaa0f90ef80ee721e4340f2dc9987074d70f7aba885628c11e71f59ddc00210",
+        "modifiedAt": "2026-03-26T21:03:35.459Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-external/runtime_master_build_plan.md",
+        "sourceTitle": "runtime_master_build_plan.md",
+        "extension": ".md",
+        "byteSize": 6347,
+        "sha256": "28268909b2904a204dbe18ec4463472550ce9e7cb974bd23886dc090210e6c68",
+        "modifiedAt": "2026-03-25T14:13:16.734Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-external/simulation_design.txt",
+        "sourceTitle": "simulation_design.txt",
+        "extension": ".txt",
+        "byteSize": 310,
+        "sha256": "56d46e7f88b9b4d1a26e8e51b4397cc3742381626baf79e083d3c70fdde6cd12",
+        "modifiedAt": "2026-03-17T00:20:14.453Z"
+      }
+    ]
+  },
+  "concepts": [
+    {
+      "conceptName": "Perceive -> Appraise -> Emotion -> Intention -> Action -> Update Memory/State",
+      "shortDescription": "A staged cognition-action loop that can stabilize consciousness-layer state transitions.",
+      "findingCategory": "A_practical_ideas_to_adopt",
+      "sourceFiles": [
+        "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+        "uploads/incoming/campti-consciousness-focused-external/comprehensive_master_build_plan.md",
+        "uploads/incoming/campti-consciousness-focused-external/deep_build_map (1).json",
+        "uploads/incoming/campti-consciousness-focused-external/deep_build_map (1).md",
+        "uploads/incoming/campti-consciousness-focused-external/deep_build_map (2).json",
+        "uploads/incoming/campti-consciousness-focused-external/deep_build_map (2).md",
+        "uploads/incoming/campti-consciousness-focused-external/deep_build_map (3).json",
+        "uploads/incoming/campti-consciousness-focused-external/deep_build_map (3).md",
+        "uploads/incoming/campti-consciousness-focused-external/deep_build_map (4).md",
+        "uploads/incoming/campti-consciousness-focused-external/deep_build_map.json",
+        "uploads/incoming/campti-consciousness-focused-external/deep_build_map.md",
+        "uploads/incoming/campti-consciousness-focused-external/master_build_explainer.json",
+        "uploads/incoming/campti-consciousness-focused-external/master_build_explainer.md"
+      ],
+      "sourceEvidence": [
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+          "sourceSha256": "fc6422522c47bbf2a7d9fff910224231917bdc7cafae9890851d068c2dc31d6e",
+          "snippet": "\"Emotional regulation envelope (freeze/flood/numb/contain/redirect)\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+          "sourceSha256": "fc6422522c47bbf2a7d9fff910224231917bdc7cafae9890851d068c2dc31d6e",
+          "snippet": "\"Decision envelope (options, forbidden options, likely action, cost of speech)\""
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+          "sourceSha256": "fc6422522c47bbf2a7d9fff910224231917bdc7cafae9890851d068c2dc31d6e",
+          "snippet": "\"CharacterPhysicalHealthProfile, CharacterMentalHealthProfile, CharacterEmotionalHealthProfile, CharacterHealthEnvelope, WorldHealthNormProfile\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+          "sourceSha256": "fc6422522c47bbf2a7d9fff910224231917bdc7cafae9890851d068c2dc31d6e",
+          "snippet": "\"note\": \"Numeric id 6 is listed after 6.5 in the array; order is intentional for Cursor execution messaging, not numeric sorting.\""
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+          "sourceSha256": "fc6422522c47bbf2a7d9fff910224231917bdc7cafae9890851d068c2dc31d6e",
+          "snippet": "\"CharacterEmotionalHealthProfile\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+          "sourceSha256": "fc6422522c47bbf2a7d9fff910224231917bdc7cafae9890851d068c2dc31d6e",
+          "snippet": "\"description\": \"Domain logic and stubs live under lib/; server mutations under app/actions/; admin reads often via lib/data-access.ts with safe() fallback when DB unavailable.\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/comprehensive_master_build_plan.md",
+          "sourceSha256": "c927adb8d0668c120717e7a78a78cea0c28c87dce6539f8dc7458b316b56add6",
+          "snippet": "4. Add deterministic domain generators for household, income, obligations, transactions, and safe-spend."
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/deep_build_map (1).json",
+          "sourceSha256": "011deafb3a3167afb87d1ecc32d9f928d7c01dd18f17816c2d385fee75e8e710",
+          "snippet": "\"content_text\": \"# Platform Seed\\n\\nPlatform slug: `platform_seed`\\n\\nPlatform type: `application-platform`\\n\\nLifecycle stage: `seed`\\n\\nCreated by: `platform-root-generator`\\n\\nOwner feature: `platform-root`\\n\\nNext expected generators:\\n- frontend-scaffold-generator\\n- backend-scaffold-generator\\n- household-domain-generator\\n- income-engine-generator\\n- obligation-engine-generator\\n- transaction-engine-generator\\n- safe-spend-calculator-generator\\n\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/deep_build_map (1).json",
+          "sourceSha256": "011deafb3a3167afb87d1ecc32d9f928d7c01dd18f17816c2d385fee75e8e710",
+          "snippet": "\"content_text\": \"# Platform Seed Architecture\\n\\n- Platform slug: `platform_seed`\\n- Platform type: `application-platform`\\n- Current phase target: `phase-1`\\n- Status: `seeded`\\n\\n## Planned generator sequence\\n\\n1. platform-root-generator\\n2. frontend-scaffold-generator\\n3. backend-scaffold-generator\\n4. household-domain-generator\\n5. income-engine-generator\\n6. obligation-engine-generator\\n7. transaction-engine-generator\\n8. safe-spend-calculator-generator\\n\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/deep_build_map (1).json",
+          "sourceSha256": "011deafb3a3167afb87d1ecc32d9f928d7c01dd18f17816c2d385fee75e8e710",
+          "snippet": "\"description\": \"The actual family budget product domain: household model, income, obligations, transactions, and safe-spend logic.\","
+        }
+      ],
+      "usefulnessForCampti": "Fits Campti-native consciousness sequencing and regeneration loop explainability without importing an external simulator runtime.",
+      "confidenceLevel": "high"
+    },
+    {
+      "conceptName": "Global State vs Perceived State",
+      "shortDescription": "Separate objective world-state from each character's subjective interpretation.",
+      "findingCategory": "A_practical_ideas_to_adopt",
+      "sourceFiles": [
+        "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+        "uploads/incoming/campti-consciousness-focused-external/campti_ingest_plan.md"
+      ],
+      "sourceEvidence": [
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+          "sourceSha256": "fc6422522c47bbf2a7d9fff910224231917bdc7cafae9890851d068c2dc31d6e",
+          "snippet": "\"purpose\": \"Historically grounded narrative simulation: law-bound story objects, bounded character cognition, world-state-shaped pressure and relationships — not raw LLM improvisation.\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+          "sourceSha256": "fc6422522c47bbf2a7d9fff910224231917bdc7cafae9890851d068c2dc31d6e",
+          "snippet": "\"/admin/world-states\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+          "sourceSha256": "fc6422522c47bbf2a7d9fff910224231917bdc7cafae9890851d068c2dc31d6e",
+          "snippet": "\"/admin/world-states/[id]/knowledge\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+          "sourceSha256": "fc6422522c47bbf2a7d9fff910224231917bdc7cafae9890851d068c2dc31d6e",
+          "snippet": "\"/admin/world-states/[id]/pressure\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+          "sourceSha256": "fc6422522c47bbf2a7d9fff910224231917bdc7cafae9890851d068c2dc31d6e",
+          "snippet": "\"/admin/world-states/[id]/relationships\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+          "sourceSha256": "fc6422522c47bbf2a7d9fff910224231917bdc7cafae9890851d068c2dc31d6e",
+          "snippet": "\"/admin/world-states/[id]/education\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti_ingest_plan.md",
+          "sourceSha256": "e1a36ab3b1265098c2311b2c6f5c1f5996efb8ba54ca5bb28b708c492e0daff6",
+          "snippet": "4. Tag each document by world-state era for your novel simulation."
+        }
+      ],
+      "usefulnessForCampti": "Directly improves character console misreading patterns, tension generation, and Chapter 1 perspective routing.",
+      "confidenceLevel": "high"
+    },
+    {
+      "conceptName": "Limited Attention / Salience Budget",
+      "shortDescription": "Constrain character processing to a bounded attention budget per scene turn.",
+      "findingCategory": "A_practical_ideas_to_adopt",
+      "sourceFiles": [],
+      "sourceEvidence": [],
+      "usefulnessForCampti": "Prevents omniscient character cognition and sharpens narrative selectivity in the consciousness engine.",
+      "confidenceLevel": "low"
+    },
+    {
+      "conceptName": "Memory Persistence and State Accumulation",
+      "shortDescription": "Carry forward resolved and unresolved signals as persistent state across chapter turns.",
+      "findingCategory": "A_practical_ideas_to_adopt",
+      "sourceFiles": [
+        "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+        "uploads/incoming/campti-consciousness-focused-external/master_build_explainer.json",
+        "uploads/incoming/campti-consciousness-focused-external/master_build_explainer.md"
+      ],
+      "sourceEvidence": [
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+          "sourceSha256": "fc6422522c47bbf2a7d9fff910224231917bdc7cafae9890851d068c2dc31d6e",
+          "snippet": "\"no_isolated_minds\": \"Behavior is framed as emerging from intelligence + pressure + environment + relationships + continuity — not a single IQ or diagnosis label.\""
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+          "sourceSha256": "fc6422522c47bbf2a7d9fff910224231917bdc7cafae9890851d068c2dc31d6e",
+          "snippet": "\"Continuity: trauma, consequence, rumor, education, health envelopes (Stage 6.5)\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+          "sourceSha256": "fc6422522c47bbf2a7d9fff910224231917bdc7cafae9890851d068c2dc31d6e",
+          "snippet": "\"goal\": \"Continuity over time; era-shaped health and learning — not simulation runs yet.\""
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+          "sourceSha256": "fc6422522c47bbf2a7d9fff910224231917bdc7cafae9890851d068c2dc31d6e",
+          "snippet": "\"stage_6_5_continuity_health\": ["
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+          "sourceSha256": "fc6422522c47bbf2a7d9fff910224231917bdc7cafae9890851d068c2dc31d6e",
+          "snippet": "\"continuity\": [\"lib/continuity-order.ts\", \"lib/continuity-order-types.ts\", \"lib/continuity-order-schemas.ts\", \"app/actions/continuity-order.ts\"],"
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+          "sourceSha256": "fc6422522c47bbf2a7d9fff910224231917bdc7cafae9890851d068c2dc31d6e",
+          "snippet": "\"assembleCharacterContinuityEnvelope (lib/continuity-order.ts) returns null — future full merge\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/master_build_explainer.json",
+          "sourceSha256": "c3f2783f46aadd2b578cff859e6b99153ce00d5a21635cbf1cd199656151bbe8",
+          "snippet": "\"The runtime and migration discipline reduce continuity risk, which matters for scale, maintainability, and buyer confidence.\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/master_build_explainer.json",
+          "sourceSha256": "c3f2783f46aadd2b578cff859e6b99153ce00d5a21635cbf1cd199656151bbe8",
+          "snippet": "\"There are many backup and migration artifacts in the repo, which help continuity but also increase noise and can dilute clarity for external reviewers.\""
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/master_build_explainer.json",
+          "sourceSha256": "c3f2783f46aadd2b578cff859e6b99153ce00d5a21635cbf1cd199656151bbe8",
+          "snippet": "\"value\": \"This reduces continuity risk. Systems with memory, reporting, and handoff are much easier to maintain and much more credible to buyers or collaborators.\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/master_build_explainer.md",
+          "sourceSha256": "aaaa0f90ef80ee721e4340f2dc9987074d70f7aba885628c11e71f59ddc00210",
+          "snippet": "- The runtime and migration discipline reduce continuity risk, which matters for scale, maintainability, and buyer confidence."
+        }
+      ],
+      "usefulnessForCampti": "Strengthens chapter-to-chapter continuity and improves regeneration loop coherence without bypassing canon protections.",
+      "confidenceLevel": "high"
+    },
+    {
+      "conceptName": "Social Feedback Loops",
+      "shortDescription": "Model social responses that recursively alter future behavior and relationship pressure.",
+      "findingCategory": "A_practical_ideas_to_adopt",
+      "sourceFiles": [
+        "uploads/incoming/campti-consciousness-focused-external/campti_ingest_plan.md"
+      ],
+      "sourceEvidence": [
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti_ingest_plan.md",
+          "sourceSha256": "e1a36ab3b1265098c2311b2c6f5c1f5996efb8ba54ca5bb28b708c492e0daff6",
+          "snippet": "5. Add relationship edges: household, marriage, enslavement, military rank, landholding."
+        }
+      ],
+      "usefulnessForCampti": "Supports relationship pressure and downstream consequence tracking in cockpit simulation controls.",
+      "confidenceLevel": "medium"
+    },
+    {
+      "conceptName": "Meaning Generation / Self-Narrative",
+      "shortDescription": "Characters interpret events through identity-forming meaning frames, not raw facts.",
+      "findingCategory": "B_philosophical_design_inspiration",
+      "sourceFiles": [],
+      "sourceEvidence": [],
+      "usefulnessForCampti": "Useful as mediated design inspiration for character console and voice-cognition shaping, not as direct prose control labels.",
+      "confidenceLevel": "low"
+    },
+    {
+      "conceptName": "Observer-Dependent Rendering",
+      "shortDescription": "Output varies by observer position and internal model of events.",
+      "findingCategory": "B_philosophical_design_inspiration",
+      "sourceFiles": [],
+      "sourceEvidence": [],
+      "usefulnessForCampti": "Useful in cockpit simulation/author review views; should remain abstracted before any runtime prose exposure.",
+      "confidenceLevel": "low"
+    },
+    {
+      "conceptName": "Hidden Variables in Character Judgement",
+      "shortDescription": "Allow unknown latent factors to shape behavior without explicit exposition.",
+      "findingCategory": "B_philosophical_design_inspiration",
+      "sourceFiles": [],
+      "sourceEvidence": [],
+      "usefulnessForCampti": "Useful for uncertainty scaffolding in decision panel and character console ambiguity handling.",
+      "confidenceLevel": "low"
+    },
+    {
+      "conceptName": "Deterministic vs Probabilistic Modes",
+      "shortDescription": "Switchable execution posture for repeatability vs variability in author simulations.",
+      "findingCategory": "B_philosophical_design_inspiration",
+      "sourceFiles": [
+        "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+        "uploads/incoming/campti-consciousness-focused-external/comprehensive_master_build_plan.md",
+        "uploads/incoming/campti-consciousness-focused-external/deep_build_map (1).json",
+        "uploads/incoming/campti-consciousness-focused-external/deep_build_map (1).md",
+        "uploads/incoming/campti-consciousness-focused-external/deep_build_map (2).json",
+        "uploads/incoming/campti-consciousness-focused-external/deep_build_map (2).md",
+        "uploads/incoming/campti-consciousness-focused-external/deep_build_map (3).json",
+        "uploads/incoming/campti-consciousness-focused-external/deep_build_map (3).md",
+        "uploads/incoming/campti-consciousness-focused-external/deep_build_map (4).md",
+        "uploads/incoming/campti-consciousness-focused-external/deep_build_map.json",
+        "uploads/incoming/campti-consciousness-focused-external/deep_build_map.md",
+        "uploads/incoming/campti-consciousness-focused-external/master_build_explainer.json",
+        "uploads/incoming/campti-consciousness-focused-external/master_build_explainer.md",
+        "uploads/incoming/campti-consciousness-focused-external/runtime_master_build_plan.md"
+      ],
+      "sourceEvidence": [
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/campti-system-map.json",
+          "sourceSha256": "fc6422522c47bbf2a7d9fff910224231917bdc7cafae9890851d068c2dc31d6e",
+          "snippet": "\"intelligence-engine: assembleCharacterCognitiveEnvelope implemented as deterministic merge; deeper simulation TBD\""
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/comprehensive_master_build_plan.md",
+          "sourceSha256": "c927adb8d0668c120717e7a78a78cea0c28c87dce6539f8dc7458b316b56add6",
+          "snippet": "4. Add deterministic domain generators for household, income, obligations, transactions, and safe-spend."
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/deep_build_map (1).json",
+          "sourceSha256": "011deafb3a3167afb87d1ecc32d9f928d7c01dd18f17816c2d385fee75e8e710",
+          "snippet": "\"description\": \"Translate product intent into deterministic household, income, obligation, transaction, and safe-spend generators.\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/deep_build_map (1).json",
+          "sourceSha256": "011deafb3a3167afb87d1ecc32d9f928d7c01dd18f17816c2d385fee75e8e710",
+          "snippet": "\"exit_gate\": \"The core budgeting product can be generated with deterministic domain modules and shared contracts.\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/deep_build_map (1).json",
+          "sourceSha256": "011deafb3a3167afb87d1ecc32d9f928d7c01dd18f17816c2d385fee75e8e710",
+          "snippet": "\"title\": \"Write deterministic generator specs for household, income, obligations, transactions, and safe-spend\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/deep_build_map (1).md",
+          "sourceSha256": "14c8413f057c2540310c3608bb8a093a01551093214477e4143a0c246eef34ce",
+          "snippet": "Translate product intent into deterministic household, income, obligation, transaction, and safe-spend generators."
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/deep_build_map (1).md",
+          "sourceSha256": "14c8413f057c2540310c3608bb8a093a01551093214477e4143a0c246eef34ce",
+          "snippet": "- Exit gate: The core budgeting product can be generated with deterministic domain modules and shared contracts."
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/deep_build_map (1).md",
+          "sourceSha256": "14c8413f057c2540310c3608bb8a093a01551093214477e4143a0c246eef34ce",
+          "snippet": "6. **[P2] Write deterministic generator specs for household, income, obligations, transactions, and safe-spend** — The product domain is still mostly conceptual; it needs executable generator contracts."
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/deep_build_map (2).json",
+          "sourceSha256": "011deafb3a3167afb87d1ecc32d9f928d7c01dd18f17816c2d385fee75e8e710",
+          "snippet": "\"description\": \"Translate product intent into deterministic household, income, obligation, transaction, and safe-spend generators.\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-external/deep_build_map (2).json",
+          "sourceSha256": "011deafb3a3167afb87d1ecc32d9f928d7c01dd18f17816c2d385fee75e8e710",
+          "snippet": "\"exit_gate\": \"The core budgeting product can be generated with deterministic domain modules and shared contracts.\","
+        }
+      ],
+      "usefulnessForCampti": "Useful as cockpit-only run-mode controls for testing without hardwiring metaphysics into runtime prose generation.",
+      "confidenceLevel": "high"
+    },
+    {
+      "conceptName": "Cosmic/Nested Simulation Metaphysics",
+      "shortDescription": "Explicit metaphysical framing about reality layers and simulation assumptions.",
+      "findingCategory": "C_out_of_scope_for_now",
+      "sourceFiles": [],
+      "sourceEvidence": [],
+      "usefulnessForCampti": "Not needed for Campti runtime architecture and risks leaking theory labels into prose; keep as research-only.",
+      "confidenceLevel": "low"
+    }
+  ]
+}

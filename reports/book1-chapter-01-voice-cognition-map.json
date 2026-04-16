@@ -1,0 +1,46 @@
+{
+  "artifact": "chapter_voice_cognition_map",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.078Z",
+  "characters": [
+    {
+      "character": "Alexis",
+      "attentionBias": "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses; rejects threat-first scan of faces, doors, and pauses framing",
+      "fearTranslationMode": "translate fear into hand pressure and route changes; stress=worst-case chaining and rapid doubt loops",
+      "memoryActivationStyle": "memory activates through handled objects and worn surfaces",
+      "namingAvoidanceStyle": "avoids naming risk directly; speaks through objects and gesture; omission=withholds fear of being misread; names consequence through movement not thesis",
+      "socialReadingMode": "reads silence debt before explicit claims; misreads=Assumes silence means consent rather than tactical delay.; distortion=filters events through betrayal or unbuffered threat inside trusted structures",
+      "decisionMode": "risk-minimizing; delays commitment until signal confidence rises; conflict=treating suspicion as external certainty; only escalates after embodied evidence shifts",
+      "silenceThreshold": 0.28,
+      "spiritualRitualPerceptionMode": "tracks ritual pace as a live pressure gauge; meaning=searches for meaning through ordered continuity of kinship obligation",
+      "bodilyConversionPatterns": [
+        "chin angle updates with rank movement",
+        "fingers count pauses before reply",
+        "routes abstraction into body cues, object handling, and spatial relation before naming",
+        "hand pressure shifts before irreversible step",
+        "desire converts to increased attentiveness to partner's spatial position and task pace",
+        "grief over partnership loss converts to silence and over-precision in household tasks"
+      ]
+    },
+    {
+      "character": "Augustin",
+      "attentionBias": "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses; rejects threat-first scan of faces, doors, and pauses framing",
+      "fearTranslationMode": "translate fear into witness-spacing reads and slowed reply timing; stress=worst-case chaining and rapid doubt loops",
+      "memoryActivationStyle": "memory activates through speaking-order shifts and kinship rank",
+      "namingAvoidanceStyle": "avoids naming risk directly; speaks through objects and gesture; omission=withholds fear of being misread; names consequence through movement not thesis",
+      "socialReadingMode": "reads doorway geometry before trust assignments; misreads=Reads caution as weakness and misses hidden agreement patterns.; distortion=filters events through betrayal or unbuffered threat inside trusted structures",
+      "decisionMode": "risk-minimizing; delays commitment until signal confidence rises; conflict=treating suspicion as external certainty; only escalates after embodied evidence shifts",
+      "silenceThreshold": 0.42000000000000004,
+      "spiritualRitualPerceptionMode": "tracks ritual pace as a live pressure gauge; meaning=searches for meaning through ordered continuity of kinship obligation",
+      "bodilyConversionPatterns": [
+        "chin angle updates with rank movement",
+        "fingers count pauses before reply",
+        "routes abstraction into body cues, object handling, and spatial relation before naming",
+        "hand pressure shifts before irreversible step",
+        "attraction converts to postural adjustment: shoulders squared, chin-angle recalibrated, grip tightened",
+        "rejection or uncertainty converts to over-investment in visible labor"
+      ]
+    }
+  ]
+}

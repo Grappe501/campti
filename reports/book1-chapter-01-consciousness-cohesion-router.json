@@ -1,0 +1,379 @@
+{
+  "artifact": "chapter_consciousness_cohesion_router",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.085Z",
+  "paragraphZones": [
+    {
+      "segment": 1,
+      "paragraph": "A",
+      "dominantConsciousnessSource": "Alexis",
+      "supportingConsciousnessModifiers": [
+        "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses; rejects threat-first scan of faces, doors, and pauses framing",
+        "reads silence debt before explicit claims; misreads=Assumes silence means consent rather than tactical delay.; distortion=filters events through betrayal or unbuffered threat inside trusted structures",
+        "Assumes silence means consent rather than tactical delay.",
+        "uses silence as control gate before speech clears social risk",
+        "silence after partner speaks carries evaluative weight; duration encodes trust level",
+        "physical proximity increases during shared labor, decreases during council tension"
+      ],
+      "bodilyPriority": 0.84,
+      "silencePriority": 0.736,
+      "intimacyDistancePriority": 0.66,
+      "perceptionPriority": 0.6,
+      "abstractionCeilingOverride": 0,
+      "emotionalExposureMode": "guarded",
+      "lawfulWithholdingMode": "strict"
+    },
+    {
+      "segment": 1,
+      "paragraph": "B",
+      "dominantConsciousnessSource": "Alexis",
+      "supportingConsciousnessModifiers": [
+        "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses; rejects threat-first scan of faces, doors, and pauses framing",
+        "reads silence debt before explicit claims; misreads=Assumes silence means consent rather than tactical delay.; distortion=filters events through betrayal or unbuffered threat inside trusted structures",
+        "Assumes silence means consent rather than tactical delay.",
+        "uses silence as control gate before speech clears social risk",
+        "silence after partner speaks carries evaluative weight; duration encodes trust level",
+        "physical proximity increases during shared labor, decreases during council tension"
+      ],
+      "bodilyPriority": 0.74,
+      "silencePriority": 0.736,
+      "intimacyDistancePriority": 0.66,
+      "perceptionPriority": 0.72,
+      "abstractionCeilingOverride": 0,
+      "emotionalExposureMode": "guarded",
+      "lawfulWithholdingMode": "strict"
+    },
+    {
+      "segment": 1,
+      "paragraph": "C",
+      "dominantConsciousnessSource": "Alexis",
+      "supportingConsciousnessModifiers": [
+        "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses; rejects threat-first scan of faces, doors, and pauses framing",
+        "reads silence debt before explicit claims; misreads=Assumes silence means consent rather than tactical delay.; distortion=filters events through betrayal or unbuffered threat inside trusted structures",
+        "Assumes silence means consent rather than tactical delay.",
+        "uses silence as control gate before speech clears social risk",
+        "silence after partner speaks carries evaluative weight; duration encodes trust level",
+        "physical proximity increases during shared labor, decreases during council tension"
+      ],
+      "bodilyPriority": 0.74,
+      "silencePriority": 0.736,
+      "intimacyDistancePriority": 0.66,
+      "perceptionPriority": 0.6,
+      "abstractionCeilingOverride": 1,
+      "emotionalExposureMode": "guarded",
+      "lawfulWithholdingMode": "strict"
+    },
+    {
+      "segment": 2,
+      "paragraph": "A",
+      "dominantConsciousnessSource": "Alexis",
+      "supportingConsciousnessModifiers": [
+        "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses; rejects threat-first scan of faces, doors, and pauses framing",
+        "reads silence debt before explicit claims; misreads=Assumes silence means consent rather than tactical delay.; distortion=filters events through betrayal or unbuffered threat inside trusted structures",
+        "Assumes silence means consent rather than tactical delay.",
+        "uses silence as control gate before speech clears social risk",
+        "silence after partner speaks carries evaluative weight; duration encodes trust level",
+        "physical proximity increases during shared labor, decreases during council tension"
+      ],
+      "bodilyPriority": 0.84,
+      "silencePriority": 0.736,
+      "intimacyDistancePriority": 0.66,
+      "perceptionPriority": 0.6,
+      "abstractionCeilingOverride": 0,
+      "emotionalExposureMode": "guarded",
+      "lawfulWithholdingMode": "strict"
+    },
+    {
+      "segment": 2,
+      "paragraph": "B",
+      "dominantConsciousnessSource": "Alexis",
+      "supportingConsciousnessModifiers": [
+        "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses; rejects threat-first scan of faces, doors, and pauses framing",
+        "reads silence debt before explicit claims; misreads=Assumes silence means consent rather than tactical delay.; distortion=filters events through betrayal or unbuffered threat inside trusted structures",
+        "Assumes silence means consent rather than tactical delay.",
+        "uses silence as control gate before speech clears social risk",
+        "silence after partner speaks carries evaluative weight; duration encodes trust level",
+        "physical proximity increases during shared labor, decreases during council tension"
+      ],
+      "bodilyPriority": 0.74,
+      "silencePriority": 0.736,
+      "intimacyDistancePriority": 0.66,
+      "perceptionPriority": 0.72,
+      "abstractionCeilingOverride": 0,
+      "emotionalExposureMode": "guarded",
+      "lawfulWithholdingMode": "strict"
+    },
+    {
+      "segment": 2,
+      "paragraph": "C",
+      "dominantConsciousnessSource": "Alexis",
+      "supportingConsciousnessModifiers": [
+        "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses; rejects threat-first scan of faces, doors, and pauses framing",
+        "reads silence debt before explicit claims; misreads=Assumes silence means consent rather than tactical delay.; distortion=filters events through betrayal or unbuffered threat inside trusted structures",
+        "Assumes silence means consent rather than tactical delay.",
+        "uses silence as control gate before speech clears social risk",
+        "silence after partner speaks carries evaluative weight; duration encodes trust level",
+        "physical proximity increases during shared labor, decreases during council tension"
+      ],
+      "bodilyPriority": 0.74,
+      "silencePriority": 0.736,
+      "intimacyDistancePriority": 0.66,
+      "perceptionPriority": 0.6,
+      "abstractionCeilingOverride": 1,
+      "emotionalExposureMode": "guarded",
+      "lawfulWithholdingMode": "strict"
+    },
+    {
+      "segment": 3,
+      "paragraph": "A",
+      "dominantConsciousnessSource": "Alexis",
+      "supportingConsciousnessModifiers": [
+        "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses; rejects threat-first scan of faces, doors, and pauses framing",
+        "reads silence debt before explicit claims; misreads=Assumes silence means consent rather than tactical delay.; distortion=filters events through betrayal or unbuffered threat inside trusted structures",
+        "Assumes silence means consent rather than tactical delay.",
+        "uses silence as control gate before speech clears social risk",
+        "silence after partner speaks carries evaluative weight; duration encodes trust level",
+        "physical proximity increases during shared labor, decreases during council tension"
+      ],
+      "bodilyPriority": 0.84,
+      "silencePriority": 0.736,
+      "intimacyDistancePriority": 0.66,
+      "perceptionPriority": 0.6,
+      "abstractionCeilingOverride": 0,
+      "emotionalExposureMode": "guarded",
+      "lawfulWithholdingMode": "strict"
+    },
+    {
+      "segment": 3,
+      "paragraph": "B",
+      "dominantConsciousnessSource": "Alexis",
+      "supportingConsciousnessModifiers": [
+        "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses; rejects threat-first scan of faces, doors, and pauses framing",
+        "reads silence debt before explicit claims; misreads=Assumes silence means consent rather than tactical delay.; distortion=filters events through betrayal or unbuffered threat inside trusted structures",
+        "Assumes silence means consent rather than tactical delay.",
+        "uses silence as control gate before speech clears social risk",
+        "silence after partner speaks carries evaluative weight; duration encodes trust level",
+        "physical proximity increases during shared labor, decreases during council tension"
+      ],
+      "bodilyPriority": 0.74,
+      "silencePriority": 0.736,
+      "intimacyDistancePriority": 0.66,
+      "perceptionPriority": 0.72,
+      "abstractionCeilingOverride": 0,
+      "emotionalExposureMode": "guarded",
+      "lawfulWithholdingMode": "strict"
+    },
+    {
+      "segment": 3,
+      "paragraph": "C",
+      "dominantConsciousnessSource": "Alexis",
+      "supportingConsciousnessModifiers": [
+        "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses; rejects threat-first scan of faces, doors, and pauses framing",
+        "reads silence debt before explicit claims; misreads=Assumes silence means consent rather than tactical delay.; distortion=filters events through betrayal or unbuffered threat inside trusted structures",
+        "Assumes silence means consent rather than tactical delay.",
+        "uses silence as control gate before speech clears social risk",
+        "silence after partner speaks carries evaluative weight; duration encodes trust level",
+        "physical proximity increases during shared labor, decreases during council tension"
+      ],
+      "bodilyPriority": 0.74,
+      "silencePriority": 0.736,
+      "intimacyDistancePriority": 0.66,
+      "perceptionPriority": 0.6,
+      "abstractionCeilingOverride": 1,
+      "emotionalExposureMode": "guarded",
+      "lawfulWithholdingMode": "strict"
+    },
+    {
+      "segment": 4,
+      "paragraph": "A",
+      "dominantConsciousnessSource": "Alexis",
+      "supportingConsciousnessModifiers": [
+        "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses; rejects threat-first scan of faces, doors, and pauses framing",
+        "reads silence debt before explicit claims; misreads=Assumes silence means consent rather than tactical delay.; distortion=filters events through betrayal or unbuffered threat inside trusted structures",
+        "Assumes silence means consent rather than tactical delay.",
+        "uses silence as control gate before speech clears social risk",
+        "silence after partner speaks carries evaluative weight; duration encodes trust level",
+        "physical proximity increases during shared labor, decreases during council tension"
+      ],
+      "bodilyPriority": 0.84,
+      "silencePriority": 0.736,
+      "intimacyDistancePriority": 0.66,
+      "perceptionPriority": 0.6,
+      "abstractionCeilingOverride": 0,
+      "emotionalExposureMode": "guarded",
+      "lawfulWithholdingMode": "strict"
+    },
+    {
+      "segment": 4,
+      "paragraph": "B",
+      "dominantConsciousnessSource": "Alexis",
+      "supportingConsciousnessModifiers": [
+        "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses; rejects threat-first scan of faces, doors, and pauses framing",
+        "reads silence debt before explicit claims; misreads=Assumes silence means consent rather than tactical delay.; distortion=filters events through betrayal or unbuffered threat inside trusted structures",
+        "Assumes silence means consent rather than tactical delay.",
+        "uses silence as control gate before speech clears social risk",
+        "silence after partner speaks carries evaluative weight; duration encodes trust level",
+        "physical proximity increases during shared labor, decreases during council tension"
+      ],
+      "bodilyPriority": 0.74,
+      "silencePriority": 0.736,
+      "intimacyDistancePriority": 0.66,
+      "perceptionPriority": 0.72,
+      "abstractionCeilingOverride": 0,
+      "emotionalExposureMode": "guarded",
+      "lawfulWithholdingMode": "strict"
+    },
+    {
+      "segment": 4,
+      "paragraph": "C",
+      "dominantConsciousnessSource": "Alexis",
+      "supportingConsciousnessModifiers": [
+        "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses; rejects threat-first scan of faces, doors, and pauses framing",
+        "reads silence debt before explicit claims; misreads=Assumes silence means consent rather than tactical delay.; distortion=filters events through betrayal or unbuffered threat inside trusted structures",
+        "Assumes silence means consent rather than tactical delay.",
+        "uses silence as control gate before speech clears social risk",
+        "silence after partner speaks carries evaluative weight; duration encodes trust level",
+        "physical proximity increases during shared labor, decreases during council tension"
+      ],
+      "bodilyPriority": 0.74,
+      "silencePriority": 0.736,
+      "intimacyDistancePriority": 0.66,
+      "perceptionPriority": 0.6,
+      "abstractionCeilingOverride": 1,
+      "emotionalExposureMode": "guarded",
+      "lawfulWithholdingMode": "strict"
+    },
+    {
+      "segment": 5,
+      "paragraph": "A",
+      "dominantConsciousnessSource": "Alexis",
+      "supportingConsciousnessModifiers": [
+        "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses; rejects threat-first scan of faces, doors, and pauses framing",
+        "reads silence debt before explicit claims; misreads=Assumes silence means consent rather than tactical delay.; distortion=filters events through betrayal or unbuffered threat inside trusted structures",
+        "Assumes silence means consent rather than tactical delay.",
+        "uses silence as control gate before speech clears social risk",
+        "silence after partner speaks carries evaluative weight; duration encodes trust level",
+        "physical proximity increases during shared labor, decreases during council tension"
+      ],
+      "bodilyPriority": 0.84,
+      "silencePriority": 0.736,
+      "intimacyDistancePriority": 0.66,
+      "perceptionPriority": 0.6,
+      "abstractionCeilingOverride": 0,
+      "emotionalExposureMode": "guarded",
+      "lawfulWithholdingMode": "strict"
+    },
+    {
+      "segment": 5,
+      "paragraph": "B",
+      "dominantConsciousnessSource": "Alexis",
+      "supportingConsciousnessModifiers": [
+        "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses; rejects threat-first scan of faces, doors, and pauses framing",
+        "reads silence debt before explicit claims; misreads=Assumes silence means consent rather than tactical delay.; distortion=filters events through betrayal or unbuffered threat inside trusted structures",
+        "Assumes silence means consent rather than tactical delay.",
+        "uses silence as control gate before speech clears social risk",
+        "silence after partner speaks carries evaluative weight; duration encodes trust level",
+        "physical proximity increases during shared labor, decreases during council tension"
+      ],
+      "bodilyPriority": 0.74,
+      "silencePriority": 0.736,
+      "intimacyDistancePriority": 0.66,
+      "perceptionPriority": 0.72,
+      "abstractionCeilingOverride": 0,
+      "emotionalExposureMode": "guarded",
+      "lawfulWithholdingMode": "strict"
+    },
+    {
+      "segment": 5,
+      "paragraph": "C",
+      "dominantConsciousnessSource": "Alexis",
+      "supportingConsciousnessModifiers": [
+        "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses; rejects threat-first scan of faces, doors, and pauses framing",
+        "reads silence debt before explicit claims; misreads=Assumes silence means consent rather than tactical delay.; distortion=filters events through betrayal or unbuffered threat inside trusted structures",
+        "Assumes silence means consent rather than tactical delay.",
+        "uses silence as control gate before speech clears social risk",
+        "silence after partner speaks carries evaluative weight; duration encodes trust level",
+        "physical proximity increases during shared labor, decreases during council tension"
+      ],
+      "bodilyPriority": 0.74,
+      "silencePriority": 0.736,
+      "intimacyDistancePriority": 0.66,
+      "perceptionPriority": 0.6,
+      "abstractionCeilingOverride": 1,
+      "emotionalExposureMode": "guarded",
+      "lawfulWithholdingMode": "strict"
+    },
+    {
+      "segment": 6,
+      "paragraph": "A",
+      "dominantConsciousnessSource": "Alexis",
+      "supportingConsciousnessModifiers": [
+        "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses; rejects threat-first scan of faces, doors, and pauses framing",
+        "reads silence debt before explicit claims; misreads=Assumes silence means consent rather than tactical delay.; distortion=filters events through betrayal or unbuffered threat inside trusted structures",
+        "Assumes silence means consent rather than tactical delay.",
+        "uses silence as control gate before speech clears social risk",
+        "silence after partner speaks carries evaluative weight; duration encodes trust level",
+        "physical proximity increases during shared labor, decreases during council tension"
+      ],
+      "bodilyPriority": 0.84,
+      "silencePriority": 0.736,
+      "intimacyDistancePriority": 0.66,
+      "perceptionPriority": 0.6,
+      "abstractionCeilingOverride": 0,
+      "emotionalExposureMode": "guarded",
+      "lawfulWithholdingMode": "strict"
+    },
+    {
+      "segment": 6,
+      "paragraph": "B",
+      "dominantConsciousnessSource": "Alexis",
+      "supportingConsciousnessModifiers": [
+        "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses; rejects threat-first scan of faces, doors, and pauses framing",
+        "reads silence debt before explicit claims; misreads=Assumes silence means consent rather than tactical delay.; distortion=filters events through betrayal or unbuffered threat inside trusted structures",
+        "Assumes silence means consent rather than tactical delay.",
+        "uses silence as control gate before speech clears social risk",
+        "silence after partner speaks carries evaluative weight; duration encodes trust level",
+        "physical proximity increases during shared labor, decreases during council tension"
+      ],
+      "bodilyPriority": 0.74,
+      "silencePriority": 0.736,
+      "intimacyDistancePriority": 0.66,
+      "perceptionPriority": 0.72,
+      "abstractionCeilingOverride": 0,
+      "emotionalExposureMode": "guarded",
+      "lawfulWithholdingMode": "strict"
+    },
+    {
+      "segment": 6,
+      "paragraph": "C",
+      "dominantConsciousnessSource": "Alexis",
+      "supportingConsciousnessModifiers": [
+        "threat-first scan of faces, doors, and pauses; mediation=notices threat-first scan of faces, doors, and pauses; rejects threat-first scan of faces, doors, and pauses framing",
+        "reads silence debt before explicit claims; misreads=Assumes silence means consent rather than tactical delay.; distortion=filters events through betrayal or unbuffered threat inside trusted structures",
+        "Assumes silence means consent rather than tactical delay.",
+        "uses silence as control gate before speech clears social risk",
+        "silence after partner speaks carries evaluative weight; duration encodes trust level",
+        "physical proximity increases during shared labor, decreases during council tension"
+      ],
+      "bodilyPriority": 0.74,
+      "silencePriority": 0.736,
+      "intimacyDistancePriority": 0.66,
+      "perceptionPriority": 0.6,
+      "abstractionCeilingOverride": 1,
+      "emotionalExposureMode": "guarded",
+      "lawfulWithholdingMode": "strict"
+    }
+  ],
+  "provenance": {
+    "sourceArtifacts": [
+      "reports/book1-chapter-01-voice-cognition-map.json",
+      "reports/book1-chapter-01-enneagram-mediation-layer.json",
+      "reports/book1-chapter-01-developmental-intimacy-engine.json",
+      "reports/book1-chapter-01-segment-simulation-state.json",
+      "reports/book1-chapter-01-render-directives.json",
+      "reports/book1-chapter-01-voice-law-engine.json",
+      "reports/book1-chapter-01-language-suppression-map.json"
+    ]
+  }
+}

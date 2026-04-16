@@ -1,0 +1,15 @@
+{
+  "artifact": "chapter_gap_report",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.019Z",
+  "missingInformation": [
+    {
+      "gapId": "GAP-CHRONO-UNRESOLVED",
+      "missing": "Undated evidence rows remain",
+      "impactOnChapter": "Chronology confidence remains probabilistic.",
+      "requiredBeforeLock": true,
+      "suggestedSource": "chapter_evidence_pack normalization"
+    }
+  ]
+}

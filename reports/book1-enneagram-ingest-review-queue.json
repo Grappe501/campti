@@ -1,0 +1,13 @@
+{
+  "artifact": "book1_enneagram_ingest_review_queue",
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-04-16T19:42:53.269Z",
+  "sourceRef": "book1-source-section-xiii-enneagram-upload",
+  "safeguards": {
+    "noRawEnneagramLabelsInProse": true,
+    "noDirectProseRenderingFromSourceText": true,
+    "temporalGatingRemainsEnforced": true,
+    "developmentalMaturityAndIntimacySeparatedFromEnneagram": true
+  },
+  "unresolvedMappings": []
+}

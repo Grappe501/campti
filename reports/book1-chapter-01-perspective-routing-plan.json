@@ -1,0 +1,296 @@
+{
+  "artifact": "chapter_perspective_routing_plan",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.079Z",
+  "routes": [
+    {
+      "segment": 1,
+      "paragraph": "A",
+      "dominantCognitionSource": "Alexis",
+      "narrativeDistanceMode": "immediate_embodied",
+      "paragraphMode": "interior",
+      "lawfulForeshadowingOnly": false,
+      "mustRemainWithheld": [
+        "no treaty, no final authority settlement, no decisive peace.",
+        "do not resolve succession or identity rupture in chapter 1.",
+        "do not collapse lineage transfer to a resolved descendant endpoint in early chapters.",
+        "Speaking order and proximity change, preserving external-contact pressure remains latent and unresolved by chapter close. while shifting local authority."
+      ],
+      "previousDistanceMode": null,
+      "sameAsPreviousDistanceMode": false
+    },
+    {
+      "segment": 1,
+      "paragraph": "B",
+      "dominantCognitionSource": "Alexis",
+      "narrativeDistanceMode": "close_observational",
+      "paragraphMode": "withheldKnowledge",
+      "lawfulForeshadowingOnly": true,
+      "mustRemainWithheld": [
+        "no treaty, no final authority settlement, no decisive peace.",
+        "do not resolve succession or identity rupture in chapter 1.",
+        "do not collapse lineage transfer to a resolved descendant endpoint in early chapters.",
+        "Speaking order and proximity change, preserving external-contact pressure remains latent and unresolved by chapter close. while shifting local authority."
+      ],
+      "previousDistanceMode": "immediate_embodied",
+      "sameAsPreviousDistanceMode": false
+    },
+    {
+      "segment": 1,
+      "paragraph": "C",
+      "dominantCognitionSource": "Alexis",
+      "narrativeDistanceMode": "social_reading",
+      "paragraphMode": "withheldKnowledge",
+      "lawfulForeshadowingOnly": true,
+      "mustRemainWithheld": [
+        "no treaty, no final authority settlement, no decisive peace.",
+        "do not resolve succession or identity rupture in chapter 1.",
+        "do not collapse lineage transfer to a resolved descendant endpoint in early chapters.",
+        "Speaking order and proximity change, preserving external-contact pressure remains latent and unresolved by chapter close. while shifting local authority."
+      ],
+      "previousDistanceMode": "close_observational",
+      "sameAsPreviousDistanceMode": false
+    },
+    {
+      "segment": 2,
+      "paragraph": "A",
+      "dominantCognitionSource": "Alexis",
+      "narrativeDistanceMode": "immediate_embodied",
+      "paragraphMode": "interior",
+      "lawfulForeshadowingOnly": false,
+      "mustRemainWithheld": [
+        "no treaty, no final authority settlement, no decisive peace.",
+        "do not resolve succession or identity rupture in chapter 1.",
+        "do not collapse lineage transfer to a resolved descendant endpoint in early chapters.",
+        "Speaking order and proximity change, preserving external-contact pressure remains latent and unresolved by chapter close. while shifting local authority."
+      ],
+      "previousDistanceMode": "social_reading",
+      "sameAsPreviousDistanceMode": false
+    },
+    {
+      "segment": 2,
+      "paragraph": "B",
+      "dominantCognitionSource": "Alexis",
+      "narrativeDistanceMode": "social_reading",
+      "paragraphMode": "social-reading",
+      "lawfulForeshadowingOnly": true,
+      "mustRemainWithheld": [
+        "no treaty, no final authority settlement, no decisive peace.",
+        "do not resolve succession or identity rupture in chapter 1.",
+        "do not collapse lineage transfer to a resolved descendant endpoint in early chapters.",
+        "Speaking order and proximity change, preserving external-contact pressure remains latent and unresolved by chapter close. while shifting local authority."
+      ],
+      "previousDistanceMode": "immediate_embodied",
+      "sameAsPreviousDistanceMode": false
+    },
+    {
+      "segment": 2,
+      "paragraph": "C",
+      "dominantCognitionSource": "Alexis",
+      "narrativeDistanceMode": "restrained_reflective",
+      "paragraphMode": "withheldKnowledge",
+      "lawfulForeshadowingOnly": true,
+      "mustRemainWithheld": [
+        "no treaty, no final authority settlement, no decisive peace.",
+        "do not resolve succession or identity rupture in chapter 1.",
+        "do not collapse lineage transfer to a resolved descendant endpoint in early chapters.",
+        "Speaking order and proximity change, preserving external-contact pressure remains latent and unresolved by chapter close. while shifting local authority."
+      ],
+      "previousDistanceMode": "social_reading",
+      "sameAsPreviousDistanceMode": false
+    },
+    {
+      "segment": 3,
+      "paragraph": "A",
+      "dominantCognitionSource": "Alexis",
+      "narrativeDistanceMode": "immediate_embodied",
+      "paragraphMode": "interior",
+      "lawfulForeshadowingOnly": false,
+      "mustRemainWithheld": [
+        "no treaty, no final authority settlement, no decisive peace.",
+        "do not resolve succession or identity rupture in chapter 1.",
+        "do not collapse lineage transfer to a resolved descendant endpoint in early chapters.",
+        "Speaking order and proximity change, preserving external-contact pressure remains latent and unresolved by chapter close. while shifting local authority."
+      ],
+      "previousDistanceMode": "restrained_reflective",
+      "sameAsPreviousDistanceMode": false
+    },
+    {
+      "segment": 3,
+      "paragraph": "B",
+      "dominantCognitionSource": "Alexis",
+      "narrativeDistanceMode": "close_observational",
+      "paragraphMode": "withheldKnowledge",
+      "lawfulForeshadowingOnly": true,
+      "mustRemainWithheld": [
+        "no treaty, no final authority settlement, no decisive peace.",
+        "do not resolve succession or identity rupture in chapter 1.",
+        "do not collapse lineage transfer to a resolved descendant endpoint in early chapters.",
+        "Speaking order and proximity change, preserving external-contact pressure remains latent and unresolved by chapter close. while shifting local authority."
+      ],
+      "previousDistanceMode": "immediate_embodied",
+      "sameAsPreviousDistanceMode": false
+    },
+    {
+      "segment": 3,
+      "paragraph": "C",
+      "dominantCognitionSource": "Alexis",
+      "narrativeDistanceMode": "social_reading",
+      "paragraphMode": "withheldKnowledge",
+      "lawfulForeshadowingOnly": true,
+      "mustRemainWithheld": [
+        "no treaty, no final authority settlement, no decisive peace.",
+        "do not resolve succession or identity rupture in chapter 1.",
+        "do not collapse lineage transfer to a resolved descendant endpoint in early chapters.",
+        "Speaking order and proximity change, preserving external-contact pressure remains latent and unresolved by chapter close. while shifting local authority."
+      ],
+      "previousDistanceMode": "close_observational",
+      "sameAsPreviousDistanceMode": false
+    },
+    {
+      "segment": 4,
+      "paragraph": "A",
+      "dominantCognitionSource": "Alexis",
+      "narrativeDistanceMode": "immediate_embodied",
+      "paragraphMode": "interior",
+      "lawfulForeshadowingOnly": false,
+      "mustRemainWithheld": [
+        "no treaty, no final authority settlement, no decisive peace.",
+        "do not resolve succession or identity rupture in chapter 1.",
+        "do not collapse lineage transfer to a resolved descendant endpoint in early chapters.",
+        "Speaking order and proximity change, preserving external-contact pressure remains latent and unresolved by chapter close. while shifting local authority."
+      ],
+      "previousDistanceMode": "social_reading",
+      "sameAsPreviousDistanceMode": false
+    },
+    {
+      "segment": 4,
+      "paragraph": "B",
+      "dominantCognitionSource": "Alexis",
+      "narrativeDistanceMode": "social_reading",
+      "paragraphMode": "social-reading",
+      "lawfulForeshadowingOnly": true,
+      "mustRemainWithheld": [
+        "no treaty, no final authority settlement, no decisive peace.",
+        "do not resolve succession or identity rupture in chapter 1.",
+        "do not collapse lineage transfer to a resolved descendant endpoint in early chapters.",
+        "Speaking order and proximity change, preserving external-contact pressure remains latent and unresolved by chapter close. while shifting local authority."
+      ],
+      "previousDistanceMode": "immediate_embodied",
+      "sameAsPreviousDistanceMode": false
+    },
+    {
+      "segment": 4,
+      "paragraph": "C",
+      "dominantCognitionSource": "Alexis",
+      "narrativeDistanceMode": "restrained_reflective",
+      "paragraphMode": "withheldKnowledge",
+      "lawfulForeshadowingOnly": true,
+      "mustRemainWithheld": [
+        "no treaty, no final authority settlement, no decisive peace.",
+        "do not resolve succession or identity rupture in chapter 1.",
+        "do not collapse lineage transfer to a resolved descendant endpoint in early chapters.",
+        "Speaking order and proximity change, preserving external-contact pressure remains latent and unresolved by chapter close. while shifting local authority."
+      ],
+      "previousDistanceMode": "social_reading",
+      "sameAsPreviousDistanceMode": false
+    },
+    {
+      "segment": 5,
+      "paragraph": "A",
+      "dominantCognitionSource": "Alexis",
+      "narrativeDistanceMode": "immediate_embodied",
+      "paragraphMode": "interior",
+      "lawfulForeshadowingOnly": false,
+      "mustRemainWithheld": [
+        "no treaty, no final authority settlement, no decisive peace.",
+        "do not resolve succession or identity rupture in chapter 1.",
+        "do not collapse lineage transfer to a resolved descendant endpoint in early chapters.",
+        "Speaking order and proximity change, preserving external-contact pressure remains latent and unresolved by chapter close. while shifting local authority."
+      ],
+      "previousDistanceMode": "restrained_reflective",
+      "sameAsPreviousDistanceMode": false
+    },
+    {
+      "segment": 5,
+      "paragraph": "B",
+      "dominantCognitionSource": "Alexis",
+      "narrativeDistanceMode": "close_observational",
+      "paragraphMode": "withheldKnowledge",
+      "lawfulForeshadowingOnly": true,
+      "mustRemainWithheld": [
+        "no treaty, no final authority settlement, no decisive peace.",
+        "do not resolve succession or identity rupture in chapter 1.",
+        "do not collapse lineage transfer to a resolved descendant endpoint in early chapters.",
+        "Speaking order and proximity change, preserving external-contact pressure remains latent and unresolved by chapter close. while shifting local authority."
+      ],
+      "previousDistanceMode": "immediate_embodied",
+      "sameAsPreviousDistanceMode": false
+    },
+    {
+      "segment": 5,
+      "paragraph": "C",
+      "dominantCognitionSource": "Alexis",
+      "narrativeDistanceMode": "social_reading",
+      "paragraphMode": "withheldKnowledge",
+      "lawfulForeshadowingOnly": true,
+      "mustRemainWithheld": [
+        "no treaty, no final authority settlement, no decisive peace.",
+        "do not resolve succession or identity rupture in chapter 1.",
+        "do not collapse lineage transfer to a resolved descendant endpoint in early chapters.",
+        "Speaking order and proximity change, preserving external-contact pressure remains latent and unresolved by chapter close. while shifting local authority."
+      ],
+      "previousDistanceMode": "close_observational",
+      "sameAsPreviousDistanceMode": false
+    },
+    {
+      "segment": 6,
+      "paragraph": "A",
+      "dominantCognitionSource": "Alexis",
+      "narrativeDistanceMode": "immediate_embodied",
+      "paragraphMode": "interior",
+      "lawfulForeshadowingOnly": false,
+      "mustRemainWithheld": [
+        "no treaty, no final authority settlement, no decisive peace.",
+        "do not resolve succession or identity rupture in chapter 1.",
+        "do not collapse lineage transfer to a resolved descendant endpoint in early chapters.",
+        "Speaking order and proximity change, preserving external-contact pressure remains latent and unresolved by chapter close. while shifting local authority."
+      ],
+      "previousDistanceMode": "social_reading",
+      "sameAsPreviousDistanceMode": false
+    },
+    {
+      "segment": 6,
+      "paragraph": "B",
+      "dominantCognitionSource": "Alexis",
+      "narrativeDistanceMode": "social_reading",
+      "paragraphMode": "social-reading",
+      "lawfulForeshadowingOnly": true,
+      "mustRemainWithheld": [
+        "no treaty, no final authority settlement, no decisive peace.",
+        "do not resolve succession or identity rupture in chapter 1.",
+        "do not collapse lineage transfer to a resolved descendant endpoint in early chapters.",
+        "Speaking order and proximity change, preserving external-contact pressure remains latent and unresolved by chapter close. while shifting local authority."
+      ],
+      "previousDistanceMode": "immediate_embodied",
+      "sameAsPreviousDistanceMode": false
+    },
+    {
+      "segment": 6,
+      "paragraph": "C",
+      "dominantCognitionSource": "Alexis",
+      "narrativeDistanceMode": "restrained_reflective",
+      "paragraphMode": "withheldKnowledge",
+      "lawfulForeshadowingOnly": true,
+      "mustRemainWithheld": [
+        "no treaty, no final authority settlement, no decisive peace.",
+        "do not resolve succession or identity rupture in chapter 1.",
+        "do not collapse lineage transfer to a resolved descendant endpoint in early chapters.",
+        "Speaking order and proximity change, preserving external-contact pressure remains latent and unresolved by chapter close. while shifting local authority."
+      ],
+      "previousDistanceMode": "social_reading",
+      "sameAsPreviousDistanceMode": false
+    }
+  ]
+}

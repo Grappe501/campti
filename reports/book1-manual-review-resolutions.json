@@ -1,0 +1,21 @@
+{
+  "instructions": "Fill resolutions and rerun script. Use set_preferred for scene+layer preference and set_status for explicit one-off promotion/demotion.",
+  "resolutions": [
+    {
+      "action": "set_preferred",
+      "sceneNumber": 4,
+      "layer": "observer_layer",
+      "preferredComponentKey": "book1-scene4-observer-manual-choice",
+      "demoteOthersTo": "CANDIDATE",
+      "note": "Manual curation for scene 4 observer stack."
+    },
+    {
+      "action": "set_preferred",
+      "sceneNumber": 11,
+      "layer": "environmental_layer",
+      "preferredComponentKey": "book1-scene11-environment-manual-choice",
+      "demoteOthersTo": "CANDIDATE",
+      "note": "Manual curation for scene 11 environmental stack."
+    }
+  ]
+}

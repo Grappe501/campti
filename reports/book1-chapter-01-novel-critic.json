@@ -1,0 +1,14 @@
+{
+  "chapter": 1,
+  "critic": "Novel Critic",
+  "generatedAt": "2026-04-16T19:48:40.721Z",
+  "findings": [
+    {
+      "severity": "critical",
+      "excerpt": "smoke and wet reed meet skin before",
+      "whyItFails": "Repeated sentence architecture across segments signals synthesized templating rather than authored progression.",
+      "recommendedFixType": "composer fix"
+    }
+  ],
+  "verdict": "Draft fails novel-authorship stress test; synthesis signature remains obvious."
+}

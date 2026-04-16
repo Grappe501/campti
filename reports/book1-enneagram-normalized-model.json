@@ -1,0 +1,1151 @@
+{
+  "artifact": "book1_enneagram_normalized_model",
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-04-16T19:42:53.269Z",
+  "sourceRef": "book1-source-section-xiii-enneagram-upload",
+  "normalized": {
+    "coreTypes": [
+      {
+        "enneagramType": "ONE",
+        "digit": "1",
+        "coreFear": "being corrupt, evil, defective, or morally failing in a way that cannot be corrected",
+        "coreDesire": "integrity, balance, right action, and a world that matches a good standard",
+        "vice": "resentment and suppressed anger framed as principled correction",
+        "virtue": "serenity",
+        "egoFixation": "resentment"
+      },
+      {
+        "enneagramType": "TWO",
+        "digit": "2",
+        "coreFear": "being unwanted, unloved, dispensable, or without place in the human weave",
+        "coreDesire": "to be loved, needed, and indispensable to someone who matters",
+        "vice": "pride expressed as helpful indispensability and hidden ledgers of debt",
+        "virtue": "humility",
+        "egoFixation": "flattery"
+      },
+      {
+        "enneagramType": "THREE",
+        "digit": "3",
+        "coreFear": "being worthless, exposed as a fraud, or failing publicly in what counts",
+        "coreDesire": "to feel valuable, admirable, and successful in the eyes that matter",
+        "vice": "deceit of image—performance, selective truth, charm as armor",
+        "virtue": "authenticity",
+        "egoFixation": "vanity"
+      },
+      {
+        "enneagramType": "FOUR",
+        "digit": "4",
+        "coreFear": "having no identity or significance—being ordinary, abandoned, or emotionally cut off",
+        "coreDesire": "to find self and be deeply understood in one’s particularity",
+        "vice": "envy—longing framed as taste, wound, and distance from the ‘simple happy’",
+        "virtue": "equanimity",
+        "egoFixation": "melancholy"
+      },
+      {
+        "enneagramType": "FIVE",
+        "digit": "5",
+        "coreFear": "being overwhelmed, invaded, emptied, or incompetent in a world that demands too much",
+        "coreDesire": "mastery, self-sufficiency, and enough inner space to think clearly",
+        "vice": "avarice of energy—hoarding time, knowledge, privacy",
+        "virtue": "non-attachment",
+        "egoFixation": "stinginess"
+      },
+      {
+        "enneagramType": "SIX",
+        "digit": "6",
+        "coreFear": "being without support, guidance, or security—abandoned to chaos or hostile force",
+        "coreDesire": "safety, certainty, and trustworthy belonging",
+        "vice": "fear run as loyalty tests, suspicion, and hypervigilance",
+        "virtue": "courage",
+        "egoFixation": "cowardice"
+      },
+      {
+        "enneagramType": "SEVEN",
+        "digit": "7",
+        "coreFear": "being trapped in pain, boredom, limitation, or emotional confinement",
+        "coreDesire": "freedom, variety, and future possibility—life kept open",
+        "vice": "gluttony for stimulation—escape through plan, story, and new frontiers",
+        "virtue": "sobriety",
+        "egoFixation": "planning"
+      },
+      {
+        "enneagramType": "EIGHT",
+        "digit": "8",
+        "coreFear": "being harmed, controlled, humiliated, or at another’s mercy",
+        "coreDesire": "self-protection and autonomy—life on one’s own terms",
+        "vice": "lust for intensity—force, confrontation, appetite",
+        "virtue": "innocence",
+        "egoFixation": "vengefulness"
+      },
+      {
+        "enneagramType": "NINE",
+        "digit": "9",
+        "coreFear": "loss of connection, inner peace, or cohesion—being disturbed into nonbeing",
+        "coreDesire": "inner stability, belonging, and gentle continuity",
+        "vice": "sloth of soul—numbing, merging, postponing decisive selfhood",
+        "virtue": "right action",
+        "egoFixation": "indolence"
+      }
+    ],
+    "wingVariants": [
+      {
+        "variantId": "one-w9",
+        "enneagramType": "ONE",
+        "wingType": "NINE",
+        "shorthand": "1w9"
+      },
+      {
+        "variantId": "one-w2",
+        "enneagramType": "ONE",
+        "wingType": "TWO",
+        "shorthand": "1w2"
+      },
+      {
+        "variantId": "two-w1",
+        "enneagramType": "TWO",
+        "wingType": "ONE",
+        "shorthand": "2w1"
+      },
+      {
+        "variantId": "two-w3",
+        "enneagramType": "TWO",
+        "wingType": "THREE",
+        "shorthand": "2w3"
+      },
+      {
+        "variantId": "three-w2",
+        "enneagramType": "THREE",
+        "wingType": "TWO",
+        "shorthand": "3w2"
+      },
+      {
+        "variantId": "three-w4",
+        "enneagramType": "THREE",
+        "wingType": "FOUR",
+        "shorthand": "3w4"
+      },
+      {
+        "variantId": "four-w3",
+        "enneagramType": "FOUR",
+        "wingType": "THREE",
+        "shorthand": "4w3"
+      },
+      {
+        "variantId": "four-w5",
+        "enneagramType": "FOUR",
+        "wingType": "FIVE",
+        "shorthand": "4w5"
+      },
+      {
+        "variantId": "five-w4",
+        "enneagramType": "FIVE",
+        "wingType": "FOUR",
+        "shorthand": "5w4"
+      },
+      {
+        "variantId": "five-w6",
+        "enneagramType": "FIVE",
+        "wingType": "SIX",
+        "shorthand": "5w6"
+      },
+      {
+        "variantId": "six-w5",
+        "enneagramType": "SIX",
+        "wingType": "FIVE",
+        "shorthand": "6w5"
+      },
+      {
+        "variantId": "six-w7",
+        "enneagramType": "SIX",
+        "wingType": "SEVEN",
+        "shorthand": "6w7"
+      },
+      {
+        "variantId": "seven-w6",
+        "enneagramType": "SEVEN",
+        "wingType": "SIX",
+        "shorthand": "7w6"
+      },
+      {
+        "variantId": "seven-w8",
+        "enneagramType": "SEVEN",
+        "wingType": "EIGHT",
+        "shorthand": "7w8"
+      },
+      {
+        "variantId": "eight-w7",
+        "enneagramType": "EIGHT",
+        "wingType": "SEVEN",
+        "shorthand": "8w7"
+      },
+      {
+        "variantId": "eight-w9",
+        "enneagramType": "EIGHT",
+        "wingType": "NINE",
+        "shorthand": "8w9"
+      },
+      {
+        "variantId": "nine-w8",
+        "enneagramType": "NINE",
+        "wingType": "EIGHT",
+        "shorthand": "9w8"
+      },
+      {
+        "variantId": "nine-w1",
+        "enneagramType": "NINE",
+        "wingType": "ONE",
+        "shorthand": "9w1"
+      }
+    ],
+    "stateExpressions": [
+      {
+        "expressionId": "one-baseline_guarded",
+        "enneagramType": "ONE",
+        "stateBand": "baseline_guarded",
+        "perceptionFilter": "prosecutor-and-jury; should-statements; measured moral inventory under guarded baseline attention",
+        "distortionEngine": "demands perfection yet envies those who break rules without consequence under guarded baseline attention",
+        "defenseMechanism": "duty, standards, responsibility to what is right",
+        "relationshipFieldBehavior": "argument as principle; escalation via standards",
+        "languageImpactRule": "inspector reporting on self and others"
+      },
+      {
+        "expressionId": "one-baseline_balanced",
+        "enneagramType": "ONE",
+        "stateBand": "baseline_balanced",
+        "perceptionFilter": "prosecutor-and-jury; should-statements; measured moral inventory under balanced baseline attention",
+        "distortionEngine": "demands perfection yet envies those who break rules without consequence under balanced baseline attention",
+        "defenseMechanism": "duty, standards, responsibility to what is right",
+        "relationshipFieldBehavior": "argument as principle; escalation via standards",
+        "languageImpactRule": "inspector reporting on self and others"
+      },
+      {
+        "expressionId": "one-stress_reactive",
+        "enneagramType": "ONE",
+        "stateBand": "stress_reactive",
+        "perceptionFilter": "prosecutor-and-jury; should-statements; measured moral inventory under stress movement toward FOUR",
+        "distortionEngine": "demands perfection yet envies those who break rules without consequence under stress movement toward FOUR",
+        "defenseMechanism": "duty, standards, responsibility to what is right",
+        "relationshipFieldBehavior": "argument as principle; escalation via standards",
+        "languageImpactRule": "inspector reporting on self and others"
+      },
+      {
+        "expressionId": "one-stress_fragmented",
+        "enneagramType": "ONE",
+        "stateBand": "stress_fragmented",
+        "perceptionFilter": "prosecutor-and-jury; should-statements; measured moral inventory under fragmented stress movement toward FOUR",
+        "distortionEngine": "demands perfection yet envies those who break rules without consequence under fragmented stress movement toward FOUR",
+        "defenseMechanism": "duty, standards, responsibility to what is right",
+        "relationshipFieldBehavior": "argument as principle; escalation via standards",
+        "languageImpactRule": "inspector reporting on self and others"
+      },
+      {
+        "expressionId": "one-growth_integrated",
+        "enneagramType": "ONE",
+        "stateBand": "growth_integrated",
+        "perceptionFilter": "prosecutor-and-jury; should-statements; measured moral inventory under growth movement toward SEVEN",
+        "distortionEngine": "demands perfection yet envies those who break rules without consequence under growth movement toward SEVEN",
+        "defenseMechanism": "duty, standards, responsibility to what is right",
+        "relationshipFieldBehavior": "argument as principle; escalation via standards",
+        "languageImpactRule": "inspector reporting on self and others"
+      },
+      {
+        "expressionId": "one-growth_transcendent",
+        "enneagramType": "ONE",
+        "stateBand": "growth_transcendent",
+        "perceptionFilter": "prosecutor-and-jury; should-statements; measured moral inventory under transcendent growth movement toward SEVEN",
+        "distortionEngine": "demands perfection yet envies those who break rules without consequence under transcendent growth movement toward SEVEN",
+        "defenseMechanism": "duty, standards, responsibility to what is right",
+        "relationshipFieldBehavior": "argument as principle; escalation via standards",
+        "languageImpactRule": "inspector reporting on self and others"
+      },
+      {
+        "expressionId": "two-baseline_guarded",
+        "enneagramType": "TWO",
+        "stateBand": "baseline_guarded",
+        "perceptionFilter": "warm, solicitous, then sharp if unthanked under guarded baseline attention",
+        "distortionEngine": "insists selflessness while tracking who owes whom under guarded baseline attention",
+        "defenseMechanism": "care, loyalty, what others truly need (as I see it)",
+        "relationshipFieldBehavior": "hurt accusation or sudden cold withdrawal",
+        "languageImpactRule": "caretaker diary; who hurts, who needs me"
+      },
+      {
+        "expressionId": "two-baseline_balanced",
+        "enneagramType": "TWO",
+        "stateBand": "baseline_balanced",
+        "perceptionFilter": "warm, solicitous, then sharp if unthanked under balanced baseline attention",
+        "distortionEngine": "insists selflessness while tracking who owes whom under balanced baseline attention",
+        "defenseMechanism": "care, loyalty, what others truly need (as I see it)",
+        "relationshipFieldBehavior": "hurt accusation or sudden cold withdrawal",
+        "languageImpactRule": "caretaker diary; who hurts, who needs me"
+      },
+      {
+        "expressionId": "two-stress_reactive",
+        "enneagramType": "TWO",
+        "stateBand": "stress_reactive",
+        "perceptionFilter": "warm, solicitous, then sharp if unthanked under stress movement toward EIGHT",
+        "distortionEngine": "insists selflessness while tracking who owes whom under stress movement toward EIGHT",
+        "defenseMechanism": "care, loyalty, what others truly need (as I see it)",
+        "relationshipFieldBehavior": "hurt accusation or sudden cold withdrawal",
+        "languageImpactRule": "caretaker diary; who hurts, who needs me"
+      },
+      {
+        "expressionId": "two-stress_fragmented",
+        "enneagramType": "TWO",
+        "stateBand": "stress_fragmented",
+        "perceptionFilter": "warm, solicitous, then sharp if unthanked under fragmented stress movement toward EIGHT",
+        "distortionEngine": "insists selflessness while tracking who owes whom under fragmented stress movement toward EIGHT",
+        "defenseMechanism": "care, loyalty, what others truly need (as I see it)",
+        "relationshipFieldBehavior": "hurt accusation or sudden cold withdrawal",
+        "languageImpactRule": "caretaker diary; who hurts, who needs me"
+      },
+      {
+        "expressionId": "two-growth_integrated",
+        "enneagramType": "TWO",
+        "stateBand": "growth_integrated",
+        "perceptionFilter": "warm, solicitous, then sharp if unthanked under growth movement toward FOUR",
+        "distortionEngine": "insists selflessness while tracking who owes whom under growth movement toward FOUR",
+        "defenseMechanism": "care, loyalty, what others truly need (as I see it)",
+        "relationshipFieldBehavior": "hurt accusation or sudden cold withdrawal",
+        "languageImpactRule": "caretaker diary; who hurts, who needs me"
+      },
+      {
+        "expressionId": "two-growth_transcendent",
+        "enneagramType": "TWO",
+        "stateBand": "growth_transcendent",
+        "perceptionFilter": "warm, solicitous, then sharp if unthanked under transcendent growth movement toward FOUR",
+        "distortionEngine": "insists selflessness while tracking who owes whom under transcendent growth movement toward FOUR",
+        "defenseMechanism": "care, loyalty, what others truly need (as I see it)",
+        "relationshipFieldBehavior": "hurt accusation or sudden cold withdrawal",
+        "languageImpactRule": "caretaker diary; who hurts, who needs me"
+      },
+      {
+        "expressionId": "three-baseline_guarded",
+        "enneagramType": "THREE",
+        "stateBand": "baseline_guarded",
+        "perceptionFilter": "resume voice; metrics; winning and optics under guarded baseline attention",
+        "distortionEngine": "needs admiration yet despises the mask required to earn it under guarded baseline attention",
+        "defenseMechanism": "results, responsibility, what the role requires",
+        "relationshipFieldBehavior": "competitive framing; reframes loss",
+        "languageImpactRule": "performance review inside the skull"
+      },
+      {
+        "expressionId": "three-baseline_balanced",
+        "enneagramType": "THREE",
+        "stateBand": "baseline_balanced",
+        "perceptionFilter": "resume voice; metrics; winning and optics under balanced baseline attention",
+        "distortionEngine": "needs admiration yet despises the mask required to earn it under balanced baseline attention",
+        "defenseMechanism": "results, responsibility, what the role requires",
+        "relationshipFieldBehavior": "competitive framing; reframes loss",
+        "languageImpactRule": "performance review inside the skull"
+      },
+      {
+        "expressionId": "three-stress_reactive",
+        "enneagramType": "THREE",
+        "stateBand": "stress_reactive",
+        "perceptionFilter": "resume voice; metrics; winning and optics under stress movement toward NINE",
+        "distortionEngine": "needs admiration yet despises the mask required to earn it under stress movement toward NINE",
+        "defenseMechanism": "results, responsibility, what the role requires",
+        "relationshipFieldBehavior": "competitive framing; reframes loss",
+        "languageImpactRule": "performance review inside the skull"
+      },
+      {
+        "expressionId": "three-stress_fragmented",
+        "enneagramType": "THREE",
+        "stateBand": "stress_fragmented",
+        "perceptionFilter": "resume voice; metrics; winning and optics under fragmented stress movement toward NINE",
+        "distortionEngine": "needs admiration yet despises the mask required to earn it under fragmented stress movement toward NINE",
+        "defenseMechanism": "results, responsibility, what the role requires",
+        "relationshipFieldBehavior": "competitive framing; reframes loss",
+        "languageImpactRule": "performance review inside the skull"
+      },
+      {
+        "expressionId": "three-growth_integrated",
+        "enneagramType": "THREE",
+        "stateBand": "growth_integrated",
+        "perceptionFilter": "resume voice; metrics; winning and optics under growth movement toward SIX",
+        "distortionEngine": "needs admiration yet despises the mask required to earn it under growth movement toward SIX",
+        "defenseMechanism": "results, responsibility, what the role requires",
+        "relationshipFieldBehavior": "competitive framing; reframes loss",
+        "languageImpactRule": "performance review inside the skull"
+      },
+      {
+        "expressionId": "three-growth_transcendent",
+        "enneagramType": "THREE",
+        "stateBand": "growth_transcendent",
+        "perceptionFilter": "resume voice; metrics; winning and optics under transcendent growth movement toward SIX",
+        "distortionEngine": "needs admiration yet despises the mask required to earn it under transcendent growth movement toward SIX",
+        "defenseMechanism": "results, responsibility, what the role requires",
+        "relationshipFieldBehavior": "competitive framing; reframes loss",
+        "languageImpactRule": "performance review inside the skull"
+      },
+      {
+        "expressionId": "four-baseline_guarded",
+        "enneagramType": "FOUR",
+        "stateBand": "baseline_guarded",
+        "perceptionFilter": "lyric, mournful, identity archaeology under guarded baseline attention",
+        "distortionEngine": "wants uniqueness yet aches to be normal when alone under guarded baseline attention",
+        "defenseMechanism": "truth of feeling; authenticity over convenience",
+        "relationshipFieldBehavior": "dramatic truth-telling; tests of loyalty",
+        "languageImpactRule": "poet-witness to inner weather"
+      },
+      {
+        "expressionId": "four-baseline_balanced",
+        "enneagramType": "FOUR",
+        "stateBand": "baseline_balanced",
+        "perceptionFilter": "lyric, mournful, identity archaeology under balanced baseline attention",
+        "distortionEngine": "wants uniqueness yet aches to be normal when alone under balanced baseline attention",
+        "defenseMechanism": "truth of feeling; authenticity over convenience",
+        "relationshipFieldBehavior": "dramatic truth-telling; tests of loyalty",
+        "languageImpactRule": "poet-witness to inner weather"
+      },
+      {
+        "expressionId": "four-stress_reactive",
+        "enneagramType": "FOUR",
+        "stateBand": "stress_reactive",
+        "perceptionFilter": "lyric, mournful, identity archaeology under stress movement toward TWO",
+        "distortionEngine": "wants uniqueness yet aches to be normal when alone under stress movement toward TWO",
+        "defenseMechanism": "truth of feeling; authenticity over convenience",
+        "relationshipFieldBehavior": "dramatic truth-telling; tests of loyalty",
+        "languageImpactRule": "poet-witness to inner weather"
+      },
+      {
+        "expressionId": "four-stress_fragmented",
+        "enneagramType": "FOUR",
+        "stateBand": "stress_fragmented",
+        "perceptionFilter": "lyric, mournful, identity archaeology under fragmented stress movement toward TWO",
+        "distortionEngine": "wants uniqueness yet aches to be normal when alone under fragmented stress movement toward TWO",
+        "defenseMechanism": "truth of feeling; authenticity over convenience",
+        "relationshipFieldBehavior": "dramatic truth-telling; tests of loyalty",
+        "languageImpactRule": "poet-witness to inner weather"
+      },
+      {
+        "expressionId": "four-growth_integrated",
+        "enneagramType": "FOUR",
+        "stateBand": "growth_integrated",
+        "perceptionFilter": "lyric, mournful, identity archaeology under growth movement toward ONE",
+        "distortionEngine": "wants uniqueness yet aches to be normal when alone under growth movement toward ONE",
+        "defenseMechanism": "truth of feeling; authenticity over convenience",
+        "relationshipFieldBehavior": "dramatic truth-telling; tests of loyalty",
+        "languageImpactRule": "poet-witness to inner weather"
+      },
+      {
+        "expressionId": "four-growth_transcendent",
+        "enneagramType": "FOUR",
+        "stateBand": "growth_transcendent",
+        "perceptionFilter": "lyric, mournful, identity archaeology under transcendent growth movement toward ONE",
+        "distortionEngine": "wants uniqueness yet aches to be normal when alone under transcendent growth movement toward ONE",
+        "defenseMechanism": "truth of feeling; authenticity over convenience",
+        "relationshipFieldBehavior": "dramatic truth-telling; tests of loyalty",
+        "languageImpactRule": "poet-witness to inner weather"
+      },
+      {
+        "expressionId": "five-baseline_guarded",
+        "enneagramType": "FIVE",
+        "stateBand": "baseline_guarded",
+        "perceptionFilter": "analyst; sparse; observational under guarded baseline attention",
+        "distortionEngine": "needs closeness yet experiences closeness as drain under guarded baseline attention",
+        "defenseMechanism": "accuracy, preparation, conservation of strength",
+        "relationshipFieldBehavior": "detached critique; sudden bluntness when cornered",
+        "languageImpactRule": "lab notes on social threat and bandwidth"
+      },
+      {
+        "expressionId": "five-baseline_balanced",
+        "enneagramType": "FIVE",
+        "stateBand": "baseline_balanced",
+        "perceptionFilter": "analyst; sparse; observational under balanced baseline attention",
+        "distortionEngine": "needs closeness yet experiences closeness as drain under balanced baseline attention",
+        "defenseMechanism": "accuracy, preparation, conservation of strength",
+        "relationshipFieldBehavior": "detached critique; sudden bluntness when cornered",
+        "languageImpactRule": "lab notes on social threat and bandwidth"
+      },
+      {
+        "expressionId": "five-stress_reactive",
+        "enneagramType": "FIVE",
+        "stateBand": "stress_reactive",
+        "perceptionFilter": "analyst; sparse; observational under stress movement toward SEVEN",
+        "distortionEngine": "needs closeness yet experiences closeness as drain under stress movement toward SEVEN",
+        "defenseMechanism": "accuracy, preparation, conservation of strength",
+        "relationshipFieldBehavior": "detached critique; sudden bluntness when cornered",
+        "languageImpactRule": "lab notes on social threat and bandwidth"
+      },
+      {
+        "expressionId": "five-stress_fragmented",
+        "enneagramType": "FIVE",
+        "stateBand": "stress_fragmented",
+        "perceptionFilter": "analyst; sparse; observational under fragmented stress movement toward SEVEN",
+        "distortionEngine": "needs closeness yet experiences closeness as drain under fragmented stress movement toward SEVEN",
+        "defenseMechanism": "accuracy, preparation, conservation of strength",
+        "relationshipFieldBehavior": "detached critique; sudden bluntness when cornered",
+        "languageImpactRule": "lab notes on social threat and bandwidth"
+      },
+      {
+        "expressionId": "five-growth_integrated",
+        "enneagramType": "FIVE",
+        "stateBand": "growth_integrated",
+        "perceptionFilter": "analyst; sparse; observational under growth movement toward EIGHT",
+        "distortionEngine": "needs closeness yet experiences closeness as drain under growth movement toward EIGHT",
+        "defenseMechanism": "accuracy, preparation, conservation of strength",
+        "relationshipFieldBehavior": "detached critique; sudden bluntness when cornered",
+        "languageImpactRule": "lab notes on social threat and bandwidth"
+      },
+      {
+        "expressionId": "five-growth_transcendent",
+        "enneagramType": "FIVE",
+        "stateBand": "growth_transcendent",
+        "perceptionFilter": "analyst; sparse; observational under transcendent growth movement toward EIGHT",
+        "distortionEngine": "needs closeness yet experiences closeness as drain under transcendent growth movement toward EIGHT",
+        "defenseMechanism": "accuracy, preparation, conservation of strength",
+        "relationshipFieldBehavior": "detached critique; sudden bluntness when cornered",
+        "languageImpactRule": "lab notes on social threat and bandwidth"
+      },
+      {
+        "expressionId": "six-baseline_guarded",
+        "enneagramType": "SIX",
+        "stateBand": "baseline_guarded",
+        "perceptionFilter": "threat-first scan of faces, doors, and pauses",
+        "distortionEngine": "Assumes silence means consent rather than tactical delay.",
+        "defenseMechanism": "treating suspicion as external certainty",
+        "relationshipFieldBehavior": "protects attachment through selective disclosure and worst-case chaining and rapid doubt loops",
+        "languageImpactRule": "conditional phrasing, risk qualifiers, and repeated verification cues"
+      },
+      {
+        "expressionId": "six-baseline_balanced",
+        "enneagramType": "SIX",
+        "stateBand": "baseline_balanced",
+        "perceptionFilter": "threat-first scan of faces, doors, and pauses",
+        "distortionEngine": "Assumes silence means consent rather than tactical delay.",
+        "defenseMechanism": "treating suspicion as external certainty",
+        "relationshipFieldBehavior": "protects attachment through selective disclosure and worst-case chaining and rapid doubt loops",
+        "languageImpactRule": "conditional phrasing, risk qualifiers, and repeated verification cues"
+      },
+      {
+        "expressionId": "six-stress_reactive",
+        "enneagramType": "SIX",
+        "stateBand": "stress_reactive",
+        "perceptionFilter": "threat-first scan of faces, doors, and pauses",
+        "distortionEngine": "Assumes silence means consent rather than tactical delay.",
+        "defenseMechanism": "treating suspicion as external certainty",
+        "relationshipFieldBehavior": "protects attachment through selective disclosure and worst-case chaining and rapid doubt loops",
+        "languageImpactRule": "conditional phrasing, risk qualifiers, and repeated verification cues"
+      },
+      {
+        "expressionId": "six-stress_fragmented",
+        "enneagramType": "SIX",
+        "stateBand": "stress_fragmented",
+        "perceptionFilter": "threat-first scan of faces, doors, and pauses",
+        "distortionEngine": "Assumes silence means consent rather than tactical delay.",
+        "defenseMechanism": "treating suspicion as external certainty",
+        "relationshipFieldBehavior": "protects attachment through selective disclosure and worst-case chaining and rapid doubt loops",
+        "languageImpactRule": "conditional phrasing, risk qualifiers, and repeated verification cues"
+      },
+      {
+        "expressionId": "six-growth_integrated",
+        "enneagramType": "SIX",
+        "stateBand": "growth_integrated",
+        "perceptionFilter": "threat-first scan of faces, doors, and pauses",
+        "distortionEngine": "Assumes silence means consent rather than tactical delay.",
+        "defenseMechanism": "treating suspicion as external certainty",
+        "relationshipFieldBehavior": "protects attachment through selective disclosure and worst-case chaining and rapid doubt loops",
+        "languageImpactRule": "conditional phrasing, risk qualifiers, and repeated verification cues"
+      },
+      {
+        "expressionId": "six-growth_transcendent",
+        "enneagramType": "SIX",
+        "stateBand": "growth_transcendent",
+        "perceptionFilter": "threat-first scan of faces, doors, and pauses",
+        "distortionEngine": "Assumes silence means consent rather than tactical delay.",
+        "defenseMechanism": "treating suspicion as external certainty",
+        "relationshipFieldBehavior": "protects attachment through selective disclosure and worst-case chaining and rapid doubt loops",
+        "languageImpactRule": "conditional phrasing, risk qualifiers, and repeated verification cues"
+      },
+      {
+        "expressionId": "seven-baseline_guarded",
+        "enneagramType": "SEVEN",
+        "stateBand": "baseline_guarded",
+        "perceptionFilter": "fast, associative, possibility chatter under guarded baseline attention",
+        "distortionEngine": "flees pain yet creates chaos that returns pain under guarded baseline attention",
+        "defenseMechanism": "hope, opportunity, refusing needless suffering",
+        "relationshipFieldBehavior": "charm or exit; rarely stays still in guilt",
+        "languageImpactRule": "travelogue of escapes and bright ideas"
+      },
+      {
+        "expressionId": "seven-baseline_balanced",
+        "enneagramType": "SEVEN",
+        "stateBand": "baseline_balanced",
+        "perceptionFilter": "fast, associative, possibility chatter under balanced baseline attention",
+        "distortionEngine": "flees pain yet creates chaos that returns pain under balanced baseline attention",
+        "defenseMechanism": "hope, opportunity, refusing needless suffering",
+        "relationshipFieldBehavior": "charm or exit; rarely stays still in guilt",
+        "languageImpactRule": "travelogue of escapes and bright ideas"
+      },
+      {
+        "expressionId": "seven-stress_reactive",
+        "enneagramType": "SEVEN",
+        "stateBand": "stress_reactive",
+        "perceptionFilter": "fast, associative, possibility chatter under stress movement toward ONE",
+        "distortionEngine": "flees pain yet creates chaos that returns pain under stress movement toward ONE",
+        "defenseMechanism": "hope, opportunity, refusing needless suffering",
+        "relationshipFieldBehavior": "charm or exit; rarely stays still in guilt",
+        "languageImpactRule": "travelogue of escapes and bright ideas"
+      },
+      {
+        "expressionId": "seven-stress_fragmented",
+        "enneagramType": "SEVEN",
+        "stateBand": "stress_fragmented",
+        "perceptionFilter": "fast, associative, possibility chatter under fragmented stress movement toward ONE",
+        "distortionEngine": "flees pain yet creates chaos that returns pain under fragmented stress movement toward ONE",
+        "defenseMechanism": "hope, opportunity, refusing needless suffering",
+        "relationshipFieldBehavior": "charm or exit; rarely stays still in guilt",
+        "languageImpactRule": "travelogue of escapes and bright ideas"
+      },
+      {
+        "expressionId": "seven-growth_integrated",
+        "enneagramType": "SEVEN",
+        "stateBand": "growth_integrated",
+        "perceptionFilter": "fast, associative, possibility chatter under growth movement toward FIVE",
+        "distortionEngine": "flees pain yet creates chaos that returns pain under growth movement toward FIVE",
+        "defenseMechanism": "hope, opportunity, refusing needless suffering",
+        "relationshipFieldBehavior": "charm or exit; rarely stays still in guilt",
+        "languageImpactRule": "travelogue of escapes and bright ideas"
+      },
+      {
+        "expressionId": "seven-growth_transcendent",
+        "enneagramType": "SEVEN",
+        "stateBand": "growth_transcendent",
+        "perceptionFilter": "fast, associative, possibility chatter under transcendent growth movement toward FIVE",
+        "distortionEngine": "flees pain yet creates chaos that returns pain under transcendent growth movement toward FIVE",
+        "defenseMechanism": "hope, opportunity, refusing needless suffering",
+        "relationshipFieldBehavior": "charm or exit; rarely stays still in guilt",
+        "languageImpactRule": "travelogue of escapes and bright ideas"
+      },
+      {
+        "expressionId": "eight-baseline_guarded",
+        "enneagramType": "EIGHT",
+        "stateBand": "baseline_guarded",
+        "perceptionFilter": "command; territory; blunt force truth under guarded baseline attention",
+        "distortionEngine": "demands honesty yet punishes vulnerability in others under guarded baseline attention",
+        "defenseMechanism": "justice as strength; protect the weak; refuse exploitation",
+        "relationshipFieldBehavior": "direct confrontation; tests",
+        "languageImpactRule": "war council; allies and enemies"
+      },
+      {
+        "expressionId": "eight-baseline_balanced",
+        "enneagramType": "EIGHT",
+        "stateBand": "baseline_balanced",
+        "perceptionFilter": "command; territory; blunt force truth under balanced baseline attention",
+        "distortionEngine": "demands honesty yet punishes vulnerability in others under balanced baseline attention",
+        "defenseMechanism": "justice as strength; protect the weak; refuse exploitation",
+        "relationshipFieldBehavior": "direct confrontation; tests",
+        "languageImpactRule": "war council; allies and enemies"
+      },
+      {
+        "expressionId": "eight-stress_reactive",
+        "enneagramType": "EIGHT",
+        "stateBand": "stress_reactive",
+        "perceptionFilter": "command; territory; blunt force truth under stress movement toward FIVE",
+        "distortionEngine": "demands honesty yet punishes vulnerability in others under stress movement toward FIVE",
+        "defenseMechanism": "justice as strength; protect the weak; refuse exploitation",
+        "relationshipFieldBehavior": "direct confrontation; tests",
+        "languageImpactRule": "war council; allies and enemies"
+      },
+      {
+        "expressionId": "eight-stress_fragmented",
+        "enneagramType": "EIGHT",
+        "stateBand": "stress_fragmented",
+        "perceptionFilter": "command; territory; blunt force truth under fragmented stress movement toward FIVE",
+        "distortionEngine": "demands honesty yet punishes vulnerability in others under fragmented stress movement toward FIVE",
+        "defenseMechanism": "justice as strength; protect the weak; refuse exploitation",
+        "relationshipFieldBehavior": "direct confrontation; tests",
+        "languageImpactRule": "war council; allies and enemies"
+      },
+      {
+        "expressionId": "eight-growth_integrated",
+        "enneagramType": "EIGHT",
+        "stateBand": "growth_integrated",
+        "perceptionFilter": "command; territory; blunt force truth under growth movement toward TWO",
+        "distortionEngine": "demands honesty yet punishes vulnerability in others under growth movement toward TWO",
+        "defenseMechanism": "justice as strength; protect the weak; refuse exploitation",
+        "relationshipFieldBehavior": "direct confrontation; tests",
+        "languageImpactRule": "war council; allies and enemies"
+      },
+      {
+        "expressionId": "eight-growth_transcendent",
+        "enneagramType": "EIGHT",
+        "stateBand": "growth_transcendent",
+        "perceptionFilter": "command; territory; blunt force truth under transcendent growth movement toward TWO",
+        "distortionEngine": "demands honesty yet punishes vulnerability in others under transcendent growth movement toward TWO",
+        "defenseMechanism": "justice as strength; protect the weak; refuse exploitation",
+        "relationshipFieldBehavior": "direct confrontation; tests",
+        "languageImpactRule": "war council; allies and enemies"
+      },
+      {
+        "expressionId": "nine-baseline_guarded",
+        "enneagramType": "NINE",
+        "stateBand": "baseline_guarded",
+        "perceptionFilter": "soft, drifting, consensus-seeking under guarded baseline attention",
+        "distortionEngine": "wants agency yet avoids claiming want under guarded baseline attention",
+        "defenseMechanism": "peace, patience, seeing all sides",
+        "relationshipFieldBehavior": "avoid; passive-aggression when cornered",
+        "languageImpactRule": "background hum; everyone’s voice louder than mine"
+      },
+      {
+        "expressionId": "nine-baseline_balanced",
+        "enneagramType": "NINE",
+        "stateBand": "baseline_balanced",
+        "perceptionFilter": "soft, drifting, consensus-seeking under balanced baseline attention",
+        "distortionEngine": "wants agency yet avoids claiming want under balanced baseline attention",
+        "defenseMechanism": "peace, patience, seeing all sides",
+        "relationshipFieldBehavior": "avoid; passive-aggression when cornered",
+        "languageImpactRule": "background hum; everyone’s voice louder than mine"
+      },
+      {
+        "expressionId": "nine-stress_reactive",
+        "enneagramType": "NINE",
+        "stateBand": "stress_reactive",
+        "perceptionFilter": "soft, drifting, consensus-seeking under stress movement toward SIX",
+        "distortionEngine": "wants agency yet avoids claiming want under stress movement toward SIX",
+        "defenseMechanism": "peace, patience, seeing all sides",
+        "relationshipFieldBehavior": "avoid; passive-aggression when cornered",
+        "languageImpactRule": "background hum; everyone’s voice louder than mine"
+      },
+      {
+        "expressionId": "nine-stress_fragmented",
+        "enneagramType": "NINE",
+        "stateBand": "stress_fragmented",
+        "perceptionFilter": "soft, drifting, consensus-seeking under fragmented stress movement toward SIX",
+        "distortionEngine": "wants agency yet avoids claiming want under fragmented stress movement toward SIX",
+        "defenseMechanism": "peace, patience, seeing all sides",
+        "relationshipFieldBehavior": "avoid; passive-aggression when cornered",
+        "languageImpactRule": "background hum; everyone’s voice louder than mine"
+      },
+      {
+        "expressionId": "nine-growth_integrated",
+        "enneagramType": "NINE",
+        "stateBand": "growth_integrated",
+        "perceptionFilter": "soft, drifting, consensus-seeking under growth movement toward THREE",
+        "distortionEngine": "wants agency yet avoids claiming want under growth movement toward THREE",
+        "defenseMechanism": "peace, patience, seeing all sides",
+        "relationshipFieldBehavior": "avoid; passive-aggression when cornered",
+        "languageImpactRule": "background hum; everyone’s voice louder than mine"
+      },
+      {
+        "expressionId": "nine-growth_transcendent",
+        "enneagramType": "NINE",
+        "stateBand": "growth_transcendent",
+        "perceptionFilter": "soft, drifting, consensus-seeking under transcendent growth movement toward THREE",
+        "distortionEngine": "wants agency yet avoids claiming want under transcendent growth movement toward THREE",
+        "defenseMechanism": "peace, patience, seeing all sides",
+        "relationshipFieldBehavior": "avoid; passive-aggression when cornered",
+        "languageImpactRule": "background hum; everyone’s voice louder than mine"
+      }
+    ],
+    "growthStressMovement": [
+      {
+        "enneagramType": "ONE",
+        "stressTarget": "FOUR",
+        "stressNotes": "Under sustained pressure, attention collapses into brooding comparison and personal defectiveness; ideals feel unreachable.",
+        "growthTarget": "SEVEN",
+        "growthNotes": "Under relief, mind opens to spontaneous joy, curiosity, and acceptance without constant correction."
+      },
+      {
+        "enneagramType": "TWO",
+        "stressTarget": "EIGHT",
+        "stressNotes": "Pressure triggers blunt control, territorial anger, and open demands—helpfulness drops for dominance.",
+        "growthTarget": "FOUR",
+        "growthNotes": "Safety allows authentic feeling, boundaries, and desire named without bargaining."
+      },
+      {
+        "enneagramType": "THREE",
+        "stressTarget": "NINE",
+        "stressNotes": "Pressure produces numbness, procrastination, merging, and quiet resentment—momentum hides.",
+        "growthTarget": "SIX",
+        "growthNotes": "Growth brings loyalty tests, sober risk assessment, and willingness to depend on others."
+      },
+      {
+        "enneagramType": "FOUR",
+        "stressTarget": "TWO",
+        "stressNotes": "Stress collapses into people-pleasing, cling, and resentment when love is conditional.",
+        "growthTarget": "ONE",
+        "growthNotes": "Growth steadies into principle, craft, and disciplined creation instead of endless mood."
+      },
+      {
+        "enneagramType": "FIVE",
+        "stressTarget": "SEVEN",
+        "stressNotes": "Stress scatters into distraction, manic options, and brittle cheer—boundaries blur oddly.",
+        "growthTarget": "EIGHT",
+        "growthNotes": "Growth moves into directness, bodily presence, and protective action without over-analysis."
+      },
+      {
+        "enneagramType": "SIX",
+        "stressTarget": "THREE",
+        "stressNotes": "Stress drives performance panic, image management, and ruthless practicality.",
+        "growthTarget": "NINE",
+        "growthNotes": "Growth softens into steadiness, tolerance, and less catastrophic forecasting."
+      },
+      {
+        "enneagramType": "SEVEN",
+        "stressTarget": "ONE",
+        "stressNotes": "Stress tightens into criticism, rules, and bitter judgment—fun curdles into fault-finding.",
+        "growthTarget": "FIVE",
+        "growthNotes": "Growth slows into focus, depth, and tolerating limitation without panic."
+      },
+      {
+        "enneagramType": "EIGHT",
+        "stressTarget": "FIVE",
+        "stressNotes": "Stress withdraws into secret hoarding, suspicion, and minimalist retreat—force goes underground.",
+        "growthTarget": "TWO",
+        "growthNotes": "Growth opens into tenderness, chosen vulnerability, and protective care without domination."
+      },
+      {
+        "enneagramType": "NINE",
+        "stressTarget": "SIX",
+        "stressNotes": "Stress amplifies worry, suspicion, and anxious scanning—peace shatters into vigilance.",
+        "growthTarget": "THREE",
+        "growthNotes": "Growth awakens initiative, visibility, and accountable action without self-erasure."
+      }
+    ],
+    "perceptionFilters": {
+      "ONE": {
+        "perception": [],
+        "distortion": [],
+        "defense": [],
+        "relationship": [],
+        "spiritual": [],
+        "language": []
+      },
+      "TWO": {
+        "perception": [],
+        "distortion": [],
+        "defense": [],
+        "relationship": [],
+        "spiritual": [],
+        "language": []
+      },
+      "THREE": {
+        "perception": [],
+        "distortion": [],
+        "defense": [],
+        "relationship": [],
+        "spiritual": [],
+        "language": []
+      },
+      "FOUR": {
+        "perception": [],
+        "distortion": [],
+        "defense": [],
+        "relationship": [],
+        "spiritual": [],
+        "language": []
+      },
+      "FIVE": {
+        "perception": [],
+        "distortion": [],
+        "defense": [],
+        "relationship": [],
+        "spiritual": [],
+        "language": []
+      },
+      "SIX": {
+        "perception": [
+          "threat-first scan of faces, doors, and pauses",
+          "de-prioritizes cues that do not support to secure reliable alliance and contingency safety",
+          "loyalty signals, weak seams, and authority reliability",
+          "threat-first scan of faces, doors, and pauses",
+          "de-prioritizes cues that do not support to secure reliable alliance and contingency safety",
+          "loyalty signals, weak seams, and authority reliability"
+        ],
+        "distortion": [
+          "Assumes silence means consent rather than tactical delay.",
+          "filters events through betrayal or unbuffered threat inside trusted structures",
+          "Reads caution as weakness and misses hidden agreement patterns.",
+          "filters events through betrayal or unbuffered threat inside trusted structures"
+        ],
+        "defense": [
+          "treating suspicion as external certainty",
+          "treating suspicion as external certainty"
+        ],
+        "relationship": [
+          "protects attachment through selective disclosure and worst-case chaining and rapid doubt loops",
+          "carries household continuity by guarding legacy fracture from witness scrutiny",
+          "reads hierarchy through loyalty signals, weak seams, and authority reliability and answers with controlled leverage",
+          "tests group safety before trust by tracking risk-minimizing; delays commitment until signal confidence rises",
+          "protects attachment through selective disclosure and worst-case chaining and rapid doubt loops",
+          "carries household continuity by guarding legacy fracture from witness scrutiny",
+          "reads hierarchy through loyalty signals, weak seams, and authority reliability and answers with controlled leverage",
+          "tests group safety before trust by tracking risk-minimizing; delays commitment until signal confidence rises"
+        ],
+        "spiritual": [
+          "searches for meaning through ordered continuity of kinship obligation",
+          "treats uncertainty as proof of betrayal or unbuffered threat inside trusted structures",
+          "meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+          "searches for meaning through ordered continuity of kinship obligation",
+          "treats uncertainty as proof of betrayal or unbuffered threat inside trusted structures",
+          "meaning arrives as embodied alignment between ritual sequence and witness trust pacing"
+        ],
+        "language": [
+          "conditional phrasing, risk qualifiers, and repeated verification cues",
+          "uses silence as control gate before speech clears social risk",
+          "vigilant tension alternating with loyal attachment",
+          "routes abstraction into body cues, object handling, and spatial relation before naming",
+          "conditional phrasing, risk qualifiers, and repeated verification cues",
+          "uses silence as control gate before speech clears social risk",
+          "vigilant tension alternating with loyal attachment",
+          "routes abstraction into body cues, object handling, and spatial relation before naming"
+        ]
+      },
+      "SEVEN": {
+        "perception": [],
+        "distortion": [],
+        "defense": [],
+        "relationship": [],
+        "spiritual": [],
+        "language": []
+      },
+      "EIGHT": {
+        "perception": [],
+        "distortion": [],
+        "defense": [],
+        "relationship": [],
+        "spiritual": [],
+        "language": []
+      },
+      "NINE": {
+        "perception": [],
+        "distortion": [],
+        "defense": [],
+        "relationship": [],
+        "spiritual": [],
+        "language": []
+      }
+    },
+    "distortionEngines": [
+      {
+        "enneagramType": "ONE",
+        "values": []
+      },
+      {
+        "enneagramType": "TWO",
+        "values": []
+      },
+      {
+        "enneagramType": "THREE",
+        "values": []
+      },
+      {
+        "enneagramType": "FOUR",
+        "values": []
+      },
+      {
+        "enneagramType": "FIVE",
+        "values": []
+      },
+      {
+        "enneagramType": "SIX",
+        "values": [
+          "Assumes silence means consent rather than tactical delay.",
+          "filters events through betrayal or unbuffered threat inside trusted structures",
+          "Reads caution as weakness and misses hidden agreement patterns.",
+          "filters events through betrayal or unbuffered threat inside trusted structures"
+        ]
+      },
+      {
+        "enneagramType": "SEVEN",
+        "values": []
+      },
+      {
+        "enneagramType": "EIGHT",
+        "values": []
+      },
+      {
+        "enneagramType": "NINE",
+        "values": []
+      }
+    ],
+    "defenseMechanisms": [
+      {
+        "enneagramType": "ONE",
+        "values": []
+      },
+      {
+        "enneagramType": "TWO",
+        "values": []
+      },
+      {
+        "enneagramType": "THREE",
+        "values": []
+      },
+      {
+        "enneagramType": "FOUR",
+        "values": []
+      },
+      {
+        "enneagramType": "FIVE",
+        "values": []
+      },
+      {
+        "enneagramType": "SIX",
+        "values": [
+          "treating suspicion as external certainty",
+          "treating suspicion as external certainty"
+        ]
+      },
+      {
+        "enneagramType": "SEVEN",
+        "values": []
+      },
+      {
+        "enneagramType": "EIGHT",
+        "values": []
+      },
+      {
+        "enneagramType": "NINE",
+        "values": []
+      }
+    ],
+    "relationshipFieldBehavior": [
+      {
+        "enneagramType": "ONE",
+        "values": []
+      },
+      {
+        "enneagramType": "TWO",
+        "values": []
+      },
+      {
+        "enneagramType": "THREE",
+        "values": []
+      },
+      {
+        "enneagramType": "FOUR",
+        "values": []
+      },
+      {
+        "enneagramType": "FIVE",
+        "values": []
+      },
+      {
+        "enneagramType": "SIX",
+        "values": [
+          "protects attachment through selective disclosure and worst-case chaining and rapid doubt loops",
+          "carries household continuity by guarding legacy fracture from witness scrutiny",
+          "reads hierarchy through loyalty signals, weak seams, and authority reliability and answers with controlled leverage",
+          "tests group safety before trust by tracking risk-minimizing; delays commitment until signal confidence rises",
+          "protects attachment through selective disclosure and worst-case chaining and rapid doubt loops",
+          "carries household continuity by guarding legacy fracture from witness scrutiny",
+          "reads hierarchy through loyalty signals, weak seams, and authority reliability and answers with controlled leverage",
+          "tests group safety before trust by tracking risk-minimizing; delays commitment until signal confidence rises"
+        ]
+      },
+      {
+        "enneagramType": "SEVEN",
+        "values": []
+      },
+      {
+        "enneagramType": "EIGHT",
+        "values": []
+      },
+      {
+        "enneagramType": "NINE",
+        "values": []
+      }
+    ],
+    "spiritualOrientation": [
+      {
+        "enneagramType": "ONE",
+        "values": []
+      },
+      {
+        "enneagramType": "TWO",
+        "values": []
+      },
+      {
+        "enneagramType": "THREE",
+        "values": []
+      },
+      {
+        "enneagramType": "FOUR",
+        "values": []
+      },
+      {
+        "enneagramType": "FIVE",
+        "values": []
+      },
+      {
+        "enneagramType": "SIX",
+        "values": [
+          "searches for meaning through ordered continuity of kinship obligation",
+          "treats uncertainty as proof of betrayal or unbuffered threat inside trusted structures",
+          "meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+          "searches for meaning through ordered continuity of kinship obligation",
+          "treats uncertainty as proof of betrayal or unbuffered threat inside trusted structures",
+          "meaning arrives as embodied alignment between ritual sequence and witness trust pacing"
+        ]
+      },
+      {
+        "enneagramType": "SEVEN",
+        "values": []
+      },
+      {
+        "enneagramType": "EIGHT",
+        "values": []
+      },
+      {
+        "enneagramType": "NINE",
+        "values": []
+      }
+    ],
+    "languageImpactRules": [
+      {
+        "enneagramType": "ONE",
+        "values": []
+      },
+      {
+        "enneagramType": "TWO",
+        "values": []
+      },
+      {
+        "enneagramType": "THREE",
+        "values": []
+      },
+      {
+        "enneagramType": "FOUR",
+        "values": []
+      },
+      {
+        "enneagramType": "FIVE",
+        "values": []
+      },
+      {
+        "enneagramType": "SIX",
+        "values": [
+          "conditional phrasing, risk qualifiers, and repeated verification cues",
+          "uses silence as control gate before speech clears social risk",
+          "vigilant tension alternating with loyal attachment",
+          "routes abstraction into body cues, object handling, and spatial relation before naming",
+          "conditional phrasing, risk qualifiers, and repeated verification cues",
+          "uses silence as control gate before speech clears social risk",
+          "vigilant tension alternating with loyal attachment",
+          "routes abstraction into body cues, object handling, and spatial relation before naming"
+        ]
+      },
+      {
+        "enneagramType": "SEVEN",
+        "values": []
+      },
+      {
+        "enneagramType": "EIGHT",
+        "values": []
+      },
+      {
+        "enneagramType": "NINE",
+        "values": []
+      }
+    ]
+  },
+  "governance": {
+    "noRawEnneagramLabelsInProse": true,
+    "noDirectSourceTextToProse": true,
+    "requireConsciousnessMediationLayer": true,
+    "preserveCanonAndChronologyProtections": true
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "generatedAt": "2026-04-16T02:03:49.094Z",
+  "source": {
+    "id": "book1-source-chunk-20",
+    "title": "Book 1 Research Chunk 20",
+    "filePath": "docs/book1/chunk20.txt",
+    "rawChars": 23852,
+    "normalizedChars": 21194,
+    "chunkCount": 7
+  },
+  "counts": {
+    "claims": 3,
+    "events": 0,
+    "places": 1,
+    "fragments": 3,
+    "openQuestions": 3
+  },
+  "chronology": [],
+  "coreTruthSet": [
+    {
+      "id": "book20-claim-intuitive-mastery-misread",
+      "description": "First matriarch’s rapid intuitive correctness is misread as luck or temporary coincidence due to peer’s learned-mastery model.",
+      "confidence": 5,
+      "quoteExcerpt": "She misreads this as luck, coincidence, or temporary correctness.",
+      "needsReview": true
+    },
+    {
+      "id": "book20-claim-peer-pov-performance-against-performance",
+      "description": "Secondary POV frame is comparative: measuring speed, precision, efficiency, and motion smoothness against one’s own benchmark.",
+      "confidence": 5,
+      "quoteExcerpt": "She is measuring: performance against performance.",
+      "needsReview": true
+    },
+    {
+      "id": "book20-claim-hierarchy-disruption-awareness",
+      "description": "Affective state is competitive unsettledness: not overt jealousy, but awareness that expected hierarchy may be shifting.",
+      "confidence": 4,
+      "quoteExcerpt": "Not jealousy yet ... awareness of disruption in expected hierarchy.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book20-place-shared-household-work-circle",
+      "name": "Shared Household Work Circle",
+      "placeType": "HOME",
+      "description": "Household workflow space where peer comparison, correctness norms, and earned-standing evaluation are continuously enacted."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book20-frag-learned-vs-intuitive-mastery-tension",
+      "title": "Learned vs Intuitive Mastery Tension",
+      "summary": "Core comparative-tension constraint.",
+      "text": "Conflict pressure emerges when repetition-earned competence confronts immediate intuitive alignment that bypasses expected learning arcs.",
+      "confidence": 5,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book20-frag-earned-standing-gatekeeping",
+      "title": "Earned Standing Gatekeeping",
+      "summary": "Status-allocation constraint.",
+      "text": "Equal standing is granted through perceived correctness legitimacy, not solely elder endorsement.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book20-frag-quiet-peer-evaluation-loop",
+      "title": "Quiet Peer Evaluation Loop",
+      "summary": "Secondary POV cognition constraint.",
+      "text": "Peer evaluation runs silently through micro-comparisons of movement quality, correction frequency, and workflow interference.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book20-oq-hierarchy-shift-management",
+      "title": "How is expected hierarchy disruption managed to avoid overt peer fracture while standards remain intact?",
+      "description": "Needed to maintain social coherence in performance-competitive scenes.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book20-oq-intuitive-mastery-proof-threshold",
+      "title": "What threshold of repeated correct execution converts perceived luck into recognized mastery?",
+      "description": "Needed for believable progression from skepticism to acknowledgment.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book20-oq-peer-evaluation-signals",
+      "title": "Which concrete micro-signals indicate peer acceptance versus provisional tolerance in the work circle?",
+      "description": "Needed to track status shifts without explicit dialogue declaration.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

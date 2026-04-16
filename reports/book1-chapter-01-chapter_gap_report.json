@@ -1,0 +1,43 @@
+{
+  "artifact": "chapter_gap_report",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T16:25:48.259Z",
+  "missingInformation": [
+    {
+      "gapId": "GAP-PSY-first-matriarch",
+      "missing": "Psych profile for First Matriarch (core fear + core desire).",
+      "impactOnChapter": "Hidden-history motive precision stays generic and reduces pressure specificity.",
+      "requiredBeforeLock": false,
+      "suggestedSource": "person.characterCoreProfile in Prisma seed data"
+    },
+    {
+      "gapId": "GAP-PSY-second-matriarch",
+      "missing": "Psych profile for Second Matriarch (core fear + core desire).",
+      "impactOnChapter": "Hidden-history motive precision stays generic and reduces pressure specificity.",
+      "requiredBeforeLock": false,
+      "suggestedSource": "person.characterCoreProfile in Prisma seed data"
+    },
+    {
+      "gapId": "GAP-PSY-third-matriarch",
+      "missing": "Psych profile for Third Matriarch (core fear + core desire).",
+      "impactOnChapter": "Hidden-history motive precision stays generic and reduces pressure specificity.",
+      "requiredBeforeLock": false,
+      "suggestedSource": "person.characterCoreProfile in Prisma seed data"
+    },
+    {
+      "gapId": "GAP-PSY-fourth-matriarch",
+      "missing": "Psych profile for Fourth Matriarch (core fear + core desire).",
+      "impactOnChapter": "Hidden-history motive precision stays generic and reduces pressure specificity.",
+      "requiredBeforeLock": false,
+      "suggestedSource": "person.characterCoreProfile in Prisma seed data"
+    },
+    {
+      "gapId": "GAP-SYMBOLIC-LAYER",
+      "missing": "Canonical symbolic-layer component for Chapter 1 scene stack.",
+      "impactOnChapter": "Recurring motif continuity into later arcs is less constrained.",
+      "requiredBeforeLock": false,
+      "suggestedSource": "book1SceneComponent with componentType=symbolic_layer"
+    }
+  ]
+}

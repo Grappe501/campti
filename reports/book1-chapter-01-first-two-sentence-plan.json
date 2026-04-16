@@ -1,0 +1,50 @@
+{
+  "artifact": "chapter_first_two_sentence_plan",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.074Z",
+  "segments": [
+    {
+      "segment": 1,
+      "family": "sound_to_withheld_recognition",
+      "previousFamily": null,
+      "sameAsPrevious": false,
+      "segment2Or4BiasApplied": false
+    },
+    {
+      "segment": 2,
+      "family": "body_to_environment",
+      "previousFamily": "sound_to_withheld_recognition",
+      "sameAsPrevious": false,
+      "segment2Or4BiasApplied": true
+    },
+    {
+      "segment": 3,
+      "family": "object_to_body",
+      "previousFamily": "body_to_environment",
+      "sameAsPrevious": false,
+      "segment2Or4BiasApplied": false
+    },
+    {
+      "segment": 4,
+      "family": "motion_to_social_cue",
+      "previousFamily": "object_to_body",
+      "sameAsPrevious": false,
+      "segment2Or4BiasApplied": true
+    },
+    {
+      "segment": 5,
+      "family": "spatial_shift_to_pressure_cue",
+      "previousFamily": "motion_to_social_cue",
+      "sameAsPrevious": false,
+      "segment2Or4BiasApplied": false
+    },
+    {
+      "segment": 6,
+      "family": "environment_to_action",
+      "previousFamily": "spatial_shift_to_pressure_cue",
+      "sameAsPrevious": false,
+      "segment2Or4BiasApplied": false
+    }
+  ]
+}

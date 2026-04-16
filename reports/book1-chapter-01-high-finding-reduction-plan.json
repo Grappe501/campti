@@ -1,0 +1,83 @@
+{
+  "artifact": "book1_chapter_01_high_finding_reduction_plan",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.016Z",
+  "topFailureClusters": [
+    {
+      "clusterId": "historical_texture_thin",
+      "weightedScore": 12,
+      "supportingCategories": [
+        "low_embodiment"
+      ],
+      "objective": "Increase lived material texture density in each segment and suppress expository substitutions.",
+      "primaryFailureZone": "segment"
+    },
+    {
+      "clusterId": "abstraction_too_visible",
+      "weightedScore": 8,
+      "supportingCategories": [
+        "repeated_abstract_fear_language"
+      ],
+      "objective": "Convert abstract pressure labels into embodied social and material actions.",
+      "primaryFailureZone": "paragraph"
+    },
+    {
+      "clusterId": "paragraph_pressure_too_even",
+      "weightedScore": 8,
+      "supportingCategories": [],
+      "objective": "Increase paragraph pressure variance and prevent repeated cadence templates.",
+      "primaryFailureZone": "paragraph"
+    }
+  ],
+  "targetedRendererConstraints": [
+    {
+      "clusterId": "historical_texture_thin",
+      "targetSubsystem": "render_directives",
+      "adjustmentType": "raise-minimum-sensory-object-beats",
+      "expectedImpactZone": "segment",
+      "parameters": {
+        "minSensoryOrObjectBeatsPerParagraph": 2,
+        "favorImagePermissionHighOnParagraphC": true
+      }
+    },
+    {
+      "clusterId": "historical_texture_thin",
+      "targetSubsystem": "voice_law_engine",
+      "adjustmentType": "tighten-historical-embedding-law",
+      "expectedImpactZone": "global",
+      "parameters": {
+        "increaseHistoricalEmbeddingRuleWeight": 1
+      }
+    },
+    {
+      "clusterId": "abstraction_too_visible",
+      "targetSubsystem": "abstraction_suppression",
+      "adjustmentType": "tighten-abstract-lexicon-blocklist",
+      "expectedImpactZone": "global",
+      "parameters": {
+        "maxAbstractSignalsPerParagraph": 1,
+        "addEmbodiedSubstitutions": true
+      }
+    },
+    {
+      "clusterId": "paragraph_pressure_too_even",
+      "targetSubsystem": "render_directives",
+      "adjustmentType": "enforce-pressure-curve-variance",
+      "expectedImpactZone": "paragraph",
+      "parameters": {
+        "pressurePattern": "compressed-mixed-expanded-rotating",
+        "minDistinctBeatOrdersPerSegment": 3
+      }
+    },
+    {
+      "clusterId": "paragraph_pressure_too_even",
+      "targetSubsystem": "narrative_distance_plan",
+      "adjustmentType": "raise-distance-mode-diversity",
+      "expectedImpactZone": "paragraph",
+      "parameters": {
+        "maxConsecutiveSameDistanceMode": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,255 @@
+{
+  "artifact": "chapter_embodied_inner_life_router",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.088Z",
+  "routes": [
+    {
+      "segment": 1,
+      "character": "Alexis",
+      "bodyCue": "desire converts to increased attentiveness to partner's spatial position and task pace",
+      "attentionShift": "threat-first scan of faces, doors, and pauses",
+      "silencePattern": "silence after partner speaks carries evaluative weight; duration encodes trust level",
+      "objectInteraction": "hands route feeling through handled objects before explicit explanation",
+      "socialReading": "Assumes silence means consent rather than tactical delay.",
+      "ritualDeviation": "small ritual timing deviations surface interior strain without explicit thesis",
+      "environmentalPressureContact": "weather, distance, and witness placement physically constrain available speech",
+      "priorityOrder": [
+        "body cue",
+        "attention shift",
+        "silence pattern",
+        "object interaction",
+        "social reading",
+        "ritual deviation",
+        "environmental pressure contact"
+      ]
+    },
+    {
+      "segment": 1,
+      "character": "Augustin",
+      "bodyCue": "attraction converts to postural adjustment: shoulders squared, chin-angle recalibrated, grip tightened",
+      "attentionShift": "threat-first scan of faces, doors, and pauses",
+      "silencePattern": "silence in the presence of a potential partner signals active processing disguised as indifference",
+      "objectInteraction": "hands route feeling through handled objects before explicit explanation",
+      "socialReading": "Reads caution as weakness and misses hidden agreement patterns.",
+      "ritualDeviation": "small ritual timing deviations surface interior strain without explicit thesis",
+      "environmentalPressureContact": "weather, distance, and witness placement physically constrain available speech",
+      "priorityOrder": [
+        "body cue",
+        "attention shift",
+        "silence pattern",
+        "object interaction",
+        "social reading",
+        "ritual deviation",
+        "environmental pressure contact"
+      ]
+    },
+    {
+      "segment": 2,
+      "character": "Alexis",
+      "bodyCue": "desire converts to increased attentiveness to partner's spatial position and task pace",
+      "attentionShift": "threat-first scan of faces, doors, and pauses",
+      "silencePattern": "silence after partner speaks carries evaluative weight; duration encodes trust level",
+      "objectInteraction": "hands route feeling through handled objects before explicit explanation",
+      "socialReading": "Assumes silence means consent rather than tactical delay.",
+      "ritualDeviation": "small ritual timing deviations surface interior strain without explicit thesis",
+      "environmentalPressureContact": "weather, distance, and witness placement physically constrain available speech",
+      "priorityOrder": [
+        "body cue",
+        "attention shift",
+        "silence pattern",
+        "object interaction",
+        "social reading",
+        "ritual deviation",
+        "environmental pressure contact"
+      ]
+    },
+    {
+      "segment": 2,
+      "character": "Augustin",
+      "bodyCue": "attraction converts to postural adjustment: shoulders squared, chin-angle recalibrated, grip tightened",
+      "attentionShift": "threat-first scan of faces, doors, and pauses",
+      "silencePattern": "silence in the presence of a potential partner signals active processing disguised as indifference",
+      "objectInteraction": "hands route feeling through handled objects before explicit explanation",
+      "socialReading": "Reads caution as weakness and misses hidden agreement patterns.",
+      "ritualDeviation": "small ritual timing deviations surface interior strain without explicit thesis",
+      "environmentalPressureContact": "weather, distance, and witness placement physically constrain available speech",
+      "priorityOrder": [
+        "body cue",
+        "attention shift",
+        "silence pattern",
+        "object interaction",
+        "social reading",
+        "ritual deviation",
+        "environmental pressure contact"
+      ]
+    },
+    {
+      "segment": 3,
+      "character": "Alexis",
+      "bodyCue": "desire converts to increased attentiveness to partner's spatial position and task pace",
+      "attentionShift": "threat-first scan of faces, doors, and pauses",
+      "silencePattern": "silence after partner speaks carries evaluative weight; duration encodes trust level",
+      "objectInteraction": "hands route feeling through handled objects before explicit explanation",
+      "socialReading": "Assumes silence means consent rather than tactical delay.",
+      "ritualDeviation": "small ritual timing deviations surface interior strain without explicit thesis",
+      "environmentalPressureContact": "weather, distance, and witness placement physically constrain available speech",
+      "priorityOrder": [
+        "body cue",
+        "attention shift",
+        "silence pattern",
+        "object interaction",
+        "social reading",
+        "ritual deviation",
+        "environmental pressure contact"
+      ]
+    },
+    {
+      "segment": 3,
+      "character": "Augustin",
+      "bodyCue": "attraction converts to postural adjustment: shoulders squared, chin-angle recalibrated, grip tightened",
+      "attentionShift": "threat-first scan of faces, doors, and pauses",
+      "silencePattern": "silence in the presence of a potential partner signals active processing disguised as indifference",
+      "objectInteraction": "hands route feeling through handled objects before explicit explanation",
+      "socialReading": "Reads caution as weakness and misses hidden agreement patterns.",
+      "ritualDeviation": "small ritual timing deviations surface interior strain without explicit thesis",
+      "environmentalPressureContact": "weather, distance, and witness placement physically constrain available speech",
+      "priorityOrder": [
+        "body cue",
+        "attention shift",
+        "silence pattern",
+        "object interaction",
+        "social reading",
+        "ritual deviation",
+        "environmental pressure contact"
+      ]
+    },
+    {
+      "segment": 4,
+      "character": "Alexis",
+      "bodyCue": "desire converts to increased attentiveness to partner's spatial position and task pace",
+      "attentionShift": "threat-first scan of faces, doors, and pauses",
+      "silencePattern": "silence after partner speaks carries evaluative weight; duration encodes trust level",
+      "objectInteraction": "hands route feeling through handled objects before explicit explanation",
+      "socialReading": "Assumes silence means consent rather than tactical delay.",
+      "ritualDeviation": "small ritual timing deviations surface interior strain without explicit thesis",
+      "environmentalPressureContact": "weather, distance, and witness placement physically constrain available speech",
+      "priorityOrder": [
+        "body cue",
+        "attention shift",
+        "silence pattern",
+        "object interaction",
+        "social reading",
+        "ritual deviation",
+        "environmental pressure contact"
+      ]
+    },
+    {
+      "segment": 4,
+      "character": "Augustin",
+      "bodyCue": "attraction converts to postural adjustment: shoulders squared, chin-angle recalibrated, grip tightened",
+      "attentionShift": "threat-first scan of faces, doors, and pauses",
+      "silencePattern": "silence in the presence of a potential partner signals active processing disguised as indifference",
+      "objectInteraction": "hands route feeling through handled objects before explicit explanation",
+      "socialReading": "Reads caution as weakness and misses hidden agreement patterns.",
+      "ritualDeviation": "small ritual timing deviations surface interior strain without explicit thesis",
+      "environmentalPressureContact": "weather, distance, and witness placement physically constrain available speech",
+      "priorityOrder": [
+        "body cue",
+        "attention shift",
+        "silence pattern",
+        "object interaction",
+        "social reading",
+        "ritual deviation",
+        "environmental pressure contact"
+      ]
+    },
+    {
+      "segment": 5,
+      "character": "Alexis",
+      "bodyCue": "desire converts to increased attentiveness to partner's spatial position and task pace",
+      "attentionShift": "threat-first scan of faces, doors, and pauses",
+      "silencePattern": "silence after partner speaks carries evaluative weight; duration encodes trust level",
+      "objectInteraction": "hands route feeling through handled objects before explicit explanation",
+      "socialReading": "Assumes silence means consent rather than tactical delay.",
+      "ritualDeviation": "small ritual timing deviations surface interior strain without explicit thesis",
+      "environmentalPressureContact": "weather, distance, and witness placement physically constrain available speech",
+      "priorityOrder": [
+        "body cue",
+        "attention shift",
+        "silence pattern",
+        "object interaction",
+        "social reading",
+        "ritual deviation",
+        "environmental pressure contact"
+      ]
+    },
+    {
+      "segment": 5,
+      "character": "Augustin",
+      "bodyCue": "attraction converts to postural adjustment: shoulders squared, chin-angle recalibrated, grip tightened",
+      "attentionShift": "threat-first scan of faces, doors, and pauses",
+      "silencePattern": "silence in the presence of a potential partner signals active processing disguised as indifference",
+      "objectInteraction": "hands route feeling through handled objects before explicit explanation",
+      "socialReading": "Reads caution as weakness and misses hidden agreement patterns.",
+      "ritualDeviation": "small ritual timing deviations surface interior strain without explicit thesis",
+      "environmentalPressureContact": "weather, distance, and witness placement physically constrain available speech",
+      "priorityOrder": [
+        "body cue",
+        "attention shift",
+        "silence pattern",
+        "object interaction",
+        "social reading",
+        "ritual deviation",
+        "environmental pressure contact"
+      ]
+    },
+    {
+      "segment": 6,
+      "character": "Alexis",
+      "bodyCue": "desire converts to increased attentiveness to partner's spatial position and task pace",
+      "attentionShift": "threat-first scan of faces, doors, and pauses",
+      "silencePattern": "silence after partner speaks carries evaluative weight; duration encodes trust level",
+      "objectInteraction": "hands route feeling through handled objects before explicit explanation",
+      "socialReading": "Assumes silence means consent rather than tactical delay.",
+      "ritualDeviation": "small ritual timing deviations surface interior strain without explicit thesis",
+      "environmentalPressureContact": "weather, distance, and witness placement physically constrain available speech",
+      "priorityOrder": [
+        "body cue",
+        "attention shift",
+        "silence pattern",
+        "object interaction",
+        "social reading",
+        "ritual deviation",
+        "environmental pressure contact"
+      ]
+    },
+    {
+      "segment": 6,
+      "character": "Augustin",
+      "bodyCue": "attraction converts to postural adjustment: shoulders squared, chin-angle recalibrated, grip tightened",
+      "attentionShift": "threat-first scan of faces, doors, and pauses",
+      "silencePattern": "silence in the presence of a potential partner signals active processing disguised as indifference",
+      "objectInteraction": "hands route feeling through handled objects before explicit explanation",
+      "socialReading": "Reads caution as weakness and misses hidden agreement patterns.",
+      "ritualDeviation": "small ritual timing deviations surface interior strain without explicit thesis",
+      "environmentalPressureContact": "weather, distance, and witness placement physically constrain available speech",
+      "priorityOrder": [
+        "body cue",
+        "attention shift",
+        "silence pattern",
+        "object interaction",
+        "social reading",
+        "ritual deviation",
+        "environmental pressure contact"
+      ]
+    }
+  ],
+  "provenance": {
+    "sourceArtifacts": [
+      "reports/book1-chapter-01-developmental-intimacy-engine.json",
+      "reports/book1-chapter-01-enneagram-mediation-layer.json",
+      "reports/book1-chapter-01-cognition-signatures.json"
+    ]
+  }
+}

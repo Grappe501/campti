@@ -1,0 +1,9 @@
+{
+  "generatedAt": "2026-04-16T14:55:30.903Z",
+  "mode": "dynamic-validator",
+  "outputPathHint": "reports/book1-manual-review-resolutions.autofill.dynamic.json",
+  "instructions": "Review suggested preferred keys and backups before apply. Use book1:manual-review:resolve with this file to apply set_preferred actions.",
+  "targets": [],
+  "suggestions": [],
+  "resolutions": []
+}

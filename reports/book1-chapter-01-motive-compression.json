@@ -1,0 +1,130 @@
+{
+  "artifact": "chapter_motive_compression",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.047Z",
+  "characterStates": [
+    {
+      "character": "Alexis",
+      "coreImmediateWant": "Secure preserve kin continuity without public rupture.",
+      "coreImmediateFear": "fear of being misread",
+      "hiddenContradiction": "Understands current leverage around \"webb and gregory. \\\"the caddo indians of louisiana.\\\".... Yet behavior still follows Assumes silence means consent rather than tactical delay.",
+      "currentTacticalBehavior": "Uses controlled silence and positional adjustment while fear of being misread. Under strain converts through worst-case chaining and rapid doubt loops."
+    },
+    {
+      "character": "Augustin",
+      "coreImmediateWant": "Secure preserve kin continuity without public rupture.",
+      "coreImmediateFear": "fear of being misread",
+      "hiddenContradiction": "Understands current leverage around \"webb and gregory. \\\"the caddo indians of louisiana.\\\".... Yet behavior still follows Reads caution as weakness and misses hidden agreement patterns.",
+      "currentTacticalBehavior": "Uses controlled silence and positional adjustment while fear of being misread. Under strain converts through worst-case chaining and rapid doubt loops."
+    }
+  ],
+  "paraphraseClusters": [
+    {
+      "clusterId": "MOTIVE-CLUSTER-1",
+      "stem": "secure preserve kin continuity without public rupture",
+      "segments": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "characters": [
+        "Alexis",
+        "Augustin"
+      ]
+    },
+    {
+      "clusterId": "MOTIVE-CLUSTER-2",
+      "stem": "fear being misread",
+      "segments": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "characters": [
+        "Alexis",
+        "Augustin"
+      ]
+    }
+  ],
+  "segmentDirectives": [
+    {
+      "segment": 1,
+      "character": "Alexis",
+      "mode": "suppress because already surfaced",
+      "rationale": "First stable appearance of motive state in chapter flow. Mediation signal: withholds fear of being misread."
+    },
+    {
+      "segment": 1,
+      "character": "Augustin",
+      "mode": "suppress because already surfaced",
+      "rationale": "First stable appearance of motive state in chapter flow. Mediation signal: withholds fear of being misread."
+    },
+    {
+      "segment": 2,
+      "character": "Alexis",
+      "mode": "suppress because already surfaced",
+      "rationale": "Paraphrase cluster detected; move meaning into gesture and misreading. Mediation signal: withholds fear of being misread."
+    },
+    {
+      "segment": 2,
+      "character": "Augustin",
+      "mode": "suppress because already surfaced",
+      "rationale": "Paraphrase cluster detected; move meaning into gesture and misreading. Mediation signal: withholds fear of being misread."
+    },
+    {
+      "segment": 3,
+      "character": "Alexis",
+      "mode": "suppress because already surfaced",
+      "rationale": "Paraphrase cluster detected; move meaning into gesture and misreading. Mediation signal: withholds fear of being misread."
+    },
+    {
+      "segment": 3,
+      "character": "Augustin",
+      "mode": "suppress because already surfaced",
+      "rationale": "Paraphrase cluster detected; move meaning into gesture and misreading. Mediation signal: withholds fear of being misread."
+    },
+    {
+      "segment": 4,
+      "character": "Alexis",
+      "mode": "suppress because already surfaced",
+      "rationale": "Motive already surfaced and transformed; suppress repeated direct naming. Mediation signal: withholds fear of being misread."
+    },
+    {
+      "segment": 4,
+      "character": "Augustin",
+      "mode": "suppress because already surfaced",
+      "rationale": "Motive already surfaced and transformed; suppress repeated direct naming. Mediation signal: withholds fear of being misread."
+    },
+    {
+      "segment": 5,
+      "character": "Alexis",
+      "mode": "suppress because already surfaced",
+      "rationale": "Motive already surfaced and transformed; suppress repeated direct naming. Mediation signal: withholds fear of being misread."
+    },
+    {
+      "segment": 5,
+      "character": "Augustin",
+      "mode": "suppress because already surfaced",
+      "rationale": "Motive already surfaced and transformed; suppress repeated direct naming. Mediation signal: withholds fear of being misread."
+    },
+    {
+      "segment": 6,
+      "character": "Alexis",
+      "mode": "suppress because already surfaced",
+      "rationale": "Motive already surfaced and transformed; suppress repeated direct naming. Mediation signal: withholds fear of being misread."
+    },
+    {
+      "segment": 6,
+      "character": "Augustin",
+      "mode": "suppress because already surfaced",
+      "rationale": "Motive already surfaced and transformed; suppress repeated direct naming. Mediation signal: withholds fear of being misread."
+    }
+  ]
+}

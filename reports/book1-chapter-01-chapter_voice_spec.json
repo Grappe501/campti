@@ -1,0 +1,44 @@
+{
+  "artifact": "chapter_voice_spec",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T16:25:48.236Z",
+  "voiceSpec": {
+    "tense": "past-leaning immediate",
+    "person": "third-person close rotating",
+    "narrativeDistance": "intimate social anthropology",
+    "dictionProfile": {
+      "prioritize": [
+        "kinship",
+        "ritual",
+        "river",
+        "labor",
+        "obligation",
+        "witness"
+      ],
+      "avoid": [
+        "meta-outline",
+        "beat",
+        "segment",
+        "reader should feel",
+        "this chapter does"
+      ]
+    },
+    "cadenceConstraints": [
+      "alternate long and short sentence runs",
+      "every segment includes one material action verb cluster"
+    ]
+  },
+  "voiceCompliancePlan": {
+    "checks": [
+      "No explicit outline-control vocabulary appears in prose.",
+      "Each segment contains sensory grounding tokens.",
+      "At least one kinship signal appears per segment."
+    ],
+    "thresholds": {
+      "maxMetaLanguageHits": 0,
+      "minSensoryGroundingHits": 10,
+      "minKinshipSignalHits": 6
+    }
+  }
+}

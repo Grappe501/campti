@@ -1,0 +1,61 @@
+{
+  "generatedAt": "2026-04-16T20:14:22.567Z",
+  "safetyRules": {
+    "noExternalSimulatorSchemaImport": true,
+    "doNotExposeTheoryLabelsInProse": true,
+    "preserveChronologyCanonProtections": true,
+    "keepDevelopmentalIntimacySeparateFromEnneagram": true
+  },
+  "classifications": [
+    {
+      "conceptName": "Perceive -> Appraise -> Emotion -> Intention -> Action -> Update Memory/State",
+      "classification": "research_only",
+      "rationale": "Concept is currently best treated as design research input until Campti-native abstractions are finalized."
+    },
+    {
+      "conceptName": "Global State vs Perceived State",
+      "classification": "runtime_safe",
+      "rationale": "Concept can be represented as behavior shaping signals without exposing external theory labels in prose."
+    },
+    {
+      "conceptName": "Limited Attention / Salience Budget",
+      "classification": "runtime_safe",
+      "rationale": "Concept can be represented as behavior shaping signals without exposing external theory labels in prose."
+    },
+    {
+      "conceptName": "Memory Persistence and State Accumulation",
+      "classification": "runtime_safe",
+      "rationale": "Concept can be represented as behavior shaping signals without exposing external theory labels in prose."
+    },
+    {
+      "conceptName": "Social Feedback Loops",
+      "classification": "runtime_safe",
+      "rationale": "Concept can be represented as behavior shaping signals without exposing external theory labels in prose."
+    },
+    {
+      "conceptName": "Meaning Generation / Self-Narrative",
+      "classification": "research_only",
+      "rationale": "Concept is currently best treated as design research input until Campti-native abstractions are finalized."
+    },
+    {
+      "conceptName": "Observer-Dependent Rendering",
+      "classification": "cockpit_simulation_only",
+      "rationale": "Concept is useful for authoring simulation controls and diagnostics but should remain outside direct runtime prose control."
+    },
+    {
+      "conceptName": "Hidden Variables in Character Judgement",
+      "classification": "research_only",
+      "rationale": "Concept is currently best treated as design research input until Campti-native abstractions are finalized."
+    },
+    {
+      "conceptName": "Deterministic vs Probabilistic Modes",
+      "classification": "cockpit_simulation_only",
+      "rationale": "Concept is useful for authoring simulation controls and diagnostics but should remain outside direct runtime prose control."
+    },
+    {
+      "conceptName": "Cosmic/Nested Simulation Metaphysics",
+      "classification": "reject_for_now",
+      "rationale": "Concept introduces metaphysical risk and is intentionally excluded from near-term implementation."
+    }
+  ]
+}

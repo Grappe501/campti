@@ -1,0 +1,473 @@
+{
+  "generatedAt": "2026-04-16T16:25:45.099Z",
+  "thematicVision": [
+    "power",
+    "identity",
+    "faith",
+    "survival"
+  ],
+  "phases": [
+    {
+      "name": "Pre-Civil War",
+      "timeRange": "Pre-contact to 1865",
+      "chapters": [
+        {
+          "chapter": 1,
+          "timePeriod": "Before 1680",
+          "keyEvents": [
+            "Timeline anchor from phase2-chunk1-relationship-engine-core-inventory (1000)",
+            "Timeline anchor from book1-chunk8-core-story-brief (1530)",
+            "Timeline anchor from book1-chunk22-core-story-brief (1542)",
+            "Lineage event 1542 (1542)"
+          ],
+          "characters": [
+            "First Matriarch",
+            "Second Matriarch",
+            "Third Matriarch",
+            "Fourth Matriarch",
+            "Augustin"
+          ],
+          "psychologicalForces": [
+            "First Matriarch: duty vs belonging under inherited pressure",
+            "Second Matriarch: duty vs belonging under inherited pressure",
+            "Third Matriarch: duty vs belonging under inherited pressure",
+            "Fourth Matriarch: duty vs belonging under inherited pressure"
+          ],
+          "themes": [
+            "power",
+            "identity",
+            "faith",
+            "survival"
+          ],
+          "readerExperience": "Pre-contact lifeways and ritual order: grounded history with escalating emotional stakes and foreshadowed lineage consequences.",
+          "connectedScenes": [
+            1
+          ]
+        },
+        {
+          "chapter": 2,
+          "timePeriod": "1680-1690",
+          "keyEvents": [
+            "Timeline anchor from book1-chunk9-core-story-brief (1680)",
+            "Timeline anchor from book1-chunk22-core-story-brief (1682)",
+            "Timeline anchor from book1-chunk23-core-story-brief (1682)",
+            "Timeline anchor from book1-chunk24-core-story-brief (1682)"
+          ],
+          "characters": [
+            "Second Matriarch",
+            "Third Matriarch",
+            "Fourth Matriarch",
+            "First Matriarch",
+            "But"
+          ],
+          "psychologicalForces": [
+            "Second Matriarch: duty vs belonging under inherited pressure",
+            "Third Matriarch: duty vs belonging under inherited pressure",
+            "Fourth Matriarch: duty vs belonging under inherited pressure",
+            "First Matriarch: duty vs belonging under inherited pressure"
+          ],
+          "themes": [
+            "power",
+            "identity",
+            "faith",
+            "survival"
+          ],
+          "readerExperience": "Early pressure signs and regional movement: grounded history with escalating emotional stakes and foreshadowed lineage consequences.",
+          "connectedScenes": [
+            2
+          ]
+        },
+        {
+          "chapter": 3,
+          "timePeriod": "1690-1714",
+          "keyEvents": [
+            "Timeline anchor from phase2-chunk1-relationship-engine-core-inventory (1690)",
+            "Timeline anchor from book1-chunk8-core-story-brief (1690)",
+            "Timeline anchor from book1-chunk22-core-story-brief (1690)",
+            "Lineage event 1690 (1690)"
+          ],
+          "characters": [
+            "Fourth Matriarch",
+            "First Matriarch",
+            "Second Matriarch",
+            "Third Matriarch",
+            "Baldwin"
+          ],
+          "psychologicalForces": [
+            "Fourth Matriarch: duty vs belonging under inherited pressure",
+            "First Matriarch: duty vs belonging under inherited pressure",
+            "Second Matriarch: duty vs belonging under inherited pressure",
+            "Third Matriarch: duty vs belonging under inherited pressure"
+          ],
+          "themes": [
+            "power",
+            "identity",
+            "faith",
+            "survival"
+          ],
+          "readerExperience": "French arrival horizon and first asymmetries: grounded history with escalating emotional stakes and foreshadowed lineage consequences.",
+          "connectedScenes": [
+            3
+          ]
+        },
+        {
+          "chapter": 4,
+          "timePeriod": "1714-1735",
+          "keyEvents": [
+            "Timeline anchor from phase2-chunk1-relationship-engine-core-inventory (1714)",
+            "Timeline anchor from book1-chunk4-core-story-brief (1714)",
+            "Timeline anchor from book1-chunk8-core-story-brief (1714)",
+            "Timeline anchor from book1-chunk22-core-story-brief (1714)"
+          ],
+          "characters": [
+            "Fourth Matriarch",
+            "First Matriarch",
+            "Second Matriarch",
+            "Third Matriarch",
+            "Alexis"
+          ],
+          "psychologicalForces": [
+            "Fourth Matriarch: duty vs belonging under inherited pressure",
+            "First Matriarch: duty vs belonging under inherited pressure",
+            "Second Matriarch: duty vs belonging under inherited pressure",
+            "Third Matriarch: duty vs belonging under inherited pressure"
+          ],
+          "themes": [
+            "power",
+            "identity",
+            "faith",
+            "survival"
+          ],
+          "readerExperience": "Trade protocols become political leverage: grounded history with escalating emotional stakes and foreshadowed lineage consequences.",
+          "connectedScenes": [
+            4
+          ]
+        },
+        {
+          "chapter": 5,
+          "timePeriod": "1735-1765",
+          "keyEvents": [
+            "Timeline anchor from book1-chunk23-core-story-brief (1740)",
+            "Lineage event 1740 (1740)",
+            "Timeline anchor from book1-chunk23-core-story-brief (1742)",
+            "Lineage event 1742 (1742)"
+          ],
+          "characters": [
+            "Fourth Matriarch",
+            "First Matriarch",
+            "Second Matriarch",
+            "Third Matriarch",
+            "Alexis"
+          ],
+          "psychologicalForces": [
+            "Fourth Matriarch: duty vs belonging under inherited pressure",
+            "First Matriarch: duty vs belonging under inherited pressure",
+            "Second Matriarch: duty vs belonging under inherited pressure",
+            "Third Matriarch: duty vs belonging under inherited pressure"
+          ],
+          "themes": [
+            "power",
+            "identity",
+            "faith",
+            "survival"
+          ],
+          "readerExperience": "Settlement pressure and land negotiation: grounded history with escalating emotional stakes and foreshadowed lineage consequences.",
+          "connectedScenes": [
+            5
+          ]
+        },
+        {
+          "chapter": 6,
+          "timePeriod": "1765-1790",
+          "keyEvents": [
+            "Timeline anchor from book1-chunk24-core-story-brief (1765)",
+            "Timeline anchor from book1-chunk24-core-story-brief (1766)",
+            "Timeline anchor from book1-chunk22-core-story-brief (1767)",
+            "Timeline anchor from book1-chunk24-core-story-brief (1770)"
+          ],
+          "characters": [
+            "First Matriarch",
+            "Second Matriarch",
+            "Third Matriarch",
+            "Fourth Matriarch",
+            "Alexis"
+          ],
+          "psychologicalForces": [
+            "First Matriarch: duty vs belonging under inherited pressure",
+            "Second Matriarch: duty vs belonging under inherited pressure",
+            "Third Matriarch: duty vs belonging under inherited pressure",
+            "Fourth Matriarch: duty vs belonging under inherited pressure"
+          ],
+          "themes": [
+            "power",
+            "identity",
+            "faith",
+            "survival"
+          ],
+          "readerExperience": "Lineage memory hardens social law: grounded history with escalating emotional stakes and foreshadowed lineage consequences.",
+          "connectedScenes": [
+            6
+          ]
+        },
+        {
+          "chapter": 7,
+          "timePeriod": "1790-1810",
+          "keyEvents": [
+            "Timeline anchor from book1-chunk23-core-story-brief (1790)",
+            "Timeline anchor from book1-chunk24-core-story-brief (1793)",
+            "Timeline anchor from book1-chunk24-core-story-brief (1794)",
+            "Timeline anchor from book1-chunk24-core-story-brief (1796)"
+          ],
+          "characters": [
+            "Fourth Matriarch",
+            "First Matriarch",
+            "Second Matriarch",
+            "Third Matriarch",
+            "Baseline"
+          ],
+          "psychologicalForces": [
+            "Fourth Matriarch: duty vs belonging under inherited pressure",
+            "First Matriarch: duty vs belonging under inherited pressure",
+            "Second Matriarch: duty vs belonging under inherited pressure",
+            "Third Matriarch: duty vs belonging under inherited pressure"
+          ],
+          "themes": [
+            "power",
+            "identity",
+            "faith",
+            "survival"
+          ],
+          "readerExperience": "Cross-cultural mediation and unstable truce: grounded history with escalating emotional stakes and foreshadowed lineage consequences.",
+          "connectedScenes": [
+            7
+          ]
+        },
+        {
+          "chapter": 8,
+          "timePeriod": "1810-1830",
+          "keyEvents": [
+            "Timeline anchor from book1-chunk24-core-story-brief (1825)",
+            "Lineage event 1829 (1829)",
+            "Timeline anchor from book1-chunk24-core-story-brief (1829)"
+          ],
+          "characters": [
+            "First Matriarch",
+            "Second Matriarch",
+            "Fourth Matriarch",
+            "Third Matriarch",
+            "Alexis"
+          ],
+          "psychologicalForces": [
+            "First Matriarch: duty vs belonging under inherited pressure",
+            "Second Matriarch: duty vs belonging under inherited pressure",
+            "Fourth Matriarch: duty vs belonging under inherited pressure",
+            "Third Matriarch: duty vs belonging under inherited pressure"
+          ],
+          "themes": [
+            "power",
+            "identity",
+            "faith",
+            "survival"
+          ],
+          "readerExperience": "Institutional tightening and survival strategy: grounded history with escalating emotional stakes and foreshadowed lineage consequences.",
+          "connectedScenes": [
+            8
+          ]
+        },
+        {
+          "chapter": 9,
+          "timePeriod": "1830-1845",
+          "keyEvents": [
+            "Lineage event 1832 (1832)",
+            "Lineage event 1840 (1840)"
+          ],
+          "characters": [
+            "Second Matriarch",
+            "Fourth Matriarch",
+            "First Matriarch",
+            "Third Matriarch",
+            "Andr"
+          ],
+          "psychologicalForces": [
+            "Second Matriarch: duty vs belonging under inherited pressure",
+            "Fourth Matriarch: duty vs belonging under inherited pressure",
+            "First Matriarch: duty vs belonging under inherited pressure",
+            "Third Matriarch: duty vs belonging under inherited pressure"
+          ],
+          "themes": [
+            "power",
+            "identity",
+            "faith",
+            "survival"
+          ],
+          "readerExperience": "Succession stress and identity fracture: grounded history with escalating emotional stakes and foreshadowed lineage consequences.",
+          "connectedScenes": [
+            9
+          ]
+        },
+        {
+          "chapter": 10,
+          "timePeriod": "1845-1855",
+          "keyEvents": [
+            "Lineage event 1542 (1542)",
+            "Lineage event 1656 (1656)",
+            "Lineage event 1661 (1661)",
+            "Timeline anchor from book1-chunk22-core-story-brief (1707)"
+          ],
+          "characters": [
+            "First Matriarch",
+            "Fourth Matriarch",
+            "Second Matriarch",
+            "Third Matriarch",
+            "Andr"
+          ],
+          "psychologicalForces": [
+            "First Matriarch: duty vs belonging under inherited pressure",
+            "Fourth Matriarch: duty vs belonging under inherited pressure",
+            "Second Matriarch: duty vs belonging under inherited pressure",
+            "Third Matriarch: duty vs belonging under inherited pressure"
+          ],
+          "themes": [
+            "power",
+            "identity",
+            "faith",
+            "survival"
+          ],
+          "readerExperience": "Spiritual tests and community convergence: grounded history with escalating emotional stakes and foreshadowed lineage consequences.",
+          "connectedScenes": [
+            10
+          ]
+        },
+        {
+          "chapter": 11,
+          "timePeriod": "1855-1860",
+          "keyEvents": [
+            "Timeline anchor from book1-chunk8-core-story-brief (1530)",
+            "Timeline anchor from book1-chunk8-core-story-brief (1653)",
+            "Timeline anchor from book1-chunk22-core-story-brief (1682)",
+            "Timeline anchor from book1-chunk22-core-story-brief (1699)"
+          ],
+          "characters": [
+            "Fourth Matriarch",
+            "First Matriarch",
+            "Second Matriarch",
+            "Third Matriarch",
+            "Alexis"
+          ],
+          "psychologicalForces": [
+            "Fourth Matriarch: duty vs belonging under inherited pressure",
+            "First Matriarch: duty vs belonging under inherited pressure",
+            "Second Matriarch: duty vs belonging under inherited pressure",
+            "Third Matriarch: duty vs belonging under inherited pressure"
+          ],
+          "themes": [
+            "power",
+            "identity",
+            "faith",
+            "survival"
+          ],
+          "readerExperience": "Borderlands militarization and fear economy: grounded history with escalating emotional stakes and foreshadowed lineage consequences.",
+          "connectedScenes": [
+            11
+          ]
+        },
+        {
+          "chapter": 12,
+          "timePeriod": "1860-1865",
+          "keyEvents": [
+            "Timeline anchor from book1-chunk8-core-story-brief (1653)"
+          ],
+          "characters": [
+            "Third Matriarch",
+            "Fourth Matriarch",
+            "First Matriarch",
+            "Second Matriarch",
+            "Claim"
+          ],
+          "psychologicalForces": [
+            "Third Matriarch: duty vs belonging under inherited pressure",
+            "Fourth Matriarch: duty vs belonging under inherited pressure",
+            "First Matriarch: duty vs belonging under inherited pressure",
+            "Second Matriarch: duty vs belonging under inherited pressure"
+          ],
+          "themes": [
+            "power",
+            "identity",
+            "faith",
+            "survival"
+          ],
+          "readerExperience": "Threshold to Civil War and unresolved vows: grounded history with escalating emotional stakes and foreshadowed lineage consequences.",
+          "connectedScenes": [
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Post-Civil War",
+      "timeRange": "1865 to present-day narrator convergence",
+      "chapters": [
+        {
+          "chapter": 13,
+          "timePeriod": "1861-1865",
+          "broadArc": "Civil War rupture reframes survival contracts.",
+          "keyCharacters": [
+            "First Matriarch",
+            "Second Matriarch",
+            "Third Matriarch",
+            "Fourth Matriarch",
+            "Alexis"
+          ]
+        },
+        {
+          "chapter": 14,
+          "timePeriod": "1865-1890",
+          "broadArc": "Reconstruction remaps authority and identity.",
+          "keyCharacters": [
+            "First Matriarch",
+            "Second Matriarch",
+            "Third Matriarch",
+            "Fourth Matriarch",
+            "Alexis"
+          ]
+        },
+        {
+          "chapter": 15,
+          "timePeriod": "1890-1945",
+          "broadArc": "Industrial and legal modernity compresses memory.",
+          "keyCharacters": [
+            "First Matriarch",
+            "Second Matriarch",
+            "Third Matriarch",
+            "Fourth Matriarch",
+            "Alexis"
+          ]
+        },
+        {
+          "chapter": 16,
+          "timePeriod": "1945-2000",
+          "broadArc": "Late-modern fragmentation and archive recovery.",
+          "keyCharacters": [
+            "First Matriarch",
+            "Second Matriarch",
+            "Third Matriarch",
+            "Fourth Matriarch",
+            "Alexis"
+          ]
+        },
+        {
+          "chapter": 17,
+          "timePeriod": "2000-present",
+          "broadArc": "Narrator convergence reconciles faith, lineage, and future.",
+          "keyCharacters": [
+            "First Matriarch",
+            "Second Matriarch",
+            "Third Matriarch",
+            "Fourth Matriarch",
+            "Alexis"
+          ]
+        }
+      ]
+    }
+  ]
+}

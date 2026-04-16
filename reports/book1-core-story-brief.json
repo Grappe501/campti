@@ -1,0 +1,128 @@
+{
+  "generatedAt": "2026-04-16T01:12:54.068Z",
+  "source": {
+    "id": "book1-source-chunk-1",
+    "title": "Book 1 Research Chunk 1",
+    "filePath": "docs/book1/chunk 1.txt",
+    "rawChars": 108348,
+    "normalizedChars": 103665,
+    "chunkCount": 32
+  },
+  "counts": {
+    "claims": 4,
+    "events": 3,
+    "places": 2,
+    "fragments": 3,
+    "openQuestions": 3
+  },
+  "chronology": [
+    {
+      "year": 1690,
+      "title": "Henri de Tonti reaches a Natchitoches village (1690)",
+      "description": "Source marks Henri de Tonti reaching a Natchitoches village while searching for La Salle’s lost expedition."
+    },
+    {
+      "year": 1690,
+      "title": "Natchitoches absorption of Ouachita (c. 1690)",
+      "description": "Source indicates the Natchitoches had absorbed the Ouachita by around 1690, signaling dynamic pre-contact political change."
+    },
+    {
+      "year": 1714,
+      "title": "St. Denis establishes French post at old Natchitoches village (1714)",
+      "description": "Source states St. Denis established the French post in 1714 at an old Natchitoches village site."
+    }
+  ],
+  "coreTruthSet": [
+    {
+      "id": "book1-claim-caddoan-civilizational-context",
+      "description": "The Natchitoches are presented as part of a broader Caddoan civilizational network rather than an isolated tribal unit.",
+      "confidence": 4,
+      "quoteExcerpt": "The Natchitoches were part of the broader Caddoan world, one branch of a large network of related peoples...",
+      "needsReview": true
+    },
+    {
+      "id": "book1-claim-matrilineal-authority",
+      "description": "Matrilineal descent and women’s authority in fields and household spaces are treated as structural social facts.",
+      "confidence": 4,
+      "quoteExcerpt": "Across the Caddo world, descent was traditionally matrilineal... elder women controlled... lodges... and fields.",
+      "needsReview": true
+    },
+    {
+      "id": "book1-claim-riverine-agricultural-settlement",
+      "description": "The source frames Natchitoches life as riverine, agricultural, and hamlet-based rather than nomadic.",
+      "confidence": 4,
+      "quoteExcerpt": "Like other Caddoan peoples, the Natchitoches belonged to an agricultural society... a series of small hamlets...",
+      "needsReview": true
+    },
+    {
+      "id": "book1-claim-trade-node-prior-to-french-post",
+      "description": "The area later used for the French post is described as pre-existing Indigenous infrastructure in a trade geography.",
+      "confidence": 4,
+      "quoteExcerpt": "They built there because the place was already native infrastructure: a node in an older trade geography.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book1-place-natchitoches-area",
+      "name": "Natchitoches Area (historic Indigenous node)",
+      "placeType": "REGION",
+      "description": "Regional node described as a long-standing Indigenous trade and settlement center before colonial attachment."
+    },
+    {
+      "id": "book1-place-red-river-valley",
+      "name": "Red River Valley (Natchitoches homeland corridor)",
+      "placeType": "RIVER",
+      "description": "Floodplain, levees, cane breaks, and settlement ground framing agriculture, mobility, and strategic life."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book1-frag-ceremony-place-ancestor-order",
+      "title": "Ceremony, Place, and Ancestor Order",
+      "summary": "Sacred-world continuity constraint.",
+      "text": "Temples, cemeteries, and ceremonial life bind social order to land, ancestors, and seasonal continuity.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book1-frag-distributed-hamlet-governance",
+      "title": "Distributed Hamlet Governance",
+      "summary": "Governance pattern constraint for scene legitimacy.",
+      "text": "Power appears distributed across linked hamlets, kinship, ritual authority, and local leadership rather than a single rigid center.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book1-frag-river-trade-witness-density",
+      "title": "River Trade Witness Density",
+      "summary": "Public-scene pressure constraint.",
+      "text": "River exchange nodes function as socially dense theaters where diplomacy, reputation, and risk circulate together.",
+      "confidence": 3,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book1-oq-cosmology-source-granularity",
+      "title": "Which Natchitoches-specific ritual practices are directly sourced vs inferred from broader Caddo records?",
+      "description": "Clarify direct evidence boundaries before scene-level ritual detail enters the core story bible.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book1-oq-natchitoches-leadership-granularity",
+      "title": "How exactly did leadership authority vary across Natchitoches hamlets?",
+      "description": "Need tighter differentiation between hereditary offices, consensus councils, and ritual authority in local governance.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book1-oq-neighbor-diplomacy-map",
+      "title": "What was the operating diplomatic map among Natchitoches, Adaes, Yatasi, Ouachita, and Hasinai at key dates?",
+      "description": "Needed for conflict architecture and alliance plausibility in chapter planning.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

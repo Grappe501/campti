@@ -1,0 +1,105 @@
+{
+  "generatedAt": "2026-04-16T02:19:25.968Z",
+  "source": {
+    "id": "book1-source-chunk-24",
+    "title": "Book 1 Research Chunk 24",
+    "filePath": "docs/book1/chunk24.txt",
+    "rawChars": 62165,
+    "normalizedChars": 48719,
+    "chunkCount": 14
+  },
+  "counts": {
+    "claims": 5,
+    "events": 0,
+    "places": 1,
+    "fragments": 2,
+    "openQuestions": 3
+  },
+  "chronology": [],
+  "coreTruthSet": [
+    {
+      "id": "book24-claim-campti-strategic-frontier-hub",
+      "description": "Campti is reframed as a strategic frontier hub for brokered movement, trade, and influence consolidation.",
+      "confidence": 5,
+      "quoteExcerpt": "Campti ... strategic frontier hub ... where frontier power consolidates.",
+      "needsReview": true
+    },
+    {
+      "id": "book24-claim-interpreter-role-is-power-position",
+      "description": "Interpreter function is modeled as a central power position controlling conflict prevention, trade continuity, and multi-group trust.",
+      "confidence": 5,
+      "quoteExcerpt": "This is a power position, not a marginal one.",
+      "needsReview": true
+    },
+    {
+      "id": "book24-claim-louis-grappe-anchor-interpreter-class",
+      "description": "Louis Grappe is framed as an anchor figure for an interpreter/broker class operating between Native, Spanish, and French systems.",
+      "confidence": 5,
+      "quoteExcerpt": "Louis Grappe ... interpreter in Indian affairs ... a cultural intermediary.",
+      "needsReview": true
+    },
+    {
+      "id": "book24-claim-hybrid-power-society-intersection",
+      "description": "Coincoin-descendant land base and Grappe diplomatic-linguistic networks are framed as intersecting to produce hybrid multi-system power.",
+      "confidence": 4,
+      "quoteExcerpt": "When these intersect ... a hybrid society with power in multiple systems.",
+      "needsReview": true
+    },
+    {
+      "id": "book24-claim-population-model-adds-broker-layer",
+      "description": "Population architecture explicitly adds an interpreter/broker layer alongside Native, colonial, enslaved/creole, and military layers.",
+      "confidence": 4,
+      "quoteExcerpt": "We now add a fourth population layer: interpreter / broker class.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book24-place-campti-interpreter-corridor-node",
+      "name": "Campti Interpreter Corridor Node",
+      "placeType": "TOWN",
+      "description": "Upper Natchitoches corridor node positioned for brokered diplomacy, landholding, and intersystem translation work."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book24-frag-five-pillar-timeline-integration",
+      "title": "Five-Pillar Timeline Integration",
+      "summary": "Macro-structure integration constraint.",
+      "text": "Story architecture should integrate native world, colonial power shifts, creole lineage, military layer, and broker/interpreter layer as concurrent forces.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book24-frag-frontier-survival-through-translation",
+      "title": "Frontier Survival Through Translation",
+      "summary": "Conflict-prevention infrastructure constraint.",
+      "text": "In high-friction borderlands, translation and trust brokerage are survival infrastructure for all sides.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book24-oq-broker-lineage-record-chain",
+      "title": "Which archival chain best links Louis Grappe and related broker figures across Spanish, French, and Native records?",
+      "description": "Needed to strengthen documentary continuity for interpreter-class claims.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book24-oq-broker-power-limits-and-failure-modes",
+      "title": "What are the limits and failure modes of broker-class influence when trust collapses or imperial demands harden?",
+      "description": "Needed to avoid over-centralizing intermediary power in later conflict arcs.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book24-oq-campti-node-function-by-decade",
+      "title": "How does Campti’s strategic function change decade-by-decade across trade, diplomacy, and landholding pressures?",
+      "description": "Needed for time-accurate frontier hub portrayal.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

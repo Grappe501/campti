@@ -1,0 +1,11 @@
+{
+  "contractVersion": "1",
+  "scope": "phase10_phase11_author_command_cockpit",
+  "evaluatedAtIso": "2026-04-15T19:09:06.235Z",
+  "decision": "READY",
+  "trueBlockers": [],
+  "nonBlockingFollowUps": [
+    "Expand indicator derivation fixtures with denser chapter/book production datasets.",
+    "Add route-level e2e checks for legacy deep links into scene workspace and chapter assembly."
+  ]
+}

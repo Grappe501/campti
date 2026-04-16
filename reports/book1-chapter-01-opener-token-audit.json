@@ -1,0 +1,56 @@
+{
+  "artifact": "chapter_opener_token_audit",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.019Z",
+  "entries": [
+    {
+      "segment": 1,
+      "paragraphIndex": 0,
+      "openerStem": "the room arranges itself",
+      "syntaxStem": "character-name-start",
+      "conflictDetected": false,
+      "resolvedByAlternateFamily": true
+    },
+    {
+      "segment": 2,
+      "paragraphIndex": 0,
+      "openerStem": "alexis s attention snaps",
+      "syntaxStem": "other",
+      "conflictDetected": false,
+      "resolvedByAlternateFamily": true
+    },
+    {
+      "segment": 3,
+      "paragraphIndex": 0,
+      "openerStem": "smoke and wet reed",
+      "syntaxStem": "character-name-start",
+      "conflictDetected": true,
+      "resolvedByAlternateFamily": false
+    },
+    {
+      "segment": 4,
+      "paragraphIndex": 0,
+      "openerStem": "alexis s shoulders set",
+      "syntaxStem": "other",
+      "conflictDetected": true,
+      "resolvedByAlternateFamily": false
+    },
+    {
+      "segment": 5,
+      "paragraphIndex": 0,
+      "openerStem": "alexis shifts lanes between",
+      "syntaxStem": "character-name-start",
+      "conflictDetected": true,
+      "resolvedByAlternateFamily": false
+    },
+    {
+      "segment": 6,
+      "paragraphIndex": 0,
+      "openerStem": "smoke and wet reed",
+      "syntaxStem": "character-name-start",
+      "conflictDetected": true,
+      "resolvedByAlternateFamily": false
+    }
+  ]
+}

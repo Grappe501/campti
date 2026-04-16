@@ -1,0 +1,386 @@
+{
+  "artifact": "chapter_render_directives",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.083Z",
+  "directives": [
+    {
+      "segment": 1,
+      "paragraph": "A",
+      "dominantBeatOrder": [
+        "sensory",
+        "object",
+        "action",
+        "social"
+      ],
+      "paragraphMood": "interior under translate fear into hand pressure and route changes; stress=worst-case chaining and rapid doubt loops; conflict=treating suspicion as external certainty; distortion=Assumes silence means consent rather than tactical delay.; meaning=meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+      "sentencePressure": "expanded",
+      "imagePermission": "medium",
+      "abstractionCeiling": 0,
+      "silenceWithholdingRequirement": true,
+      "transitionBehavior": "unfinished action carry; uses silence as control gate before speech clears social risk",
+      "allowedKnowledgeScope": "present-scene-only",
+      "activeCharacterScope": [
+        "Alexis",
+        "Augustin"
+      ]
+    },
+    {
+      "segment": 1,
+      "paragraph": "B",
+      "dominantBeatOrder": [
+        "action",
+        "pressure",
+        "object",
+        "social"
+      ],
+      "paragraphMood": "withheldKnowledge under translate fear into hand pressure and route changes; stress=worst-case chaining and rapid doubt loops; conflict=treating suspicion as external certainty; distortion=Assumes silence means consent rather than tactical delay.; meaning=meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+      "sentencePressure": "mixed",
+      "imagePermission": "medium",
+      "abstractionCeiling": 0,
+      "silenceWithholdingRequirement": true,
+      "transitionBehavior": "attention shift with social consequence; uses silence as control gate before speech clears social risk",
+      "allowedKnowledgeScope": "lawful-foreshadowing-only",
+      "activeCharacterScope": [
+        "Alexis",
+        "Augustin"
+      ]
+    },
+    {
+      "segment": 1,
+      "paragraph": "C",
+      "dominantBeatOrder": [
+        "pressure",
+        "sensory",
+        "action",
+        "withheld"
+      ],
+      "paragraphMood": "withheldKnowledge under translate fear into hand pressure and route changes; stress=worst-case chaining and rapid doubt loops; conflict=treating suspicion as external certainty; distortion=Assumes silence means consent rather than tactical delay.; meaning=meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+      "sentencePressure": "compressed",
+      "imagePermission": "high",
+      "abstractionCeiling": 1,
+      "silenceWithholdingRequirement": true,
+      "transitionBehavior": "environmental pressure continuation; uses silence as control gate before speech clears social risk",
+      "allowedKnowledgeScope": "lawful-foreshadowing-only",
+      "activeCharacterScope": [
+        "Alexis",
+        "Augustin"
+      ]
+    },
+    {
+      "segment": 2,
+      "paragraph": "A",
+      "dominantBeatOrder": [
+        "sensory",
+        "object",
+        "action",
+        "social"
+      ],
+      "paragraphMood": "interior under translate fear into hand pressure and route changes; stress=worst-case chaining and rapid doubt loops; conflict=treating suspicion as external certainty; distortion=Assumes silence means consent rather than tactical delay.; meaning=meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+      "sentencePressure": "mixed",
+      "imagePermission": "medium",
+      "abstractionCeiling": 0,
+      "silenceWithholdingRequirement": true,
+      "transitionBehavior": "attention shift with social consequence; uses silence as control gate before speech clears social risk",
+      "allowedKnowledgeScope": "present-scene-only",
+      "activeCharacterScope": [
+        "Alexis",
+        "Augustin"
+      ]
+    },
+    {
+      "segment": 2,
+      "paragraph": "B",
+      "dominantBeatOrder": [
+        "action",
+        "pressure",
+        "object",
+        "social"
+      ],
+      "paragraphMood": "social-reading under translate fear into hand pressure and route changes; stress=worst-case chaining and rapid doubt loops; conflict=treating suspicion as external certainty; distortion=Assumes silence means consent rather than tactical delay.; meaning=meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+      "sentencePressure": "compressed",
+      "imagePermission": "medium",
+      "abstractionCeiling": 0,
+      "silenceWithholdingRequirement": true,
+      "transitionBehavior": "environmental pressure continuation; uses silence as control gate before speech clears social risk",
+      "allowedKnowledgeScope": "lawful-foreshadowing-only",
+      "activeCharacterScope": [
+        "Alexis",
+        "Augustin"
+      ]
+    },
+    {
+      "segment": 2,
+      "paragraph": "C",
+      "dominantBeatOrder": [
+        "sensory",
+        "action",
+        "pressure",
+        "object"
+      ],
+      "paragraphMood": "withheldKnowledge under translate fear into hand pressure and route changes; stress=worst-case chaining and rapid doubt loops; conflict=treating suspicion as external certainty; distortion=Assumes silence means consent rather than tactical delay.; meaning=meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+      "sentencePressure": "expanded",
+      "imagePermission": "high",
+      "abstractionCeiling": 1,
+      "silenceWithholdingRequirement": true,
+      "transitionBehavior": "object continuity handoff; uses silence as control gate before speech clears social risk",
+      "allowedKnowledgeScope": "lawful-foreshadowing-only",
+      "activeCharacterScope": [
+        "Alexis",
+        "Augustin"
+      ]
+    },
+    {
+      "segment": 3,
+      "paragraph": "A",
+      "dominantBeatOrder": [
+        "sensory",
+        "object",
+        "action",
+        "social"
+      ],
+      "paragraphMood": "interior under translate fear into hand pressure and route changes; stress=worst-case chaining and rapid doubt loops; conflict=treating suspicion as external certainty; distortion=Assumes silence means consent rather than tactical delay.; meaning=meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+      "sentencePressure": "compressed",
+      "imagePermission": "medium",
+      "abstractionCeiling": 0,
+      "silenceWithholdingRequirement": true,
+      "transitionBehavior": "environmental pressure continuation; uses silence as control gate before speech clears social risk",
+      "allowedKnowledgeScope": "present-scene-only",
+      "activeCharacterScope": [
+        "Alexis",
+        "Augustin"
+      ]
+    },
+    {
+      "segment": 3,
+      "paragraph": "B",
+      "dominantBeatOrder": [
+        "action",
+        "pressure",
+        "object",
+        "social"
+      ],
+      "paragraphMood": "withheldKnowledge under translate fear into hand pressure and route changes; stress=worst-case chaining and rapid doubt loops; conflict=treating suspicion as external certainty; distortion=Assumes silence means consent rather than tactical delay.; meaning=meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+      "sentencePressure": "expanded",
+      "imagePermission": "medium",
+      "abstractionCeiling": 0,
+      "silenceWithholdingRequirement": true,
+      "transitionBehavior": "object continuity handoff; uses silence as control gate before speech clears social risk",
+      "allowedKnowledgeScope": "lawful-foreshadowing-only",
+      "activeCharacterScope": [
+        "Alexis",
+        "Augustin"
+      ]
+    },
+    {
+      "segment": 3,
+      "paragraph": "C",
+      "dominantBeatOrder": [
+        "action",
+        "social",
+        "pressure",
+        "withheld"
+      ],
+      "paragraphMood": "withheldKnowledge under translate fear into hand pressure and route changes; stress=worst-case chaining and rapid doubt loops; conflict=treating suspicion as external certainty; distortion=Assumes silence means consent rather than tactical delay.; meaning=meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+      "sentencePressure": "mixed",
+      "imagePermission": "high",
+      "abstractionCeiling": 1,
+      "silenceWithholdingRequirement": true,
+      "transitionBehavior": "unfinished action carry; uses silence as control gate before speech clears social risk",
+      "allowedKnowledgeScope": "lawful-foreshadowing-only",
+      "activeCharacterScope": [
+        "Alexis",
+        "Augustin"
+      ]
+    },
+    {
+      "segment": 4,
+      "paragraph": "A",
+      "dominantBeatOrder": [
+        "sensory",
+        "object",
+        "action",
+        "social"
+      ],
+      "paragraphMood": "interior under translate fear into hand pressure and route changes; stress=worst-case chaining and rapid doubt loops; conflict=treating suspicion as external certainty; distortion=Assumes silence means consent rather than tactical delay.; meaning=meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+      "sentencePressure": "expanded",
+      "imagePermission": "medium",
+      "abstractionCeiling": 0,
+      "silenceWithholdingRequirement": true,
+      "transitionBehavior": "object continuity handoff; uses silence as control gate before speech clears social risk",
+      "allowedKnowledgeScope": "present-scene-only",
+      "activeCharacterScope": [
+        "Alexis",
+        "Augustin"
+      ]
+    },
+    {
+      "segment": 4,
+      "paragraph": "B",
+      "dominantBeatOrder": [
+        "action",
+        "pressure",
+        "object",
+        "social"
+      ],
+      "paragraphMood": "social-reading under translate fear into hand pressure and route changes; stress=worst-case chaining and rapid doubt loops; conflict=treating suspicion as external certainty; distortion=Assumes silence means consent rather than tactical delay.; meaning=meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+      "sentencePressure": "mixed",
+      "imagePermission": "medium",
+      "abstractionCeiling": 0,
+      "silenceWithholdingRequirement": true,
+      "transitionBehavior": "unfinished action carry; uses silence as control gate before speech clears social risk",
+      "allowedKnowledgeScope": "lawful-foreshadowing-only",
+      "activeCharacterScope": [
+        "Alexis",
+        "Augustin"
+      ]
+    },
+    {
+      "segment": 4,
+      "paragraph": "C",
+      "dominantBeatOrder": [
+        "object",
+        "action",
+        "social",
+        "pressure"
+      ],
+      "paragraphMood": "withheldKnowledge under translate fear into hand pressure and route changes; stress=worst-case chaining and rapid doubt loops; conflict=treating suspicion as external certainty; distortion=Assumes silence means consent rather than tactical delay.; meaning=meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+      "sentencePressure": "compressed",
+      "imagePermission": "high",
+      "abstractionCeiling": 1,
+      "silenceWithholdingRequirement": true,
+      "transitionBehavior": "attention shift with social consequence; uses silence as control gate before speech clears social risk",
+      "allowedKnowledgeScope": "lawful-foreshadowing-only",
+      "activeCharacterScope": [
+        "Alexis",
+        "Augustin"
+      ]
+    },
+    {
+      "segment": 5,
+      "paragraph": "A",
+      "dominantBeatOrder": [
+        "sensory",
+        "object",
+        "action",
+        "social"
+      ],
+      "paragraphMood": "interior under translate fear into hand pressure and route changes; stress=worst-case chaining and rapid doubt loops; conflict=treating suspicion as external certainty; distortion=Assumes silence means consent rather than tactical delay.; meaning=meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+      "sentencePressure": "mixed",
+      "imagePermission": "medium",
+      "abstractionCeiling": 0,
+      "silenceWithholdingRequirement": true,
+      "transitionBehavior": "unfinished action carry; uses silence as control gate before speech clears social risk",
+      "allowedKnowledgeScope": "present-scene-only",
+      "activeCharacterScope": [
+        "Alexis",
+        "Augustin"
+      ]
+    },
+    {
+      "segment": 5,
+      "paragraph": "B",
+      "dominantBeatOrder": [
+        "action",
+        "pressure",
+        "object",
+        "social"
+      ],
+      "paragraphMood": "withheldKnowledge under translate fear into hand pressure and route changes; stress=worst-case chaining and rapid doubt loops; conflict=treating suspicion as external certainty; distortion=Assumes silence means consent rather than tactical delay.; meaning=meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+      "sentencePressure": "compressed",
+      "imagePermission": "medium",
+      "abstractionCeiling": 0,
+      "silenceWithholdingRequirement": true,
+      "transitionBehavior": "attention shift with social consequence; uses silence as control gate before speech clears social risk",
+      "allowedKnowledgeScope": "lawful-foreshadowing-only",
+      "activeCharacterScope": [
+        "Alexis",
+        "Augustin"
+      ]
+    },
+    {
+      "segment": 5,
+      "paragraph": "C",
+      "dominantBeatOrder": [
+        "pressure",
+        "sensory",
+        "action",
+        "withheld"
+      ],
+      "paragraphMood": "withheldKnowledge under translate fear into hand pressure and route changes; stress=worst-case chaining and rapid doubt loops; conflict=treating suspicion as external certainty; distortion=Assumes silence means consent rather than tactical delay.; meaning=meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+      "sentencePressure": "expanded",
+      "imagePermission": "high",
+      "abstractionCeiling": 1,
+      "silenceWithholdingRequirement": true,
+      "transitionBehavior": "environmental pressure continuation; uses silence as control gate before speech clears social risk",
+      "allowedKnowledgeScope": "lawful-foreshadowing-only",
+      "activeCharacterScope": [
+        "Alexis",
+        "Augustin"
+      ]
+    },
+    {
+      "segment": 6,
+      "paragraph": "A",
+      "dominantBeatOrder": [
+        "sensory",
+        "object",
+        "action",
+        "social"
+      ],
+      "paragraphMood": "interior under translate fear into hand pressure and route changes; stress=worst-case chaining and rapid doubt loops; conflict=treating suspicion as external certainty; distortion=Assumes silence means consent rather than tactical delay.; meaning=meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+      "sentencePressure": "compressed",
+      "imagePermission": "medium",
+      "abstractionCeiling": 0,
+      "silenceWithholdingRequirement": true,
+      "transitionBehavior": "attention shift with social consequence; uses silence as control gate before speech clears social risk",
+      "allowedKnowledgeScope": "present-scene-only",
+      "activeCharacterScope": [
+        "Alexis",
+        "Augustin"
+      ]
+    },
+    {
+      "segment": 6,
+      "paragraph": "B",
+      "dominantBeatOrder": [
+        "action",
+        "pressure",
+        "object",
+        "social"
+      ],
+      "paragraphMood": "social-reading under translate fear into hand pressure and route changes; stress=worst-case chaining and rapid doubt loops; conflict=treating suspicion as external certainty; distortion=Assumes silence means consent rather than tactical delay.; meaning=meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+      "sentencePressure": "expanded",
+      "imagePermission": "medium",
+      "abstractionCeiling": 0,
+      "silenceWithholdingRequirement": true,
+      "transitionBehavior": "environmental pressure continuation; uses silence as control gate before speech clears social risk",
+      "allowedKnowledgeScope": "lawful-foreshadowing-only",
+      "activeCharacterScope": [
+        "Alexis",
+        "Augustin"
+      ]
+    },
+    {
+      "segment": 6,
+      "paragraph": "C",
+      "dominantBeatOrder": [
+        "sensory",
+        "action",
+        "pressure",
+        "object"
+      ],
+      "paragraphMood": "withheldKnowledge under translate fear into hand pressure and route changes; stress=worst-case chaining and rapid doubt loops; conflict=treating suspicion as external certainty; distortion=Assumes silence means consent rather than tactical delay.; meaning=meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+      "sentencePressure": "mixed",
+      "imagePermission": "high",
+      "abstractionCeiling": 1,
+      "silenceWithholdingRequirement": true,
+      "transitionBehavior": "object continuity handoff; uses silence as control gate before speech clears social risk",
+      "allowedKnowledgeScope": "lawful-foreshadowing-only",
+      "activeCharacterScope": [
+        "Alexis",
+        "Augustin"
+      ]
+    }
+  ]
+}

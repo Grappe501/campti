@@ -1,0 +1,18 @@
+{
+  "artifact": "chapter_prose_shape_summary",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:40.721Z",
+  "mostCommonFailurePattern": "repeated_opener",
+  "segmentsWithMostFailures": [
+    1
+  ],
+  "failureCluster": "starts",
+  "totalsByCategory": {
+    "low_embodiment": 6,
+    "repeated_opener": 22,
+    "repeated_abstract_fear_language": 6,
+    "fear_language_density": 3,
+    "abstraction_overuse_by_segment": 1
+  }
+}

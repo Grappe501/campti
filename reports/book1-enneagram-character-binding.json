@@ -1,0 +1,84 @@
+{
+  "artifact": "book1_enneagram_character_binding",
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-04-16T19:42:53.269Z",
+  "sourceRef": "book1-source-section-xiii-enneagram-upload",
+  "bindings": [
+    {
+      "character": "Alexis",
+      "enneagramType": "SIX",
+      "wing": "FIVE",
+      "instinctualStack": [
+        "sp",
+        "so",
+        "sx"
+      ],
+      "selfAwarenessLevel": "high",
+      "selfNarrationAccuracy": 0.78,
+      "stressSecurityPattern": {
+        "underPressure": "worst-case chaining and rapid doubt loops",
+        "inGrowth": "grounded caution with cooperative trust"
+      },
+      "relationalFieldProfile": {
+        "intimateBehavior": "protects attachment through selective disclosure and worst-case chaining and rapid doubt loops",
+        "kinshipRole": "carries household continuity by guarding legacy fracture from witness scrutiny",
+        "powerWorkBehavior": "reads hierarchy through loyalty signals, weak seams, and authority reliability and answers with controlled leverage",
+        "socialGroupBehavior": "tests group safety before trust by tracking risk-minimizing; delays commitment until signal confidence rises"
+      },
+      "languageUnderPressure": {
+        "sentenceStructure": "conditional phrasing, risk qualifiers, and repeated verification cues",
+        "silenceVsSpeech": "uses silence as control gate before speech clears social risk",
+        "emotionalExpression": "vigilant tension alternating with loyal attachment",
+        "abstractionVsEmbodiment": "routes abstraction into body cues, object handling, and spatial relation before naming"
+      },
+      "mediationRouting": {
+        "routeThroughConsciousnessLayer": true,
+        "routeThroughMediationLayer": true,
+        "allowDirectSourceToRenderer": false,
+        "allowRawTypologyLabelsInRenderedProse": false,
+        "temporalGatingRequired": true,
+        "canonGatingRequired": true,
+        "developmentalMaturitySeparatedFromEnneagram": true,
+        "intimacyEngineSeparatedFromEnneagram": true
+      }
+    },
+    {
+      "character": "Augustin",
+      "enneagramType": "SIX",
+      "wing": "FIVE",
+      "instinctualStack": [
+        "sp",
+        "so",
+        "sx"
+      ],
+      "selfAwarenessLevel": "low",
+      "selfNarrationAccuracy": 0.34,
+      "stressSecurityPattern": {
+        "underPressure": "worst-case chaining and rapid doubt loops",
+        "inGrowth": "grounded caution with cooperative trust"
+      },
+      "relationalFieldProfile": {
+        "intimateBehavior": "protects attachment through selective disclosure and worst-case chaining and rapid doubt loops",
+        "kinshipRole": "carries household continuity by guarding legacy fracture from witness scrutiny",
+        "powerWorkBehavior": "reads hierarchy through loyalty signals, weak seams, and authority reliability and answers with controlled leverage",
+        "socialGroupBehavior": "tests group safety before trust by tracking risk-minimizing; delays commitment until signal confidence rises"
+      },
+      "languageUnderPressure": {
+        "sentenceStructure": "conditional phrasing, risk qualifiers, and repeated verification cues",
+        "silenceVsSpeech": "uses silence as control gate before speech clears social risk",
+        "emotionalExpression": "vigilant tension alternating with loyal attachment",
+        "abstractionVsEmbodiment": "routes abstraction into body cues, object handling, and spatial relation before naming"
+      },
+      "mediationRouting": {
+        "routeThroughConsciousnessLayer": true,
+        "routeThroughMediationLayer": true,
+        "allowDirectSourceToRenderer": false,
+        "allowRawTypologyLabelsInRenderedProse": false,
+        "temporalGatingRequired": true,
+        "canonGatingRequired": true,
+        "developmentalMaturitySeparatedFromEnneagram": true,
+        "intimacyEngineSeparatedFromEnneagram": true
+      }
+    }
+  ]
+}

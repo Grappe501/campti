@@ -1,0 +1,70 @@
+{
+  "artifact": "chapter_voice_law_engine",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.080Z",
+  "abstractionCeiling": {
+    "maxAbstractSignalsPerParagraph": 1,
+    "maxAbstractSignalsPerSegment": 2
+  },
+  "imageDensityRange": {
+    "minPerParagraph": 1,
+    "maxPerParagraph": 3
+  },
+  "sentenceCompressionExpansionProfile": [
+    "alternate compressed and expanded sentence runs inside each segment",
+    "open with concrete signal before interpretive clause",
+    "avoid three consecutive equal-length declarative starts"
+  ],
+  "emotionalRestraintLaw": [
+    "render emotion through withheld action, pacing, and bodily signal",
+    "avoid direct naming when tension can be inferred from scene behavior",
+    "favor misreading and silence over declared interior certainty"
+  ],
+  "paragraphPressureCurve": [
+    "every paragraph carries one active pressure source",
+    "pressure should transform movement or speaking order by paragraph end",
+    "do not resolve pressure in same paragraph where introduced"
+  ],
+  "historicalEmbeddingRules": [
+    "embed historical context through labor, objects, and social ordering",
+    "replace summary history statements with lived scene cues",
+    "use ritual/material continuity instead of exposition",
+    "historical condition must stay lived: No explicit dated event may exceed year 1680 in Chapter 1 outputs.",
+    "historical condition must stay lived: Civil War era references are disallowed in present-tense chapter reality.",
+    "historical condition must stay lived: Later descendants (e.g., Alexis line) cannot enter early chapter active cast before chronology window.",
+    "each paragraph must include at least one concrete material or social ordering signal",
+    "historical pressure must be shown by labor sequence change before abstract framing"
+  ],
+  "forbiddenSentenceFamilies": [
+    "summary declaration followed by abstract interpretation",
+    "uniform declarative cadence for full paragraph openings",
+    "meta-governance phrasing in narrative surface"
+  ],
+  "transitionBehaviors": [
+    "object continuity handoff",
+    "unfinished action carry",
+    "attention shift with social consequence",
+    "environmental pressure continuation"
+  ],
+  "acceptableMetaphorImageClasses": [
+    "river-material",
+    "tool-hand contact",
+    "weather-pressure",
+    "ritual gesture"
+  ],
+  "antiSummaryRules": [
+    "do not lead paragraphs with explanatory thesis language",
+    "replace abstract motive labels with observed behavior change",
+    "history appears as handled condition, not interpretive recap"
+  ],
+  "antiOutlineLeakageRules": [
+    "remove planning and governance terms from narrative surface",
+    "forbid chapter-purpose phrasing inside generated prose"
+  ],
+  "antiInterchangeableInteriorityRules": [
+    "route interior cues through character-specific attention bias",
+    "do not reuse identical fear-language textures across cast",
+    "each lead character must expose a distinct notice->decide->withhold chain"
+  ]
+}

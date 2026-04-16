@@ -1,0 +1,61 @@
+{
+  "artifact": "book1_chapter_01_critic_feedback_map",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.014Z",
+  "sourceSnapshots": {
+    "proseShapeCriticGeneratedAt": "2026-04-16T19:18:54.944Z",
+    "adversarialGeneratedAt": "2026-04-16T19:18:54.944Z",
+    "chapterStatus": "blocked",
+    "finalRecommendation": "reject new draft"
+  },
+  "findings": [
+    {
+      "findingCategory": "repeated_opener",
+      "findingSeverity": "critical",
+      "findingCount": 30,
+      "likelyRendererCause": "Opening sequence families are reused too aggressively across segment starts.",
+      "targetSubsystem": "render_directives",
+      "recommendedAdjustmentType": "increase-paragraph-pressure-variation",
+      "expectedImpactZone": "paragraph",
+      "evidence": [
+        "from withheldknowledge range, alexis",
+        "settlements define movement, risk,",
+        "\"webb and gregory."
+      ]
+    },
+    {
+      "findingCategory": "repeated_abstract_fear_language",
+      "findingSeverity": "mixed",
+      "findingCount": 8,
+      "likelyRendererCause": "Fear translation remains lexical rather than embodied.",
+      "targetSubsystem": "language_suppression_map",
+      "recommendedAdjustmentType": "tighten-abstraction-suppression",
+      "expectedImpactZone": "paragraph",
+      "evidence": [
+        "from withheldknowledge range alexis keeps decisions :: From withheldKnowledge range, Alexis keeps decisions in risk-minimizing; delays commitment until signal confidence rises; conflict=treating suspicion as external certainty; only escalates after embodied...",
+        "settlements define movement risk belonging :: settlements define movement, risk, and belonging.",
+        "alexis augustin misread each other through :: Alexis and Augustin misread each other through filters threat through loyalty signals, weak seams, and authority reliability and consent rather than tactical delay.."
+      ]
+    },
+    {
+      "findingCategory": "low_embodiment",
+      "findingSeverity": "high",
+      "findingCount": 6,
+      "likelyRendererCause": "Directive mix underweights sensory/object beats relative to abstract pressure beats.",
+      "targetSubsystem": "render_directives",
+      "recommendedAdjustmentType": "increase-historical-lived-texture",
+      "expectedImpactZone": "segment",
+      "evidence": [
+        "The room arranges itself around what stays unsaid; the pressure does not clear, and Near the opening, River settlements define movement, risk, and belonging; the pressure does not clear, and \"Webb and Gregory; the pressure does not clear, and \\\"The Caddo In...",
+        "Alexis's attention snaps to a hand movement that interrupts routine. Near the opening, Alexis filters detail through signal-first scan of faces, doors, and pauses; mediation=notices signal-first scan of faces, doors, and pauses; rejects signal-first scan of...",
+        "Smoke and wet reed meet skin before anyone risks a claim in river settlements define movement, risk. belonging.. Near the opening, River settlements define movement, risk. belonging. \"Early Caddo History El Camino Real de los... Object contact marks memory ..."
+      ]
+    }
+  ],
+  "convergenceSignals": {
+    "adversarialHighTrend": "unchanged",
+    "adversarialCriticalTrend": "improved",
+    "proseShapeCriticalTrend": "improved"
+  }
+}

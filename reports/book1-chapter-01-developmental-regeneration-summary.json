@@ -1,0 +1,95 @@
+{
+  "artifact": "book1_chapter_01_regeneration_summary",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:37:46.979Z",
+  "changedSystems": [
+    "voice_contract",
+    "prose_briefs",
+    "lived_history",
+    "cognition_signatures",
+    "enneagram_operating_layer",
+    "enneagram_consciousness_engine",
+    "enneagram_mediation_layer",
+    "segment_simulation_state",
+    "thought_recurrence_guard",
+    "motive_compression",
+    "character_distinction_plan",
+    "abstract_fear_suppression",
+    "entry_strategy_randomizer",
+    "paragraph_shape_alternator",
+    "embodiment_first_injection",
+    "transition_texture_builder",
+    "segment_2_4_opener_policy",
+    "segment_2_4_embodiment_policy",
+    "opening_family_audit",
+    "opening_paragraph_family_diversification",
+    "opener_token_suppression",
+    "first_two_sentence_diversity_governor",
+    "segment_1_opener_isolation",
+    "early_paragraph_anti_symmetry",
+    "voice_engine_rulebook",
+    "narrative_distance_controller",
+    "abstraction_suppression_layer",
+    "voice_cognition_map",
+    "perspective_routing_plan",
+    "voice_law_engine",
+    "language_suppression_map",
+    "render_directives",
+    "sentence_pattern_governor",
+    "segment_energy",
+    "embodiment",
+    "developmental_intimacy_engine",
+    "character_console",
+    "law_console"
+  ],
+  "changedChapterLawConditions": [
+    "adjust_symbolic_emphasis:river-oath-symbol <= {\"motifWeight\":0.74}",
+    "adjust_foreshadowing_intensity:FA-2 <= {\"intensityDelta\":0.18}",
+    "change_reveal_imply_balance:scene-4-observer-layer <= {\"revealRatio\":0.36,\"implyRatio\":0.64}"
+  ],
+  "changedCharacterStateConditions": [
+    "chapter1.scene1.alexis.dialogue_tone <= {\"hesitationWeight\":0.63,\"assertionWeight\":0.37}"
+  ],
+  "whatImproved": [
+    "gapCount",
+    "adversarialCriticalFindings",
+    "adversarialHighFindings",
+    "proseShapeCriticalFindings",
+    "proseShapeFindingCount",
+    "voiceIdentityRisk",
+    "abstractionLeakRisk",
+    "behaviorMediationQuality"
+  ],
+  "whatWorsened": [
+    "voicePassRate"
+  ],
+  "unchangedRisks": [
+    "consistencyPassCount",
+    "characterInteriorBlendingRisk",
+    "enneagramOverexposureRisk",
+    "proseTheorizationRisk"
+  ],
+  "enneagramOverexposureRisk": "low",
+  "behaviorMediationQuality": "strong",
+  "proseTheorizationRisk": "low",
+  "recommendation": "reject new draft",
+  "canonRisk": "critical",
+  "lockedAnchorsEnforced": true,
+  "canonicalOverwritePerformed": false,
+  "provenance": {
+    "sourceArtifacts": [
+      "reports/book1-chapter-01-chapter_draft.json",
+      "reports/book1-chapter-01-chapter_consistency_report.json",
+      "reports/book1-chapter-01-chapter_voice_report.json",
+      "reports/book1-chapter-01-chapter_gap_report.json",
+      "reports/book1-chapter-01-adversarial-summary.json",
+      "reports/book1-character-console-session.json",
+      "reports/book1-law-console-session.json",
+      "reports/book1-chapter-01-chapter_draft.json#segments[0]",
+      "reports/book1-chapter-01-chapter_law.json#futureArcConstraints[0]",
+      "reports/book1-chapter-01-chapter_law.json#futureArcConstraints[1]",
+      "reports/book1-chapter-01-outline.json#timeline[3]"
+    ]
+  }
+}

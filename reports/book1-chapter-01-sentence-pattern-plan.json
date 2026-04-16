@@ -1,0 +1,207 @@
+{
+  "artifact": "chapter_sentence_pattern_plan",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.064Z",
+  "globalConstraints": {
+    "maxRepeatedOpenersInWindow": 1,
+    "sentenceLengthBands": [
+      {
+        "minWords": 5,
+        "maxWords": 12,
+        "targetShare": 0.28
+      },
+      {
+        "minWords": 13,
+        "maxWords": 24,
+        "targetShare": 0.52
+      },
+      {
+        "minWords": 25,
+        "maxWords": 40,
+        "targetShare": 0.2
+      }
+    ],
+    "clauseCountTargets": {
+      "min": 1,
+      "max": 4
+    },
+    "paragraphRhythmGuidance": [
+      "alternate compact and expansive sentence runs",
+      "avoid repeating opener style in adjacent paragraphs",
+      "inject one sensory or motion-led entry per paragraph"
+    ]
+  },
+  "segmentPlans": [
+    {
+      "segment": 1,
+      "bannedRecentOpenings": [
+        "opening terrain and",
+        "river settlements define",
+        "segment-1"
+      ],
+      "preferredNextOpeningTypes": [
+        "sensory",
+        "motion",
+        "observation"
+      ],
+      "paragraphShapeRecommendations": {
+        "targetSentenceRange": {
+          "min": 5,
+          "max": 9
+        },
+        "targetWordRange": {
+          "min": 95,
+          "max": 175
+        },
+        "clauseVarianceTarget": 0.35
+      }
+    },
+    {
+      "segment": 2,
+      "bannedRecentOpenings": [
+        "opening terrain and",
+        "river settlements define",
+        "segment-1",
+        "environmental forces tighten",
+        "segment-2"
+      ],
+      "preferredNextOpeningTypes": [
+        "motion",
+        "observation",
+        "interiority"
+      ],
+      "paragraphShapeRecommendations": {
+        "targetSentenceRange": {
+          "min": 4,
+          "max": 7
+        },
+        "targetWordRange": {
+          "min": 80,
+          "max": 155
+        },
+        "clauseVarianceTarget": 0.47
+      }
+    },
+    {
+      "segment": 3,
+      "bannedRecentOpenings": [
+        "opening terrain and",
+        "river settlements define",
+        "segment-1",
+        "environmental forces tighten",
+        "segment-2",
+        "pov carries lineage",
+        "segment-3"
+      ],
+      "preferredNextOpeningTypes": [
+        "interiority",
+        "dialogic",
+        "sensory"
+      ],
+      "paragraphShapeRecommendations": {
+        "targetSentenceRange": {
+          "min": 5,
+          "max": 9
+        },
+        "targetWordRange": {
+          "min": 80,
+          "max": 155
+        },
+        "clauseVarianceTarget": 0.59
+      }
+    },
+    {
+      "segment": 4,
+      "bannedRecentOpenings": [
+        "opening terrain and",
+        "river settlements define",
+        "segment-1",
+        "environmental forces tighten",
+        "segment-2",
+        "pov carries lineage",
+        "segment-3",
+        "observer lens captures",
+        "segment-4"
+      ],
+      "preferredNextOpeningTypes": [
+        "observation",
+        "declarative",
+        "motion"
+      ],
+      "paragraphShapeRecommendations": {
+        "targetSentenceRange": {
+          "min": 4,
+          "max": 7
+        },
+        "targetWordRange": {
+          "min": 95,
+          "max": 175
+        },
+        "clauseVarianceTarget": 0.35
+      }
+    },
+    {
+      "segment": 5,
+      "bannedRecentOpenings": [
+        "river settlements define",
+        "segment-1",
+        "environmental forces tighten",
+        "segment-2",
+        "pov carries lineage",
+        "segment-3",
+        "observer lens captures",
+        "segment-4",
+        "interpretive turn links",
+        "segment-5"
+      ],
+      "preferredNextOpeningTypes": [
+        "motion",
+        "sensory",
+        "dialogic"
+      ],
+      "paragraphShapeRecommendations": {
+        "targetSentenceRange": {
+          "min": 5,
+          "max": 9
+        },
+        "targetWordRange": {
+          "min": 80,
+          "max": 155
+        },
+        "clauseVarianceTarget": 0.47
+      }
+    },
+    {
+      "segment": 6,
+      "bannedRecentOpenings": [
+        "environmental forces tighten",
+        "segment-2",
+        "pov carries lineage",
+        "segment-3",
+        "observer lens captures",
+        "segment-4",
+        "interpretive turn links",
+        "segment-5",
+        "closing beat secures",
+        "segment-6"
+      ],
+      "preferredNextOpeningTypes": [
+        "interiority",
+        "observation",
+        "declarative"
+      ],
+      "paragraphShapeRecommendations": {
+        "targetSentenceRange": {
+          "min": 4,
+          "max": 7
+        },
+        "targetWordRange": {
+          "min": 80,
+          "max": 155
+        },
+        "clauseVarianceTarget": 0.59
+      }
+    }
+  ]
+}

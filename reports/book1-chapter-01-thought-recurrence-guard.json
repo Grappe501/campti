@@ -1,0 +1,197 @@
+{
+  "artifact": "chapter_thought_recurrence_guard",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.038Z",
+  "chapterLevelRepeatedSignals": {
+    "thoughtContent": [
+      "secure preserve kin continuity without public rupture",
+      "understands current leverage around \"webb and gregory",
+      "\\\"the caddo indians of louisiana",
+      "assumes silence means consent rather than tactical delay",
+      "fear of being misread",
+      "reads caution as weakness and misses hidden agreement",
+      "understands current leverage around caddoan presence",
+      "~800–1000 ad onward likely rooted in earlier woodland",
+      "understands current leverage around \"early caddo history el",
+      "understands current leverage around layer one",
+      "the natchitoches world before europe",
+      "understands current leverage around before europeans planted a",
+      "the country around present",
+      "understands current leverage around that helps explain why"
+    ],
+    "motifs": [
+      "speaking order and proximity change",
+      "preserving external-contact pressure remains latent and unresolved by",
+      "while shifting local authority"
+    ],
+    "fears": [
+      "fear of being misread"
+    ],
+    "symbols": [
+      "hands and posture carry the exchange while river"
+    ]
+  },
+  "segmentGuards": [
+    {
+      "segment": 1,
+      "blockedThoughtPhrases": [
+        "secure preserve kin continuity without public rupture",
+        "understands current leverage around \"webb and gregory",
+        "\\\"the caddo indians of louisiana",
+        "fear of being misread"
+      ],
+      "blockedMotifs": [
+        "speaking order and proximity change",
+        "preserving external-contact pressure remains latent and unresolved by",
+        "while shifting local authority"
+      ],
+      "blockedFearAbstractions": [
+        "fear of being misread"
+      ],
+      "blockedSymbolicParaphrases": [
+        "hands and posture carry the exchange while river"
+      ],
+      "allowRecurrenceIf": [
+        "pressure escalates",
+        "meaning changes",
+        "embodiment changes",
+        "obsession pattern explicitly intended"
+      ],
+      "obsessionPatternIntended": false
+    },
+    {
+      "segment": 2,
+      "blockedThoughtPhrases": [
+        "secure preserve kin continuity without public rupture",
+        "fear of being misread",
+        "understands current leverage around caddoan presence",
+        "~800–1000 ad onward likely rooted in earlier woodland"
+      ],
+      "blockedMotifs": [
+        "speaking order and proximity change",
+        "preserving external-contact pressure remains latent and unresolved by",
+        "while shifting local authority"
+      ],
+      "blockedFearAbstractions": [
+        "fear of being misread"
+      ],
+      "blockedSymbolicParaphrases": [
+        "hands and posture carry the exchange while river"
+      ],
+      "allowRecurrenceIf": [
+        "pressure escalates",
+        "meaning changes",
+        "embodiment changes",
+        "obsession pattern explicitly intended"
+      ],
+      "obsessionPatternIntended": false
+    },
+    {
+      "segment": 3,
+      "blockedThoughtPhrases": [
+        "secure preserve kin continuity without public rupture",
+        "fear of being misread",
+        "understands current leverage around \"early caddo history el"
+      ],
+      "blockedMotifs": [
+        "speaking order and proximity change",
+        "preserving external-contact pressure remains latent and unresolved by",
+        "while shifting local authority"
+      ],
+      "blockedFearAbstractions": [
+        "fear of being misread"
+      ],
+      "blockedSymbolicParaphrases": [
+        "hands and posture carry the exchange while river"
+      ],
+      "allowRecurrenceIf": [
+        "pressure escalates",
+        "meaning changes",
+        "embodiment changes",
+        "obsession pattern explicitly intended"
+      ],
+      "obsessionPatternIntended": false
+    },
+    {
+      "segment": 4,
+      "blockedThoughtPhrases": [
+        "secure preserve kin continuity without public rupture",
+        "fear of being misread",
+        "understands current leverage around layer one",
+        "the natchitoches world before europe"
+      ],
+      "blockedMotifs": [
+        "speaking order and proximity change",
+        "preserving external-contact pressure remains latent and unresolved by",
+        "while shifting local authority"
+      ],
+      "blockedFearAbstractions": [
+        "fear of being misread"
+      ],
+      "blockedSymbolicParaphrases": [
+        "hands and posture carry the exchange while river"
+      ],
+      "allowRecurrenceIf": [
+        "pressure escalates",
+        "meaning changes",
+        "embodiment changes",
+        "obsession pattern explicitly intended"
+      ],
+      "obsessionPatternIntended": false
+    },
+    {
+      "segment": 5,
+      "blockedThoughtPhrases": [
+        "secure preserve kin continuity without public rupture",
+        "fear of being misread",
+        "understands current leverage around before europeans planted a",
+        "the country around present"
+      ],
+      "blockedMotifs": [
+        "speaking order and proximity change",
+        "preserving external-contact pressure remains latent and unresolved by",
+        "while shifting local authority"
+      ],
+      "blockedFearAbstractions": [
+        "fear of being misread"
+      ],
+      "blockedSymbolicParaphrases": [
+        "hands and posture carry the exchange while river"
+      ],
+      "allowRecurrenceIf": [
+        "pressure escalates",
+        "meaning changes",
+        "embodiment changes",
+        "obsession pattern explicitly intended"
+      ],
+      "obsessionPatternIntended": false
+    },
+    {
+      "segment": 6,
+      "blockedThoughtPhrases": [
+        "secure preserve kin continuity without public rupture",
+        "fear of being misread",
+        "understands current leverage around that helps explain why"
+      ],
+      "blockedMotifs": [
+        "speaking order and proximity change",
+        "preserving external-contact pressure remains latent and unresolved by",
+        "while shifting local authority"
+      ],
+      "blockedFearAbstractions": [
+        "fear of being misread"
+      ],
+      "blockedSymbolicParaphrases": [
+        "hands and posture carry the exchange while river"
+      ],
+      "allowRecurrenceIf": [
+        "pressure escalates",
+        "meaning changes",
+        "embodiment changes",
+        "obsession pattern explicitly intended"
+      ],
+      "obsessionPatternIntended": true
+    }
+  ]
+}

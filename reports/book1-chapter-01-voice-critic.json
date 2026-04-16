@@ -1,0 +1,20 @@
+{
+  "chapter": 1,
+  "critic": "Voice Critic",
+  "generatedAt": "2026-04-16T19:48:40.721Z",
+  "findings": [
+    {
+      "severity": "medium",
+      "excerpt": "Observer lens captures status signals and hidden negotiations..",
+      "whyItFails": "Abstract modern diction drifts from embodied period voice and flattens tonal distinctiveness.",
+      "recommendedFixType": "voice-spec fix"
+    },
+    {
+      "severity": "medium",
+      "excerpt": "small ritual timing deviations surface interior strain without explicit thesis Alexis and Augustin misread each other through filters threat through loyalty signals, weak seams.",
+      "whyItFails": "Abstract modern diction drifts from embodied period voice and flattens tonal distinctiveness.",
+      "recommendedFixType": "voice-spec fix"
+    }
+  ],
+  "verdict": "Voice register fails stress test; rewrite system constraints before scaling."
+}

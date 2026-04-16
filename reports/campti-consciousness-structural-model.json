@@ -1,0 +1,76 @@
+{
+  "generatedAt": "2026-04-16T19:58:57.238Z",
+  "ingestBatchId": "campti-consciousness-1776369537238",
+  "category": "practical_simulation_architecture",
+  "modelGroups": [
+    {
+      "modelGroup": "agents",
+      "normalizedName": "agents",
+      "extractionHits": [],
+      "inferredSchemaStatus": "not_found"
+    },
+    {
+      "modelGroup": "agent_traits",
+      "normalizedName": "agent_traits",
+      "extractionHits": [],
+      "inferredSchemaStatus": "not_found"
+    },
+    {
+      "modelGroup": "agent_filters",
+      "normalizedName": "agent_filters",
+      "extractionHits": [],
+      "inferredSchemaStatus": "not_found"
+    },
+    {
+      "modelGroup": "agent_rules",
+      "normalizedName": "agent_rules",
+      "extractionHits": [],
+      "inferredSchemaStatus": "not_found"
+    },
+    {
+      "modelGroup": "scenarios",
+      "normalizedName": "scenarios",
+      "extractionHits": [],
+      "inferredSchemaStatus": "not_found"
+    },
+    {
+      "modelGroup": "scenario_events",
+      "normalizedName": "scenario_events",
+      "extractionHits": [],
+      "inferredSchemaStatus": "not_found"
+    },
+    {
+      "modelGroup": "sim_runs",
+      "normalizedName": "sim_runs",
+      "extractionHits": [],
+      "inferredSchemaStatus": "not_found"
+    },
+    {
+      "modelGroup": "sim_agent_state",
+      "normalizedName": "sim_agent_state",
+      "extractionHits": [],
+      "inferredSchemaStatus": "not_found"
+    }
+  ],
+  "traitMenus": [],
+  "signalMenus": [],
+  "actionTaxonomyCandidates": [],
+  "stateTransitionLoop": {
+    "canonicalFlow": [
+      "perceive",
+      "appraise",
+      "emotion",
+      "intention",
+      "action",
+      "update memory/state"
+    ],
+    "observedEvidence": {
+      "perceive": false,
+      "appraise": false,
+      "emotion": false,
+      "intention": false,
+      "action": false,
+      "updateMemoryState": false
+    }
+  }
+}

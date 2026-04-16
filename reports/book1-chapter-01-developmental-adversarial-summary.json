@@ -1,0 +1,51 @@
+{
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:37:47.148Z",
+  "critics": {
+    "voice": {
+      "findingCount": 5,
+      "criticalCount": 0
+    },
+    "historical": {
+      "findingCount": 15,
+      "criticalCount": 0
+    },
+    "novel": {
+      "findingCount": 1,
+      "criticalCount": 1
+    },
+    "proseShape": {
+      "findingCount": 44,
+      "criticalCount": 28
+    }
+  },
+  "severityTotals": {
+    "low": 0,
+    "medium": 15,
+    "high": 21,
+    "critical": 29
+  },
+  "proseShapeCategoryTotals": {
+    "low_embodiment": 6,
+    "repeated_opener": 28,
+    "repeated_abstract_fear_language": 7,
+    "fear_language_density": 3
+  },
+  "recommendedFixTotals": {
+    "composer fix": 32,
+    "evidence-pack fix": 15,
+    "lived-history fix": 13,
+    "voice-spec fix": 5
+  },
+  "rerunChapterReview": {
+    "chapterCoherence": 100,
+    "chapterPacing": 0,
+    "chapterEmotionalArc": 100,
+    "proseNaturalness": 100,
+    "outlineLeakage": 100,
+    "historicalIntegrationQuality": 100,
+    "characterCoherence": 100,
+    "narrativeContinuity": 83
+  },
+  "releaseDecision": "BLOCKED: Chapter 1 is not scale-ready. Apply system fixes and rerun adversarial review."
+}

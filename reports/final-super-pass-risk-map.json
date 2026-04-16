@@ -1,0 +1,31 @@
+{
+  "contractVersion": "1",
+  "scope": "phase8_plus_phase9_super_pass",
+  "evaluatedAtIso": "2026-04-15T19:04:48.645Z",
+  "risks": [
+    {
+      "riskId": "creator_role_or_workspace_leakage",
+      "severity": "low"
+    },
+    {
+      "riskId": "editorial_or_package_governance_bypass",
+      "severity": "low"
+    },
+    {
+      "riskId": "public_release_leakage",
+      "severity": "low"
+    },
+    {
+      "riskId": "deployment_promotion_or_rollback_gap",
+      "severity": "low"
+    },
+    {
+      "riskId": "commercial_entitlement_drift",
+      "severity": "low"
+    },
+    {
+      "riskId": "monitoring_or_intelligence_non_actionable",
+      "severity": "low"
+    }
+  ]
+}

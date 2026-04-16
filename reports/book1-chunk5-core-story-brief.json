@@ -1,0 +1,113 @@
+{
+  "generatedAt": "2026-04-16T01:37:00.124Z",
+  "source": {
+    "id": "book1-source-chunk-5",
+    "title": "Book 1 Research Chunk 5",
+    "filePath": "docs/book1/chunk5.txt",
+    "rawChars": 88426,
+    "normalizedChars": 30402,
+    "chunkCount": 9
+  },
+  "counts": {
+    "claims": 5,
+    "events": 0,
+    "places": 1,
+    "fragments": 3,
+    "openQuestions": 3
+  },
+  "chronology": [],
+  "coreTruthSet": [
+    {
+      "id": "book5-claim-yatasi-close-variation-not-separate-world",
+      "description": "The Yatasi are framed as a close variation of the Natchitoches baseline rather than a completely separate system.",
+      "confidence": 4,
+      "quoteExcerpt": "The Yatasi are not a completely different world. They are a close variation of the Natchitoches baseline.",
+      "needsReview": true
+    },
+    {
+      "id": "book5-claim-yatasi-dependent-trade-participation",
+      "description": "Yatasi trade behavior is framed as participatory and dependency-oriented rather than central node control.",
+      "confidence": 4,
+      "quoteExcerpt": "They are not driving trade. They are participating within it.",
+      "needsReview": true
+    },
+    {
+      "id": "book5-claim-yatasi-relational-diplomacy-priority",
+      "description": "Diplomacy is portrayed as personal-trust-first and relationship-driven rather than large-scale strategic positioning.",
+      "confidence": 4,
+      "quoteExcerpt": "More intimate, relationship-driven diplomacy... less strategic positioning in large-scale alliances.",
+      "needsReview": true
+    },
+    {
+      "id": "book5-claim-yatasi-fragmented-settlement-vulnerability",
+      "description": "The profile emphasizes weakened or fragmented settlement continuity, with greater vulnerability to external pressure.",
+      "confidence": 3,
+      "quoteExcerpt": "Historically weakened and reduced over time... more fragmented settlement identity.",
+      "needsReview": true
+    },
+    {
+      "id": "book5-claim-yatasi-subtle-dialect-difference",
+      "description": "Language variation is framed as subtle and insider-legible (tone/expression/cadence) despite close dialect proximity.",
+      "confidence": 3,
+      "quoteExcerpt": "Likely very close dialectically... subtle differences in tone, expression, cadence.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book5-place-yatasi-interior-tributary-zone",
+      "name": "Yatasi Interior Tributary Zone",
+      "placeType": "REGION",
+      "description": "Interior-facing habitation and movement space less exposed to main-artery traffic and visibility pressures."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book5-frag-personal-trust-before-negotiation",
+      "title": "Personal Trust Before Negotiation",
+      "summary": "Diplomatic sequencing constraint.",
+      "text": "Formal negotiation follows personal trust formation; transactional entry without trust weakens long-horizon alignment.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book5-frag-relationship-entry-over-traffic-entry",
+      "title": "Relationship Entry Over Traffic Entry",
+      "summary": "Access protocol constraint for Yatasi-facing scenes.",
+      "text": "Influence with the Yatasi begins through trusted relationships rather than route control or traffic dominance.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book5-frag-stabilize-access-not-dominate-trade",
+      "title": "Stabilize Access, Not Trade Domination",
+      "summary": "Trade-governance constraint for difference profile.",
+      "text": "Legitimate leverage comes from stabilizing Yatasi access and reciprocity, not from imposing intermediary control.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book5-oq-yatasi-chronology-of-fragmentation",
+      "title": "What dated milestones best map Yatasi settlement weakening and merger dynamics with neighboring groups?",
+      "description": "Needed to avoid compressing multi-decade structural changes into a single narrative beat.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book5-oq-yatasi-dialect-markers",
+      "title": "What linguistic markers (tone, cadence, phrase choices) can be safely treated as Yatasi-distinct in dialogue?",
+      "description": "Needed for voice differentiation that avoids generic or over-assertive language claims.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book5-oq-yatasi-trade-dependency-mechanics",
+      "title": "Which concrete exchange dependencies defined Yatasi trade participation under Natchitoches-adjacent systems?",
+      "description": "Needed to model stabilization scenes with credible economic specifics.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

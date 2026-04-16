@@ -1,0 +1,32 @@
+{
+  "artifact": "chapter_segment_2_4_opener_policy",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.072Z",
+  "policies": [
+    {
+      "segment": 2,
+      "requiresBodyStateCue": true,
+      "requiresSensoryCue": true,
+      "requiresPressureCue": true,
+      "requiresVisibleMicroAction": true,
+      "bannedAbstractOpenerForms": [
+        "summary-style orientation",
+        "generalized emotional framing",
+        "explanatory historical setup"
+      ]
+    },
+    {
+      "segment": 4,
+      "requiresBodyStateCue": true,
+      "requiresSensoryCue": true,
+      "requiresPressureCue": true,
+      "requiresVisibleMicroAction": true,
+      "bannedAbstractOpenerForms": [
+        "summary-style orientation",
+        "generalized emotional framing",
+        "explanatory historical setup"
+      ]
+    }
+  ]
+}

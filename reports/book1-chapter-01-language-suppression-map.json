@@ -1,0 +1,103 @@
+{
+  "artifact": "chapter_language_suppression_map",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.081Z",
+  "blockedPatterns": [
+    "historical process",
+    "structural tension",
+    "systemic pressure",
+    "unresolved dynamic",
+    "social dynamic",
+    "pressure pattern",
+    "constraint field",
+    "risk profile",
+    "interior state",
+    "fear of being misread",
+    "hands and posture carry the exchange while river",
+    "secure preserve kin continuity without public rupture",
+    "understands current leverage around \"webb and gregory",
+    "\\\"the caddo indians of louisiana",
+    "understands current leverage around caddoan presence",
+    "~800–1000 ad onward likely rooted in earlier woodland",
+    "understands current leverage around \"early caddo history el",
+    "understands current leverage around layer one",
+    "the natchitoches world before europe",
+    "understands current leverage around before europeans planted a",
+    "the country around present",
+    "understands current leverage around that helps explain why",
+    "fear is",
+    "motive is",
+    "history shows",
+    "history teaches",
+    "the reason is",
+    "in this chapter",
+    "chapter",
+    "segment",
+    "future arc",
+    "planning language",
+    "withholds fear of",
+    "self narration ceiling",
+    "suppresses motive naming",
+    "self narration ceiling",
+    "enneagram",
+    "type 1",
+    "type 2",
+    "type 3",
+    "type 4",
+    "type 5",
+    "type 6",
+    "type 7",
+    "type 8",
+    "type 9",
+    "wing",
+    "instinctual stack",
+    "assumes silence means",
+    "reads caution as"
+  ],
+  "openerTokenFamilies": [
+    "the",
+    "pressure",
+    "fear",
+    "history",
+    "there",
+    "this",
+    "alexis",
+    "he",
+    "she"
+  ],
+  "transformationRoutes": [
+    {
+      "sourcePattern": "fear is",
+      "rewriteAs": "bodily cue"
+    },
+    {
+      "sourcePattern": "motive is",
+      "rewriteAs": "action"
+    },
+    {
+      "sourcePattern": "history shows",
+      "rewriteAs": "object interaction"
+    },
+    {
+      "sourcePattern": "history teaches",
+      "rewriteAs": "perception"
+    },
+    {
+      "sourcePattern": "the reason is",
+      "rewriteAs": "silence"
+    },
+    {
+      "sourcePattern": "future arc",
+      "rewriteAs": "silence"
+    },
+    {
+      "sourcePattern": "segment",
+      "rewriteAs": "spatial relation"
+    },
+    {
+      "sourcePattern": "planning language",
+      "rewriteAs": "perception"
+    }
+  ]
+}

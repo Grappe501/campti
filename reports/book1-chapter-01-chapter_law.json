@@ -1,0 +1,62 @@
+{
+  "artifact": "chapter_law",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T16:25:48.236Z",
+  "chronologyInvariants": [
+    {
+      "id": "CI-1",
+      "rule": "No explicit dated event may exceed year 1680 in Chapter 1 outputs.",
+      "enforcement": "Reject segment if year token > 1680 is detected."
+    },
+    {
+      "id": "CI-2",
+      "rule": "Civil War era references are disallowed in present-tense chapter reality.",
+      "enforcement": "Disallow terms: civil war, reconstruction, 1861, 1865."
+    },
+    {
+      "id": "CI-3",
+      "rule": "Later descendants (e.g., Alexis line) cannot enter early chapter active cast before chronology window.",
+      "enforcement": "Gate descendant entities to metadata links only when chapter window is <=1680."
+    }
+  ],
+  "futureArcConstraints": [
+    {
+      "id": "FA-1",
+      "mustPreserve": "External-contact pressure remains latent and unresolved by chapter close.",
+      "forbiddenResolution": "No treaty, no final authority settlement, no decisive peace."
+    },
+    {
+      "id": "FA-2",
+      "mustPreserve": "Future chapter hooks must remain available: 2:1680-1690, 3:1690-1714, 4:1714-1735.",
+      "forbiddenResolution": "Do not resolve succession or identity rupture in chapter 1."
+    },
+    {
+      "id": "FA-3",
+      "mustPreserve": "Matriarchal conduit inheritance pressure remains active and unresolved through protected ancestral line.",
+      "forbiddenResolution": "Do not collapse lineage transfer to a resolved descendant endpoint in early chapters."
+    }
+  ],
+  "compositionFirewall": {
+    "allowedInputs": [
+      "chapter_law",
+      "chapter_evidence_pack",
+      "chapter_voice_contract",
+      "chapter_prose_briefs",
+      "chapter_lived_history"
+    ],
+    "deniedInputs": [
+      "raw_research",
+      "timelineEvents",
+      "knowledgeNodes",
+      "sceneComponents",
+      "entities",
+      "psychProfiles",
+      "chapter_outline.narrativePurpose",
+      "chapter_outline.readerExperience",
+      "chapter_outline.historicalContext",
+      "chapter_outline.foreshadowing",
+      "chapter_outline.transitionToNext"
+    ]
+  }
+}

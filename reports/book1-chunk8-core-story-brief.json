@@ -1,0 +1,99 @@
+{
+  "generatedAt": "2026-04-16T01:39:54.532Z",
+  "source": {
+    "id": "book1-source-chunk-8",
+    "title": "Book 1 Research Chunk 8",
+    "filePath": "docs/book1/chunk8.txt",
+    "rawChars": 36276,
+    "normalizedChars": 26206,
+    "chunkCount": 8
+  },
+  "counts": {
+    "claims": 3,
+    "events": 0,
+    "places": 1,
+    "fragments": 3,
+    "openQuestions": 3
+  },
+  "chronology": [],
+  "coreTruthSet": [
+    {
+      "id": "book8-claim-core-theme-mothers-hold-river",
+      "description": "The working core theme is defined as maternal stewardship of power transfer within the Red River system.",
+      "confidence": 5,
+      "quoteExcerpt": "Working Core Theme: The Mothers Who Hold the River.",
+      "needsReview": true
+    },
+    {
+      "id": "book8-claim-mother-daughter-dual-structure",
+      "description": "Primary structure is mother-first-matriarch and daughter-second-matriarch, with the relationship carrying system revelation.",
+      "confidence": 5,
+      "quoteExcerpt": "The entire book is their relationship. The system is revealed through their lives.",
+      "needsReview": true
+    },
+    {
+      "id": "book8-claim-two-generation-matriarch-origin",
+      "description": "Book 1 is explicitly framed as a two-generation matriarchal origin story centered on bridge-lineage formation.",
+      "confidence": 5,
+      "quoteExcerpt": "A two-generation matriarchal origin story of the bridge lineage.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book8-place-red-river-matriarchal-origin-stage",
+      "name": "Red River Matriarchal Origin Stage",
+      "placeType": "RIVER",
+      "description": "Primary narrative stage for maternal governance, kinship transfer, and bridge-lineage emergence before major disruption."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book8-frag-balance-before-disruption-design-law",
+      "title": "Balance Before Disruption Design Law",
+      "summary": "Macro-structure constraint for Book 1 pacing.",
+      "text": "Book 1 must render a fully functioning world first so later disruption reads as consequential rather than cosmetic.",
+      "confidence": 5,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book8-frag-mother-to-daughter-power-transfer",
+      "title": "Mother-to-Daughter Power Transfer Arc",
+      "summary": "Character-arc transfer constraint.",
+      "text": "Authority transfer should move from embodied system memory (mother) to adaptive system evolution (daughter) through relationship-driven scenes.",
+      "confidence": 5,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book8-frag-observer-child-perception-advantage",
+      "title": "Observer Child Perception Advantage",
+      "summary": "Leadership-emergence constraint.",
+      "text": "Non-heir positioning creates observational bandwidth; leadership emergence is built from accumulated pattern-reading, not title inheritance.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book8-oq-daughter-transition-loss-markers",
+      "title": "What specific loss and responsibility markers trigger the daughter’s transition into second matriarch leadership?",
+      "description": "Needed to make the arc legible and earned across the 1660s-1680s timeline.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book8-oq-mother-scenes-system-demonstration",
+      "title": "Which scene set best demonstrates the mother as system-in-human-form without reducing her to exposition?",
+      "description": "Needed to preserve cinematic character depth while establishing governance mechanics.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book8-oq-pre-french-ending-threshold-design",
+      "title": "Which closing signals best indicate approaching French pressure without collapsing Book 1 into colonial-contact narrative too early?",
+      "description": "Needed to hit the designed threshold ending while preserving Book 1’s internal-world focus.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

@@ -1,0 +1,399 @@
+{
+  "artifact": "chapter_evidence_pack",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T16:25:48.236Z",
+  "chronologyWindow": {
+    "startYear": null,
+    "endYear": 1680,
+    "label": "Before 1680 only"
+  },
+  "evidence": [
+    {
+      "evidenceId": "KN-1",
+      "kind": "knowledge_node",
+      "title": "Timeline claim 1",
+      "statement": "\"Webb and Gregory. \\\"The Caddo Indians of Louisiana.\\\"...",
+      "inferredYear": null,
+      "confidence": "high",
+      "supports": [
+        "settlement-order",
+        "kinship-law"
+      ]
+    },
+    {
+      "evidenceId": "KN-2",
+      "kind": "knowledge_node",
+      "title": "Timeline claim 1",
+      "statement": "Caddoan presence: ~800–1000 AD onward Likely rooted in earlier Woodland cultures before that",
+      "inferredYear": null,
+      "confidence": "high",
+      "supports": [
+        "settlement-order",
+        "kinship-law"
+      ]
+    },
+    {
+      "evidenceId": "KN-3",
+      "kind": "knowledge_node",
+      "title": "Timeline claim 1",
+      "statement": "\"Early Caddo History El Camino Real de los...",
+      "inferredYear": null,
+      "confidence": "high",
+      "supports": [
+        "settlement-order",
+        "kinship-law"
+      ]
+    },
+    {
+      "evidenceId": "KN-4",
+      "kind": "knowledge_node",
+      "title": "Timeline claim 1",
+      "statement": "Layer One: The Natchitoches World Before Europe",
+      "inferredYear": null,
+      "confidence": "high",
+      "supports": [
+        "settlement-order",
+        "kinship-law"
+      ]
+    },
+    {
+      "evidenceId": "KN-5",
+      "kind": "knowledge_node",
+      "title": "Timeline claim 1",
+      "statement": "Before Europeans planted a flag anywhere near the lower Red River, the country around present-day Natchitoches was not ...",
+      "inferredYear": null,
+      "confidence": "high",
+      "supports": [
+        "settlement-order",
+        "kinship-law"
+      ]
+    },
+    {
+      "evidenceId": "KN-6",
+      "kind": "knowledge_node",
+      "title": "Timeline claim 1",
+      "statement": "That helps explain why the Natchitoches mattered so much once Europeans finally arrived.",
+      "inferredYear": null,
+      "confidence": "high",
+      "supports": [
+        "settlement-order",
+        "kinship-law"
+      ]
+    },
+    {
+      "evidenceId": "KN-7",
+      "kind": "knowledge_node",
+      "title": "Timeline claim 1",
+      "statement": "Even first contact tells that story.",
+      "inferredYear": null,
+      "confidence": "high",
+      "supports": [
+        "settlement-order",
+        "kinship-law"
+      ]
+    },
+    {
+      "evidenceId": "KN-8",
+      "kind": "knowledge_node",
+      "title": "Timeline claim 1",
+      "statement": "That is the world the French walked into: not wilderness, but an old native borderland with memory, rank, ritual, diplo...",
+      "inferredYear": null,
+      "confidence": "high",
+      "supports": [
+        "settlement-order",
+        "kinship-law"
+      ]
+    },
+    {
+      "evidenceId": "KN-9",
+      "kind": "knowledge_node",
+      "title": "Timeline claim 1",
+      "statement": "I. The Meaning of “Natchitoches” — Identity Before Definition",
+      "inferredYear": null,
+      "confidence": "high",
+      "supports": [
+        "settlement-order",
+        "kinship-law"
+      ]
+    },
+    {
+      "evidenceId": "KN-10",
+      "kind": "knowledge_node",
+      "title": "Timeline claim 1",
+      "statement": "This is critical: Natchitoches identity is ecological before it is political.",
+      "inferredYear": null,
+      "confidence": "high",
+      "supports": [
+        "settlement-order",
+        "kinship-law"
+      ]
+    },
+    {
+      "evidenceId": "TE-1",
+      "kind": "timeline_event",
+      "title": "Timeline anchor from phase2-chunk1-relationship-engine-core-inventory",
+      "statement": "Caddoan presence: ~800–1000 AD onward Likely rooted in earlier Woodland cultures before that",
+      "inferredYear": 1000,
+      "confidence": "high",
+      "supports": [
+        "chronology",
+        "pressure-setup"
+      ]
+    },
+    {
+      "evidenceId": "TE-2",
+      "kind": "timeline_event",
+      "title": "Timeline anchor from book1-chunk8-core-story-brief",
+      "statement": "Doustioni and Yatasi decline faster through absorption and fragility.",
+      "inferredYear": 1530,
+      "confidence": "high",
+      "supports": [
+        "chronology",
+        "pressure-setup"
+      ]
+    },
+    {
+      "evidenceId": "TE-3",
+      "kind": "timeline_event",
+      "title": "Timeline anchor from book1-chunk22-core-story-brief",
+      "statement": "1542 — first recorded Spanish passage through the larger Caddo world 1714 — Natchitoches founded 1716 — first Spanish mission at Los Adaes 1721 — Los Adaes reestablished as presidio and mission 1729 — Los Adaes becomes capital of Texas 1762 / 1763 — trans...",
+      "inferredYear": 1542,
+      "confidence": "high",
+      "supports": [
+        "chronology",
+        "pressure-setup"
+      ]
+    },
+    {
+      "evidenceId": "TE-4",
+      "kind": "timeline_event",
+      "title": "Timeline anchor from book1-chunk22-core-story-brief",
+      "statement": "1. Mystery (1542–1680s) 2.",
+      "inferredYear": 1542,
+      "confidence": "high",
+      "supports": [
+        "chronology",
+        "pressure-setup"
+      ]
+    },
+    {
+      "evidenceId": "TE-5",
+      "kind": "timeline_event",
+      "title": "Timeline anchor from book1-chunk22-core-story-brief",
+      "statement": "1542 — The first disruption April 9, 1682 — The unseen claim (opening) 1714 — Natchitoches 1721 — Los Adaes 1729 — Spanish capital 1762 — Transfer to Spain 1773 — Collapse of Los Adaes 1803 — American arrival",
+      "inferredYear": 1542,
+      "confidence": "high",
+      "supports": [
+        "chronology",
+        "pressure-setup"
+      ]
+    },
+    {
+      "evidenceId": "TE-6",
+      "kind": "timeline_event",
+      "title": "Timeline anchor from book1-chunk22-core-story-brief",
+      "statement": "1542 — First Echo of Spain",
+      "inferredYear": 1542,
+      "confidence": "high",
+      "supports": [
+        "chronology",
+        "pressure-setup"
+      ]
+    },
+    {
+      "evidenceId": "TE-7",
+      "kind": "timeline_event",
+      "title": "Lineage event 1542",
+      "statement": "1542 — first recorded Spanish description of Caddo-region peoples comes from the Moscoso phase of the De Soto expedition , after De Soto’s death.",
+      "inferredYear": 1542,
+      "confidence": "high",
+      "supports": [
+        "chronology",
+        "pressure-setup"
+      ]
+    },
+    {
+      "evidenceId": "TE-8",
+      "kind": "timeline_event",
+      "title": "Lineage event 1637",
+      "statement": "First matriarch born 1637 , enters womanhood and marriage around 1653 at about 16.",
+      "inferredYear": 1637,
+      "confidence": "high",
+      "supports": [
+        "chronology",
+        "pressure-setup"
+      ]
+    },
+    {
+      "evidenceId": "SC-1",
+      "kind": "scene_component",
+      "title": "SETTING_LAYER",
+      "statement": "Who belongs in the house How relationships are formed How power flows through kin lines How alliances are built",
+      "inferredYear": null,
+      "confidence": "medium",
+      "supports": [
+        "chapter-surface",
+        "voice-grounding"
+      ]
+    },
+    {
+      "evidenceId": "SC-2",
+      "kind": "scene_component",
+      "title": "SECONDARY_POV",
+      "statement": "Secondary POV layer reserved for systemic misread of the same moment.",
+      "inferredYear": null,
+      "confidence": "medium",
+      "supports": [
+        "chapter-surface",
+        "voice-grounding"
+      ]
+    },
+    {
+      "evidenceId": "SC-3",
+      "kind": "scene_component",
+      "title": "SYMBOLIC_LAYER",
+      "statement": "Prayer Diplomacy Ritual",
+      "inferredYear": null,
+      "confidence": "medium",
+      "supports": [
+        "chapter-surface",
+        "voice-grounding"
+      ]
+    },
+    {
+      "evidenceId": "SC-4",
+      "kind": "scene_component",
+      "title": "SETTING_LAYER",
+      "statement": "Sleeping areas were arranged along the edges of the house Bedding consisted of:",
+      "inferredYear": null,
+      "confidence": "medium",
+      "supports": [
+        "chapter-surface",
+        "voice-grounding"
+      ]
+    },
+    {
+      "evidenceId": "SC-5",
+      "kind": "scene_component",
+      "title": "PRIMARY_POV",
+      "statement": "Primary POV centers on the girl moving in alignment with the river world.",
+      "inferredYear": null,
+      "confidence": "high",
+      "supports": [
+        "chapter-surface",
+        "voice-grounding"
+      ]
+    },
+    {
+      "evidenceId": "SC-6",
+      "kind": "scene_component",
+      "title": "OBSERVER_LAYER",
+      "statement": "Observer POV captures pre-verbal awareness and orientation.",
+      "inferredYear": null,
+      "confidence": "high",
+      "supports": [
+        "chapter-surface",
+        "voice-grounding"
+      ]
+    },
+    {
+      "evidenceId": "EN-1",
+      "kind": "entity",
+      "title": "First Matriarch",
+      "statement": "Extracted from cmo1knqgu007lvhi4ark292rq-seg-678",
+      "inferredYear": null,
+      "confidence": "high",
+      "supports": [
+        "cast-coherence",
+        "ancestral-conduit"
+      ]
+    },
+    {
+      "evidenceId": "EN-2",
+      "kind": "entity",
+      "title": "Second Matriarch",
+      "statement": "Extracted from cmo1ko9kb0000vhk84r32ik4a-seg-104",
+      "inferredYear": null,
+      "confidence": "high",
+      "supports": [
+        "cast-coherence",
+        "ancestral-conduit"
+      ]
+    },
+    {
+      "evidenceId": "EN-3",
+      "kind": "entity",
+      "title": "Third Matriarch",
+      "statement": "Extracted from cmo1knm020000vhi4uq6szhrj-seg-145",
+      "inferredYear": null,
+      "confidence": "high",
+      "supports": [
+        "cast-coherence",
+        "ancestral-conduit"
+      ]
+    },
+    {
+      "evidenceId": "EN-4",
+      "kind": "entity",
+      "title": "Fourth Matriarch",
+      "statement": "Synthetic protected ancestral-canon placeholder for lineage-conduit continuity.",
+      "inferredYear": null,
+      "confidence": "high",
+      "supports": [
+        "cast-coherence",
+        "ancestral-conduit"
+      ]
+    },
+    {
+      "evidenceId": "EN-5",
+      "kind": "entity",
+      "title": "Across",
+      "statement": "Extracted from cmo0wpdi90000vhmwo7mip1rg-seg-013",
+      "inferredYear": null,
+      "confidence": "high",
+      "supports": [
+        "cast-coherence"
+      ]
+    },
+    {
+      "evidenceId": "EN-6",
+      "kind": "entity",
+      "title": "Active",
+      "statement": "Extracted from cmo105b9a00ojvh7o0che4l3u-seg-009",
+      "inferredYear": null,
+      "confidence": "high",
+      "supports": [
+        "cast-coherence"
+      ]
+    },
+    {
+      "evidenceId": "EN-7",
+      "kind": "entity",
+      "title": "Adaes",
+      "statement": "Extracted from cmo0wpdi90000vhmwo7mip1rg-seg-019",
+      "inferredYear": null,
+      "confidence": "high",
+      "supports": [
+        "cast-coherence"
+      ]
+    },
+    {
+      "evidenceId": "EN-8",
+      "kind": "entity",
+      "title": "Adoption",
+      "statement": "Extracted from cmo0wq8tg00ijvhmw59vpfq4u-seg-958",
+      "inferredYear": null,
+      "confidence": "high",
+      "supports": [
+        "cast-coherence"
+      ]
+    }
+  ],
+  "coverage": {
+    "knowledgeNodes": 919,
+    "timelineEvents": 568,
+    "sceneComponents": 113,
+    "entities": 316
+  }
+}

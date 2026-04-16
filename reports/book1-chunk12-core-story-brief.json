@@ -1,0 +1,113 @@
+{
+  "generatedAt": "2026-04-16T01:49:57.623Z",
+  "source": {
+    "id": "book1-source-chunk-12",
+    "title": "Book 1 Research Chunk 12",
+    "filePath": "docs/book1/chunk12.txt",
+    "rawChars": 33298,
+    "normalizedChars": 27160,
+    "chunkCount": 8
+  },
+  "counts": {
+    "claims": 5,
+    "events": 0,
+    "places": 1,
+    "fragments": 3,
+    "openQuestions": 3
+  },
+  "chronology": [],
+  "coreTruthSet": [
+    {
+      "id": "book12-claim-attention-crosspoint-entry-power",
+      "description": "A new actor’s power is marked by taking position where attention lines cross, with others making space without explicit command.",
+      "confidence": 5,
+      "quoteExcerpt": "making space without being asked ... where the lines of attention crossed.",
+      "needsReview": true
+    },
+    {
+      "id": "book12-claim-second-matriarch-edge-position-authority",
+      "description": "The second matriarch exerts authority from edge-position steadiness, neither advancing nor retreating, while reading group-entry behavior.",
+      "confidence": 5,
+      "quoteExcerpt": "She did not step forward. She did not retreat. She held her place.",
+      "needsReview": true
+    },
+    {
+      "id": "book12-claim-staggered-arrival-governance-signal",
+      "description": "The gathering is structured through staggered multi-directional arrivals, signaling distributed authority and negotiated entry rather than centralized summons.",
+      "confidence": 5,
+      "quoteExcerpt": "They did not gather all at once. They arrived... from different directions, at different times.",
+      "needsReview": true
+    },
+    {
+      "id": "book12-claim-known-unmarked-path-network",
+      "description": "Unmarked but mutually known paths indicate an embedded relational network infrastructure rather than formalized route signage.",
+      "confidence": 4,
+      "quoteExcerpt": "None were marked. All were known.",
+      "needsReview": true
+    },
+    {
+      "id": "book12-claim-weight-recognition-transition-capacity",
+      "description": "Naming collective 'weight' marks the second matriarch’s transition toward system-level perception and burden recognition.",
+      "confidence": 4,
+      "quoteExcerpt": "\"What is it?\" ... \"Weight,\" she said.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book12-place-river-overlook-convergence-clearing",
+      "name": "River Overlook Convergence Clearing",
+      "placeType": "FIELD",
+      "description": "Semi-set-apart elevated clearing above river used for multi-group convergence, spacing negotiation, and relational signal reading."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book12-frag-entry-pattern-reading-protocol",
+      "title": "Entry Pattern Reading Protocol",
+      "summary": "Convergence-scene interpretation constraint.",
+      "text": "Group spacing, speech volume, and arrival shape are treated as pre-verbal political signals that must be read before formal negotiation.",
+      "confidence": 5,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book12-frag-balanced-not-crowded-assembly-law",
+      "title": "Balanced-Not-Crowded Assembly Law",
+      "summary": "Spatial-order constraint.",
+      "text": "Legitimate assembly is conveyed through relational balance rather than density; spatial equilibrium indicates retained system order under stress.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book12-frag-inward-shift-power-recognition",
+      "title": "Inward-Shift Power Recognition",
+      "summary": "Power-recognition cue constraint.",
+      "text": "High-status entry is signaled by inward attention compression and voluntary accommodation rather than overt declaration.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book12-oq-attention-crosspoint-authority-legibility",
+      "title": "Which behavioral cues make crosspoint authority legible without formal title declaration?",
+      "description": "Needed to keep emergent-power scenes coherent and culturally grounded.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book12-oq-convergence-entry-order-rules",
+      "title": "What norms govern arrival order, spacing, and speaking thresholds in multi-group convergence gatherings?",
+      "description": "Needed for procedural consistency across future council-convergence scenes.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book12-oq-second-matriarch-recognition-arc",
+      "title": "What sequence of moments validates the second matriarch’s shift from watcher to recognized system-holder in public gatherings?",
+      "description": "Needed to stage progression from interior perception to external legitimacy.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

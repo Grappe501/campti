@@ -1,0 +1,113 @@
+{
+  "generatedAt": "2026-04-16T01:58:50.859Z",
+  "source": {
+    "id": "book1-source-chunk-17",
+    "title": "Book 1 Research Chunk 17",
+    "filePath": "docs/book1/chunk17.txt",
+    "rawChars": 48025,
+    "normalizedChars": 43691,
+    "chunkCount": 13
+  },
+  "counts": {
+    "claims": 5,
+    "events": 0,
+    "places": 1,
+    "fragments": 3,
+    "openQuestions": 3
+  },
+  "chronology": [],
+  "coreTruthSet": [
+    {
+      "id": "book17-claim-blind-spot-system-failure-invisibility",
+      "description": "Core blind spot is inability to perceive systemic failure or irreversible rupture in the current stage.",
+      "confidence": 5,
+      "quoteExcerpt": "Cannot perceive system failure ... no framework for true rupture.",
+      "needsReview": true
+    },
+    {
+      "id": "book17-claim-decision-filter-align-with-existing-rhythm",
+      "description": "Primary decision filter is rhythmic alignment (join vs force), with anti-patterns including disruption initiation and control-seeking.",
+      "confidence": 5,
+      "quoteExcerpt": "\"Does this align with the existing rhythm?\" ... She enters systems correctly.",
+      "needsReview": true
+    },
+    {
+      "id": "book17-claim-first-matriarch-environmental-integration-mode",
+      "description": "Scene 1 first-matriarch mode is environmental integration: she feels pressure/rhythm/flow/alignment before analytical interpretation.",
+      "confidence": 5,
+      "quoteExcerpt": "Environmental Integration (She Feels Before She Thinks) ... pressure, rhythm, flow, alignment.",
+      "needsReview": true
+    },
+    {
+      "id": "book17-claim-pov-layering-architecture",
+      "description": "The chunk defines a POV layering architecture with perception channel, decision filter, blind spot, and growth evolution as core scene design primitives.",
+      "confidence": 5,
+      "quoteExcerpt": "POV LAYERING SYSTEM ... primary perception channel ... decision filter ... blind spot ... growth evolution.",
+      "needsReview": true
+    },
+    {
+      "id": "book17-claim-river-truth-alignment-symbol-lock",
+      "description": "Scene symbol lock ties river to truth/alignment, establishing future stress when systems become unreadable or non-river-like.",
+      "confidence": 4,
+      "quoteExcerpt": "RIVER = TRUTH / ALIGNMENT ... she will struggle when the system becomes unstable or unreadable.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book17-place-scene1-threshold-alignment-space",
+      "name": "Scene 1 Threshold Alignment Space",
+      "placeType": "REGION",
+      "description": "Perceptual threshold space where identity transition is read through pressure, air, stillness, and movement shifts."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book17-frag-feel-before-think-pov-rule",
+      "title": "Feel-Before-Think POV Rule",
+      "summary": "Perception-order constraint.",
+      "text": "First-matriarch POV prioritizes body sensation and rhythm before visual detail or abstract interpretation.",
+      "confidence": 5,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book17-frag-adjust-not-initiate-behavior-rule",
+      "title": "Adjust-Not-Initiate Behavior Rule",
+      "summary": "Behavioral POV constraint.",
+      "text": "Micro-behavior in early scenes must show pausing, mirroring, and adjustment rather than initiation or interpretation rush.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book17-frag-internal-language-present-sensory-only",
+      "title": "Present-Sensory Internal Language",
+      "summary": "Voice-style constraint.",
+      "text": "Internal narration should avoid abstract projection and explanation, favoring present-sensory physical metaphor.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book17-oq-daughter-pov-layer-contrast-design",
+      "title": "How should daughter POV layering contrast with first-matriarch mode while preserving lineage continuity?",
+      "description": "Needed to build intergenerational voice distinction without breaking thematic cohesion.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book17-oq-pov-marker-validation-checklist",
+      "title": "What measurable checklist verifies that Scene 1 POV markers are present in each drafted passage?",
+      "description": "Needed for consistent editorial QA of perception/voice mechanics.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book17-oq-pov-transition-trigger-map",
+      "title": "Which specific scene triggers move the first matriarch from stable alignment confidence toward rupture-awareness?",
+      "description": "Needed to sequence blind-spot erosion coherently across later chapters.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "artifact": "chapter_abstract_fear_suppression",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.063Z",
+  "globalStopPatterns": [
+    "fear sits at",
+    "hesitation sits at",
+    "risk remains unresolved",
+    "pressure remains",
+    "threat remains",
+    "erasure risk",
+    "exposure fear"
+  ],
+  "substitutionRules": [
+    {
+      "from": "fear",
+      "toPattern": "Replace with narrowed perception or interrupted movement.",
+      "rule": "convert abstract fear into perception"
+    },
+    {
+      "from": "motive restatement",
+      "toPattern": "Replace with action hesitation and object handling.",
+      "rule": "convert repeated motive into action hesitation"
+    },
+    {
+      "from": "emotional label",
+      "toPattern": "Replace with misreading, silence, breath, or posture shift.",
+      "rule": "convert repeated emotional label into bodily or social cue"
+    }
+  ],
+  "segmentDirectives": [
+    {
+      "segment": 1,
+      "blockedAbstractPatterns": [
+        "fear sits at",
+        "hesitation sits at",
+        "risk remains unresolved",
+        "pressure remains",
+        "threat remains",
+        "erasure risk",
+        "exposure fear"
+      ],
+      "substitutionPriority": [
+        "perception",
+        "hesitation_action",
+        "misreading_or_silence",
+        "bodily_cue"
+      ],
+      "maxAbstractFearMentionsPerParagraph": 1
+    },
+    {
+      "segment": 2,
+      "blockedAbstractPatterns": [
+        "fear sits at",
+        "hesitation sits at",
+        "risk remains unresolved",
+        "pressure remains",
+        "threat remains",
+        "erasure risk",
+        "exposure fear"
+      ],
+      "substitutionPriority": [
+        "perception",
+        "hesitation_action",
+        "misreading_or_silence",
+        "bodily_cue"
+      ],
+      "maxAbstractFearMentionsPerParagraph": 0
+    },
+    {
+      "segment": 3,
+      "blockedAbstractPatterns": [
+        "fear sits at",
+        "hesitation sits at",
+        "risk remains unresolved",
+        "pressure remains",
+        "threat remains",
+        "erasure risk",
+        "exposure fear"
+      ],
+      "substitutionPriority": [
+        "perception",
+        "hesitation_action",
+        "misreading_or_silence",
+        "bodily_cue"
+      ],
+      "maxAbstractFearMentionsPerParagraph": 1
+    },
+    {
+      "segment": 4,
+      "blockedAbstractPatterns": [
+        "fear sits at",
+        "hesitation sits at",
+        "risk remains unresolved",
+        "pressure remains",
+        "threat remains",
+        "erasure risk",
+        "exposure fear"
+      ],
+      "substitutionPriority": [
+        "perception",
+        "hesitation_action",
+        "misreading_or_silence",
+        "bodily_cue"
+      ],
+      "maxAbstractFearMentionsPerParagraph": 0
+    },
+    {
+      "segment": 5,
+      "blockedAbstractPatterns": [
+        "fear sits at",
+        "hesitation sits at",
+        "risk remains unresolved",
+        "pressure remains",
+        "threat remains",
+        "erasure risk",
+        "exposure fear"
+      ],
+      "substitutionPriority": [
+        "perception",
+        "hesitation_action",
+        "misreading_or_silence",
+        "bodily_cue"
+      ],
+      "maxAbstractFearMentionsPerParagraph": 1
+    },
+    {
+      "segment": 6,
+      "blockedAbstractPatterns": [
+        "fear sits at",
+        "hesitation sits at",
+        "risk remains unresolved",
+        "pressure remains",
+        "threat remains",
+        "erasure risk",
+        "exposure fear"
+      ],
+      "substitutionPriority": [
+        "perception",
+        "hesitation_action",
+        "misreading_or_silence",
+        "bodily_cue"
+      ],
+      "maxAbstractFearMentionsPerParagraph": 0
+    }
+  ]
+}

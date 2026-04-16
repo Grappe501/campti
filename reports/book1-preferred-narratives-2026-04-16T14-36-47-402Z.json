@@ -1,0 +1,277 @@
+{
+  "generatedAt": "2026-04-16T14:36:47.401Z",
+  "options": {
+    "includeInterpretiveLayer": true,
+    "includeSymbolicLayer": true,
+    "includeCandidates": true,
+    "candidateTopN": 1
+  },
+  "scenes": [
+    {
+      "sceneNumber": 4,
+      "sceneKey": "book1_scene_04",
+      "title": "Book 1 Anchor Scene 04 (placeholder)",
+      "preferred": {
+        "setting_layer": {
+          "id": "cmo0wr3880113vhmwbyzp9gpe",
+          "componentKey": "book1-scene-component-263140d874",
+          "sceneAnchorId": "book1-scene-anchor-04",
+          "sceneNumber": 4,
+          "sceneKey": "book1_scene_04",
+          "sceneTitle": "Book 1 Anchor Scene 04 (placeholder)",
+          "componentType": "setting_layer",
+          "canonStatus": "CANON",
+          "confidenceType": "INFERRED_HISTORICAL",
+          "textContent": "* Hunting grounds overlap\n* Travel routes intersect\n* Settlement expands",
+          "summary": "* Hunting grounds overlap * Travel routes intersect * Settlement expands",
+          "functionInScene": "setting passage (medium)",
+          "orderPriority": null,
+          "sourceKey": "book1-raw-chunk-4",
+          "sourceFileName": "Book 1 raw chunk 4",
+          "sourceChunkNumber": 4
+        },
+        "environmental_layer": {
+          "id": "cmo0wr30s0110vhmw38wdxhyd",
+          "componentKey": "book1-scene-component-3dcb8c40be",
+          "sceneAnchorId": "book1-scene-anchor-04",
+          "sceneNumber": 4,
+          "sceneKey": "book1_scene_04",
+          "sceneTitle": "Book 1 Anchor Scene 04 (placeholder)",
+          "componentType": "environmental_layer",
+          "canonStatus": "CANON",
+          "confidenceType": "INFERRED_HISTORICAL",
+          "textContent": "👉 Conflict reveals the strength of the system",
+          "summary": "👉 Conflict reveals the strength of the system",
+          "functionInScene": "interpretive passage (high)",
+          "orderPriority": null,
+          "sourceKey": "book1-raw-chunk-4",
+          "sourceFileName": "Book 1 raw chunk 4",
+          "sourceChunkNumber": 4
+        },
+        "primary_pov": {
+          "id": "cmo0wr4wp011rvhmwuyj1yynx",
+          "componentKey": "book1-scene-component-25f45d8475",
+          "sceneAnchorId": "book1-scene-anchor-04",
+          "sceneNumber": 4,
+          "sceneKey": "book1_scene_04",
+          "sceneTitle": "Book 1 Anchor Scene 04 (placeholder)",
+          "componentType": "primary_pov",
+          "canonStatus": "CANON",
+          "confidenceType": "INFERRED_HISTORICAL",
+          "textContent": "Here’s the working order I recommend for the Red River / borderlands story system, with the Natchitoches as the baseline tribe because they sit at the center of the local network and the French post at Natchitoches was explicitly built to trade with the local Natchitoches Caddo people. ([Natchitoches Tribe of Louisiana][1])",
+          "summary": "Here’s the working order I recommend for the Red River / borderlands story system, with the Natchitoches as the baseline tribe because they...",
+          "functionInScene": "setting passage (medium)",
+          "orderPriority": null,
+          "sourceKey": "book1-raw-chunk-4",
+          "sourceFileName": "Book 1 raw chunk 4",
+          "sourceChunkNumber": 4
+        },
+        "interpretive_layer": {
+          "id": "cmo0wr2t9010xvhmwprxy7xy8",
+          "componentKey": "book1-scene-component-812b00d83c",
+          "sceneAnchorId": "book1-scene-anchor-04",
+          "sceneNumber": 4,
+          "sceneKey": "book1_scene_04",
+          "sceneTitle": "Book 1 Anchor Scene 04 (placeholder)",
+          "componentType": "interpretive_layer",
+          "canonStatus": "CANON",
+          "confidenceType": "INFERRED_HISTORICAL",
+          "textContent": "👉 Conflict reveals the strength of the system",
+          "summary": "👉 Conflict reveals the strength of the system",
+          "functionInScene": "interpretive passage (high)",
+          "orderPriority": null,
+          "sourceKey": "book1-raw-chunk-4",
+          "sourceFileName": "Book 1 raw chunk 4",
+          "sourceChunkNumber": 4
+        },
+        "symbolic_layer": {
+          "id": "cmo0wr26o010ovhmw19avfmnh",
+          "componentKey": "book1-scene-component-687478765a",
+          "sceneAnchorId": "book1-scene-anchor-04",
+          "sceneNumber": 4,
+          "sceneKey": "book1_scene_04",
+          "sceneTitle": "Book 1 Anchor Scene 04 (placeholder)",
+          "componentType": "symbolic_layer",
+          "canonStatus": "CANON",
+          "confidenceType": "INFERRED_HISTORICAL",
+          "textContent": "* Gift exchange\n* Public acknowledgment\n* Mediation\n* Ritual",
+          "summary": "* Gift exchange * Public acknowledgment * Mediation * Ritual",
+          "functionInScene": "symbolic motif (medium)",
+          "orderPriority": null,
+          "sourceKey": "book1-raw-chunk-4",
+          "sourceFileName": "Book 1 raw chunk 4",
+          "sourceChunkNumber": 4
+        }
+      },
+      "candidates": {
+        "setting_layer": [
+          {
+            "id": "cmo0wr5je0120vhmwabiklxcr",
+            "componentKey": "book1-scene-component-bebb7d97cd",
+            "sceneAnchorId": "book1-scene-anchor-04",
+            "sceneNumber": 4,
+            "sceneKey": "book1_scene_04",
+            "sceneTitle": "Book 1 Anchor Scene 04 (placeholder)",
+            "componentType": "setting_layer",
+            "canonStatus": "CANDIDATE",
+            "confidenceType": "INFERRED_HISTORICAL",
+            "textContent": "## 2. Settlement pattern",
+            "summary": "## 2. Settlement pattern",
+            "functionInScene": "setting passage (medium)",
+            "orderPriority": null,
+            "sourceKey": "book1-raw-chunk-4",
+            "sourceFileName": "Book 1 raw chunk 4",
+            "sourceChunkNumber": 4
+          }
+        ],
+        "environmental_layer": [
+          {
+            "id": "cmo0wr70c012lvhmwxtm8laux",
+            "componentKey": "book1-scene-component-eff429f359",
+            "sceneAnchorId": "book1-scene-anchor-04",
+            "sceneNumber": 4,
+            "sceneKey": "book1_scene_04",
+            "sceneTitle": "Book 1 Anchor Scene 04 (placeholder)",
+            "componentType": "environmental_layer",
+            "canonStatus": "CANDIDATE",
+            "confidenceType": "INFERRED_HISTORICAL",
+            "textContent": "## **VIII. The Moment of Recognition — When the System Accepts Them**",
+            "summary": "## **VIII. The Moment of Recognition — When the System Accepts Them**",
+            "functionInScene": "scene fragment (medium)",
+            "orderPriority": null,
+            "sourceKey": "book1-raw-chunk-4",
+            "sourceFileName": "Book 1 raw chunk 4",
+            "sourceChunkNumber": 4
+          }
+        ],
+        "primary_pov": [
+          {
+            "id": "cmo0wr5qx0123vhmwvvqbuw0m",
+            "componentKey": "book1-scene-component-155a3f3a4b",
+            "sceneAnchorId": "book1-scene-anchor-04",
+            "sceneNumber": 4,
+            "sceneKey": "book1_scene_04",
+            "sceneTitle": "Book 1 Anchor Scene 04 (placeholder)",
+            "componentType": "primary_pov",
+            "canonStatus": "CANDIDATE",
+            "confidenceType": "INFERRED_HISTORICAL",
+            "textContent": "**Baseline:** Small affiliated communities and hamlets rather than one massive centralized capital. National Park Service and Caddo historical summaries describe historic Caddo peoples as living primarily in small groups on the Red River and East Texas, while Louisiana/Caddo syntheses place the Natchitoches inside that smaller-settlement pattern. ([National Park Service][2])",
+            "summary": "**Baseline:** Small affiliated communities and hamlets rather than one massive centralized capital. National Park Service and Caddo histori...",
+            "functionInScene": "setting passage (medium)",
+            "orderPriority": null,
+            "sourceKey": "book1-raw-chunk-4",
+            "sourceFileName": "Book 1 raw chunk 4",
+            "sourceChunkNumber": 4
+          }
+        ],
+        "symbolic_layer": [
+          {
+            "id": "cmo0wr2lp010uvhmw12ccpr3d",
+            "componentKey": "book1-scene-component-415d5ec2c4",
+            "sceneAnchorId": "book1-scene-anchor-04",
+            "sceneNumber": 4,
+            "sceneKey": "book1_scene_04",
+            "sceneTitle": "Book 1 Anchor Scene 04 (placeholder)",
+            "componentType": "symbolic_layer",
+            "canonStatus": "CANDIDATE",
+            "confidenceType": "INFERRED_HISTORICAL",
+            "textContent": "* Subtle vs structured\n* Ritual intensity differences",
+            "summary": "* Subtle vs structured * Ritual intensity differences",
+            "functionInScene": "symbolic motif (medium)",
+            "orderPriority": null,
+            "sourceKey": "book1-raw-chunk-4",
+            "sourceFileName": "Book 1 raw chunk 4",
+            "sourceChunkNumber": 4
+          }
+        ]
+      },
+      "orderedNarrativeBlocks": [
+        {
+          "layer": "setting_layer",
+          "text": "* Hunting grounds overlap * Travel routes intersect * Settlement expands",
+          "source": {
+            "componentKey": "book1-scene-component-263140d874",
+            "sourceKey": "book1-raw-chunk-4"
+          },
+          "candidate": false
+        },
+        {
+          "layer": "setting_layer",
+          "text": "## 2. Settlement pattern",
+          "source": {
+            "componentKey": "book1-scene-component-bebb7d97cd",
+            "sourceKey": "book1-raw-chunk-4"
+          },
+          "candidate": true
+        },
+        {
+          "layer": "environmental_layer",
+          "text": "👉 Conflict reveals the strength of the system",
+          "source": {
+            "componentKey": "book1-scene-component-3dcb8c40be",
+            "sourceKey": "book1-raw-chunk-4"
+          },
+          "candidate": false
+        },
+        {
+          "layer": "environmental_layer",
+          "text": "## **VIII. The Moment of Recognition — When the System Accepts Them**",
+          "source": {
+            "componentKey": "book1-scene-component-eff429f359",
+            "sourceKey": "book1-raw-chunk-4"
+          },
+          "candidate": true
+        },
+        {
+          "layer": "primary_pov",
+          "text": "Here’s the working order I recommend for the Red River / borderlands story system, with the Natchitoches as the baseline tribe because they...",
+          "source": {
+            "componentKey": "book1-scene-component-25f45d8475",
+            "sourceKey": "book1-raw-chunk-4"
+          },
+          "candidate": false
+        },
+        {
+          "layer": "primary_pov",
+          "text": "**Baseline:** Small affiliated communities and hamlets rather than one massive centralized capital. National Park Service and Caddo histori...",
+          "source": {
+            "componentKey": "book1-scene-component-155a3f3a4b",
+            "sourceKey": "book1-raw-chunk-4"
+          },
+          "candidate": true
+        },
+        {
+          "layer": "interpretive_layer",
+          "text": "👉 Conflict reveals the strength of the system",
+          "source": {
+            "componentKey": "book1-scene-component-812b00d83c",
+            "sourceKey": "book1-raw-chunk-4"
+          },
+          "candidate": false
+        },
+        {
+          "layer": "symbolic_layer",
+          "text": "* Gift exchange * Public acknowledgment * Mediation * Ritual",
+          "source": {
+            "componentKey": "book1-scene-component-687478765a",
+            "sourceKey": "book1-raw-chunk-4"
+          },
+          "candidate": false
+        },
+        {
+          "layer": "symbolic_layer",
+          "text": "* Subtle vs structured * Ritual intensity differences",
+          "source": {
+            "componentKey": "book1-scene-component-415d5ec2c4",
+            "sourceKey": "book1-raw-chunk-4"
+          },
+          "candidate": true
+        }
+      ],
+      "plainText": "Scene 4: Book 1 Anchor Scene 04 (placeholder)\n\nSetting: * Hunting grounds overlap * Travel routes intersect * Settlement expands\n\nSetting: ## 2. Settlement pattern\n(candidate blend)\n\nEnvironment: 👉 Conflict reveals the strength of the system\n\nEnvironment: ## **VIII. The Moment of Recognition — When the System Accepts Them**\n(candidate blend)\n\nPOV: Here’s the working order I recommend for the Red River / borderlands story system, with the Natchitoches as the baseline tribe because they...\n\nPOV: **Baseline:** Small affiliated communities and hamlets rather than one massive centralized capital. National Park Service and Caddo histori...\n(candidate blend)\n\nInterpretation: 👉 Conflict reveals the strength of the system\n\nSymbolic: * Gift exchange * Public acknowledgment * Mediation * Ritual\n\nSymbolic: * Subtle vs structured * Ritual intensity differences\n(candidate blend)\n\nWarnings:\n- missing preferred observer_layer",
+      "warnings": [
+        "missing preferred observer_layer"
+      ]
+    }
+  ]
+}

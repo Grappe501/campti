@@ -1,0 +1,112 @@
+{
+  "generatedAt": "2026-04-16T01:37:51.991Z",
+  "source": {
+    "id": "book1-source-chunk-6",
+    "title": "Book 1 Research Chunk 6",
+    "filePath": "docs/book1/chunk6.txt",
+    "rawChars": 54468,
+    "normalizedChars": 17224,
+    "chunkCount": 5
+  },
+  "counts": {
+    "claims": 6,
+    "events": 0,
+    "places": 1,
+    "fragments": 2,
+    "openQuestions": 3
+  },
+  "chronology": [],
+  "coreTruthSet": [
+    {
+      "id": "book6-claim-ouachita-environmental-variation",
+      "description": "Ouachita are framed as an environmental variation within the broader system rather than a dramatic civilizational break.",
+      "confidence": 4,
+      "quoteExcerpt": "The Ouachita (Washita) ... an environmental variation of the system.",
+      "needsReview": true
+    },
+    {
+      "id": "book6-claim-ouachita-irregular-micro-community-settlement",
+      "description": "Settlement pattern is portrayed as terrain-shaped and irregular, requiring navigation across localized micro-communities.",
+      "confidence": 4,
+      "quoteExcerpt": "More irregular distribution ... navigate multiple micro-communities.",
+      "needsReview": true
+    },
+    {
+      "id": "book6-claim-ouachita-regional-trade-connector",
+      "description": "Trade role is framed as important regional connector behavior without central-system dominance.",
+      "confidence": 4,
+      "quoteExcerpt": "Regional connector, not central hub ... important-but not dominant.",
+      "needsReview": true
+    },
+    {
+      "id": "book6-claim-ouachita-reserved-diplomacy-slower-trust",
+      "description": "Diplomacy is described as measured and slightly reserved, with slower trust formation that yields stronger durability.",
+      "confidence": 4,
+      "quoteExcerpt": "Trust builds slower—but holds stronger.",
+      "needsReview": true
+    },
+    {
+      "id": "book6-claim-ouachita-river-upland-mix",
+      "description": "Ouachita geography is characterized as a river-valley plus upland mix, producing less uniform terrain and slower movement.",
+      "confidence": 4,
+      "quoteExcerpt": "River-valley + upland mix ... movement is more varied and slower.",
+      "needsReview": true
+    },
+    {
+      "id": "book6-claim-ouachita-regional-language-inflection",
+      "description": "Language is treated as closely related to the baseline but with subtle regional inflection discernible to careful listeners.",
+      "confidence": 3,
+      "quoteExcerpt": "Very close linguistically ... slight regional inflection in speech patterns.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book6-place-ouachita-river-upland-interface",
+      "name": "Ouachita River-Upland Interface",
+      "placeType": "RIVER",
+      "description": "Mixed-terrain contact zone combining river corridors with upland forest/hill movement constraints."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book6-frag-micro-community-navigation",
+      "title": "Micro-Community Navigation",
+      "summary": "Community-structure constraint.",
+      "text": "Effective engagement requires treating Ouachita spaces as multiple local clusters rather than a single negotiable unit.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book6-frag-terrain-dependent-mobility-logic",
+      "title": "Terrain-Dependent Mobility Logic",
+      "summary": "Mobility-planning constraint.",
+      "text": "Movement strategy shifts from route-first assumptions to terrain-conditioned pacing, pathing, and contact timing.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book6-oq-ouachita-language-inflection-cues",
+      "title": "What specific speech-pattern cues can safely signal Ouachita regional inflection without over-claiming divergence?",
+      "description": "Needed for dialogue differentiation grounded in nuanced linguistic proximity.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book6-oq-ouachita-micro-community-mapping",
+      "title": "Which micro-community clusters are most relevant to Ouachita settlement and decision flow in the target period?",
+      "description": "Needed to convert terrain-shaped dispersion into concrete interaction maps for scenes and chapters.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book6-oq-ouachita-regional-trade-specifics",
+      "title": "What goods and reciprocal obligations most strongly define Ouachita regional connector trade behavior?",
+      "description": "Needed for precise exchange scenes and realistic leverage dynamics.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

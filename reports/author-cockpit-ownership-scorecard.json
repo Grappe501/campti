@@ -1,0 +1,40 @@
+{
+  "contractVersion": "1",
+  "scope": "author_cockpit_audit_workstream_1",
+  "generatedAtIso": "2026-04-15T00:00:00.000Z",
+  "ownershipScorecard": [
+    {
+      "dimension": "single_authoritative_author_cockpit",
+      "status": "at_risk",
+      "notes": "Scene workspace is strongest candidate but narrative/book/chapter slices create competing command pathways."
+    },
+    {
+      "dimension": "author_vs_reader_separation",
+      "status": "acceptable",
+      "notes": "ui-ownership-service enforces reader/author capability separation."
+    },
+    {
+      "dimension": "author_vs_operator_internal_separation",
+      "status": "at_risk",
+      "notes": "Observer-style internal pages are near author surfaces and need explicit non-cockpit designation."
+    },
+    {
+      "dimension": "capability_to_ui_alignment",
+      "status": "at_risk",
+      "notes": "Author workflow orchestration actions exist but are not unified in one cockpit authority."
+    },
+    {
+      "dimension": "centered_command_experience",
+      "status": "at_risk",
+      "notes": "Current admin nav and dashboard fragment command flow across many equal-weight links."
+    }
+  ],
+  "explicitFindings": {
+    "duplicateCompetingAuthorWorkbenches": true,
+    "unclearOwnership": true,
+    "hiddenCapabilitiesNotSurfacedInUnifiedUI": true,
+    "surfacesToRetireOrMerge": true,
+    "readerInappropriateButAuthorAppropriate": true,
+    "adminInternalNotForAuthorCockpit": true
+  }
+}

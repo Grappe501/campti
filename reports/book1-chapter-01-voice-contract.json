@@ -1,0 +1,195 @@
+{
+  "artifact": "chapter_voice_contract",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.028Z",
+  "positiveConstraints": {
+    "sentenceRhythmProfile": {
+      "preferredBands": [
+        {
+          "minWords": 8,
+          "maxWords": 15,
+          "targetShare": 0.38
+        },
+        {
+          "minWords": 16,
+          "maxWords": 26,
+          "targetShare": 0.47
+        },
+        {
+          "minWords": 27,
+          "maxWords": 36,
+          "targetShare": 0.15
+        }
+      ],
+      "cadenceVarianceTarget": 0.42,
+      "maxRepeatedOpeningsPerSegment": 1
+    },
+    "paragraphDensity": {
+      "targetSentencesPerParagraph": {
+        "min": 4,
+        "max": 8
+      },
+      "targetWordRangePerParagraph": {
+        "min": 90,
+        "max": 180
+      }
+    },
+    "narrativeDistance": {
+      "mode": "third-person close with embodied social observation",
+      "povDiscipline": [
+        "show inner pressure through perception and withheld response",
+        "anchor thought in immediate physical context",
+        "avoid omniscient future exposition"
+      ]
+    },
+    "historicalEmbeddingMode": {
+      "mode": "lived material reality",
+      "requiredTextureSignals": [
+        "labor gesture",
+        "ritual signal",
+        "social hierarchy cue",
+        "environment pressure"
+      ]
+    },
+    "emotionalRestraintLevel": {
+      "target": "controlled, unsentimental pressure",
+      "mustShowThrough": [
+        "choice under strain",
+        "silence",
+        "micro-reaction",
+        "attention shift"
+      ]
+    },
+    "sensoryToAbstractionRatio": {
+      "targetRatio": 2.6,
+      "minimumSensoryHitsPerSegment": 6,
+      "maxAbstractSignalsPerSegment": 2
+    },
+    "transitionStyle": {
+      "preferred": [
+        "consequence handoff",
+        "object continuity",
+        "social pressure carryover"
+      ],
+      "avoid": [
+        "meta signpost",
+        "declared transition"
+      ]
+    },
+    "foreshadowingTreatment": {
+      "preferred": [
+        "latent implication",
+        "behavioral omen",
+        "ritual anomaly"
+      ],
+      "forbidden": [
+        "explicit future summary",
+        "arc explanation"
+      ]
+    }
+  },
+  "negativeConstraints": {
+    "outlineLeakageLanguage": [
+      "the focus turns to",
+      "this beat matters because",
+      "transition to next",
+      "segment objective"
+    ],
+    "metaNarrativeScaffolding": [
+      "the chapter does",
+      "the narrative now",
+      "the story signals",
+      "reader should"
+    ],
+    "summaryStylePhrases": [
+      "in this scene",
+      "what happens next",
+      "the purpose is",
+      "this section shows"
+    ],
+    "overExplanatoryThematicPhrasing": [
+      "because this symbolizes",
+      "the theme is",
+      "this represents"
+    ],
+    "artificialRhetoricalSymmetry": [
+      "not only... but also",
+      "both x and y in equal measure",
+      "on the one hand"
+    ],
+    "repeatedSegmentOpeningPatterns": [
+      "scene x holds",
+      "at river light",
+      "by this point"
+    ],
+    "genericAbstractionWithoutEmbodiment": [
+      "systems pressure",
+      "social dynamic",
+      "historical process",
+      "structural tension"
+    ]
+  },
+  "complianceRubric": {
+    "rhythmCompliance": {
+      "check": "sentence rhythm and opening variance",
+      "scoreRange": {
+        "min": 0,
+        "max": 1
+      },
+      "passThreshold": 0.68,
+      "weight": 0.2,
+      "measurement": "sentence-length distribution + repeated opening count"
+    },
+    "narrativeDistanceCompliance": {
+      "check": "close POV discipline without omniscient exposition",
+      "scoreRange": {
+        "min": 0,
+        "max": 1
+      },
+      "passThreshold": 0.65,
+      "weight": 0.16,
+      "measurement": "presence of perception-action cues vs meta narration"
+    },
+    "embodimentCompliance": {
+      "check": "sensory and material grounding density",
+      "scoreRange": {
+        "min": 0,
+        "max": 1
+      },
+      "passThreshold": 0.72,
+      "weight": 0.2,
+      "measurement": "sensory token density and concrete action references"
+    },
+    "historicalIntegrationCompliance": {
+      "check": "historical context appears as lived conditions",
+      "scoreRange": {
+        "min": 0,
+        "max": 1
+      },
+      "passThreshold": 0.7,
+      "weight": 0.16,
+      "measurement": "kinship/labor/ritual cues without expository explanation"
+    },
+    "abstractionLeakageRisk": {
+      "check": "generic abstraction leakage risk",
+      "scoreRange": {
+        "min": 0,
+        "max": 1
+      },
+      "passThreshold": 0.45,
+      "weight": 0.14,
+      "measurement": "abstraction term frequency relative to sensory grounding"
+    },
+    "syntheticProseRisk": {
+      "check": "template-like synthetic prose risk",
+      "scoreRange": {
+        "min": 0,
+        "max": 1
+      },
+      "passThreshold": 0.35,
+      "weight": 0.14,
+      "measurement": "repeated openings, balanced-clause cadence, and formulaic pivots"
+    }
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "contractVersion": "1",
+  "certificationScope": "phase8_plus_phase9_super_pass",
+  "executedAtIso": "2026-04-15T19:04:48.645Z",
+  "commands": [
+    {
+      "command": "npx prisma validate",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npx prisma generate",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run typecheck",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run lint",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run build",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:migrations",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:contracts",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:contract-drift",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:interaction-truth-firewall",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:prelaunch:strict",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:full-system:strict",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:creator-identity-roles",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:workspace-project-model",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:editorial-workflow",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:publishing-package",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:asset-metadata-governance",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:multi-creator-safety",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:public-publishing-surfaces",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:creator-publishing-layer",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:deployment-governance",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:rollout-rollback",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:commercial-catalog",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:commercial-entitlements",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:release-monitoring",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:commercial-operator-surfaces",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:deployment-commercial-intelligence",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    },
+    {
+      "command": "npm run verify:deployment-commercial-layer",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredBySuperPass": true
+    }
+  ],
+  "summary": {
+    "total": 27,
+    "passed": 27,
+    "failed": 0,
+    "skipped": 0
+  }
+}

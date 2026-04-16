@@ -1,0 +1,20 @@
+{
+  "artifact": "chapter_consistency_report",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T16:25:48.256Z",
+  "chronology": {
+    "passed": true,
+    "findings": []
+  },
+  "futureArc": {
+    "passed": true,
+    "findings": []
+  },
+  "firewall": {
+    "passed": true,
+    "findings": [
+      "Composer inputs locked to chapter_law|chapter_evidence_pack|chapter_voice_contract|chapter_prose_briefs|chapter_lived_history"
+    ]
+  }
+}

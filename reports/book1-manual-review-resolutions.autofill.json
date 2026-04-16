@@ -1,0 +1,356 @@
+{
+  "generatedAt": "2026-04-16T14:49:05.467Z",
+  "mode": "missing-required",
+  "outputPathHint": "reports/book1-manual-review-resolutions.autofill.json",
+  "instructions": "Review suggested preferred keys and backups before apply. Use book1:manual-review:resolve with this file to apply set_preferred actions.",
+  "targets": [
+    {
+      "sceneNumber": 4,
+      "layer": "primary_pov"
+    },
+    {
+      "sceneNumber": 11,
+      "layer": "setting_layer"
+    }
+  ],
+  "suggestions": [
+    {
+      "sceneNumber": 4,
+      "layer": "primary_pov",
+      "sceneKey": "book1_scene_04",
+      "sceneTitle": "Book 1 Anchor Scene 04 (placeholder)",
+      "suggestedPreferredComponentKey": "book1-scene-component-5b0b4ec359",
+      "backupCandidateComponentKeys": [
+        "book1-scene-component-4ecd5cb147",
+        "book1-scene-component-adaaf6ee7f",
+        "book1-scene-component-c8a9f5798f",
+        "book1-scene-component-155a3f3a4b",
+        "book1-scene-component-687478765a"
+      ],
+      "candidates": [
+        {
+          "componentId": "cmo1knsee0099vhi4hyin416p",
+          "componentKey": "book1-scene-component-5b0b4ec359",
+          "componentType": "PRIMARY_POV",
+          "textContent": "Say the word and we go to Scene 4. Perfect—this is where we introduce someone who understands the system in a **completely different way** ...",
+          "summary": "Say the word and we go to Scene 4. Perfect—this is where we introduce someone who understands the system in a **completely different way** ...",
+          "canonStatus": "CANDIDATE",
+          "confidenceType": "INFERRED_HISTORICAL",
+          "sourceKey": "book1-raw-chunk-20",
+          "sourceKind": "UPLOADED_CHUNK",
+          "sourceTitle": "Book 1 raw chunk 20",
+          "sourceFileName": "chunk20.txt",
+          "sourceChunkNumber": 20,
+          "lexicalSimilarityToSceneCanon": 0.041666666666666664,
+          "score": 0.7023333333333334,
+          "scoreBreakdown": {
+            "confidence": 0.85,
+            "canon": 0.8,
+            "similarity": 0.041666666666666664,
+            "provenance": 0.9
+          },
+          "reasonSummary": "confidence=inferred_historical; status=candidate; similarity=0.042; sourceKind=uploaded_chunk; chunk=20",
+          "requiresRetype": false
+        },
+        {
+          "componentId": "cmo0wr6st012ivhmwd43dc8io",
+          "componentKey": "book1-scene-component-4ecd5cb147",
+          "componentType": "PRIMARY_POV",
+          "textContent": "Every conflict has a moment where:",
+          "summary": "Every conflict has a moment where:",
+          "canonStatus": "CANDIDATE",
+          "confidenceType": "INFERRED_HISTORICAL",
+          "sourceKey": "book1-raw-chunk-4",
+          "sourceKind": "UPLOADED_CHUNK",
+          "sourceTitle": "Book 1 raw chunk 4",
+          "sourceFileName": "chunk4.txt",
+          "sourceChunkNumber": 4,
+          "lexicalSimilarityToSceneCanon": 0.02631578947368421,
+          "score": 0.6992631578947369,
+          "scoreBreakdown": {
+            "confidence": 0.85,
+            "canon": 0.8,
+            "similarity": 0.02631578947368421,
+            "provenance": 0.9
+          },
+          "reasonSummary": "confidence=inferred_historical; status=candidate; similarity=0.026; sourceKind=uploaded_chunk; chunk=4",
+          "requiresRetype": false
+        },
+        {
+          "componentId": "cmo1kn06l005ovhz8bsoluxcm",
+          "componentKey": "book1-scene-component-adaaf6ee7f",
+          "componentType": "PRIMARY_POV",
+          "textContent": "* Scene 3 → “Is this correct here?” * Scene 4 → **“How does this connect to everything else?”**",
+          "summary": "* Scene 3 → “Is this correct here?” * Scene 4 → **“How does this connect to everything else?”**",
+          "canonStatus": "CANDIDATE",
+          "confidenceType": "INFERRED_HISTORICAL",
+          "sourceKey": "book1-raw-chunk-17",
+          "sourceKind": "UPLOADED_CHUNK",
+          "sourceTitle": "Book 1 raw chunk 17",
+          "sourceFileName": "chunk17.txt",
+          "sourceChunkNumber": 17,
+          "lexicalSimilarityToSceneCanon": 0.023809523809523808,
+          "score": 0.6987619047619048,
+          "scoreBreakdown": {
+            "confidence": 0.85,
+            "canon": 0.8,
+            "similarity": 0.023809523809523808,
+            "provenance": 0.9
+          },
+          "reasonSummary": "confidence=inferred_historical; status=candidate; similarity=0.024; sourceKind=uploaded_chunk; chunk=17",
+          "requiresRetype": false
+        },
+        {
+          "componentId": "cmo1knsee009hvhi4v4in055z",
+          "componentKey": "book1-scene-component-c8a9f5798f",
+          "componentType": "PRIMARY_POV",
+          "textContent": "Scene 4 is about **movement and connection**, so the best secondary POV is:",
+          "summary": "Scene 4 is about **movement and connection**, so the best secondary POV is:",
+          "canonStatus": "CANDIDATE",
+          "confidenceType": "INFERRED_HISTORICAL",
+          "sourceKey": "book1-raw-chunk-20",
+          "sourceKind": "UPLOADED_CHUNK",
+          "sourceTitle": "Book 1 raw chunk 20",
+          "sourceFileName": "chunk20.txt",
+          "sourceChunkNumber": 20,
+          "lexicalSimilarityToSceneCanon": 0.023809523809523808,
+          "score": 0.6987619047619048,
+          "scoreBreakdown": {
+            "confidence": 0.85,
+            "canon": 0.8,
+            "similarity": 0.023809523809523808,
+            "provenance": 0.9
+          },
+          "reasonSummary": "confidence=inferred_historical; status=candidate; similarity=0.024; sourceKind=uploaded_chunk; chunk=20",
+          "requiresRetype": false
+        },
+        {
+          "componentId": "cmo0wr5qx0123vhmwvvqbuw0m",
+          "componentKey": "book1-scene-component-155a3f3a4b",
+          "componentType": "PRIMARY_POV",
+          "textContent": "**Baseline:** Small affiliated communities and hamlets rather than one massive centralized capital. National Park Service and Caddo histori...",
+          "summary": "**Baseline:** Small affiliated communities and hamlets rather than one massive centralized capital. National Park Service and Caddo histori...",
+          "canonStatus": "CANDIDATE",
+          "confidenceType": "INFERRED_HISTORICAL",
+          "sourceKey": "book1-raw-chunk-4",
+          "sourceKind": "UPLOADED_CHUNK",
+          "sourceTitle": "Book 1 raw chunk 4",
+          "sourceFileName": "chunk4.txt",
+          "sourceChunkNumber": 4,
+          "lexicalSimilarityToSceneCanon": 0.02,
+          "score": 0.6980000000000001,
+          "scoreBreakdown": {
+            "confidence": 0.85,
+            "canon": 0.8,
+            "similarity": 0.02,
+            "provenance": 0.9
+          },
+          "reasonSummary": "confidence=inferred_historical; status=candidate; similarity=0.020; sourceKind=uploaded_chunk; chunk=4",
+          "requiresRetype": false
+        },
+        {
+          "componentId": "cmo0wr26o010ovhmw19avfmnh",
+          "componentKey": "book1-scene-component-687478765a",
+          "componentType": "SYMBOLIC_LAYER",
+          "textContent": "* Gift exchange * Public acknowledgment * Mediation * Ritual",
+          "summary": "* Gift exchange * Public acknowledgment * Mediation * Ritual",
+          "canonStatus": "CANON",
+          "confidenceType": "INFERRED_HISTORICAL",
+          "sourceKey": "book1-raw-chunk-4",
+          "sourceKind": "UPLOADED_CHUNK",
+          "sourceTitle": "Book 1 raw chunk 4",
+          "sourceFileName": "chunk4.txt",
+          "sourceChunkNumber": 4,
+          "lexicalSimilarityToSceneCanon": 0.17647058823529413,
+          "score": 0.6960941176470588,
+          "scoreBreakdown": {
+            "confidence": 0.85,
+            "canon": 1,
+            "similarity": 0.17647058823529413,
+            "provenance": 0.9
+          },
+          "reasonSummary": "confidence=inferred_historical; status=canon; similarity=0.176; sourceKind=uploaded_chunk; chunk=4",
+          "requiresRetype": true
+        }
+      ]
+    },
+    {
+      "sceneNumber": 11,
+      "layer": "setting_layer",
+      "sceneKey": "book1_scene_11",
+      "sceneTitle": "Book 1 Anchor Scene 11 (placeholder)",
+      "suggestedPreferredComponentKey": "book1-scene-component-8aee4be009",
+      "backupCandidateComponentKeys": [
+        "book1-scene-component-f093464740",
+        "book1-scene-component-9d6e32ff21",
+        "book1-scene-component-91c104b0dd",
+        "book1-scene-component-4889a73be7",
+        "book1-scene-component-5267e55433"
+      ],
+      "candidates": [
+        {
+          "componentId": "cmo10pu8j02jtvh7oq2srm9jg",
+          "componentKey": "book1-scene-component-8aee4be009",
+          "componentType": "SETTING_LAYER",
+          "textContent": "Another who had come from farther down the river, drawn by the same absence.",
+          "summary": "Another who had come from farther down the river, drawn by the same absence.",
+          "canonStatus": "CANDIDATE",
+          "confidenceType": "INFERRED_HISTORICAL",
+          "sourceKey": "book1-raw-chunk-11",
+          "sourceKind": "UPLOADED_CHUNK",
+          "sourceTitle": "Book 1 raw chunk 11",
+          "sourceFileName": "chunk11.txt",
+          "sourceChunkNumber": 11,
+          "lexicalSimilarityToSceneCanon": 0.08823529411764706,
+          "score": 0.7116470588235294,
+          "scoreBreakdown": {
+            "confidence": 0.85,
+            "canon": 0.8,
+            "similarity": 0.08823529411764706,
+            "provenance": 0.9
+          },
+          "reasonSummary": "confidence=inferred_historical; status=candidate; similarity=0.088; sourceKind=uploaded_chunk; chunk=11",
+          "requiresRetype": false
+        },
+        {
+          "componentId": "cmo10pk3q02invh7o2hsso3dg",
+          "componentKey": "book1-scene-component-f093464740",
+          "componentType": "SETTING_LAYER",
+          "textContent": "The village moved.",
+          "summary": "The village moved.",
+          "canonStatus": "CANDIDATE",
+          "confidenceType": "INFERRED_HISTORICAL",
+          "sourceKey": "book1-raw-chunk-11",
+          "sourceKind": "UPLOADED_CHUNK",
+          "sourceTitle": "Book 1 raw chunk 11",
+          "sourceFileName": "chunk11.txt",
+          "sourceChunkNumber": 11,
+          "lexicalSimilarityToSceneCanon": 0.07692307692307693,
+          "score": 0.7093846153846154,
+          "scoreBreakdown": {
+            "confidence": 0.85,
+            "canon": 0.8,
+            "similarity": 0.07692307692307693,
+            "provenance": 0.9
+          },
+          "reasonSummary": "confidence=inferred_historical; status=candidate; similarity=0.077; sourceKind=uploaded_chunk; chunk=11",
+          "requiresRetype": false
+        },
+        {
+          "componentId": "cmo10pi6y02ibvh7o9ci88soi",
+          "componentKey": "book1-scene-component-9d6e32ff21",
+          "componentType": "SETTING_LAYER",
+          "textContent": "Outside, the village continued.",
+          "summary": "Outside, the village continued.",
+          "canonStatus": "CANDIDATE",
+          "confidenceType": "INFERRED_HISTORICAL",
+          "sourceKey": "book1-raw-chunk-11",
+          "sourceKind": "UPLOADED_CHUNK",
+          "sourceTitle": "Book 1 raw chunk 11",
+          "sourceFileName": "chunk11.txt",
+          "sourceChunkNumber": 11,
+          "lexicalSimilarityToSceneCanon": 0.07407407407407407,
+          "score": 0.7088148148148149,
+          "scoreBreakdown": {
+            "confidence": 0.85,
+            "canon": 0.8,
+            "similarity": 0.07407407407407407,
+            "provenance": 0.9
+          },
+          "reasonSummary": "confidence=inferred_historical; status=candidate; similarity=0.074; sourceKind=uploaded_chunk; chunk=11",
+          "requiresRetype": false
+        },
+        {
+          "componentId": "cmo10prqb02jkvh7o4j9dzkh7",
+          "componentKey": "book1-scene-component-91c104b0dd",
+          "componentType": "SETTING_LAYER",
+          "textContent": "Not waiting at the river.",
+          "summary": "Not waiting at the river.",
+          "canonStatus": "CANDIDATE",
+          "confidenceType": "INFERRED_HISTORICAL",
+          "sourceKey": "book1-raw-chunk-11",
+          "sourceKind": "UPLOADED_CHUNK",
+          "sourceTitle": "Book 1 raw chunk 11",
+          "sourceFileName": "chunk11.txt",
+          "sourceChunkNumber": 11,
+          "lexicalSimilarityToSceneCanon": 0.07407407407407407,
+          "score": 0.7088148148148149,
+          "scoreBreakdown": {
+            "confidence": 0.85,
+            "canon": 0.8,
+            "similarity": 0.07407407407407407,
+            "provenance": 0.9
+          },
+          "reasonSummary": "confidence=inferred_historical; status=candidate; similarity=0.074; sourceKind=uploaded_chunk; chunk=11",
+          "requiresRetype": false
+        },
+        {
+          "componentId": "cmo10pim802ievh7oi0uc7ymo",
+          "componentKey": "book1-scene-component-4889a73be7",
+          "componentType": "SETTING_LAYER",
+          "textContent": "Someone walked past the house.",
+          "summary": "Someone walked past the house.",
+          "canonStatus": "CANDIDATE",
+          "confidenceType": "INFERRED_HISTORICAL",
+          "sourceKey": "book1-raw-chunk-11",
+          "sourceKind": "UPLOADED_CHUNK",
+          "sourceTitle": "Book 1 raw chunk 11",
+          "sourceFileName": "chunk11.txt",
+          "sourceChunkNumber": 11,
+          "lexicalSimilarityToSceneCanon": 0.07142857142857142,
+          "score": 0.7082857142857143,
+          "scoreBreakdown": {
+            "confidence": 0.85,
+            "canon": 0.8,
+            "similarity": 0.07142857142857142,
+            "provenance": 0.9
+          },
+          "reasonSummary": "confidence=inferred_historical; status=candidate; similarity=0.071; sourceKind=uploaded_chunk; chunk=11",
+          "requiresRetype": false
+        },
+        {
+          "componentId": "cmo10plyd02iwvh7o4o3y661o",
+          "componentKey": "book1-scene-component-5267e55433",
+          "componentType": "SETTING_LAYER",
+          "textContent": "The house had been cleared.",
+          "summary": "The house had been cleared.",
+          "canonStatus": "CANDIDATE",
+          "confidenceType": "INFERRED_HISTORICAL",
+          "sourceKey": "book1-raw-chunk-11",
+          "sourceKind": "UPLOADED_CHUNK",
+          "sourceTitle": "Book 1 raw chunk 11",
+          "sourceFileName": "chunk11.txt",
+          "sourceChunkNumber": 11,
+          "lexicalSimilarityToSceneCanon": 0.07142857142857142,
+          "score": 0.7082857142857143,
+          "scoreBreakdown": {
+            "confidence": 0.85,
+            "canon": 0.8,
+            "similarity": 0.07142857142857142,
+            "provenance": 0.9
+          },
+          "reasonSummary": "confidence=inferred_historical; status=candidate; similarity=0.071; sourceKind=uploaded_chunk; chunk=11",
+          "requiresRetype": false
+        }
+      ]
+    }
+  ],
+  "resolutions": [
+    {
+      "action": "set_preferred",
+      "sceneNumber": 4,
+      "layer": "primary_pov",
+      "preferredComponentKey": "book1-scene-component-5b0b4ec359",
+      "demoteOthersTo": "CANDIDATE",
+      "note": "Autofilled by ranking confidence/canon/similarity/provenance for scene 4 primary_pov."
+    },
+    {
+      "action": "set_preferred",
+      "sceneNumber": 11,
+      "layer": "setting_layer",
+      "preferredComponentKey": "book1-scene-component-8aee4be009",
+      "demoteOthersTo": "CANDIDATE",
+      "note": "Autofilled by ranking confidence/canon/similarity/provenance for scene 11 setting_layer."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "artifact": "chapter_segment_1_opener_isolation",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.019Z",
+  "segment1Family": "sound_to_withheld_recognition",
+  "protectedTokenStem": "the room arranges itself",
+  "blockedForLaterSegments": [
+    "sound_to_withheld_recognition"
+  ]
+}

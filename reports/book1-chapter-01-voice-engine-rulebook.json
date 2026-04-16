@@ -1,0 +1,45 @@
+{
+  "artifact": "chapter_voice_engine_rulebook",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.075Z",
+  "sentenceCompressionExpansionRules": [
+    "alternate compressed and expanded sentence runs inside each segment",
+    "open with concrete signal before interpretive clause",
+    "avoid three consecutive equal-length declarative starts"
+  ],
+  "abstractionCeiling": {
+    "maxAbstractSignalsPerParagraph": 2,
+    "preferredConcreteToAbstractRatio": 2.4
+  },
+  "historicalTextureEmbeddingRules": [
+    "embed historical context through labor, objects, and social ordering",
+    "replace summary history statements with lived scene cues",
+    "use ritual/material continuity instead of exposition"
+  ],
+  "emotionalRestraintRules": [
+    "render emotion through withheld action, pacing, and bodily signal",
+    "avoid direct naming when tension can be inferred from scene behavior",
+    "favor misreading and silence over declared interior certainty"
+  ],
+  "paragraphPressureRules": [
+    "every paragraph carries one active pressure source",
+    "pressure should transform movement or speaking order by paragraph end",
+    "do not resolve pressure in same paragraph where introduced"
+  ],
+  "metaphorImageDensityRules": [
+    "allow one image pulse per paragraph maximum",
+    "images must arise from material world, not abstract thesis"
+  ],
+  "forbiddenSentenceFamilies": [
+    "summary declaration followed by abstract interpretation",
+    "uniform declarative cadence for full paragraph openings",
+    "meta-governance phrasing in narrative surface"
+  ],
+  "preferredTransitionBehaviors": [
+    "object continuity handoff",
+    "unfinished action carry",
+    "attention shift with social consequence",
+    "environmental pressure continuation"
+  ]
+}

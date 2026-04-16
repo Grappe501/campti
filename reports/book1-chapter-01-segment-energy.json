@@ -1,0 +1,104 @@
+{
+  "artifact": "chapter_segment_energy",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.066Z",
+  "segments": [
+    {
+      "segment": 1,
+      "dominantEnergy": "stillness",
+      "tempoTarget": "slow",
+      "sentenceDensityTarget": {
+        "min": 5,
+        "max": 7
+      },
+      "abstractionCeiling": 0.22,
+      "sensoryPriority": [
+        "touch",
+        "breath",
+        "sound"
+      ],
+      "transitionPressure": "low"
+    },
+    {
+      "segment": 2,
+      "dominantEnergy": "motion",
+      "tempoTarget": "fast",
+      "sentenceDensityTarget": {
+        "min": 6,
+        "max": 9
+      },
+      "abstractionCeiling": 0.18,
+      "sensoryPriority": [
+        "movement",
+        "friction",
+        "weather"
+      ],
+      "transitionPressure": "high"
+    },
+    {
+      "segment": 3,
+      "dominantEnergy": "observation",
+      "tempoTarget": "slow",
+      "sentenceDensityTarget": {
+        "min": 5,
+        "max": 8
+      },
+      "abstractionCeiling": 0.2,
+      "sensoryPriority": [
+        "detail",
+        "sound",
+        "distance"
+      ],
+      "transitionPressure": "moderate"
+    },
+    {
+      "segment": 4,
+      "dominantEnergy": "observation",
+      "tempoTarget": "slow",
+      "sentenceDensityTarget": {
+        "min": 5,
+        "max": 8
+      },
+      "abstractionCeiling": 0.2,
+      "sensoryPriority": [
+        "detail",
+        "sound",
+        "distance"
+      ],
+      "transitionPressure": "moderate"
+    },
+    {
+      "segment": 5,
+      "dominantEnergy": "threat",
+      "tempoTarget": "variable",
+      "sentenceDensityTarget": {
+        "min": 6,
+        "max": 10
+      },
+      "abstractionCeiling": 0.16,
+      "sensoryPriority": [
+        "distance",
+        "silence",
+        "pulse"
+      ],
+      "transitionPressure": "high"
+    },
+    {
+      "segment": 6,
+      "dominantEnergy": "aftermath",
+      "tempoTarget": "measured",
+      "sentenceDensityTarget": {
+        "min": 4,
+        "max": 7
+      },
+      "abstractionCeiling": 0.2,
+      "sensoryPriority": [
+        "residue",
+        "sound",
+        "light"
+      ],
+      "transitionPressure": "low"
+    }
+  ]
+}

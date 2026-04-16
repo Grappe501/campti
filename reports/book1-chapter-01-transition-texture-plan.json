@@ -1,0 +1,38 @@
+{
+  "artifact": "chapter_transition_texture_plan",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.072Z",
+  "segmentTransitions": [
+    {
+      "segment": 1,
+      "transitionMode": "attention-shift",
+      "carryForwardCue": "unfinished-1-gesture"
+    },
+    {
+      "segment": 2,
+      "transitionMode": "movement-shift",
+      "carryForwardCue": "unfinished-2-gesture"
+    },
+    {
+      "segment": 3,
+      "transitionMode": "environmental-pressure-shift",
+      "carryForwardCue": "unfinished-3-gesture"
+    },
+    {
+      "segment": 4,
+      "transitionMode": "social-reading-shift",
+      "carryForwardCue": "unfinished-4-gesture"
+    },
+    {
+      "segment": 5,
+      "transitionMode": "unfinished-action-carry",
+      "carryForwardCue": "unfinished-5-gesture"
+    },
+    {
+      "segment": 6,
+      "transitionMode": "attention-shift",
+      "carryForwardCue": "unfinished-6-gesture"
+    }
+  ]
+}

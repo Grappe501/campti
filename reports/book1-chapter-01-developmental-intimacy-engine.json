@@ -1,0 +1,457 @@
+{
+  "artifact": "chapter_developmental_intimacy_engine",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T22:00:00.000Z",
+  "timePeriod": "Before 1680",
+  "culturalFrame": "Pre-contact Caddoan / Natchitoches riverine settlement",
+  "characters": [
+    {
+      "character": "Alexis",
+      "ageMaturityLayer": {
+        "chronologicalAge": "late-30s-to-mid-40s",
+        "developmentalPhase": "full-adult-authority",
+        "biologicalMaturationProfile": "post-reproductive-peak; body carries labor history as knowledge; seasonal illness and recovery memory shapes risk tolerance",
+        "emotionalMaturityProfile": "grief-integrated; processes loss as structural data rather than fresh wound; emotional restraint is practiced discipline not suppression",
+        "socialRoleMaturity": "decision-bearing elder-adjacent; expected to mediate between elder counsel and younger action; carries household-scale authority with council accountability",
+        "selfAwarenessLevel": "high but blind to own rigidity; accurately reads others but underestimates how own fear narrows options"
+      },
+      "intimacyEmbodimentLayer": {
+        "bodyAwarenessStyle": "functional-instrumental; body is labor tool and social signal rather than site of private sensation; notices body through task interruption and fatigue",
+        "attractionAwarenessStyle": "alliance-filtered; attraction registers as kinship-strategic compatibility before physical pull; beauty reads as health and labor capacity",
+        "boundaryUnderstanding": "spatial-relational; boundaries are communal architecture not personal preference; proximity encodes rank and obligation",
+        "consentAgencyUnderstanding": "obligation-embedded; consent operates through kinship negotiation and elder approval rather than individual declaration; agency is collective before personal",
+        "reproductiveAwareness": "practical-lineage; reproduction understood as continuity engineering; pregnancy loss and infant mortality shape reproduction as high-stakes communal event",
+        "intimacyKnowledgeSource": "elder instruction, observed marriages, seasonal ceremony, co-sleeping proximity, birth-witness experience",
+        "honorShamePressure": "high; personal conduct reflects on household lineage across generations; shame operates through witness memory not private guilt",
+        "agencyConstraintLevel": "moderate; constrained by elder counsel and kinship obligation but holds enough rank to negotiate within those structures",
+        "embodimentStyle": "task-anchored; sensory experience flows through handled objects, weather exposure, and witnessed labor rather than private interiority",
+        "intimacyRiskPerception": "structural; intimacy risk is lineage risk; wrong alliance weakens household position across generations"
+      },
+      "historicalCulturalMediation": {
+        "ritualStatus": "full-participant; has completed all age-appropriate ceremonies; carries ritual knowledge as working law",
+        "maritalStatus": "partnered-or-widowed; marital bond is political-economic alliance with affective dimension rather than romance-first union",
+        "kinshipObligationPressure": "high; must balance competing lineage claims and cross-household alliances; marriage decisions ripple through trade networks",
+        "communityCourtshipNorms": "elder-mediated; courtship involves household negotiation, gift exchange protocols, and seasonal timing; private desire subordinate to collective assessment",
+        "spiritualMeaningOfUnion": "cosmological; union carries spiritual reciprocity obligations; fertility and partnership linked to land health and ceremonial continuity",
+        "publicVsPrivateIntimacyCode": "public-dominant; intimate partnership visible through labor cooperation, seating order, and ceremonial position; private tenderness expressed through provision, gesture, and silence"
+      },
+      "renderingImpact": {
+        "voiceCognitionModifiers": [
+          "interior monologue may reference partner through object association (their tool, their fire-spot) rather than direct naming",
+          "body awareness filtered through labor history; physical sensation named through task vocabulary",
+          "attraction or affection expressed as assessment of reliability and lineage fit"
+        ],
+        "perspectiveRoutingModifiers": [
+          "intimacy scenes routed through spatial awareness and social reading rather than interiority zoom",
+          "private feeling expressed through withholding and gesture change, never through declarative emotional labeling"
+        ],
+        "renderDirectiveModifiers": [
+          "abstractionCeiling: 0 for any intimacy-adjacent content; all closeness must land through object, body, and spatial cue",
+          "silenceWithholdingRequirement: true for any scene where partnership tension operates; let silence carry the weight",
+          "imagePermission: high for domestic labor scenes that encode partnership; low for explicit interiority about desire"
+        ],
+        "characterConsoleModifiers": [
+          "Alexis registers partner presence through peripheral awareness: position at fire, sound of their movement, absence from expected location",
+          "sexual or romantic energy converts to duty-assessment and lineage-continuity pressure before surfacing as feeling"
+        ],
+        "bodilyConversionPatterns": [
+          "desire converts to increased attentiveness to partner's spatial position and task pace",
+          "grief over partnership loss converts to silence and over-precision in household tasks",
+          "intimacy pressure converts to hand stillness and breath regulation before speech"
+        ],
+        "silencePatterns": [
+          "silence after partner speaks carries evaluative weight; duration encodes trust level",
+          "silence about absent partner marks active grief or unresolved obligation",
+          "silence during communal meal encodes partnership strain visible to entire household"
+        ],
+        "intimacyDistancePatterns": [
+          "physical proximity increases during shared labor, decreases during council tension",
+          "narrative distance pulls back from embodied to observational when partnership is under communal scrutiny",
+          "touch rendered through task-adjacent contact: passing objects, adjusting shared workload, side-by-side positioning"
+        ]
+      }
+    },
+    {
+      "character": "Augustin",
+      "ageMaturityLayer": {
+        "chronologicalAge": "late-20s-to-early-30s",
+        "developmentalPhase": "emerging-authority",
+        "biologicalMaturationProfile": "physical prime; body optimized for labor and travel; still learning to read fatigue as signal rather than weakness",
+        "emotionalMaturityProfile": "partially integrated; processes threat faster than grief; emotional range narrowed by role pressure to perform competence",
+        "socialRoleMaturity": "ascending but unconfirmed; earns authority through demonstrated judgment rather than inherited position; tested by elders through delegation",
+        "selfAwarenessLevel": "low-to-moderate; reads external signals with precision but misattributes own emotional states as strategic thinking"
+      },
+      "intimacyEmbodimentLayer": {
+        "bodyAwarenessStyle": "performance-oriented; body understood through capacity and endurance; notices body when it fails or exceeds expectation",
+        "attractionAwarenessStyle": "status-filtered; attraction registers through demonstrated competence and household standing; physical appeal secondary to alliance value",
+        "boundaryUnderstanding": "role-defined; boundaries set by age-grade, gender role, and ceremonial status rather than personal negotiation",
+        "consentAgencyUnderstanding": "emerging; beginning to understand that personal choice operates within but does not override kinship structure; tests limits through indirect action",
+        "reproductiveAwareness": "duty-framed; reproduction understood as lineage obligation with personal desire as secondary driver; aware of consequences through observed family outcomes",
+        "intimacyKnowledgeSource": "age-grade peer exchange, elder instruction fragments, ceremonial observation, seasonal proximity patterns",
+        "honorShamePressure": "very high; proving-ground phase where missteps carry outsized reputational cost; shame operates through elder judgment and peer comparison",
+        "agencyConstraintLevel": "high constraint; must demonstrate reliability before earning autonomy; intimate choices scrutinized as indicators of judgment quality",
+        "embodimentStyle": "action-first; sensory experience registered through movement, distance, and physical consequence rather than contemplation",
+        "intimacyRiskPerception": "reputational; wrong intimacy choice threatens ascending authority; reads risk through potential witness exposure"
+      },
+      "historicalCulturalMediation": {
+        "ritualStatus": "recently-confirmed; has completed threshold ceremonies but has not yet led ceremony; carries authority-in-training status",
+        "maritalStatus": "pre-marital-or-early-union; partnership under active household negotiation; personal preference expressed through indirect signals",
+        "kinshipObligationPressure": "very high; must prove worthy of the lineage position being offered; marriage negotiation is simultaneous test of political judgment",
+        "communityCourtshipNorms": "constrained-initiative; may signal interest but cannot finalize without elder approval; courtship involves demonstrating provider capacity and judgment",
+        "spiritualMeaningOfUnion": "aspirational; understands union as spiritual-political event but has not yet internalized the cosmological weight; learns through witnessing elder unions",
+        "publicVsPrivateIntimacyCode": "public-performance-heavy; intimate interest must be legible to community as appropriate before it can be privately explored; private feeling deferred to public assessment cycle"
+      },
+      "renderingImpact": {
+        "voiceCognitionModifiers": [
+          "interior monologue about potential partner filtered through competence-assessment vocabulary",
+          "body awareness spikes during status-relevant encounters; physical sensation named through action vocabulary (grip, stride, breath-hold)",
+          "attraction awareness surfaced through heightened observational precision about the other person's movements and social positioning"
+        ],
+        "perspectiveRoutingModifiers": [
+          "intimacy-adjacent scenes routed through external observation and social-reading mode rather than interior zoom",
+          "narrative distance increases when Augustin is conscious of being watched during any partnership-relevant interaction"
+        ],
+        "renderDirectiveModifiers": [
+          "abstractionCeiling: 0 for any intimacy content; closeness must register through action, spacing, and object exchange",
+          "sentencePressure: compressed during attraction-awareness moments; short clauses mimic the character's elevated alertness",
+          "imagePermission: medium for status-display encounters; low for private feeling"
+        ],
+        "characterConsoleModifiers": [
+          "Augustin registers potential-partner presence through heightened alertness to their spatial behavior and speech timing",
+          "desire converts to competitive assessment before surfacing as interest; interest converts to strategic positioning"
+        ],
+        "bodilyConversionPatterns": [
+          "attraction converts to postural adjustment: shoulders squared, chin-angle recalibrated, grip tightened on current task",
+          "rejection or uncertainty converts to over-investment in visible labor; works harder when emotionally unsettled",
+          "intimacy curiosity converts to observational hyper-focus on the other person's micro-behaviors"
+        ],
+        "silencePatterns": [
+          "silence in the presence of a potential partner signals active processing disguised as indifference",
+          "silence after elder commentary on partnership suitability encodes deferred compliance or private resistance",
+          "long pauses before responding to partnership-relevant questions indicate internal conflict between desire and obligation"
+        ],
+        "intimacyDistancePatterns": [
+          "proximity to potential partner managed through task adjacency: chooses work stations that enable observation without declaring interest",
+          "narrative distance oscillates between embodied and observational when attraction is active; reflecting the character's own confusion about the source of alertness",
+          "physical touch limited to task-justified contact: handing tools, sharing water, carrying shared loads"
+        ]
+      }
+    },
+    {
+      "character": "Elder Memory Holder",
+      "ageMaturityLayer": {
+        "chronologicalAge": "late-50s-to-60s",
+        "developmentalPhase": "generative-authority",
+        "biologicalMaturationProfile": "post-menopausal; body carries cumulative labor and ceremonial knowledge; physical decline reframed as earned wisdom",
+        "emotionalMaturityProfile": "deeply integrated; grief, loss, and joy processed as pattern recognition across generations; emotional expression disciplined by role",
+        "socialRoleMaturity": "apex; holds memory-law authority; decisions carry intergenerational weight; counsels rather than commands",
+        "selfAwarenessLevel": "high; accurate self-narration but selective about what knowledge to transmit and when"
+      },
+      "intimacyEmbodimentLayer": {
+        "bodyAwarenessStyle": "memorial; body carries partnership history as layered physical memory; sensation anchored in seasonal and ceremonial recurrence",
+        "attractionAwarenessStyle": "retrospective-evaluative; attraction remembered as a force that shaped lineage outcomes; assesses younger relatives' attractions through outcome prediction",
+        "boundaryUnderstanding": "architectural; understands boundaries as the structure that protects lineage continuity; enforces them through instruction and witness",
+        "consentAgencyUnderstanding": "systemic; consent understood as the intersection of individual readiness, elder approval, and cosmological timing",
+        "reproductiveAwareness": "comprehensive; has witnessed the full cycle of conception, birth, loss, and lineage consequence; reproduction understood as the highest-stakes communal event",
+        "intimacyKnowledgeSource": "lived experience, elder transmission, ceremonial participation, midwifery knowledge, grief-integration",
+        "honorShamePressure": "guardian; carries shame-honor for the entire lineage; personal conduct exemplary not from constraint but from integrated understanding",
+        "agencyConstraintLevel": "low constraint; exercises agency through counsel, instruction, and ceremonial authority; constrained only by cosmological law",
+        "embodimentStyle": "witness-memorial; sensory experience registered through comparison with prior seasons and ceremonies; present moment layered with memory",
+        "intimacyRiskPerception": "generational; reads intimacy risk across decades; a wrong union today echoes in grandchildren's lives"
+      },
+      "historicalCulturalMediation": {
+        "ritualStatus": "ceremonial-authority; leads or guides age-appropriate ceremonies; carries songs and memory-law",
+        "maritalStatus": "widowed-or-long-partnered; partnership history is public knowledge woven into household identity",
+        "kinshipObligationPressure": "apex; all younger relatives' obligations flow through elder counsel; must balance competing claims without appearing to favor",
+        "communityCourtshipNorms": "gatekeeper; evaluates courtship proposals against lineage strategy; approval carries binding weight",
+        "spiritualMeaningOfUnion": "embodied; has lived the cosmological reality of union; understands partnership as ongoing spiritual obligation rather than single event",
+        "publicVsPrivateIntimacyCode": "fully public; private life has become communal memory; intimacy history read by community as precedent and instruction"
+      },
+      "renderingImpact": {
+        "voiceCognitionModifiers": [
+          "references to partnership arrive through seasonal and ceremonial comparison; present unions measured against remembered ones",
+          "body awareness layered: current sensation compared to stored physical memory of prior years",
+          "evaluates younger relatives' intimate choices through outcome-prediction not moral judgment"
+        ],
+        "perspectiveRoutingModifiers": [
+          "intimacy-relevant scenes rendered from elder distance: observational with embedded memory layer",
+          "private feeling surfaces only through gesture and breath-pattern change; never through declarative interior statement"
+        ],
+        "renderDirectiveModifiers": [
+          "abstractionCeiling: 1 maximum; elder may carry one interpretive thread per paragraph tied to lived-history comparison",
+          "imagePermission: high for memory-layered domestic scenes; low for explicit evaluation of younger relatives' intimate conduct"
+        ],
+        "characterConsoleModifiers": [
+          "Elder registers partnership dynamics through micro-gesture comparison: how a hand rests now versus how a remembered hand rested decades ago",
+          "intimate knowledge surfaces as instruction fragments embedded in practical correction rather than direct teaching"
+        ],
+        "bodilyConversionPatterns": [
+          "memory of lost partner converts to momentary stillness and adjusted breathing before returning to present task",
+          "observation of young couple converts to quickened assessment pattern: posture reading, distance measurement, speech-timing evaluation"
+        ],
+        "silencePatterns": [
+          "silence after witnessing young partnership interaction encodes judgment that will emerge later as counsel",
+          "silence about deceased partner marks sacred boundary that community respects without explicit instruction"
+        ],
+        "intimacyDistancePatterns": [
+          "physical distance from younger couples maintained at observation range; close enough to read but not close enough to interfere",
+          "narrative distance from elder's own intimate memories kept at restrained-reflective; surfaces through objects and seasons not direct recall"
+        ]
+      }
+    },
+    {
+      "character": "Younger Woman Threshold Learner",
+      "ageMaturityLayer": {
+        "chronologicalAge": "mid-teens-to-early-20s",
+        "developmentalPhase": "threshold-crossing",
+        "biologicalMaturationProfile": "recently matured; body is newly capable and not yet fully mapped by the self; physical changes noticed through changed social treatment rather than private reflection",
+        "emotionalMaturityProfile": "emergent; processes emotions through imitation and testing of elder patterns; genuine feeling and performed feeling not yet fully distinguished",
+        "socialRoleMaturity": "apprentice; learning social grammar through observation and supervised participation; mistakes carry outsized consequence because they are publicly witnessed",
+        "selfAwarenessLevel": "low-to-moderate; self-understanding arrives through reflection of others' reactions rather than introspection"
+      },
+      "intimacyEmbodimentLayer": {
+        "bodyAwarenessStyle": "newly alert; body noticed through changed responses from community; physical self-awareness arriving through social mirror rather than private discovery",
+        "attractionAwarenessStyle": "pre-categorical; attraction registered as unfamiliar heightened attention without established vocabulary; may not distinguish attraction from other forms of alertness",
+        "boundaryUnderstanding": "learning; absorbs boundary rules from elder instruction and observation of consequences; boundaries felt as prohibition before they are understood as protection",
+        "consentAgencyUnderstanding": "nascent; understands that choices carry consequence but has not yet internalized the full structure of kinship-mediated consent; agency experienced as gap between desire and permitted action",
+        "reproductiveAwareness": "partial; understands basic biological reality through elder instruction and ceremonial teaching but has not yet connected it to personal future; reproduction remains abstract until witnessed directly",
+        "intimacyKnowledgeSource": "elder instruction fragments, peer whisper, ceremonial observation, environmental observation of animal breeding cycles, indirect inference from household sleeping arrangements",
+        "honorShamePressure": "acute; any misstep in intimacy-adjacent behavior carries maximum reputational risk because threshold status means maximum community scrutiny",
+        "agencyConstraintLevel": "very high; agency expressed only through approved channels; intimate curiosity must be invisible or risk-punished",
+        "embodimentStyle": "sensation-led; new physical experiences not yet filtered through social vocabulary; body speaks before mind interprets",
+        "intimacyRiskPerception": "immediate-concrete; risk perceived as punishment, shame, or loss of standing rather than long-term lineage consequence"
+      },
+      "historicalCulturalMediation": {
+        "ritualStatus": "threshold-crosser; has completed or is preparing for maturation ceremonies; ceremonial status in flux",
+        "maritalStatus": "pre-marital; subject to household courtship strategy; personal desire unvoiced or voiced only to trusted peers",
+        "kinshipObligationPressure": "receiving; obligations defined by elders and not yet internalized as self-directed duty; compliance is survival strategy",
+        "communityCourtshipNorms": "object-of-negotiation; courtship operates around and about this character as much as through them; agency exercised through refusal signals rather than initiative",
+        "spiritualMeaningOfUnion": "instructed but not yet experienced; understands union as important ceremony without full comprehension of ongoing spiritual obligation",
+        "publicVsPrivateIntimacyCode": "hyper-public; every gesture observed and interpreted; private experience of curiosity or interest must be rigorously hidden from witness"
+      },
+      "renderingImpact": {
+        "voiceCognitionModifiers": [
+          "interior awareness of attraction arrives as unnamed physical alertness: quickened breath, changed peripheral attention, task disruption",
+          "does not yet have vocabulary for desire; renders interest through behavioral disruption rather than named feeling",
+          "body awareness surfaces through comparison with observed elder behavior: am I moving like someone who belongs or someone who is exposed"
+        ],
+        "perspectiveRoutingModifiers": [
+          "intimacy-adjacent content rendered from sensation-first position; interpretation arrives late or not at all",
+          "narrative distance stays at immediate-embodied for this character's intimacy awareness; never pulls to reflective distance because the character lacks the framework for reflection on these matters"
+        ],
+        "renderDirectiveModifiers": [
+          "abstractionCeiling: 0 absolute; this character cannot theorize about intimacy; all awareness must land as body cue or behavioral disruption",
+          "sentencePressure: compressed and interrupted during attraction-awareness moments; sentence breaks mimic the character's fragmented processing",
+          "imagePermission: low for any explicit intimacy content; high for environmental and body-state cues that encode the underlying awareness"
+        ],
+        "characterConsoleModifiers": [
+          "Threshold Learner registers intimacy-relevant moments as disruption to expected routine: lost count, dropped object, delayed response",
+          "curiosity surfaces as heightened observational acuity directed at elder partnerships, not as self-directed inquiry"
+        ],
+        "bodilyConversionPatterns": [
+          "attraction converts to task clumsiness: hands falter, gaze lingers, breathing pattern breaks",
+          "shame converts to immediate over-correction: exaggerated focus on work, averted eyes, speech withdrawal",
+          "curiosity converts to covert observation patterns: watches elder partnerships from peripheral angles"
+        ],
+        "silencePatterns": [
+          "silence during elder discussion of courtship encodes intense absorption disguised as compliant quiet",
+          "silence after being observed looking at a peer carries fear-of-exposure weight",
+          "silence in response to teasing about potential partnership encodes genuine uncertainty about own feeling"
+        ],
+        "intimacyDistancePatterns": [
+          "physical proximity to age-peers managed through task justification; closeness requires visible practical reason",
+          "narrative distance from this character's intimate awareness maintained at maximum remove; the reader senses what the character cannot yet name",
+          "touch limited to accidental or task-required contact; any departure from this pattern signals significant narrative moment"
+        ]
+      }
+    },
+    {
+      "character": "Child Silent Recorder",
+      "ageMaturityLayer": {
+        "chronologicalAge": "6-to-10",
+        "developmentalPhase": "pre-threshold-absorption",
+        "biologicalMaturationProfile": "pre-pubertal; body understood entirely through play capacity and task-learning; physical self-awareness limited to hunger, fatigue, and injury",
+        "emotionalMaturityProfile": "imitative-absorptive; emotions processed through behavioral mimicry of adults; genuine feeling and copied feeling indistinguishable",
+        "socialRoleMaturity": "observer-learner; role is to absorb and reproduce cultural patterns; not yet held accountable for social judgment",
+        "selfAwarenessLevel": "minimal; self understood through position relative to older relatives; no independent self-narration capacity about intimacy matters"
+      },
+      "intimacyEmbodimentLayer": {
+        "bodyAwarenessStyle": "pre-reflexive; body experienced as undifferentiated sensation; no intimate self-awareness has yet developed",
+        "attractionAwarenessStyle": "not-yet-active; attachment understood through familial warmth and comfort-seeking rather than any proto-romantic framework",
+        "boundaryUnderstanding": "implicit; understands where children may go and where they may not through repeated instruction and spatial prohibition; no conceptual framework for why",
+        "consentAgencyUnderstanding": "not-yet-applicable; operates within adult-defined safety structures without questioning them; compliance is environmental not negotiated",
+        "reproductiveAwareness": "environmental; has observed animal birth and seasonal cycles; connects these to human life only through fragments of elder commentary",
+        "intimacyKnowledgeSource": "overheard elder conversation, animal observation, sleeping-arrangement proximity, ceremonial fragments observed without full comprehension",
+        "honorShamePressure": "reflected; absorbs household shame-honor dynamics without understanding the stakes; compliance is habit-driven",
+        "agencyConstraintLevel": "total; no autonomous agency in intimacy-related matters; protection is the governing principle",
+        "embodimentStyle": "undifferentiated; physical experience is sensation without intimate interpretation; body is for running, eating, sleeping, and learning tasks",
+        "intimacyRiskPerception": "not-applicable; has no framework for intimacy risk; safety maintained by adult-imposed structures"
+      },
+      "historicalCulturalMediation": {
+        "ritualStatus": "pre-ceremonial; has witnessed ceremonies as spectator; understands them as important events without grasping content",
+        "maritalStatus": "not-applicable",
+        "kinshipObligationPressure": "passive-recipient; obligations defined entirely by adults; compliance is behavioral not conceptual",
+        "communityCourtshipNorms": "observer-only; witnesses courtship dynamics as part of household life without understanding the system being observed",
+        "spiritualMeaningOfUnion": "pre-instructional; may understand that marriages happen and carry importance but cannot articulate why",
+        "publicVsPrivateIntimacyCode": "unaware; does not yet distinguish public from private in intimacy contexts; may innocently breach boundaries adults maintain"
+      },
+      "renderingImpact": {
+        "voiceCognitionModifiers": [
+          "records adult partnership behaviors as unexplained patterns: who sits where, who speaks first, who goes silent",
+          "body awareness limited to play, hunger, fatigue, and comfort; no intimate self-awareness renders in prose",
+          "age-appropriate protection: this character's interiority NEVER processes intimacy content as personal experience"
+        ],
+        "perspectiveRoutingModifiers": [
+          "when this character is focal, all adult intimacy dynamics rendered as environmental background: spatial patterns, tone changes, and unexplained adult silences",
+          "narrative distance from adult partnership content maximized when child is perspective source; reader understands what child cannot"
+        ],
+        "renderDirectiveModifiers": [
+          "abstractionCeiling: 0 absolute; child interprets nothing about adult intimacy; all partnership data arrives as uninterpreted sensory observation",
+          "imagePermission: none for any intimacy content from this perspective; adult partnership registered only through displacement cues",
+          "HARD RULE: prose never places this character in proximity to explicit intimacy content as participant or aware observer"
+        ],
+        "characterConsoleModifiers": [
+          "Child records object movement and tone shifts related to adult partnerships without understanding what they encode",
+          "partnership dynamics surface only as unexplained changes in household routine: different seating, changed speaking order, new task assignments"
+        ],
+        "bodilyConversionPatterns": [
+          "adult tension converts to child's heightened alertness: stillness, wide eyes, interrupted play",
+          "household partnership strain registered as vague unease: appetite change, sleep disruption, clinginess"
+        ],
+        "silencePatterns": [
+          "child silence during adult partnership discussion is absorption without comprehension; encodes future memory formation",
+          "child silence after witnessing adult tension is protective withdrawal not interpretive processing"
+        ],
+        "intimacyDistancePatterns": [
+          "PROTECTION RULE: this character is never rendered closer than environmental-background distance to adult intimacy content",
+          "child's proximity to adult partnership dynamics is always incidental to task or play, never focused or interpretive"
+        ]
+      }
+    }
+  ],
+  "globalRenderingRules": {
+    "noClinicalLabelsInProse": true,
+    "expressMaturityThrough": [
+      "awareness quality",
+      "hesitation patterns",
+      "body cue vocabulary",
+      "curiosity style",
+      "shame and restraint behavior",
+      "ritual participation level",
+      "duty-vs-desire processing style",
+      "misreading patterns specific to developmental stage"
+    ],
+    "chronologyProtection": "No developmental-intimacy content may introduce dates, events, or knowledge beyond the Before-1680 chronological envelope",
+    "canonProtection": "Developmental-intimacy modeling may not resolve succession, identity, or partnership outcomes that must remain latent for future chapters",
+    "ageAppropriateHandling": {
+      "childCharacters": "HARD PROTECTION: Child characters never process, witness directly, or participate in intimate content. Partnership dynamics render as unexplained environmental patterns only.",
+      "thresholdCharacters": "Intimacy awareness arrives as unnamed body disruption and social-mirror feedback. Never named, categorized, or theorized by the character.",
+      "adultCharacters": "Intimacy awareness processed through task vocabulary, spatial awareness, and lineage-strategic assessment. Never rendered as modern psychological interiority.",
+      "elderCharacters": "Intimacy processed through memorial comparison and instructional authority. Present desire does not surface; all intimate awareness is retrospective or evaluative."
+    },
+    "noExplicitSexualityFlattening": "Do not render sexuality or desire through modern adult-explicit frameworks. All intimacy content must be mediated through the historical-cultural lens: kinship negotiation, ceremonial timing, honor-shame architecture, spatial proximity rules, and witnessed labor cooperation.",
+    "intimacyRenderingPrinciple": "Intimacy is expressed through what characters notice, what they withhold, how their bodies move in proximity to others, what silences carry, and what labor they choose to share. Never through declarative statements about feeling, desire, or attraction."
+  },
+  "segmentImpactMap": [
+    {
+      "segment": 1,
+      "activeIntimacyDynamics": [
+        "Alexis-Augustin partnership tension expressed through labor coordination and speaking-order negotiation",
+        "Elder Memory Holder evaluates household partnership stability through micro-gesture reading",
+        "Threshold Learner absorbs partnership dynamics through observation of seating and speaking patterns"
+      ],
+      "developmentalPhaseInfluenceOnScene": "Alexis operates from established-authority intimacy position; Augustin from proving-ground position. The developmental gap creates misreading: Alexis reads Augustin's caution as weakness; Augustin reads Alexis's restraint as distrust.",
+      "bodilyConversionActivations": [
+        "hand-pressure shift before irreversible partnership-relevant decision",
+        "postural adjustment when authority is tested in front of potential-alliance witnesses",
+        "silence-duration change when partnership topic surfaces indirectly"
+      ]
+    },
+    {
+      "segment": 2,
+      "activeIntimacyDynamics": [
+        "Environmental strain narrows partnership-negotiation window; urgency accelerates courtship-timeline pressure",
+        "Augustin's performance-oriented embodiment intensifies under scarcity threat",
+        "Elder evaluates whether current partnership arrangements will survive environmental pressure"
+      ],
+      "developmentalPhaseInfluenceOnScene": "Scarcity compresses developmental timelines: Augustin must prove readiness faster; Threshold Learner's education accelerates through crisis exposure.",
+      "bodilyConversionActivations": [
+        "breath-regulation under environmental stress overlays partnership tension",
+        "grip-tightening on tools when dual pressure (survival + intimacy) operates simultaneously",
+        "gaze-management during shared labor under stress"
+      ]
+    },
+    {
+      "segment": 3,
+      "activeIntimacyDynamics": [
+        "POV lineage memory surfaces partnership precedents: how prior unions succeeded or failed under pressure",
+        "Alexis's grief-integrated maturity shapes current partnership assessment through memorial comparison",
+        "Intergenerational duty binds intimacy to continuity: partnership is not personal but structural"
+      ],
+      "developmentalPhaseInfluenceOnScene": "Alexis's mature emotional processing allows memorial comparison that younger characters cannot access. This creates information asymmetry that drives misreading.",
+      "bodilyConversionActivations": [
+        "memory of past partnership surfaces through handled objects associated with that history",
+        "stillness when memory overlaps present-moment partnership dynamics",
+        "speech-delay when lineage memory contradicts current partnership strategy"
+      ]
+    },
+    {
+      "segment": 4,
+      "activeIntimacyDynamics": [
+        "Observer lens reads partnership signals through status micro-cues: who defers, who initiates, who watches",
+        "Hidden negotiations include partnership-alliance positioning that operates beneath explicit political negotiation",
+        "Augustin's ascending-authority developmental phase makes his partnership behavior especially scrutinized"
+      ],
+      "developmentalPhaseInfluenceOnScene": "The observer frame reveals how developmental stage shapes what each character notices: Alexis sees alliance strategy; Augustin sees performance pressure; Elder sees generational pattern; Threshold Learner sees prohibition structure.",
+      "bodilyConversionActivations": [
+        "chin-angle updates when partnership-relevant rank signals shift",
+        "speaking-order sensitivity heightened during partnership-adjacent negotiations",
+        "witness-spacing reads intensified when courtship subtext operates"
+      ]
+    },
+    {
+      "segment": 5,
+      "activeIntimacyDynamics": [
+        "Domestic action reveals partnership as structural history: who partners with whom determines which lineage survives",
+        "Interpretive turn links personal partnership choice to civilizational-scale consequence",
+        "Child Silent Recorder absorbs partnership-as-structure without understanding the personal dimension"
+      ],
+      "developmentalPhaseInfluenceOnScene": "The interpretive frame elevates intimacy from personal to structural. Each character's developmental phase determines how much of this elevation they can perceive.",
+      "bodilyConversionActivations": [
+        "hand-still moment when structural significance of partnership becomes visible through action",
+        "breath-change when personal choice and lineage obligation collide",
+        "spatial reorganization when partnership implications reshape household seating"
+      ]
+    },
+    {
+      "segment": 6,
+      "activeIntimacyDynamics": [
+        "Closing vow carries partnership obligation forward as unresolved pressure",
+        "Alexis and Augustin's closing exchange encodes partnership-relevant commitment without naming it",
+        "Elder Memory Holder's silence at chapter close signals deferred judgment on partnership trajectory"
+      ],
+      "developmentalPhaseInfluenceOnScene": "The chapter closes with each character's developmental phase shaping how they carry forward unresolved partnership pressure: Alexis through strategic patience; Augustin through determined proving; Elder through deferred counsel; Threshold Learner through stored observation; Child through unprocessed sensation.",
+      "bodilyConversionActivations": [
+        "final hand-pressure change encodes partnership commitment without speech",
+        "breathing-pattern alignment or misalignment between partners signals chapter-closing bond state",
+        "spatial separation at nightfall encodes distance between obligation and desire"
+      ]
+    }
+  ],
+  "provenance": {
+    "sourceArtifacts": [
+      "reports/book1-chapter-01-outline.json",
+      "reports/book1-chapter-01-cognition-signatures.json",
+      "reports/book1-chapter-01-voice-cognition-map.json",
+      "reports/book1-chapter-01-embodiment.json",
+      "reports/book1-chapter-01-character-distinction-plan.json",
+      "reports/book1-chapter-01-enneagram-consciousness-engine.json",
+      "reports/book1-chapter-01-enneagram-mediation-layer.json",
+      "reports/book1-chapter-01-render-directives.json",
+      "reports/book1-chapter-01-perspective-routing-plan.json",
+      "Natchitoches_Campti_Story_System/04_MATRIARCH_DOSSIERS.md",
+      "reports/book1-epic-outline.json"
+    ]
+  }
+}

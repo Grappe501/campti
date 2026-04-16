@@ -1,0 +1,44 @@
+{
+  "artifact": "chapter_entry_strategy_plan",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.069Z",
+  "segmentPlans": [
+    {
+      "segment": 1,
+      "strategy": "withheld-knowledge-first",
+      "energyAlignment": "stillness",
+      "embodimentBias": "normal"
+    },
+    {
+      "segment": 2,
+      "strategy": "interrupted-attention-first",
+      "energyAlignment": "motion",
+      "embodimentBias": "strong"
+    },
+    {
+      "segment": 3,
+      "strategy": "sensory-first",
+      "energyAlignment": "observation",
+      "embodimentBias": "normal"
+    },
+    {
+      "segment": 4,
+      "strategy": "body-state-first",
+      "energyAlignment": "observation",
+      "embodimentBias": "strong"
+    },
+    {
+      "segment": 5,
+      "strategy": "motion-first",
+      "energyAlignment": "threat",
+      "embodimentBias": "normal"
+    },
+    {
+      "segment": 6,
+      "strategy": "sensory-first",
+      "energyAlignment": "aftermath",
+      "embodimentBias": "normal"
+    }
+  ]
+}

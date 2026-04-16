@@ -1,0 +1,586 @@
+{
+  "artifact": "book1_author_cockpit_simulation",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T15:33:02.882Z",
+  "governancePolicy": {
+    "allowAnchorMutation": false,
+    "allowChapterLawMutation": true,
+    "allowCharacterPsychologyTuning": true,
+    "allowForeshadowingRetune": true,
+    "allowTimelineMutation": true,
+    "allowRelationshipPressureRetune": true,
+    "allowVoiceSpecTuning": true,
+    "simulationMode": "counterfactual"
+  },
+  "canonicalStateProtected": true,
+  "sourceStateProvenance": {
+    "sourceArtifacts": [
+      "reports/book1-chapter-01-chapter_epic_simulation.json",
+      "reports/book1-chapter-01-chapter_law.json",
+      "reports/book1-chapter-01-chapter_relationship_pressure_map.json",
+      "reports/book1-chapter-01-chapter_character_hidden_histories.json",
+      "reports/book1-chapter-01-chapter_voice_spec.json"
+    ],
+    "capturedAt": "2026-04-16T15:33:02.876Z"
+  },
+  "actions": [
+    {
+      "actionId": "A-1",
+      "chapter": 1,
+      "actionType": "update_chapter_law",
+      "targetKey": "FA-1",
+      "rationale": "Keep external contact unresolved but raise identity pressure language in future arc constraint.",
+      "patch": {
+        "mustPreserve": "External-contact pressure remains latent and unresolved, with identity strain explicitly escalating."
+      },
+      "requestedBy": "chapter1_author_cockpit",
+      "requestedAt": "2026-04-16T15:33:02.877Z",
+      "provenanceRefs": [
+        "reports/book1-chapter-01-chapter_law.json#futureArcConstraints[0]"
+      ]
+    },
+    {
+      "actionId": "A-2",
+      "chapter": 1,
+      "actionType": "adjust_symbolic_emphasis",
+      "targetKey": "river-oath",
+      "rationale": "Increase river covenant motif to reinforce faith and survival continuity.",
+      "patch": {
+        "motifWeight": 0.72,
+        "motifTag": "river-oath"
+      },
+      "requestedBy": "chapter1_author_cockpit",
+      "requestedAt": "2026-04-16T15:33:02.877Z",
+      "provenanceRefs": [
+        "reports/book1-chapter-01-chapter_draft.json#segments"
+      ]
+    },
+    {
+      "actionId": "A-3",
+      "chapter": 1,
+      "actionType": "retune_foreshadowing",
+      "targetKey": "H4",
+      "rationale": "Shift foreshadowing toward later authority fracture while preserving latent external contact.",
+      "patch": {
+        "futureArcConstraintLink": "Later authority fracture must feel seeded through oath language drift."
+      },
+      "requestedBy": "chapter1_author_cockpit",
+      "requestedAt": "2026-04-16T15:33:02.877Z",
+      "provenanceRefs": [
+        "reports/book1-chapter-01-chapter_epic_simulation.json#hiddenTimeline[3]"
+      ]
+    },
+    {
+      "actionId": "A-4",
+      "chapter": 1,
+      "actionType": "change_relationship_pressure",
+      "targetKey": "Alexis->Augustin",
+      "rationale": "Retune pressure toward identity conflict to support early power negotiation.",
+      "patch": {
+        "intensity": 0.74,
+        "pressureType": "status_negotiation"
+      },
+      "requestedBy": "chapter1_author_cockpit",
+      "requestedAt": "2026-04-16T15:33:02.877Z",
+      "provenanceRefs": [
+        "reports/book1-chapter-01-chapter_relationship_pressure_map.json#relationships[0]"
+      ]
+    },
+    {
+      "actionId": "A-5",
+      "chapter": 1,
+      "actionType": "change_psychological_weighting",
+      "targetKey": "Alexis",
+      "rationale": "Increase Alexis fear weighting so duty choices read as constrained, not arbitrary.",
+      "patch": {
+        "fearWeight": 0.68,
+        "desireWeight": 0.52
+      },
+      "requestedBy": "chapter1_author_cockpit",
+      "requestedAt": "2026-04-16T15:33:02.877Z",
+      "provenanceRefs": [
+        "reports/book1-chapter-01-chapter_character_hidden_histories.json#characters"
+      ]
+    },
+    {
+      "actionId": "A-6",
+      "chapter": 1,
+      "actionType": "propose_anchor_mutation",
+      "targetKey": "H1",
+      "rationale": "Test anchor lock behavior by proposing alternate opening event timing.",
+      "patch": {
+        "latentEvent": "Household oath allocation occurs under visible external emissary pressure."
+      },
+      "requestedBy": "chapter1_author_cockpit",
+      "requestedAt": "2026-04-16T15:33:02.877Z",
+      "provenanceRefs": [
+        "reports/book1-chapter-01-chapter_epic_simulation.json#hiddenTimeline[0]"
+      ]
+    },
+    {
+      "actionId": "A-7",
+      "chapter": 1,
+      "actionType": "mutate_timeline",
+      "targetKey": "H2",
+      "rationale": "Counterfactual timeline stress test with slight chronology shift inside chapter window.",
+      "patch": {
+        "inferredYear": 1675
+      },
+      "requestedBy": "chapter1_author_cockpit",
+      "requestedAt": "2026-04-16T15:33:02.877Z",
+      "provenanceRefs": [
+        "reports/book1-chapter-01-chapter_epic_simulation.json#hiddenTimeline[1]"
+      ]
+    },
+    {
+      "actionId": "A-8",
+      "chapter": 1,
+      "actionType": "tune_voice_spec",
+      "targetKey": "voice.dictionProfile.prioritize",
+      "rationale": "Raise ritual and kinship lexical density while keeping chapter1 voice envelope intact.",
+      "patch": {
+        "prioritize": [
+          "kinship",
+          "ritual",
+          "river",
+          "oath",
+          "witness",
+          "lineage"
+        ]
+      },
+      "requestedBy": "chapter1_author_cockpit",
+      "requestedAt": "2026-04-16T15:33:02.877Z",
+      "provenanceRefs": [
+        "reports/book1-chapter-01-chapter_voice_spec.json#voiceSpec"
+      ]
+    }
+  ],
+  "evaluations": [
+    {
+      "actionId": "A-1",
+      "actionType": "update_chapter_law",
+      "targetKey": "FA-1",
+      "allowed": true,
+      "reason": "Allowed by counterfactual policy and toggle matrix.",
+      "changedBranchState": true,
+      "branchOnly": true,
+      "affected": {
+        "chapters": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "scenes": [
+          "book1-scene-01",
+          "chapter1-h1",
+          "chapter1-h2",
+          "chapter1-h3",
+          "chapter1-h4"
+        ],
+        "characters": [
+          "Alexis",
+          "Augustin"
+        ],
+        "themes": [
+          "identity"
+        ]
+      },
+      "lockedAnchorViolation": false,
+      "canonRisk": "high",
+      "provenance": {
+        "requestedBy": "chapter1_author_cockpit",
+        "requestedAt": "2026-04-16T15:33:02.877Z",
+        "policyMode": "counterfactual",
+        "sourceArtifacts": [
+          "reports/book1-chapter-01-chapter_epic_simulation.json",
+          "reports/book1-chapter-01-chapter_law.json",
+          "reports/book1-chapter-01-chapter_relationship_pressure_map.json",
+          "reports/book1-chapter-01-chapter_character_hidden_histories.json",
+          "reports/book1-chapter-01-chapter_voice_spec.json"
+        ]
+      }
+    },
+    {
+      "actionId": "A-2",
+      "actionType": "adjust_symbolic_emphasis",
+      "targetKey": "river-oath",
+      "allowed": true,
+      "reason": "Allowed by counterfactual policy and toggle matrix.",
+      "changedBranchState": true,
+      "branchOnly": true,
+      "affected": {
+        "chapters": [
+          1
+        ],
+        "scenes": [
+          "book1-scene-01",
+          "chapter1-h1",
+          "chapter1-h2",
+          "chapter1-h3",
+          "chapter1-h4"
+        ],
+        "characters": [
+          "Alexis",
+          "Augustin"
+        ],
+        "themes": [
+          "faith",
+          "survival"
+        ]
+      },
+      "lockedAnchorViolation": false,
+      "canonRisk": "low",
+      "provenance": {
+        "requestedBy": "chapter1_author_cockpit",
+        "requestedAt": "2026-04-16T15:33:02.877Z",
+        "policyMode": "counterfactual",
+        "sourceArtifacts": [
+          "reports/book1-chapter-01-chapter_epic_simulation.json",
+          "reports/book1-chapter-01-chapter_law.json",
+          "reports/book1-chapter-01-chapter_relationship_pressure_map.json",
+          "reports/book1-chapter-01-chapter_character_hidden_histories.json",
+          "reports/book1-chapter-01-chapter_voice_spec.json"
+        ]
+      }
+    },
+    {
+      "actionId": "A-3",
+      "actionType": "retune_foreshadowing",
+      "targetKey": "H4",
+      "allowed": true,
+      "reason": "Allowed by counterfactual policy and toggle matrix.",
+      "changedBranchState": true,
+      "branchOnly": true,
+      "affected": {
+        "chapters": [
+          1
+        ],
+        "scenes": [
+          "book1-scene-01",
+          "chapter1-h1",
+          "chapter1-h2",
+          "chapter1-h3",
+          "chapter1-h4"
+        ],
+        "characters": [
+          "Alexis",
+          "Augustin"
+        ],
+        "themes": [
+          "survival",
+          "faith"
+        ]
+      },
+      "lockedAnchorViolation": false,
+      "canonRisk": "low",
+      "provenance": {
+        "requestedBy": "chapter1_author_cockpit",
+        "requestedAt": "2026-04-16T15:33:02.877Z",
+        "policyMode": "counterfactual",
+        "sourceArtifacts": [
+          "reports/book1-chapter-01-chapter_epic_simulation.json",
+          "reports/book1-chapter-01-chapter_law.json",
+          "reports/book1-chapter-01-chapter_relationship_pressure_map.json",
+          "reports/book1-chapter-01-chapter_character_hidden_histories.json",
+          "reports/book1-chapter-01-chapter_voice_spec.json"
+        ]
+      }
+    },
+    {
+      "actionId": "A-4",
+      "actionType": "change_relationship_pressure",
+      "targetKey": "Alexis->Augustin",
+      "allowed": true,
+      "reason": "Allowed by counterfactual policy and toggle matrix.",
+      "changedBranchState": true,
+      "branchOnly": true,
+      "affected": {
+        "chapters": [
+          1
+        ],
+        "scenes": [
+          "book1-scene-01",
+          "chapter1-h1",
+          "chapter1-h2",
+          "chapter1-h3",
+          "chapter1-h4"
+        ],
+        "characters": [
+          "Alexis",
+          "Augustin"
+        ],
+        "themes": [
+          "power",
+          "identity"
+        ]
+      },
+      "lockedAnchorViolation": false,
+      "canonRisk": "moderate",
+      "provenance": {
+        "requestedBy": "chapter1_author_cockpit",
+        "requestedAt": "2026-04-16T15:33:02.877Z",
+        "policyMode": "counterfactual",
+        "sourceArtifacts": [
+          "reports/book1-chapter-01-chapter_epic_simulation.json",
+          "reports/book1-chapter-01-chapter_law.json",
+          "reports/book1-chapter-01-chapter_relationship_pressure_map.json",
+          "reports/book1-chapter-01-chapter_character_hidden_histories.json",
+          "reports/book1-chapter-01-chapter_voice_spec.json"
+        ]
+      }
+    },
+    {
+      "actionId": "A-5",
+      "actionType": "change_psychological_weighting",
+      "targetKey": "Alexis",
+      "allowed": true,
+      "reason": "Allowed by counterfactual policy and toggle matrix.",
+      "changedBranchState": true,
+      "branchOnly": true,
+      "affected": {
+        "chapters": [
+          1
+        ],
+        "scenes": [
+          "book1-scene-01",
+          "chapter1-h1",
+          "chapter1-h2",
+          "chapter1-h3",
+          "chapter1-h4"
+        ],
+        "characters": [
+          "Alexis"
+        ],
+        "themes": [
+          "identity",
+          "faith"
+        ]
+      },
+      "lockedAnchorViolation": false,
+      "canonRisk": "moderate",
+      "provenance": {
+        "requestedBy": "chapter1_author_cockpit",
+        "requestedAt": "2026-04-16T15:33:02.877Z",
+        "policyMode": "counterfactual",
+        "sourceArtifacts": [
+          "reports/book1-chapter-01-chapter_epic_simulation.json",
+          "reports/book1-chapter-01-chapter_law.json",
+          "reports/book1-chapter-01-chapter_relationship_pressure_map.json",
+          "reports/book1-chapter-01-chapter_character_hidden_histories.json",
+          "reports/book1-chapter-01-chapter_voice_spec.json"
+        ]
+      }
+    },
+    {
+      "actionId": "A-6",
+      "actionType": "propose_anchor_mutation",
+      "targetKey": "H1",
+      "allowed": false,
+      "reason": "Action propose_anchor_mutation is disallowed in mode counterfactual.",
+      "changedBranchState": false,
+      "branchOnly": true,
+      "affected": {
+        "chapters": [
+          1
+        ],
+        "scenes": [
+          "book1-scene-01",
+          "chapter1-h1",
+          "chapter1-h2",
+          "chapter1-h3",
+          "chapter1-h4"
+        ],
+        "characters": [
+          "Alexis",
+          "Augustin"
+        ],
+        "themes": [
+          "power"
+        ]
+      },
+      "lockedAnchorViolation": true,
+      "canonRisk": "critical",
+      "provenance": {
+        "requestedBy": "chapter1_author_cockpit",
+        "requestedAt": "2026-04-16T15:33:02.877Z",
+        "policyMode": "counterfactual",
+        "sourceArtifacts": [
+          "reports/book1-chapter-01-chapter_epic_simulation.json",
+          "reports/book1-chapter-01-chapter_law.json",
+          "reports/book1-chapter-01-chapter_relationship_pressure_map.json",
+          "reports/book1-chapter-01-chapter_character_hidden_histories.json",
+          "reports/book1-chapter-01-chapter_voice_spec.json"
+        ]
+      }
+    },
+    {
+      "actionId": "A-7",
+      "actionType": "mutate_timeline",
+      "targetKey": "H2",
+      "allowed": true,
+      "reason": "Allowed by counterfactual policy and toggle matrix.",
+      "changedBranchState": true,
+      "branchOnly": true,
+      "affected": {
+        "chapters": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "scenes": [
+          "book1-scene-01",
+          "chapter1-h1",
+          "chapter1-h2",
+          "chapter1-h3",
+          "chapter1-h4"
+        ],
+        "characters": [
+          "Alexis",
+          "Augustin"
+        ],
+        "themes": [
+          "power"
+        ]
+      },
+      "lockedAnchorViolation": false,
+      "canonRisk": "high",
+      "provenance": {
+        "requestedBy": "chapter1_author_cockpit",
+        "requestedAt": "2026-04-16T15:33:02.877Z",
+        "policyMode": "counterfactual",
+        "sourceArtifacts": [
+          "reports/book1-chapter-01-chapter_epic_simulation.json",
+          "reports/book1-chapter-01-chapter_law.json",
+          "reports/book1-chapter-01-chapter_relationship_pressure_map.json",
+          "reports/book1-chapter-01-chapter_character_hidden_histories.json",
+          "reports/book1-chapter-01-chapter_voice_spec.json"
+        ]
+      }
+    },
+    {
+      "actionId": "A-8",
+      "actionType": "tune_voice_spec",
+      "targetKey": "voice.dictionProfile.prioritize",
+      "allowed": true,
+      "reason": "Allowed by counterfactual policy and toggle matrix.",
+      "changedBranchState": true,
+      "branchOnly": true,
+      "affected": {
+        "chapters": [
+          1
+        ],
+        "scenes": [
+          "book1-scene-01",
+          "chapter1-h1",
+          "chapter1-h2",
+          "chapter1-h3",
+          "chapter1-h4"
+        ],
+        "characters": [
+          "Alexis",
+          "Augustin"
+        ],
+        "themes": [
+          "power"
+        ]
+      },
+      "lockedAnchorViolation": false,
+      "canonRisk": "low",
+      "provenance": {
+        "requestedBy": "chapter1_author_cockpit",
+        "requestedAt": "2026-04-16T15:33:02.877Z",
+        "policyMode": "counterfactual",
+        "sourceArtifacts": [
+          "reports/book1-chapter-01-chapter_epic_simulation.json",
+          "reports/book1-chapter-01-chapter_law.json",
+          "reports/book1-chapter-01-chapter_relationship_pressure_map.json",
+          "reports/book1-chapter-01-chapter_character_hidden_histories.json",
+          "reports/book1-chapter-01-chapter_voice_spec.json"
+        ]
+      }
+    }
+  ],
+  "branchSandbox": {
+    "branchId": "book1-author-sim-2026-04-16T15-33-02-882Z",
+    "mode": "counterfactual",
+    "mutatesCanonicalState": false,
+    "patches": [
+      {
+        "actionId": "A-1",
+        "actionType": "update_chapter_law",
+        "targetKey": "FA-1",
+        "patch": {
+          "mustPreserve": "External-contact pressure remains latent and unresolved, with identity strain explicitly escalating."
+        },
+        "appliedAt": "2026-04-16T15:33:02.882Z"
+      },
+      {
+        "actionId": "A-2",
+        "actionType": "adjust_symbolic_emphasis",
+        "targetKey": "river-oath",
+        "patch": {
+          "motifWeight": 0.72,
+          "motifTag": "river-oath"
+        },
+        "appliedAt": "2026-04-16T15:33:02.882Z"
+      },
+      {
+        "actionId": "A-3",
+        "actionType": "retune_foreshadowing",
+        "targetKey": "H4",
+        "patch": {
+          "futureArcConstraintLink": "Later authority fracture must feel seeded through oath language drift."
+        },
+        "appliedAt": "2026-04-16T15:33:02.882Z"
+      },
+      {
+        "actionId": "A-4",
+        "actionType": "change_relationship_pressure",
+        "targetKey": "Alexis->Augustin",
+        "patch": {
+          "intensity": 0.74,
+          "pressureType": "status_negotiation"
+        },
+        "appliedAt": "2026-04-16T15:33:02.882Z"
+      },
+      {
+        "actionId": "A-5",
+        "actionType": "change_psychological_weighting",
+        "targetKey": "Alexis",
+        "patch": {
+          "fearWeight": 0.68,
+          "desireWeight": 0.52
+        },
+        "appliedAt": "2026-04-16T15:33:02.882Z"
+      },
+      {
+        "actionId": "A-7",
+        "actionType": "mutate_timeline",
+        "targetKey": "H2",
+        "patch": {
+          "inferredYear": 1675
+        },
+        "appliedAt": "2026-04-16T15:33:02.882Z"
+      },
+      {
+        "actionId": "A-8",
+        "actionType": "tune_voice_spec",
+        "targetKey": "voice.dictionProfile.prioritize",
+        "patch": {
+          "prioritize": [
+            "kinship",
+            "ritual",
+            "river",
+            "oath",
+            "witness",
+            "lineage"
+          ]
+        },
+        "appliedAt": "2026-04-16T15:33:02.882Z"
+      }
+    ]
+  }
+}

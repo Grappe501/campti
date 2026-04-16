@@ -1,0 +1,113 @@
+{
+  "generatedAt": "2026-04-16T01:47:15.871Z",
+  "source": {
+    "id": "book1-source-chunk-10",
+    "title": "Book 1 Research Chunk 10",
+    "filePath": "docs/book1/chunk10.txt",
+    "rawChars": 33520,
+    "normalizedChars": 31312,
+    "chunkCount": 10
+  },
+  "counts": {
+    "claims": 5,
+    "events": 0,
+    "places": 1,
+    "fragments": 3,
+    "openQuestions": 3
+  },
+  "chronology": [],
+  "coreTruthSet": [
+    {
+      "id": "book10-claim-mediator-positional-listening",
+      "description": "The mother’s mediating authority is conveyed through physical placement optimized for bilateral listening and non-dominating influence.",
+      "confidence": 5,
+      "quoteExcerpt": "In the place where someone could hear both sides without turning.",
+      "needsReview": true
+    },
+    {
+      "id": "book10-claim-micro-movement-conflict-shift",
+      "description": "A minimal embodied intervention by the mother changes interaction dynamics without overt command or volume increase.",
+      "confidence": 5,
+      "quoteExcerpt": "She simply adjusted her position... and in that small movement, something changed.",
+      "needsReview": true
+    },
+    {
+      "id": "book10-claim-observer-position-learning",
+      "description": "The focal child’s observer positioning is framed as intentional edge-of-circle learning rather than formal inclusion.",
+      "confidence": 5,
+      "quoteExcerpt": "Not close enough to be called. Not far enough to miss anything.",
+      "needsReview": true
+    },
+    {
+      "id": "book10-claim-bundle-ritualized-claim-timing",
+      "description": "Shared bundle placement functions as a procedural object that delays individual claim until relational timing is collectively acceptable.",
+      "confidence": 4,
+      "quoteExcerpt": "A bundle lay between them... placed where everyone could see it and no one could claim it until the moment was right.",
+      "needsReview": true
+    },
+    {
+      "id": "book10-claim-soft-voice-space-widening-deescalation",
+      "description": "De-escalation occurs through reframing language that widens responsibility attribution instead of escalating direct blame.",
+      "confidence": 4,
+      "quoteExcerpt": "The words moved through the group... not as a challenge. As a widening.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book10-place-firelight-council-edge",
+      "name": "Firelight Council Edge",
+      "placeType": "FIELD",
+      "description": "Night mediation setting outside residential cluster where low-volume bilateral dispute handling and procedural object placement occur."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book10-frag-nonforcing-mediation-technique",
+      "title": "Non-Forcing Mediation Technique",
+      "summary": "Mediation-method constraint for character-consistent scenes.",
+      "text": "Effective mediation can proceed through breath pacing, silence, and position rather than overt verbal dominance.",
+      "confidence": 5,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book10-frag-face-reading-as-truth-channel",
+      "title": "Face Reading as Truth Channel",
+      "summary": "Perception-channel constraint.",
+      "text": "In high-tension negotiation scenes, face response and body shift are primary truth channels when explicit speech is partial or strategic.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book10-frag-observer-to-bridge-formation",
+      "title": "Observer-to-Bridge Formation",
+      "summary": "Developmental-arc constraint.",
+      "text": "Bridge leadership emerges from repeated edge-position observation of procedural, emotional, and relational dynamics before formal authority transfer.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book10-oq-child-observer-thresholds",
+      "title": "What social thresholds distinguish tolerated observer presence from prohibited participation for children in council-like settings?",
+      "description": "Needed to preserve realism in repeated observer-learning beats.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book10-oq-mediation-procedure-sequence",
+      "title": "What procedural sequence governs who speaks, when objects are acknowledged, and when settlement terms become claimable?",
+      "description": "Needed to keep future mediation scenes legally and culturally coherent.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book10-oq-silence-positional-cues-codification",
+      "title": "Which silence and positional cues are culturally legible as de-escalation signals across groups?",
+      "description": "Needed for consistent nonverbal conflict-resolution writing across chapters.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

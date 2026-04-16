@@ -1,0 +1,556 @@
+{
+  "generatedAt": "2026-04-16T03:13:24.337Z",
+  "sceneDiagnostics": [
+    {
+      "sceneNumber": 1,
+      "sceneKey": "book1_scene_01",
+      "title": "Book 1 Anchor Scene 01 (placeholder)",
+      "completenessScore": 1,
+      "missingLayers": [],
+      "candidateCountByLayer": {
+        "primary_pov": 1,
+        "secondary_pov": 1,
+        "environmental_layer": 1,
+        "setting_layer": 1,
+        "observer_layer": 1,
+        "interpretive_layer": 0,
+        "symbolic_layer": 0
+      },
+      "duplicateLayers": [],
+      "conflictingAssignments": [],
+      "lowConfidenceAssignments": []
+    },
+    {
+      "sceneNumber": 2,
+      "sceneKey": "book1_scene_02",
+      "title": "Book 1 Anchor Scene 02 (placeholder)",
+      "completenessScore": 0,
+      "missingLayers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ],
+      "candidateCountByLayer": {
+        "primary_pov": 0,
+        "secondary_pov": 0,
+        "environmental_layer": 0,
+        "setting_layer": 0,
+        "observer_layer": 0,
+        "interpretive_layer": 0,
+        "symbolic_layer": 0
+      },
+      "duplicateLayers": [],
+      "conflictingAssignments": [],
+      "lowConfidenceAssignments": []
+    },
+    {
+      "sceneNumber": 3,
+      "sceneKey": "book1_scene_03",
+      "title": "Book 1 Anchor Scene 03 (placeholder)",
+      "completenessScore": 0,
+      "missingLayers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ],
+      "candidateCountByLayer": {
+        "primary_pov": 0,
+        "secondary_pov": 0,
+        "environmental_layer": 0,
+        "setting_layer": 0,
+        "observer_layer": 0,
+        "interpretive_layer": 0,
+        "symbolic_layer": 0
+      },
+      "duplicateLayers": [],
+      "conflictingAssignments": [],
+      "lowConfidenceAssignments": []
+    },
+    {
+      "sceneNumber": 4,
+      "sceneKey": "book1_scene_04",
+      "title": "Book 1 Anchor Scene 04 (placeholder)",
+      "completenessScore": 0,
+      "missingLayers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ],
+      "candidateCountByLayer": {
+        "primary_pov": 0,
+        "secondary_pov": 0,
+        "environmental_layer": 0,
+        "setting_layer": 0,
+        "observer_layer": 0,
+        "interpretive_layer": 0,
+        "symbolic_layer": 0
+      },
+      "duplicateLayers": [],
+      "conflictingAssignments": [],
+      "lowConfidenceAssignments": []
+    },
+    {
+      "sceneNumber": 5,
+      "sceneKey": "book1_scene_05",
+      "title": "Book 1 Anchor Scene 05 (placeholder)",
+      "completenessScore": 0,
+      "missingLayers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ],
+      "candidateCountByLayer": {
+        "primary_pov": 0,
+        "secondary_pov": 0,
+        "environmental_layer": 0,
+        "setting_layer": 0,
+        "observer_layer": 0,
+        "interpretive_layer": 0,
+        "symbolic_layer": 0
+      },
+      "duplicateLayers": [],
+      "conflictingAssignments": [],
+      "lowConfidenceAssignments": []
+    },
+    {
+      "sceneNumber": 6,
+      "sceneKey": "book1_scene_06",
+      "title": "Book 1 Anchor Scene 06 (placeholder)",
+      "completenessScore": 0,
+      "missingLayers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ],
+      "candidateCountByLayer": {
+        "primary_pov": 0,
+        "secondary_pov": 0,
+        "environmental_layer": 0,
+        "setting_layer": 0,
+        "observer_layer": 0,
+        "interpretive_layer": 0,
+        "symbolic_layer": 0
+      },
+      "duplicateLayers": [],
+      "conflictingAssignments": [],
+      "lowConfidenceAssignments": []
+    },
+    {
+      "sceneNumber": 7,
+      "sceneKey": "book1_scene_07",
+      "title": "Book 1 Anchor Scene 07 (placeholder)",
+      "completenessScore": 0,
+      "missingLayers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ],
+      "candidateCountByLayer": {
+        "primary_pov": 0,
+        "secondary_pov": 0,
+        "environmental_layer": 0,
+        "setting_layer": 0,
+        "observer_layer": 0,
+        "interpretive_layer": 0,
+        "symbolic_layer": 0
+      },
+      "duplicateLayers": [],
+      "conflictingAssignments": [],
+      "lowConfidenceAssignments": []
+    },
+    {
+      "sceneNumber": 8,
+      "sceneKey": "book1_scene_08",
+      "title": "Book 1 Anchor Scene 08 (placeholder)",
+      "completenessScore": 0,
+      "missingLayers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ],
+      "candidateCountByLayer": {
+        "primary_pov": 0,
+        "secondary_pov": 0,
+        "environmental_layer": 0,
+        "setting_layer": 0,
+        "observer_layer": 0,
+        "interpretive_layer": 0,
+        "symbolic_layer": 0
+      },
+      "duplicateLayers": [],
+      "conflictingAssignments": [],
+      "lowConfidenceAssignments": []
+    },
+    {
+      "sceneNumber": 9,
+      "sceneKey": "book1_scene_09",
+      "title": "Book 1 Anchor Scene 09 (placeholder)",
+      "completenessScore": 0,
+      "missingLayers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ],
+      "candidateCountByLayer": {
+        "primary_pov": 0,
+        "secondary_pov": 0,
+        "environmental_layer": 0,
+        "setting_layer": 0,
+        "observer_layer": 0,
+        "interpretive_layer": 0,
+        "symbolic_layer": 0
+      },
+      "duplicateLayers": [],
+      "conflictingAssignments": [],
+      "lowConfidenceAssignments": []
+    },
+    {
+      "sceneNumber": 10,
+      "sceneKey": "book1_scene_10",
+      "title": "Book 1 Anchor Scene 10 (placeholder)",
+      "completenessScore": 0,
+      "missingLayers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ],
+      "candidateCountByLayer": {
+        "primary_pov": 0,
+        "secondary_pov": 0,
+        "environmental_layer": 0,
+        "setting_layer": 0,
+        "observer_layer": 0,
+        "interpretive_layer": 0,
+        "symbolic_layer": 0
+      },
+      "duplicateLayers": [],
+      "conflictingAssignments": [],
+      "lowConfidenceAssignments": []
+    },
+    {
+      "sceneNumber": 11,
+      "sceneKey": "book1_scene_11",
+      "title": "Book 1 Anchor Scene 11 (placeholder)",
+      "completenessScore": 0,
+      "missingLayers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ],
+      "candidateCountByLayer": {
+        "primary_pov": 0,
+        "secondary_pov": 0,
+        "environmental_layer": 0,
+        "setting_layer": 0,
+        "observer_layer": 0,
+        "interpretive_layer": 0,
+        "symbolic_layer": 0
+      },
+      "duplicateLayers": [],
+      "conflictingAssignments": [],
+      "lowConfidenceAssignments": []
+    },
+    {
+      "sceneNumber": 12,
+      "sceneKey": "book1_scene_12",
+      "title": "Book 1 Anchor Scene 12 (placeholder)",
+      "completenessScore": 0,
+      "missingLayers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ],
+      "candidateCountByLayer": {
+        "primary_pov": 0,
+        "secondary_pov": 0,
+        "environmental_layer": 0,
+        "setting_layer": 0,
+        "observer_layer": 0,
+        "interpretive_layer": 0,
+        "symbolic_layer": 0
+      },
+      "duplicateLayers": [],
+      "conflictingAssignments": [],
+      "lowConfidenceAssignments": []
+    },
+    {
+      "sceneNumber": 13,
+      "sceneKey": "book1_scene_13",
+      "title": "Book 1 Anchor Scene 13 (placeholder)",
+      "completenessScore": 0,
+      "missingLayers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ],
+      "candidateCountByLayer": {
+        "primary_pov": 0,
+        "secondary_pov": 0,
+        "environmental_layer": 0,
+        "setting_layer": 0,
+        "observer_layer": 0,
+        "interpretive_layer": 0,
+        "symbolic_layer": 0
+      },
+      "duplicateLayers": [],
+      "conflictingAssignments": [],
+      "lowConfidenceAssignments": []
+    },
+    {
+      "sceneNumber": 14,
+      "sceneKey": "book1_scene_14",
+      "title": "Book 1 Anchor Scene 14 (placeholder)",
+      "completenessScore": 0,
+      "missingLayers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ],
+      "candidateCountByLayer": {
+        "primary_pov": 0,
+        "secondary_pov": 0,
+        "environmental_layer": 0,
+        "setting_layer": 0,
+        "observer_layer": 0,
+        "interpretive_layer": 0,
+        "symbolic_layer": 0
+      },
+      "duplicateLayers": [],
+      "conflictingAssignments": [],
+      "lowConfidenceAssignments": []
+    },
+    {
+      "sceneNumber": 15,
+      "sceneKey": "book1_scene_15",
+      "title": "Book 1 Anchor Scene 15 (placeholder)",
+      "completenessScore": 0,
+      "missingLayers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ],
+      "candidateCountByLayer": {
+        "primary_pov": 0,
+        "secondary_pov": 0,
+        "environmental_layer": 0,
+        "setting_layer": 0,
+        "observer_layer": 0,
+        "interpretive_layer": 0,
+        "symbolic_layer": 0
+      },
+      "duplicateLayers": [],
+      "conflictingAssignments": [],
+      "lowConfidenceAssignments": []
+    },
+    {
+      "sceneNumber": 16,
+      "sceneKey": "book1_scene_16",
+      "title": "Book 1 Anchor Scene 16 (placeholder)",
+      "completenessScore": 0,
+      "missingLayers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ],
+      "candidateCountByLayer": {
+        "primary_pov": 0,
+        "secondary_pov": 0,
+        "environmental_layer": 0,
+        "setting_layer": 0,
+        "observer_layer": 0,
+        "interpretive_layer": 0,
+        "symbolic_layer": 0
+      },
+      "duplicateLayers": [],
+      "conflictingAssignments": [],
+      "lowConfidenceAssignments": []
+    },
+    {
+      "sceneNumber": 17,
+      "sceneKey": "book1_scene_17",
+      "title": "Book 1 Anchor Scene 17 (placeholder)",
+      "completenessScore": 0,
+      "missingLayers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ],
+      "candidateCountByLayer": {
+        "primary_pov": 0,
+        "secondary_pov": 0,
+        "environmental_layer": 0,
+        "setting_layer": 0,
+        "observer_layer": 0,
+        "interpretive_layer": 0,
+        "symbolic_layer": 0
+      },
+      "duplicateLayers": [],
+      "conflictingAssignments": [],
+      "lowConfidenceAssignments": []
+    }
+  ],
+  "missingLayers": [
+    {
+      "sceneNumber": 2,
+      "layers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ]
+    },
+    {
+      "sceneNumber": 3,
+      "layers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ]
+    },
+    {
+      "sceneNumber": 4,
+      "layers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ]
+    },
+    {
+      "sceneNumber": 5,
+      "layers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ]
+    },
+    {
+      "sceneNumber": 6,
+      "layers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ]
+    },
+    {
+      "sceneNumber": 7,
+      "layers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ]
+    },
+    {
+      "sceneNumber": 8,
+      "layers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ]
+    },
+    {
+      "sceneNumber": 9,
+      "layers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ]
+    },
+    {
+      "sceneNumber": 10,
+      "layers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ]
+    },
+    {
+      "sceneNumber": 11,
+      "layers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ]
+    },
+    {
+      "sceneNumber": 12,
+      "layers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ]
+    },
+    {
+      "sceneNumber": 13,
+      "layers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ]
+    },
+    {
+      "sceneNumber": 14,
+      "layers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ]
+    },
+    {
+      "sceneNumber": 15,
+      "layers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ]
+    },
+    {
+      "sceneNumber": 16,
+      "layers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ]
+    },
+    {
+      "sceneNumber": 17,
+      "layers": [
+        "primary_pov",
+        "environmental_layer",
+        "setting_layer",
+        "observer_layer"
+      ]
+    }
+  ],
+  "duplicateLayers": [],
+  "lowConfidenceAssignments": []
+}

@@ -1,0 +1,106 @@
+{
+  "generatedAt": "2026-04-16T01:51:08.200Z",
+  "source": {
+    "id": "book1-source-chunk-13",
+    "title": "Book 1 Research Chunk 13",
+    "filePath": "docs/book1/chunk13.txt",
+    "rawChars": 29069,
+    "normalizedChars": 23762,
+    "chunkCount": 7
+  },
+  "counts": {
+    "claims": 4,
+    "events": 0,
+    "places": 1,
+    "fragments": 3,
+    "openQuestions": 3
+  },
+  "chronology": [],
+  "coreTruthSet": [
+    {
+      "id": "book13-claim-hearth-maintenance-over-feeding",
+      "description": "Fire practice is framed as maintenance discipline, not fuel-maximizing intensity, with micro-adjustments rather than forceful intervention.",
+      "confidence": 5,
+      "quoteExcerpt": "The fire was not something to feed. It was something to maintain.",
+      "needsReview": true
+    },
+    {
+      "id": "book13-claim-house-as-thermal-memory-system",
+      "description": "The house is portrayed as a thermal-memory system that holds and redistributes heat, scent, and labor traces across time.",
+      "confidence": 5,
+      "quoteExcerpt": "The house held heat differently ... it settled into the walls, into the ground, into the objects that lived there.",
+      "needsReview": true
+    },
+    {
+      "id": "book13-claim-placement-not-random-arrangement",
+      "description": "Domestic order is described as intentional placement shaped by repeated use rather than decorative arrangement.",
+      "confidence": 5,
+      "quoteExcerpt": "Nothing was arranged. Everything was placed.",
+      "needsReview": true
+    },
+    {
+      "id": "book13-claim-sensory-literacy-as-training-channel",
+      "description": "Training occurs through sensory literacy (texture, heat, smell, rhythm) and embodied repetition rather than abstract explanation.",
+      "confidence": 4,
+      "quoteExcerpt": "Ground corn and water ... thick ... beginning to shift ... the clay was warm to the touch.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book13-place-hearth-centered-household-workspace",
+      "name": "Hearth-Centered Household Workspace",
+      "placeType": "HOME",
+      "description": "Curved-pole, cane-clay domestic interior organized around a low central hearth and continuous productive rhythm."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book13-frag-maintenance-not-force-house-law",
+      "title": "Maintenance-Not-Force House Law",
+      "summary": "Domestic governance constraint.",
+      "text": "Core household systems remain stable through small continuous adjustments rather than episodic force.",
+      "confidence": 5,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book13-frag-correction-as-placement",
+      "title": "Correction as Placement",
+      "summary": "Training interaction constraint.",
+      "text": "Corrective speech places the learner back into system rhythm; authority is enacted through alignment, not volume.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book13-frag-no-wasted-motion-sound-discipline",
+      "title": "No-Wasted-Motion Discipline",
+      "summary": "Embodied-discipline constraint.",
+      "text": "Labor legitimacy is encoded in efficient motion and contained sound; waste marks misalignment with house order.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book13-oq-correction-thresholds-for-novices",
+      "title": "What thresholds trigger correction versus silent observation in novice household training?",
+      "description": "Needed to calibrate authority tone and learning progression.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book13-oq-household-labor-rotation",
+      "title": "What labor rotation rules determine who tends fire, grain, sorting, and repair work across age and status?",
+      "description": "Needed for continuity in domestic scenes and role assignment realism.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book13-oq-material-repair-cycle-seasonality",
+      "title": "How often are cane/clay wall repairs and hearth adjustments made across seasonal cycles?",
+      "description": "Needed to ground environmental wear-and-maintenance detail in recurring practice.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

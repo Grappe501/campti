@@ -1,0 +1,60 @@
+{
+  "artifact": "chapter_enneagram_operating_layer",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.040Z",
+  "characters": [
+    {
+      "character": "Alexis",
+      "enneagramType": "6",
+      "coreFear": "betrayal or unbuffered threat inside trusted structures",
+      "coreDesire": "to secure reliable alliance and contingency safety",
+      "defenseMechanism": "treating suspicion as external certainty",
+      "attentionFixation": "loyalty signals, weak seams, and authority reliability",
+      "stressPattern": "worst-case chaining and rapid doubt loops",
+      "securityPattern": "grounded caution with cooperative trust",
+      "emotionalStyle": "vigilant tension alternating with loyal attachment",
+      "selfAwarenessLevel": "high",
+      "selfNarrationAccuracy": 0.78,
+      "whatTheyCanAdmit": [
+        "Secure preserve kin continuity without public rupture.",
+        "loyalty signals, weak seams, and authority reliability",
+        "immediate procedural risk in front of witnesses"
+      ],
+      "whatTheyCannotAdmit": [
+        "fear of being misread",
+        "dependence on validation from fragile alliances",
+        "betrayal or unbuffered threat inside trusted structures"
+      ],
+      "howTheyMisreadOthers": "Assumes silence means consent rather than tactical delay.",
+      "howTypeShapesLanguageUnderPressure": "conditional phrasing, risk qualifiers, and repeated verification cues",
+      "temporallyValidForChapter1": true
+    },
+    {
+      "character": "Augustin",
+      "enneagramType": "6",
+      "coreFear": "betrayal or unbuffered threat inside trusted structures",
+      "coreDesire": "to secure reliable alliance and contingency safety",
+      "defenseMechanism": "treating suspicion as external certainty",
+      "attentionFixation": "loyalty signals, weak seams, and authority reliability",
+      "stressPattern": "worst-case chaining and rapid doubt loops",
+      "securityPattern": "grounded caution with cooperative trust",
+      "emotionalStyle": "vigilant tension alternating with loyal attachment",
+      "selfAwarenessLevel": "low",
+      "selfNarrationAccuracy": 0.34,
+      "whatTheyCanAdmit": [
+        "Secure preserve kin continuity without public rupture.",
+        "loyalty signals, weak seams, and authority reliability",
+        "immediate procedural risk in front of witnesses"
+      ],
+      "whatTheyCannotAdmit": [
+        "fear of being misread",
+        "dependence on validation from fragile alliances",
+        "betrayal or unbuffered threat inside trusted structures"
+      ],
+      "howTheyMisreadOthers": "Reads caution as weakness and misses hidden agreement patterns.",
+      "howTypeShapesLanguageUnderPressure": "conditional phrasing, risk qualifiers, and repeated verification cues",
+      "temporallyValidForChapter1": true
+    }
+  ]
+}

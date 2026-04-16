@@ -1,0 +1,99 @@
+{
+  "artifact": "book1_chapter_01_render_stability",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:04:40.186Z",
+  "runCount": 4,
+  "stabilityScore": 88,
+  "variation": {
+    "proseShapeCritical": {
+      "min": 29,
+      "max": 29,
+      "spread": 0
+    },
+    "adversarialCritical": {
+      "min": 30,
+      "max": 30,
+      "spread": 0
+    },
+    "adversarialHigh": {
+      "min": 25,
+      "max": 25,
+      "spread": 0
+    }
+  },
+  "unstableZones": [
+    {
+      "segment": 1,
+      "recurrenceRate": 1,
+      "categoryCount": 4,
+      "categories": [
+        "fear_language_density",
+        "low_embodiment",
+        "repeated_abstract_fear_language",
+        "repeated_opener"
+      ]
+    },
+    {
+      "segment": 3,
+      "recurrenceRate": 1,
+      "categoryCount": 4,
+      "categories": [
+        "fear_language_density",
+        "low_embodiment",
+        "repeated_abstract_fear_language",
+        "repeated_opener"
+      ]
+    },
+    {
+      "segment": 5,
+      "recurrenceRate": 0.75,
+      "categoryCount": 3,
+      "categories": [
+        "fear_language_density",
+        "low_embodiment",
+        "repeated_opener"
+      ]
+    },
+    {
+      "segment": 2,
+      "recurrenceRate": 0.5,
+      "categoryCount": 2,
+      "categories": [
+        "low_embodiment",
+        "repeated_opener"
+      ]
+    },
+    {
+      "segment": 4,
+      "recurrenceRate": 0.5,
+      "categoryCount": 2,
+      "categories": [
+        "low_embodiment",
+        "repeated_opener"
+      ]
+    }
+  ],
+  "recurringFailureClusters": [
+    {
+      "category": "low_embodiment",
+      "recurrenceRate": 1,
+      "runHits": 4
+    },
+    {
+      "category": "repeated_opener",
+      "recurrenceRate": 1,
+      "runHits": 4
+    },
+    {
+      "category": "repeated_abstract_fear_language",
+      "recurrenceRate": 1,
+      "runHits": 4
+    },
+    {
+      "category": "fear_language_density",
+      "recurrenceRate": 1,
+      "runHits": 4
+    }
+  ]
+}

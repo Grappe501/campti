@@ -4653,3 +4653,387 @@ model RevisionJob {
   @@index([kind])
   @@index([sceneId])
 }
+
+enum Book1SourceKind {
+  UPLOADED_CHUNK
+  RESEARCH_NOTE
+  SYNTHESIS_NOTE
+  SCENE_DRAFT
+  CHARACTER_NOTE
+}
+
+enum Book1ContentMode {
+  HISTORY
+  LINEAGE
+  WORLDBUILDING
+  SCENE_TEXT
+  POV_TEXT
+  SETTING_TEXT
+  SYMBOLIC_TEXT
+  TIMELINE_TEXT
+  INTERPRETIVE_TEXT
+}
+
+enum Book1NodeType {
+  HISTORICAL_CLAIM
+  WORLD_RULE
+  TRIBE_TRAIT
+  LINEAGE_FACT
+  CHARACTER_DEFINITION
+  CONFLICT_PATTERN
+  SYMBOLIC_MOTIF
+  TIMELINE_ANCHOR
+  SCENE_SEED
+  GEOGRAPHIC_LOGIC
+  SOCIAL_SYSTEM
+  CEREMONIAL_SYSTEM
+  MATERIAL_CULTURE_FACT
+  SCENE_INTERPRETATION
+  SETTING_INTELLIGENCE
+}
+
+enum Book1CanonStatus {
+  CANON
+  CANDIDATE
+  OPTIONAL
+  DEPRECATED
+}
+
+enum Book1ConfidenceType {
+  HISTORICAL
+  INFERRED_HISTORICAL
+  NARRATIVE_DESIGN
+  INTERPRETIVE
+  UNRESOLVED
+}
+
+enum Book1EntityType {
+  PERSON
+  LINEAGE
+  TRIBE
+  SETTLEMENT
+  RIVER
+  ROUTE
+  REGION
+  OBJECT
+  INSTITUTION
+  CEREMONY
+  SYSTEM
+  THEME
+}
+
+enum Book1EntityRelationshipType {
+  PARENT_OF
+  CHILD_OF
+  PART_OF
+  ALLIED_WITH
+  TRADES_WITH
+  MOVES_THROUGH
+  LIVES_IN
+  SYMBOLIZES
+  GOVERNS
+  CONTRADICTS
+  CONTRASTS_WITH
+  INHERITS_FROM
+  TEACHES
+  STABILIZES
+  PRESSURES
+  MEDIATES_BETWEEN
+}
+
+enum Book1TimelineEventType {
+  HISTORICAL_EVENT
+  BOOK_ANCHOR
+  LINEAGE_EVENT
+  MIGRATION_EVENT
+  DEATH_EVENT
+  BIRTH_EVENT
+  CONTACT_EVENT
+  RUPTURE_EVENT
+  SYSTEM_SHIFT
+}
+
+enum Book1TimelineAxis {
+  HISTORICAL
+  STORY
+}
+
+enum Book1SceneAnchorStatus {
+  STUB
+  PARTIAL
+  LAYERED
+  COMPLETE
+}
+
+enum Book1SceneComponentType {
+  PRIMARY_POV
+  SECONDARY_POV
+  ENVIRONMENTAL_LAYER
+  SETTING_LAYER
+  OBSERVER_LAYER
+  INTERPRETIVE_LAYER
+  SYMBOLIC_LAYER
+}
+
+enum Book1LinkedObjectType {
+  KNOWLEDGE_NODE
+  ENTITY
+  TIMELINE_EVENT
+  SYMBOLIC_MOTIF
+}
+
+enum Book1RetrievalObjectType {
+  KNOWLEDGE_NODE
+  SCENE_COMPONENT
+  ENTITY
+  TIMELINE_EVENT
+  WORLD_STATE_SNAPSHOT
+}
+
+model Book1Source {
+  id String @id @default(cuid())
+
+  sourceKey           String?          @unique @map("source_key")
+  title               String
+  rawText             String           @db.Text @map("raw_text")
+  uploadSequence      Int?             @map("upload_sequence")
+  chunkNumber         Int?             @map("chunk_number")
+  fileName            String?          @map("file_name")
+  bookNumber          Int              @default(1) @map("book_number")
+  timeScopeStart      Int?             @map("time_scope_start")
+  timeScopeEnd        Int?             @map("time_scope_end")
+  sourceKind          Book1SourceKind  @map("source_kind")
+  dominantContentMode Book1ContentMode @map("dominant_content_mode")
+  secondaryModesJson  Json?            @map("secondary_modes_json")
+  densityLabel        String?          @map("density_label")
+  processingStatus    String?          @map("processing_status")
+  notes               String?          @db.Text
+  createdAt           DateTime         @default(now()) @map("created_at")
+  updatedAt           DateTime         @updatedAt @map("updated_at")
+
+  knowledgeNodes  Book1KnowledgeNode[]
+  sceneComponents Book1SceneComponent[]
+
+  @@index([bookNumber], map: "sources_book_number_idx")
+  @@index([sourceKind], map: "sources_source_kind_idx")
+  @@index([dominantContentMode], map: "sources_dominant_content_mode_idx")
+  @@index([processingStatus], map: "sources_processing_status_idx")
+  @@map("sources")
+}
+
+model Book1KnowledgeNode {
+  id String @id @default(cuid())
+
+  sourceId            String               @map("source_id")
+  source              Book1Source          @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+  nodeKey             String?              @unique @map("node_key")
+  nodeType            Book1NodeType        @map("node_type")
+  title               String
+  canonicalStatement  String               @db.Text @map("canonical_statement")
+  summaryShort        String?              @map("summary_short")
+  summaryLong         String?              @db.Text @map("summary_long")
+  canonStatus         Book1CanonStatus     @default(CANDIDATE) @map("canon_status")
+  confidenceType      Book1ConfidenceType  @default(UNRESOLVED) @map("confidence_type")
+  confidenceScore     Decimal?             @db.Decimal(5, 4) @map("confidence_score")
+  bookNumber          Int                  @default(1) @map("book_number")
+  eraLabel            String?              @map("era_label")
+  historicalScope     String?              @map("historical_scope")
+  narrativeScope      String?              @map("narrative_scope")
+  activeStatus        String?              @map("active_status")
+  timeTagsJson        Json?                @map("time_tags_json")
+  geographyTagsJson   Json?                @map("geography_tags_json")
+  culturalTagsJson    Json?                @map("cultural_tags_json")
+  narrativeTagsJson   Json?                @map("narrative_tags_json")
+  functionalTagsJson  Json?                @map("functional_tags_json")
+  createdAt           DateTime             @default(now()) @map("created_at")
+  updatedAt           DateTime             @updatedAt @map("updated_at")
+
+  sourceRelationships Book1EntityRelationship[]
+  timelineEvents      Book1TimelineEvent[]
+  worldStateSnapshots Book1WorldStateSnapshot[]
+
+  @@index([sourceId], map: "knowledge_nodes_source_id_idx")
+  @@index([nodeType], map: "knowledge_nodes_node_type_idx")
+  @@index([canonStatus], map: "knowledge_nodes_canon_status_idx")
+  @@index([bookNumber], map: "knowledge_nodes_book_number_idx")
+  @@map("knowledge_nodes")
+}
+
+model Book1Entity {
+  id String @id @default(cuid())
+
+  entityKey           String?         @unique @map("entity_key")
+  entityType          Book1EntityType @map("entity_type")
+  displayName         String          @map("display_name")
+  normalizedName      String          @unique @map("normalized_name")
+  alternateNamesJson  Json?           @map("alternate_names_json")
+  description         String?         @db.Text
+  historicalStatus    String?         @map("historical_status")
+  startYear           Int?            @map("start_year")
+  endYear             Int?            @map("end_year")
+  notes               String?         @db.Text
+  createdAt           DateTime        @default(now()) @map("created_at")
+  updatedAt           DateTime        @updatedAt @map("updated_at")
+
+  outgoingRelationships Book1EntityRelationship[] @relation("Book1EntityRelationshipFrom")
+  incomingRelationships Book1EntityRelationship[] @relation("Book1EntityRelationshipTo")
+
+  @@index([entityType], map: "entities_entity_type_idx")
+  @@index([displayName], map: "entities_display_name_idx")
+  @@map("entities")
+}
+
+model Book1EntityRelationship {
+  id String @id @default(cuid())
+
+  fromEntityId      String                      @map("from_entity_id")
+  fromEntity        Book1Entity                 @relation("Book1EntityRelationshipFrom", fields: [fromEntityId], references: [id], onDelete: Cascade)
+  toEntityId        String                      @map("to_entity_id")
+  toEntity          Book1Entity                 @relation("Book1EntityRelationshipTo", fields: [toEntityId], references: [id], onDelete: Cascade)
+  relationshipType  Book1EntityRelationshipType @map("relationship_type")
+  description       String?                     @db.Text
+  sourceNodeId      String?                     @map("source_node_id")
+  sourceNode        Book1KnowledgeNode?         @relation(fields: [sourceNodeId], references: [id], onDelete: SetNull)
+  startYear         Int?                        @map("start_year")
+  endYear           Int?                        @map("end_year")
+  confidenceScore   Decimal?                    @db.Decimal(5, 4) @map("confidence_score")
+  provenanceJson    Json?                       @map("provenance_json")
+  createdAt         DateTime                    @default(now()) @map("created_at")
+  updatedAt         DateTime                    @updatedAt @map("updated_at")
+
+  @@index([fromEntityId], map: "entity_relationships_from_entity_id_idx")
+  @@index([toEntityId], map: "entity_relationships_to_entity_id_idx")
+  @@index([relationshipType], map: "entity_relationships_relationship_type_idx")
+  @@index([sourceNodeId], map: "entity_relationships_source_node_id_idx")
+  @@map("entity_relationships")
+}
+
+model Book1TimelineEvent {
+  id String @id @default(cuid())
+
+  eventKey           String?                @unique @map("event_key")
+  title              String
+  eventType          Book1TimelineEventType @map("event_type")
+  dateStart          DateTime?              @map("date_start")
+  dateEnd            DateTime?              @map("date_end")
+  yearLabel          String?                @map("year_label")
+  description        String?                @db.Text
+  historicalOrStory  Book1TimelineAxis      @default(HISTORICAL) @map("historical_or_story")
+  certaintyLevel     String?                @map("certainty_level")
+  sourceNodeId       String?                @map("source_node_id")
+  sourceNode         Book1KnowledgeNode?    @relation(fields: [sourceNodeId], references: [id], onDelete: SetNull)
+  createdAt          DateTime               @default(now()) @map("created_at")
+  updatedAt          DateTime               @updatedAt @map("updated_at")
+
+  @@index([eventType], map: "timeline_events_event_type_idx")
+  @@index([dateStart], map: "timeline_events_date_start_idx")
+  @@index([historicalOrStory], map: "timeline_events_historical_or_story_idx")
+  @@index([sourceNodeId], map: "timeline_events_source_node_id_idx")
+  @@map("timeline_events")
+}
+
+model Book1SceneAnchor {
+  id String @id @default(cuid())
+
+  sceneNumber    Int                  @unique @map("scene_number")
+  sceneKey       String               @unique @map("scene_key")
+  title          String
+  eraLabel       String?              @map("era_label")
+  functionInBook String?              @db.Text @map("function_in_book")
+  summary        String?              @db.Text
+  currentStatus  Book1SceneAnchorStatus @default(STUB) @map("current_status")
+  createdAt      DateTime             @default(now()) @map("created_at")
+  updatedAt      DateTime             @updatedAt @map("updated_at")
+
+  sceneComponents Book1SceneComponent[]
+
+  @@index([currentStatus], map: "scene_anchors_current_status_idx")
+  @@map("scene_anchors")
+}
+
+model Book1SceneComponent {
+  id String @id @default(cuid())
+
+  sceneAnchorId    String                  @map("scene_anchor_id")
+  sceneAnchor      Book1SceneAnchor        @relation(fields: [sceneAnchorId], references: [id], onDelete: Cascade)
+  sourceId         String                  @map("source_id")
+  source           Book1Source             @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+  componentKey     String?                 @unique @map("component_key")
+  componentType    Book1SceneComponentType @map("component_type")
+  componentSubtype String?                 @map("component_subtype")
+  povCharacter     String?                 @map("pov_character")
+  textContent      String                  @db.Text @map("text_content")
+  summary          String?                 @db.Text
+  functionInScene  String?                 @db.Text @map("function_in_scene")
+  orderPriority    Int?                    @map("order_priority")
+  canonStatus      Book1CanonStatus        @default(CANDIDATE) @map("canon_status")
+  confidenceType   Book1ConfidenceType     @default(UNRESOLVED) @map("confidence_type")
+  timeTagsJson     Json?                   @map("time_tags_json")
+  geographyTagsJson Json?                  @map("geography_tags_json")
+  culturalTagsJson Json?                   @map("cultural_tags_json")
+  narrativeTagsJson Json?                  @map("narrative_tags_json")
+  functionalTagsJson Json?                 @map("functional_tags_json")
+  createdAt        DateTime                @default(now()) @map("created_at")
+  updatedAt        DateTime                @updatedAt @map("updated_at")
+
+  links Book1SceneComponentLink[]
+
+  @@index([sceneAnchorId], map: "scene_components_scene_anchor_id_idx")
+  @@index([sourceId], map: "scene_components_source_id_idx")
+  @@index([componentType], map: "scene_components_component_type_idx")
+  @@index([canonStatus], map: "scene_components_canon_status_idx")
+  @@map("scene_components")
+}
+
+model Book1SceneComponentLink {
+  id String @id @default(cuid())
+
+  sceneComponentId String                @map("scene_component_id")
+  sceneComponent   Book1SceneComponent   @relation(fields: [sceneComponentId], references: [id], onDelete: Cascade)
+  linkedObjectType Book1LinkedObjectType @map("linked_object_type")
+  linkedObjectId   String                @map("linked_object_id")
+  relationshipNote String?               @db.Text @map("relationship_note")
+
+  @@index([sceneComponentId], map: "scene_component_links_scene_component_id_idx")
+  @@index([linkedObjectType, linkedObjectId], map: "scene_component_links_linked_object_idx")
+  @@map("scene_component_links")
+}
+
+model Book1WorldStateSnapshot {
+  id String @id @default(cuid())
+
+  snapshotKey             String             @unique @map("snapshot_key")
+  year                    Int
+  region                  String
+  populationModelSummary  String?            @db.Text @map("population_model_summary")
+  tradeStateSummary       String?            @db.Text @map("trade_state_summary")
+  kinshipStateSummary     String?            @db.Text @map("kinship_state_summary")
+  externalPressureSummary String?            @db.Text @map("external_pressure_summary")
+  narrativeSummary        String?            @db.Text @map("narrative_summary")
+  sourceNodeId            String?            @map("source_node_id")
+  sourceNode              Book1KnowledgeNode? @relation(fields: [sourceNodeId], references: [id], onDelete: SetNull)
+
+  @@index([year], map: "world_state_snapshots_year_idx")
+  @@index([region], map: "world_state_snapshots_region_idx")
+  @@index([sourceNodeId], map: "world_state_snapshots_source_node_id_idx")
+  @@map("world_state_snapshots")
+}
+
+model Book1RetrievalProfile {
+  id String @id @default(cuid())
+
+  objectType       Book1RetrievalObjectType @map("object_type")
+  objectId         String                   @map("object_id")
+  embeddingText    String                   @db.Text @map("embedding_text")
+  retrievalTagsJson Json?                   @map("retrieval_tags_json")
+  useCasesJson     Json?                    @map("use_cases_json")
+  spoilerLevel     String?                  @map("spoiler_level")
+  priorityWeight   Decimal?                 @db.Decimal(7, 4) @map("priority_weight")
+  createdAt        DateTime                 @default(now()) @map("created_at")
+  updatedAt        DateTime                 @updatedAt @map("updated_at")
+
+  @@unique([objectType, objectId], map: "retrieval_profiles_object_unique")
+  @@index([objectType], map: "retrieval_profiles_object_type_idx")
+  @@index([priorityWeight], map: "retrieval_profiles_priority_weight_idx")
+  @@map("retrieval_profiles")
+}

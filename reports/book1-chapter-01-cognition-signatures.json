@@ -1,0 +1,34 @@
+{
+  "artifact": "chapter_cognition_signatures",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.035Z",
+  "characters": [
+    {
+      "character": "Alexis",
+      "attentionBias": "threat-first scan of faces, doors, and pauses",
+      "thoughtStyle": "compressed inferential thought; tests outcomes before speaking",
+      "emotionalProcessingStyle": "suppresses fear into stillness and delayed response",
+      "namingAvoidanceStyle": "avoids naming risk directly; speaks through objects and gesture",
+      "sensoryPriority": [
+        "sound",
+        "distance",
+        "breath"
+      ],
+      "decisionStyle": "risk-minimizing; delays commitment until signal confidence rises"
+    },
+    {
+      "character": "Augustin",
+      "attentionBias": "threat-first scan of faces, doors, and pauses",
+      "thoughtStyle": "compressed inferential thought; tests outcomes before speaking",
+      "emotionalProcessingStyle": "suppresses fear into stillness and delayed response",
+      "namingAvoidanceStyle": "avoids naming risk directly; speaks through objects and gesture",
+      "sensoryPriority": [
+        "sound",
+        "distance",
+        "breath"
+      ],
+      "decisionStyle": "risk-minimizing; delays commitment until signal confidence rises"
+    }
+  ]
+}

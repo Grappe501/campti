@@ -1,0 +1,92 @@
+{
+  "artifact": "chapter_character_hidden_histories",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T16:25:48.236Z",
+  "characters": [
+    {
+      "character": "First Matriarch",
+      "publicRole": "ancestral conduit holder",
+      "suppressedMotive": "preserve lineage continuity while masking fear",
+      "privateWound": "fear of erasure under shifting authority norms",
+      "hiddenHistoryBeats": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "futureArcHooks": [
+        "must-resurface-during-succession-stress",
+        "must-intersect-with-faith-identity-conflict",
+        "must-remain-unresolved-in-chapter1",
+        "future-descendant-link:Alexis",
+        "future-descendant-link:Alexis Grappe",
+        "future-descendant-link:Francois Grappe",
+        "future-descendant-link:Buford Grappe",
+        "future-descendant-link:Coincoin"
+      ]
+    },
+    {
+      "character": "Second Matriarch",
+      "publicRole": "ancestral conduit holder",
+      "suppressedMotive": "preserve lineage continuity while masking fear",
+      "privateWound": "fear of erasure under shifting authority norms",
+      "hiddenHistoryBeats": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "futureArcHooks": [
+        "must-resurface-during-succession-stress",
+        "must-intersect-with-faith-identity-conflict",
+        "must-remain-unresolved-in-chapter1",
+        "future-descendant-link:Alexis",
+        "future-descendant-link:Alexis Grappe",
+        "future-descendant-link:Francois Grappe",
+        "future-descendant-link:Buford Grappe",
+        "future-descendant-link:Coincoin"
+      ]
+    },
+    {
+      "character": "Third Matriarch",
+      "publicRole": "ancestral conduit holder",
+      "suppressedMotive": "preserve lineage continuity while masking fear",
+      "privateWound": "fear of erasure under shifting authority norms",
+      "hiddenHistoryBeats": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "futureArcHooks": [
+        "must-resurface-during-succession-stress",
+        "must-intersect-with-faith-identity-conflict",
+        "must-remain-unresolved-in-chapter1",
+        "future-descendant-link:Alexis",
+        "future-descendant-link:Alexis Grappe",
+        "future-descendant-link:Francois Grappe",
+        "future-descendant-link:Buford Grappe",
+        "future-descendant-link:Coincoin"
+      ]
+    },
+    {
+      "character": "Fourth Matriarch",
+      "publicRole": "ancestral conduit holder",
+      "suppressedMotive": "preserve lineage continuity while masking fear",
+      "privateWound": "fear of erasure under shifting authority norms",
+      "hiddenHistoryBeats": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "futureArcHooks": [
+        "must-resurface-during-succession-stress",
+        "must-intersect-with-faith-identity-conflict",
+        "must-remain-unresolved-in-chapter1",
+        "future-descendant-link:Alexis",
+        "future-descendant-link:Alexis Grappe",
+        "future-descendant-link:Francois Grappe",
+        "future-descendant-link:Buford Grappe",
+        "future-descendant-link:Coincoin"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "generatedAt": "2026-04-16T01:45:56.897Z",
+  "source": {
+    "id": "book1-source-chunk-9",
+    "title": "Book 1 Research Chunk 9",
+    "filePath": "docs/book1/chunk9.txt",
+    "rawChars": 94923,
+    "normalizedChars": 73242,
+    "chunkCount": 22
+  },
+  "counts": {
+    "claims": 5,
+    "events": 3,
+    "places": 1,
+    "fragments": 3,
+    "openQuestions": 3
+  },
+  "chronology": [
+    {
+      "year": 1653,
+      "title": "Generation 1 Active Window (1653-1662)",
+      "description": "First matriarch active window in high-density network conditions."
+    },
+    {
+      "year": 1661,
+      "title": "Pandemic Fracture Window (1661-1662)",
+      "description": "Population thinning event that introduces the first visible structural fracture."
+    },
+    {
+      "year": 1662,
+      "title": "Generation 2 Active Window (1662-1687)",
+      "description": "Second matriarch transition arc through thinning but functional network conditions."
+    }
+  ],
+  "coreTruthSet": [
+    {
+      "id": "book9-claim-gen2-thinning-network-active-maintenance",
+      "description": "Generation 2 lives through network thinning and must actively maintain ties that prior density once maintained automatically.",
+      "confidence": 5,
+      "quoteExcerpt": "She grows up in a thinning but still functional network ... She must actively maintain connections.",
+      "needsReview": true
+    },
+    {
+      "id": "book9-claim-three-generation-census-aligned-lineage",
+      "description": "The lineage is explicitly designed as a three-generation matriarchal line aligned to a 1653-1687 census world model.",
+      "confidence": 5,
+      "quoteExcerpt": "Map your three-generation matriarchal line inside the 1653 -> 1687 census world.",
+      "needsReview": true
+    },
+    {
+      "id": "book9-claim-gen1-high-density-balance-world",
+      "description": "Generation 1 operates inside a dense, high-redundancy network where system stability precedes visible fracture.",
+      "confidence": 4,
+      "quoteExcerpt": "She is born into a fully functioning, high-density network.",
+      "needsReview": true
+    },
+    {
+      "id": "book9-claim-matrilineal-relational-placement",
+      "description": "Marriage and alliance entry are framed as relational placement through matrilineal network logic rather than primarily romantic selection.",
+      "confidence": 4,
+      "quoteExcerpt": "She is not chosen romantically first ... She is placed relationally.",
+      "needsReview": true
+    },
+    {
+      "id": "book9-claim-pandemic-thinning-first-fracture",
+      "description": "The 1661-1662 pandemic thinning is treated as the first visible system fracture and a trigger for lineage transition.",
+      "confidence": 4,
+      "quoteExcerpt": "Death (1661-1662 Pandemic Event) ... the first visible fracture in the system.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book9-place-census-aligned-red-river-lineage-grid",
+      "name": "Census-Aligned Red River Lineage Grid",
+      "placeType": "REGION",
+      "description": "Narrative operating map tying lineage decisions to nearby populations, settlement density, and relationship exposure realities."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book9-frag-density-to-thinning-transition-law",
+      "title": "Density to Thinning Transition Law",
+      "summary": "Macro-continuity constraint for census-phase transitions.",
+      "text": "Book 1 lineage continuity must show structural shift from high-density redundancy to thinning-node dependence without abrupt world-model collapse.",
+      "confidence": 5,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book9-frag-observer-middle-child-bridge-emergence",
+      "title": "Observer Middle-Child Bridge Emergence",
+      "summary": "Leadership-emergence constraint.",
+      "text": "Leadership credibility emerges through observation-first development and distributed kin training, not direct primogeniture preparation.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book9-frag-relationship-value-under-thinning-pressure",
+      "title": "Relationship Value Under Thinning Pressure",
+      "summary": "Relational-pressure constraint.",
+      "text": "As nodes thin, each tie carries higher systemic weight; conflict and trade scenes should reflect increased relational stakes per connection.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book9-oq-census-number-source-audit",
+      "title": "Which source chain supports each population figure used in the 1653-1687 census-aligned model?",
+      "description": "Needed to separate anchored historical estimates from interpretive narrative scaffolding.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book9-oq-gen2-bridge-training-scenes",
+      "title": "Which concrete scenes best show observer-to-bridge development across childhood, post-loss kin training, and early mediation?",
+      "description": "Needed to convert lineage architecture into emotionally legible cinematic progression.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book9-oq-pandemic-impact-localization",
+      "title": "How did pandemic thinning impacts vary across Natchitoches, Yatasi, and Doustioni local clusters?",
+      "description": "Needed for non-uniform loss portrayal and realistic transition dynamics.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

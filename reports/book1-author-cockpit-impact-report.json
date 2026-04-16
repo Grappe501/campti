@@ -1,0 +1,63 @@
+{
+  "artifact": "book1_author_cockpit_impact_report",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T15:33:02.882Z",
+  "governanceMode": "counterfactual",
+  "actionTotals": {
+    "submitted": 8,
+    "allowed": 7,
+    "denied": 1,
+    "appliedToBranch": 7
+  },
+  "lockViolations": {
+    "anchorViolations": 1,
+    "violatingActionIds": [
+      "A-6"
+    ]
+  },
+  "affectedSurfaceSummary": {
+    "chapters": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "scenes": [
+      "book1-scene-01",
+      "chapter1-h1",
+      "chapter1-h2",
+      "chapter1-h3",
+      "chapter1-h4"
+    ],
+    "characters": [
+      "Alexis",
+      "Augustin"
+    ],
+    "themes": [
+      "identity",
+      "faith",
+      "survival",
+      "power"
+    ]
+  },
+  "canonRiskSummary": {
+    "highest": "critical",
+    "histogram": {
+      "low": 3,
+      "moderate": 2,
+      "high": 2,
+      "critical": 1
+    }
+  },
+  "branchIsolation": {
+    "canonicalStateMutated": false,
+    "branchSandboxId": "book1-author-sim-2026-04-16T15-33-02-882Z",
+    "provenanceRetained": true
+  },
+  "recommendations": [
+    "Keep chapter1 anchor edits blocked unless simulationMode is unlocked_branch and anchor governance is explicitly enabled.",
+    "Treat chapter law and timeline mutations as high-risk and require manual review before propagating beyond sandbox.",
+    "Use affectedSurfaceSummary to schedule downstream re-validation for impacted chapters and cast relationships."
+  ]
+}

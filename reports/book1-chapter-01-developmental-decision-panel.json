@@ -1,0 +1,151 @@
+{
+  "artifact": "book1_chapter_01_decision_panel",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:37:47.159Z",
+  "chapterStatus": "blocked",
+  "latestAcceptedDraftReference": {
+    "path": "reports/book1-chapter-01-chapter_draft.json",
+    "reason": "Regenerated draft not accepted; canonical draft remains accepted baseline."
+  },
+  "latestRegeneratedDraftReference": {
+    "path": "reports/book1-chapter-01-developmental-regenerated-draft.json",
+    "recommendation": "reject new draft"
+  },
+  "appliedMutations": {
+    "characterConsole": {
+      "count": 1,
+      "mutations": [
+        {
+          "id": "mutation-1",
+          "kind": "dialogue",
+          "target": "chapter1.scene1.alexis.dialogue_tone",
+          "patch": {
+            "hesitationWeight": 0.63,
+            "assertionWeight": 0.37
+          },
+          "scope": "sandbox"
+        }
+      ]
+    },
+    "lawConsole": {
+      "count": 3,
+      "mutations": [
+        {
+          "id": "LAW-1",
+          "actionType": "adjust_symbolic_emphasis",
+          "target": "river-oath-symbol",
+          "patch": {
+            "motifWeight": 0.74
+          },
+          "scope": "sandbox"
+        },
+        {
+          "id": "LAW-2",
+          "actionType": "adjust_foreshadowing_intensity",
+          "target": "FA-2",
+          "patch": {
+            "intensityDelta": 0.18
+          },
+          "scope": "sandbox"
+        },
+        {
+          "id": "LAW-3",
+          "actionType": "change_reveal_imply_balance",
+          "target": "scene-4-observer-layer",
+          "patch": {
+            "revealRatio": 0.36,
+            "implyRatio": 0.64
+          },
+          "scope": "sandbox"
+        }
+      ]
+    }
+  },
+  "improvements": [
+    "gapCount",
+    "adversarialCriticalFindings",
+    "adversarialHighFindings",
+    "proseShapeCriticalFindings",
+    "proseShapeFindingCount",
+    "voiceIdentityRisk",
+    "abstractionLeakRisk",
+    "behaviorMediationQuality"
+  ],
+  "regressions": [
+    "voicePassRate"
+  ],
+  "unchangedRisks": [
+    "consistencyPassCount",
+    "characterInteriorBlendingRisk",
+    "enneagramOverexposureRisk",
+    "proseTheorizationRisk"
+  ],
+  "lockedAnchorWarnings": {
+    "count": 1,
+    "warnings": [
+      "Law action LAW-4 violated locked-anchor governance: Action propose_anchor_mutation is disallowed in simulationMode counterfactual."
+    ],
+    "violations": 0
+  },
+  "qualityRiskSummary": {
+    "voiceRisk": "moderate",
+    "historicalIntegrationRisk": "moderate",
+    "coherenceRisk": "low",
+    "proseRisk": "critical",
+    "novelQualityRisk": "critical"
+  },
+  "temporalIntegrityRisk": "moderate",
+  "voiceIdentityRisk": "high",
+  "characterInteriorBlendingRisk": "moderate",
+  "abstractionLeakRisk": "moderate",
+  "enneagramOverexposureRisk": "low",
+  "behaviorMediationQuality": "strong",
+  "proseTheorizationRisk": "low",
+  "recommendedNextActions": [
+    "Reduce repeated opening and paragraph-shape templates by adding cadence variance controls in the composer.",
+    "Strengthen prose-brief transformation so every segment encodes lived pressure instead of control-language residue.",
+    "Expand lived-history packets with stronger material and social texture where prose shape flags abstraction drift.",
+    "Tighten voice-contract compliance gates and fail regeneration when synthetic prose risk exceeds threshold.",
+    "Introduce an anchor-aware mutation preflight that blocks illegal anchor actions before sandbox execution.",
+    "Add a continuity calibration pass that validates scene-to-scene handoff semantics, not only structural compliance flags."
+  ],
+  "finalRecommendation": "reject new draft",
+  "decisionRationalePlainLanguage": [
+    "Status is blocked because regeneration recommendation is \"reject new draft\" and adversarial release decision is \"BLOCKED: Chapter 1 is not scale-ready. Apply system fixes and rerun adversarial review.\".",
+    "Key improvements: gapCount, adversarialCriticalFindings, adversarialHighFindings, proseShapeCriticalFindings, proseShapeFindingCount, voiceIdentityRisk, abstractionLeakRisk, behaviorMediationQuality; key regressions: voicePassRate.",
+    "Locked-anchor governance produced 1 warning(s), and canon overwrite remains disabled."
+  ],
+  "sourceSnapshots": {
+    "consistencyReportPath": "reports/book1-chapter-01-chapter_consistency_report.json",
+    "voiceReportPath": "reports/book1-chapter-01-chapter_voice_report.json",
+    "gapReportPath": "reports/book1-chapter-01-chapter_gap_report.json",
+    "adversarialSummaryPath": "reports/book1-chapter-01-adversarial-summary.json"
+  },
+  "provenance": {
+    "sourceArtifacts": [
+      "reports/book1-chapter-01-chapter_draft.json",
+      "reports/book1-chapter-01-chapter_law.json",
+      "reports/book1-chapter-01-chapter_voice_spec.json",
+      "reports/book1-chapter-01-chapter_evidence_pack.json",
+      "reports/book1-chapter-01-developmental-regenerated-draft.json",
+      "reports/book1-character-console-session.json",
+      "reports/book1-law-console-session.json",
+      "reports/book1-chapter-01-regeneration-summary.json",
+      "reports/book1-chapter-01-regeneration-diff.json",
+      "reports/book1-chapter-01-chapter_consistency_report.json",
+      "reports/book1-chapter-01-chapter_voice_report.json",
+      "reports/book1-chapter-01-chapter_gap_report.json",
+      "reports/book1-chapter-01-adversarial-summary.json",
+      "reports/book1-chapter-01-developmental-intimacy-engine.json",
+      "reports/book1-chapter-01-chapter_draft.json#segments[0]",
+      "reports/book1-chapter-01-chapter_law.json#futureArcConstraints[0]",
+      "reports/book1-chapter-01-chapter_law.json#futureArcConstraints[1]",
+      "reports/book1-chapter-01-outline.json#timeline[3]",
+      "reports/book1-chapter-01-chapter_character_hidden_histories.json",
+      "reports/book1-chapter-01-chapter_relationship_pressure_map.json",
+      "reports/book1-chapter-01-chapter_epic_simulation.json",
+      "reports/book1-chapter-01-outline.json"
+    ]
+  }
+}

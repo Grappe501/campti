@@ -1,0 +1,23 @@
+{
+  "contractVersion": "1",
+  "scope": "phase10_phase11_author_command_cockpit",
+  "evaluatedAtIso": "2026-04-15T19:09:06.235Z",
+  "risks": [
+    {
+      "riskId": "dual_workbench_competition",
+      "severity": "low"
+    },
+    {
+      "riskId": "scope_fragmentation",
+      "severity": "low"
+    },
+    {
+      "riskId": "indicator_or_signal_overreach",
+      "severity": "low"
+    },
+    {
+      "riskId": "cockpit_command_orchestration_drift",
+      "severity": "low"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "artifact": "chapter_segment_2_4_embodiment_policy",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.073Z",
+  "segmentPolicies": [
+    {
+      "segment": 2,
+      "requiredEmbodimentSignals": [
+        "gesture",
+        "movement",
+        "touch",
+        "sound",
+        "material_object_interaction",
+        "spatial_adjustment",
+        "environmental_contact"
+      ],
+      "reduceAbstractExplanatoryPhrasing": true,
+      "reduceDeclarativeEmotionalLabeling": true,
+      "requirePhysicalNoticeAvoidChangePivot": true
+    },
+    {
+      "segment": 4,
+      "requiredEmbodimentSignals": [
+        "gesture",
+        "movement",
+        "touch",
+        "sound",
+        "material_object_interaction",
+        "spatial_adjustment",
+        "environmental_contact"
+      ],
+      "reduceAbstractExplanatoryPhrasing": true,
+      "reduceDeclarativeEmotionalLabeling": true,
+      "requirePhysicalNoticeAvoidChangePivot": true
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "artifact": "book1_chapter_01_regeneration_diff",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:37:46.979Z",
+  "comparedAgainst": {
+    "draft": "reports/book1-chapter-01-draft.json",
+    "consistency": "reports/book1-chapter-01-chapter_consistency_report.json",
+    "voice": "reports/book1-chapter-01-chapter_voice_report.json",
+    "gap": "reports/book1-chapter-01-chapter_gap_report.json",
+    "adversarialSummary": "reports/book1-chapter-01-adversarial-summary.json"
+  },
+  "metrics": {
+    "consistencyPassCount": {
+      "before": 3,
+      "after": 3,
+      "trend": "unchanged"
+    },
+    "voicePassRate": {
+      "before": 1,
+      "after": 0.2,
+      "trend": "worsened"
+    },
+    "gapCount": {
+      "before": 5,
+      "after": 1,
+      "trend": "improved"
+    },
+    "adversarialCriticalFindings": {
+      "before": 31,
+      "after": 29,
+      "trend": "improved"
+    },
+    "adversarialHighFindings": {
+      "before": 25,
+      "after": 21,
+      "trend": "improved"
+    },
+    "proseShapeCriticalFindings": {
+      "before": 30,
+      "after": 28,
+      "trend": "improved"
+    },
+    "proseShapeFindingCount": {
+      "before": 47,
+      "after": 44,
+      "trend": "improved"
+    },
+    "characterInteriorBlendingRisk": {
+      "before": 0,
+      "after": 0,
+      "trend": "unchanged"
+    },
+    "voiceIdentityRisk": {
+      "before": 37,
+      "after": 33,
+      "trend": "improved"
+    },
+    "abstractionLeakRisk": {
+      "before": 8,
+      "after": 7,
+      "trend": "improved"
+    },
+    "enneagramOverexposureRisk": {
+      "before": 0,
+      "after": 0,
+      "trend": "unchanged"
+    },
+    "behaviorMediationQuality": {
+      "before": 7.476,
+      "after": 12.198,
+      "trend": "improved"
+    },
+    "proseTheorizationRisk": {
+      "before": 0,
+      "after": 0,
+      "trend": "unchanged"
+    }
+  },
+  "lockEnforcement": {
+    "lockedAnchorViolations": 0,
+    "blockedMutations": []
+  },
+  "canonicalMutation": {
+    "requested": false,
+    "performed": false,
+    "reason": "Regeneration loop never overwrites canonical artifacts without explicit external approval workflow."
+  }
+}

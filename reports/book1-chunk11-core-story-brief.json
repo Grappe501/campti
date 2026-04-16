@@ -1,0 +1,106 @@
+{
+  "generatedAt": "2026-04-16T01:48:36.737Z",
+  "source": {
+    "id": "book1-source-chunk-11",
+    "title": "Book 1 Research Chunk 11",
+    "filePath": "docs/book1/chunk11.txt",
+    "rawChars": 29921,
+    "normalizedChars": 24813,
+    "chunkCount": 8
+  },
+  "counts": {
+    "claims": 4,
+    "events": 0,
+    "places": 1,
+    "fragments": 3,
+    "openQuestions": 3
+  },
+  "chronology": [],
+  "coreTruthSet": [
+    {
+      "id": "book11-claim-placement-over-instruction",
+      "description": "Transfer language is framed as relational placement rather than didactic instruction or warning.",
+      "confidence": 5,
+      "quoteExcerpt": "Not instruction. Not warning. Placement.",
+      "needsReview": true
+    },
+    {
+      "id": "book11-claim-watching-as-identified-role",
+      "description": "The child’s role is explicitly identified as watcher, establishing observerhood as sanctioned succession preparation.",
+      "confidence": 5,
+      "quoteExcerpt": "You are watching... Good.",
+      "needsReview": true
+    },
+    {
+      "id": "book11-claim-aunt-co-witness-continuity",
+      "description": "An aunt functions as steady co-witness and continuity anchor through small necessary movements and nonverbal completion cues.",
+      "confidence": 4,
+      "quoteExcerpt": "Her aunt knelt beside her... small movements... a look that passed between them... the aunt nodded once.",
+      "needsReview": true
+    },
+    {
+      "id": "book11-claim-river-constancy-during-loss",
+      "description": "River continuity is used as structural counterpoint to household mortality, reinforcing system persistence across personal rupture.",
+      "confidence": 4,
+      "quoteExcerpt": "The river moved, the same as it always had, its presence steady beneath everything else.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book11-place-hearthside-succession-house",
+      "name": "Hearthside Succession House",
+      "placeType": "HOME",
+      "description": "Interior hearth setting where final speech, witness positioning, and matriarchal transfer cues are enacted."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book11-frag-receive-dont-force-threshold",
+      "title": "Receive-Do-Not-Force Threshold",
+      "summary": "Succession-behavior constraint.",
+      "text": "At succession thresholds, legitimacy comes from holding position and receiving transmission rather than acting to control the moment.",
+      "confidence": 5,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book11-frag-nonverbal-relational-completion",
+      "title": "Nonverbal Relational Completion",
+      "summary": "Subtext-transfer constraint.",
+      "text": "Critical transfer steps may complete through eye contact and shared recognition rather than explicit declarative speech.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book11-frag-succession-through-attention",
+      "title": "Succession Through Attention",
+      "summary": "Observer-discipline constraint.",
+      "text": "Attention discipline (breath, stillness, face reading, interval listening) functions as a training channel for emergent leadership.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book11-oq-aunt-authority-scope",
+      "title": "What authority scope does the aunt hold during and after matriarchal transition events?",
+      "description": "Needed to model continuity governance accurately across generations.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book11-oq-observer-child-to-acting-bridge-timing",
+      "title": "When does observer role convert to active bridge authority, and what validates that shift?",
+      "description": "Needed for credible progression from witnessing to decision-bearing leadership.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book11-oq-succession-ritual-protocol",
+      "title": "What formal or semi-formal succession protocol governs witness roles, final speech rights, and household participation order?",
+      "description": "Needed to align future transfer scenes with coherent ritual/legal expectations.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

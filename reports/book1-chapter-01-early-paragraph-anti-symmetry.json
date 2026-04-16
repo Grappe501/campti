@@ -1,0 +1,50 @@
+{
+  "artifact": "chapter_early_paragraph_anti_symmetry",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.019Z",
+  "segments": [
+    {
+      "segment": 1,
+      "sentenceLengthPattern": "169-25",
+      "clauseCountPattern": "51-5",
+      "orientationThenExplanationShape": false,
+      "repeatsPreviousPattern": false
+    },
+    {
+      "segment": 2,
+      "sentenceLengthPattern": "10-57",
+      "clauseCountPattern": "1-9",
+      "orientationThenExplanationShape": false,
+      "repeatsPreviousPattern": false
+    },
+    {
+      "segment": 3,
+      "sentenceLengthPattern": "17-1",
+      "clauseCountPattern": "3-1",
+      "orientationThenExplanationShape": false,
+      "repeatsPreviousPattern": false
+    },
+    {
+      "segment": 4,
+      "sentenceLengthPattern": "154-25",
+      "clauseCountPattern": "44-5",
+      "orientationThenExplanationShape": false,
+      "repeatsPreviousPattern": false
+    },
+    {
+      "segment": 5,
+      "sentenceLengthPattern": "13-54",
+      "clauseCountPattern": "3-11",
+      "orientationThenExplanationShape": false,
+      "repeatsPreviousPattern": false
+    },
+    {
+      "segment": 6,
+      "sentenceLengthPattern": "17-1",
+      "clauseCountPattern": "3-1",
+      "orientationThenExplanationShape": false,
+      "repeatsPreviousPattern": false
+    }
+  ]
+}

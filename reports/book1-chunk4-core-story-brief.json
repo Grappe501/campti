@@ -1,0 +1,113 @@
+{
+  "generatedAt": "2026-04-16T01:35:20.839Z",
+  "source": {
+    "id": "book1-source-chunk-4",
+    "title": "Book 1 Research Chunk 4",
+    "filePath": "docs/book1/chunk4.txt",
+    "rawChars": 72899,
+    "normalizedChars": 29080,
+    "chunkCount": 9
+  },
+  "counts": {
+    "claims": 5,
+    "events": 0,
+    "places": 1,
+    "fragments": 3,
+    "openQuestions": 3
+  },
+  "chronology": [],
+  "coreTruthSet": [
+    {
+      "id": "book4-claim-conflict-inevitable-systemic",
+      "description": "Conflict is framed as an inevitable systemic condition in dense multi-party networks, not as an abnormal exception.",
+      "confidence": 4,
+      "quoteExcerpt": "Conflict is not abnormal. It is inevitable.",
+      "needsReview": true
+    },
+    {
+      "id": "book4-claim-conflict-management-over-elimination",
+      "description": "The stated governance goal is conflict management that preserves system integrity rather than conflict elimination.",
+      "confidence": 4,
+      "quoteExcerpt": "The goal is not to eliminate conflict... manage it without breaking the system.",
+      "needsReview": true
+    },
+    {
+      "id": "book4-claim-miscommunication-primary-spark",
+      "description": "Miscommunication (language, cultural assumptions, tone) is described as the most common proximate spark for escalation.",
+      "confidence": 4,
+      "quoteExcerpt": "Most conflict doesn’t begin with intent. It begins with misunderstanding.",
+      "needsReview": true
+    },
+    {
+      "id": "book4-claim-resource-shock-drives-violence-risk",
+      "description": "Resource shocks (harvest failure, flooding, drought, overhunting) are treated as primary escalation triggers from tension to survival conflict.",
+      "confidence": 4,
+      "quoteExcerpt": "People don’t fight because they want to... because they have to survive.",
+      "needsReview": true
+    },
+    {
+      "id": "book4-claim-trade-fairness-perception-critical",
+      "description": "Trade stability depends on perceived fairness and reciprocity; exploitation perception leads to refusal, distrust, and retaliation.",
+      "confidence": 4,
+      "quoteExcerpt": "Trade must feel fair—even if it isn’t equal.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book4-place-conflict-pressure-web",
+      "name": "Conflict Pressure Web (Red River Network)",
+      "placeType": "REGION",
+      "description": "System-level theater where resource, trade, language, and kinship tensions accumulate and are either managed or destabilized."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book4-frag-meaning-correction-before-emotion",
+      "title": "Meaning Correction Before Emotion",
+      "summary": "Mediation/translation constraint.",
+      "text": "De-escalation depends on correcting meaning early, before emotional momentum hardens misunderstanding into retaliation.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book4-frag-preemptive-relief-before-violence",
+      "title": "Preemptive Relief Before Violence",
+      "summary": "Conflict-prevention timing constraint.",
+      "text": "Legitimate power acts before scarcity-driven desperation converts into open violence; timing is the core trust mechanic.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book4-frag-kinship-obligation-pressure",
+      "title": "Kinship Obligation Pressure",
+      "summary": "Kinship-risk constraint.",
+      "text": "Kinship strengthens cooperation while simultaneously increasing obligation strain; unmet expectations can destabilize alliances.",
+      "confidence": 3,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book4-oq-kinship-obligation-adjudication",
+      "title": "How were competing kinship obligations adjudicated when resource or honor claims collided?",
+      "description": "Needed to model internal fractures without flattening kin networks into simple loyalty blocs.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book4-oq-resource-shock-thresholds",
+      "title": "What concrete thresholds separate manageable scarcity from violence-prone desperation in this network?",
+      "description": "Needed to calibrate when mediation can still work versus when emergency intervention is required.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book4-oq-trade-fairness-mechanics",
+      "title": "Which practical mechanisms made trade feel fair across culturally asymmetric parties?",
+      "description": "Needed for credible conflict-resolution scenes around reciprocity and value translation.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

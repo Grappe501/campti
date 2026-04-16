@@ -1,0 +1,63 @@
+{
+  "contractVersion": "1",
+  "scope": "author_cockpit_audit_workstream_1",
+  "generatedAtIso": "2026-04-15T00:00:00.000Z",
+  "surfaces": [
+    {
+      "route": "/admin/scenes/[id]/workspace",
+      "surfaceType": "author_workbench",
+      "audience": "author",
+      "ownership": "candidate_authority",
+      "status": "active"
+    },
+    {
+      "route": "/admin/narrative",
+      "surfaceType": "author_hub",
+      "audience": "author",
+      "ownership": "secondary",
+      "status": "active"
+    },
+    {
+      "route": "/admin/narrative/books/[bookId]",
+      "surfaceType": "book_planner_slice",
+      "audience": "author",
+      "ownership": "secondary",
+      "status": "active"
+    },
+    {
+      "route": "/admin/narrative/chapters/[chapterId]/assembly",
+      "surfaceType": "chapter_assembly_slice",
+      "audience": "author",
+      "ownership": "secondary",
+      "status": "active"
+    },
+    {
+      "route": "/admin/dashboard",
+      "surfaceType": "admin_dashboard",
+      "audience": "admin",
+      "ownership": "admin_utility",
+      "status": "active"
+    },
+    {
+      "route": "/admin/scenes/[id]/observer",
+      "surfaceType": "debug_observer",
+      "audience": "internal_author_debug",
+      "ownership": "internal_debug",
+      "status": "active"
+    },
+    {
+      "route": "/admin/world-observer",
+      "surfaceType": "world_debug_observer",
+      "audience": "internal_operator_debug",
+      "ownership": "internal_debug",
+      "status": "active"
+    },
+    {
+      "route": "/read/cockpit",
+      "surfaceType": "reader_cockpit",
+      "audience": "reader",
+      "ownership": "reader_experience",
+      "status": "active"
+    }
+  ]
+}

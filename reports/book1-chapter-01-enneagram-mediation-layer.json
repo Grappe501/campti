@@ -1,0 +1,94 @@
+{
+  "artifact": "chapter_enneagram_mediation_layer",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.043Z",
+  "characters": [
+    {
+      "character": "Alexis",
+      "perceptionBiasOutputs": [
+        "notices threat-first scan of faces, doors, and pauses",
+        "filters threat through loyalty signals, weak seams, and authority reliability",
+        "ignores de-prioritizes cues that do not support to secure reliable alliance and contingency safety",
+        "over-focuses on loyalty signals, weak seams, and authority reliability"
+      ],
+      "omissionPatterns": [
+        "withholds fear of being misread",
+        "self-narration ceiling at 78%",
+        "suppresses motive naming when treating suspicion as external certainty activates"
+      ],
+      "misreadingPatterns": [
+        "Assumes silence means consent rather than tactical delay.",
+        "filters events through betrayal or unbuffered threat inside trusted structures"
+      ],
+      "bodilyStressConversions": [
+        "worst-case chaining and rapid doubt loops",
+        "routes abstraction into body cues, object handling, and spatial relation before naming"
+      ],
+      "silencePatterns": [
+        "uses silence as control gate before speech clears social risk",
+        "silence holds unresolved motive before reply"
+      ],
+      "conflictResponsePatterns": [
+        "treating suspicion as external certainty",
+        "worst-case chaining and rapid doubt loops"
+      ],
+      "intimacyDistancePatterns": [
+        "protects attachment through selective disclosure and worst-case chaining and rapid doubt loops",
+        "tests group safety before trust by tracking risk-minimizing; delays commitment until signal confidence rises"
+      ],
+      "authorityResponsePatterns": [
+        "reads hierarchy through loyalty signals, weak seams, and authority reliability and answers with controlled leverage",
+        "resists authority moves that trigger betrayal or unbuffered threat inside trusted structures"
+      ],
+      "ritualMeaningPatterns": [
+        "meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+        "searches for meaning through ordered continuity of kinship obligation",
+        "treats uncertainty as proof of betrayal or unbuffered threat inside trusted structures"
+      ]
+    },
+    {
+      "character": "Augustin",
+      "perceptionBiasOutputs": [
+        "notices threat-first scan of faces, doors, and pauses",
+        "filters threat through loyalty signals, weak seams, and authority reliability",
+        "ignores de-prioritizes cues that do not support to secure reliable alliance and contingency safety",
+        "over-focuses on loyalty signals, weak seams, and authority reliability"
+      ],
+      "omissionPatterns": [
+        "withholds fear of being misread",
+        "self-narration ceiling at 34%",
+        "suppresses motive naming when treating suspicion as external certainty activates"
+      ],
+      "misreadingPatterns": [
+        "Reads caution as weakness and misses hidden agreement patterns.",
+        "filters events through betrayal or unbuffered threat inside trusted structures"
+      ],
+      "bodilyStressConversions": [
+        "worst-case chaining and rapid doubt loops",
+        "routes abstraction into body cues, object handling, and spatial relation before naming"
+      ],
+      "silencePatterns": [
+        "uses silence as control gate before speech clears social risk",
+        "silence extends until external evidence forces response"
+      ],
+      "conflictResponsePatterns": [
+        "treating suspicion as external certainty",
+        "worst-case chaining and rapid doubt loops"
+      ],
+      "intimacyDistancePatterns": [
+        "protects attachment through selective disclosure and worst-case chaining and rapid doubt loops",
+        "tests group safety before trust by tracking risk-minimizing; delays commitment until signal confidence rises"
+      ],
+      "authorityResponsePatterns": [
+        "reads hierarchy through loyalty signals, weak seams, and authority reliability and answers with controlled leverage",
+        "resists authority moves that trigger betrayal or unbuffered threat inside trusted structures"
+      ],
+      "ritualMeaningPatterns": [
+        "meaning arrives as embodied alignment between ritual sequence and witness trust pacing",
+        "searches for meaning through ordered continuity of kinship obligation",
+        "treats uncertainty as proof of betrayal or unbuffered threat inside trusted structures"
+      ]
+    }
+  ]
+}

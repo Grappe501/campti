@@ -1,0 +1,105 @@
+{
+  "generatedAt": "2026-04-16T02:18:17.423Z",
+  "source": {
+    "id": "book1-source-chunk-23",
+    "title": "Book 1 Research Chunk 23",
+    "filePath": "docs/book1/chunk23.txt",
+    "rawChars": 52406,
+    "normalizedChars": 49713,
+    "chunkCount": 17
+  },
+  "counts": {
+    "claims": 5,
+    "events": 0,
+    "places": 1,
+    "fragments": 2,
+    "openQuestions": 3
+  },
+  "chronology": [],
+  "coreTruthSet": [
+    {
+      "id": "book23-claim-1722-layer-is-military-not-civil",
+      "description": "The 1722 page is explicitly modeled as a military population layer rather than a civilian census baseline.",
+      "confidence": 5,
+      "quoteExcerpt": "This is NOT a Civilian Census ... Military population layer (French troops).",
+      "needsReview": true
+    },
+    {
+      "id": "book23-claim-frontier-military-turnover-high",
+      "description": "High turnover (discharged, deserted, died) indicates unstable military churn and low long-horizon persistence for many individuals.",
+      "confidence": 5,
+      "quoteExcerpt": "Most of these men will NOT persist into long-term population.",
+      "needsReview": true
+    },
+    {
+      "id": "book23-claim-priority-triage-for-records",
+      "description": "Records are triaged into transient, potential settlers, and high-value reappearing individuals for downstream modeling depth.",
+      "confidence": 5,
+      "quoteExcerpt": "Classify into 3 groups: Transient, Potential Settlers, High-Value Individuals.",
+      "needsReview": true
+    },
+    {
+      "id": "book23-claim-spelling-fluid-identity-pattern-match",
+      "description": "Identity resolution must use pattern-based matching because spelling variation and duplicate forms are expected.",
+      "confidence": 5,
+      "quoteExcerpt": "Spelling is fluid -> identity must be matched by pattern, not exact name.",
+      "needsReview": true
+    },
+    {
+      "id": "book23-claim-military-layer-crucial-for-power-map",
+      "description": "Even with low genealogical persistence, this layer is critical for power structure, movement patterns, and frontier instability mapping.",
+      "confidence": 4,
+      "quoteExcerpt": "This page is STILL critical ... power structure ... movement patterns ... instability level.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book23-place-1722-military-population-frontier-layer",
+      "name": "1722 Military Population Frontier Layer",
+      "placeType": "REGION",
+      "description": "French military personnel layer for frontier power/turnover analysis, distinct from civilian/parish/land persistence datasets."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book23-frag-military-layer-to-civil-layer-bridge",
+      "title": "Military-to-Civil Layer Bridge",
+      "summary": "Cross-layer integration constraint.",
+      "text": "Military records should feed civil/parish/land linkage hypotheses rather than be treated as standalone population truth.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book23-frag-persistence-priority-profiling",
+      "title": "Persistence-Priority Profiling",
+      "summary": "Modeling-priority constraint.",
+      "text": "Profile depth should scale with persistence likelihood and cross-record recurrence, minimizing investment in low-retention transient rows.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book23-oq-desertion-destination-model",
+      "title": "How should likely desertion destinations (Spanish/Native zones) be modeled in movement and risk maps?",
+      "description": "Needed to connect military churn with cross-border pressure dynamics.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book23-oq-entity-resolution-confidence-rules",
+      "title": "What confidence rules should govern when spelling variants are merged versus kept separate?",
+      "description": "Needed to reduce false merges while preserving deduplication value.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book23-oq-military-to-settler-conversion-rate",
+      "title": "What proportion of discharged/pensioned soldiers become long-term settlers in this corridor?",
+      "description": "Needed to calibrate population transition assumptions.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

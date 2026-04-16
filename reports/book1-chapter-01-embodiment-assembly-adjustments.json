@@ -1,0 +1,64 @@
+{
+  "artifact": "chapter_embodiment_assembly_adjustments",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.071Z",
+  "segmentRules": [
+    {
+      "segment": 1,
+      "lowEmbodimentRisk": false,
+      "openingMustInclude": [],
+      "increasePhysicalActionDensity": false,
+      "increaseSensoryAnchoring": false,
+      "reduceDeclarativeExplanation": false
+    },
+    {
+      "segment": 2,
+      "lowEmbodimentRisk": true,
+      "openingMustInclude": [
+        "physical_action",
+        "sensory_cue",
+        "immediate_pressure_cue"
+      ],
+      "increasePhysicalActionDensity": true,
+      "increaseSensoryAnchoring": true,
+      "reduceDeclarativeExplanation": true
+    },
+    {
+      "segment": 3,
+      "lowEmbodimentRisk": false,
+      "openingMustInclude": [],
+      "increasePhysicalActionDensity": false,
+      "increaseSensoryAnchoring": false,
+      "reduceDeclarativeExplanation": false
+    },
+    {
+      "segment": 4,
+      "lowEmbodimentRisk": true,
+      "openingMustInclude": [
+        "physical_action",
+        "sensory_cue",
+        "immediate_pressure_cue"
+      ],
+      "increasePhysicalActionDensity": true,
+      "increaseSensoryAnchoring": true,
+      "reduceDeclarativeExplanation": true
+    },
+    {
+      "segment": 5,
+      "lowEmbodimentRisk": false,
+      "openingMustInclude": [],
+      "increasePhysicalActionDensity": false,
+      "increaseSensoryAnchoring": false,
+      "reduceDeclarativeExplanation": false
+    },
+    {
+      "segment": 6,
+      "lowEmbodimentRisk": false,
+      "openingMustInclude": [],
+      "increasePhysicalActionDensity": false,
+      "increaseSensoryAnchoring": false,
+      "reduceDeclarativeExplanation": false
+    }
+  ]
+}

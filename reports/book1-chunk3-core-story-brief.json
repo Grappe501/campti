@@ -1,0 +1,125 @@
+{
+  "generatedAt": "2026-04-16T01:21:57.369Z",
+  "source": {
+    "id": "book1-source-chunk-3",
+    "title": "Book 1 Research Chunk 3",
+    "filePath": "docs/book1/chunk3.txt",
+    "rawChars": 131523,
+    "normalizedChars": 36359,
+    "chunkCount": 11
+  },
+  "counts": {
+    "claims": 5,
+    "events": 0,
+    "places": 3,
+    "fragments": 3,
+    "openQuestions": 3
+  },
+  "chronology": [],
+  "coreTruthSet": [
+    {
+      "id": "book3-claim-natural-levee-precision-placement",
+      "description": "Natural levees are presented as precision settlement zones balancing flood avoidance, water access, and fertile soils.",
+      "confidence": 4,
+      "quoteExcerpt": "Not random placement—precision placement.",
+      "needsReview": true
+    },
+    {
+      "id": "book3-claim-oxbow-stability-settlement",
+      "description": "Oxbow lakes such as Cane River are described as settlement anchors due to stable water and reduced exposure relative to main channels.",
+      "confidence": 4,
+      "quoteExcerpt": "Oxbow lakes... former river channels... stable water sources... ideal for settlement... safer than main river flow.",
+      "needsReview": true
+    },
+    {
+      "id": "book3-claim-river-system-not-scenery",
+      "description": "The Red River is framed as a governing system of movement, boundaries, exchange, and information flow rather than passive background.",
+      "confidence": 4,
+      "quoteExcerpt": "The Red River is not scenery. It is: The road, the boundary, the marketplace, the messenger.",
+      "needsReview": true
+    },
+    {
+      "id": "book3-claim-cane-brake-defensive-infrastructure",
+      "description": "Cane brakes are treated as defensive and mobility infrastructure: barriers externally, pathways for those with local knowledge.",
+      "confidence": 3,
+      "quoteExcerpt": "Cane brakes function as natural barriers, defensive shields, hidden pathways (if you know them).",
+      "needsReview": true
+    },
+    {
+      "id": "book3-claim-power-through-water-literacy",
+      "description": "Power durability is tied to ecological literacy: those who read water movement and site correctly outlast competitors.",
+      "confidence": 3,
+      "quoteExcerpt": "Who understands where to build and where not to build survives longer than everyone else.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book3-place-cane-river-oxbow-anchor",
+      "name": "Cane River Oxbow Anchor",
+      "placeType": "LAKE",
+      "description": "Stable off-channel settlement anchor balancing access to routes with lower direct exposure to main-flow volatility."
+    },
+    {
+      "id": "book3-place-natural-levee-settlement-band",
+      "name": "Natural Levee Settlement Band",
+      "placeType": "REGION",
+      "description": "Slightly elevated alluvial ground used for durable village and field placement under recurring flood pressure."
+    },
+    {
+      "id": "book3-place-red-river-mobility-corridor",
+      "name": "Red River Mobility Corridor",
+      "placeType": "RIVER",
+      "description": "Primary movement artery linking settlement logic, exchange, and strategic positioning in the chapter’s geography-of-power frame."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book3-frag-main-channel-vs-oxbow-dual-logic",
+      "title": "Main Channel vs Oxbow Dual Logic",
+      "summary": "Core spatial tension constraint for chapter architecture.",
+      "text": "Main river channels prioritize movement and exposure; oxbow zones prioritize continuity and control. Strong chapters stage tension between these two geographies.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book3-frag-cane-brake-visibility-control",
+      "title": "Cane Brake Visibility Control",
+      "summary": "Scene-blocking and surveillance constraint.",
+      "text": "Cane brakes function as selective visibility infrastructure: concealment, defense, and controlled mobility for informed actors.",
+      "confidence": 3,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book3-frag-hydrological-literacy-as-power",
+      "title": "Hydrological Literacy as Power",
+      "summary": "Governance-through-geography constraint.",
+      "text": "Political survival follows hydrological literacy: reading bends, floods, narrows, and branches determines who can route people, goods, and risk.",
+      "confidence": 3,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book3-oq-cane-brake-route-knowledge-distribution",
+      "title": "Who held actionable knowledge of cane-brake routes and how was that knowledge controlled or transmitted?",
+      "description": "Needed for plausible power asymmetry in movement, defense, and secrecy scenes.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book3-oq-oxbow-main-channel-risk-deltas",
+      "title": "What measurable risk differences existed between main-channel and oxbow-adjacent settlement patterns?",
+      "description": "Helps calibrate scene stakes and migration/siting decisions beyond qualitative framing.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book3-oq-river-course-change-time-slices",
+      "title": "Which specific time slices show major Red River course shifts most relevant to Grappe-era settlement decisions?",
+      "description": "Need periodized river-change anchors to avoid flattening hydrological dynamics across generations.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "artifact": "chapter_opening_paragraph_family_plan",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.074Z",
+  "segments": [
+    {
+      "segment": 1,
+      "family": "perception_before_interpretation",
+      "previousFamily": null,
+      "sameAsPrevious": false,
+      "segmentBiasApplied": false
+    },
+    {
+      "segment": 2,
+      "family": "immediate_embodied_pressure",
+      "previousFamily": "perception_before_interpretation",
+      "sameAsPrevious": false,
+      "segmentBiasApplied": true
+    },
+    {
+      "segment": 3,
+      "family": "object_centered_attention",
+      "previousFamily": "immediate_embodied_pressure",
+      "sameAsPrevious": false,
+      "segmentBiasApplied": false
+    },
+    {
+      "segment": 4,
+      "family": "scene_already_in_motion",
+      "previousFamily": "object_centered_attention",
+      "sameAsPrevious": false,
+      "segmentBiasApplied": true
+    },
+    {
+      "segment": 5,
+      "family": "environmental_friction",
+      "previousFamily": "scene_already_in_motion",
+      "sameAsPrevious": false,
+      "segmentBiasApplied": false
+    },
+    {
+      "segment": 6,
+      "family": "social_tension_signal",
+      "previousFamily": "environmental_friction",
+      "sameAsPrevious": false,
+      "segmentBiasApplied": false
+    }
+  ]
+}

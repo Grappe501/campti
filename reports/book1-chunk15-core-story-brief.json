@@ -1,0 +1,99 @@
+{
+  "generatedAt": "2026-04-16T01:53:50.641Z",
+  "source": {
+    "id": "book1-source-chunk-15",
+    "title": "Book 1 Research Chunk 15",
+    "filePath": "docs/book1/chunk15.txt",
+    "rawChars": 27549,
+    "normalizedChars": 20860,
+    "chunkCount": 6
+  },
+  "counts": {
+    "claims": 3,
+    "events": 0,
+    "places": 1,
+    "fragments": 3,
+    "openQuestions": 3
+  },
+  "chronology": [],
+  "coreTruthSet": [
+    {
+      "id": "book15-claim-held-fire-state-for-transition",
+      "description": "The fire is managed in a held state (neither extinguished nor actively fed), signaling controlled transition conditions.",
+      "confidence": 5,
+      "quoteExcerpt": "Not allowed to die. Not fed. Held.",
+      "needsReview": true
+    },
+    {
+      "id": "book15-claim-environmental-cue-literacy-in-loss",
+      "description": "The second matriarch reads environmental micro-cues (air weight, scent shift, mat temperature) as part of transition awareness.",
+      "confidence": 4,
+      "quoteExcerpt": "The air had changed ... lighter ... emptier ... The smell of the house had shifted.",
+      "needsReview": true
+    },
+    {
+      "id": "book15-claim-grounded-steady-response-pattern",
+      "description": "Initial response behavior is grounded and procedural (listen, verify, move slowly), not performative panic.",
+      "confidence": 4,
+      "quoteExcerpt": "She did not move at first. She listened.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book15-place-pre-dawn-hearth-transition-house",
+      "name": "Pre-Dawn Hearth Transition House",
+      "placeType": "HOME",
+      "description": "Pre-dawn domestic interior where death recognition occurs through sensory continuity checks and controlled household rhythm."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book15-frag-absence-detection-protocol",
+      "title": "Absence Detection Protocol",
+      "summary": "Death-recognition constraint.",
+      "text": "Critical transitions are detected by disciplined attention to missing rhythms (breath, warmth, micro-motion) before overt communal response.",
+      "confidence": 5,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book15-frag-held-quiet-continuity-law",
+      "title": "Held Quiet Continuity Law",
+      "summary": "Continuity-under-loss constraint.",
+      "text": "Household continuity under loss is maintained by held quiet and controlled heat rather than abrupt symbolic rupture.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book15-frag-slow-verification-before-action",
+      "title": "Slow Verification Before Action",
+      "summary": "Response sequencing constraint.",
+      "text": "Legitimate authority response proceeds via slow verification and embodied confirmation before speech or broader coordination.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book15-oq-fire-state-symbolism-vs-practice",
+      "title": "How does held-fire protocol function both practically and symbolically during transition periods?",
+      "description": "Needed to align material practice with ritual meaning without over-abstracting.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book15-oq-household-death-procedure-order",
+      "title": "What is the procedural order after first recognition of death in the household?",
+      "description": "Needed to stage next-scene actions (notification, preparation, witness order) coherently.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book15-oq-second-matriarch-first-command-moment",
+      "title": "What moment marks the second matriarch’s first explicit command after recognition?",
+      "description": "Needed to define the shift from witness-recognition to active leadership authority.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

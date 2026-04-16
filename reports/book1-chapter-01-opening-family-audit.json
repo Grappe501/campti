@@ -1,0 +1,50 @@
+{
+  "artifact": "chapter_opening_family_audit",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.073Z",
+  "segments": [
+    {
+      "segment": 1,
+      "openingFamily": "withheld-knowledge-first",
+      "previousSegmentFamily": null,
+      "sameAsPrevious": false,
+      "forcedDivergenceApplied": false
+    },
+    {
+      "segment": 2,
+      "openingFamily": "interrupted-attention-first",
+      "previousSegmentFamily": "withheld-knowledge-first",
+      "sameAsPrevious": false,
+      "forcedDivergenceApplied": true
+    },
+    {
+      "segment": 3,
+      "openingFamily": "sensory-first",
+      "previousSegmentFamily": "interrupted-attention-first",
+      "sameAsPrevious": false,
+      "forcedDivergenceApplied": false
+    },
+    {
+      "segment": 4,
+      "openingFamily": "body-state-first",
+      "previousSegmentFamily": "sensory-first",
+      "sameAsPrevious": false,
+      "forcedDivergenceApplied": true
+    },
+    {
+      "segment": 5,
+      "openingFamily": "motion-first",
+      "previousSegmentFamily": "body-state-first",
+      "sameAsPrevious": false,
+      "forcedDivergenceApplied": false
+    },
+    {
+      "segment": 6,
+      "openingFamily": "sensory-first",
+      "previousSegmentFamily": "motion-first",
+      "sameAsPrevious": false,
+      "forcedDivergenceApplied": false
+    }
+  ]
+}

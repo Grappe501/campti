@@ -1,0 +1,79 @@
+{
+  "artifact": "chapter_lineage_conduit_report",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T16:25:48.236Z",
+  "activeAncestralFigures": [
+    {
+      "name": "First Matriarch",
+      "ancestral_priority": 1,
+      "direct_lineage_conduit": true,
+      "chronology_protection": true
+    },
+    {
+      "name": "Second Matriarch",
+      "ancestral_priority": 1,
+      "direct_lineage_conduit": true,
+      "chronology_protection": true
+    },
+    {
+      "name": "Third Matriarch",
+      "ancestral_priority": 1,
+      "direct_lineage_conduit": true,
+      "chronology_protection": true
+    },
+    {
+      "name": "Fourth Matriarch",
+      "ancestral_priority": 1,
+      "direct_lineage_conduit": true,
+      "chronology_protection": true
+    }
+  ],
+  "futureDescendantsLinkedThroughThem": [
+    {
+      "ancestor": "First Matriarch",
+      "descendants": [
+        "Alexis",
+        "Alexis Grappe",
+        "Francois Grappe",
+        "Buford Grappe",
+        "Coincoin"
+      ]
+    },
+    {
+      "ancestor": "Second Matriarch",
+      "descendants": [
+        "Alexis",
+        "Alexis Grappe",
+        "Francois Grappe",
+        "Buford Grappe",
+        "Coincoin"
+      ]
+    },
+    {
+      "ancestor": "Third Matriarch",
+      "descendants": [
+        "Alexis",
+        "Alexis Grappe",
+        "Francois Grappe",
+        "Buford Grappe",
+        "Coincoin"
+      ]
+    },
+    {
+      "ancestor": "Fourth Matriarch",
+      "descendants": [
+        "Alexis",
+        "Alexis Grappe",
+        "Francois Grappe",
+        "Buford Grappe",
+        "Coincoin"
+      ]
+    }
+  ],
+  "activeInheritancePressures": [
+    "Lineage authority transfer is active through matriarchal continuity cues.",
+    "Household governance pressure remains unresolved and carried as inherited duty.",
+    "Future descendants are linked as deferred consequence, not active chapter cast."
+  ]
+}

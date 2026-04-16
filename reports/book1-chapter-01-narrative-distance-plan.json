@@ -1,0 +1,134 @@
+{
+  "artifact": "chapter_narrative_distance_plan",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.076Z",
+  "paragraphs": [
+    {
+      "segment": 1,
+      "paragraph": "A",
+      "mode": "immediate_embodied",
+      "previousMode": null,
+      "sameAsPrevious": false
+    },
+    {
+      "segment": 1,
+      "paragraph": "B",
+      "mode": "close_observational",
+      "previousMode": "immediate_embodied",
+      "sameAsPrevious": false
+    },
+    {
+      "segment": 1,
+      "paragraph": "C",
+      "mode": "social_reading",
+      "previousMode": "close_observational",
+      "sameAsPrevious": false
+    },
+    {
+      "segment": 2,
+      "paragraph": "A",
+      "mode": "immediate_embodied",
+      "previousMode": "social_reading",
+      "sameAsPrevious": false
+    },
+    {
+      "segment": 2,
+      "paragraph": "B",
+      "mode": "social_reading",
+      "previousMode": "immediate_embodied",
+      "sameAsPrevious": false
+    },
+    {
+      "segment": 2,
+      "paragraph": "C",
+      "mode": "restrained_reflective",
+      "previousMode": "social_reading",
+      "sameAsPrevious": false
+    },
+    {
+      "segment": 3,
+      "paragraph": "A",
+      "mode": "immediate_embodied",
+      "previousMode": "restrained_reflective",
+      "sameAsPrevious": false
+    },
+    {
+      "segment": 3,
+      "paragraph": "B",
+      "mode": "close_observational",
+      "previousMode": "immediate_embodied",
+      "sameAsPrevious": false
+    },
+    {
+      "segment": 3,
+      "paragraph": "C",
+      "mode": "social_reading",
+      "previousMode": "close_observational",
+      "sameAsPrevious": false
+    },
+    {
+      "segment": 4,
+      "paragraph": "A",
+      "mode": "immediate_embodied",
+      "previousMode": "social_reading",
+      "sameAsPrevious": false
+    },
+    {
+      "segment": 4,
+      "paragraph": "B",
+      "mode": "social_reading",
+      "previousMode": "immediate_embodied",
+      "sameAsPrevious": false
+    },
+    {
+      "segment": 4,
+      "paragraph": "C",
+      "mode": "restrained_reflective",
+      "previousMode": "social_reading",
+      "sameAsPrevious": false
+    },
+    {
+      "segment": 5,
+      "paragraph": "A",
+      "mode": "immediate_embodied",
+      "previousMode": "restrained_reflective",
+      "sameAsPrevious": false
+    },
+    {
+      "segment": 5,
+      "paragraph": "B",
+      "mode": "close_observational",
+      "previousMode": "immediate_embodied",
+      "sameAsPrevious": false
+    },
+    {
+      "segment": 5,
+      "paragraph": "C",
+      "mode": "social_reading",
+      "previousMode": "close_observational",
+      "sameAsPrevious": false
+    },
+    {
+      "segment": 6,
+      "paragraph": "A",
+      "mode": "immediate_embodied",
+      "previousMode": "social_reading",
+      "sameAsPrevious": false
+    },
+    {
+      "segment": 6,
+      "paragraph": "B",
+      "mode": "social_reading",
+      "previousMode": "immediate_embodied",
+      "sameAsPrevious": false
+    },
+    {
+      "segment": 6,
+      "paragraph": "C",
+      "mode": "restrained_reflective",
+      "previousMode": "social_reading",
+      "sameAsPrevious": false
+    }
+  ]
+}

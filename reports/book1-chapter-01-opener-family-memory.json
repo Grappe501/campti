@@ -1,0 +1,74 @@
+{
+  "artifact": "chapter_opener_family_memory",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.019Z",
+  "entries": [
+    {
+      "segment": 1,
+      "paragraphIndex": 0,
+      "firstToken": "the",
+      "firstNounFamily": "room",
+      "firstVerbFamily": "arranges",
+      "firstSyntaxStem": "character-name-start",
+      "firstOrientationFamily": "motion",
+      "conflictDetected": false,
+      "forcedAlternativeApplied": true
+    },
+    {
+      "segment": 2,
+      "paragraphIndex": 0,
+      "firstToken": "alexis's",
+      "firstNounFamily": "s",
+      "firstVerbFamily": "alexis",
+      "firstSyntaxStem": "other",
+      "firstOrientationFamily": "object",
+      "conflictDetected": false,
+      "forcedAlternativeApplied": true
+    },
+    {
+      "segment": 3,
+      "paragraphIndex": 0,
+      "firstToken": "smoke",
+      "firstNounFamily": "and",
+      "firstVerbFamily": "reed",
+      "firstSyntaxStem": "character-name-start",
+      "firstOrientationFamily": "object",
+      "conflictDetected": true,
+      "forcedAlternativeApplied": false
+    },
+    {
+      "segment": 4,
+      "paragraphIndex": 0,
+      "firstToken": "alexis's",
+      "firstNounFamily": "s",
+      "firstVerbFamily": "alexis",
+      "firstSyntaxStem": "other",
+      "firstOrientationFamily": "motion",
+      "conflictDetected": true,
+      "forcedAlternativeApplied": false
+    },
+    {
+      "segment": 5,
+      "paragraphIndex": 0,
+      "firstToken": "alexis",
+      "firstNounFamily": "shifts",
+      "firstVerbFamily": "alexis",
+      "firstSyntaxStem": "character-name-start",
+      "firstOrientationFamily": "motion",
+      "conflictDetected": true,
+      "forcedAlternativeApplied": false
+    },
+    {
+      "segment": 6,
+      "paragraphIndex": 0,
+      "firstToken": "smoke",
+      "firstNounFamily": "and",
+      "firstVerbFamily": "reed",
+      "firstSyntaxStem": "character-name-start",
+      "firstOrientationFamily": "object",
+      "conflictDetected": true,
+      "forcedAlternativeApplied": false
+    }
+  ]
+}

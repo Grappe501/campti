@@ -1,0 +1,105 @@
+{
+  "generatedAt": "2026-04-16T01:38:46.102Z",
+  "source": {
+    "id": "book1-source-chunk-7",
+    "title": "Book 1 Research Chunk 7",
+    "filePath": "docs/book1/chunk7.txt",
+    "rawChars": 40272,
+    "normalizedChars": 13655,
+    "chunkCount": 4
+  },
+  "counts": {
+    "claims": 5,
+    "events": 0,
+    "places": 1,
+    "fragments": 2,
+    "openQuestions": 3
+  },
+  "chronology": [],
+  "coreTruthSet": [
+    {
+      "id": "book7-claim-comanche-system-rewriting-disruption",
+      "description": "Comanche are framed as a disruptive force whose full-plains mobility can rewrite existing system assumptions.",
+      "confidence": 4,
+      "quoteExcerpt": "Comanche ... disruptive force that rewrites the system ... full plains mobility.",
+      "needsReview": true
+    },
+    {
+      "id": "book7-claim-osage-dominant-range-power-assertion",
+      "description": "Osage are represented as dominant range holders using trade and conflict assertively to reinforce territorial control.",
+      "confidence": 4,
+      "quoteExcerpt": "Osage ... dominant range holders ... trade used to assert control and reinforce dominance.",
+      "needsReview": true
+    },
+    {
+      "id": "book7-claim-shift-building-power-to-holding-under-stress",
+      "description": "Narrative phase shifts from building influence to sustaining authority under escalating external stress.",
+      "confidence": 4,
+      "quoteExcerpt": "Story shifts from building power to holding power under stress.",
+      "needsReview": true
+    },
+    {
+      "id": "book7-claim-wichita-osage-comanche-pressure-systems",
+      "description": "Wichita, Osage, and Comanche are framed as pressure systems that test existing network stability rather than ordinary participants.",
+      "confidence": 4,
+      "quoteExcerpt": "Wichita -> Osage -> Comanche ... They are pressure systems.",
+      "needsReview": true
+    },
+    {
+      "id": "book7-claim-wichita-plains-river-connector-expansion",
+      "description": "Wichita are described as plains-river hybrids that expand system reach westward through mobile connector trade logic.",
+      "confidence": 4,
+      "quoteExcerpt": "Wichita ... Plains-River Hybrid ... They expand the system westward.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book7-place-plains-caddoan-pressure-interface",
+      "name": "Plains-Caddoan Pressure Interface",
+      "placeType": "REGION",
+      "description": "Strategic interface where mobile plains powers and established Caddoan-network actors generate sustained pressure on trust and control systems."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book7-frag-engaging-self-sufficient-power",
+      "title": "Engaging Self-Sufficient Power",
+      "summary": "Osage-facing power asymmetry constraint.",
+      "text": "When counterpart powers do not need your network, leverage shifts to boundary management, risk calculus, and selective reciprocity.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book7-frag-disruption-adaptation-cycle",
+      "title": "Disruption Adaptation Cycle",
+      "summary": "Comanche-facing adaptation constraint.",
+      "text": "System durability under Comanche-like disruption requires rapid adaptation loops that update movement, trade, and alliance assumptions in real time.",
+      "confidence": 3,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book7-oq-comanche-disruption-thresholds",
+      "title": "At what thresholds did Comanche mobility patterns force structural changes in existing alliance and trade systems?",
+      "description": "Needed to mark the transition from stress to systemic rewrite in chapter arcs.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book7-oq-osage-dominance-boundary-mechanisms",
+      "title": "What specific mechanisms did Osage use to enforce dominance across wide territorial ranges?",
+      "description": "Needed for realistic conflict and negotiation stakes under asymmetric power.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book7-oq-wichita-connector-route-architecture",
+      "title": "Which route architectures made Wichita connector power structurally distinct from river-centric Caddoan nodes?",
+      "description": "Needed to model westward expansion with concrete movement/trade mechanics.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

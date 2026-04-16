@@ -1,0 +1,66 @@
+{
+  "contractVersion": "1",
+  "scope": "author_cockpit_audit_workstream_1",
+  "generatedAtIso": "2026-04-15T00:00:00.000Z",
+  "authorRouteWiring": [
+    {
+      "route": "/admin/scenes/[id]/workspace",
+      "actions": [
+        "updateSceneWorkspace",
+        "generateSceneScaffold",
+        "generateSceneSummaryFromDraft",
+        "linkEntityToScene",
+        "unlinkEntityFromScene"
+      ],
+      "services": [
+        "loadSceneLegalityView",
+        "getSceneContextData",
+        "getSceneContinuityWarnings"
+      ],
+      "capabilityClass": "author_scene_workspace"
+    },
+    {
+      "route": "/admin/narrative",
+      "actions": [],
+      "services": [
+        "prisma.epic.findMany"
+      ],
+      "capabilityClass": "narrative_navigation_hub"
+    },
+    {
+      "route": "/admin/narrative/books/[bookId]",
+      "actions": [],
+      "services": [
+        "prisma.book.findUnique"
+      ],
+      "capabilityClass": "book_slice"
+    },
+    {
+      "route": "/admin/narrative/chapters/[chapterId]/assembly",
+      "actions": [],
+      "services": [
+        "assembleChapterReaderText"
+      ],
+      "capabilityClass": "chapter_assembly_slice"
+    },
+    {
+      "route": "/admin/scenes/[id]/observer",
+      "actions": [],
+      "services": [
+        "buildSceneObserverSnapshot"
+      ],
+      "capabilityClass": "debug_observer_slice"
+    }
+  ],
+  "capabilitiesWithoutUnifiedCockpitSurface": [
+    "actionOrchestrateSceneDraftPackage",
+    "actionOrchestrateChapterProductionPackage",
+    "actionOrchestrateBookProductionPackage",
+    "actionRunAuthorialInspection"
+  ],
+  "separationNotes": [
+    "reader_cockpit capability remains reader-owned via ui-ownership-service",
+    "author_inspection and conversation_observer capabilities remain author-owned",
+    "operator live surfaces remain outside author cockpit authority"
+  ]
+}

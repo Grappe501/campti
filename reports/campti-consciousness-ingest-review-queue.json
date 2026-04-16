@@ -1,0 +1,18 @@
+{
+  "generatedAt": "2026-04-16T19:58:57.238Z",
+  "ingestBatchId": "campti-consciousness-1776369537238",
+  "reviewQueue": [
+    {
+      "id": "unresolved-structural-groups",
+      "severity": "medium",
+      "type": "schema_decision",
+      "detail": "Missing structural group definitions: agents, agent_traits, agent_filters, agent_rules, scenarios, scenario_events, sim_runs, sim_agent_state.",
+      "sourcePaths": []
+    }
+  ],
+  "topSchemaDecisions": [
+    "Define canonical storage model for sim_agent_state snapshots (JSON envelope vs normalized child rows).",
+    "Decide whether scenario_events should be append-only event logs or mutable stateful records.",
+    "Decide trait/action namespace governance to avoid overlap with Enneagram and developmental intimacy layers."
+  ]
+}

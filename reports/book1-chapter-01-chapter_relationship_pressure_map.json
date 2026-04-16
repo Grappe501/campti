@@ -1,0 +1,40 @@
+{
+  "artifact": "chapter_relationship_pressure_map",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T16:25:48.236Z",
+  "relationships": [
+    {
+      "from": "First Matriarch",
+      "to": "Second Matriarch",
+      "pressureType": "kinship_duty",
+      "intensity": 0.58,
+      "chapterSignal": "cooperation appears intact but trust costs increase",
+      "futureArcTrigger": "pressure must intensify before civil-war threshold chapters"
+    },
+    {
+      "from": "Second Matriarch",
+      "to": "Third Matriarch",
+      "pressureType": "status_negotiation",
+      "intensity": 0.67,
+      "chapterSignal": "cooperation appears intact but trust costs increase",
+      "futureArcTrigger": "pressure must intensify before civil-war threshold chapters"
+    },
+    {
+      "from": "Third Matriarch",
+      "to": "Fourth Matriarch",
+      "pressureType": "resource_scarcity",
+      "intensity": 0.76,
+      "chapterSignal": "cooperation appears intact but trust costs increase",
+      "futureArcTrigger": "pressure must intensify before civil-war threshold chapters"
+    },
+    {
+      "from": "Fourth Matriarch",
+      "to": "First Matriarch",
+      "pressureType": "external_contact",
+      "intensity": 0.85,
+      "chapterSignal": "cooperation appears intact but trust costs increase",
+      "futureArcTrigger": "pressure must intensify before civil-war threshold chapters"
+    }
+  ]
+}

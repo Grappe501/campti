@@ -1,0 +1,43 @@
+{
+  "contractVersion": "1",
+  "scope": "phase8_plus_phase9_super_pass",
+  "evaluatedAtIso": "2026-04-15T19:04:48.645Z",
+  "subsystems": [
+    {
+      "subsystem": "creator_publishing_layer",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "deployment_governance",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "rollout_rollback_control",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "commercial_catalog",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "commercial_entitlements",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "release_monitoring",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "commercial_operator_surfaces",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "deployment_commercial_intelligence",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "deployment_commercial_layer",
+      "status": "acceptable"
+    }
+  ]
+}

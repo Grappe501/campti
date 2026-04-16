@@ -1,0 +1,113 @@
+{
+  "generatedAt": "2026-04-16T01:55:13.363Z",
+  "source": {
+    "id": "book1-source-chunk-16",
+    "title": "Book 1 Research Chunk 16",
+    "filePath": "docs/book1/chunk16.txt",
+    "rawChars": 20313,
+    "normalizedChars": 15332,
+    "chunkCount": 5
+  },
+  "counts": {
+    "claims": 5,
+    "events": 0,
+    "places": 1,
+    "fragments": 3,
+    "openQuestions": 3
+  },
+  "chronology": [],
+  "coreTruthSet": [
+    {
+      "id": "book16-claim-arranged-group-spacing-governance",
+      "description": "Group formation and inter-group distance operate as governance signals; spacing itself carries political meaning.",
+      "confidence": 5,
+      "quoteExcerpt": "The spacing between groups mattered most ... The distance itself held meaning.",
+      "needsReview": true
+    },
+    {
+      "id": "book16-claim-distributed-low-fire-assembly-pattern",
+      "description": "Assembly uses multiple low controlled fires instead of a single center, distributing attention and reducing singular authority cues.",
+      "confidence": 5,
+      "quoteExcerpt": "Not one central flame. Many. Each low. Each controlled.",
+      "needsReview": true
+    },
+    {
+      "id": "book16-claim-held-clearing-shared-stewardship",
+      "description": "The gathering site is framed as shared, held ground rather than proprietary territory, enabling multi-group coexistence.",
+      "confidence": 5,
+      "quoteExcerpt": "The land did not belong to anyone. That was why it held them all.",
+      "needsReview": true
+    },
+    {
+      "id": "book16-claim-clarity-delayed-as-procedure",
+      "description": "Environmental softening (smoke diffusion, layered sound) is treated as procedural delay, making immediate clarity intentionally unavailable.",
+      "confidence": 4,
+      "quoteExcerpt": "Clarity was not meant to come quickly here.",
+      "needsReview": true
+    },
+    {
+      "id": "book16-claim-multi-path-unmarked-network",
+      "description": "Multiple unmarked but visible paths indicate adaptive network memory across regular, occasional, and seasonal routes.",
+      "confidence": 4,
+      "quoteExcerpt": "Paths entered from every direction ... Not marked ... But visible.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book16-place-held-multi-group-clearing",
+      "name": "Held Multi-Group Clearing",
+      "placeType": "FIELD",
+      "description": "Slightly raised convergence ground with distributed entry paths and layered fire/smoke conditions for negotiated assembly."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book16-frag-spacing-as-diplomatic-language",
+      "title": "Spacing as Diplomatic Language",
+      "summary": "Spatial diplomacy constraint.",
+      "text": "Inter-group distance, intra-group formation, and entry posture function as pre-verbal diplomatic language in assembly spaces.",
+      "confidence": 5,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book16-frag-distributed-attention-management",
+      "title": "Distributed Attention Management",
+      "summary": "Attention-governance constraint.",
+      "text": "Multiple low fires and non-dominant sound layering keep attention distributed, preventing premature center capture.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book16-frag-entry-pause-awareness-protocol",
+      "title": "Entry Pause Awareness Protocol",
+      "summary": "Entry-sequencing constraint.",
+      "text": "Legitimate entry requires pause-and-read behavior at the edge, prioritizing environmental and relational awareness over immediacy.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book16-oq-distributed-fire-placement-rules",
+      "title": "What practical rules govern placement and count of low fires in multi-group gatherings?",
+      "description": "Needed to keep assembly staging materially coherent.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book16-oq-path-use-seasonality-signals",
+      "title": "How do seasonal path changes alter who can arrive, when, and with what relational leverage?",
+      "description": "Needed to connect route ecology with gathering power dynamics.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book16-oq-spacing-threshold-codes",
+      "title": "What spacing thresholds map to alliance, neutrality, and tension states in these assemblies?",
+      "description": "Needed for consistent spatial coding of political relations across scenes.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

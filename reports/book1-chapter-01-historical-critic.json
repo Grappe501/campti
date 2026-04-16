@@ -1,0 +1,68 @@
+{
+  "chapter": 1,
+  "critic": "Historical Texture Critic",
+  "generatedAt": "2026-04-16T19:48:40.721Z",
+  "findings": [
+    {
+      "severity": "high",
+      "excerpt": "From withheldKnowledge range, Alexis keeps decisions in signal-minimizing; delays commitment until signal confidence rises; conflict=treating suspicion as external certainty; only escalates after embodied evidence shifts; the pressure does not clear, and At...",
+      "whyItFails": "Context is imported as research residue, not metabolized into period action.",
+      "recommendedFixType": "evidence-pack fix"
+    },
+    {
+      "severity": "high",
+      "excerpt": "\"early caddo history el camino real d....",
+      "whyItFails": "Context is imported as research residue, not metabolized into period action.",
+      "recommendedFixType": "evidence-pack fix"
+    },
+    {
+      "severity": "high",
+      "excerpt": "\"Early Caddo History El Camino Real de los...",
+      "whyItFails": "Context is imported as research residue, not metabolized into period action.",
+      "recommendedFixType": "evidence-pack fix"
+    },
+    {
+      "severity": "high",
+      "excerpt": "From withheldKnowledge range, Alexis keeps decisions in risk-minimizing; delays commitment until signal confidence rises; conflict=treating suspicion as external certainty; only escalates after embodied evidence shifts; the pressure does not clear, and Unde...",
+      "whyItFails": "Context is imported as research residue, not metabolized into period action.",
+      "recommendedFixType": "evidence-pack fix"
+    },
+    {
+      "severity": "high",
+      "excerpt": "Alexis's shoulders set early, and the room reads the set before his words; the pressure does not clear, and Near the opening, River settlements define movement, signal, and belonging; the pressure does not clear, and Layer One: Handled proof stays material:...",
+      "whyItFails": "Context is imported as research residue, not metabolized into period action.",
+      "recommendedFixType": "evidence-pack fix"
+    },
+    {
+      "severity": "high",
+      "excerpt": "layer one: the natchitoches world bef....",
+      "whyItFails": "Context is imported as research residue, not metabolized into period action.",
+      "recommendedFixType": "evidence-pack fix"
+    },
+    {
+      "severity": "high",
+      "excerpt": "Layer One: Alexis, Augustin read rank through who speaks first, who waits.",
+      "whyItFails": "Context is imported as research residue, not metabolized into period action.",
+      "recommendedFixType": "evidence-pack fix"
+    },
+    {
+      "severity": "high",
+      "excerpt": "Layer One: The Natchitoches World Bef...",
+      "whyItFails": "Context is imported as research residue, not metabolized into period action.",
+      "recommendedFixType": "evidence-pack fix"
+    },
+    {
+      "severity": "high",
+      "excerpt": "Under closer pressure, Interpretive turn links domestic action to structural history..",
+      "whyItFails": "Context is imported as research residue, not metabolized into period action.",
+      "recommendedFixType": "evidence-pack fix"
+    },
+    {
+      "severity": "high",
+      "excerpt": "desire converts to increased attentiveness to partner's spatial position and task pace weather, distance, and witness placement physically constrain available speech Handled proof stays material: Caddoan presence, ~800–1000 AD onward Likely rooted in earlie...",
+      "whyItFails": "Context is imported as research residue, not metabolized into period action.",
+      "recommendedFixType": "evidence-pack fix"
+    }
+  ],
+  "verdict": "Historical texture fails adversarial review; lived-world embedding is insufficient."
+}

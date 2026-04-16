@@ -1,0 +1,97 @@
+{
+  "artifact": "chapter_epic_simulation",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T16:25:48.236Z",
+  "hiddenTimeline": [
+    {
+      "beatId": "H1",
+      "sequence": 1,
+      "latentEvent": "Clan allocates ritual labor before visible contact pressure.",
+      "inferredYear": 1672,
+      "actors": [
+        "First Matriarch",
+        "Second Matriarch"
+      ],
+      "pressureVectors": [
+        "kinship_duty",
+        "spiritual_obligation"
+      ],
+      "chapterSurfaceSignal": "Morning routines appear stable while obligations tighten.",
+      "futureArcConstraintLink": "Identity conflict must begin as internal duty tension.",
+      "evidenceRefs": [
+        "KN-1",
+        "KN-2",
+        "KN-3"
+      ]
+    },
+    {
+      "beatId": "H2",
+      "sequence": 2,
+      "latentEvent": "Resource scarcity silently reprioritizes inter-household trust.",
+      "inferredYear": 1674,
+      "actors": [
+        "First Matriarch",
+        "Second Matriarch",
+        "Third Matriarch",
+        "Fourth Matriarch"
+      ],
+      "pressureVectors": [
+        "resource_scarcity",
+        "status_negotiation"
+      ],
+      "chapterSurfaceSignal": "Distribution choices create subtle rank friction.",
+      "futureArcConstraintLink": "Succession arc later must inherit this scarcity memory.",
+      "evidenceRefs": [
+        "KN-4",
+        "KN-5",
+        "KN-6"
+      ]
+    },
+    {
+      "beatId": "H3",
+      "sequence": 3,
+      "latentEvent": "Observer faction records social debt ledger outside public speech.",
+      "inferredYear": 1676,
+      "actors": [
+        "First Matriarch",
+        "Second Matriarch",
+        "Third Matriarch",
+        "Fourth Matriarch"
+      ],
+      "pressureVectors": [
+        "status_negotiation",
+        "kinship_duty"
+      ],
+      "chapterSurfaceSignal": "Polite dialogue hides adjudication mechanics.",
+      "futureArcConstraintLink": "Future mediation scenes must echo hidden ledger logic.",
+      "evidenceRefs": [
+        "KN-7",
+        "KN-8",
+        "KN-9"
+      ]
+    },
+    {
+      "beatId": "H4",
+      "sequence": 4,
+      "latentEvent": "External-contact rumors alter internal oath language without public admission.",
+      "inferredYear": 1678,
+      "actors": [
+        "First Matriarch",
+        "Second Matriarch",
+        "Third Matriarch"
+      ],
+      "pressureVectors": [
+        "external_contact",
+        "spiritual_obligation"
+      ],
+      "chapterSurfaceSignal": "Ceremonial phrasing shifts by one generation.",
+      "futureArcConstraintLink": "Later colonial leverage must be pre-seeded, not sudden.",
+      "evidenceRefs": [
+        "KN-10",
+        "TE-1",
+        "TE-2"
+      ]
+    }
+  ]
+}

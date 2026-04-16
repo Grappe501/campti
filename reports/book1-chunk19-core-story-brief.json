@@ -1,0 +1,106 @@
+{
+  "generatedAt": "2026-04-16T02:01:35.690Z",
+  "source": {
+    "id": "book1-source-chunk-19",
+    "title": "Book 1 Research Chunk 19",
+    "filePath": "docs/book1/chunk19.txt",
+    "rawChars": 27358,
+    "normalizedChars": 24669,
+    "chunkCount": 8
+  },
+  "counts": {
+    "claims": 4,
+    "events": 0,
+    "places": 1,
+    "fragments": 3,
+    "openQuestions": 3
+  },
+  "chronology": [],
+  "coreTruthSet": [
+    {
+      "id": "book19-claim-authority-as-organizing-alignment",
+      "description": "Authority is reframed as alignment-organizing force rather than position, dominance, or command volume.",
+      "confidence": 5,
+      "quoteExcerpt": "True power does not force-it organizes.",
+      "needsReview": true
+    },
+    {
+      "id": "book19-claim-decision-filter-space-cohesion",
+      "description": "Decision filter evolves toward identifying what keeps the whole space from breaking, emphasizing stabilizers over incidents.",
+      "confidence": 5,
+      "quoteExcerpt": "What holds this entire space together? ... what keeps all of this from breaking?",
+      "needsReview": true
+    },
+    {
+      "id": "book19-claim-primary-mode-multi-system-awareness",
+      "description": "Primary perception mode shifts to simultaneous multi-system awareness across group style, spacing, and authority expression.",
+      "confidence": 5,
+      "quoteExcerpt": "Multi-System Awareness ... many systems interacting simultaneously.",
+      "needsReview": true
+    },
+    {
+      "id": "book19-claim-blindspot-scale-failure-underestimation",
+      "description": "Blind spot becomes overconfidence that large systems can always stabilize, without yet grasping scale-amplified failure.",
+      "confidence": 4,
+      "quoteExcerpt": "Believes large systems can always stabilize ... does NOT yet understand: scale can amplify failure.",
+      "needsReview": true
+    }
+  ],
+  "settingAnchors": [
+    {
+      "id": "book19-place-great-council-multisystem-container",
+      "name": "Great Council Multi-System Container",
+      "placeType": "FIELD",
+      "description": "Council-scale spatial container where multiple systems coexist without merging and where distance itself carries structural function."
+    }
+  ],
+  "continuityConstraints": [
+    {
+      "id": "book19-frag-systems-interacting-with-systems",
+      "title": "Systems Interacting With Systems",
+      "summary": "Scale-perception constraint.",
+      "text": "Scene cognition should prioritize system-to-system interactions rather than isolated individual motives at council scale.",
+      "confidence": 5,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book19-frag-awe-to-focus-regulation",
+      "title": "Awe-to-Focus Regulation",
+      "summary": "Affective-regulation constraint.",
+      "text": "Emotional response to scale should convert awe into controlled focus rather than fear or confusion.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "book19-frag-stillness-center-power-detection",
+      "title": "Stillness-Center Power Detection",
+      "summary": "Power-legibility constraint at scale.",
+      "text": "Power recognition emerges by tracking where stillness gathers and attention stabilizes across competing group motions.",
+      "confidence": 4,
+      "reviewStatus": "pending"
+    }
+  ],
+  "openResearchGaps": [
+    {
+      "id": "book19-oq-multisystem-readability-markers",
+      "title": "Which concrete markers best signal multi-system readability versus overload in council-scale scenes?",
+      "description": "Needed to keep Scene 15 complexity legible while preserving depth.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book19-oq-organizing-power-vs-command",
+      "title": "How can organizing power be shown consistently without reverting to command-and-dominance tropes?",
+      "description": "Needed for continuity with Campti-alignment authority model.",
+      "priority": 2,
+      "status": "open"
+    },
+    {
+      "id": "book19-oq-scale-failure-foreshadow-seeds",
+      "title": "What subtle Scene 15 seeds best foreshadow later scale-amplified failure without collapsing current coherence?",
+      "description": "Needed to set up Scene 17 while preserving present-stage confidence.",
+      "priority": 2,
+      "status": "open"
+    }
+  ]
+}

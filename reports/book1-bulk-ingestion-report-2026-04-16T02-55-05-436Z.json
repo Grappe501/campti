@@ -1,0 +1,474 @@
+{
+  "generatedAt": "2026-04-16T02:55:05.435Z",
+  "dryRun": true,
+  "range": {
+    "fromChunk": 1,
+    "toChunk": 5
+  },
+  "results": [
+    {
+      "chunkFileName": "chunk 1.txt",
+      "chunkRelativePath": "docs/book1/chunk 1.txt",
+      "matchedBriefFileNames": [
+        "phase2-chunk1-relationship-engine-core-inventory.md",
+        "phase3-chunk1-arc-engine-core-inventory.md"
+      ],
+      "classifierResult": {
+        "primary_mode": "worldbuilding",
+        "secondary_modes": [
+          "scene_text",
+          "lineage",
+          "setting_text"
+        ],
+        "density_label": "mixed_dense",
+        "mode_scores": {
+          "history": 17,
+          "lineage": 40,
+          "worldbuilding": 67,
+          "scene_text": 48,
+          "pov_text": 1,
+          "setting_text": 24,
+          "symbolic_text": 0,
+          "timeline_text": 22,
+          "interpretive_text": 17
+        },
+        "rationale": [
+          "primary_mode=worldbuilding",
+          "secondary_modes=scene_text,lineage,setting_text",
+          "density_label=mixed_dense"
+        ]
+      },
+      "segmentCount": 1051,
+      "knowledgeNodesCommitted": 996,
+      "entitiesCommitted": 54,
+      "relationshipsCommitted": 19,
+      "sceneComponentsCommitted": 120,
+      "timelineEventsCommitted": 24,
+      "retrievalProfilesCommitted": 1194,
+      "detectedSceneAnchors": [
+        1
+      ],
+      "ambiguousLayerAssignments": [
+        "multiple layer candidates for dry-source-1-seg-005: primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-007: primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-216: primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-012: symbolic_layer, primary_pov",
+        "multiple layer candidates for dry-source-1-seg-225: symbolic_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-232: symbolic_layer, primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-246: symbolic_layer, primary_pov",
+        "multiple layer candidates for dry-source-1-seg-222: interpretive_layer, secondary_pov",
+        "multiple layer candidates for dry-source-1-seg-228: interpretive_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-001: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-038: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-051: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-068: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-143: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-272: setting_layer, primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-647: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-694: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-709: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-006: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-010: setting_layer, primary_pov",
+        "multiple layer candidates for dry-source-1-seg-011: setting_layer, primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-014: setting_layer, primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-017: setting_layer, primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-019: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-024: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-036: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-040: setting_layer, primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-066: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-067: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-075: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-214: setting_layer, primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-227: setting_layer, primary_pov",
+        "multiple layer candidates for dry-source-1-seg-235: setting_layer, primary_pov",
+        "multiple layer candidates for dry-source-1-seg-238: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-249: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-252: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-649: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-828: environmental_layer, primary_pov",
+        "multiple layer candidates for dry-source-1-seg-873: environmental_layer, primary_pov"
+      ],
+      "warnings": [],
+      "manualReviewQueue": [
+        "multiple layer candidates for dry-source-1-seg-005: primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-007: primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-216: primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-012: symbolic_layer, primary_pov",
+        "multiple layer candidates for dry-source-1-seg-225: symbolic_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-232: symbolic_layer, primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-246: symbolic_layer, primary_pov",
+        "multiple layer candidates for dry-source-1-seg-222: interpretive_layer, secondary_pov",
+        "multiple layer candidates for dry-source-1-seg-228: interpretive_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-001: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-038: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-051: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-068: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-143: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-272: setting_layer, primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-647: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-694: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-709: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-006: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-010: setting_layer, primary_pov",
+        "multiple layer candidates for dry-source-1-seg-011: setting_layer, primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-014: setting_layer, primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-017: setting_layer, primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-019: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-024: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-036: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-040: setting_layer, primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-066: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-067: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-075: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-214: setting_layer, primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-227: setting_layer, primary_pov",
+        "multiple layer candidates for dry-source-1-seg-235: setting_layer, primary_pov",
+        "multiple layer candidates for dry-source-1-seg-238: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-249: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-252: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-649: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-1-seg-828: environmental_layer, primary_pov",
+        "multiple layer candidates for dry-source-1-seg-873: environmental_layer, primary_pov"
+      ]
+    },
+    {
+      "chunkFileName": "chunk2.txt",
+      "chunkRelativePath": "docs/book1/chunk2.txt",
+      "matchedBriefFileNames": [
+        "book1-chunk2-core-story-brief.md",
+        "chunk2-migration-runtime-dependency-map.md",
+        "phase2-chunk2-relationship-progression-reader-bonding-inventory.md",
+        "phase3-chunk2-chapter-movement-progression-inventory.md"
+      ],
+      "classifierResult": {
+        "primary_mode": "worldbuilding",
+        "secondary_modes": [
+          "scene_text",
+          "lineage",
+          "setting_text"
+        ],
+        "density_label": "mixed_dense",
+        "mode_scores": {
+          "history": 1,
+          "lineage": 9,
+          "worldbuilding": 54,
+          "scene_text": 10,
+          "pov_text": 2,
+          "setting_text": 7,
+          "symbolic_text": 0,
+          "timeline_text": 5,
+          "interpretive_text": 5
+        },
+        "rationale": [
+          "primary_mode=worldbuilding",
+          "secondary_modes=scene_text,lineage,setting_text",
+          "density_label=mixed_dense"
+        ]
+      },
+      "segmentCount": 1067,
+      "knowledgeNodesCommitted": 1048,
+      "entitiesCommitted": 14,
+      "relationshipsCommitted": 6,
+      "sceneComponentsCommitted": 47,
+      "timelineEventsCommitted": 5,
+      "retrievalProfilesCommitted": 1114,
+      "detectedSceneAnchors": [
+        2
+      ],
+      "ambiguousLayerAssignments": [
+        "multiple layer candidates for dry-source-2-seg-597: symbolic_layer, primary_pov",
+        "multiple layer candidates for dry-source-2-seg-412: observer_layer, primary_pov",
+        "multiple layer candidates for dry-source-2-seg-114: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-2-seg-352: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-2-seg-532: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-2-seg-686: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-2-seg-844: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-2-seg-847: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-2-seg-108: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-2-seg-280: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-2-seg-287: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-2-seg-832: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-2-seg-454: environmental_layer, primary_pov"
+      ],
+      "warnings": [],
+      "manualReviewQueue": [
+        "multiple layer candidates for dry-source-2-seg-597: symbolic_layer, primary_pov",
+        "multiple layer candidates for dry-source-2-seg-412: observer_layer, primary_pov",
+        "multiple layer candidates for dry-source-2-seg-114: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-2-seg-352: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-2-seg-532: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-2-seg-686: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-2-seg-844: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-2-seg-847: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-2-seg-108: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-2-seg-280: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-2-seg-287: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-2-seg-832: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-2-seg-454: environmental_layer, primary_pov"
+      ]
+    },
+    {
+      "chunkFileName": "chunk3.txt",
+      "chunkRelativePath": "docs/book1/chunk3.txt",
+      "matchedBriefFileNames": [
+        "book1-chunk3-core-story-brief.md",
+        "chunk3-contract-governance-inventory.md",
+        "phase2-chunk3-consequence-engine-core-inventory.md",
+        "phase3-chunk3-narrative-pressure-engine-inventory.md"
+      ],
+      "classifierResult": {
+        "primary_mode": "lineage",
+        "secondary_modes": [
+          "scene_text",
+          "worldbuilding",
+          "timeline_text"
+        ],
+        "density_label": "lineage_dense",
+        "mode_scores": {
+          "history": 0,
+          "lineage": 76,
+          "worldbuilding": 33,
+          "scene_text": 34,
+          "pov_text": 2,
+          "setting_text": 5,
+          "symbolic_text": 0,
+          "timeline_text": 22,
+          "interpretive_text": 3
+        },
+        "rationale": [
+          "primary_mode=lineage",
+          "secondary_modes=scene_text,worldbuilding,timeline_text",
+          "density_label=lineage_dense"
+        ]
+      },
+      "segmentCount": 1592,
+      "knowledgeNodesCommitted": 1557,
+      "entitiesCommitted": 44,
+      "relationshipsCommitted": 54,
+      "sceneComponentsCommitted": 69,
+      "timelineEventsCommitted": 19,
+      "retrievalProfilesCommitted": 1689,
+      "detectedSceneAnchors": [
+        3
+      ],
+      "ambiguousLayerAssignments": [
+        "multiple layer candidates for dry-source-3-seg-027: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-046: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-049: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-054: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-123: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-177: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-277: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-330: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-369: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-672: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-010: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-022: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-030: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-036: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-042: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-043: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-068: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-072: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-094: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-108: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-119: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-139: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-924: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-1154: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-106: environmental_layer, primary_pov",
+        "multiple layer candidates for dry-source-3-seg-627: environmental_layer, primary_pov",
+        "multiple layer candidates for dry-source-3-seg-1482: environmental_layer, primary_pov"
+      ],
+      "warnings": [],
+      "manualReviewQueue": [
+        "multiple layer candidates for dry-source-3-seg-027: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-046: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-049: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-054: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-123: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-177: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-277: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-330: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-369: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-672: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-010: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-022: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-030: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-036: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-042: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-043: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-068: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-072: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-094: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-108: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-119: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-139: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-924: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-1154: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-3-seg-106: environmental_layer, primary_pov",
+        "multiple layer candidates for dry-source-3-seg-627: environmental_layer, primary_pov",
+        "multiple layer candidates for dry-source-3-seg-1482: environmental_layer, primary_pov"
+      ]
+    },
+    {
+      "chunkFileName": "chunk4.txt",
+      "chunkRelativePath": "docs/book1/chunk4.txt",
+      "matchedBriefFileNames": [
+        "book1-chunk4-core-story-brief.md",
+        "chunk4-read-model-consolidation-inventory.md",
+        "phase2-chunk4-memory-activation-engine-inventory.md",
+        "phase3-chunk4-branch-governance-core-inventory.md"
+      ],
+      "classifierResult": {
+        "primary_mode": "lineage",
+        "secondary_modes": [
+          "worldbuilding",
+          "scene_text",
+          "timeline_text"
+        ],
+        "density_label": "lineage_dense",
+        "mode_scores": {
+          "history": 5,
+          "lineage": 41,
+          "worldbuilding": 37,
+          "scene_text": 21,
+          "pov_text": 0,
+          "setting_text": 1,
+          "symbolic_text": 1,
+          "timeline_text": 9,
+          "interpretive_text": 2
+        },
+        "rationale": [
+          "primary_mode=lineage",
+          "secondary_modes=worldbuilding,scene_text,timeline_text",
+          "density_label=lineage_dense"
+        ]
+      },
+      "segmentCount": 860,
+      "knowledgeNodesCommitted": 843,
+      "entitiesCommitted": 25,
+      "relationshipsCommitted": 34,
+      "sceneComponentsCommitted": 33,
+      "timelineEventsCommitted": 8,
+      "retrievalProfilesCommitted": 909,
+      "detectedSceneAnchors": [
+        4
+      ],
+      "ambiguousLayerAssignments": [
+        "multiple layer candidates for dry-source-4-seg-673: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-4-seg-707: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-4-seg-735: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-4-seg-218: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-4-seg-671: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-4-seg-812: setting_layer, primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-4-seg-819: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-4-seg-822: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-4-seg-846: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-4-seg-855: setting_layer, environmental_layer"
+      ],
+      "warnings": [],
+      "manualReviewQueue": [
+        "multiple layer candidates for dry-source-4-seg-673: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-4-seg-707: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-4-seg-735: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-4-seg-218: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-4-seg-671: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-4-seg-812: setting_layer, primary_pov, environmental_layer",
+        "multiple layer candidates for dry-source-4-seg-819: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-4-seg-822: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-4-seg-846: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-4-seg-855: setting_layer, environmental_layer"
+      ]
+    },
+    {
+      "chunkFileName": "chunk5.txt",
+      "chunkRelativePath": "docs/book1/chunk5.txt",
+      "matchedBriefFileNames": [
+        "book1-chunk5-core-story-brief.md",
+        "chunk5-boundary-enforcement-inventory.md",
+        "phase2-chunk5-emotional-continuity-expansion-inventory.md",
+        "phase3-chunk5-storyline-orchestrator-integration-inventory.md"
+      ],
+      "classifierResult": {
+        "primary_mode": "interpretive_text",
+        "secondary_modes": [
+          "worldbuilding",
+          "lineage",
+          "scene_text"
+        ],
+        "density_label": "interpretive_dense",
+        "mode_scores": {
+          "history": 6,
+          "lineage": 32,
+          "worldbuilding": 47,
+          "scene_text": 20,
+          "pov_text": 3,
+          "setting_text": 1,
+          "symbolic_text": 0,
+          "timeline_text": 2,
+          "interpretive_text": 50
+        },
+        "rationale": [
+          "primary_mode=interpretive_text",
+          "secondary_modes=worldbuilding,lineage,scene_text",
+          "density_label=interpretive_dense"
+        ]
+      },
+      "segmentCount": 1198,
+      "knowledgeNodesCommitted": 1174,
+      "entitiesCommitted": 19,
+      "relationshipsCommitted": 20,
+      "sceneComponentsCommitted": 90,
+      "timelineEventsCommitted": 2,
+      "retrievalProfilesCommitted": 1285,
+      "detectedSceneAnchors": [
+        5
+      ],
+      "ambiguousLayerAssignments": [
+        "multiple layer candidates for dry-source-5-seg-015: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-018: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-253: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-485: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-728: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-979: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-983: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-024: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-249: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-482: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-719: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-725: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-967: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-976: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-1178: setting_layer, environmental_layer"
+      ],
+      "warnings": [],
+      "manualReviewQueue": [
+        "multiple layer candidates for dry-source-5-seg-015: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-018: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-253: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-485: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-728: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-979: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-983: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-024: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-249: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-482: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-719: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-725: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-967: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-976: setting_layer, environmental_layer",
+        "multiple layer candidates for dry-source-5-seg-1178: setting_layer, environmental_layer"
+      ]
+    }
+  ],
+  "summary": {
+    "totalChunksScanned": 5,
+    "totalChunksIngested": 5,
+    "chunksWithNoBriefs": 0,
+    "chunksWithSceneMaterial": 5,
+    "chunksWithLineageMaterial": 5,
+    "chunksNeedingManualReview": 5
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "generatedAt": "2026-04-16T20:14:46.669Z",
+  "focus": "Top 5 Campti-native improvements for Chapter 1 and author cockpit.",
+  "recommendedImprovements": [
+    {
+      "title": "Add salience-budget gates to consciousness routing",
+      "sourceIdeas": [
+        "Limited Attention / Salience Budget",
+        "Global State vs Perceived State"
+      ],
+      "camptiSubsystemToModify": "consciousness engine",
+      "expectedBenefitToChapterOrCockpit": "Chapter 1 characters process fewer but more plausible cues, improving perspective realism.",
+      "betterThanImportingSimulator": "Reuses existing Campti cognition contracts and avoids external state machine coupling risk.",
+      "recommendedOrder": 1
+    },
+    {
+      "title": "Introduce perceived-vs-global state split in character console",
+      "sourceIdeas": [
+        "Global State vs Perceived State",
+        "Hidden Variables in Character Judgement"
+      ],
+      "camptiSubsystemToModify": "character console",
+      "expectedBenefitToChapterOrCockpit": "Improves misreading diagnostics and author ability to tune tension in Chapter 1 revisions.",
+      "betterThanImportingSimulator": "Extends current console semantics directly instead of adding parallel simulator entities and migration debt.",
+      "recommendedOrder": 2
+    },
+    {
+      "title": "Persist cognition deltas through regeneration loop",
+      "sourceIdeas": [
+        "Memory Persistence and State Accumulation",
+        "Perceive -> Appraise -> Emotion -> Intention -> Action -> Update Memory/State"
+      ],
+      "camptiSubsystemToModify": "regeneration loop",
+      "expectedBenefitToChapterOrCockpit": "Reduces continuity drift between Chapter 1 regeneration passes and stabilizes emotional carry-over.",
+      "betterThanImportingSimulator": "Leverages existing regeneration checkpoints and chronology guards already native to Campti.",
+      "recommendedOrder": 3
+    },
+    {
+      "title": "Add social feedback pressure previews in decision panel",
+      "sourceIdeas": [
+        "Social Feedback Loops",
+        "Meaning Generation / Self-Narrative"
+      ],
+      "camptiSubsystemToModify": "decision panel",
+      "expectedBenefitToChapterOrCockpit": "Authors can preview downstream relationship pressure impacts before committing branch decisions.",
+      "betterThanImportingSimulator": "Keeps governance in one Campti decision surface rather than syncing two divergent decision systems.",
+      "recommendedOrder": 4
+    },
+    {
+      "title": "Add cockpit-only deterministic/probabilistic simulation toggles",
+      "sourceIdeas": [
+        "Deterministic vs Probabilistic Modes",
+        "Observer-Dependent Rendering"
+      ],
+      "camptiSubsystemToModify": "author cockpit simulation controls",
+      "expectedBenefitToChapterOrCockpit": "Improves test reproducibility and exploratory what-if runs without leaking theory framing into runtime prose.",
+      "betterThanImportingSimulator": "Provides experimental flexibility while preserving Campti renderer contracts and canon safety barriers.",
+      "recommendedOrder": 5
+    }
+  ]
+}

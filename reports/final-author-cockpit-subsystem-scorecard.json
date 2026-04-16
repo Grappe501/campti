@@ -1,0 +1,35 @@
+{
+  "contractVersion": "1",
+  "scope": "phase10_phase11_author_command_cockpit",
+  "evaluatedAtIso": "2026-04-15T19:09:06.235Z",
+  "subsystems": [
+    {
+      "subsystem": "author_cockpit_consolidation",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "cockpit_shell_architecture",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "cockpit_scope_model",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "tool_rail_system",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "indicator_bank_model",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "guided_signals",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "author_command_cockpit_orchestration",
+      "status": "acceptable"
+    }
+  ]
+}

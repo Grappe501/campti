@@ -1,0 +1,388 @@
+{
+  "chapter": 1,
+  "critic": "Prose Shape Critic",
+  "generatedAt": "2026-04-16T19:48:40.721Z",
+  "findings": [
+    {
+      "category": "low_embodiment",
+      "segment": 1,
+      "position": "middle",
+      "severity": "high",
+      "excerpt": "The room arranges itself around what stays unsaid; the pressure does not clear, and Near the opening, River settlements define movement, risk, and belonging; the pressure does not clear, and \"Webb and Gregory; the pressure does not clear, and \\\"The Caddo In...",
+      "whyItFails": "Embodied sensory and material cues are too sparse for lived historical texture.",
+      "recommendedFixType": "lived-history fix",
+      "suggestedSystemTarget": "lived-history fix"
+    },
+    {
+      "category": "low_embodiment",
+      "segment": 2,
+      "position": "middle",
+      "severity": "high",
+      "excerpt": "Alexis's attention snaps to a hand movement that interrupts routine. Near the opening, signal-first scan of faces, doors, and pauses small ritual timing deviations surface interior strain without explicit thesis hand-pressure shift before irreversible partn...",
+      "whyItFails": "Embodied sensory and material cues are too sparse for lived historical texture.",
+      "recommendedFixType": "lived-history fix",
+      "suggestedSystemTarget": "lived-history fix"
+    },
+    {
+      "category": "low_embodiment",
+      "segment": 3,
+      "position": "middle",
+      "severity": "high",
+      "excerpt": "Smoke and wet reed meet skin before anyone risks a claim in river settlements define movement, risk. belonging.. Near the opening, Alexis filters detail through threat-first scan of faces, doors. pauses. mediation=notices threat-first scan of faces, doors. ...",
+      "whyItFails": "Embodied sensory and material cues are too sparse for lived historical texture.",
+      "recommendedFixType": "lived-history fix",
+      "suggestedSystemTarget": "lived-history fix"
+    },
+    {
+      "category": "low_embodiment",
+      "segment": 4,
+      "position": "middle",
+      "severity": "high",
+      "excerpt": "Alexis's shoulders set early, and the room reads the set before his words; the pressure does not clear, and Near the opening, River settlements define movement, signal, and belonging; the pressure does not clear, and Layer One: Handled proof stays material:...",
+      "whyItFails": "Embodied sensory and material cues are too sparse for lived historical texture.",
+      "recommendedFixType": "lived-history fix",
+      "suggestedSystemTarget": "lived-history fix"
+    },
+    {
+      "category": "low_embodiment",
+      "segment": 5,
+      "position": "middle",
+      "severity": "high",
+      "excerpt": "Alexis shifts lanes between hearth and doorway, forcing answers to move with him. Near the opening, threat-first scan of faces, doors, and pauses hands route feeling through handled objects before explicit explanation desire converts to increased attentiven...",
+      "whyItFails": "Embodied sensory and material cues are too sparse for lived historical texture.",
+      "recommendedFixType": "lived-history fix",
+      "suggestedSystemTarget": "lived-history fix"
+    },
+    {
+      "category": "low_embodiment",
+      "segment": 6,
+      "position": "middle",
+      "severity": "high",
+      "excerpt": "Smoke and wet reed meet skin before anyone risks a claim in river settlements define movement, signal. belonging.. Near the opening, Alexis filters detail through signal-first scan of faces, doors. pauses. mediation=notices signal-first scan of faces, doors...",
+      "whyItFails": "Embodied sensory and material cues are too sparse for lived historical texture.",
+      "recommendedFixType": "lived-history fix",
+      "suggestedSystemTarget": "lived-history fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 1,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "from withheldknowledge range, alexis",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 1,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "\"webb and gregory.",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 1,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "withholding remains lawful and",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 1,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "block abstract explanatory clauses",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 1,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "object positions, body orientation,",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 1,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "alexis tracks threat-first scan",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 1,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "pauses.",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 1,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "at the carry-forward edge,",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 1,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "belonging.",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 1,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "alexis, augustin read rank",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 1,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "who is trusted to",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 1,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "what remains withheld: no",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 1,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "do not resolve succession",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 1,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "motive exposure stays action-bound.",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 1,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "allow minimal abstraction only",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 2,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "from social-reading range, alexis",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 2,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "delays commitment until signal",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 2,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "conflict=treating suspicion as external",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 2,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "only escalates after embodied",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 2,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "motive signal stays action-bound.",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 2,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "object positions, body orientation.",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_opener",
+      "segment": 2,
+      "position": "start",
+      "severity": "critical",
+      "excerpt": "speaking order all shift,",
+      "whyItFails": "Repeated sentence openings indicate templated cadence and synthetic assembly patterns.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "voice-contract fix"
+    },
+    {
+      "category": "repeated_abstract_fear_language",
+      "segment": 1,
+      "position": "middle",
+      "severity": "medium",
+      "excerpt": "from withheldknowledge range alexis keeps decisions :: From withheldKnowledge range, Alexis keeps decisions in risk-minimizing; delays commitment until signal confidence rises; conflict=treating suspicion as external certainty; only escalates after embodied...",
+      "whyItFails": "Abstract fear wording repeats without embodied escalation markers.",
+      "recommendedFixType": "lived-history fix",
+      "suggestedSystemTarget": "composer fix"
+    },
+    {
+      "category": "repeated_abstract_fear_language",
+      "segment": 1,
+      "position": "middle",
+      "severity": "medium",
+      "excerpt": "object positions body orientation speaking order :: Object positions, body orientation, and speaking order all shift, marking altered rank and risk..",
+      "whyItFails": "Abstract fear wording repeats without embodied escalation markers.",
+      "recommendedFixType": "lived-history fix",
+      "suggestedSystemTarget": "composer fix"
+    },
+    {
+      "category": "repeated_abstract_fear_language",
+      "segment": 1,
+      "position": "middle",
+      "severity": "medium",
+      "excerpt": "alexis tracks threat first scan faces :: Alexis tracks threat-first scan of faces, doors.",
+      "whyItFails": "Abstract fear wording repeats without embodied escalation markers.",
+      "recommendedFixType": "lived-history fix",
+      "suggestedSystemTarget": "composer fix"
+    },
+    {
+      "category": "repeated_abstract_fear_language",
+      "segment": 1,
+      "position": "middle",
+      "severity": "medium",
+      "excerpt": "mediation notices threat first scan faces :: mediation=notices threat-first scan of faces, doors.",
+      "whyItFails": "Abstract fear wording repeats without embodied escalation markers.",
+      "recommendedFixType": "lived-history fix",
+      "suggestedSystemTarget": "composer fix"
+    },
+    {
+      "category": "repeated_abstract_fear_language",
+      "segment": 3,
+      "position": "middle",
+      "severity": "medium",
+      "excerpt": "settlements define movement risk :: settlements define movement, risk.",
+      "whyItFails": "Abstract fear wording repeats without embodied escalation markers.",
+      "recommendedFixType": "lived-history fix",
+      "suggestedSystemTarget": "composer fix"
+    },
+    {
+      "category": "repeated_abstract_fear_language",
+      "segment": 3,
+      "position": "middle",
+      "severity": "medium",
+      "excerpt": "speaking order all shift marking altered :: speaking order all shift, marking altered rank and risk..",
+      "whyItFails": "Abstract fear wording repeats without embodied escalation markers.",
+      "recommendedFixType": "lived-history fix",
+      "suggestedSystemTarget": "composer fix"
+    },
+    {
+      "category": "fear_language_density",
+      "segment": 1,
+      "position": "middle",
+      "severity": "medium",
+      "excerpt": "The room arranges itself around what stays unsaid; the pressure does not clear, and Near the opening, River settlements define movement, risk, and belonging; the pressure does not clear, and \"Webb and Gregory; the pressure does not clear, and \\\"The Caddo In...",
+      "whyItFails": "Fear language density is too high for nearby paragraphs at similar abstraction level.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "composer fix"
+    },
+    {
+      "category": "abstraction_overuse_by_segment",
+      "segment": 2,
+      "position": "middle",
+      "severity": "high",
+      "excerpt": "Alexis's attention snaps to a hand movement that interrupts routine. Near the opening, signal-first scan of faces, doors, and pauses small ritual timing deviations surface interior strain without explicit thesis hand-pressure shift before irreversible partn...",
+      "whyItFails": "Segment leans on abstract pressure labels instead of embodied causal detail.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "lived-history fix"
+    },
+    {
+      "category": "fear_language_density",
+      "segment": 3,
+      "position": "middle",
+      "severity": "medium",
+      "excerpt": "Smoke and wet reed meet skin before anyone risks a claim in river settlements define movement, risk. belonging.. Near the opening, Alexis filters detail through threat-first scan of faces, doors. pauses. mediation=notices threat-first scan of faces, doors. ...",
+      "whyItFails": "Fear language density is too high for nearby paragraphs at similar abstraction level.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "composer fix"
+    },
+    {
+      "category": "fear_language_density",
+      "segment": 5,
+      "position": "middle",
+      "severity": "medium",
+      "excerpt": "Alexis shifts lanes between hearth and doorway, forcing answers to move with him. Near the opening, threat-first scan of faces, doors, and pauses hands route feeling through handled objects before explicit explanation desire converts to increased attentiven...",
+      "whyItFails": "Fear language density is too high for nearby paragraphs at similar abstraction level.",
+      "recommendedFixType": "composer fix",
+      "suggestedSystemTarget": "composer fix"
+    }
+  ],
+  "verdict": "Synthetic prose signatures remain; regenerate after system-level fixes."
+}

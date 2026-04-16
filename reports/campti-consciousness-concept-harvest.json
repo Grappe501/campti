@@ -1,0 +1,441 @@
+{
+  "generatedAt": "2026-04-16T20:14:46.669Z",
+  "framing": "Design-harvest pass only. No external simulator ingestion.",
+  "provenance": {
+    "sourceRootPaths": [
+      "uploads/incoming/campti-consciousness-focused-campti"
+    ],
+    "sourceArtifacts": [
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-campti/book1-author-cockpit-simulation.json",
+        "sourceTitle": "book1-author-cockpit-simulation.json",
+        "extension": ".json",
+        "byteSize": 17842,
+        "sha256": "4fba8ee9bc1b99425117d97e2089a9f855d9d8fbf6f36aa11326b0d43c5e58e1",
+        "modifiedAt": "2026-04-16T15:33:02.901Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-consciousness-cohesion-router.json",
+        "sourceTitle": "book1-chapter-01-consciousness-cohesion-router.json",
+        "extension": ".json",
+        "byteSize": 21204,
+        "sha256": "97bb7386c299dcd182dd37202992310c49860b8c4b1f431d7d6a5a6224e935e4",
+        "modifiedAt": "2026-04-16T19:48:39.194Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-enneagram-consciousness-engine.json",
+        "sourceTitle": "book1-chapter-01-enneagram-consciousness-engine.json",
+        "extension": ".json",
+        "byteSize": 6012,
+        "sha256": "7557b4294a0b3a9ac487b59162048319a10e0e54cbd14ea0ff6752ef22a576a6",
+        "modifiedAt": "2026-04-16T19:48:39.193Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-enneagram-operating-layer.json",
+        "sourceTitle": "book1-chapter-01-enneagram-operating-layer.json",
+        "extension": ".json",
+        "byteSize": 2846,
+        "sha256": "bf572be80b1e0ebe5c3ef94cfaf638a475c195e767dba0491d97e98af98111b1",
+        "modifiedAt": "2026-04-16T19:48:39.193Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-segment-simulation-state.json",
+        "sourceTitle": "book1-chapter-01-segment-simulation-state.json",
+        "extension": ".json",
+        "byteSize": 10416,
+        "sha256": "e9d00399fe6c0e6eca56063dde472a469b81aa208040f8830a96a78da2accf2e",
+        "modifiedAt": "2026-04-16T19:48:39.193Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-campti/book1-enneagram-character-binding.json",
+        "sourceTitle": "book1-enneagram-character-binding.json",
+        "extension": ".json",
+        "byteSize": 3907,
+        "sha256": "115fa53a7609c71aab7667d903ba9f6a6061e7b3d9d0b3e8613e35d8473fc95d",
+        "modifiedAt": "2026-04-16T19:42:53.276Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-campti/book1-enneagram-normalized-model.json",
+        "sourceTitle": "book1-enneagram-normalized-model.json",
+        "extension": ".json",
+        "byteSize": 53113,
+        "sha256": "beabb548c78a044924041ac9b48bfd8b41f66344be0b194ba97c62ec77281ed1",
+        "modifiedAt": "2026-04-16T19:42:53.275Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-campti/book1-enneagram-source-ingest.json",
+        "sourceTitle": "book1-enneagram-source-ingest.json",
+        "extension": ".json",
+        "byteSize": 7343,
+        "sha256": "2a5ccd63102d5680ce34cf58cd3642efddfdb95ddf76c3bd309dc63ed96deb11",
+        "modifiedAt": "2026-04-16T19:42:53.273Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json",
+        "sourceTitle": "campti-consciousness-research-model.json",
+        "extension": ".json",
+        "byteSize": 2556,
+        "sha256": "ec2afc40fb81835f66128a28595647e0567d6d3b72d56b77c7625f2c7423fcdd",
+        "modifiedAt": "2026-04-16T19:58:57.270Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-runtime-mapping.json",
+        "sourceTitle": "campti-consciousness-runtime-mapping.json",
+        "extension": ".json",
+        "byteSize": 3786,
+        "sha256": "ca0cf903ba2ffb764dc1b7ef77148fde722cc5e372ded85764fb11f1d2f0b955",
+        "modifiedAt": "2026-04-16T19:58:57.272Z"
+      },
+      {
+        "filePath": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-structural-model.json",
+        "sourceTitle": "campti-consciousness-structural-model.json",
+        "extension": ".json",
+        "byteSize": 1878,
+        "sha256": "b89c7876ee0a6c08582c01fb70be182a4d4cf7667bee721836e38303643c33b2",
+        "modifiedAt": "2026-04-16T19:58:57.269Z"
+      }
+    ]
+  },
+  "concepts": [
+    {
+      "conceptName": "Perceive -> Appraise -> Emotion -> Intention -> Action -> Update Memory/State",
+      "shortDescription": "A staged cognition-action loop that can stabilize consciousness-layer state transitions.",
+      "findingCategory": "A_practical_ideas_to_adopt",
+      "sourceFiles": [
+        "uploads/incoming/campti-consciousness-focused-campti/book1-author-cockpit-simulation.json",
+        "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-consciousness-cohesion-router.json",
+        "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-enneagram-consciousness-engine.json",
+        "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-enneagram-operating-layer.json",
+        "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-segment-simulation-state.json",
+        "uploads/incoming/campti-consciousness-focused-campti/book1-enneagram-character-binding.json",
+        "uploads/incoming/campti-consciousness-focused-campti/book1-enneagram-normalized-model.json",
+        "uploads/incoming/campti-consciousness-focused-campti/book1-enneagram-source-ingest.json",
+        "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json",
+        "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-runtime-mapping.json",
+        "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-structural-model.json"
+      ],
+      "sourceEvidence": [
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-author-cockpit-simulation.json",
+          "sourceSha256": "4fba8ee9bc1b99425117d97e2089a9f855d9d8fbf6f36aa11326b0d43c5e58e1",
+          "snippet": "\"actions\": ["
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-author-cockpit-simulation.json",
+          "sourceSha256": "4fba8ee9bc1b99425117d97e2089a9f855d9d8fbf6f36aa11326b0d43c5e58e1",
+          "snippet": "\"actionId\": \"A-1\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-author-cockpit-simulation.json",
+          "sourceSha256": "4fba8ee9bc1b99425117d97e2089a9f855d9d8fbf6f36aa11326b0d43c5e58e1",
+          "snippet": "\"actionType\": \"update_chapter_law\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-author-cockpit-simulation.json",
+          "sourceSha256": "4fba8ee9bc1b99425117d97e2089a9f855d9d8fbf6f36aa11326b0d43c5e58e1",
+          "snippet": "\"actionId\": \"A-2\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-author-cockpit-simulation.json",
+          "sourceSha256": "4fba8ee9bc1b99425117d97e2089a9f855d9d8fbf6f36aa11326b0d43c5e58e1",
+          "snippet": "\"actionType\": \"adjust_symbolic_emphasis\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-author-cockpit-simulation.json",
+          "sourceSha256": "4fba8ee9bc1b99425117d97e2089a9f855d9d8fbf6f36aa11326b0d43c5e58e1",
+          "snippet": "\"actionId\": \"A-3\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-consciousness-cohesion-router.json",
+          "sourceSha256": "97bb7386c299dcd182dd37202992310c49860b8c4b1f431d7d6a5a6224e935e4",
+          "snippet": "\"abstractionCeilingOverride\": 0,"
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-consciousness-cohesion-router.json",
+          "sourceSha256": "97bb7386c299dcd182dd37202992310c49860b8c4b1f431d7d6a5a6224e935e4",
+          "snippet": "\"emotionalExposureMode\": \"guarded\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-consciousness-cohesion-router.json",
+          "sourceSha256": "97bb7386c299dcd182dd37202992310c49860b8c4b1f431d7d6a5a6224e935e4",
+          "snippet": "\"abstractionCeilingOverride\": 0,"
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-consciousness-cohesion-router.json",
+          "sourceSha256": "97bb7386c299dcd182dd37202992310c49860b8c4b1f431d7d6a5a6224e935e4",
+          "snippet": "\"emotionalExposureMode\": \"guarded\","
+        }
+      ],
+      "usefulnessForCampti": "Fits Campti-native consciousness sequencing and regeneration loop explainability without importing an external simulator runtime.",
+      "confidenceLevel": "high"
+    },
+    {
+      "conceptName": "Global State vs Perceived State",
+      "shortDescription": "Separate objective world-state from each character's subjective interpretation.",
+      "findingCategory": "A_practical_ideas_to_adopt",
+      "sourceFiles": [
+        "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json"
+      ],
+      "sourceEvidence": [
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json",
+          "sourceSha256": "ec2afc40fb81835f66128a28595647e0567d6d3b72d56b77c7625f2c7423fcdd",
+          "snippet": "\"conceptLabel\": \"local perceived state vs global state\","
+        }
+      ],
+      "usefulnessForCampti": "Directly improves character console misreading patterns, tension generation, and Chapter 1 perspective routing.",
+      "confidenceLevel": "high"
+    },
+    {
+      "conceptName": "Limited Attention / Salience Budget",
+      "shortDescription": "Constrain character processing to a bounded attention budget per scene turn.",
+      "findingCategory": "A_practical_ideas_to_adopt",
+      "sourceFiles": [
+        "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json",
+        "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-runtime-mapping.json"
+      ],
+      "sourceEvidence": [
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json",
+          "sourceSha256": "ec2afc40fb81835f66128a28595647e0567d6d3b72d56b77c7625f2c7423fcdd",
+          "snippet": "\"conceptLabel\": \"limited attention budget\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-runtime-mapping.json",
+          "sourceSha256": "ca0cf903ba2ffb764dc1b7ef77148fde722cc5e372ded85764fb11f1d2f0b955",
+          "snippet": "\"runtimeChannel\": \"limited_attention_salience_budget\","
+        }
+      ],
+      "usefulnessForCampti": "Prevents omniscient character cognition and sharpens narrative selectivity in the consciousness engine.",
+      "confidenceLevel": "high"
+    },
+    {
+      "conceptName": "Memory Persistence and State Accumulation",
+      "shortDescription": "Carry forward resolved and unresolved signals as persistent state across chapter turns.",
+      "findingCategory": "A_practical_ideas_to_adopt",
+      "sourceFiles": [
+        "uploads/incoming/campti-consciousness-focused-campti/book1-author-cockpit-simulation.json",
+        "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-enneagram-consciousness-engine.json",
+        "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-enneagram-operating-layer.json",
+        "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-segment-simulation-state.json",
+        "uploads/incoming/campti-consciousness-focused-campti/book1-enneagram-character-binding.json",
+        "uploads/incoming/campti-consciousness-focused-campti/book1-enneagram-normalized-model.json",
+        "uploads/incoming/campti-consciousness-focused-campti/book1-enneagram-source-ingest.json",
+        "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json"
+      ],
+      "sourceEvidence": [
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-author-cockpit-simulation.json",
+          "sourceSha256": "4fba8ee9bc1b99425117d97e2089a9f855d9d8fbf6f36aa11326b0d43c5e58e1",
+          "snippet": "\"rationale\": \"Increase river covenant motif to reinforce faith and survival continuity.\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-enneagram-consciousness-engine.json",
+          "sourceSha256": "7557b4294a0b3a9ac487b59162048319a10e0e54cbd14ea0ff6752ef22a576a6",
+          "snippet": "\"kinshipRole\": \"carries household continuity by guarding legacy fracture from witness scrutiny\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-enneagram-consciousness-engine.json",
+          "sourceSha256": "7557b4294a0b3a9ac487b59162048319a10e0e54cbd14ea0ff6752ef22a576a6",
+          "snippet": "\"seeks\": \"searches for meaning through ordered continuity of kinship obligation\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-enneagram-consciousness-engine.json",
+          "sourceSha256": "7557b4294a0b3a9ac487b59162048319a10e0e54cbd14ea0ff6752ef22a576a6",
+          "snippet": "\"kinshipRole\": \"carries household continuity by guarding legacy fracture from witness scrutiny\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-enneagram-consciousness-engine.json",
+          "sourceSha256": "7557b4294a0b3a9ac487b59162048319a10e0e54cbd14ea0ff6752ef22a576a6",
+          "snippet": "\"seeks\": \"searches for meaning through ordered continuity of kinship obligation\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-enneagram-operating-layer.json",
+          "sourceSha256": "bf572be80b1e0ebe5c3ef94cfaf638a475c195e767dba0491d97e98af98111b1",
+          "snippet": "\"Secure preserve kin continuity without public rupture.\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-enneagram-operating-layer.json",
+          "sourceSha256": "bf572be80b1e0ebe5c3ef94cfaf638a475c195e767dba0491d97e98af98111b1",
+          "snippet": "\"Secure preserve kin continuity without public rupture.\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-segment-simulation-state.json",
+          "sourceSha256": "e9d00399fe6c0e6eca56063dde472a469b81aa208040f8830a96a78da2accf2e",
+          "snippet": "\"wants\": \"Secure preserve kin continuity without public rupture.\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-segment-simulation-state.json",
+          "sourceSha256": "e9d00399fe6c0e6eca56063dde472a469b81aa208040f8830a96a78da2accf2e",
+          "snippet": "\"wants\": \"Secure preserve kin continuity without public rupture.\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-segment-simulation-state.json",
+          "sourceSha256": "e9d00399fe6c0e6eca56063dde472a469b81aa208040f8830a96a78da2accf2e",
+          "snippet": "\"wants\": \"Secure preserve kin continuity without public rupture.\","
+        }
+      ],
+      "usefulnessForCampti": "Strengthens chapter-to-chapter continuity and improves regeneration loop coherence without bypassing canon protections.",
+      "confidenceLevel": "high"
+    },
+    {
+      "conceptName": "Social Feedback Loops",
+      "shortDescription": "Model social responses that recursively alter future behavior and relationship pressure.",
+      "findingCategory": "A_practical_ideas_to_adopt",
+      "sourceFiles": [
+        "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json"
+      ],
+      "sourceEvidence": [
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json",
+          "sourceSha256": "ec2afc40fb81835f66128a28595647e0567d6d3b72d56b77c7625f2c7423fcdd",
+          "snippet": "\"conceptLabel\": \"social feedback loops\","
+        }
+      ],
+      "usefulnessForCampti": "Supports relationship pressure and downstream consequence tracking in cockpit simulation controls.",
+      "confidenceLevel": "medium"
+    },
+    {
+      "conceptName": "Meaning Generation / Self-Narrative",
+      "shortDescription": "Characters interpret events through identity-forming meaning frames, not raw facts.",
+      "findingCategory": "B_philosophical_design_inspiration",
+      "sourceFiles": [
+        "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json"
+      ],
+      "sourceEvidence": [
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json",
+          "sourceSha256": "ec2afc40fb81835f66128a28595647e0567d6d3b72d56b77c7625f2c7423fcdd",
+          "snippet": "\"conceptLabel\": \"meaning generation engine\","
+        }
+      ],
+      "usefulnessForCampti": "Useful as mediated design inspiration for character console and voice-cognition shaping, not as direct prose control labels.",
+      "confidenceLevel": "medium"
+    },
+    {
+      "conceptName": "Observer-Dependent Rendering",
+      "shortDescription": "Output varies by observer position and internal model of events.",
+      "findingCategory": "B_philosophical_design_inspiration",
+      "sourceFiles": [
+        "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-segment-simulation-state.json",
+        "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json",
+        "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-runtime-mapping.json"
+      ],
+      "sourceEvidence": [
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/book1-chapter-01-segment-simulation-state.json",
+          "sourceSha256": "e9d00399fe6c0e6eca56063dde472a469b81aa208040f8830a96a78da2accf2e",
+          "snippet": "\"visibleAction\": \"Observer lens captures status signals and hidden negotiations.. Hands and posture carry the exchange while river settlements define movement, risk, and belonging. layer one: the natchitoches world bef.... Layer One: The Natchitoches World Before Europe\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json",
+          "sourceSha256": "ec2afc40fb81835f66128a28595647e0567d6d3b72d56b77c7625f2c7423fcdd",
+          "snippet": "\"conceptId\": \"observer_dependent_rendering\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json",
+          "sourceSha256": "ec2afc40fb81835f66128a28595647e0567d6d3b72d56b77c7625f2c7423fcdd",
+          "snippet": "\"conceptLabel\": \"observer-dependent rendering\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json",
+          "sourceSha256": "ec2afc40fb81835f66128a28595647e0567d6d3b72d56b77c7625f2c7423fcdd",
+          "snippet": "\"conceptId\": \"entanglement_observer_metaphors\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json",
+          "sourceSha256": "ec2afc40fb81835f66128a28595647e0567d6d3b72d56b77c7625f2c7423fcdd",
+          "snippet": "\"conceptLabel\": \"entanglement/observer metaphors\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-runtime-mapping.json",
+          "sourceSha256": "ca0cf903ba2ffb764dc1b7ef77148fde722cc5e372ded85764fb11f1d2f0b955",
+          "snippet": "\"observer-collapse metaphysics\","
+        }
+      ],
+      "usefulnessForCampti": "Useful in cockpit simulation/author review views; should remain abstracted before any runtime prose exposure.",
+      "confidenceLevel": "high"
+    },
+    {
+      "conceptName": "Hidden Variables in Character Judgement",
+      "shortDescription": "Allow unknown latent factors to shape behavior without explicit exposition.",
+      "findingCategory": "B_philosophical_design_inspiration",
+      "sourceFiles": [
+        "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json"
+      ],
+      "sourceEvidence": [
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json",
+          "sourceSha256": "ec2afc40fb81835f66128a28595647e0567d6d3b72d56b77c7625f2c7423fcdd",
+          "snippet": "\"conceptLabel\": \"hidden variables\","
+        }
+      ],
+      "usefulnessForCampti": "Useful for uncertainty scaffolding in decision panel and character console ambiguity handling.",
+      "confidenceLevel": "medium"
+    },
+    {
+      "conceptName": "Deterministic vs Probabilistic Modes",
+      "shortDescription": "Switchable execution posture for repeatability vs variability in author simulations.",
+      "findingCategory": "B_philosophical_design_inspiration",
+      "sourceFiles": [
+        "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json"
+      ],
+      "sourceEvidence": [
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json",
+          "sourceSha256": "ec2afc40fb81835f66128a28595647e0567d6d3b72d56b77c7625f2c7423fcdd",
+          "snippet": "\"conceptId\": \"deterministic_vs_probabilistic_modes\","
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-research-model.json",
+          "sourceSha256": "ec2afc40fb81835f66128a28595647e0567d6d3b72d56b77c7625f2c7423fcdd",
+          "snippet": "\"conceptLabel\": \"deterministic vs probabilistic modes\","
+        }
+      ],
+      "usefulnessForCampti": "Useful as cockpit-only run-mode controls for testing without hardwiring metaphysics into runtime prose generation.",
+      "confidenceLevel": "medium"
+    },
+    {
+      "conceptName": "Cosmic/Nested Simulation Metaphysics",
+      "shortDescription": "Explicit metaphysical framing about reality layers and simulation assumptions.",
+      "findingCategory": "C_out_of_scope_for_now",
+      "sourceFiles": [
+        "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-runtime-mapping.json"
+      ],
+      "sourceEvidence": [
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-runtime-mapping.json",
+          "sourceSha256": "ca0cf903ba2ffb764dc1b7ef77148fde722cc5e372ded85764fb11f1d2f0b955",
+          "snippet": "\"proseExposureGuard\": \"No raw theory labels, metaphysics, or quantum analogies in prose output.\""
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-runtime-mapping.json",
+          "sourceSha256": "ca0cf903ba2ffb764dc1b7ef77148fde722cc5e372ded85764fb11f1d2f0b955",
+          "snippet": "\"proseExposureGuard\": \"No raw theory labels, metaphysics, or quantum analogies in prose output.\""
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-runtime-mapping.json",
+          "sourceSha256": "ca0cf903ba2ffb764dc1b7ef77148fde722cc5e372ded85764fb11f1d2f0b955",
+          "snippet": "\"proseExposureGuard\": \"No raw theory labels, metaphysics, or quantum analogies in prose output.\""
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-runtime-mapping.json",
+          "sourceSha256": "ca0cf903ba2ffb764dc1b7ef77148fde722cc5e372ded85764fb11f1d2f0b955",
+          "snippet": "\"proseExposureGuard\": \"No raw theory labels, metaphysics, or quantum analogies in prose output.\""
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-runtime-mapping.json",
+          "sourceSha256": "ca0cf903ba2ffb764dc1b7ef77148fde722cc5e372ded85764fb11f1d2f0b955",
+          "snippet": "\"proseExposureGuard\": \"No raw theory labels, metaphysics, or quantum analogies in prose output.\""
+        },
+        {
+          "sourceFile": "uploads/incoming/campti-consciousness-focused-campti/campti-consciousness-runtime-mapping.json",
+          "sourceSha256": "ca0cf903ba2ffb764dc1b7ef77148fde722cc5e372ded85764fb11f1d2f0b955",
+          "snippet": "\"proseExposureGuard\": \"No raw theory labels, metaphysics, or quantum analogies in prose output.\""
+        }
+      ],
+      "usefulnessForCampti": "Not needed for Campti runtime architecture and risks leaking theory labels into prose; keep as research-only.",
+      "confidenceLevel": "high"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "ok": false,
+  "reason": "missing_scene_tables",
+  "missingTables": [
+    "scene_anchors",
+    "scene_components"
+  ],
+  "suggestion": "Run Book 1 ingestion migration before scene validation.",
+  "generatedAt": "2026-04-16T03:06:14.061Z"
+}

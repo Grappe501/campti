@@ -1,0 +1,39 @@
+{
+  "contractVersion": "1",
+  "scope": "phase8_creator_ecosystem_publishing_layer",
+  "evaluatedAtIso": "2026-04-15T18:26:28.308Z",
+  "subsystems": [
+    {
+      "subsystem": "creator_identity_roles",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "workspace_project_isolation",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "editorial_workflow_approvals",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "publishing_package_governance",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "asset_metadata_governance",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "multi_creator_safety",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "public_publishing_surfaces",
+      "status": "acceptable"
+    },
+    {
+      "subsystem": "creator_publishing_verification_surface",
+      "status": "acceptable"
+    }
+  ]
+}

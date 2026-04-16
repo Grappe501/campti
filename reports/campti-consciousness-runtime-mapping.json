@@ -1,0 +1,109 @@
+{
+  "generatedAt": "2026-04-16T19:58:57.238Z",
+  "ingestBatchId": "campti-consciousness-1776369537238",
+  "mappingPolicy": {
+    "allowOnlyRuntimeSafeOutputs": true,
+    "preserveChronologyCanonProtections": true,
+    "doNotExposeTheoryLabelsInProse": true,
+    "keepDevelopmentalIntimacySeparateFromEnneagram": true,
+    "keepPhilosophicalSimulationOutsideCoreRenderer": true
+  },
+  "promotedRuntimeMappings": [
+    {
+      "runtimeChannel": "perception_bias_outputs",
+      "mappedFrom": {
+        "structuralSignals": [],
+        "structuralTraits": [],
+        "observedResearchLimitedToSafeAbstractions": []
+      },
+      "proseExposureGuard": "No raw theory labels, metaphysics, or quantum analogies in prose output."
+    },
+    {
+      "runtimeChannel": "omission_patterns",
+      "mappedFrom": {
+        "structuralSignals": [],
+        "structuralTraits": [],
+        "observedResearchLimitedToSafeAbstractions": []
+      },
+      "proseExposureGuard": "No raw theory labels, metaphysics, or quantum analogies in prose output."
+    },
+    {
+      "runtimeChannel": "misreading_patterns",
+      "mappedFrom": {
+        "structuralSignals": [],
+        "structuralTraits": [],
+        "observedResearchLimitedToSafeAbstractions": []
+      },
+      "proseExposureGuard": "No raw theory labels, metaphysics, or quantum analogies in prose output."
+    },
+    {
+      "runtimeChannel": "bodily_stress_conversions",
+      "mappedFrom": {
+        "structuralSignals": [],
+        "structuralTraits": [],
+        "observedResearchLimitedToSafeAbstractions": []
+      },
+      "proseExposureGuard": "No raw theory labels, metaphysics, or quantum analogies in prose output."
+    },
+    {
+      "runtimeChannel": "silence_patterns",
+      "mappedFrom": {
+        "structuralSignals": [],
+        "structuralTraits": [],
+        "observedResearchLimitedToSafeAbstractions": []
+      },
+      "proseExposureGuard": "No raw theory labels, metaphysics, or quantum analogies in prose output."
+    },
+    {
+      "runtimeChannel": "conflict_response_patterns",
+      "mappedFrom": {
+        "structuralSignals": [],
+        "structuralTraits": [],
+        "observedResearchLimitedToSafeAbstractions": []
+      },
+      "proseExposureGuard": "No raw theory labels, metaphysics, or quantum analogies in prose output."
+    },
+    {
+      "runtimeChannel": "intimacy_distance_patterns",
+      "mappedFrom": {
+        "structuralSignals": [],
+        "structuralTraits": [],
+        "observedResearchLimitedToSafeAbstractions": []
+      },
+      "proseExposureGuard": "No raw theory labels, metaphysics, or quantum analogies in prose output."
+    },
+    {
+      "runtimeChannel": "authority_response_patterns",
+      "mappedFrom": {
+        "structuralSignals": [],
+        "structuralTraits": [],
+        "observedResearchLimitedToSafeAbstractions": []
+      },
+      "proseExposureGuard": "No raw theory labels, metaphysics, or quantum analogies in prose output."
+    },
+    {
+      "runtimeChannel": "ritual_meaning_patterns",
+      "mappedFrom": {
+        "structuralSignals": [],
+        "structuralTraits": [],
+        "observedResearchLimitedToSafeAbstractions": []
+      },
+      "proseExposureGuard": "No raw theory labels, metaphysics, or quantum analogies in prose output."
+    },
+    {
+      "runtimeChannel": "limited_attention_salience_budget",
+      "mappedFrom": {
+        "structuralSignals": [],
+        "structuralTraits": [],
+        "observedResearchLimitedToSafeAbstractions": []
+      },
+      "proseExposureGuard": "No raw theory labels, metaphysics, or quantum analogies in prose output."
+    }
+  ],
+  "blockedDirectMappings": [
+    "cosmic simulation assumptions",
+    "observer-collapse metaphysics",
+    "explicit quantum theory analogies",
+    "raw theory labels"
+  ]
+}

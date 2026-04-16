@@ -1,0 +1,121 @@
+{
+  "contractVersion": "1",
+  "certificationScope": "phase10_phase11_workstream9_author_cockpit_certification",
+  "executedAtIso": "2026-04-15T19:09:06.235Z",
+  "commands": [
+    {
+      "command": "npx prisma validate",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npx prisma generate",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run typecheck",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run lint",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run build",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:migrations",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:contracts",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:contract-drift",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:interaction-truth-firewall",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:prelaunch:strict",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:full-system:strict",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:author-cockpit-consolidation",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:cockpit-shell-architecture",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:cockpit-scope-model",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:tool-rail-system",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:indicator-bank-model",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:guided-signals",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    },
+    {
+      "command": "npm run verify:author-command-cockpit",
+      "status": "pass",
+      "exitCode": 0,
+      "requiredByWorkstream9": true
+    }
+  ],
+  "summary": {
+    "total": 18,
+    "passed": 18,
+    "failed": 0,
+    "skipped": 0
+  }
+}

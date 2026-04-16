@@ -1,0 +1,55 @@
+{
+  "ok": true,
+  "canonicalSceneMax": 17,
+  "unexpectedAnchorCount": 3,
+  "anchors": [
+    {
+      "sceneNumber": 18,
+      "sceneKey": "book1-scene-18",
+      "title": "Book 1 Scene 18",
+      "componentCount": 1,
+      "touchedBySources": [
+        {
+          "sourceId": "cmo105b9a00ojvh7o0che4l3u",
+          "sourceKey": "book1-raw-chunk-9",
+          "fileName": "chunk9.txt",
+          "chunkNumber": 9,
+          "componentKey": "book1-scene-component-2ae77eb4d0",
+          "notes": "{\"provenance\":\"raw_chunk_authoritative_source\",\"matchedBriefs\":[\"docs/build/book1-chunk9-core-story-brief.md\",\"docs/build/phase3-chunk9-storyline-certification-run-inventory.md\"]}"
+        }
+      ]
+    },
+    {
+      "sceneNumber": 19,
+      "sceneKey": "book1-scene-19",
+      "title": "Book 1 Scene 19",
+      "componentCount": 1,
+      "touchedBySources": [
+        {
+          "sourceId": "cmo105b9a00ojvh7o0che4l3u",
+          "sourceKey": "book1-raw-chunk-9",
+          "fileName": "chunk9.txt",
+          "chunkNumber": 9,
+          "componentKey": "book1-scene-component-cb36fa5e11",
+          "notes": "{\"provenance\":\"raw_chunk_authoritative_source\",\"matchedBriefs\":[\"docs/build/book1-chunk9-core-story-brief.md\",\"docs/build/phase3-chunk9-storyline-certification-run-inventory.md\"]}"
+        }
+      ]
+    },
+    {
+      "sceneNumber": 20,
+      "sceneKey": "book1-scene-20",
+      "title": "Book 1 Scene 20",
+      "componentCount": 1,
+      "touchedBySources": [
+        {
+          "sourceId": "cmo105b9a00ojvh7o0che4l3u",
+          "sourceKey": "book1-raw-chunk-9",
+          "fileName": "chunk9.txt",
+          "chunkNumber": 9,
+          "componentKey": "book1-scene-component-0c0782d9b9",
+          "notes": "{\"provenance\":\"raw_chunk_authoritative_source\",\"matchedBriefs\":[\"docs/build/book1-chunk9-core-story-brief.md\",\"docs/build/phase3-chunk9-storyline-certification-run-inventory.md\"]}"
+        }
+      ]
+    }
+  ]
+}

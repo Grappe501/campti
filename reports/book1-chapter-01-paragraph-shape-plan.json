@@ -1,0 +1,44 @@
+{
+  "artifact": "chapter_paragraph_shape_plan",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.070Z",
+  "segmentProfiles": [
+    {
+      "segment": 1,
+      "dominantProfile": "compressed-intense",
+      "targetParagraphLength": "short",
+      "clauseDensity": "medium"
+    },
+    {
+      "segment": 2,
+      "dominantProfile": "action-threaded",
+      "targetParagraphLength": "medium",
+      "clauseDensity": "medium"
+    },
+    {
+      "segment": 3,
+      "dominantProfile": "action-threaded",
+      "targetParagraphLength": "medium",
+      "clauseDensity": "medium"
+    },
+    {
+      "segment": 4,
+      "dominantProfile": "environmental-drift",
+      "targetParagraphLength": "medium",
+      "clauseDensity": "medium"
+    },
+    {
+      "segment": 5,
+      "dominantProfile": "dialogic-tension",
+      "targetParagraphLength": "medium",
+      "clauseDensity": "low"
+    },
+    {
+      "segment": 6,
+      "dominantProfile": "environmental-drift",
+      "targetParagraphLength": "medium",
+      "clauseDensity": "medium"
+    }
+  ]
+}

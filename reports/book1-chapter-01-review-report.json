@@ -1,0 +1,278 @@
+{
+  "generatedAt": "2026-04-16T15:28:19.913Z",
+  "chapter1Summary": {
+    "proseNaturalness": {
+      "score": 100,
+      "findings": []
+    },
+    "outlineLeakage": {
+      "score": 100,
+      "findings": []
+    },
+    "historicalIntegrationQuality": {
+      "score": 100,
+      "findings": []
+    },
+    "characterCoherence": {
+      "score": 100,
+      "findings": []
+    },
+    "narrativeContinuity": {
+      "score": 100,
+      "findings": []
+    }
+  },
+  "chapter": {
+    "coherence": {
+      "score": 100,
+      "findings": []
+    },
+    "pacing": {
+      "score": 0,
+      "findings": [
+        "Segment 1 is outside target density (609 words).",
+        "Segment 2 is outside target density (601 words).",
+        "Segment 3 is outside target density (589 words).",
+        "Segment 4 is outside target density (609 words).",
+        "Segment 5 is outside target density (606 words).",
+        "Segment 6 is outside target density (619 words)."
+      ]
+    },
+    "emotionalArc": {
+      "score": 100,
+      "findings": []
+    }
+  },
+  "scenes": [
+    {
+      "segment": 1,
+      "clarity": {
+        "score": 0,
+        "notes": [
+          "Segment 1 should clarify action beats more concretely."
+        ]
+      },
+      "realism": {
+        "score": 0,
+        "notes": [
+          "Segment 1 needs stronger historical/physical grounding."
+        ]
+      },
+      "continuity": {
+        "score": 33,
+        "notes": [
+          "Segment 1 should strengthen carryover into A small anomaly in daily rhythm points toward incoming external systems."
+        ]
+      }
+    },
+    {
+      "segment": 2,
+      "clarity": {
+        "score": 0,
+        "notes": [
+          "Segment 2 should clarify action beats more concretely."
+        ]
+      },
+      "realism": {
+        "score": 33,
+        "notes": [
+          "Segment 2 needs stronger historical/physical grounding."
+        ]
+      },
+      "continuity": {
+        "score": 33,
+        "notes": [
+          "Segment 2 should strengthen carryover into A relational exchange reframes survival into social strategy."
+        ]
+      }
+    },
+    {
+      "segment": 3,
+      "clarity": {
+        "score": 0,
+        "notes": [
+          "Segment 3 should clarify action beats more concretely."
+        ]
+      },
+      "realism": {
+        "score": 0,
+        "notes": [
+          "Segment 3 needs stronger historical/physical grounding."
+        ]
+      },
+      "continuity": {
+        "score": 33,
+        "notes": [
+          "Segment 3 should strengthen carryover into Observation from another angle challenges the POV certainty."
+        ]
+      }
+    },
+    {
+      "segment": 4,
+      "clarity": {
+        "score": 0,
+        "notes": [
+          "Segment 4 should clarify action beats more concretely."
+        ]
+      },
+      "realism": {
+        "score": 0,
+        "notes": [
+          "Segment 4 needs stronger historical/physical grounding."
+        ]
+      },
+      "continuity": {
+        "score": 33,
+        "notes": [
+          "Segment 4 should strengthen carryover into Interpretive frame expands local scene into civilizational stakes."
+        ]
+      }
+    },
+    {
+      "segment": 5,
+      "clarity": {
+        "score": 0,
+        "notes": [
+          "Segment 5 should clarify action beats more concretely."
+        ]
+      },
+      "realism": {
+        "score": 0,
+        "notes": [
+          "Segment 5 needs stronger historical/physical grounding."
+        ]
+      },
+      "continuity": {
+        "score": 33,
+        "notes": [
+          "Segment 5 should strengthen carryover into A concrete vow closes the chapter while opening unresolved obligations."
+        ]
+      }
+    },
+    {
+      "segment": 6,
+      "clarity": {
+        "score": 0,
+        "notes": [
+          "Segment 6 should clarify action beats more concretely."
+        ]
+      },
+      "realism": {
+        "score": 0,
+        "notes": [
+          "Segment 6 needs stronger historical/physical grounding."
+        ]
+      },
+      "continuity": {
+        "score": 33,
+        "notes": [
+          "Segment 6 should strengthen carryover into Chapter 2 begins at the first visible fracture between inherited law and external leverage."
+        ]
+      }
+    }
+  ],
+  "paragraphs": [
+    {
+      "paragraphIndex": 1,
+      "proseQuality": {
+        "score": 67,
+        "notes": []
+      },
+      "redundancy": {
+        "score": 77,
+        "notes": []
+      },
+      "toneConsistency": {
+        "score": 0,
+        "notes": [
+          "Narrative control markers are inconsistent across paragraph."
+        ]
+      }
+    },
+    {
+      "paragraphIndex": 2,
+      "proseQuality": {
+        "score": 67,
+        "notes": []
+      },
+      "redundancy": {
+        "score": 78,
+        "notes": []
+      },
+      "toneConsistency": {
+        "score": 0,
+        "notes": [
+          "Narrative control markers are inconsistent across paragraph."
+        ]
+      }
+    },
+    {
+      "paragraphIndex": 3,
+      "proseQuality": {
+        "score": 67,
+        "notes": []
+      },
+      "redundancy": {
+        "score": 78,
+        "notes": []
+      },
+      "toneConsistency": {
+        "score": 0,
+        "notes": [
+          "Narrative control markers are inconsistent across paragraph."
+        ]
+      }
+    },
+    {
+      "paragraphIndex": 4,
+      "proseQuality": {
+        "score": 67,
+        "notes": []
+      },
+      "redundancy": {
+        "score": 78,
+        "notes": []
+      },
+      "toneConsistency": {
+        "score": 0,
+        "notes": [
+          "Narrative control markers are inconsistent across paragraph."
+        ]
+      }
+    },
+    {
+      "paragraphIndex": 5,
+      "proseQuality": {
+        "score": 67,
+        "notes": []
+      },
+      "redundancy": {
+        "score": 78,
+        "notes": []
+      },
+      "toneConsistency": {
+        "score": 0,
+        "notes": [
+          "Narrative control markers are inconsistent across paragraph."
+        ]
+      }
+    },
+    {
+      "paragraphIndex": 6,
+      "proseQuality": {
+        "score": 67,
+        "notes": []
+      },
+      "redundancy": {
+        "score": 75,
+        "notes": []
+      },
+      "toneConsistency": {
+        "score": 0,
+        "notes": [
+          "Narrative control markers are inconsistent across paragraph."
+        ]
+      }
+    }
+  ]
+}

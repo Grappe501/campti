@@ -1,0 +1,54 @@
+{
+  "artifact": "chapter_abstraction_suppression",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.076Z",
+  "blockedAbstractPatterns": [
+    "historical process",
+    "structural tension",
+    "systemic pressure",
+    "unresolved dynamic",
+    "social dynamic",
+    "pressure pattern",
+    "constraint field",
+    "risk profile",
+    "interior state"
+  ],
+  "substitutionRules": [
+    {
+      "from": "historical process",
+      "to": "handled object and repeated labor cue",
+      "strategy": "object interaction"
+    },
+    {
+      "from": "structural tension",
+      "to": "distance shift and speaking-order change",
+      "strategy": "spatial relation"
+    },
+    {
+      "from": "systemic pressure",
+      "to": "weather, body, and route constraint",
+      "strategy": "perception"
+    },
+    {
+      "from": "unresolved dynamic",
+      "to": "unfinished action and silence carry",
+      "strategy": "silence"
+    },
+    {
+      "from": "social dynamic",
+      "to": "witness pause and material contact",
+      "strategy": "social cue"
+    },
+    {
+      "from": "constraint field",
+      "to": "doorway spacing and hand-to-tool hesitation",
+      "strategy": "social cue"
+    },
+    {
+      "from": "interior state",
+      "to": "breath pattern and unfinished movement",
+      "strategy": "bodily cue"
+    }
+  ]
+}

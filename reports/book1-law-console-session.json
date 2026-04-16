@@ -1,0 +1,408 @@
+{
+  "artifact": "book1_law_console_session",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T15:46:32.672Z",
+  "governancePolicy": {
+    "allowChapterLawMutation": true,
+    "allowForeshadowingRetune": true,
+    "allowVoiceSpecTuning": true,
+    "allowAnchorMutation": false,
+    "simulationMode": "counterfactual"
+  },
+  "sourceStateProvenance": {
+    "sourceArtifacts": [
+      "reports/book1-chapter-01-chapter_law.json",
+      "reports/book1-chapter-01-chapter_voice_spec.json",
+      "reports/book1-chapter-01-chapter_epic_simulation.json",
+      "reports/book1-chapter-01-outline.json",
+      "reports/book1-chapter-01-chapter_draft.json",
+      "reports/book1-chapter-01-chapter_character_hidden_histories.json"
+    ],
+    "capturedAt": "2026-04-16T15:46:32.669Z"
+  },
+  "actions": [
+    {
+      "actionId": "LAW-1",
+      "chapter": 1,
+      "actionType": "adjust_symbolic_emphasis",
+      "targetKey": "river-oath-symbol",
+      "rationale": "Increase continuity signaling around ritual witness motif.",
+      "patch": {
+        "motifWeight": 0.74
+      },
+      "requestedBy": "chapter1_author_cockpit",
+      "requestedAt": "2026-04-16T15:46:32.670Z",
+      "provenanceRefs": [
+        "reports/book1-chapter-01-chapter_draft.json#segments[0]"
+      ]
+    },
+    {
+      "actionId": "LAW-2",
+      "chapter": 1,
+      "actionType": "adjust_foreshadowing_intensity",
+      "targetKey": "FA-2",
+      "rationale": "Raise chapter-end carry-forward pressure for succession instability.",
+      "patch": {
+        "intensityDelta": 0.18
+      },
+      "requestedBy": "chapter1_author_cockpit",
+      "requestedAt": "2026-04-16T15:46:32.670Z",
+      "provenanceRefs": [
+        "reports/book1-chapter-01-chapter_law.json#futureArcConstraints[1]"
+      ]
+    },
+    {
+      "actionId": "LAW-3",
+      "chapter": 1,
+      "actionType": "change_reveal_imply_balance",
+      "targetKey": "scene-4-observer-layer",
+      "rationale": "Shift observer section toward implication to preserve unresolved pressure.",
+      "patch": {
+        "revealRatio": 0.36,
+        "implyRatio": 0.64
+      },
+      "requestedBy": "chapter1_author_cockpit",
+      "requestedAt": "2026-04-16T15:46:32.670Z",
+      "provenanceRefs": [
+        "reports/book1-chapter-01-outline.json#timeline[3]"
+      ]
+    },
+    {
+      "actionId": "LAW-4",
+      "chapter": 1,
+      "actionType": "propose_anchor_mutation",
+      "targetKey": "H1",
+      "rationale": "Test locked-anchor governance for chapter law console.",
+      "patch": {
+        "latentEvent": "Mutated opening anchor"
+      },
+      "requestedBy": "chapter1_author_cockpit",
+      "requestedAt": "2026-04-16T15:46:32.670Z",
+      "provenanceRefs": [
+        "reports/book1-chapter-01-chapter_epic_simulation.json#hiddenTimeline[0]"
+      ]
+    }
+  ],
+  "evaluations": [
+    {
+      "actionId": "LAW-1",
+      "actionType": "adjust_symbolic_emphasis",
+      "targetKey": "river-oath-symbol",
+      "allowed": true,
+      "reason": "Action allowed in sandbox only; canonical state remains unchanged.",
+      "sandboxApplied": true,
+      "canonicalApplied": false,
+      "lockedAnchorViolation": false,
+      "canonRisk": "low",
+      "affected": {
+        "scenes": [
+          "chapter1-scene-01",
+          "chapter1-scene-02",
+          "chapter1-scene-03",
+          "chapter1-scene-04"
+        ],
+        "characters": [
+          "Alexis",
+          "Augustin",
+          "Caddo",
+          "Alexis Grappe"
+        ],
+        "themes": [
+          "continuity"
+        ],
+        "futureForeshadowingContracts": [
+          "FA-1: External-contact pressure remains latent and unresolved by chapter close."
+        ]
+      },
+      "simulatedDraftBehavior": {
+        "proseSignalShift": [
+          "Increase motif lexical repetition",
+          "Prioritize symbolic callbacks in sentence endings"
+        ],
+        "expectedSceneEffect": [
+          {
+            "scene": "chapter1-scene-01",
+            "behaviorDelta": "adjust_symbolic_emphasis changes narrative emphasis at chapter1-scene-01 via target river-oath-symbol."
+          },
+          {
+            "scene": "chapter1-scene-02",
+            "behaviorDelta": "adjust_symbolic_emphasis changes narrative emphasis at chapter1-scene-02 via target river-oath-symbol."
+          },
+          {
+            "scene": "chapter1-scene-03",
+            "behaviorDelta": "adjust_symbolic_emphasis changes narrative emphasis at chapter1-scene-03 via target river-oath-symbol."
+          },
+          {
+            "scene": "chapter1-scene-04",
+            "behaviorDelta": "adjust_symbolic_emphasis changes narrative emphasis at chapter1-scene-04 via target river-oath-symbol."
+          }
+        ],
+        "foreshadowingContractDelta": [
+          {
+            "contractId": "FA-1",
+            "impact": "Potentially retuned by adjust_symbolic_emphasis for river-oath-symbol."
+          }
+        ]
+      },
+      "provenance": {
+        "requestedBy": "chapter1_author_cockpit",
+        "requestedAt": "2026-04-16T15:46:32.670Z",
+        "refs": [
+          "reports/book1-chapter-01-chapter_draft.json#segments[0]"
+        ],
+        "policyMode": "counterfactual"
+      }
+    },
+    {
+      "actionId": "LAW-2",
+      "actionType": "adjust_foreshadowing_intensity",
+      "targetKey": "FA-2",
+      "allowed": true,
+      "reason": "Action allowed in sandbox only; canonical state remains unchanged.",
+      "sandboxApplied": true,
+      "canonicalApplied": false,
+      "lockedAnchorViolation": false,
+      "canonRisk": "high",
+      "affected": {
+        "scenes": [
+          "chapter1-scene-01",
+          "chapter1-scene-02",
+          "chapter1-scene-03",
+          "chapter1-scene-04"
+        ],
+        "characters": [
+          "Alexis",
+          "Augustin",
+          "Caddo",
+          "Alexis Grappe"
+        ],
+        "themes": [
+          "survival",
+          "faith"
+        ],
+        "futureForeshadowingContracts": [
+          "FA-1: External-contact pressure remains latent and unresolved by chapter close.",
+          "FA-2: Future chapter hooks must remain available: 2:1680-1690, 3:1690-1714, 4:1714-1735."
+        ]
+      },
+      "simulatedDraftBehavior": {
+        "proseSignalShift": [
+          "Raise unresolved future pressure markers",
+          "Increase long-arc hint frequency in segment transitions"
+        ],
+        "expectedSceneEffect": [
+          {
+            "scene": "chapter1-scene-01",
+            "behaviorDelta": "adjust_foreshadowing_intensity changes narrative emphasis at chapter1-scene-01 via target FA-2."
+          },
+          {
+            "scene": "chapter1-scene-02",
+            "behaviorDelta": "adjust_foreshadowing_intensity changes narrative emphasis at chapter1-scene-02 via target FA-2."
+          },
+          {
+            "scene": "chapter1-scene-03",
+            "behaviorDelta": "adjust_foreshadowing_intensity changes narrative emphasis at chapter1-scene-03 via target FA-2."
+          },
+          {
+            "scene": "chapter1-scene-04",
+            "behaviorDelta": "adjust_foreshadowing_intensity changes narrative emphasis at chapter1-scene-04 via target FA-2."
+          }
+        ],
+        "foreshadowingContractDelta": [
+          {
+            "contractId": "FA-1",
+            "impact": "Potentially retuned by adjust_foreshadowing_intensity for FA-2."
+          },
+          {
+            "contractId": "FA-2",
+            "impact": "Potentially retuned by adjust_foreshadowing_intensity for FA-2."
+          }
+        ]
+      },
+      "provenance": {
+        "requestedBy": "chapter1_author_cockpit",
+        "requestedAt": "2026-04-16T15:46:32.670Z",
+        "refs": [
+          "reports/book1-chapter-01-chapter_law.json#futureArcConstraints[1]"
+        ],
+        "policyMode": "counterfactual"
+      }
+    },
+    {
+      "actionId": "LAW-3",
+      "actionType": "change_reveal_imply_balance",
+      "targetKey": "scene-4-observer-layer",
+      "allowed": true,
+      "reason": "Action allowed in sandbox only; canonical state remains unchanged.",
+      "sandboxApplied": true,
+      "canonicalApplied": false,
+      "lockedAnchorViolation": false,
+      "canonRisk": "moderate",
+      "affected": {
+        "scenes": [
+          "chapter1-scene-01",
+          "chapter1-scene-02",
+          "chapter1-scene-03",
+          "chapter1-scene-04"
+        ],
+        "characters": [
+          "Alexis",
+          "Augustin",
+          "Caddo",
+          "Alexis Grappe"
+        ],
+        "themes": [
+          "identity",
+          "power"
+        ],
+        "futureForeshadowingContracts": [
+          "FA-1: External-contact pressure remains latent and unresolved by chapter close."
+        ]
+      },
+      "simulatedDraftBehavior": {
+        "proseSignalShift": [
+          "Shift explicit statements toward implication ratio",
+          "Limit direct exposition density"
+        ],
+        "expectedSceneEffect": [
+          {
+            "scene": "chapter1-scene-01",
+            "behaviorDelta": "change_reveal_imply_balance changes narrative emphasis at chapter1-scene-01 via target scene-4-observer-layer."
+          },
+          {
+            "scene": "chapter1-scene-02",
+            "behaviorDelta": "change_reveal_imply_balance changes narrative emphasis at chapter1-scene-02 via target scene-4-observer-layer."
+          },
+          {
+            "scene": "chapter1-scene-03",
+            "behaviorDelta": "change_reveal_imply_balance changes narrative emphasis at chapter1-scene-03 via target scene-4-observer-layer."
+          },
+          {
+            "scene": "chapter1-scene-04",
+            "behaviorDelta": "change_reveal_imply_balance changes narrative emphasis at chapter1-scene-04 via target scene-4-observer-layer."
+          }
+        ],
+        "foreshadowingContractDelta": [
+          {
+            "contractId": "FA-1",
+            "impact": "Potentially retuned by change_reveal_imply_balance for scene-4-observer-layer."
+          }
+        ]
+      },
+      "provenance": {
+        "requestedBy": "chapter1_author_cockpit",
+        "requestedAt": "2026-04-16T15:46:32.670Z",
+        "refs": [
+          "reports/book1-chapter-01-outline.json#timeline[3]"
+        ],
+        "policyMode": "counterfactual"
+      }
+    },
+    {
+      "actionId": "LAW-4",
+      "actionType": "propose_anchor_mutation",
+      "targetKey": "H1",
+      "allowed": false,
+      "reason": "Action propose_anchor_mutation is disallowed in simulationMode counterfactual.",
+      "sandboxApplied": false,
+      "canonicalApplied": false,
+      "lockedAnchorViolation": true,
+      "canonRisk": "critical",
+      "affected": {
+        "scenes": [
+          "chapter1-scene-01",
+          "chapter1-scene-02",
+          "chapter1-scene-03",
+          "chapter1-scene-04"
+        ],
+        "characters": [
+          "Alexis",
+          "Augustin",
+          "Caddo",
+          "Alexis Grappe"
+        ],
+        "themes": [
+          "continuity",
+          "identity"
+        ],
+        "futureForeshadowingContracts": [
+          "FA-1: External-contact pressure remains latent and unresolved by chapter close."
+        ]
+      },
+      "simulatedDraftBehavior": {
+        "proseSignalShift": [
+          "Mutate hidden-timeline anchor linkage cues",
+          "Re-map cause/effect references around anchor"
+        ],
+        "expectedSceneEffect": [
+          {
+            "scene": "chapter1-scene-01",
+            "behaviorDelta": "propose_anchor_mutation changes narrative emphasis at chapter1-scene-01 via target H1."
+          },
+          {
+            "scene": "chapter1-scene-02",
+            "behaviorDelta": "propose_anchor_mutation changes narrative emphasis at chapter1-scene-02 via target H1."
+          },
+          {
+            "scene": "chapter1-scene-03",
+            "behaviorDelta": "propose_anchor_mutation changes narrative emphasis at chapter1-scene-03 via target H1."
+          },
+          {
+            "scene": "chapter1-scene-04",
+            "behaviorDelta": "propose_anchor_mutation changes narrative emphasis at chapter1-scene-04 via target H1."
+          }
+        ],
+        "foreshadowingContractDelta": [
+          {
+            "contractId": "FA-1",
+            "impact": "Potentially retuned by propose_anchor_mutation for H1."
+          }
+        ]
+      },
+      "provenance": {
+        "requestedBy": "chapter1_author_cockpit",
+        "requestedAt": "2026-04-16T15:46:32.670Z",
+        "refs": [
+          "reports/book1-chapter-01-chapter_epic_simulation.json#hiddenTimeline[0]"
+        ],
+        "policyMode": "counterfactual"
+      }
+    }
+  ],
+  "branchSandbox": {
+    "sandboxId": "book1-law-console-2026-04-16T15-46-32-672Z",
+    "simulatedPatches": [
+      {
+        "actionId": "LAW-1",
+        "actionType": "adjust_symbolic_emphasis",
+        "targetKey": "river-oath-symbol",
+        "patch": {
+          "motifWeight": 0.74
+        },
+        "appliedAt": "2026-04-16T15:46:32.672Z"
+      },
+      {
+        "actionId": "LAW-2",
+        "actionType": "adjust_foreshadowing_intensity",
+        "targetKey": "FA-2",
+        "patch": {
+          "intensityDelta": 0.18
+        },
+        "appliedAt": "2026-04-16T15:46:32.672Z"
+      },
+      {
+        "actionId": "LAW-3",
+        "actionType": "change_reveal_imply_balance",
+        "targetKey": "scene-4-observer-layer",
+        "patch": {
+          "revealRatio": 0.36,
+          "implyRatio": 0.64
+        },
+        "appliedAt": "2026-04-16T15:46:32.672Z"
+      }
+    ],
+    "canonicalMutations": []
+  },
+  "canonicalStateProtected": true
+}

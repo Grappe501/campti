@@ -1,0 +1,34 @@
+{
+  "artifact": "chapter_voice_report",
+  "schemaVersion": "1.0.0",
+  "chapter": 1,
+  "generatedAt": "2026-04-16T19:48:39.019Z",
+  "checks": [
+    {
+      "check": "meta-language-block",
+      "passed": true,
+      "detail": "metaHits=0"
+    },
+    {
+      "check": "sensory-grounding",
+      "passed": true,
+      "detail": "sensoryHits=27"
+    },
+    {
+      "check": "kinship-signal-density",
+      "passed": false,
+      "detail": "kinshipHits=2"
+    },
+    {
+      "check": "voice-contract-rhythm-compliance",
+      "passed": false,
+      "detail": "rhythmCompliance=0"
+    },
+    {
+      "check": "voice-contract-synthetic-risk",
+      "passed": false,
+      "detail": "syntheticProseRisk=1"
+    }
+  ],
+  "passRate": 0.4
+}
