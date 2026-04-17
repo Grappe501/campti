@@ -10,6 +10,7 @@ import {
 } from "@/lib/services/book1-epic-outline-builder";
 import type { Chapter1SceneComponent } from "@/lib/services/book1-chapter1-deep-outline-generator";
 import { MATRIARCH_LINE_NAMES, isFutureDescendantOnlyEntity } from "@/lib/services/book1-lineage-conduit-service";
+import { Book1ChapterLawChronologyInvariantSourceRowSchema } from "@/lib/domain/book1-console-law-constraint";
 
 const EVIDENCE_KIND = ["knowledge_node", "timeline_event", "scene_component", "entity"] as const;
 const PRESSURE_KIND = ["kinship_duty", "resource_scarcity", "status_negotiation", "external_contact", "spiritual_obligation"] as const;
@@ -163,13 +164,7 @@ const ChapterLawSchema = z.object({
   schemaVersion: z.literal("1.0.0"),
   chapter: z.literal(1),
   generatedAt: z.string(),
-  chronologyInvariants: z.array(
-    z.object({
-      id: z.string(),
-      rule: z.string(),
-      enforcement: z.string(),
-    }),
-  ),
+  chronologyInvariants: z.array(Book1ChapterLawChronologyInvariantSourceRowSchema),
   futureArcConstraints: z.array(
     z.object({
       id: z.string(),

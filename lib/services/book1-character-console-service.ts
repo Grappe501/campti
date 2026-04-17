@@ -7,6 +7,14 @@ import {
   type Book1CharacterConsoleTurn,
   type Book1CharacterMutationKind,
 } from "@/lib/domain/book1-character-console";
+import {
+  Book1ChapterLawChronologyInvariantSourceRowSchema,
+  Book1ConsoleLawConstraintRowSchema,
+  chronologyInvariantToConsoleConstraintRow,
+  futureArcConstraintToConsoleConstraintRow,
+  sceneLawConstraintToConsoleRow,
+  type Book1ConsoleLawConstraintRow,
+} from "@/lib/domain/book1-console-law-constraint";
 
 const ChapterCharacterHiddenHistoriesSourceSchema = z.object({
   artifact: z.literal("chapter_character_hidden_histories"),
@@ -41,7 +49,7 @@ const ChapterRelationshipPressureMapSourceSchema = z.object({
 const ChapterLawSourceSchema = z.object({
   artifact: z.literal("chapter_law"),
   chapter: z.literal(1),
-  chronologyInvariants: z.array(z.object({ id: z.string(), rule: z.string(), enforcement: z.string() })),
+  chronologyInvariants: z.array(Book1ChapterLawChronologyInvariantSourceRowSchema),
   futureArcConstraints: z.array(z.object({ id: z.string(), mustPreserve: z.string(), forbiddenResolution: z.string() })),
 });
 
@@ -258,19 +266,8 @@ const CharacterConsoleSimulationPacketSchema = z.object({
       ritualMeaningPatterns: z.array(z.string()),
     })
     .optional(),
-  currentChapterLawConstraints: z.array(
-    z.object({
-      id: z.string(),
-      constraint: z.string(),
-      enforcement: z.string().optional(),
-    }),
-  ),
-  currentSceneLawConstraints: z.array(
-    z.object({
-      id: z.string(),
-      constraint: z.string(),
-    }),
-  ),
+  currentChapterLawConstraints: z.array(Book1ConsoleLawConstraintRowSchema),
+  currentSceneLawConstraints: z.array(Book1ConsoleLawConstraintRowSchema),
   provenance: z.object({
     sourceArtifacts: z.array(z.string()),
   }),
@@ -399,8 +396,8 @@ function buildSceneLawConstraints(input: {
   scene: number;
   sceneOutline: z.infer<typeof ChapterOutlineSourceSchema>["timeline"][number];
   sceneDraft?: z.infer<typeof ChapterDraftSourceSchema>["segments"][number];
-}) {
-  const rows = [
+}): Book1ConsoleLawConstraintRow[] {
+  const rows: Array<{ id: string; constraint: string }> = [
     {
       id: `SL-${input.scene}-focus`,
       constraint: `Preserve scene focus: ${input.sceneOutline.sceneFocus}`,
@@ -420,7 +417,7 @@ function buildSceneLawConstraints(input: {
       constraint: `Preserve segment objective: ${input.sceneDraft.objective}`,
     });
   }
-  return rows;
+  return rows.map(sceneLawConstraintToConsoleRow);
 }
 
 function mutationAllowedByPolicy(input: {
@@ -512,15 +509,10 @@ export class Book1CharacterConsoleService {
       relationshipPressureState.length > 0
         ? relationshipPressureState.reduce((sum, row) => sum + row.intensity, 0) / relationshipPressureState.length
         : 0.35;
-    const chapterLawConstraints = sourceState.chapterLaw.chronologyInvariants
-      .map((row) => ({ id: row.id, constraint: row.rule, enforcement: row.enforcement }))
-      .concat(
-        sourceState.chapterLaw.futureArcConstraints.map((row) => ({
-          id: row.id,
-          constraint: `${row.mustPreserve} | Forbidden: ${row.forbiddenResolution}`,
-          enforcement: "future_arc",
-        })),
-      );
+    const chapterLawConstraints: Book1ConsoleLawConstraintRow[] = [
+      ...sourceState.chapterLaw.chronologyInvariants.map(chronologyInvariantToConsoleConstraintRow),
+      ...sourceState.chapterLaw.futureArcConstraints.map(futureArcConstraintToConsoleConstraintRow),
+    ];
     const sceneLawConstraints = buildSceneLawConstraints({
       scene: selection.scene,
       sceneOutline,

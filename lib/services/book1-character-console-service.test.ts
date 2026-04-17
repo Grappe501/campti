@@ -5,6 +5,7 @@ import type {
   Book1CharacterConsoleGovernancePolicy,
   Book1CharacterConsoleTurn,
 } from "@/lib/domain/book1-character-console";
+import { BOOK1_CONSOLE_ENFORCEMENT } from "@/lib/domain/book1-console-law-constraint";
 import {
   Book1CharacterConsoleService,
   type Book1CharacterConsoleSourceState,
@@ -225,6 +226,16 @@ describe("book1-character-console-service", () => {
     assert.equal(result.session.simulationPacket.canonicalIdentity.character, "Alexis");
     assert.equal(result.session.simulationPacket.currentSceneLawConstraints.length > 0, true);
     assert.equal(result.session.simulationPacket.currentChapterLawConstraints.length > 0, true);
+    for (const row of result.session.simulationPacket.currentChapterLawConstraints) {
+      assert.equal(typeof row.enforcement, "string");
+      assert.ok(row.enforcement.length > 0);
+    }
+    for (const row of result.session.simulationPacket.currentSceneLawConstraints) {
+      assert.equal(row.enforcement, BOOK1_CONSOLE_ENFORCEMENT.sceneLawConstraint);
+    }
+    const fa = result.session.simulationPacket.currentChapterLawConstraints.find((row) => row.id === "FA-1");
+    assert.ok(fa);
+    assert.equal(fa.enforcement, BOOK1_CONSOLE_ENFORCEMENT.futureArcConstraint);
     assert.equal(result.session.simulationPacket.falseBeliefs.length > 0, true);
     assert.equal(result.session.simulationPacket.rawEnneagramOperatingLayer?.enneagramType, "6");
     assert.equal(
@@ -233,6 +244,28 @@ describe("book1-character-console-service", () => {
       ),
       true,
     );
+  });
+
+  it("derives chronology_invariant in packet when chapter_law omits chronology enforcement", () => {
+    const service = new Book1CharacterConsoleService();
+    const now = new Date().toISOString();
+    const base = sampleSourceState();
+    const sourceState: Book1CharacterConsoleSourceState = {
+      ...base,
+      chapterLaw: {
+        ...base.chapterLaw,
+        chronologyInvariants: [{ id: "CI-OMIT", rule: "Temporal rule without artifact enforcement field." }],
+      },
+    };
+    const result = service.runSession({
+      sourceState,
+      selection: { chapter: 1, scene: 1, character: "Alexis" },
+      governancePolicy: samplePolicy({ simulationMode: "observer" }),
+      turns: sampleTurns(now).slice(0, 1),
+    });
+    const row = result.session.simulationPacket.currentChapterLawConstraints.find((r) => r.id === "CI-OMIT");
+    assert.ok(row);
+    assert.equal(row.enforcement, BOOK1_CONSOLE_ENFORCEMENT.chronologyInvariant);
   });
 
   it("blocks interventions in observer mode", () => {

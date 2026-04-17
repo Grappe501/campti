@@ -8,6 +8,7 @@ import {
   type Book1AuthorSimulationGovernancePolicy,
   type Book1SimulationMode,
 } from "@/lib/domain/book1-author-cockpit-simulation";
+import { Book1ChapterLawChronologyInvariantSourceRowSchema } from "@/lib/domain/book1-console-law-constraint";
 
 const ChapterEpicSimulationSourceSchema = z.object({
   artifact: z.literal("chapter_epic_simulation"),
@@ -28,7 +29,7 @@ const ChapterEpicSimulationSourceSchema = z.object({
 const ChapterLawSourceSchema = z.object({
   artifact: z.literal("chapter_law"),
   chapter: z.literal(1),
-  chronologyInvariants: z.array(z.object({ id: z.string(), rule: z.string(), enforcement: z.string() })),
+  chronologyInvariants: z.array(Book1ChapterLawChronologyInvariantSourceRowSchema),
   futureArcConstraints: z.array(z.object({ id: z.string(), mustPreserve: z.string(), forbiddenResolution: z.string() })),
 });
 

@@ -75,6 +75,7 @@ import { ProseGenerationValidationService } from "@/lib/services/prose-generatio
 import { SettingThreadCoverageService } from "@/lib/services/setting-thread-coverage-service";
 import { Book1BeatAssemblyService } from "@/lib/services/book1-beat-assembly-service";
 import { ThreadCallbackReentryService } from "@/lib/services/thread-callback-reentry-service";
+import { Book1ChapterLawChronologyInvariantSourceRowSchema } from "@/lib/domain/book1-console-law-constraint";
 import { ProseGenerationConstraintsSchema } from "@/lib/domain/prose-generation-constraints";
 import { ChapterCompositionPlanSchema } from "@/lib/domain/chapter-composition";
 import { LiteraryDeviceCockpitService } from "@/lib/services/literary-device-cockpit-service";
@@ -108,7 +109,7 @@ const ChapterEvidencePackSchema = z.object({
 const ChapterLawSchema = z.object({
   artifact: z.literal("chapter_law"),
   chapter: z.literal(1),
-  chronologyInvariants: z.array(z.object({ id: z.string(), rule: z.string(), enforcement: z.string() })),
+  chronologyInvariants: z.array(Book1ChapterLawChronologyInvariantSourceRowSchema),
   futureArcConstraints: z.array(z.object({ id: z.string(), mustPreserve: z.string(), forbiddenResolution: z.string() })),
   compositionFirewall: z.object({
     allowedInputs: z.array(z.string()),
