@@ -155,4 +155,15 @@ export type SceneGenerationInput = {
    * Populated on DB production scene generation when canonical governance prep runs.
    */
   canonicalPreGeneration?: import("@/lib/domain/canonical-scene-generation-governance").CanonicalPreGenerationBundle | null;
+
+  /**
+   * Cluster 5 — prose realism shaping (prompt lines + pre-gen profile). Wired on the canonical scene path.
+   */
+  proseRealismLayer?: import("@/lib/domain/prose-realism").ProseRealismLayerArtifact | null;
+
+  /**
+   * Cluster 6 — attachment, relational stakes, consequence persistence, generational burden runtime governors.
+   * Derived after Cluster 3/4 governance merge; included in canonical hash and model prompt when present.
+   */
+  humanGravityRuntime?: import("@/lib/domain/human-gravity-runtime").HumanGravityRuntimeProfile | null;
 };

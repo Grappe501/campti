@@ -1,0 +1,58 @@
+{
+  "artifact": "book1_prose_realism_sample_report",
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-04-16T00:00:00.000Z",
+  "bookId": "book1",
+  "chapterId": "book1-chapter-01",
+  "summary": "Sample Cluster 5 diagnostics illustrating scene-level realism bundles after canonical scene generation.",
+  "scenes": [
+    {
+      "sceneId": "scene-01",
+      "inferredRole": "grounding_scene",
+      "preGenerationProfile": {
+        "realismScore": 0.71,
+        "eraTruthScore": 0.74,
+        "cognitionTruthScore": 0.68,
+        "narratorBoundaryScore": 0.72,
+        "emotionalCredibilityScore": 0.69,
+        "sensoryEmbodimentScore": 0.73,
+        "voiceDistinctnessScore": 0.7,
+        "consequenceResidueScore": 0.66,
+        "literaryNaturalnessScore": 0.71,
+        "antiMechanicalScore": 0.72
+      },
+      "postValidationHighlights": {
+        "narratorCharacterDistinction": "Witness framing kept subordinate to embodied labor detail.",
+        "eraTruth": "No modern psych register detected in deterministic scan.",
+        "residue": "Closure left relational proximity unresolved (advisory alignment with EEGS carry-forward)."
+      },
+      "driftWarningsSample": ["Low embodied sensory grounding for historical scene mode."],
+      "literaryNaturalizationSample": "Symbol bound to route memory (mud on planks) rather than abstract theme naming."
+    },
+    {
+      "sceneId": "scene-02",
+      "inferredRole": "pressure_scene",
+      "preGenerationProfile": {
+        "realismScore": 0.69,
+        "voiceDistinctnessScore": 0.72
+      },
+      "notes": "Voice differentiation lines push alternate sentence entry vs grounding scene."
+    }
+  ],
+  "cockpitPanelExample": {
+    "chapterId": "book1-chapter-01",
+    "governanceLinked": true,
+    "recommendedRefinementTargets": [
+      "vary sentence entry across scenes",
+      "keep devices bound to place/thread",
+      "prefer behavioral residue over emotion labels"
+    ]
+  },
+  "remainingWeakSpots": [
+    "DB-only governance adapter may use synthetic adjacent scene for sequence parity — realism scores still valid but chapter roles are heuristic."
+  ],
+  "nextHardeningRecommendations": [
+    "Deterministic callback half-echo scoring vs thread anchors",
+    "Optional chapter-batch cadence divergence metric"
+  ]
+}

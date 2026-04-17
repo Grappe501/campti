@@ -87,6 +87,11 @@ import { LiterarySymbolRegistryService } from "@/lib/services/literary-symbol-re
 import { SceneGenerationEngineService } from "@/lib/services/scene-generation-engine-service";
 import { CanonicalNarrativeGovernanceOrchestrationService } from "@/lib/services/canonical-narrative-governance-orchestration-service";
 import { buildCluster3RuntimeActivationTruth } from "@/lib/services/canonical-runtime-cluster3-governance-service";
+import {
+  buildHumanGravityRuntimeCockpitPanelFromProfile,
+  HumanGravityRuntimeDerivationService,
+} from "@/lib/services/human-gravity-runtime-derivation-service";
+import { buildProseRealismCockpitPanelFromGovernance } from "@/lib/services/prose-realism-derivation-service";
 import { RUNTIME_ID_BOOK1_REGENERATION } from "@/lib/services/runtime-authority-registry-service";
 
 const ChapterEvidencePackSchema = z.object({
@@ -3595,14 +3600,27 @@ export class Book1RegenerationLoopService {
       "literary_device_cockpit",
       "narrative_sequence_architecture",
       "scene_generation_engine",
+      "prose_narrative_realism_cluster5",
       "epic_narrative_continuity",
       "epic_continuity_validation",
       "epic_emotional_gravity",
       "epic_emotional_gravity_validation",
+      "human_gravity_runtime_cluster6",
       "narrator_presence_engine",
       "narrator_convergence_engine",
     );
     if (beatAssemblyBlocked) {
+      const humanGravitySceneId =
+        chapterComposition.sceneSequence[0]?.sceneId ?? `${chapterState.chapterId}:runtime-scene`;
+      const humanGravityRuntimePanel = buildHumanGravityRuntimeCockpitPanelFromProfile(
+        new HumanGravityRuntimeDerivationService().deriveFromPackContext({
+          pack: epicEmotionalGravityPack,
+          chapterId: chapterState.chapterId,
+          sceneId: humanGravitySceneId,
+          chapterSequence: chapterState.sequenceNumber,
+          participatingPeopleIds: ["natchitoches-matriarch-keeper", "younger-kin-observer"],
+        }),
+      );
       const cluster3RuntimeActivationTruthForCockpit = buildCluster3RuntimeActivationTruth({
         proseConstraints,
         sequenceValidation,
@@ -3785,6 +3803,13 @@ export class Book1RegenerationLoopService {
             narratorPresenceValidation.hardFailures.map((row) => row.message),
           ),
         },
+        proseRealism: buildProseRealismCockpitPanelFromGovernance({
+          chapterId: chapterState.chapterId,
+          proseConstraints,
+          narratorPresencePack,
+          epicEmotionalGravityPack,
+        }),
+        humanGravityRuntime: humanGravityRuntimePanel,
         cluster3RuntimeActivationTruth: cluster3RuntimeActivationTruthForCockpit,
         runtimeConvergenceTruth: buildRuntimeGovernanceConvergenceTruth({
           runtimePathLabel: "regeneration",
@@ -4668,6 +4693,17 @@ export class Book1RegenerationLoopService {
         : improved.length >= 3
           ? "accept new draft"
           : "iterate again";
+    const humanGravitySceneIdSuccess =
+      chapterComposition.sceneSequence[0]?.sceneId ?? `${chapterState.chapterId}:runtime-scene`;
+    const humanGravityRuntimePanelSuccess = buildHumanGravityRuntimeCockpitPanelFromProfile(
+      new HumanGravityRuntimeDerivationService().deriveFromPackContext({
+        pack: epicEmotionalGravityPack,
+        chapterId: chapterState.chapterId,
+        sceneId: humanGravitySceneIdSuccess,
+        chapterSequence: chapterState.sequenceNumber,
+        participatingPeopleIds: ["natchitoches-matriarch-keeper", "younger-kin-observer"],
+      }),
+    );
     const cluster3RuntimeActivationTruthForCockpit = buildCluster3RuntimeActivationTruth({
       proseConstraints,
       sequenceValidation,
@@ -4909,6 +4945,13 @@ export class Book1RegenerationLoopService {
           narratorPresenceValidation.hardFailures.map((row) => row.message),
         ),
       },
+      proseRealism: buildProseRealismCockpitPanelFromGovernance({
+        chapterId: chapterState.chapterId,
+        proseConstraints,
+        narratorPresencePack,
+        epicEmotionalGravityPack,
+      }),
+      humanGravityRuntime: humanGravityRuntimePanelSuccess,
       cluster3RuntimeActivationTruth: cluster3RuntimeActivationTruthForCockpit,
       runtimeConvergenceTruth: buildRuntimeGovernanceConvergenceTruth({
         runtimePathLabel: "regeneration",

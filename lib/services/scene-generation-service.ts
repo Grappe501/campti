@@ -11,11 +11,16 @@ import { adviseSocialPressureInGeneratedProse } from "@/lib/scene-generation/soc
 import { generateSceneProseWithModel } from "@/lib/scene-generation/scene-generation-llm-adapter";
 import { loadSceneGenerationInput } from "@/lib/services/scene-generation-input-loader";
 import { prepareCanonicalPreGenerationBundleForScene } from "@/lib/services/scene-generation-governance-input-adapter";
+import { HumanGravityRuntimeDerivationService } from "@/lib/services/human-gravity-runtime-derivation-service";
+import { HumanGravityValidationService } from "@/lib/services/human-gravity-validation-service";
+import { ProseRealismDerivationService } from "@/lib/services/prose-realism-derivation-service";
+import { ProseRealismValidationService } from "@/lib/services/prose-realism-validation-service";
 import {
   hashDependencyPlan,
   registerSceneGenerationDependencies,
   type SceneGenerationDependencyPlan,
 } from "@/lib/services/scene-generation-dependency-service";
+import { buildCluster7RuntimeTruthEnvelope } from "@/lib/services/cluster7-runtime-truth-service";
 import { assertWorldStateMatchesBook } from "@/lib/services/world-book-mapper";
 
 /**
@@ -81,6 +86,20 @@ export type RunSceneGenerationParams = {
    * When false, generation is not canonical-governance-equivalent at the prose-constraint layer.
    */
   applyCanonicalNarrativeGovernance?: boolean;
+  /** Cluster 6 — human-gravity runtime derivation + prompt injection + advisory validation (default true). */
+  applyHumanGravityLayer?: boolean;
+  /** Cluster 5 — prose realism prompt shaping + validation (default true). */
+  applyProseRealismLayer?: boolean;
+  /**
+   * When true, persist `generationText` even if realism rules mark the scene output invalid.
+   * Default false — invalid generations are not saved (canonical truth: success requires valid runtime output).
+   */
+  allowSaveOnInvalidRealism?: boolean;
+  /**
+   * When true, persist `generationText` even if no-reset human-gravity rules mark the scene output invalid.
+   * Default false.
+   */
+  allowSaveOnInvalidHumanGravity?: boolean;
 };
 
 export async function runSceneGeneration(
@@ -125,6 +144,20 @@ export async function runSceneGeneration(
     merged = { ...merged, canonicalPreGeneration };
   }
 
+  if (params.applyHumanGravityLayer !== false && merged.canonicalPreGeneration?.governanceMergeApplied) {
+    merged = {
+      ...merged,
+      humanGravityRuntime: new HumanGravityRuntimeDerivationService().deriveFromSceneGenerationInput(merged),
+    };
+  }
+
+  if (params.applyProseRealismLayer !== false) {
+    merged = {
+      ...merged,
+      proseRealismLayer: new ProseRealismDerivationService().derive(merged),
+    };
+  }
+
   /** P2-D — narrative book timeline must contain the scene’s resolved world state (when spine is calibrated). */
   await assertWorldStateMatchesBook(params.sceneId, merged.contract.book.id);
 
@@ -138,6 +171,70 @@ export async function runSceneGeneration(
 
   let output = await generateSceneProseWithModel(merged, basis);
   output = validateRegisteredContractPayload("sceneGenerationOutput", output, "write");
+
+  let humanGravityValidation: SceneGenerationRunResult["humanGravityValidation"] = null;
+  if (params.applyHumanGravityLayer !== false && merged.humanGravityRuntime) {
+    humanGravityValidation = new HumanGravityValidationService().validate({
+      profile: merged.humanGravityRuntime,
+      generatedText: output.generatedText,
+    });
+    const hg = humanGravityValidation.driftReport;
+    const hgWarnings: string[] = [];
+    for (const w of hg.hardWarnings) {
+      hgWarnings.push(`[human_gravity:hard] ${w}`);
+    }
+    for (const w of hg.softWarnings) {
+      hgWarnings.push(`[human_gravity:soft] ${w}`);
+    }
+    for (const v of humanGravityValidation.humanGravityTruth.noResetViolations) {
+      hgWarnings.push(`[human_gravity:no_reset] ${v}`);
+    }
+    if (hgWarnings.length) {
+      output = { ...output, warnings: [...output.warnings, ...hgWarnings] };
+    }
+    if (!humanGravityValidation.humanGravityTruth.sceneOutputValidUnderNoResetRules) {
+      output = {
+        ...output,
+        continuityFlags: [...output.continuityFlags, "cluster6_human_gravity_no_reset_invalid"],
+        warnings: [
+          ...output.warnings,
+          "[human_gravity:invalid] Scene output failed no-reset human-gravity rules — not a successful canonical generation for promotion.",
+        ],
+      };
+    }
+  }
+
+  let proseRealism: SceneGenerationRunResult["proseRealism"] = null;
+  if (params.applyProseRealismLayer !== false && merged.proseRealismLayer) {
+    proseRealism = new ProseRealismValidationService().validate({
+      sceneId: params.sceneId,
+      generatedText: output.generatedText,
+      sceneGenerationInput: merged,
+      preGenerationProfile: merged.proseRealismLayer.profileSeed,
+    });
+    const drift = proseRealism.driftReport;
+    const extraWarnings: string[] = [];
+    for (const w of drift.warnings) {
+      extraWarnings.push(`[prose_realism:warn] ${w}`);
+    }
+    for (const h of drift.hardFailures) {
+      extraWarnings.push(`[prose_realism:hard] ${h}`);
+    }
+    if (extraWarnings.length) {
+      output = { ...output, warnings: [...output.warnings, ...extraWarnings] };
+    }
+
+    if (!proseRealism.realismTruth.sceneOutputValidUnderRealismRules) {
+      output = {
+        ...output,
+        continuityFlags: [...output.continuityFlags, "cluster5_realism_scene_output_invalid"],
+        warnings: [
+          ...output.warnings,
+          "[prose_realism:invalid] Scene output failed realism truth rules — not a successful canonical generation for promotion.",
+        ],
+      };
+    }
+  }
 
   const socialBundle = merged.contract.socialFieldGeneration ?? null;
   if (params.runSocialPressureAdvisory !== false && socialBundle) {
@@ -169,12 +266,43 @@ export async function runSceneGeneration(
   }
 
   let savedGenerationText = false;
+  let generationTextSaveBlockedByRealism = false;
+  let generationTextSaveBlockedByHumanGravity = false;
   if (params.saveGenerationText) {
-    await prisma.scene.update({
-      where: { id: params.sceneId },
-      data: { generationText: output.generatedText },
-    });
-    savedGenerationText = true;
+    const realismInvalid =
+      proseRealism?.realismTruth && !proseRealism.realismTruth.sceneOutputValidUnderRealismRules;
+    const realismSaveBlocked = realismInvalid && params.allowSaveOnInvalidRealism !== true;
+
+    const hgInvalid =
+      humanGravityValidation?.humanGravityTruth &&
+      !humanGravityValidation.humanGravityTruth.sceneOutputValidUnderNoResetRules;
+    const humanGravitySaveBlocked = hgInvalid && params.allowSaveOnInvalidHumanGravity !== true;
+
+    if (realismSaveBlocked) {
+      generationTextSaveBlockedByRealism = true;
+      output = {
+        ...output,
+        warnings: [
+          ...output.warnings,
+          "[prose_realism:blocked_save] generationText not persisted — scene failed realism truth rules; set allowSaveOnInvalidRealism to override.",
+        ],
+      };
+    } else if (humanGravitySaveBlocked) {
+      generationTextSaveBlockedByHumanGravity = true;
+      output = {
+        ...output,
+        warnings: [
+          ...output.warnings,
+          "[human_gravity:blocked_save] generationText not persisted — scene failed no-reset human-gravity rules; set allowSaveOnInvalidHumanGravity to override.",
+        ],
+      };
+    } else {
+      await prisma.scene.update({
+        where: { id: params.sceneId },
+        data: { generationText: output.generatedText },
+      });
+      savedGenerationText = true;
+    }
   }
 
   const plan = buildDependencyPlanFromInput(merged);
@@ -188,7 +316,7 @@ export async function runSceneGeneration(
     proseQuality = analyzeProseDeterministic(output.generatedText, merged.proseQaContext);
   }
 
-  return {
+  const runResult: SceneGenerationRunResult = {
     output,
     proseQuality,
     savedGenerationText,
@@ -197,6 +325,30 @@ export async function runSceneGeneration(
     socialFieldQaScalars: merged.socialFieldQaScalars ?? null,
     humanizationAdvisory,
     canonicalPreGeneration: merged.canonicalPreGeneration ?? null,
+    humanGravityRuntime: merged.humanGravityRuntime ?? null,
+    humanGravityValidation,
+    humanGravityTruth: humanGravityValidation?.humanGravityTruth ?? null,
+    proseRealism,
+    realismTruth: proseRealism?.realismTruth ?? null,
+    generationTextSaveBlockedByRealism: generationTextSaveBlockedByRealism || undefined,
+    generationTextSaveBlockedByHumanGravity: generationTextSaveBlockedByHumanGravity || undefined,
+  };
+
+  const cluster7RunId = `sg_${params.sceneId}_${inputHash.slice(0, 16)}`;
+  const cluster7RuntimeTruth = buildCluster7RuntimeTruthEnvelope({
+    runId: cluster7RunId,
+    sceneId: params.sceneId,
+    sceneGenerationInputHash: inputHash,
+    applyCanonicalNarrativeGovernance: params.applyCanonicalNarrativeGovernance !== false,
+    saveGenerationTextRequested: params.saveGenerationText === true,
+    allowSaveOnInvalidRealism: params.allowSaveOnInvalidRealism === true,
+    allowSaveOnInvalidHumanGravity: params.allowSaveOnInvalidHumanGravity === true,
+    run: runResult,
+  });
+
+  return {
+    ...runResult,
+    cluster7RuntimeTruth,
   };
 }
 

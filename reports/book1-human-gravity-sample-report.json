@@ -1,0 +1,80 @@
+{
+  "artifact": "book1_human_gravity_runtime_bundle",
+  "schemaVersion": "1",
+  "generatedAt": "2026-04-17T01:48:26.977Z",
+  "humanGravityRuntimeProfile": {
+    "contractVersion": "1",
+    "clusterTag": "cluster6_human_gravity_runtime",
+    "chapterId": "book1-chapter-01",
+    "sceneId": "book1-chapter-01-scene-01",
+    "chapterSequence": 1,
+    "activeCharacterAttachmentIds": [
+      "natchitoches-matriarch-keeper"
+    ],
+    "attachmentWeightMap": {
+      "natchitoches-matriarch-keeper": 0.9684
+    },
+    "activeRelationalStakeIds": [
+      "bond-keeper-younger"
+    ],
+    "relationalThreatMap": {
+      "bond-keeper-younger": 0.8
+    },
+    "activeConsequenceMarkers": [
+      "irr-1:emotionally_irreversible:shadow=0.82:Silence protects immediate survival while permanently thinning trust bandwidth.",
+      "irr-2:structurally_irreversible:shadow=0.90:Untranslated warning burden transfers to younger line.",
+      "identity_fracture:younger-kin-observer:Silence now means unresolved danger and missing knowledge.",
+      "relationship_shift:bond-keeper-younger:repairDifficulty=0.78:instruction-through-withholding",
+      "loss:possibility:Chance to transmit warning in full language closes during first rupture window.",
+      "permanent:family_line:Memory transmission switches from explicit teaching to encoded gesture."
+    ],
+    "irreversibilityState": "Irreversibility mix: 2 non-reversible markers in scope; 1 no-return thresholds registered.",
+    "activeBurdenLines": [
+      "burden-warning-silence: Carry warning without naming source danger openly. (weight 0.88; mistaken for identity)",
+      "burden-route-shame: Believe displacement equals personal failure. (weight 0.73; mistaken for identity)"
+    ],
+    "inheritedWarningLines": [
+      "warning-riverline: When routine feels easy, double-check the route."
+    ],
+    "repairDifficultySignals": [
+      "repair:bond-keeper-younger:0.78"
+    ],
+    "carryForwardResidue": [
+      "Protective labor ends with dread that warning literacy is failing.",
+      "unfinished_need:Need explicit reconciliation between inherited warning and present agency."
+    ],
+    "povBiasSummary": "POV bias: weight toward natchitoches-matriarch-keeper (score 0.97); bond modes favor embodied duty and inherited ache; tight interior access and observational closeness.",
+    "sceneFocusSummary": "Scene focus: carry_forward_pressure; attachment function: Expose need through action before explanation.; carry-forward weight 0.86.",
+    "closureWeightSummary": "Closure pressure: carryForwardWeight=0.86; irreversibilityPotential=0.77; dominant function=carry_forward_pressure.",
+    "activeFearDesireVulnerabilityIds": [
+      "exposure-mk-1",
+      "fear-mk-1",
+      "desire-mk-1"
+    ],
+    "validationFlags": [
+      "cluster6_runtime_derived"
+    ],
+    "humanGravityScore": 0.8256,
+    "runtimeInfluenceTruth": {
+      "attachmentLinesInPrompt": true,
+      "relationalStakesLinesInPrompt": true,
+      "consequencePersistenceLinesInPrompt": true,
+      "generationalBurdenLinesInPrompt": true,
+      "validationIsAdvisoryDeterministic": true,
+      "advisoryRemainderNote": "Human-gravity validation is deterministic advisory; it does not replace human editorial judgment."
+    },
+    "promptInstructionLines": [
+      "CLUSTER6_HUMAN_GRAVITY (runtime governor — subordinate to contract facts, P2-E sources, and governance blocks):",
+      "— Prefer implication, residue, and behavioral cost over emotional naming.",
+      "POV bias: weight toward natchitoches-matriarch-keeper (score 0.97); bond modes favor embodied duty and inherited ache; tight interior access and observational closeness.",
+      "Scene focus: carry_forward_pressure; attachment function: Expose need through action before explanation.; carry-forward weight 0.86.",
+      "Relational stakes: threatened bonds bond-keeper-younger. Obligation texture: bond-keeper-younger: Protect line continuity even at personal relational cost. Unspoken need (subtext/gesture): Need to be trusted with full warning context.",
+      "Irreversibility mix: 2 non-reversible markers in scope; 1 no-return thresholds registered.",
+      "Consequence shadows to keep behaviorally present: irr-1:emotionally_irreversible:shadow=0.82:Silence protects immediate survival while permanently thinning trust bandwidth. | irr-2:structurally_irreversible:shadow=0.90:Untranslated warning burden transfers to younger line. | identity_fracture:younger-kin-observer:Silence now means unresolved danger and missing knowledge. | relationship_shift:bond-keeper-younger:repairDifficulty=0.78:instruction-through-withholding",
+      "Repair difficulty signals: repair:bond-keeper-younger:0.78",
+      "Inherited burdens: burden-warning-silence: Carry warning without naming source danger openly. (weight 0.88; mistaken for identity) | burden-route-shame: Believe displacement equals personal failure. (weight 0.73; mistaken for identity) Warnings: warning-riverline: When routine feels easy, double-check the route. Silence mechanics: silence:Do not discuss forced movement cost with children.→Next generation misreads inherited caution as personal inadequacy.",
+      "Carry-forward residue: Protective labor ends with dread that warning literacy is failing. | unfinished_need:Need explicit reconciliation between inherited warning and present agency.",
+      "Closure pressure: carryForwardWeight=0.86; irreversibilityPotential=0.77; dominant function=carry_forward_pressure."
+    ]
+  }
+}

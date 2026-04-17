@@ -41,6 +41,8 @@ function buildSystemPrompt(): string {
     "Do not paste numbers, percentages, or field names from JSON; embody pressure as felt tension, restraint, secrecy, or exposure.",
     "In `generationNotes`, at most one short clause may nod to ambient social pressure if useful (no metrics).",
     "PHASE 7 — HUMAN PRESENCE: Prefer lived specificity over generic summary. Let emotion show through posture, work, object, and timing before naming it.",
+    "CLUSTER 5 — PROSE REALISM: When PROSE_REALISM_CLUSTER5 appears in the user message, treat it as craft shaping layered under all truth/governance blocks — never as permission to violate era cognition, POV bounds, or contract facts.",
+    "CLUSTER 6 — HUMAN GRAVITY: When CLUSTER6_HUMAN_GRAVITY appears, treat it as scene-active attachment/stakes/consequence/burden pressure — embody through gesture, obligation, and residue; never contradict contract facts or P2-E sources.",
     "Avoid explanatory tone that tidies the scene for a reader; preserve ambiguity and silence where the witness lines ask for it.",
     "Output ONE JSON object only, matching the schema in the user message. No markdown fences.",
     "The JSON field `generatedText` is MODEL DRAFT ONLY — it must never be described as reader-canonical.",
@@ -57,6 +59,21 @@ function compactSocialGuidanceLines(input: SceneGenerationInput): string | null 
   if (parts.length) return parts.join("\n");
   if (input.socialFieldSummaryForGeneration?.trim()) return input.socialFieldSummaryForGeneration.trim();
   return null;
+}
+
+export function compactProseRealismLines(input: SceneGenerationInput): string | null {
+  const layer = input.proseRealismLayer;
+  if (!layer?.promptInstructionLines?.length) return null;
+  return [
+    "PROSE_REALISM_CLUSTER5 (craft shaping — subordinate to governance + contract truth):",
+    ...layer.promptInstructionLines,
+  ].join("\n");
+}
+
+export function compactHumanGravityRuntimeLines(input: SceneGenerationInput): string | null {
+  const hg = input.humanGravityRuntime;
+  if (!hg?.promptInstructionLines?.length) return null;
+  return hg.promptInstructionLines.join("\n");
 }
 
 export function compactCanonicalGovernanceLines(input: SceneGenerationInput): string | null {
@@ -144,6 +161,8 @@ function buildUserPrompt(input: SceneGenerationInput, basisProse: string | null)
   const socialLines = compactSocialGuidanceLines(input);
   const storylineLines = compactStorylineGuidanceLines(input);
   const governanceLines = compactCanonicalGovernanceLines(input);
+  const proseRealismLines = compactProseRealismLines(input);
+  const humanGravityLines = compactHumanGravityRuntimeLines(input);
   const narrativeSourcesBlock = compactNarrativeSourcesBlock(input);
   return [
     `GENERATION_MODE: ${input.generationMode}`,
@@ -178,6 +197,10 @@ function buildUserPrompt(input: SceneGenerationInput, basisProse: string | null)
       : "",
     "",
     governanceLines ? `${governanceLines}\n` : "",
+    "",
+    proseRealismLines ? `${proseRealismLines}\n` : "",
+    "",
+    humanGravityLines ? `${humanGravityLines}\n` : "",
     "",
     input.contract.socialFieldGeneration
       ? [

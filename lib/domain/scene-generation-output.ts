@@ -43,4 +43,28 @@ export type SceneGenerationRunResult = {
   humanizationAdvisory?: HumanizationAdvisoryReport | null;
   /** Cluster 4 — governance bundle applied before model call (when enabled). */
   canonicalPreGeneration?: import("@/lib/domain/canonical-scene-generation-governance").CanonicalPreGenerationBundle | null;
+  /** Cluster 5 — prose realism validation bundle (post-gen profile + drift). */
+  proseRealism?: import("@/lib/domain/prose-realism").ProseRealismValidationBundle | null;
+  /**
+   * Cluster 5 — quick access to realism truth (mirrors `proseRealism.realismTruth` when present).
+   * Null when realism layer was off or validation skipped.
+   */
+  realismTruth?: import("@/lib/domain/prose-realism").RealismTruthResult | null;
+  /** True when invalid realism output blocked DB save of generation text (see `allowSaveOnInvalidRealism`). */
+  generationTextSaveBlockedByRealism?: boolean;
+  /** Cluster 6 — human-gravity runtime profile applied to this run (when governance + layer enabled). */
+  humanGravityRuntime?: import("@/lib/domain/human-gravity-runtime").HumanGravityRuntimeProfile | null;
+  /** Cluster 6 — deterministic validation + no-reset truth. */
+  humanGravityValidation?: import("@/lib/domain/human-gravity-runtime").HumanGravityValidationBundle | null;
+  /**
+   * Cluster 6 — quick access to no-reset truth (mirrors `humanGravityValidation.humanGravityTruth` when present).
+   */
+  humanGravityTruth?: import("@/lib/domain/human-gravity-runtime").HumanGravityTruthResult | null;
+  /** True when no-reset invalidity blocked DB save (see `allowSaveOnInvalidHumanGravity`). */
+  generationTextSaveBlockedByHumanGravity?: boolean;
+  /**
+   * Cluster 7 — semantic invariants, artifact truth stamp, persistence audit, readiness depth, drift detection.
+   * Present when the canonical scene generation path assembles runtime truth (see `cluster7-runtime-truth-service`).
+   */
+  cluster7RuntimeTruth?: import("@/lib/domain/cluster7-runtime-truth").Cluster7RuntimeTruthEnvelope | null;
 };

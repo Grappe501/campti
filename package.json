@@ -17,6 +17,7 @@
     "verify:runtime-dependency-consistency": "tsx --test lib/services/runtime-dependency-guard.test.ts",
     "verify:runtime-authority-lock": "tsx --test lib/services/runtime-authority-registry-service.test.ts",
     "verify:enforcement-contract": "tsx scripts/verify-enforcement-contract.ts && tsx --test lib/services/enforcement-registry-service.test.ts && tsx --test lib/services/enforcement-cockpit-truth-service.test.ts",
+    "verify:cluster7-runtime": "tsx --test lib/services/cluster7-runtime-hardening.test.ts",
     "verify:generation-hash": "tsx --test lib/scene-generation/canonical-scene-generation-hash.test.ts",
     "verify:revision-job-policy": "tsx --test lib/services/revision-job-runner.policy.test.ts",
     "verify:conversational-identity": "tsx --test lib/conversational-identity/build-conversational-identity-snapshot.test.ts",

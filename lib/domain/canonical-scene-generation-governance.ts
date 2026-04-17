@@ -35,6 +35,11 @@ export type CanonicalPreGenerationBundle = {
   /** When the DB path could not mirror full book1 literary layering before governance. */
   literaryLayerParityNote?: string | null;
   validationFlags: string[];
+  /**
+   * Cluster 7 — optional semantic flags for drift detection and certification (e.g. `parity_warning`, `advisory_merge`).
+   * Prefer propagating end-to-end over inferring from preparation path alone.
+   */
+  runtimeSemanticTruthFlags?: string[];
 };
 
 export type RuntimeGovernanceConvergenceTruth = {

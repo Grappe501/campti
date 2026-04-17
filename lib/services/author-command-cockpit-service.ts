@@ -126,9 +126,12 @@ export function buildAuthorCommandCockpitBundle(input: {
   literaryDevices?: AuthorCommandCockpitBundle["literaryDevices"];
   epicContinuity?: AuthorCommandCockpitBundle["epicContinuity"];
   emotionalGravity?: AuthorCommandCockpitBundle["emotionalGravity"];
+  humanGravityRuntime?: AuthorCommandCockpitBundle["humanGravityRuntime"];
   narratorPresence?: AuthorCommandCockpitBundle["narratorPresence"];
+  proseRealism?: AuthorCommandCockpitBundle["proseRealism"];
   cluster3RuntimeActivationTruth?: Cluster3RuntimeActivationTruth;
   runtimeConvergenceTruth?: import("@/lib/domain/canonical-scene-generation-governance").RuntimeGovernanceConvergenceTruth;
+  certificationHardening?: import("@/lib/domain/author-command-cockpit").CockpitCertificationHardeningSummary;
 }): AuthorCommandCockpitBundle {
   const runtimeAuthority = createRuntimeAuthorityStamp(input.runtimeId);
   const centered = deriveCenteredSurfaceTitle({
@@ -173,9 +176,12 @@ export function buildAuthorCommandCockpitBundle(input: {
     literaryDevices: input.literaryDevices,
     epicContinuity: input.epicContinuity,
     emotionalGravity: input.emotionalGravity,
+    humanGravityRuntime: input.humanGravityRuntime,
     narratorPresence: input.narratorPresence,
+    proseRealism: input.proseRealism,
     cluster3RuntimeActivationTruth: input.cluster3RuntimeActivationTruth,
     runtimeConvergenceTruth: input.runtimeConvergenceTruth,
+    certificationHardening: input.certificationHardening,
     enforcementSemanticTruth,
     bounded: true,
     explainable: true,

@@ -19,7 +19,9 @@ export const AUTHOR_COCKPIT_PANEL_TO_SUBSYSTEM: Record<string, string> = {
   literaryDevices: "literary_device_controls",
   epicContinuity: "epic_narrative_continuity_encs",
   emotionalGravity: "epic_emotional_gravity_eegs",
+  humanGravityRuntime: "human_gravity_runtime_cluster6",
   narratorPresence: "narrator_presence_convergence",
+  proseRealism: "prose_narrative_realism_cluster5",
 };
 
 export type AuthorCockpitPanelPresenceInput = {
@@ -35,7 +37,9 @@ export type AuthorCockpitPanelPresenceInput = {
   literaryDevices?: unknown;
   epicContinuity?: unknown;
   emotionalGravity?: unknown;
+  humanGravityRuntime?: unknown;
   narratorPresence?: unknown;
+  proseRealism?: unknown;
   cluster3RuntimeActivationTruth?: unknown;
   runtimeConvergenceTruth?: unknown;
 };
@@ -56,7 +60,9 @@ export function collectPopulatedAuthorCockpitPanelKeys(
   if (input.literaryDevices !== undefined) keys.push("literaryDevices");
   if (input.epicContinuity !== undefined) keys.push("epicContinuity");
   if (input.emotionalGravity !== undefined) keys.push("emotionalGravity");
+  if (input.humanGravityRuntime !== undefined) keys.push("humanGravityRuntime");
   if (input.narratorPresence !== undefined) keys.push("narratorPresence");
+  if (input.proseRealism !== undefined) keys.push("proseRealism");
   if (input.cluster3RuntimeActivationTruth !== undefined) keys.push("cluster3RuntimeActivationTruth");
   if (input.runtimeConvergenceTruth !== undefined) keys.push("runtimeConvergenceTruth");
   return keys;

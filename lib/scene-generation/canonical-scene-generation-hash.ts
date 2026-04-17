@@ -13,8 +13,9 @@
  * **merged** defaults, flattened witness/voice/humanization lines, `authorVoiceShaping`,
  * P2-E temporally filtered narrative source ids (`sourceIdsUsed`, sorted in the hash payload; ids are
  * already filtered upstream by canonical world-state chronology via `getSourcesForWorldState`),
- * `proseQaContext`, routing (`generationMode` / `purpose`), prose basis selection, and a digest
- * of baseline prose when rewrite/repair uses it.
+ * `proseQaContext`, routing (`generationMode` / `purpose`), prose basis selection, a digest
+ * of baseline prose when rewrite/repair uses it, Cluster 4 `canonicalPreGeneration` when present,
+ * Cluster 5 `proseRealismLayer` when present, and Cluster 6 `humanGravityRuntime` when present.
  *
  * **What must be excluded**
  * Observability-only payloads: full `narrativeShapingResolution` trace (`fieldSources`, `layers`,
@@ -93,6 +94,10 @@ export type CanonicalSceneGenerationHashInputV1 = {
   narrativeSourceIdsForHash: string[];
   /** Cluster 4 — canonical governance bundle when prep ran (stable-sorted JSON). */
   canonicalPreGeneration: unknown | null;
+  /** Cluster 5 — prose realism layer when wired (stable-sorted JSON). Omitted when absent. */
+  proseRealismLayer?: unknown;
+  /** Cluster 6 — human-gravity runtime profile when wired (stable-sorted JSON). Omitted when absent. */
+  humanGravityRuntime?: unknown;
 };
 
 export function sha256Utf8Hex(data: string): string {
@@ -180,6 +185,12 @@ export function buildCanonicalSceneGenerationHashInputV1(
     characterVoiceProfileId: input.characterVoiceProfile?.id ?? null,
     narrativeSourceIdsForHash,
     canonicalPreGeneration: input.canonicalPreGeneration ?? null,
+    ...(input.proseRealismLayer != null
+      ? { proseRealismLayer: stableDeepSort(input.proseRealismLayer as unknown) }
+      : {}),
+    ...(input.humanGravityRuntime != null
+      ? { humanGravityRuntime: stableDeepSort(input.humanGravityRuntime as unknown) }
+      : {}),
   };
 }
 

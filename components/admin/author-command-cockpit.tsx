@@ -31,6 +31,64 @@ export function AuthorCommandCockpit({ bundle, scopeOptions }: Props) {
         </div>
       </section>
 
+      {bundle.certificationHardening ? (
+        <section className="rounded-2xl border border-amber-200 bg-amber-50/80 p-4 shadow-sm">
+          <p className="text-xs uppercase tracking-widest text-amber-800">Certification &amp; validation truth (Cluster 7)</p>
+          <p className="mt-2 text-sm text-amber-950">{bundle.certificationHardening.certificationReadinessLine}</p>
+          <ul className="mt-3 grid gap-2 text-xs text-amber-950 sm:grid-cols-2">
+            <li>Certification truth rule: {bundle.certificationHardening.certificationTruthRuleSatisfied ? "satisfied" : "not satisfied"}</li>
+            <li>Artifact truth rule: {bundle.certificationHardening.artifactTruthRuleSatisfied ? "satisfied" : "not satisfied"}</li>
+            <li>Execution-ready: {bundle.certificationHardening.mayPresentAsExecutionReady ? "allowed" : "disallowed"}</li>
+            <li>Production-grade: {bundle.certificationHardening.mayPresentAsProductionGrade ? "allowed" : "disallowed"}</li>
+            <li>Artifact authority: {bundle.certificationHardening.canonicalArtifactAuthority.replaceAll("_", " ")}</li>
+            <li>Save eligible: {bundle.certificationHardening.saveEligible ? "yes" : "no"}</li>
+            <li>Readiness evidence trust: {bundle.certificationHardening.readinessEvidenceTrustClass.replaceAll("_", " ")}</li>
+            <li>
+              Semantic invariants — hard: {bundle.certificationHardening.semanticHardViolations} · soft:{" "}
+              {bundle.certificationHardening.semanticSoftViolations}
+            </li>
+            <li>
+              Overrides: realism {bundle.certificationHardening.overrideUsage.allowSaveOnInvalidRealism ? "on" : "off"} · human
+              gravity {bundle.certificationHardening.overrideUsage.allowSaveOnInvalidHumanGravity ? "on" : "off"}
+            </li>
+          </ul>
+          {bundle.certificationHardening.saveBlockedReasons.length > 0 ? (
+            <div className="mt-2 rounded-lg border border-amber-300 bg-white p-2">
+              <p className="text-[11px] font-medium text-amber-900">Save blocked because</p>
+              <ul className="mt-1 space-y-1 text-[11px] text-amber-800">
+                {bundle.certificationHardening.saveBlockedReasons.map((r) => (
+                  <li key={r}>- {r}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+          {bundle.certificationHardening.driftErrors.length > 0 ? (
+            <ul className="mt-2 space-y-1 text-xs text-red-800">
+              {bundle.certificationHardening.driftErrors.map((m) => (
+                <li key={m}>- {m}</li>
+              ))}
+            </ul>
+          ) : null}
+          {bundle.certificationHardening.driftWarnings.length > 0 ? (
+            <ul className="mt-2 space-y-1 text-xs text-amber-800">
+              {bundle.certificationHardening.driftWarnings.map((m) => (
+                <li key={m}>- {m}</li>
+              ))}
+            </ul>
+          ) : null}
+          {bundle.certificationHardening.remediationTargets.length > 0 ? (
+            <div className="mt-3 rounded-lg border border-amber-200 bg-white p-2">
+              <p className="text-[11px] font-medium text-amber-900">Remediation targets</p>
+              <ul className="mt-1 space-y-1 text-[11px] text-stone-700">
+                {bundle.certificationHardening.remediationTargets.map((t) => (
+                  <li key={t}>- {t}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+        </section>
+      ) : null}
+
       <section className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm">
         <p className="text-xs uppercase tracking-widest text-stone-500">{bundle.toolRails.topBand.label}</p>
         <div className="mt-2 flex flex-wrap gap-2">
@@ -195,6 +253,85 @@ export function AuthorCommandCockpit({ bundle, scopeOptions }: Props) {
                     <li key={warning}>- {warning}</li>
                   ))}
                 </ul>
+              ) : null}
+            </div>
+          ) : null}
+
+          {bundle.humanGravityRuntime ? (
+            <div className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm">
+              <p className="text-xs uppercase tracking-widest text-stone-500">Human gravity runtime (Cluster 6)</p>
+              <p className="mt-2 text-xs text-stone-600">
+                Scene: {bundle.humanGravityRuntime.sceneId} · Prompt lines materialized:{" "}
+                {bundle.humanGravityRuntime.runtimePromptLinesMaterialized ? "yes" : "no"}
+              </p>
+              <p className="mt-2 text-xs text-stone-600">
+                Canonical runtime active (truth rule):{" "}
+                {bundle.humanGravityRuntime.humanGravityCanonicalRuntimeActive ? "yes" : "no"} · No-reset gate:{" "}
+                {bundle.humanGravityRuntime.noResetValidationParticipatesInCanonicalValidity ? "yes" : "no"}
+              </p>
+              <p className="mt-2 text-xs text-stone-700">
+                Score: {bundle.humanGravityRuntime.humanGravityScore.toFixed(2)}
+              </p>
+              <p className="mt-2 text-xs text-stone-600">{bundle.humanGravityRuntime.povBiasSummary}</p>
+              <ul className="mt-2 space-y-1 text-xs text-stone-600">
+                <li>Relational threat (top): {bundle.humanGravityRuntime.relationalThreatTop.join(", ") || "—"}</li>
+                <li>Active consequence markers: {bundle.humanGravityRuntime.activeConsequenceMarkers.length}</li>
+                <li>Fear/desire/vulnerability ids: {bundle.humanGravityRuntime.activeFearDesireVulnerabilityLines.length}</li>
+              </ul>
+              {bundle.humanGravityRuntime.burdenAndInheritanceLines.length > 0 ? (
+                <ul className="mt-2 space-y-1 text-[11px] text-stone-600">
+                  {bundle.humanGravityRuntime.burdenAndInheritanceLines.slice(0, 6).map((line) => (
+                    <li key={line}>- {line}</li>
+                  ))}
+                </ul>
+              ) : null}
+              {bundle.humanGravityRuntime.carryForwardResidue.length > 0 ? (
+                <p className="mt-2 text-[11px] text-stone-500">
+                  Carry-forward: {bundle.humanGravityRuntime.carryForwardResidue.slice(0, 3).join(" · ")}
+                </p>
+              ) : null}
+              {bundle.humanGravityRuntime.shallowOrResetWarnings.length > 0 ? (
+                <ul className="mt-2 space-y-1 text-xs text-amber-700">
+                  {bundle.humanGravityRuntime.shallowOrResetWarnings.map((w) => (
+                    <li key={w}>- {w}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          ) : null}
+
+          {bundle.proseRealism ? (
+            <div className="rounded-2xl border border-stone-200 bg-white p-4 shadow-sm">
+              <p className="text-xs uppercase tracking-widest text-stone-500">Prose realism (Cluster 5)</p>
+              <p className="mt-2 text-xs text-stone-600">
+                Governance-linked: {bundle.proseRealism.governanceLinked ? "yes" : "no"}
+              </p>
+              <ul className="mt-2 space-y-1 text-xs text-stone-600">
+                <li>Era truth: {bundle.proseRealism.eraTruthScore?.toFixed(2) ?? "—"}</li>
+                <li>Cognition truth: {bundle.proseRealism.cognitionTruthScore?.toFixed(2) ?? "—"}</li>
+                <li>Narrator boundary: {bundle.proseRealism.narratorBoundaryIntegrity?.toFixed(2) ?? "—"}</li>
+                <li>Emotional credibility: {bundle.proseRealism.emotionalCredibility?.toFixed(2) ?? "—"}</li>
+                <li>Sensory embodiment: {bundle.proseRealism.sensoryEmbodiment?.toFixed(2) ?? "—"}</li>
+                <li>Voice distinctness: {bundle.proseRealism.voiceDistinctness?.toFixed(2) ?? "—"}</li>
+                <li>Consequence residue: {bundle.proseRealism.consequenceResidue?.toFixed(2) ?? "—"}</li>
+                <li>Literary naturalness: {bundle.proseRealism.literaryNaturalness?.toFixed(2) ?? "—"}</li>
+              </ul>
+              {bundle.proseRealism.antiMechanicalWarnings.length > 0 ? (
+                <ul className="mt-2 space-y-1 text-xs text-amber-700">
+                  {bundle.proseRealism.antiMechanicalWarnings.map((w) => (
+                    <li key={w}>- {w}</li>
+                  ))}
+                </ul>
+              ) : null}
+              {bundle.proseRealism.recommendedRefinementTargets.length > 0 ? (
+                <div className="mt-2 rounded-lg border border-stone-200 bg-stone-50 p-2">
+                  <p className="text-[11px] font-medium text-stone-700">Refinement targets</p>
+                  <ul className="mt-1 space-y-1 text-[11px] text-stone-600">
+                    {bundle.proseRealism.recommendedRefinementTargets.map((t) => (
+                      <li key={t}>- {t}</li>
+                    ))}
+                  </ul>
+                </div>
               ) : null}
             </div>
           ) : null}

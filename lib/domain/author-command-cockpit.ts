@@ -3,6 +3,28 @@ import type { RuntimeAuthorityStamp } from "@/lib/domain/runtime-authority";
 
 export const AUTHOR_COMMAND_COCKPIT_CONTRACT_VERSION = "1" as const;
 
+/** Cluster 7 — operator-visible certification / validation health (derived from runtime truth, not decorative). */
+export type CockpitCertificationHardeningSummary = {
+  contractVersion: "1";
+  canonicalArtifactAuthority: import("@/lib/domain/canonical-artifact-governance").ArtifactAuthorityClass;
+  saveEligible: boolean;
+  saveBlockedReasons: string[];
+  readinessEvidenceTrustClass: import("@/lib/domain/enforcement-contract").ReadinessEvidenceTrustClass;
+  semanticHardViolations: number;
+  semanticSoftViolations: number;
+  overrideUsage: { allowSaveOnInvalidRealism: boolean; allowSaveOnInvalidHumanGravity: boolean };
+  driftWarnings: string[];
+  driftErrors: string[];
+  certificationReadinessLine: string;
+  remediationTargets: string[];
+  /** Normative gates from certification truth / artifact truth rules. */
+  certificationTruthRuleSatisfied: boolean;
+  artifactTruthRuleSatisfied: boolean;
+  mayPresentAsExecutionReady: boolean;
+  mayPresentAsProductionGrade: boolean;
+  validationFlags: string[];
+};
+
 export const COCKPIT_ENFORCEMENT_SEMANTIC_TRUTH_VERSION = "1" as const;
 
 export type CockpitEnforcementPanelTruth = {
@@ -327,6 +349,26 @@ export type AuthorCommandCockpitBundle = {
     epicEmotionalGravityScore: number;
     diagnostics: string[];
   };
+  /** Cluster 6 — human-gravity runtime bundle (attachment/stakes/consequence/burden governors on canonical generation). */
+  humanGravityRuntime?: {
+    chapterId: string;
+    sceneId: string;
+    humanGravityScore: number;
+    /** True only when prompt/seed/no-reset gate materially participates (see runtime contract). */
+    humanGravityCanonicalRuntimeActive: boolean;
+    povBiasSummary: string;
+    activeFearDesireVulnerabilityLines: string[];
+    relationalThreatTop: string[];
+    activeConsequenceMarkers: string[];
+    burdenAndInheritanceLines: string[];
+    carryForwardResidue: string[];
+    repairDifficultySignals: string[];
+    shallowOrResetWarnings: string[];
+    refinementTargets: string[];
+    /** Mirrors profile: substantive CLUSTER6 prompt lines on canonical path. */
+    runtimePromptLinesMaterialized: boolean;
+    noResetValidationParticipatesInCanonicalValidity: boolean;
+  };
   narratorPresence?: {
     chapterId: string;
     currentNarratorPresenceLevel: string;
@@ -340,12 +382,29 @@ export type AuthorCommandCockpitBundle = {
     firstPersonReadinessStatus: string;
     voiceShiftRisks: string[];
   };
+  /** Cluster 5 — prose & narrative realism observability (governance-linked scores + refinement targets). */
+  proseRealism?: {
+    chapterId: string;
+    governanceLinked: boolean;
+    eraTruthScore: number | null;
+    cognitionTruthScore: number | null;
+    narratorBoundaryIntegrity: number | null;
+    emotionalCredibility: number | null;
+    sensoryEmbodiment: number | null;
+    voiceDistinctness: number | null;
+    consequenceResidue: number | null;
+    literaryNaturalness: number | null;
+    antiMechanicalWarnings: string[];
+    recommendedRefinementTargets: string[];
+  };
   /** Cluster 3 — which narrative governance layers materially influenced this run’s canonical prose/sequence path. */
   cluster3RuntimeActivationTruth?: Cluster3RuntimeActivationTruth;
   /** Cluster 4 — regeneration vs production governance parity and runtime path truth. */
   runtimeConvergenceTruth?: import("@/lib/domain/canonical-scene-generation-governance").RuntimeGovernanceConvergenceTruth;
   /** Cluster 2 — machine-readable enforcement truth for populated panels (optional when not computed). */
   enforcementSemanticTruth?: CockpitEnforcementSemanticTruth;
+  /** Cluster 7 — validation/certification visibility (optional when scene/cluster7 truth not evaluated). */
+  certificationHardening?: CockpitCertificationHardeningSummary;
   bounded: true;
   explainable: true;
   nonOmniscient: true;
