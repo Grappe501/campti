@@ -41,4 +41,6 @@ export type SceneGenerationRunResult = {
   socialFieldQaScalars?: SceneGenerationSocialQaScalars | null;
   /** Phase 7 — deterministic humanization advisory (optional). */
   humanizationAdvisory?: HumanizationAdvisoryReport | null;
+  /** Cluster 4 — governance bundle applied before model call (when enabled). */
+  canonicalPreGeneration?: import("@/lib/domain/canonical-scene-generation-governance").CanonicalPreGenerationBundle | null;
 };

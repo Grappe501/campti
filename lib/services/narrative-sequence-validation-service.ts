@@ -13,6 +13,8 @@ export class NarrativeSequenceValidationService {
   validate(input: {
     bookPlan: BookSequencePlan;
     chapterPlan: ChapterSequencePlan;
+    /** Epic continuity validation risks (e.g. HCEL anti-dropoff) promoted into sequence gating. */
+    cluster3EpicContinuityHookRisks?: string[];
   }): SequenceValidationReport {
     const warnings: string[] = [];
     const flags: SequenceValidationReport["structuralWeaknessFlags"] = [];
@@ -58,6 +60,15 @@ export class NarrativeSequenceValidationService {
     if (linearTransitionsOnly) {
       warnings.push("Motion framework transitions are overly linear.");
       push(flags, "over_linear_structure");
+    }
+
+    const hookRisks = input.cluster3EpicContinuityHookRisks ?? [];
+    for (const risk of hookRisks) {
+      if (risk.includes("ANTI-DROPOFF") || risk.includes("READER-CARRY FAIL")) {
+        warnings.push(`Cluster3 hook continuity: ${risk}`);
+        push(flags, "cluster3_hook_continuity_pressure");
+        break;
+      }
     }
 
     const score = Number(Math.max(0, 1 - flags.length * 0.11 - warnings.length * 0.03).toFixed(3));

@@ -91,6 +91,8 @@ export type CanonicalSceneGenerationHashInputV1 = {
   characterVoiceProfileId: string | null;
   /** P2-E — sorted unique ids of narrative sources allowed for this scene (temporal truth firewall). */
   narrativeSourceIdsForHash: string[];
+  /** Cluster 4 — canonical governance bundle when prep ran (stable-sorted JSON). */
+  canonicalPreGeneration: unknown | null;
 };
 
 export function sha256Utf8Hex(data: string): string {
@@ -177,6 +179,7 @@ export function buildCanonicalSceneGenerationHashInputV1(
     narrativeVoiceProfileId: input.narrativeVoiceProfile?.id ?? null,
     characterVoiceProfileId: input.characterVoiceProfile?.id ?? null,
     narrativeSourceIdsForHash,
+    canonicalPreGeneration: input.canonicalPreGeneration ?? null,
   };
 }
 

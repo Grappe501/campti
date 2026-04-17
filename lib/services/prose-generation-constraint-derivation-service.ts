@@ -21,6 +21,8 @@ export class ProseGenerationConstraintDerivationService {
     chapterPsychology: ChapterNarrativePsychology;
     chapterState: ChapterState;
     beatChain: BeatAssemblyChain;
+    /** When true, narrator→prose merge is deferred to Cluster 3 governance (full narrator pack + ENCS/EEGS). */
+    integration?: { deferNarratorToCluster3?: boolean };
   }): ProseGenerationConstraints {
     const topPov = input.chapterState.povWeightingCandidates[0]?.characterId ?? "natchitoches-observer";
     const tension = input.chapterPsychology.axisTargets.unresolved_pull;
@@ -111,6 +113,10 @@ export class ProseGenerationConstraintDerivationService {
       driftFlags: [],
       validationFlags: ["observer_bounded", "native_cognition_first", "beat_fidelity_required"],
     });
+
+    if (input.integration?.deferNarratorToCluster3) {
+      return baseConstraints;
+    }
 
     const narratorPack = this.narratorPresence.deriveCamptiPack({
       chapterId: input.chapterPsychology.chapterId,

@@ -93,6 +93,21 @@ export const AUTHOR_COMMAND_ACTIONS = [
 ] as const;
 export type AuthorCommandAction = (typeof AUTHOR_COMMAND_ACTIONS)[number];
 
+export type Cluster3RuntimeActivationTruth = {
+  contractVersion: "1";
+  governanceMergeApplied: boolean;
+  proseConstraintCluster3Flags: string[];
+  sequenceStructuralHookPressureActive: boolean;
+  epicContinuityPackValidated: boolean;
+  epicEmotionalGravityPackValidated: boolean;
+  narratorPresenceValidated: boolean;
+  encsMaterialInfluences: string[];
+  eegsMaterialInfluences: string[];
+  narratorMaterialInfluences: string[];
+  hcelHookHardSignalsActive: boolean;
+  advisoryRemainderNote: string;
+};
+
 export type AuthorCommandCockpitBundle = {
   contractVersion: typeof AUTHOR_COMMAND_COCKPIT_CONTRACT_VERSION;
   sourceOfTruth: "governed_author_state";
@@ -325,6 +340,10 @@ export type AuthorCommandCockpitBundle = {
     firstPersonReadinessStatus: string;
     voiceShiftRisks: string[];
   };
+  /** Cluster 3 — which narrative governance layers materially influenced this run’s canonical prose/sequence path. */
+  cluster3RuntimeActivationTruth?: Cluster3RuntimeActivationTruth;
+  /** Cluster 4 — regeneration vs production governance parity and runtime path truth. */
+  runtimeConvergenceTruth?: import("@/lib/domain/canonical-scene-generation-governance").RuntimeGovernanceConvergenceTruth;
   /** Cluster 2 — machine-readable enforcement truth for populated panels (optional when not computed). */
   enforcementSemanticTruth?: CockpitEnforcementSemanticTruth;
   bounded: true;

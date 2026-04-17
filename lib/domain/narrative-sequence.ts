@@ -190,6 +190,8 @@ export const SequenceValidationReportSchema = z.object({
       "flat_reader_energy",
       "flat_expansion_contraction",
       "over_linear_structure",
+      /** Cluster 3 — HCEL / ENCS hook continuity hard signals surfaced on sequence layer. */
+      "cluster3_hook_continuity_pressure",
     ]),
   ),
 });

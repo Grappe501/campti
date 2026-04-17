@@ -149,4 +149,10 @@ export type SceneGenerationInput = {
    * (matches the filtered temporal set). Participates in `canonical-scene-generation-hash` (sorted there).
    */
   sourceIdsUsed: string[];
+
+  /**
+   * Cluster 4 — post–Cluster-3 narrative governance bundle (ENCS/EEGS/narrator merge + sequence validation).
+   * Populated on DB production scene generation when canonical governance prep runs.
+   */
+  canonicalPreGeneration?: import("@/lib/domain/canonical-scene-generation-governance").CanonicalPreGenerationBundle | null;
 };

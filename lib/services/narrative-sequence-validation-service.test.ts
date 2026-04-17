@@ -78,6 +78,13 @@ describe("narrative-sequence-validation-service", () => {
     });
 
     assert.equal(report.sequenceScore < 1, true);
+
+    const withHook = new NarrativeSequenceValidationService().validate({
+      bookPlan,
+      chapterPlan,
+      cluster3EpicContinuityHookRisks: ["ANTI-DROPOFF HARD-FAIL: Book boundary book1 has hookContinuityScore 0.10 below 0.70"],
+    });
+    assert.equal(withHook.structuralWeaknessFlags.includes("cluster3_hook_continuity_pressure"), true);
     assert.equal(report.structuralWeaknessFlags.includes("repeated_function_cluster"), true);
     assert.equal(report.structuralWeaknessFlags.includes("no_delayed_convergence"), true);
   });

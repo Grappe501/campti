@@ -36,6 +36,8 @@ export type AuthorCockpitPanelPresenceInput = {
   epicContinuity?: unknown;
   emotionalGravity?: unknown;
   narratorPresence?: unknown;
+  cluster3RuntimeActivationTruth?: unknown;
+  runtimeConvergenceTruth?: unknown;
 };
 
 export function collectPopulatedAuthorCockpitPanelKeys(
@@ -55,6 +57,8 @@ export function collectPopulatedAuthorCockpitPanelKeys(
   if (input.epicContinuity !== undefined) keys.push("epicContinuity");
   if (input.emotionalGravity !== undefined) keys.push("emotionalGravity");
   if (input.narratorPresence !== undefined) keys.push("narratorPresence");
+  if (input.cluster3RuntimeActivationTruth !== undefined) keys.push("cluster3RuntimeActivationTruth");
+  if (input.runtimeConvergenceTruth !== undefined) keys.push("runtimeConvergenceTruth");
   return keys;
 }
 

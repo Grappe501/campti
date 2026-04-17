@@ -2,6 +2,7 @@ import {
   AUTHOR_COMMAND_COCKPIT_CONTRACT_VERSION,
   type AuthorCommandAction,
   type AuthorCommandCockpitBundle,
+  type Cluster3RuntimeActivationTruth,
   type CockpitScopeContext,
 } from "@/lib/domain/author-command-cockpit";
 import {
@@ -126,6 +127,8 @@ export function buildAuthorCommandCockpitBundle(input: {
   epicContinuity?: AuthorCommandCockpitBundle["epicContinuity"];
   emotionalGravity?: AuthorCommandCockpitBundle["emotionalGravity"];
   narratorPresence?: AuthorCommandCockpitBundle["narratorPresence"];
+  cluster3RuntimeActivationTruth?: Cluster3RuntimeActivationTruth;
+  runtimeConvergenceTruth?: import("@/lib/domain/canonical-scene-generation-governance").RuntimeGovernanceConvergenceTruth;
 }): AuthorCommandCockpitBundle {
   const runtimeAuthority = createRuntimeAuthorityStamp(input.runtimeId);
   const centered = deriveCenteredSurfaceTitle({
@@ -171,6 +174,8 @@ export function buildAuthorCommandCockpitBundle(input: {
     epicContinuity: input.epicContinuity,
     emotionalGravity: input.emotionalGravity,
     narratorPresence: input.narratorPresence,
+    cluster3RuntimeActivationTruth: input.cluster3RuntimeActivationTruth,
+    runtimeConvergenceTruth: input.runtimeConvergenceTruth,
     enforcementSemanticTruth,
     bounded: true,
     explainable: true,

@@ -10,6 +10,7 @@ import { assessProseHumanizationAdvisory } from "@/lib/scene-generation/prose-hu
 import { adviseSocialPressureInGeneratedProse } from "@/lib/scene-generation/social-pressure-qa";
 import { generateSceneProseWithModel } from "@/lib/scene-generation/scene-generation-llm-adapter";
 import { loadSceneGenerationInput } from "@/lib/services/scene-generation-input-loader";
+import { prepareCanonicalPreGenerationBundleForScene } from "@/lib/services/scene-generation-governance-input-adapter";
 import {
   hashDependencyPlan,
   registerSceneGenerationDependencies,
@@ -75,6 +76,11 @@ export type RunSceneGenerationParams = {
   inputOverride?: Partial<SceneGenerationInput>;
   /** Phase 7 — append deterministic humanization advisories to warnings. Default true. */
   runHumanizationAdvisory?: boolean;
+  /**
+   * Cluster 4 — run shared Cluster 3 narrative governance merge before the model (default true).
+   * When false, generation is not canonical-governance-equivalent at the prose-constraint layer.
+   */
+  applyCanonicalNarrativeGovernance?: boolean;
 };
 
 export async function runSceneGeneration(
@@ -111,6 +117,12 @@ export async function runSceneGeneration(
         authorVoiceShaping: merged.authorVoiceShaping,
       },
     };
+  }
+
+  let canonicalPreGeneration: SceneGenerationRunResult["canonicalPreGeneration"];
+  if (params.applyCanonicalNarrativeGovernance !== false) {
+    canonicalPreGeneration = await prepareCanonicalPreGenerationBundleForScene(params.sceneId);
+    merged = { ...merged, canonicalPreGeneration };
   }
 
   /** P2-D — narrative book timeline must contain the scene’s resolved world state (when spine is calibrated). */
@@ -184,6 +196,7 @@ export async function runSceneGeneration(
     socialFieldGeneration: socialBundle,
     socialFieldQaScalars: merged.socialFieldQaScalars ?? null,
     humanizationAdvisory,
+    canonicalPreGeneration: merged.canonicalPreGeneration ?? null,
   };
 }
 

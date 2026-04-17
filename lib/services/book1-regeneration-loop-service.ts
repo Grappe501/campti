@@ -58,6 +58,7 @@ import {
 import { deriveChapterState } from "@/lib/chapter-state/chapter-state-derivation";
 import { deriveBeatProfileRecommendation } from "@/lib/chapter-state/chapter-state-to-beat-profile";
 import { buildAuthorCommandCockpitBundle } from "@/lib/services/author-command-cockpit-service";
+import { buildRuntimeGovernanceConvergenceTruth } from "@/lib/services/runtime-governance-convergence-truth-builder";
 import { resolveCockpitScopeContext } from "@/lib/services/cockpit-scope-model-service";
 import { ChapterStateToBeatAssemblyChainService } from "@/lib/services/chapter-state-to-beat-assembly-chain-service";
 import { NarrativePsychologyDerivationService } from "@/lib/services/narrative-psychology-derivation-service";
@@ -83,15 +84,9 @@ import { LiteraryDeviceDerivationService } from "@/lib/services/literary-device-
 import { LiteraryDeviceToProseConstraintsService } from "@/lib/services/literary-device-to-prose-constraints-service";
 import { LiteraryDeviceValidationService } from "@/lib/services/literary-device-validation-service";
 import { LiterarySymbolRegistryService } from "@/lib/services/literary-symbol-registry-service";
-import { NarrativeSequenceDerivationService } from "@/lib/services/narrative-sequence-derivation-service";
-import { NarrativeSequenceValidationService } from "@/lib/services/narrative-sequence-validation-service";
 import { SceneGenerationEngineService } from "@/lib/services/scene-generation-engine-service";
-import { EpicContinuityDerivationService } from "@/lib/services/epic-continuity-derivation-service";
-import { EpicContinuityValidationService } from "@/lib/services/epic-continuity-validation-service";
-import { EpicEmotionalGravityDerivationService } from "@/lib/services/epic-emotional-gravity-derivation-service";
-import { EpicEmotionalGravityValidationService } from "@/lib/services/epic-emotional-gravity-validation-service";
-import { NarratorPresenceDerivationService } from "@/lib/services/narrator-presence-derivation-service";
-import { NarratorPresenceValidationService } from "@/lib/services/narrator-presence-validation-service";
+import { CanonicalNarrativeGovernanceOrchestrationService } from "@/lib/services/canonical-narrative-governance-orchestration-service";
+import { buildCluster3RuntimeActivationTruth } from "@/lib/services/canonical-runtime-cluster3-governance-service";
 import { RUNTIME_ID_BOOK1_REGENERATION } from "@/lib/services/runtime-authority-registry-service";
 
 const ChapterEvidencePackSchema = z.object({
@@ -2955,6 +2950,7 @@ export class Book1RegenerationLoopService {
           chapterPsychology: chapterNarrativePsychology,
           chapterState,
           beatChain: beatAssemblyChain,
+          integration: { deferNarratorToCluster3: true },
         })
       : blockedProseConstraints;
     const literaryDeviceDerivationService = new LiteraryDeviceDerivationService();
@@ -3005,7 +3001,7 @@ export class Book1RegenerationLoopService {
       current: literaryDevicePack.symbolRegistry,
       updates: [],
     });
-    const proseConstraints = literaryToProseService.apply({
+    let proseConstraints = literaryToProseService.apply({
       constraints: baseProseConstraints,
       plan: literaryDeviceApplicationPlan,
       validation: literaryDeviceValidation,
@@ -3131,43 +3127,32 @@ export class Book1RegenerationLoopService {
       chapterClosureProfile: "convergence_teased",
       validationFlags: [],
     });
-    const sequenceDerivation = new NarrativeSequenceDerivationService().derive({
+    const governanceOrchestration = new CanonicalNarrativeGovernanceOrchestrationService();
+    const cluster3Governance = governanceOrchestration.orchestrate({
+      proseConstraintsAfterLiteraryLayer: proseConstraints,
       epicId: "book1-epic",
       bookId: "book1",
       chapterId: chapterState.chapterId,
+      chapterSequence: chapterState.sequenceNumber,
+      chapterMode: chapterState.chapterMode,
+      chapterPsychologyMode: chapterNarrativePsychology.chapterPsychologyMode,
+      activeThreadIds: narrativeThreadInspection.activeThreadIds,
       chapterCompositionPlan,
-      threads: narrativeThreadPack.threads,
+      narrativeThreads: narrativeThreadPack.threads,
       settingCoverageReport,
+      sceneIdsInChapter: chapterComposition.sceneSequence.map((scene) => scene.sceneId),
+      preparationPath: "book1_regeneration_orchestration",
+      literaryLayerParityNote: null,
     });
-    const sequenceValidation = new NarrativeSequenceValidationService().validate({
-      bookPlan: sequenceDerivation.bookSequencePlan,
-      chapterPlan: sequenceDerivation.chapterSequencePlan,
-    });
-    const epicContinuityPack = new EpicContinuityDerivationService().deriveCamptiPack({
-      chapterId: chapterState.chapterId,
-      chapterSequence: chapterState.sequenceNumber,
-      chapterMode: chapterState.chapterMode,
-      chapterPsychologyMode: chapterNarrativePsychology.chapterPsychologyMode,
-      activeThreadIds: narrativeThreadInspection.activeThreadIds,
-      recallWindows: sequenceDerivation.bookSequencePlan.recallWindows,
-    });
-    const epicContinuityValidation = new EpicContinuityValidationService().validatePack(epicContinuityPack);
-    const epicEmotionalGravityPack = new EpicEmotionalGravityDerivationService().deriveCamptiPack({
-      chapterId: chapterState.chapterId,
-      chapterSequence: chapterState.sequenceNumber,
-      chapterMode: chapterState.chapterMode,
-      chapterPsychologyMode: chapterNarrativePsychology.chapterPsychologyMode,
-      activeThreadIds: narrativeThreadInspection.activeThreadIds,
-      recallWindows: sequenceDerivation.bookSequencePlan.recallWindows,
-      sceneIds: chapterComposition.sceneSequence.map((scene) => scene.sceneId),
-    });
-    const epicEmotionalGravityValidation = new EpicEmotionalGravityValidationService().validatePack(epicEmotionalGravityPack);
-    const narratorPresencePack = new NarratorPresenceDerivationService().deriveCamptiPack({
-      chapterId: chapterState.chapterId,
-      chapterSequence: chapterState.sequenceNumber,
-      sceneIds: chapterComposition.sceneSequence.map((scene) => scene.sceneId),
-    });
-    const narratorPresenceValidation = new NarratorPresenceValidationService().validatePack(narratorPresencePack);
+    const sequenceDerivation = cluster3Governance.sequenceDerivation;
+    const sequenceValidation = cluster3Governance.sequenceValidation;
+    const epicContinuityPack = cluster3Governance.epicContinuityPack;
+    const epicContinuityValidation = cluster3Governance.validations.epicContinuity;
+    const epicEmotionalGravityPack = cluster3Governance.epicEmotionalGravityPack;
+    const epicEmotionalGravityValidation = cluster3Governance.validations.epicEmotionalGravity;
+    const narratorPresencePack = cluster3Governance.narratorPresencePack;
+    const narratorPresenceValidation = cluster3Governance.validations.narratorPresence;
+    proseConstraints = cluster3Governance.proseConstraints;
     const sceneGeneration = new SceneGenerationEngineService().run({
       chapterId: chapterState.chapterId,
       parentBookId: "book1",
@@ -3618,6 +3603,16 @@ export class Book1RegenerationLoopService {
       "narrator_convergence_engine",
     );
     if (beatAssemblyBlocked) {
+      const cluster3RuntimeActivationTruthForCockpit = buildCluster3RuntimeActivationTruth({
+        proseConstraints,
+        sequenceValidation,
+        epicContinuityPack,
+        epicEmotionalGravityPack,
+        narratorPresencePack,
+        epicContinuityValidation,
+        epicEmotionalGravityValidation,
+        narratorPresenceValidation,
+      });
       const authorCockpitBundle = buildAuthorCommandCockpitBundle({
         runtimeId: RUNTIME_ID_BOOK1_REGENERATION,
         context: resolveCockpitScopeContext({ scope: "chapter", chapterId: chapterState.chapterId }),
@@ -3790,6 +3785,12 @@ export class Book1RegenerationLoopService {
             narratorPresenceValidation.hardFailures.map((row) => row.message),
           ),
         },
+        cluster3RuntimeActivationTruth: cluster3RuntimeActivationTruthForCockpit,
+        runtimeConvergenceTruth: buildRuntimeGovernanceConvergenceTruth({
+          runtimePathLabel: "regeneration",
+          cluster3: cluster3RuntimeActivationTruthForCockpit,
+          literaryLayerParityNotes: ["beat_assembly_blocked_operational_warnings_may_differ_from_ready_path"],
+        }),
       });
       const blockedResult = {
         artifact: "book1_chapter_01_regeneration_blocked",
@@ -4667,6 +4668,16 @@ export class Book1RegenerationLoopService {
         : improved.length >= 3
           ? "accept new draft"
           : "iterate again";
+    const cluster3RuntimeActivationTruthForCockpit = buildCluster3RuntimeActivationTruth({
+      proseConstraints,
+      sequenceValidation,
+      epicContinuityPack,
+      epicEmotionalGravityPack,
+      narratorPresencePack,
+      epicContinuityValidation,
+      epicEmotionalGravityValidation,
+      narratorPresenceValidation,
+    });
     const authorCockpitBundle = buildAuthorCommandCockpitBundle({
       runtimeId: RUNTIME_ID_BOOK1_REGENERATION,
       context: resolveCockpitScopeContext({ scope: "chapter", chapterId: chapterState.chapterId }),
@@ -4724,7 +4735,9 @@ export class Book1RegenerationLoopService {
         attachmentTarget: proseConstraints.attachmentTarget,
         placeImmersionTarget: proseConstraints.placeImmersionTarget,
         compliant: postGenerationProseValidation.passed,
-        driftWarnings: postGenerationProseValidation.cockpitSummary.driftWarnings,
+        driftWarnings: postGenerationProseValidation.cockpitSummary.driftWarnings.concat(
+          proseConstraints.validationFlags.filter((f) => f.startsWith("cluster3_")),
+        ),
       },
       beatGating: {
         required: true,
@@ -4896,6 +4909,11 @@ export class Book1RegenerationLoopService {
           narratorPresenceValidation.hardFailures.map((row) => row.message),
         ),
       },
+      cluster3RuntimeActivationTruth: cluster3RuntimeActivationTruthForCockpit,
+      runtimeConvergenceTruth: buildRuntimeGovernanceConvergenceTruth({
+        runtimePathLabel: "regeneration",
+        cluster3: cluster3RuntimeActivationTruthForCockpit,
+      }),
     });
 
     const regenerationReview = {

@@ -59,6 +59,31 @@ function compactSocialGuidanceLines(input: SceneGenerationInput): string | null 
   return null;
 }
 
+export function compactCanonicalGovernanceLines(input: SceneGenerationInput): string | null {
+  const bundle = input.canonicalPreGeneration;
+  if (!bundle?.governanceMergeApplied) return null;
+  const c = bundle.proseConstraints;
+  const lines: string[] = [
+    "CANONICAL_NARRATIVE_GOVERNANCE (Cluster 3/4 merge — respect tension, drift, and guardrails; do not paste flags as exposition).",
+    `proseConstraintId=${c.proseConstraintId}`,
+    `continuityEmphasis=${c.continuityEmphasis} placeImmersionTarget=${c.placeImmersionTarget} attachmentTarget=${c.attachmentTarget}`,
+    `lineTension: target=${c.lineTensionProfile.target} unresolvedCarryForward=${c.lineTensionProfile.unresolvedCarryForward}`,
+    `narrativeDistance=${c.narrativeDistance} expositionAllowance=${c.expositionAllowance}`,
+  ];
+  if (c.driftFlags.length) {
+    lines.push(`driftFlags (sample): ${c.driftFlags.slice(0, 8).join(" | ")}`);
+  }
+  if (c.validationFlags.filter((f) => f.startsWith("cluster3_")).length) {
+    lines.push(
+      `cluster3_flags: ${c.validationFlags.filter((f) => f.startsWith("cluster3_")).join(", ")}`,
+    );
+  }
+  if (bundle.sequenceValidation.structuralWeaknessFlags.length) {
+    lines.push(`sequence_structural: ${bundle.sequenceValidation.structuralWeaknessFlags.join(", ")}`);
+  }
+  return lines.join("\n");
+}
+
 export function compactStorylineGuidanceLines(input: SceneGenerationInput): string | null {
   const summary = input.storylineGuidanceSummary;
   if (!summary) return null;
@@ -118,6 +143,7 @@ function compactNarrativeSourcesBlock(input: SceneGenerationInput): string | nul
 function buildUserPrompt(input: SceneGenerationInput, basisProse: string | null): string {
   const socialLines = compactSocialGuidanceLines(input);
   const storylineLines = compactStorylineGuidanceLines(input);
+  const governanceLines = compactCanonicalGovernanceLines(input);
   const narrativeSourcesBlock = compactNarrativeSourcesBlock(input);
   return [
     `GENERATION_MODE: ${input.generationMode}`,
@@ -150,6 +176,8 @@ function buildUserPrompt(input: SceneGenerationInput, basisProse: string | null)
     storylineLines
       ? `STORYLINE_GUIDANCE_BOUNDED (soft weighting only; never override structural legality):\n${storylineLines}`
       : "",
+    "",
+    governanceLines ? `${governanceLines}\n` : "",
     "",
     input.contract.socialFieldGeneration
       ? [

@@ -190,6 +190,14 @@ describe("computeSceneGenerationInputHash", () => {
     const b = minimalSceneGenerationInput({ sourceIdsUsed: ["nsrc_1"] });
     assert.notEqual(computeSceneGenerationInputHash(a, null), computeSceneGenerationInputHash(b, null));
   });
+
+  it("changing canonical pre-generation bundle changes hash", () => {
+    const a = minimalSceneGenerationInput();
+    const b = minimalSceneGenerationInput({
+      canonicalPreGeneration: { contractVersion: "1", governanceMergeApplied: true } as SceneGenerationInput["canonicalPreGeneration"],
+    });
+    assert.notEqual(computeSceneGenerationInputHash(a, null), computeSceneGenerationInputHash(b, null));
+  });
 });
 
 describe("serializeCanonicalSceneGenerationHashInput", () => {
