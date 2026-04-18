@@ -20,3 +20,7 @@
 ## Scene generation
 
 `runSceneGeneration` attaches `cluster7RuntimeTruth.persistenceGovernance` for every run, aligned with existing `allowSaveOnInvalidRealism` / `allowSaveOnInvalidHumanGravity` behavior.
+
+## Alignment with artifact truth
+
+`lib/domain/persistence-governance.ts` documents how **`mayDescribeAsCanonicalReady`** stays false when validity failed (including after overrides), matching `ArtifactTruthStamp` authority downgrades in `canonical-artifact-record-service.ts`.

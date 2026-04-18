@@ -1,0 +1,41 @@
+{
+  "contractVersion": "1",
+  "title": "RICRE sample — Red River crossing / ferry custom (fictional demonstration IDs)",
+  "steps": [
+    "Author creates AuthorResearchTarget { targetType: route, targetName: Red River crossing, linkedSceneIds: [scene_demo] }",
+    "AuthorResearchSource ingested with provenanceHash, rawExcerpt cap, ingestMethod author_url_fetch or manual_paste",
+    "ResearchClaimExtractionService emits ExtractedKnowledgeClaim rows (heuristic_stub)",
+    "CanonComparisonService compares claims to AuthorCanonKnowledgeRecord + Person/Place descriptions",
+    "ResearchContradictionDetectionService surfaces contradicts_canon rows for cockpit",
+    "CanonReconciliationService.applyAuthorDecision records AuthorCanonDecision and creates AuthorCanonKnowledgeRecord only after explicit accept / merge / divergence choice",
+    "loadAcceptedRicreCanonKnowledgeForScene injects RICRE_ACCEPTED_CANON lines into scene generation (subordinate to P2-E)"
+  ],
+  "sampleResearchTarget": {
+    "targetType": "route",
+    "targetName": "Red River ferry crossing (historical corridor)",
+    "linkedSceneIds": ["scene_red_river_demo"],
+    "researchIntent": "Ground ferry timing, toll custom, and sensory bank without overwriting genealogy."
+  },
+  "sampleSource": {
+    "sourceType": "url",
+    "sourceTitle": "Regional note on river crossings (illustrative)",
+    "sourceUrl": "https://example.invalid/ricre-demo",
+    "sourceTrustTier": "popular_or_unverified",
+    "ingestMethod": "author_manual_paste"
+  },
+  "sampleClaim": {
+    "claimType": "cultural_practice",
+    "claimText": "Crossing toll was often negotiated in goods rather than coin during lean seasons.",
+    "confidence": 3,
+    "contradictionPotential": "medium"
+  },
+  "sampleCanonDecision": {
+    "authorDecision": "accept_as_canon",
+    "decisionReason": "Matches oral-history layer already used in Book 1 room tone; keep as soft social texture only.",
+    "canonTargetType": "scene",
+    "canonTargetId": "scene_red_river_demo",
+    "knowledgeType": "cultural_practice",
+    "historicalRealityStatus": "likely_historical",
+    "storyRealityStatus": "accepted_story_canon"
+  }
+}

@@ -49,11 +49,32 @@ export class ConsequencePersistenceRuntimeService {
       (r) => `permanent:${r.targetKind}:${r.permanentChangeStatement}`,
     );
 
-    const activeConsequenceMarkers = [...markers, ...relAlts.slice(0, 3), ...loss.slice(0, 2), ...permanent.slice(0, 2)];
+    const noReturn = input.profile.noReturnThresholds
+      .filter(
+        (n) =>
+          n.chapterWindow === input.chapterId ||
+          n.chapterWindow.includes(input.chapterId) ||
+          input.chapterId.includes(n.chapterWindow),
+      )
+      .map((n) => `no_return:${n.thresholdId}:${n.thresholdLabel}`);
+
+    const activeConsequenceMarkers = [
+      ...markers,
+      ...relAlts.slice(0, 3),
+      ...loss.slice(0, 2),
+      ...permanent.slice(0, 2),
+      ...noReturn.slice(0, 3),
+    ];
 
     const irrClasses = input.profile.irreversibilityMarkers.map((m) => m.irreversibilityClass);
     const heavy = irrClasses.filter((c) => c !== "reversible").length;
-    const irreversibilityState = `Irreversibility mix: ${heavy} non-reversible markers in scope; ${input.profile.noReturnThresholds.length} no-return thresholds registered.`;
+    const triggeredNoReturn = input.profile.noReturnThresholds.filter(
+      (n) =>
+        n.chapterWindow === input.chapterId ||
+        n.chapterWindow.includes(input.chapterId) ||
+        input.chapterId.includes(n.chapterWindow),
+    ).length;
+    const irreversibilityState = `Irreversibility mix: ${heavy} non-reversible markers in scope; ${input.profile.noReturnThresholds.length} no-return thresholds registered (${triggeredNoReturn} in/near this chapter window).`;
 
     const repairDifficultySignals = input.profile.relationshipAlterationEvents.map(
       (e) => `repair:${e.relationshipId}:${e.repairDifficulty.toFixed(2)}`,

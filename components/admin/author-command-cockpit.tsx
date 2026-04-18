@@ -1,6 +1,9 @@
 import Link from "next/link";
 
+import { SceneGenerationLaunchPanel } from "@/components/admin/scene-generation-launch-panel";
 import type { AuthorCommandCockpitBundle, AuthorCockpitScope } from "@/lib/domain/author-command-cockpit";
+import type { SceneDecisionAssistCockpitCard } from "@/lib/domain/scene-decision-assist";
+import type { SceneLaunchGuardResult } from "@/lib/domain/scene-launch-guard";
 
 type ScopeOption = {
   id: string;
@@ -11,9 +14,14 @@ type ScopeOption = {
 type Props = {
   bundle: AuthorCommandCockpitBundle;
   scopeOptions: Record<AuthorCockpitScope, ScopeOption[]>;
+  /** Scene-scoped launch guard (canonical preflight-aligned); null when not on scene scope. */
+  sceneLaunchGuard?: SceneLaunchGuardResult | null;
+  sceneLaunchSceneTitle?: string | null;
+  /** Advisory summary from decision-assist layer (scene scope only). */
+  sceneDecisionAssistCard?: SceneDecisionAssistCockpitCard | null;
 };
 
-export function AuthorCommandCockpit({ bundle, scopeOptions }: Props) {
+export function AuthorCommandCockpit({ bundle, scopeOptions, sceneLaunchGuard, sceneLaunchSceneTitle, sceneDecisionAssistCard }: Props) {
   const currentScopeOptions = scopeOptions[bundle.context.scope];
 
   return (
@@ -31,6 +39,109 @@ export function AuthorCommandCockpit({ bundle, scopeOptions }: Props) {
         </div>
       </section>
 
+      {bundle.context.scope === "scene" && bundle.context.sceneId && sceneLaunchGuard ? (
+        <SceneGenerationLaunchPanel
+          sceneId={bundle.context.sceneId}
+          sceneTitle={sceneLaunchSceneTitle ?? null}
+          initialGuard={sceneLaunchGuard}
+          compact
+        />
+      ) : null}
+
+      {bundle.context.scope === "scene" && sceneDecisionAssistCard ? (
+        <section className="rounded-2xl border border-teal-200 bg-teal-50/70 p-4 shadow-sm">
+          <p className="text-xs uppercase tracking-widest text-teal-900">Decision assist (advisory)</p>
+          <p className="mt-2 text-sm font-medium text-teal-950">{sceneDecisionAssistCard.primaryTitle}</p>
+          <p className="mt-1 text-xs text-teal-900">{sceneDecisionAssistCard.primaryRecommendation}</p>
+          <p className="mt-2 text-[11px] text-teal-800">
+            Strength: <span className="capitalize">{sceneDecisionAssistCard.strength}</span> — not autopilot; open the tab for evidence.
+          </p>
+          <p className="mt-2">
+            <Link href={sceneDecisionAssistCard.sceneAssistHref} className="text-sm font-medium text-teal-950 underline-offset-2 hover:underline">
+              Open full Decision Assist →
+            </Link>
+          </p>
+        </section>
+      ) : null}
+
+      {bundle.ricreResearchCanon ? (
+        <section className="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-4 shadow-sm">
+          <p className="text-xs uppercase tracking-widest text-emerald-900">RICRE — research and canon reconciliation</p>
+          <p className="mt-2 text-sm text-emerald-950">{bundle.ricreResearchCanon.workflowNote}</p>
+          <ul className="mt-2 grid gap-2 text-xs text-emerald-950 sm:grid-cols-2">
+            <li>Linked research targets: {bundle.ricreResearchCanon.linkedTargets}</li>
+            <li>Open claims (pending review): {bundle.ricreResearchCanon.openClaims}</li>
+            <li>Contradiction-shaped comparisons: {bundle.ricreResearchCanon.contradictions}</li>
+            <li>Accepted canon records (scene/people/places): {bundle.ricreResearchCanon.acceptedCanonRecords}</li>
+            <li className="sm:col-span-2">Last author decision: {bundle.ricreResearchCanon.lastDecisionAt ?? "—"}</li>
+            <li className="sm:col-span-2">Observational only: {bundle.ricreResearchCanon.observationalOnly ? "yes" : "no"}</li>
+          </ul>
+          <p className="mt-2 text-[11px] text-emerald-900">
+            Use services under <span className="font-mono">lib/services/research-*</span> and{" "}
+            <span className="font-mono">canon-reconciliation-service</span>; decisions persist in{" "}
+            <span className="font-mono">AuthorCanonDecision</span> / <span className="font-mono">AuthorCanonKnowledgeRecord</span>.
+          </p>
+          <p className="mt-2 text-[11px] text-emerald-950">
+            <Link href="/admin/research" className="font-medium text-emerald-950 underline-offset-2 hover:underline">
+              Open Research and Canon workbench →
+            </Link>{" "}
+            (ingest, extract, compare, decide — same persistence path as production RICRE).
+          </p>
+        </section>
+      ) : null}
+
+      {bundle.operatorExecutionSummary ? (
+        <section className="rounded-2xl border border-sky-200 bg-sky-50/80 p-4 shadow-sm">
+          <p className="text-xs uppercase tracking-widest text-sky-900">Operator execution truth (Cluster 9)</p>
+          <p className="mt-2 text-sm text-sky-950">{bundle.operatorExecutionSummary.canonicalRuntimePath}</p>
+          <ul className="mt-2 grid gap-2 text-xs text-sky-950 sm:grid-cols-2">
+            <li>Cockpit runtime id: {bundle.operatorExecutionSummary.cockpitRuntimeId}</li>
+            <li>Cockpit observational only: {bundle.operatorExecutionSummary.cockpitObservationalOnly ? "yes" : "no"}</li>
+            <li className="sm:col-span-2">
+              Character simulation profile source: {bundle.operatorExecutionSummary.characterSimulationProfileTruth.replaceAll("_", " ")}
+            </li>
+          </ul>
+          <div className="mt-3 rounded-lg border border-sky-200 bg-white p-2">
+            <p className="text-[11px] font-medium text-sky-900">Author workflow quick links</p>
+            <ul className="mt-1 space-y-1 text-[11px] text-stone-700">
+              {bundle.operatorExecutionSummary.quickLinks.map((link) => (
+                <li key={link.href + link.label}>
+                  <Link href={link.href} className="font-medium text-sky-900 underline-offset-2 hover:underline">
+                    {link.label}
+                  </Link>
+                  {link.advisory ? <span className="text-stone-500"> — {link.advisory}</span> : null}
+                </li>
+              ))}
+            </ul>
+          </div>
+          {bundle.operatorExecutionSummary.characterSimulationWorkbenchRollup ? (
+            <div className="mt-3 rounded-lg border border-violet-200 bg-violet-50/80 p-3">
+              <p className="text-[11px] font-medium text-violet-950">Character Simulation Workbench (cast rollup)</p>
+              <p className="mt-1 text-xs text-violet-950">{bundle.operatorExecutionSummary.characterSimulationWorkbenchRollup.summaryLine}</p>
+              <ul className="mt-2 space-y-1 text-[11px] text-violet-950">
+                {bundle.operatorExecutionSummary.characterSimulationWorkbenchRollup.perPerson.map((p) => (
+                  <li key={p.personId} className="flex flex-wrap items-baseline justify-between gap-2">
+                    <span className="font-medium">{p.displayName}</span>
+                    <span className="text-violet-900">
+                      {p.readinessImpact.replaceAll("_", " ")} · blocking {p.blockingConflicts} · advisory {p.advisoryConflicts}
+                    </span>
+                    <Link href={p.workbenchHref} className="text-violet-900 underline-offset-2 hover:underline">
+                      Open workbench →
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              {bundle.operatorExecutionSummary.characterSimulationWorkbenchRollup.validationFlags.length ? (
+                <p className="mt-2 text-[10px] text-violet-900">
+                  Flags: {bundle.operatorExecutionSummary.characterSimulationWorkbenchRollup.validationFlags.slice(0, 6).join(" · ")}
+                  {bundle.operatorExecutionSummary.characterSimulationWorkbenchRollup.validationFlags.length > 6 ? " …" : ""}
+                </p>
+              ) : null}
+            </div>
+          ) : null}
+        </section>
+      ) : null}
+
       {bundle.certificationHardening ? (
         <section className="rounded-2xl border border-amber-200 bg-amber-50/80 p-4 shadow-sm">
           <p className="text-xs uppercase tracking-widest text-amber-800">Certification &amp; validation truth (Cluster 7)</p>
@@ -41,6 +152,13 @@ export function AuthorCommandCockpit({ bundle, scopeOptions }: Props) {
             <li>Execution-ready: {bundle.certificationHardening.mayPresentAsExecutionReady ? "allowed" : "disallowed"}</li>
             <li>Production-grade: {bundle.certificationHardening.mayPresentAsProductionGrade ? "allowed" : "disallowed"}</li>
             <li>Artifact authority: {bundle.certificationHardening.canonicalArtifactAuthority.replaceAll("_", " ")}</li>
+            <li>Artifact id: {bundle.certificationHardening.canonicalArtifactId}</li>
+            <li>
+              Hard invariant ids:{" "}
+              {bundle.certificationHardening.semanticInvariantHardFailureIds.length
+                ? bundle.certificationHardening.semanticInvariantHardFailureIds.join(", ")
+                : "—"}
+            </li>
             <li>Save eligible: {bundle.certificationHardening.saveEligible ? "yes" : "no"}</li>
             <li>Readiness evidence trust: {bundle.certificationHardening.readinessEvidenceTrustClass.replaceAll("_", " ")}</li>
             <li>
@@ -273,6 +391,10 @@ export function AuthorCommandCockpit({ bundle, scopeOptions }: Props) {
                 Score: {bundle.humanGravityRuntime.humanGravityScore.toFixed(2)}
               </p>
               <p className="mt-2 text-xs text-stone-600">{bundle.humanGravityRuntime.povBiasSummary}</p>
+              <p className="mt-2 text-[11px] text-stone-600">{bundle.humanGravityRuntime.bondModeSummary}</p>
+              <p className="mt-2 text-[11px] text-stone-500">
+                Relational foreground: {bundle.humanGravityRuntime.relationalForegroundSummary}
+              </p>
               <ul className="mt-2 space-y-1 text-xs text-stone-600">
                 <li>Relational threat (top): {bundle.humanGravityRuntime.relationalThreatTop.join(", ") || "—"}</li>
                 <li>Active consequence markers: {bundle.humanGravityRuntime.activeConsequenceMarkers.length}</li>
@@ -297,6 +419,90 @@ export function AuthorCommandCockpit({ bundle, scopeOptions }: Props) {
                   ))}
                 </ul>
               ) : null}
+            </div>
+          ) : null}
+
+          {bundle.characterSimulation ? (
+            <div className="rounded-2xl border border-violet-200 bg-violet-50/60 p-4 shadow-sm">
+              <p className="text-xs uppercase tracking-widest text-violet-800">Character simulation (Cluster 8)</p>
+              <p className="mt-2 text-[11px] font-medium text-violet-950">
+                Profile source: {bundle.characterSimulation.profileTruth.replaceAll("_", " ")} (persisted author JSON vs deterministic seed)
+              </p>
+              <p className="mt-2 text-[11px] text-violet-950">
+                Scene {bundle.characterSimulation.sceneId} · Chapter {bundle.characterSimulation.chapterId}
+              </p>
+              <p className="mt-2 text-xs font-medium text-violet-950">
+                Purpose from pressure: {bundle.characterSimulation.scenePurposeFromPressure}
+              </p>
+              <div className="mt-2 rounded-lg border border-violet-200 bg-white p-2">
+                <p className="text-[11px] font-medium text-violet-900">Necessity (preview)</p>
+                <ul className="mt-1 space-y-1 text-[11px] text-stone-700">
+                  {bundle.characterSimulation.necessityPreview.map((line) => (
+                    <li key={line}>- {line}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="mt-2 rounded-lg border border-violet-200 bg-white p-2">
+                <p className="text-[11px] font-medium text-violet-900">Conflicts (preview)</p>
+                <ul className="mt-1 space-y-1 text-[11px] text-stone-700">
+                  {bundle.characterSimulation.conflictPreview.map((line) => (
+                    <li key={line}>- {line}</li>
+                  ))}
+                </ul>
+              </div>
+              <ul className="mt-2 grid gap-2 text-[11px] text-stone-800 sm:grid-cols-2">
+                {bundle.characterSimulation.cognitiveSnapshot.map((c) => (
+                  <li key={c.characterId} className="rounded border border-stone-200 bg-white p-2">
+                    <p className="font-mono text-[10px] text-stone-500">{c.characterId}</p>
+                    <p>fear {c.fear.toFixed(2)} · decision {c.decisionPressure.toFixed(2)} · identity {c.identityStress.toFixed(2)}</p>
+                    <p className="mt-1 text-stone-600">{c.desireFocus}</p>
+                  </li>
+                ))}
+              </ul>
+              <ul className="mt-2 space-y-1 text-[11px] text-stone-700">
+                {bundle.characterSimulation.voiceSnapshot.map((v) => (
+                  <li key={v.characterId}>
+                    Voice {v.characterId}: {v.mode} · stress {v.stress.toFixed(2)} · truth/mask {v.truthVsMask.toFixed(2)}
+                  </li>
+                ))}
+              </ul>
+              <ul className="mt-2 space-y-1 text-[11px] text-stone-700">
+                {bundle.characterSimulation.relationshipSnapshot.map((r) => (
+                  <li key={r.relationshipId}>
+                    {r.relationshipId}: tension {r.tension.toFixed(2)} · threat {r.threat.toFixed(2)} · {r.mode} · repair{" "}
+                    {r.repair}
+                  </li>
+                ))}
+              </ul>
+              {bundle.characterSimulation.constraintFlags.length > 0 ? (
+                <div className="mt-2 rounded-lg border border-amber-200 bg-amber-50/80 p-2">
+                  <p className="text-[11px] font-medium text-amber-900">Constraint flags</p>
+                  <ul className="mt-1 space-y-1 text-[11px] text-amber-950">
+                    {bundle.characterSimulation.constraintFlags.map((f) => (
+                      <li key={f}>- {f}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+              <p className="mt-2 text-[11px] text-stone-600">
+                Evolution: order {bundle.characterSimulation.evolution.sceneOrderIndex} · no-reset aligned{" "}
+                {bundle.characterSimulation.evolution.noResetAligned ? "yes" : "no"}
+              </p>
+              {bundle.characterSimulation.evolution.residueNotes.length > 0 ? (
+                <ul className="mt-1 space-y-1 text-[11px] text-stone-600">
+                  {bundle.characterSimulation.evolution.residueNotes.map((n) => (
+                    <li key={n}>- {n}</li>
+                  ))}
+                </ul>
+              ) : null}
+              <div className="mt-2 rounded-lg border border-violet-200 bg-white p-2">
+                <p className="text-[11px] font-medium text-violet-900">Author nudge (input hooks)</p>
+                <ul className="mt-1 space-y-1 text-[11px] text-stone-600">
+                  {bundle.characterSimulation.authorNudgeHints.map((h) => (
+                    <li key={h}>- {h}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           ) : null}
 

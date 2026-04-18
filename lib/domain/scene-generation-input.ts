@@ -1,8 +1,10 @@
 import type {
-  CharacterVoiceProfile,
+  CharacterVoiceProfile as PrismaCharacterVoiceProfile,
   NarrativeVoiceProfile,
 } from "@prisma/client";
 
+import type { CharacterMindProfile } from "@/lib/domain/character-mind";
+import type { CharacterVoiceProfile as SimulationCharacterVoiceProfile } from "@/lib/domain/character-voice";
 import type { AuthorSceneGoals, AnalyzeProseContext } from "@/lib/prose-quality";
 
 import type { SceneGenerationContractV1 } from "@/lib/domain/scene-generation-contract";
@@ -96,7 +98,7 @@ export type SceneGenerationInput = {
 
   /** POV / character voice when `personId` matches */
   characterVoiceProfile?: Pick<
-    CharacterVoiceProfile,
+    PrismaCharacterVoiceProfile,
     | "id"
     | "dictionLevel"
     | "rhythmStyle"
@@ -166,4 +168,27 @@ export type SceneGenerationInput = {
    * Derived after Cluster 3/4 governance merge; included in canonical hash and model prompt when present.
    */
   humanGravityRuntime?: import("@/lib/domain/human-gravity-runtime").HumanGravityRuntimeProfile | null;
+
+  /**
+   * Cluster 8 — character simulation runtime (mind/voice/relationship pressure + emergence digest).
+   * Populated on canonical scene generation after Cluster 6 human gravity when governance merge is active.
+   */
+  characterSimulationRuntime?: import("@/lib/domain/character-simulation-runtime").CharacterSimulationRuntimeArtifact | null;
+
+  /** Optional author deltas for inspection runs / advanced callers (never overrides contract facts). */
+  characterSimulationAuthorNudge?: import("@/lib/domain/character-simulation-runtime").CharacterSimulationAuthorNudge | null;
+
+  /**
+   * Cluster 9 — author-owned Cluster-8 mind/voice JSON merged on top of deterministic seeds before C8 derivation.
+   * Populated by canonical loaders from `CharacterSimulationAuthorBundle` when rows exist.
+   */
+  persistedCharacterSimulationProfiles?: Record<
+    string,
+    { mindPartial?: Partial<CharacterMindProfile>; voicePartial?: Partial<SimulationCharacterVoiceProfile> }
+  > | null;
+
+  /**
+   * RICRE — author-accepted research canon lines for grounding (never replaces P2-E narrative sources or contract facts).
+   */
+  ricreAcceptedCanonKnowledge?: import("@/lib/domain/canon-reconciliation").RicreAcceptedCanonKnowledgeBundle | null;
 };

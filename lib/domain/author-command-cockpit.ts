@@ -7,6 +7,10 @@ export const AUTHOR_COMMAND_COCKPIT_CONTRACT_VERSION = "1" as const;
 export type CockpitCertificationHardeningSummary = {
   contractVersion: "1";
   canonicalArtifactAuthority: import("@/lib/domain/canonical-artifact-governance").ArtifactAuthorityClass;
+  /** Canonical artifact record id from Cluster 7 envelope (provenance). */
+  canonicalArtifactId: string;
+  /** Invariant ids that failed with hard severity (first pass, for remediation routing). */
+  semanticInvariantHardFailureIds: string[];
   saveEligible: boolean;
   saveBlockedReasons: string[];
   readinessEvidenceTrustClass: import("@/lib/domain/enforcement-contract").ReadinessEvidenceTrustClass;
@@ -357,6 +361,8 @@ export type AuthorCommandCockpitBundle = {
     /** True only when prompt/seed/no-reset gate materially participates (see runtime contract). */
     humanGravityCanonicalRuntimeActive: boolean;
     povBiasSummary: string;
+    bondModeSummary: string;
+    relationalForegroundSummary: string;
     activeFearDesireVulnerabilityLines: string[];
     relationalThreatTop: string[];
     activeConsequenceMarkers: string[];
@@ -405,6 +411,68 @@ export type AuthorCommandCockpitBundle = {
   enforcementSemanticTruth?: CockpitEnforcementSemanticTruth;
   /** Cluster 7 — validation/certification visibility (optional when scene/cluster7 truth not evaluated). */
   certificationHardening?: CockpitCertificationHardeningSummary;
+  /** Cluster 8 — live character simulation snapshot (mind pressure, relationships, voice modes, constraints). */
+  characterSimulation?: {
+    sceneId: string;
+    chapterId: string;
+    scenePurposeFromPressure: string;
+    necessityPreview: string[];
+    conflictPreview: string[];
+    cognitiveSnapshot: Array<{
+      characterId: string;
+      fear: number;
+      decisionPressure: number;
+      identityStress: number;
+      desireFocus: string;
+      internalConflict: string;
+    }>;
+    relationshipSnapshot: Array<{
+      relationshipId: string;
+      tension: number;
+      threat: number;
+      mode: string;
+      repair: string;
+    }>;
+    voiceSnapshot: Array<{
+      characterId: string;
+      mode: string;
+      stress: number;
+      truthVsMask: number;
+    }>;
+    constraintFlags: string[];
+    evolution: {
+      sceneOrderIndex: number;
+      residueNotes: string[];
+      noResetAligned: boolean;
+    };
+    authorNudgeHints: string[];
+    /** Cluster 9 — whether Cluster-8 mind/voice came from DB author bundle, seed only, or mixed cast. */
+    profileTruth: "persisted_author" | "deterministic_seed_only" | "mixed";
+  };
+  /** RICRE — research ingestion & canon reconciliation summary (counts + advisory workflow; no auto-canon). */
+  ricreResearchCanon?: {
+    sceneId?: string;
+    linkedTargets: number;
+    openClaims: number;
+    contradictions: number;
+    acceptedCanonRecords: number;
+    lastDecisionAt: string | null;
+    workflowNote: string;
+    observationalOnly: true;
+    validationFlags: string[];
+  };
+  /**
+   * Cluster 9 — operator-facing execution path summary (canonical inspection / generation; truthful labels).
+   */
+  operatorExecutionSummary?: {
+    canonicalRuntimePath: string;
+    cockpitRuntimeId: string;
+    cockpitObservationalOnly: true;
+    characterSimulationProfileTruth: "persisted_author" | "deterministic_seed_only" | "mixed";
+    quickLinks: Array<{ label: string; href: string; advisory?: string }>;
+    /** Optional per-cast Character Simulation Workbench aggregate (honest when migration missing — see flags). */
+    characterSimulationWorkbenchRollup?: import("@/lib/domain/character-simulation-workbench").CharacterSimulationWorkbenchSceneRollup;
+  };
   bounded: true;
   explainable: true;
   nonOmniscient: true;

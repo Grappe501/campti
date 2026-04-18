@@ -1,7 +1,13 @@
 import { AuthorCommandCockpit } from "@/components/admin/author-command-cockpit";
 import { prisma } from "@/lib/prisma";
+import { evaluateSceneLaunchGuard } from "@/lib/services/scene-launch-guard-service";
 import { buildAuthorCommandCockpitBundle } from "@/lib/services/author-command-cockpit-service";
+import { buildCharacterSimulationCockpitPanelForScene } from "@/lib/services/character-simulation-cockpit-inspection-service";
 import { resolveCockpitScopeContext } from "@/lib/services/cockpit-scope-model-service";
+import { buildEnforcementRegistry } from "@/lib/services/enforcement-registry-service";
+import { summarizeRicreForScene } from "@/lib/services/ricre-canon-knowledge-loader-service";
+import { buildCharacterSimulationWorkbenchSceneRollup } from "@/lib/services/character-simulation-workbench-scene-aggregate-service";
+import { buildSceneDecisionAssistViewModel } from "@/lib/services/scene-decision-assist-service";
 import { RUNTIME_ID_COCKPIT_INSPECTION } from "@/lib/services/runtime-authority-registry-service";
 
 export const dynamic = "force-dynamic";
@@ -70,6 +76,36 @@ export default async function NarrativeHubPage({ searchParams }: NarrativePagePr
     selectedEpic,
   });
 
+  const characterSimulationPanel =
+    context.scope === "scene" && context.sceneId
+      ? await buildCharacterSimulationCockpitPanelForScene(context.sceneId)
+      : null;
+
+  const enforcementRegistry = buildEnforcementRegistry();
+
+  const ricreSummary =
+    context.scope === "scene" && context.sceneId ? await summarizeRicreForScene(context.sceneId) : null;
+
+  const workbenchRollup =
+    context.scope === "scene" && selectedScene?.persons?.length
+      ? await buildCharacterSimulationWorkbenchSceneRollup(selectedScene.persons.map((p) => p.id))
+      : undefined;
+
+  const sceneLaunchGuard =
+    context.scope === "scene" && context.sceneId ? await evaluateSceneLaunchGuard(context.sceneId) : null;
+
+  const sceneDecisionAssistVm =
+    context.scope === "scene" && context.sceneId ? await buildSceneDecisionAssistViewModel(context.sceneId) : null;
+  const sceneDecisionAssistCard =
+    sceneDecisionAssistVm?.recommendations.primary && context.sceneId
+      ? {
+          primaryTitle: sceneDecisionAssistVm.recommendations.primary.title,
+          primaryRecommendation: sceneDecisionAssistVm.recommendations.primary.recommendationText,
+          strength: sceneDecisionAssistVm.recommendations.primary.strength,
+          sceneAssistHref: `/admin/scenes/${context.sceneId}?tab=assist`,
+        }
+      : null;
+
   const bundle = buildAuthorCommandCockpitBundle({
     runtimeId: RUNTIME_ID_COCKPIT_INSPECTION,
     context,
@@ -80,11 +116,76 @@ export default async function NarrativeHubPage({ searchParams }: NarrativePagePr
       epicLabel: selectedEpic?.title,
     },
     metrics,
+    characterSimulation: characterSimulationPanel ?? undefined,
+    ricreResearchCanon: ricreSummary
+      ? {
+          sceneId: context.sceneId,
+          linkedTargets: ricreSummary.linkedTargets,
+          openClaims: ricreSummary.openClaims,
+          contradictions: ricreSummary.contradictions,
+          acceptedCanonRecords: ricreSummary.acceptedCanonRecords,
+          lastDecisionAt: ricreSummary.lastDecisionAt,
+          workflowNote:
+            "RICRE: ingest with provenance → extract structured claims → compare to canon → author decision → optional prompt grounding. Raw research never silently becomes canon.",
+          observationalOnly: true,
+          validationFlags: [],
+        }
+      : undefined,
+    operatorExecutionSummary: {
+      canonicalRuntimePath: `${enforcementRegistry.canonicalRuntimeId} — canonical scene generation + save path. This page assembles read-only cockpit bundles under ${RUNTIME_ID_COCKPIT_INSPECTION} (observational; no prose mutation).`,
+      cockpitRuntimeId: RUNTIME_ID_COCKPIT_INSPECTION,
+      cockpitObservationalOnly: true,
+      characterSimulationProfileTruth:
+        characterSimulationPanel?.profileTruth ?? "deterministic_seed_only",
+      quickLinks: [
+        ...(context.scope === "scene" && context.sceneId
+          ? [
+              {
+                label: "Run ledger, diff & analytics (scene)",
+                href: `/admin/scenes/${context.sceneId}?tab=runs`,
+                advisory: "Ledger, structured diff, outcome signals — replay stays guarded.",
+              },
+              {
+                label: "Decision assist (scene)",
+                href: `/admin/scenes/${context.sceneId}?tab=assist`,
+                advisory: "Traceable next-step guidance — advisory only.",
+              },
+            ]
+          : []),
+        { label: "Scenes (rerun / save)", href: "/admin/scenes", advisory: "Uses runSceneGeneration — same canonical stack as production." },
+        { label: "Chapters", href: "/admin/chapters" },
+        { label: "Continuity", href: "/admin/continuity" },
+        {
+          label: "People (author simulation JSON)",
+          href: "/admin/people",
+          advisory: "Persist Cluster-8 mind/voice on CharacterSimulationAuthorBundle (Prisma); seed remains fallback.",
+        },
+        ...(selectedScene?.persons[0]
+          ? [
+              {
+                label: "Character Simulation Workbench",
+                href: `/admin/people/${selectedScene.persons[0].id}/simulation-workbench`,
+                advisory: "Per-person authoring surface; pick other cast from People if needed.",
+              },
+            ]
+          : []),
+        {
+          label: "Research and canon workbench (RICRE)",
+          href: "/admin/research",
+          advisory: "Governed ingest → claims → comparisons → author decisions; observational in cockpit.",
+        },
+        { label: "Readiness", href: "/admin/readiness" },
+      ],
+      characterSimulationWorkbenchRollup: workbenchRollup,
+    },
   });
 
   return (
     <AuthorCommandCockpit
       bundle={bundle}
+      sceneLaunchGuard={sceneLaunchGuard}
+      sceneLaunchSceneTitle={selectedScene?.description ?? null}
+      sceneDecisionAssistCard={sceneDecisionAssistCard}
       scopeOptions={{
         scene: scenes.map((scene) => ({
           id: scene.id,

@@ -52,6 +52,10 @@ export type SceneGenerationRunResult = {
   realismTruth?: import("@/lib/domain/prose-realism").RealismTruthResult | null;
   /** True when invalid realism output blocked DB save of generation text (see `allowSaveOnInvalidRealism`). */
   generationTextSaveBlockedByRealism?: boolean;
+  /** Cluster 8 — character simulation runtime artifact when the layer ran. */
+  characterSimulationRuntime?: import("@/lib/domain/character-simulation-runtime").CharacterSimulationRuntimeArtifact | null;
+  /** Cluster 8 — deterministic validation advisory (warnings only; does not block save). */
+  characterSimulationValidation?: import("@/lib/services/character-simulation-validation-service").CharacterSimulationValidationResult | null;
   /** Cluster 6 — human-gravity runtime profile applied to this run (when governance + layer enabled). */
   humanGravityRuntime?: import("@/lib/domain/human-gravity-runtime").HumanGravityRuntimeProfile | null;
   /** Cluster 6 — deterministic validation + no-reset truth. */

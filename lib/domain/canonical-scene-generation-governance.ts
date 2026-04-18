@@ -40,6 +40,11 @@ export type CanonicalPreGenerationBundle = {
    * Prefer propagating end-to-end over inferring from preparation path alone.
    */
   runtimeSemanticTruthFlags?: string[];
+  /**
+   * Cluster 8 — character-driven scene emergence overlay (per scene plan id in chapter composition).
+   * Feeds scene necessity / conflict justification before model generation on the canonical path.
+   */
+  characterSceneEmergencePlan?: import("@/lib/domain/character-scene-emergence").CharacterSceneEmergenceChapterPlan | null;
 };
 
 export type RuntimeGovernanceConvergenceTruth = {

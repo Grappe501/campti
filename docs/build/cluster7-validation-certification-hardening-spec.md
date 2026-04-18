@@ -4,6 +4,12 @@
 
 Cluster 7 makes the canonical narrative runtime **operationally trustworthy**: semantic validation (not only JSON shape), explicit artifact authority, auditable persistence, readiness evidence that cannot be silently inflated, and drift detection across runtime output vs cockpit vs persistence claims.
 
+## Normative rules (verbatim)
+
+**CERTIFICATION TRUTH RULE:** A run may not be presented as execution-ready or production-grade unless its readiness/certification evidence is derived from canonical runtime truth, semantically valid artifact records, and non-downgraded save eligibility.
+
+**ARTIFACT TRUTH RULE:** Any scene/chapter/run artifact that does not preserve authority class, enforcement truth, validation outcome, and save eligibility is invalid as canonical evidence.
+
 ## Non-negotiables (enforced in code)
 
 1. **Semantic validation** — `RuntimeSemanticInvariantService` evaluates cataloged invariants; hard failures surface in `RuntimeSemanticInvariantReport`.
@@ -24,6 +30,9 @@ Cluster 7 makes the canonical narrative runtime **operationally trustworthy**: s
 | Runtime truth envelope | `lib/domain/cluster7-runtime-truth.ts` |
 | Orchestration | `lib/services/cluster7-runtime-truth-service.ts` |
 | Cockpit summary builder | `buildCockpitCertificationHardeningSummary` |
+| Readiness inflation helper | `lib/services/readiness-evidence-semantic-service.ts` |
+| Artifact batch report | `lib/services/canonical-artifact-governance-service.ts` |
+| Cross-layer drift | `lib/services/cross-system-drift-detection-service.ts` |
 
 ## Operator cockpit
 

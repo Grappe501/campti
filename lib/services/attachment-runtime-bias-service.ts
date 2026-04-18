@@ -9,6 +9,8 @@ export type AttachmentSceneBias = {
   povBiasSummary: string;
   sceneFocusSummary: string;
   activeFearDesireVulnerabilityIds: string[];
+  /** Reader-bond modes and era accent for cockpit / runtime digest. */
+  bondModeSummary: string;
 };
 
 function clamp01(n: number): number {
@@ -74,6 +76,14 @@ export class AttachmentRuntimeBiasService {
     const topId = top?.[0] ?? "none";
     const topW = top?.[1] ?? 0;
 
+    const topProfile = profiles.find((p) => p.characterId === topId) ?? profiles[0];
+    const bondModes = topProfile?.bondVector.bondModes ?? [];
+    const eraAccent = topProfile?.bondVector.bookEraVariation.at(0)?.dominantBondMode;
+    const bondModeSummary = bondModes.length
+      ? `Dominant bond modes: ${bondModes.slice(0, 4).join(", ")}${eraAccent ? `; era accent: ${eraAccent}` : ""}.`
+      : "Bond vector present — let protectiveness, recognition, and ache surface through duty-shaped gesture before explanation.";
+    const roleHints = topProfile?.sceneRoleBias.slice(0, 2).join("; ") ?? "";
+
     const closeness =
       scenePlan && scenePlan.carryForwardWeight > 0.75
         ? "tight interior access and observational closeness"
@@ -81,11 +91,16 @@ export class AttachmentRuntimeBiasService {
           ? "close witness with relational risk texture"
           : "moderate observational distance; prefer gesture and work over interior summary";
 
-    const povBiasSummary = `POV bias: weight toward ${topId} (score ${topW.toFixed(2)}); bond modes favor embodied duty and inherited ache; ${closeness}.`;
+    const povBiasSummary = `POV bias: weight toward ${topId} (score ${topW.toFixed(2)}); ${bondModeSummary} ${closeness}.`;
 
-    const sceneFocusSummary = scenePlan
-      ? `Scene focus: ${scenePlan.dominantEmotionalFunction}; attachment function: ${scenePlan.attachmentFunction}; carry-forward weight ${scenePlan.carryForwardWeight.toFixed(2)}.`
-      : "Scene focus: derive attachment beats from contract intent; preserve vulnerability before explanation.";
+    const sceneFocusSummary = [
+      scenePlan
+        ? `Scene focus: ${scenePlan.dominantEmotionalFunction}; attachment function: ${scenePlan.attachmentFunction}; carry-forward weight ${scenePlan.carryForwardWeight.toFixed(2)}.`
+        : "Scene focus: derive attachment beats from contract intent; preserve vulnerability before explanation.",
+      roleHints ? `Scene-role bias hints: ${roleHints}.` : "",
+    ]
+      .filter(Boolean)
+      .join(" ");
 
     return {
       attachmentWeightMap,
@@ -93,6 +108,7 @@ export class AttachmentRuntimeBiasService {
       povBiasSummary,
       sceneFocusSummary,
       activeFearDesireVulnerabilityIds: [...new Set(activeFearDesireVulnerabilityIds)],
+      bondModeSummary,
     };
   }
 }

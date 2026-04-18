@@ -1,3 +1,8 @@
+/**
+ * Canonical narrative governance orchestration (Clusters 3–4 EEGS / continuity / sequence packs).
+ * Downstream Cluster 6 (`HumanGravityRuntimeDerivationService`) consumes `epicEmotionalGravityPack` from the merged
+ * `CanonicalPreGenerationBundle` on the same path as `runSceneGeneration` in `lib/services/scene-generation-service.ts`.
+ */
 import type { Cluster3RuntimeActivationTruth } from "@/lib/domain/author-command-cockpit";
 import type { ChapterCompositionPlan } from "@/lib/domain/chapter-composition";
 import type { CamptiEpicContinuityPack } from "@/lib/domain/epic-narrative-continuity";
@@ -21,6 +26,7 @@ import { NarrativeSequenceDerivationService } from "@/lib/services/narrative-seq
 import { NarrativeSequenceValidationService } from "@/lib/services/narrative-sequence-validation-service";
 import { NarratorPresenceDerivationService } from "@/lib/services/narrator-presence-derivation-service";
 import { NarratorPresenceValidationService } from "@/lib/services/narrator-presence-validation-service";
+import { CharacterSceneEmergenceService } from "@/lib/services/character-scene-emergence-service";
 
 export type GovernanceOrchestrationInput = {
   proseConstraintsAfterLiteraryLayer: ProseGenerationConstraints;
@@ -48,6 +54,7 @@ export type GovernanceOrchestrationResult = {
   narratorPresencePack: CamptiNarratorPresencePack;
   validations: Cluster3PackValidations;
   cluster3RuntimeActivationTruth: Cluster3RuntimeActivationTruth;
+  characterSceneEmergencePlan: import("@/lib/domain/character-scene-emergence").CharacterSceneEmergenceChapterPlan;
 };
 
 /**
@@ -124,6 +131,14 @@ export class CanonicalNarrativeGovernanceOrchestrationService {
       narratorPresenceValidation,
     });
 
+    const characterSceneEmergencePlan = new CharacterSceneEmergenceService().deriveChapterPlan({
+      chapterId: input.chapterId,
+      bookId: input.bookId,
+      chapterCompositionPlan: input.chapterCompositionPlan,
+      epicContinuityPack,
+      epicEmotionalGravityPack,
+    });
+
     return {
       sequenceDerivation,
       proseConstraints,
@@ -138,6 +153,7 @@ export class CanonicalNarrativeGovernanceOrchestrationService {
           input.literaryLayerParityNote?.trim() ??
           cluster3RuntimeActivationTruth.advisoryRemainderNote,
       },
+      characterSceneEmergencePlan,
     };
   }
 
@@ -151,6 +167,7 @@ export class CanonicalNarrativeGovernanceOrchestrationService {
     const validationFlags = [
       ...orchestrated.proseConstraints.validationFlags.filter((f) => f.startsWith("cluster3_")),
       "cluster4_canonical_pre_generation_bundle",
+      "cluster8_character_scene_emergence_plan_attached",
     ];
     return {
       contractVersion: "1",
@@ -165,6 +182,7 @@ export class CanonicalNarrativeGovernanceOrchestrationService {
       preparationPath: meta.preparationPath,
       literaryLayerParityNote: meta.literaryLayerParityNote ?? null,
       validationFlags,
+      characterSceneEmergencePlan: orchestrated.characterSceneEmergencePlan,
     };
   }
 }

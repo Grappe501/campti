@@ -1,5 +1,11 @@
 export const PERSISTENCE_GOVERNANCE_CONTRACT_VERSION = "1" as const;
 
+/**
+ * **ARTIFACT / CERTIFICATION alignment:** `mayDescribeAsCanonicalReady` must stay false when realism or
+ * human-gravity validity failed, including when an operator override persisted text — overrides are labeled in
+ * `PersistedTruthLabel` and truth-stamp authority must downgrade (`canonical-artifact-record-service`).
+ */
+
 export type PersistedTruthLabel =
   | "canonical_generation_text_saved"
   | "blocked_invalid_realism"

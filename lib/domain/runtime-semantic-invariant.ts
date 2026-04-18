@@ -1,6 +1,17 @@
+import { z } from "zod";
+
 export const RUNTIME_SEMANTIC_INVARIANT_CONTRACT_VERSION = "1" as const;
 
 /**
+ * Cluster 7 — semantic invariant model (normative).
+ *
+ * **CERTIFICATION TRUTH RULE:** A run may not be presented as execution-ready or production-grade unless its
+ * readiness/certification evidence is derived from canonical runtime truth, semantically valid artifact records,
+ * and non-downgraded save eligibility. (Enforced via `evaluateReadinessCertificationDepth` + cockpit summary.)
+ *
+ * **ARTIFACT TRUTH RULE:** Any scene/chapter/run artifact that does not preserve authority class, enforcement truth,
+ * validation outcome, and save eligibility is invalid as canonical evidence. (Enforced via `evaluateArtifactTruthRule`.)
+ *
  * Semantic invariant classes for the canonical narrative runtime (Cluster 7).
  * Shape-level validation is insufficient; these describe runtime meaning and enforcement.
  */
@@ -15,6 +26,7 @@ export const RUNTIME_SEMANTIC_INVARIANT_CLASSES = [
   "artifact_truth_invariant",
   "persistence_truth_invariant",
   "readiness_evidence_invariant",
+  "hook_continuity_invariant",
 ] as const;
 
 export type RuntimeSemanticInvariantClass = (typeof RUNTIME_SEMANTIC_INVARIANT_CLASSES)[number];
@@ -63,6 +75,29 @@ export type RuntimeSemanticInvariantReport = {
   suggestedRepairs: string[];
   validationFlags: string[];
 };
+
+/** Machine validation of invariant evaluation output (integration / certification scripts). */
+export const InvariantResultSchema = z.object({
+  invariantId: z.string(),
+  invariantClass: z.string().min(1),
+  passed: z.boolean(),
+  severity: z.enum(INVARIANT_SEVERITIES),
+  enforcementMode: z.enum(INVARIANT_ENFORCEMENT_MODES),
+  message: z.string().nullable(),
+  validationFlags: z.array(z.string()),
+});
+
+export const RuntimeSemanticInvariantReportSchema = z.object({
+  contractVersion: z.literal(RUNTIME_SEMANTIC_INVARIANT_CONTRACT_VERSION),
+  runId: z.string().min(1),
+  sceneId: z.string().min(1),
+  invariantResults: z.array(InvariantResultSchema),
+  hardViolations: z.array(InvariantResultSchema),
+  softViolations: z.array(InvariantResultSchema),
+  warnings: z.array(InvariantResultSchema),
+  suggestedRepairs: z.array(z.string()),
+  validationFlags: z.array(z.string()),
+});
 
 /** Catalog: definitions for operators and machine routing; evaluation lives in the invariant service. */
 export const RUNTIME_SEMANTIC_INVARIANT_CATALOG: readonly RuntimeSemanticInvariant[] = [
@@ -175,5 +210,16 @@ export const RUNTIME_SEMANTIC_INVARIANT_CATALOG: readonly RuntimeSemanticInvaria
     violationConditions: ["authoritative_production claimed without eligible enforcement path"],
     enforcementMode: "advisory",
     validationFlags: ["cluster7_readiness"],
+  },
+  {
+    invariantId: "inv.hook_pressure_consistent_with_continuity",
+    invariantName: "Hard hook pressure must not assert while epic continuity pack is invalid",
+    invariantClass: "hook_continuity_invariant",
+    severity: "soft",
+    appliesToScopes: ["scene", "chapter"],
+    requiredInputs: ["canonicalPreGeneration.cluster3RuntimeActivationTruth", "packValidations.epicContinuity"],
+    violationConditions: ["hcelHookHardSignalsActive true with invalid epic continuity — hook/continuity semantic drift"],
+    enforcementMode: "advisory",
+    validationFlags: ["cluster7_hook_continuity"],
   },
 ] as const;

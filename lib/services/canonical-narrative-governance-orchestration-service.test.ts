@@ -168,5 +168,7 @@ describe("canonical-narrative-governance-orchestration-service", () => {
 
     assert.equal(result.proseConstraints.validationFlags.includes("cluster3_encs_eegs_narrator_governance_merge"), true);
     assert.equal(result.sequenceDerivation.bookSequencePlan.bookId, "book1");
+    assert.equal(result.characterSceneEmergencePlan.clusterTag, "cluster8_character_scene_emergence_chapter");
+    assert.ok(Object.keys(result.characterSceneEmergencePlan.sceneEmergenceBySceneId).length >= 1);
   });
 });

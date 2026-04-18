@@ -4,6 +4,7 @@ import { AdminSignOutButton } from "@/components/admin-sign-out-button";
 const links = [
   { href: "/admin/dashboard", label: "Dashboard" },
   { href: "/admin/narrative", label: "Author Cockpit" },
+  { href: "/admin/research", label: "Research (RICRE)" },
   { href: "/admin/brain", label: "Brain" },
   { href: "/admin/registries", label: "Registries" },
   { href: "/admin/ontology", label: "Ontology" },

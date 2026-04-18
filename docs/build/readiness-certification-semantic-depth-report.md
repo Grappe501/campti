@@ -1,28 +1,26 @@
-# Readiness Certification Semantic Depth (Cluster 7)
+# Readiness & certification semantic depth (Cluster 7)
 
-## Contract version
+## Normative rules
 
-`READINESS_CERTIFICATION_DEPTH_CONTRACT_VERSION` is **2** — adds certification truth rule, artifact truth rule, `mayPresentAsExecutionReady`, `mayPresentAsProductionGrade`, and `evidenceDerivedFromCluster7Envelope` (see `lib/domain/certification-truth-rules.ts`).
+See `lib/domain/certification-truth-rules.ts` and the module header on `lib/domain/readiness-certification-depth.ts`.
 
-## Record
+- **CERTIFICATION TRUTH RULE:** A run may not be presented as execution-ready or production-grade unless readiness/certification evidence is derived from canonical runtime truth, semantically valid artifact records, and non-downgraded save eligibility.
+- **ARTIFACT TRUTH RULE:** Any scene/chapter/run artifact that does not preserve authority class, enforcement truth, validation outcome, and save eligibility is invalid as canonical evidence.
 
-`ReadinessCertificationEvidenceRecord` (`lib/domain/readiness-certification-depth.ts`) extends boolean readiness with:
+## Implementation
 
-- `canonicalRuntimeAuthorityUsed` — governance merge
-- `governanceConvergenceSatisfied` — merge applied (strict convergence can be extended)
-- `cluster3GovernorsMaterial` — ENCS/EEGS/narrator/hook signals
-- `humanGravityNoResetTruthPreserved` / `proseRealismNotCriticallyFailed`
-- `narratorBoundaryRespected` / `continuityEmotionalHookSystemsTruthfullyClassified`
-- `artifactTrustClass` — aligned with `ReadinessEvidenceTrustClass`
-- `persistedOutputsMatchClaims` — from `PersistenceGovernanceDecision.mayDescribeAsCanonicalReady`
-- `advisoryEvidenceUsed` — cockpit observational-only flag when passed
-- `blockingReasons` / `qualificationNotes`
-- **Gates:** `certificationTruthRuleSatisfied`, `artifactTruthRuleSatisfied`, `saveEligibilityNonDowngraded`, `mayPresentAsExecutionReady`, `mayPresentAsProductionGrade`
+| Concern | Location |
+|--------|----------|
+| Depth evaluation | `evaluateReadinessCertificationDepth` in `lib/services/readiness-certification-depth-service.ts` |
+| Artifact rule | `evaluateArtifactTruthRule` in `lib/services/artifact-canonical-evidence-validation-service.ts` |
+| Evidence inflation helper | `evaluateReadinessEvidenceInflationRisk` in `lib/services/readiness-evidence-semantic-service.ts` |
+| Record shape | `ReadinessCertificationEvidenceRecord` in `lib/domain/readiness-certification-depth.ts` |
+| Cockpit projection | `buildCockpitCertificationHardeningSummary` in `lib/services/cluster7-runtime-truth-service.ts` |
 
-## Builder
+## Production-grade gate
 
-`evaluateReadinessCertificationDepth` in `lib/services/readiness-certification-depth-service.ts` consumes invariant report + persistence decision + pre-generation bundle.
+`mayPresentAsProductionGrade` requires, among other checks: `certificationTruthRuleSatisfied`, `artifactTrust === "authoritative_production"`, non-downgraded save eligibility, realism and human-gravity truth not failed, and cockpit not observational-only when that flag is supplied.
 
-## Trust rule alignment
+## Next refinement
 
-Authoritative production tier requires governance merge, no hard invariant failures, and non-failing realism/human-gravity when those layers ran — see `trustClassForArtifact` and Cluster 2 readiness rules in `docs/build/readiness-evidence-trust-rules.md`.
+Thread `cockpitObservationalOnly` from live cockpit builds into `evaluateReadinessCertificationDepth` for regeneration vs DB production parity.

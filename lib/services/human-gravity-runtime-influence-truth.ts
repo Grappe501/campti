@@ -1,8 +1,13 @@
 import type { HumanGravityRuntimeInfluenceTruth } from "@/lib/domain/human-gravity-runtime";
 
 /**
- * Computes honest runtime-active labeling for human gravity (Cluster 6 truth rule).
- * A dimension is prompt-material only if its derived strings are included in the CLUSTER6 block with substance.
+ * **HUMAN-GRAVITY TRUTH RULE** — `humanGravityCanonicalRuntimeActive` is true only when at least one of:
+ * - **Generation**: substantive CLUSTER6 user prompt lines reach the model **and** at least one EEGS dimension
+ *   contributed prompt material; or
+ * - **Validation**: the no-reset gate is armed (`noResetValidationParticipatesInCanonicalValidity`), so canonical
+ *   validity outcomes can change even if a given run skipped prompt reach (must remain honest in cockpit).
+ *
+ * Per-dimension `*PromptMaterial` flags are **not** alone sufficient to claim full human-gravity runtime activity.
  */
 export function computeHumanGravityRuntimeInfluenceTruth(input: {
   promptInstructionLines: string[];
@@ -58,6 +63,15 @@ export function computeHumanGravityRuntimeInfluenceTruth(input: {
 
   const humanGravityCanonicalRuntimeActive = generationMaterial || noResetValidationParticipatesInCanonicalValidity;
 
+  const validationFlags: string[] = [];
+  if (attachmentPromptMaterial) validationFlags.push("cluster6_attachment_prompt_material");
+  if (relationalStakesPromptMaterial) validationFlags.push("cluster6_relational_stakes_prompt_material");
+  if (consequencePersistencePromptMaterial) validationFlags.push("cluster6_consequence_persistence_prompt_material");
+  if (generationalBurdenPromptMaterial) validationFlags.push("cluster6_generational_burden_prompt_material");
+  if (promptReachModel) validationFlags.push("cluster6_prompt_block_reaches_model");
+  if (proseRealismSeedInfluencedByHumanGravity) validationFlags.push("cluster6_prose_realism_seed_influenced");
+  if (noResetValidationParticipatesInCanonicalValidity) validationFlags.push("cluster6_no_reset_gate_tracks");
+
   return {
     humanGravityCanonicalRuntimeActive,
     attachmentPromptMaterial,
@@ -66,5 +80,6 @@ export function computeHumanGravityRuntimeInfluenceTruth(input: {
     generationalBurdenPromptMaterial,
     proseRealismSeedInfluencedByHumanGravity,
     noResetValidationParticipatesInCanonicalValidity,
+    validationFlags,
   };
 }

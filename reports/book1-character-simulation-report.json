@@ -1,0 +1,16 @@
+{
+  "reportId": "book1_character_simulation_cluster8",
+  "contractVersion": "1",
+  "generatedAt": "2026-04-18T00:00:00.000Z",
+  "summary": "Character simulation runtime is derived on the canonical scene path after human gravity; governance bundle carries chapter emergence plan.",
+  "canonicalPathSteps": [
+    "prepareCanonicalPreGenerationBundleForScene → orchestration (includes characterSceneEmergencePlan)",
+    "runSceneGeneration → humanGravityRuntime",
+    "runSceneGeneration → characterSimulationRuntime",
+    "runSceneGeneration → proseRealismLayer (voice distinctness seed influenced by Cluster 8)",
+    "scene-generation-llm-adapter → CLUSTER8_CHARACTER_SIMULATION user block",
+    "CharacterSimulationValidationService → warnings appended to output"
+  ],
+  "subsystemId": "character_simulation_runtime_cluster8",
+  "book1Readiness": "seeded_deterministic_minds_until_db_profiles_land"
+}

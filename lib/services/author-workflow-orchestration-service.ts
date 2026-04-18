@@ -6,7 +6,8 @@ import {
   failWorkflow,
   pushCheckpoint,
 } from "@/lib/services/author-production-workflow-service";
-import { runSceneGeneration, type RunSceneGenerationParams } from "@/lib/services/scene-generation-service";
+import { executeMachineGuardedSceneLaunch } from "@/lib/services/scene-launch-guard-service";
+import type { RunSceneGenerationParams } from "@/lib/services/scene-generation-service";
 import {
   buildBookObserverSnapshot,
   buildChapterObserverSnapshot,
@@ -15,7 +16,7 @@ import {
 
 export type SceneDraftPackage = {
   sceneId: string;
-  run: Awaited<ReturnType<typeof runSceneGeneration>>;
+  run: Awaited<ReturnType<typeof import("@/lib/services/scene-generation-service").runSceneGeneration>>;
   sceneObserver: Awaited<ReturnType<typeof buildSceneObserverSnapshot>>;
   workflow: ReturnType<typeof createWorkflowRunSummary>;
 };
@@ -31,7 +32,29 @@ export async function orchestrateSceneDraftPackage(
   wf = pushCheckpoint(wf, "build_scene_input");
   let run: SceneDraftPackage["run"];
   try {
-    run = await runSceneGeneration({ sceneId, ...params });
+    const { sceneId: _sid, ...forwarded } = { sceneId, ...params };
+    void _sid;
+    const guarded = await executeMachineGuardedSceneLaunch(
+      {
+        sceneId,
+        intent: "full_generation",
+        launchSource: "draft_package_orchestration",
+        saveGenerationText: params?.saveGenerationText,
+        registerDependencies: params?.registerDependencies,
+        runProseQuality: params?.runProseQuality,
+        runSocialPressureAdvisory: params?.runSocialPressureAdvisory,
+        runHumanizationAdvisory: params?.runHumanizationAdvisory,
+        auditMeta: { workflow: "orchestrateSceneDraftPackage" },
+      },
+      forwarded,
+    );
+    if (!guarded.ok) {
+      throw new Error(`[scene_launch_guard:${guarded.code}] ${guarded.message}`);
+    }
+    if (!guarded.run) {
+      throw new Error("[scene_launch_guard:internal_no_run] Draft package launch produced no generation run.");
+    }
+    run = guarded.run;
   } catch (e) {
     wf = failWorkflow(wf, e instanceof Error ? e.message : "scene_generation_failed");
     throw e;

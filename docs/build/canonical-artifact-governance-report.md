@@ -16,6 +16,11 @@ Defined in `lib/domain/canonical-artifact-governance.ts`:
 - `buildArtifactTruthStamp`
 - `buildSceneGenerationCanonicalArtifactRecord`
 
+`lib/services/canonical-artifact-governance-service.ts`:
+
+- Re-exports builders + `evaluateArtifactTruthRule`
+- `buildArtifactCanonicalizationReport` — batch aggregation and ambiguous authority/trust combinations
+
 Authority class derives from persistence label, governance merge, and realism / human-gravity validity. Overrides that persist invalid text downgrade trust and authority.
 
 ## Artifact truth rule (validation)

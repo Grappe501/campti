@@ -62,8 +62,10 @@ function hasBehavioralResidue(text: string): boolean {
 }
 
 /**
- * No-reset rule: when upstream models major consequence / threatened bond / inherited burden pressure,
- * prose must retain behavioral residue or explicitly account (repair, suppression, transformation).
+ * **NO-RESET RULE** — A chapter/scene output is invalid if major consequences, threatened bonds, or inherited
+ * burdens are modeled in upstream runtime truth but disappear from canonical output without explicit repair,
+ * suppression, or transformation explanation. Implemented here via residue / marker-echo / explicit-accounting
+ * heuristics plus tidy-reset phrase bans when `upstreamNoResetPressureActive`.
  */
 function evaluateNoResetRules(
   profile: HumanGravityRuntimeProfile,
@@ -194,10 +196,32 @@ export class HumanGravityValidationService {
       softWarnings.length >= 3 ||
       humanGravityScore < 0.35;
 
+    const bundleValidationFlags: string[] = [];
+    if (input.profile.runtimeInfluenceTruth.humanGravityCanonicalRuntimeActive) {
+      bundleValidationFlags.push("cluster6_upstream_runtime_active");
+    }
+    if (!humanGravityTruth.sceneOutputValidUnderNoResetRules) {
+      bundleValidationFlags.push("cluster6_no_reset_invalid");
+    }
+    if (sceneReadsShallowUnderProfile) bundleValidationFlags.push("cluster6_scene_reads_shallow");
+    if (hardWarnings.length) bundleValidationFlags.push("cluster6_hard_drift");
+    if (softWarnings.length >= 2) bundleValidationFlags.push("cluster6_soft_drift_elevated");
+
     return HumanGravityValidationBundleSchema.parse({
       contractVersion: "1",
       clusterTag: "cluster6_human_gravity_validation",
       sceneId: input.profile.sceneId,
+      humanGravityCanonicalRuntimeActive: input.profile.runtimeInfluenceTruth.humanGravityCanonicalRuntimeActive,
+      sceneOutputValidUnderNoResetRules: humanGravityTruth.sceneOutputValidUnderNoResetRules,
+      upstreamNoResetPressureActive: humanGravityTruth.upstreamNoResetPressureActive,
+      noResetViolations: humanGravityTruth.noResetViolations,
+      weakAttachmentWarnings,
+      weakRelationalStakesWarnings,
+      consequenceResetWarnings,
+      burdenSuppressionWarnings,
+      suggestedHardeningActions: driftReport.suggestedHardeningActions,
+      humanGravityScore: driftReport.humanGravityScore,
+      validationFlags: bundleValidationFlags,
       driftReport,
       sceneReadsShallowUnderProfile,
       humanGravityTruth,

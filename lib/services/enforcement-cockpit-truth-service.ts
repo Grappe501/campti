@@ -22,6 +22,8 @@ export const AUTHOR_COCKPIT_PANEL_TO_SUBSYSTEM: Record<string, string> = {
   humanGravityRuntime: "human_gravity_runtime_cluster6",
   narratorPresence: "narrator_presence_convergence",
   proseRealism: "prose_narrative_realism_cluster5",
+  characterSimulation: "character_simulation_runtime_cluster8",
+  ricreResearchCanon: "ricre_research_canon_reconciliation",
 };
 
 export type AuthorCockpitPanelPresenceInput = {
@@ -40,6 +42,8 @@ export type AuthorCockpitPanelPresenceInput = {
   humanGravityRuntime?: unknown;
   narratorPresence?: unknown;
   proseRealism?: unknown;
+  characterSimulation?: unknown;
+  ricreResearchCanon?: unknown;
   cluster3RuntimeActivationTruth?: unknown;
   runtimeConvergenceTruth?: unknown;
 };
@@ -63,6 +67,8 @@ export function collectPopulatedAuthorCockpitPanelKeys(
   if (input.humanGravityRuntime !== undefined) keys.push("humanGravityRuntime");
   if (input.narratorPresence !== undefined) keys.push("narratorPresence");
   if (input.proseRealism !== undefined) keys.push("proseRealism");
+  if (input.characterSimulation !== undefined) keys.push("characterSimulation");
+  if (input.ricreResearchCanon !== undefined) keys.push("ricreResearchCanon");
   if (input.cluster3RuntimeActivationTruth !== undefined) keys.push("cluster3RuntimeActivationTruth");
   if (input.runtimeConvergenceTruth !== undefined) keys.push("runtimeConvergenceTruth");
   return keys;

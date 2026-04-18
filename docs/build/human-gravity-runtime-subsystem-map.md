@@ -46,4 +46,6 @@ flowchart TB
 | Consequence persistence | `lib/services/consequence-persistence-runtime-service.ts` |
 | Generational burden | `lib/services/generational-burden-runtime-service.ts` |
 | Validation | `lib/services/human-gravity-validation-service.ts` |
+| Runtime-active truth labeling | `lib/services/human-gravity-runtime-influence-truth.ts` |
+| Governance upstream (EEGS source) | `lib/services/canonical-narrative-governance-orchestration-service.ts` |
 | Tests | `lib/services/human-gravity-cluster6.test.ts` |

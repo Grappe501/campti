@@ -1,0 +1,14 @@
+{
+  "contractVersion": "1",
+  "canonicalRuntimeReady": false,
+  "cockpitReady": true,
+  "authorWorkflowReady": true,
+  "persistenceReady": true,
+  "outputTrustReady": false,
+  "demonstrationReady": false,
+  "releaseRiskSummary": "Rehearsal incomplete: no Cluster 7 envelope (common when LLM step is skipped or failed). Not release-candidate evidence.",
+  "validationFlags": [
+    "cluster9_rehearsal_stub",
+    "rehearsal_incomplete"
+  ]
+}

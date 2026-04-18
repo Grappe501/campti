@@ -29,6 +29,10 @@ export default async function AdminPersonDetailPage({ params, searchParams }: Pr
         </Link>
         <PageHeader title={person.name} description="Core identity, relationships, and story-facing notes." />
         <p className="mt-2 text-sm">
+          <Link href={`/admin/people/${person.id}/simulation-workbench`} className="text-violet-900 hover:underline">
+            Character Simulation Workbench →
+          </Link>
+          {" · "}
           <Link href={`/admin/characters/${person.id}/mind`} className="text-amber-900 hover:underline">
             Character mind (world model) →
           </Link>

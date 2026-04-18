@@ -5,12 +5,9 @@ import { prisma } from "@/lib/prisma";
 import { analyzeProseDeterministic, type ProseQualityReportV1 } from "@/lib/prose-quality";
 import { listProseQualityReportsForScene } from "@/lib/services/prose-quality-service";
 import { assembleChapterReaderText } from "@/lib/services/chapter-assembly-service";
-import {
-  generateSceneDraft,
-  repairSceneContinuity,
-  rewriteSceneDraft,
-  type RunSceneGenerationParams,
-} from "@/lib/services/scene-generation-service";
+import type { SceneLaunchSource, SceneMachineLaunchPolicy } from "@/lib/domain/scene-guarded-launch";
+import { executeMachineGuardedSceneLaunch } from "@/lib/services/scene-launch-guard-service";
+import type { RunSceneGenerationParams } from "@/lib/services/scene-generation-service";
 import type {
   SceneRepairClassificationContext,
   SceneRepairPlanHints,
@@ -94,6 +91,10 @@ export type ExecuteSceneRepairOptions = {
   postRepairProseQa?: boolean;
   registerDependencies?: boolean;
   runSocialPressureAdvisory?: boolean;
+  /** Machine launch audit provenance (default `scene_repair_service`). */
+  launchSource?: SceneLaunchSource;
+  auditMeta?: Record<string, unknown>;
+  machinePolicy?: SceneMachineLaunchPolicy;
 } & Pick<RunSceneGenerationParams, "proseQaContext" | "loaderOptions">;
 
 /**
@@ -122,8 +123,7 @@ export async function executeSceneRepair(
     return { plan, outcome: "chapter_reassembled", chapterAssembly };
   }
 
-  const base: RunSceneGenerationParams = {
-    sceneId,
+  const forwarded: Omit<RunSceneGenerationParams, "sceneId"> = {
     saveGenerationText,
     runProseQuality: options.runProseQuality ?? true,
     registerDependencies: options.registerDependencies ?? true,
@@ -132,16 +132,39 @@ export async function executeSceneRepair(
     loaderOptions: options.loaderOptions,
   };
 
-  let run: Awaited<ReturnType<typeof generateSceneDraft>>;
-  if (plan.repairMode === "REGENERATE_DRAFT") {
-    run = await generateSceneDraft(sceneId, base);
-  } else if (plan.repairMode === "REWRITE_EXISTING_DRAFT") {
-    run = await rewriteSceneDraft(sceneId, base);
-  } else if (plan.repairMode === "REPAIR_CONTINUITY") {
-    run = await repairSceneContinuity(sceneId, base);
-  } else {
+  const intent =
+    plan.repairMode === "REGENERATE_DRAFT"
+      ? ("draft" as const)
+      : plan.repairMode === "REWRITE_EXISTING_DRAFT"
+        ? ("rewrite" as const)
+        : plan.repairMode === "REPAIR_CONTINUITY"
+          ? ("repair" as const)
+          : null;
+  if (!intent) {
     return { plan, outcome: "skipped" };
   }
+
+  const guarded = await executeMachineGuardedSceneLaunch(
+    {
+      sceneId,
+      intent,
+      launchSource: options.launchSource ?? "scene_repair_service",
+      saveGenerationText,
+      runProseQuality: forwarded.runProseQuality,
+      registerDependencies: forwarded.registerDependencies,
+      runSocialPressureAdvisory: forwarded.runSocialPressureAdvisory,
+      machinePolicy: options.machinePolicy,
+      auditMeta: { repairMode: plan.repairMode, ...options.auditMeta },
+    },
+    forwarded,
+  );
+  if (!guarded.ok) {
+    throw new Error(`[scene_launch_guard:${guarded.code}] ${guarded.message}`);
+  }
+  if (!guarded.run) {
+    throw new Error("[scene_launch_guard:internal_no_run] Machine repair launch produced no generation run.");
+  }
+  const run = guarded.run;
 
   if (saveGenerationText && run.savedGenerationText) {
     await prisma.scene.update({

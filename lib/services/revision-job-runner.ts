@@ -7,7 +7,8 @@
  *   admin action should call `claimNextPendingRevisionJob` + `runClaimedRevisionJob`, or
  *   `runRevisionJobById` which wraps both).
  * - There is still **no long-running daemon in this repository**; something external must invoke
- *   the runner on a schedule or manually. This pass makes that invocation **safe and explicit**.
+ *   the runner on a schedule or manually. Execution uses **machine guarded launch** (preflight + audit)
+ *   when work touches scene generation/repair.
  *
  * **Claiming (no double execution)**
  * - `claimNextPendingRevisionJob` / `claimRevisionJobById` use `updateMany({ where: { id, status: PENDING }, ... })`
@@ -207,6 +208,8 @@ export async function runClaimedRevisionJob(job: RevisionJob): Promise<void> {
       saveGenerationText: true,
       runProseQuality: true,
       registerDependencies: true,
+      launchSource: "revision_job",
+      auditMeta: { revisionJobId: job.id, revisionJobKind: job.kind },
     });
     return;
   }
@@ -217,6 +220,8 @@ export async function runClaimedRevisionJob(job: RevisionJob): Promise<void> {
       saveGenerationText: true,
       runProseQuality: true,
       registerDependencies: true,
+      launchSource: "revision_job",
+      auditMeta: { revisionJobId: job.id, revisionJobKind: job.kind },
     });
     return;
   }

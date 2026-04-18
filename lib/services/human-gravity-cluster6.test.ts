@@ -239,6 +239,55 @@ describe("human gravity cluster 6", () => {
     assert.equal(new HumanGravityRuntimeDerivationService().deriveFromSceneGenerationInput(input), null);
   });
 
+  it("validation bundle exposes flattened no-reset and drift fields", () => {
+    const pack = new EpicEmotionalGravityDerivationService().deriveCamptiPack({
+      chapterId: "book1-chapter-01",
+      chapterSequence: 1,
+      chapterMode: "pressure",
+      chapterPsychologyMode: "intimate",
+      activeThreadIds: [],
+      recallWindows: [],
+      sceneIds: ["book1-chapter-01-scene-01"],
+    });
+    const profile = new HumanGravityRuntimeDerivationService().deriveFromPackContext({
+      pack,
+      chapterId: "book1-chapter-01",
+      sceneId: "book1-chapter-01-scene-01",
+      chapterSequence: 1,
+      participatingPeopleIds: [],
+    });
+    const bundle = new HumanGravityValidationService().validate({
+      profile,
+      generatedText:
+        "She looked away. The silence carried weight, stillness between them, unresolved distance after what the river took.",
+    });
+    assert.equal(bundle.humanGravityCanonicalRuntimeActive, profile.runtimeInfluenceTruth.humanGravityCanonicalRuntimeActive);
+    assert.equal(bundle.sceneOutputValidUnderNoResetRules, bundle.humanGravityTruth.sceneOutputValidUnderNoResetRules);
+    assert.ok(Array.isArray(bundle.validationFlags));
+    assert.ok(bundle.weakAttachmentWarnings.length >= 0);
+  });
+
+  it("runtime influence truth carries validationFlags when subsystem material is present", () => {
+    const pack = new EpicEmotionalGravityDerivationService().deriveCamptiPack({
+      chapterId: "book1-chapter-01",
+      chapterSequence: 1,
+      chapterMode: "pressure",
+      chapterPsychologyMode: "intimate",
+      activeThreadIds: [],
+      recallWindows: [],
+      sceneIds: ["book1-chapter-01-scene-01"],
+    });
+    const profile = new HumanGravityRuntimeDerivationService().deriveFromPackContext({
+      pack,
+      chapterId: "book1-chapter-01",
+      sceneId: "book1-chapter-01-scene-01",
+      chapterSequence: 1,
+      participatingPeopleIds: [],
+    });
+    assert.ok(profile.runtimeInfluenceTruth.validationFlags.includes("cluster6_prompt_block_reaches_model"));
+    assert.ok(profile.promptInstructionLines.some((l) => l.includes("Bond-mode reader gravity")));
+  });
+
   it("compactHumanGravityRuntimeLines mirrors derived profile for model prompt", () => {
     const pack = new EpicEmotionalGravityDerivationService().deriveCamptiPack({
       chapterId: "book1-chapter-01",

@@ -440,6 +440,9 @@ model Source {
   fragments         Fragment[]
   brainMemos        BrainMemo[]
 
+  /// RICRE — optional link when author promotes research row into legacy Source.
+  authorResearchSources AuthorResearchSource[]
+
   narrativeRules      NarrativeRule[]
   narrativeThemes     Theme[]
   motifs              Motif[]
@@ -1098,6 +1101,243 @@ model Person {
 
   /// Phase 5F — optional link from promoted census / population row.
   populationLink PopulationEntity? @relation("PopulationEntityPerson")
+
+  /// Cluster 9 — author-owned Cluster-8 simulation mind/voice JSON (hydrates canonical path; deterministic seed is fallback only).
+  characterSimulationAuthorBundle CharacterSimulationAuthorBundle?
+
+  /// Character Simulation Workbench — durable edit / preview audit (optional; migration must be applied).
+  characterSimulationAuditLogs CharacterSimulationAuditLog[]
+}
+
+/// Cluster 9 / Cluster 8 — persisted author simulation profiles for canonical character-runtime (mind + voice domain shapes).
+model CharacterSimulationAuthorBundle {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  personId String @unique
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  /// JSON partial or full `CharacterMindProfile` (see `lib/domain/character-mind.ts`).
+  simulationMindProfileJson  Json?
+  /// JSON partial or full simulation `CharacterVoiceProfile` (see `lib/domain/character-voice.ts`, not Prisma CharacterVoiceProfile).
+  simulationVoiceProfileJson Json?
+
+  /// Workbench-only metadata (author notes, accepted advisory conflict ids). Does not replace mind/voice domain JSON.
+  workbenchMetaJson Json?
+
+  @@index([personId])
+}
+
+/// Character Simulation Workbench — structured audit trail for author simulation edits (Cluster 9 extension).
+model CharacterSimulationAuditLog {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  personId String
+  person   Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  /// e.g. save_author_bundle | preview | resolve_conflict
+  action String
+
+  /// Human-readable one-line summary for operator lists.
+  summary String @db.Text
+
+  /// Optional operator note (resolution text, etc.).
+  actorNote String? @db.Text
+
+  beforeJson Json?
+  afterJson  Json?
+
+  @@index([personId, createdAt(sort: Desc)])
+}
+
+// -----------------------------------------------------------------------------
+// RICRE — Research Ingestion & Canon Reconciliation Engine (author-controlled)
+// -----------------------------------------------------------------------------
+
+/// Author-defined research anchor (targets are ids in JSON arrays, not hard FKs, for flexible linking).
+model AuthorResearchTarget {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  targetType     String
+  targetName     String
+  researchIntent String? @db.Text
+
+  linkedSceneIds   Json @default("[]")
+  linkedChapterIds Json @default("[]")
+  linkedBookIds    Json @default("[]")
+  linkedPersonIds  Json @default("[]")
+  linkedPlaceIds   Json @default("[]")
+  linkedEraIds     Json @default("[]")
+  linkedThreadIds  Json @default("[]")
+
+  validationFlags Json @default("[]")
+
+  sources   AuthorResearchSource[]
+  evidences AuthorResearchEvidence[]
+  claims    AuthorResearchClaim[]
+
+  @@index([targetType])
+  @@index([targetName])
+}
+
+/// External or uploaded research material tied to a target; provenance always stored.
+model AuthorResearchSource {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  researchTargetId String
+  researchTarget   AuthorResearchTarget @relation(fields: [researchTargetId], references: [id], onDelete: Cascade)
+
+  legacySourceId String?
+  legacySource   Source? @relation(fields: [legacySourceId], references: [id], onDelete: SetNull)
+
+  sourceType         String
+  sourceTitle        String
+  sourceUrl          String?
+  publisher          String?
+  authorAttribution  String?
+  publicationDate    String?
+  accessDate         DateTime @default(now())
+  provenanceHash     String
+  ingestMethod       String
+  sourceTrustTier    String
+  rawContentRef      String?
+  rawExcerpt         String? @db.Text
+  validationFlags    Json @default("[]")
+
+  evidences AuthorResearchEvidence[]
+  claims    AuthorResearchClaim[]
+
+  @@index([researchTargetId])
+  @@index([legacySourceId])
+  @@index([provenanceHash])
+}
+
+model AuthorResearchEvidence {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  researchTargetId String
+  researchTarget   AuthorResearchTarget @relation(fields: [researchTargetId], references: [id], onDelete: Cascade)
+
+  sourceId String
+  source   AuthorResearchSource @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+
+  extractedTextRef String?
+  summary          String  @db.Text
+  confidence       Int     @default(3)
+  relevanceScore   Float   @default(0.5)
+  validationFlags  Json    @default("[]")
+
+  claims AuthorResearchClaim[]
+
+  @@index([researchTargetId])
+  @@index([sourceId])
+}
+
+model AuthorResearchClaim {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  researchTargetId String
+  researchTarget   AuthorResearchTarget @relation(fields: [researchTargetId], references: [id], onDelete: Cascade)
+
+  sourceId String
+  source   AuthorResearchSource @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+
+  evidenceId String?
+  evidence   AuthorResearchEvidence? @relation(fields: [evidenceId], references: [id], onDelete: SetNull)
+
+  claimType               String
+  claimText               String  @db.Text
+  structuredValue         Json?
+  confidence              Int     @default(3)
+  timeScope               String?
+  placeScope              String?
+  peopleScope             Json?
+  materialCultureScope    String?
+  languageScope           String?
+  sensoryScope            String?
+  contradictionPotential  String?
+  claimStatus             String  @default("pending")
+  extractionMethod        String  @default("heuristic_stub")
+  validationFlags         Json    @default("[]")
+
+  comparisons AuthorCanonComparison[]
+  decisions   AuthorCanonDecision[]
+
+  @@index([researchTargetId])
+  @@index([sourceId])
+  @@index([claimType])
+  @@index([claimStatus])
+}
+
+model AuthorCanonComparison {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  claimId String
+  claim   AuthorResearchClaim @relation(fields: [claimId], references: [id], onDelete: Cascade)
+
+  comparedAgainstType String
+  comparedAgainstId   String
+  comparisonResult    String
+  contradictionType   String?
+  impactScope         String?
+  validationFlags     Json @default("[]")
+
+  @@index([claimId])
+  @@index([comparedAgainstType, comparedAgainstId])
+}
+
+model AuthorCanonDecision {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  claimId String
+  claim   AuthorResearchClaim @relation(fields: [claimId], references: [id], onDelete: Cascade)
+
+  authorDecision           String
+  decisionReason           String  @db.Text
+  resultingCanonAction     String
+  resultingCanonRecordId   String?
+  intentionalDivergenceFlag Boolean @default(false)
+  overrideNotes            String? @db.Text
+  decidedBy                String?
+  validationFlags          Json @default("[]")
+
+  @@index([claimId])
+}
+
+model AuthorCanonKnowledgeRecord {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  canonicalStatus          String
+  targetType               String
+  targetId                 String
+  knowledgeType            String
+  content                  String  @db.Text
+  structuredValue          Json?
+  sourceLinks              Json @default("[]")
+  decisionHistory          Json @default("[]")
+  historicalRealityStatus String
+  storyRealityStatus       String
+  originatingClaimId       String?
+  impactSummary            String? @db.Text
+  validationFlags          Json @default("[]")
+
+  @@index([canonicalStatus, targetType, targetId])
+  @@index([originatingClaimId])
 }
 
 /// Slow-changing cognitive profile (1:1 with Person). Grounds inner voice / traces; does not replace `CharacterProfile`.
@@ -3651,6 +3891,12 @@ model Scene {
   /// P2-M — reader–character conversation sessions anchored to this scene when set.
   characterConversationSessions CharacterConversationSession[]
 
+  /// Guarded scene generation launch attempts (preflight-aligned audit).
+  sceneLaunchAuditLogs SceneLaunchAuditLog[]
+
+  /// Durable per-run prose snapshots (ledgerRunKey correlation).
+  runGenerationOutputs SceneRunGenerationOutput[]
+
   @@index([chapterId])
   @@index([orderInChapter])
   @@index([writingMode])
@@ -3658,6 +3904,74 @@ model Scene {
   @@index([lastAssistRunId])
   @@index([worldStateOverrideId])
   @@index([narrativeAssemblyStatus])
+}
+
+/// Audit trail for guarded scene generation launches (evaluate / block / confirm / run).
+model SceneLaunchAuditLog {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  sceneId String
+  scene   Scene  @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+
+  eventType               String
+  launchAllowance         String?
+  freshnessDigestPrefix   String?
+  blockerCount            Int?
+  riskCount               Int?
+  advisoryCount           Int?
+  confirmationRequired    Boolean?
+  riskAcknowledged         Boolean?
+  guardEvaluatedAtIso     String?
+  inputHashPreview         String?
+  finalAction              String?
+  errorMessage             String? @db.Text
+  intent                   String?
+  meta                     Json?
+  /// interactive | machine | rehearsal — universal launch governance classification.
+  launchClass              String?
+  launchSource             String?
+  policyMode               String?
+  confirmationMode         String?
+
+  @@index([sceneId, createdAt])
+}
+
+/// Bounded per-run prose snapshot: links `ledgerRunKey` to text produced by a guarded launch (including replay when generation ran).
+model SceneRunGenerationOutput {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  sceneId String
+  scene   Scene  @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+
+  /// Stable correlation with Run Ledger rows (hash of sceneId + launch start audit id + start time ms).
+  ledgerRunKey String @unique
+
+  launchStartAuditId String?
+  launchEndAuditId   String?
+  cluster7RunId      String?
+
+  /// Full text as produced for this run (even when `scene.generationText` was not updated).
+  persistedProse String @db.Text
+
+  /// True when this run also wrote `Scene.generationText`.
+  sceneGenerationTextSynced Boolean @default(false)
+
+  /// persisted_to_scene | snapshot_only | blocked_save_realism | blocked_save_human_gravity
+  outputCompleteness String
+
+  characterCount    Int
+  paragraphCount    Int
+  openingFingerprint String
+  endingFingerprint  String
+
+  launchClass  String?
+  launchSource String?
+  intent       String?
+
+  @@index([sceneId])
+  @@index([sceneId, createdAt])
 }
 
 /// Draft-Scene planning beats (distinct from `SceneBeat` on MetaScene). Drives scene generation and ordering.

@@ -21,6 +21,9 @@ import {
   type SceneGenerationDependencyPlan,
 } from "@/lib/services/scene-generation-dependency-service";
 import { buildCluster7RuntimeTruthEnvelope } from "@/lib/services/cluster7-runtime-truth-service";
+import { loadPersistedCharacterSimulationProfilesForPersonIds } from "@/lib/services/character-simulation-author-bundle-load-service";
+import { CharacterSimulationRuntimeDerivationService } from "@/lib/services/character-simulation-runtime-service";
+import { CharacterSimulationValidationService } from "@/lib/services/character-simulation-validation-service";
 import { assertWorldStateMatchesBook } from "@/lib/services/world-book-mapper";
 
 /**
@@ -88,6 +91,11 @@ export type RunSceneGenerationParams = {
   applyCanonicalNarrativeGovernance?: boolean;
   /** Cluster 6 — human-gravity runtime derivation + prompt injection + advisory validation (default true). */
   applyHumanGravityLayer?: boolean;
+  /**
+   * Cluster 8 — character simulation (mind/voice/relationship + scene emergence) on canonical path (default true).
+   * Runs after human gravity so residue and no-reset pressure can shape character state.
+   */
+  applyCharacterSimulationLayer?: boolean;
   /** Cluster 5 — prose realism prompt shaping + validation (default true). */
   applyProseRealismLayer?: boolean;
   /**
@@ -151,6 +159,19 @@ export async function runSceneGeneration(
     };
   }
 
+  if (params.applyCharacterSimulationLayer !== false && merged.canonicalPreGeneration?.governanceMergeApplied) {
+    const personIds = merged.contract.participatingPeople.map((p) => p.id);
+    const persistedMap = await loadPersistedCharacterSimulationProfilesForPersonIds(personIds);
+    merged = {
+      ...merged,
+      persistedCharacterSimulationProfiles: Object.keys(persistedMap).length ? persistedMap : null,
+    };
+    merged = {
+      ...merged,
+      characterSimulationRuntime: new CharacterSimulationRuntimeDerivationService().derive(merged),
+    };
+  }
+
   if (params.applyProseRealismLayer !== false) {
     merged = {
       ...merged,
@@ -171,6 +192,24 @@ export async function runSceneGeneration(
 
   let output = await generateSceneProseWithModel(merged, basis);
   output = validateRegisteredContractPayload("sceneGenerationOutput", output, "write");
+
+  let characterSimulationValidation: SceneGenerationRunResult["characterSimulationValidation"] = null;
+  if (params.applyCharacterSimulationLayer !== false && merged.characterSimulationRuntime) {
+    characterSimulationValidation = new CharacterSimulationValidationService().validate({
+      sceneGenerationInput: merged,
+      generatedText: output.generatedText,
+    });
+    const c8w: string[] = [];
+    for (const h of characterSimulationValidation.hardIssues) {
+      c8w.push(`[character_simulation:hard] ${h}`);
+    }
+    for (const s of characterSimulationValidation.softIssues) {
+      c8w.push(`[character_simulation:soft] ${s}`);
+    }
+    if (c8w.length) {
+      output = { ...output, warnings: [...output.warnings, ...c8w] };
+    }
+  }
 
   let humanGravityValidation: SceneGenerationRunResult["humanGravityValidation"] = null;
   if (params.applyHumanGravityLayer !== false && merged.humanGravityRuntime) {
@@ -325,6 +364,8 @@ export async function runSceneGeneration(
     socialFieldQaScalars: merged.socialFieldQaScalars ?? null,
     humanizationAdvisory,
     canonicalPreGeneration: merged.canonicalPreGeneration ?? null,
+    characterSimulationRuntime: merged.characterSimulationRuntime ?? null,
+    characterSimulationValidation,
     humanGravityRuntime: merged.humanGravityRuntime ?? null,
     humanGravityValidation,
     humanGravityTruth: humanGravityValidation?.humanGravityTruth ?? null,
@@ -360,7 +401,14 @@ export async function buildSceneGenerationInputForAction(
   return loadSceneGenerationInput(sceneId, proseQaContext, options);
 }
 
-/** Thin entry points — same model call; purpose/mode live on `SceneGenerationInput`. */
+/**
+ * Thin entry points — same model call; purpose/mode live on `SceneGenerationInput`.
+ *
+ * **Governance:** Canonical server/automation callers must use `executeSceneLaunchAfterGuard` /
+ * `executeMachineGuardedSceneLaunch` / `executeRehearsalGuardedSceneLaunch` so preflight, digest policy,
+ * and `SceneLaunchAuditLog` stay aligned. These functions are low-level internals for cases that already
+ * passed the guarded launch core (or non-canonical test utilities).
+ */
 export async function generateSceneDraft(sceneId: string, opts?: RunSceneGenerationParams) {
   return runSceneGeneration({
     ...opts,

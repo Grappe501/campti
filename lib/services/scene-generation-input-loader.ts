@@ -28,6 +28,7 @@ import {
   assembleStorylineGuidanceBundle,
   buildStorylineOrchestrationInputsFromSeamContext,
 } from "@/lib/services/storyline-orchestrator-integration-service";
+import { loadAcceptedRicreCanonKnowledgeForScene } from "@/lib/services/ricre-canon-knowledge-loader-service";
 
 function parishPlaceIdFromSceneJson(structuredDataJson: unknown): string | null {
   if (!structuredDataJson || typeof structuredDataJson !== "object") return null;
@@ -173,6 +174,8 @@ export async function loadSceneGenerationInput(
   }
 
   const sourceIdsUsed = narrativeSourcesForScene.map((s) => s.id);
+
+  const ricreAcceptedCanonKnowledge = await loadAcceptedRicreCanonKnowledgeForScene(sceneId);
 
   let cognitionFramePayload: Record<string, unknown> | null = null;
   let pinnedDecisionTracePayload: Record<string, unknown> | null = null;
@@ -331,5 +334,6 @@ export async function loadSceneGenerationInput(
     narrativeShapingSummary,
     narrativeSourcesForScene,
     sourceIdsUsed,
+    ricreAcceptedCanonKnowledge,
   };
 }

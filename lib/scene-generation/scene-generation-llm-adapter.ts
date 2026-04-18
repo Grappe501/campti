@@ -43,6 +43,8 @@ function buildSystemPrompt(): string {
     "PHASE 7 — HUMAN PRESENCE: Prefer lived specificity over generic summary. Let emotion show through posture, work, object, and timing before naming it.",
     "CLUSTER 5 — PROSE REALISM: When PROSE_REALISM_CLUSTER5 appears in the user message, treat it as craft shaping layered under all truth/governance blocks — never as permission to violate era cognition, POV bounds, or contract facts.",
     "CLUSTER 6 — HUMAN GRAVITY: When CLUSTER6_HUMAN_GRAVITY appears, treat it as scene-active attachment/stakes/consequence/burden pressure — embody through gesture, obligation, and residue; never contradict contract facts or P2-E sources.",
+    "CLUSTER 8 — CHARACTER SIMULATION: When CLUSTER8_CHARACTER_SIMULATION appears, treat it as primary scene motion: desire/fear/voice/relationship constraints drive dialogue and interiority; do not flatten characters; story structure is subordinate to these behavioral limits.",
+    "RICRE — ACCEPTED RESEARCH CANON: When RICRE_ACCEPTED_CANON appears, treat it as author-gated grounding texture only; it must not override JSON contract facts, genealogical assertions, P2-E narrative sources, or world-state chronology.",
     "Avoid explanatory tone that tidies the scene for a reader; preserve ambiguity and silence where the witness lines ask for it.",
     "Output ONE JSON object only, matching the schema in the user message. No markdown fences.",
     "The JSON field `generatedText` is MODEL DRAFT ONLY — it must never be described as reader-canonical.",
@@ -74,6 +76,21 @@ export function compactHumanGravityRuntimeLines(input: SceneGenerationInput): st
   const hg = input.humanGravityRuntime;
   if (!hg?.promptInstructionLines?.length) return null;
   return hg.promptInstructionLines.join("\n");
+}
+
+export function compactRicreAcceptedCanonLines(input: SceneGenerationInput): string | null {
+  const r = input.ricreAcceptedCanonKnowledge;
+  if (!r?.promptInstructionLines?.length) return null;
+  return r.promptInstructionLines.join("\n");
+}
+
+export function compactCharacterSimulationRuntimeLines(input: SceneGenerationInput): string | null {
+  const c8 = input.characterSimulationRuntime;
+  if (!c8?.promptInstructionLines?.length) return null;
+  return [
+    "CLUSTER8_CHARACTER_SIMULATION (motion source — characters own pressure; embody, never paste flags as exposition):",
+    ...c8.promptInstructionLines,
+  ].join("\n");
 }
 
 export function compactCanonicalGovernanceLines(input: SceneGenerationInput): string | null {
@@ -163,6 +180,8 @@ function buildUserPrompt(input: SceneGenerationInput, basisProse: string | null)
   const governanceLines = compactCanonicalGovernanceLines(input);
   const proseRealismLines = compactProseRealismLines(input);
   const humanGravityLines = compactHumanGravityRuntimeLines(input);
+  const characterSimulationLines = compactCharacterSimulationRuntimeLines(input);
+  const ricreCanonLines = compactRicreAcceptedCanonLines(input);
   const narrativeSourcesBlock = compactNarrativeSourcesBlock(input);
   return [
     `GENERATION_MODE: ${input.generationMode}`,
@@ -201,6 +220,10 @@ function buildUserPrompt(input: SceneGenerationInput, basisProse: string | null)
     proseRealismLines ? `${proseRealismLines}\n` : "",
     "",
     humanGravityLines ? `${humanGravityLines}\n` : "",
+    "",
+    characterSimulationLines ? `${characterSimulationLines}\n` : "",
+    "",
+    ricreCanonLines ? `${ricreCanonLines}\n` : "",
     "",
     input.contract.socialFieldGeneration
       ? [

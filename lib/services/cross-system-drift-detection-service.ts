@@ -7,7 +7,12 @@ export type DriftDetectionInput = {
   runId: string;
   sceneId: string;
   run: SceneGenerationRunResult;
-  cockpitBundle?: Pick<AuthorCommandCockpitBundle, "humanGravityRuntime" | "proseRealism" | "runtimeConvergenceTruth"> | null;
+  cockpitBundle?:
+    | Pick<
+        AuthorCommandCockpitBundle,
+        "humanGravityRuntime" | "proseRealism" | "runtimeConvergenceTruth" | "certificationHardening"
+      >
+    | null;
 };
 
 /**
@@ -25,6 +30,28 @@ export class CrossSystemDriftDetectionService {
         severity: "warning",
         message: "Realism invalid but continuity flags do not include cluster5_realism_scene_output_invalid.",
         layers: ["runtime", "artifact"],
+      });
+    }
+
+    const hgTruthInvalid =
+      run.humanGravityTruth && !run.humanGravityTruth.sceneOutputValidUnderNoResetRules;
+    if (hgTruthInvalid && !run.output.continuityFlags.includes("cluster6_human_gravity_no_reset_invalid")) {
+      findings.push({
+        code: "human_gravity_invalid_without_cluster6_flag",
+        severity: "warning",
+        message:
+          "Human-gravity no-reset invalid but continuity flags do not include cluster6_human_gravity_no_reset_invalid.",
+        layers: ["runtime", "artifact"],
+      });
+    }
+
+    const ch = cockpitBundle?.certificationHardening;
+    if (ch?.mayPresentAsProductionGrade && ch.canonicalArtifactAuthority !== "canonical_production") {
+      findings.push({
+        code: "cockpit_production_grade_vs_artifact_authority",
+        severity: "error",
+        message: "Cockpit allows production-grade presentation while artifact authority is not canonical_production.",
+        layers: ["cockpit", "readiness"],
       });
     }
 

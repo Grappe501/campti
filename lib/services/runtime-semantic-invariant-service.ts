@@ -5,7 +5,7 @@ import type {
   RuntimeSemanticInvariantReport,
 } from "@/lib/domain/runtime-semantic-invariant";
 import { RUNTIME_SEMANTIC_INVARIANT_CATALOG, RUNTIME_SEMANTIC_INVARIANT_CONTRACT_VERSION } from "@/lib/domain/runtime-semantic-invariant";
-import type { HumanGravityValidationBundle } from "@/lib/domain/human-gravity-runtime";
+import type { HumanGravityRuntimeProfile, HumanGravityValidationBundle } from "@/lib/domain/human-gravity-runtime";
 import type { ProseRealismValidationBundle } from "@/lib/domain/prose-realism";
 
 export type SemanticInvariantEvaluationContext = {
@@ -20,6 +20,8 @@ export type SemanticInvariantEvaluationContext = {
   generationTextSaveBlockedByHumanGravity: boolean;
   proseRealism: ProseRealismValidationBundle | null | undefined;
   humanGravityValidation: HumanGravityValidationBundle | null | undefined;
+  /** When present, enables human-gravity **coherence** checks against influence truth (Cluster 6). */
+  humanGravityRuntime?: HumanGravityRuntimeProfile | null;
 };
 
 function byId(id: string) {
@@ -40,6 +42,7 @@ export class RuntimeSemanticInvariantService {
     results.push(this.evalAdvisoryEnvelope(ctx));
     results.push(this.evalPersistence(ctx));
     results.push(this.evalHumanGravityCoherence(ctx));
+    results.push(this.evalHookPressureContinuity(ctx));
     results.push(this.evalEnforcementTruthPlaceholder());
     results.push(this.evalReadinessEvidencePlaceholder());
 
@@ -268,13 +271,71 @@ export class RuntimeSemanticInvariantService {
         validationFlags: ["skipped_no_governance_merge"],
       };
     }
+    const hg = ctx.humanGravityRuntime;
+    if (!hg) {
+      return {
+        invariantId: def.invariantId,
+        invariantClass: def.invariantClass,
+        passed: true,
+        severity: def.severity,
+        enforcementMode: def.enforcementMode,
+        message: null,
+        validationFlags: ["skipped_no_human_gravity_runtime_profile"],
+      };
+    }
+    const substantiveLines = hg.promptInstructionLines.filter(
+      (l) =>
+        l.trim().length > 0 &&
+        !l.trim().startsWith("CLUSTER6_HUMAN_GRAVITY") &&
+        !l.startsWith("— Prefer implication"),
+    );
+    const promptThin = substantiveLines.length < 3 && hg.humanGravityScore >= 0.45;
+    const influenceInactive =
+      !hg.runtimeInfluenceTruth.humanGravityCanonicalRuntimeActive &&
+      !hg.runtimeInfluenceTruth.noResetValidationParticipatesInCanonicalValidity &&
+      hg.humanGravityScore >= 0.35;
+    const ok = !promptThin && !influenceInactive;
     return {
       invariantId: def.invariantId,
       invariantClass: def.invariantClass,
-      passed: true,
+      passed: ok,
       severity: def.severity,
       enforcementMode: def.enforcementMode,
-      message: null,
+      message: ok
+        ? null
+        : promptThin
+          ? "Human-gravity score is high but CLUSTER6 substantive prompt lines are thin — generation path may not carry gravity."
+          : "Human-gravity profile is substantive but influence truth reports inactive without no-reset gate — labeling drift risk.",
+      validationFlags: def.validationFlags,
+    };
+  }
+
+  private evalHookPressureContinuity(ctx: SemanticInvariantEvaluationContext): InvariantResult {
+    const def = byId("inv.hook_pressure_consistent_with_continuity");
+    const pre = ctx.canonicalPreGeneration;
+    const c3 = pre?.cluster3RuntimeActivationTruth;
+    const cont = pre?.packValidations?.epicContinuity;
+    if (!pre?.governanceMergeApplied || !c3 || !cont) {
+      return {
+        invariantId: def.invariantId,
+        invariantClass: def.invariantClass,
+        passed: true,
+        severity: def.severity,
+        enforcementMode: def.enforcementMode,
+        message: null,
+        validationFlags: ["skipped_no_hook_continuity_snapshot"],
+      };
+    }
+    const bad = Boolean(c3.hcelHookHardSignalsActive && !cont.valid);
+    return {
+      invariantId: def.invariantId,
+      invariantClass: def.invariantClass,
+      passed: !bad,
+      severity: def.severity,
+      enforcementMode: def.enforcementMode,
+      message: bad
+        ? "Hard hook signals active while epic continuity pack is invalid — treat hook pressure as advisory until continuity recovers."
+        : null,
       validationFlags: def.validationFlags,
     };
   }

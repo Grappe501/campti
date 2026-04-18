@@ -1,14 +1,24 @@
 "use server";
 
+import type { SceneGenerationLaunchGuardPayload } from "@/lib/domain/scene-launch-guard";
+import type { SceneLaunchGuardResult } from "@/lib/domain/scene-launch-guard";
 import type { SceneGenerationInput } from "@/lib/domain/scene-generation-input";
-import type { RunSceneGenerationParams } from "@/lib/services/scene-generation-service";
 import {
   buildSceneGenerationInputForAction,
-  generateSceneDraft,
-  repairSceneContinuity,
-  rewriteSceneDraft,
-  runSceneGeneration,
+  type RunSceneGenerationParams,
 } from "@/lib/services/scene-generation-service";
+import { executeSceneLaunchAfterGuard } from "@/lib/services/scene-launch-guard-service";
+
+export type GuardedSceneGenerationActionResult =
+  | { ok: true; run: Awaited<ReturnType<typeof import("@/lib/services/scene-generation-service").runSceneGeneration>> }
+  | { ok: false; code: string; message: string; guard?: SceneLaunchGuardResult };
+
+function stripSceneId(params?: RunSceneGenerationParams): Omit<RunSceneGenerationParams, "sceneId"> | undefined {
+  if (!params) return undefined;
+  const { sceneId: _sid, ...rest } = params;
+  void _sid;
+  return rest;
+}
 
 export async function actionBuildSceneGenerationInput(
   sceneId: string,
@@ -18,19 +28,69 @@ export async function actionBuildSceneGenerationInput(
   return buildSceneGenerationInputForAction(sceneId, proseQaContext, options);
 }
 
-/** Full orchestration with optional save + dependency registration + prose QA. */
-export async function actionRunSceneGeneration(params: RunSceneGenerationParams) {
-  return runSceneGeneration(params);
+/** Full orchestration — requires prior `evaluateSceneLaunchGuardAction` + matching `freshnessDigest`. */
+export async function actionRunSceneGeneration(
+  params: RunSceneGenerationParams & { launchGuard: SceneGenerationLaunchGuardPayload },
+): Promise<GuardedSceneGenerationActionResult> {
+  const { launchGuard, sceneId, ...forwarded } = params;
+  return executeSceneLaunchAfterGuard(
+    {
+      sceneId,
+      freshnessDigest: launchGuard.freshnessDigest,
+      riskAcknowledged: launchGuard.riskAcknowledged,
+      intent: "full_generation",
+      saveGenerationText: params.saveGenerationText,
+      registerDependencies: params.registerDependencies,
+      runProseQuality: params.runProseQuality,
+    },
+    forwarded,
+  );
 }
 
-export async function actionGenerateSceneDraft(sceneId: string, opts?: RunSceneGenerationParams) {
-  return generateSceneDraft(sceneId, opts);
+export async function actionGenerateSceneDraft(input: {
+  sceneId: string;
+  launchGuard: SceneGenerationLaunchGuardPayload;
+  opts?: RunSceneGenerationParams;
+}): Promise<GuardedSceneGenerationActionResult> {
+  return executeSceneLaunchAfterGuard(
+    {
+      sceneId: input.sceneId,
+      freshnessDigest: input.launchGuard.freshnessDigest,
+      riskAcknowledged: input.launchGuard.riskAcknowledged,
+      intent: "draft",
+    },
+    stripSceneId(input.opts),
+  );
 }
 
-export async function actionRewriteSceneDraft(sceneId: string, opts?: RunSceneGenerationParams) {
-  return rewriteSceneDraft(sceneId, opts);
+export async function actionRewriteSceneDraft(input: {
+  sceneId: string;
+  launchGuard: SceneGenerationLaunchGuardPayload;
+  opts?: RunSceneGenerationParams;
+}): Promise<GuardedSceneGenerationActionResult> {
+  return executeSceneLaunchAfterGuard(
+    {
+      sceneId: input.sceneId,
+      freshnessDigest: input.launchGuard.freshnessDigest,
+      riskAcknowledged: input.launchGuard.riskAcknowledged,
+      intent: "rewrite",
+    },
+    stripSceneId(input.opts),
+  );
 }
 
-export async function actionRepairSceneContinuity(sceneId: string, opts?: RunSceneGenerationParams) {
-  return repairSceneContinuity(sceneId, opts);
+export async function actionRepairSceneContinuity(input: {
+  sceneId: string;
+  launchGuard: SceneGenerationLaunchGuardPayload;
+  opts?: RunSceneGenerationParams;
+}): Promise<GuardedSceneGenerationActionResult> {
+  return executeSceneLaunchAfterGuard(
+    {
+      sceneId: input.sceneId,
+      freshnessDigest: input.launchGuard.freshnessDigest,
+      riskAcknowledged: input.launchGuard.riskAcknowledged,
+      intent: "repair",
+    },
+    stripSceneId(input.opts),
+  );
 }

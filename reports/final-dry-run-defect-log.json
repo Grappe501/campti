@@ -1,0 +1,14 @@
+{
+  "contractVersion": "1",
+  "dryRunId": "cluster9_2026-04-18T153039",
+  "executedAtIso": "2026-04-18T15:30:45.348Z",
+  "sceneId": "ing-rr-scene-riverbank-disclosure",
+  "defects": [
+    {
+      "code": "run_failed",
+      "severity": "error",
+      "message": "[\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"direct_scene\",\n      \"report\",\n      \"rumor\",\n      \"messenger_arrival\",\n      \"memory\",\n      \"heard_event\",\n      \"expected_danger\",\n      \"route_mention\",\n      \"trade_origin_destination\",\n      \"kin_tie\",\n      \"ceremonial_tie\",\n      \"resource_tie\"\n    ],\n    \"path\": [\n      \"appearanceMode\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"direct_scene\\\"|\\\"report\\\"|\\\"rumor\\\"|\\\"messenger_arrival\\\"|\\\"memory\\\"|\\\"heard_event\\\"|\\\"expected_danger\\\"|\\\"route_mention\\\"|\\\"trade_origin_destination\\\"|\\\"kin_tie\\\"|\\\"ceremonial_tie\\\"|\\\"resource_tie\\\"\"\n  }\n]",
+      "layer": "runtime"
+    }
+  ]
+}

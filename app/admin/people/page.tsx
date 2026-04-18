@@ -112,6 +112,18 @@ export default async function AdminPeoplePage({
                     ? `${p.birthYear ?? "—"} – ${p.deathYear ?? "—"}`
                     : "—",
               },
+              {
+                key: "workbench",
+                header: "Simulation",
+                cell: (p) => (
+                  <Link
+                    href={`/admin/people/${p.id}/simulation-workbench`}
+                    className="text-xs font-medium text-violet-900 underline-offset-2 hover:underline"
+                  >
+                    Workbench
+                  </Link>
+                ),
+              },
             ]}
           />
         )}

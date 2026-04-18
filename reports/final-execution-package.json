@@ -1,0 +1,31 @@
+{
+  "contractVersion": "1",
+  "executionId": "cluster9_2026-04-18T153039_ing-rr-scene-riverbank-disclosure",
+  "runtimeId": "scene_chapter_production_runtime",
+  "sceneId": "ing-rr-scene-riverbank-disclosure",
+  "chapterId": "ing-rr-chapter-riverbank",
+  "authorityClass": "incomplete",
+  "readinessStatus": "rehearsal_incomplete",
+  "canonicalArtifactIds": [],
+  "sceneRunIds": [],
+  "chapterRunIds": [],
+  "activeGovernors": [],
+  "advisoryGovernors": [],
+  "blockedOrDowngradedReasons": [
+    "run_failed: [\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"direct_scene\",\n      \"report\",\n      \"rumor\",\n      \"messenger_arrival\",\n      \"memory\",\n      \"heard_event\",\n      \"expected_danger\",\n      \"route_mention\",\n      \"trade_origin_destination\",\n      \"kin_tie\",\n      \"ceremonial_tie\",\n      \"resource_tie\"\n    ],\n    \"path\": [\n      \"appearanceMode\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"direct_scene\\\"|\\\"report\\\"|\\\"rumor\\\"|\\\"messenger_arrival\\\"|\\\"memory\\\"|\\\"heard_event\\\"|\\\"expected_danger\\\"|\\\"route_mention\\\"|\\\"trade_origin_destination\\\"|\\\"kin_tie\\\"|\\\"ceremonial_tie\\\"|\\\"resource_tie\\\"\"\n  }\n]"
+  ],
+  "operatorWorkflowSummary": "Rehearsal did not complete a full canonical generation; no Cluster 7 envelope. Fix noted defects and rerun.",
+  "authorWorkflowSummary": "Same as full workflow, but generation step did not finish — inspect defects before presenting readiness.",
+  "exportableOutputs": [
+    "reports/final-dry-run-defect-log.json"
+  ],
+  "validationSummary": "rehearsal_incomplete",
+  "certificationSummary": "not_evaluated",
+  "remediationTargets": [
+    "run_failed: [\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"direct_scene\",\n      \"report\",\n      \"rumor\",\n      \"messenger_arrival\",\n      \"memory\",\n      \"heard_event\",\n      \"expected_danger\",\n      \"route_mention\",\n      \"trade_origin_destination\",\n      \"kin_tie\",\n      \"ceremonial_tie\",\n      \"resource_tie\"\n    ],\n    \"path\": [\n      \"appearanceMode\"\n    ],\n    \"message\": \"Invalid option: expected one of \\\"direct_scene\\\"|\\\"report\\\"|\\\"rumor\\\"|\\\"messenger_arrival\\\"|\\\"memory\\\"|\\\"heard_event\\\"|\\\"expected_danger\\\"|\\\"route_mention\\\"|\\\"trade_origin_destination\\\"|\\\"kin_tie\\\"|\\\"ceremonial_tie\\\"|\\\"resource_tie\\\"\"\n  }\n]"
+  ],
+  "validationFlags": [
+    "cluster9_rehearsal_stub"
+  ],
+  "characterSimulationProfileTruth": "deterministic_seed_only"
+}

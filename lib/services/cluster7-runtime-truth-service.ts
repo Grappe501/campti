@@ -53,6 +53,7 @@ export function buildCluster7RuntimeTruthEnvelope(params: BuildCluster7TruthPara
     generationTextSaveBlockedByHumanGravity: Boolean(run.generationTextSaveBlockedByHumanGravity),
     proseRealism: run.proseRealism,
     humanGravityValidation: run.humanGravityValidation,
+    humanGravityRuntime: run.humanGravityRuntime ?? null,
   });
 
   const canonicalArtifact = buildSceneGenerationCanonicalArtifactRecord({
@@ -121,6 +122,8 @@ export function buildCockpitCertificationHardeningSummary(
   return {
     contractVersion: "1",
     canonicalArtifactAuthority: envelope.canonicalArtifact.truthStamp.authorityClass,
+    canonicalArtifactId: envelope.canonicalArtifact.artifactId,
+    semanticInvariantHardFailureIds: envelope.semanticInvariantReport.hardViolations.map((v) => v.invariantId),
     saveEligible: eligible,
     saveBlockedReasons: envelope.truthStamp.saveEligibility.blockedReasons,
     readinessEvidenceTrustClass: envelope.truthStamp.readinessEvidenceTrustClass,

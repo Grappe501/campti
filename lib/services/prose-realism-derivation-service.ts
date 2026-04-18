@@ -90,9 +90,14 @@ function buildProfileSeed(input: SceneGenerationInput, realismId: string): Prose
     ? clamp01(0.4 + (c.sensoryDensityProfile.requiredDensity === "high" ? 0.28 : 0.18) + c.environmentalGroundingFloor * 0.22)
     : 0.5;
 
-  const voiceDistinctnessScore = c
+  let voiceDistinctnessScore = c
     ? clamp01(0.45 + c.ambiguityAllowance * 0.15 + (c.driftFlags.length ? 0.05 : 0.08))
     : 0.5;
+
+  const c8 = input.characterSimulationRuntime;
+  if (c8 && c8.voiceProfiles.length > 1) {
+    voiceDistinctnessScore = clamp01(voiceDistinctnessScore + 0.06);
+  }
 
   let consequenceResidueScore = eegs
     ? clamp01(
@@ -168,6 +173,11 @@ export class ProseRealismDerivationService {
     const realismId = `${sceneId}:cluster5:${input.contract.chapter.id}`;
     const promptInstructionLines: string[] = [
       "PROSE_REALISM_CLUSTER5 — obey all truth firewalls and governance blocks above; this block shapes craft only.",
+      ...(input.characterSimulationRuntime?.voiceProfiles.length
+        ? [
+            "CLUSTER8_VOICE_REALISM: differentiate speech and interiority using CHARACTER_SIMULATION voice+cognition lines above; stress must modulate cadence and silence.",
+          ]
+        : []),
       ...this.voiceDiff.derivePromptLines({
         contract: input.contract,
         chapterFunctionHint: input.contract.chapter.summary ?? null,

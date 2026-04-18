@@ -8,9 +8,15 @@ This is a **runtime-depth** pass, not a parallel architecture. A single canonica
 
 ## Truth labeling
 
-**Human-gravity truth rule:** `runtimeInfluenceTruth.humanGravityCanonicalRuntimeActive` is true only when CLUSTER6 prompt assembly is substantive **and** at least one of attachment/relational/consequence/burden dimensions contributed materially, **or** when the no-reset gate applies (upstream pressure that can invalidate output). Subsystems are **not** labeled prompt-material unless their derived lines actually inform the assembled block (`computeHumanGravityRuntimeInfluenceTruth`).
+**HUMAN-GRAVITY TRUTH RULE (verbatim):** A character/relationship/consequence/burden system may not be labeled runtime-active unless it materially changes canonical scene/chapter generation behavior or canonical runtime validation outcomes.
 
-**No-reset rule:** When upstream models major consequence load (≥2 active markers), threatened bonds (relational threat ≥0.6), and/or inherited burdens, generated prose must show **behavioral residue** (lexical/gesture cues), **marker echo**, or **explicit** repair/suppression/transformation accounting. Otherwise `humanGravityTruth.sceneOutputValidUnderNoResetRules` is false, continuity flag `cluster6_human_gravity_no_reset_invalid` is set, and `generationText` save is blocked unless `allowSaveOnInvalidHumanGravity` is true (same pattern as realism invalid save).
+In code, `runtimeInfluenceTruth.humanGravityCanonicalRuntimeActive` implements that rule: it is true when CLUSTER6 **materially** reaches generation (substantive prompt lines **and** at least one dimension’s prompt material) **or** when the **no-reset** gate participates in canonical validity (so validation outcomes can change). Per-dimension `*PromptMaterial` flags are supplementary; they must not be mistaken alone for “full” runtime activity.
+
+`runtimeInfluenceTruth.validationFlags` lists which material dimensions fired (e.g. `cluster6_attachment_prompt_material`, `cluster6_no_reset_gate_tracks`) for cockpit and artifact audits.
+
+**NO-RESET RULE (verbatim):** A chapter/scene output is invalid if major consequences, threatened bonds, or inherited burdens are modeled in upstream runtime truth but disappear from canonical output without explicit repair, suppression, or transformation explanation.
+
+Operationally: when upstream pressure applies, generated prose must show **behavioral residue** (lexical/gesture cues), **marker echo**, or **explicit** repair/suppression/transformation accounting. Otherwise `humanGravityTruth.sceneOutputValidUnderNoResetRules` is false, continuity flag `cluster6_human_gravity_no_reset_invalid` is set, and `generationText` save is blocked unless `allowSaveOnInvalidHumanGravity` is true (same pattern as realism invalid save).
 
 | Layer | Effect on output |
 | --- | --- |
@@ -22,15 +28,15 @@ This is a **runtime-depth** pass, not a parallel architecture. A single canonica
 ## Domain contract
 
 - **Schema**: `lib/domain/human-gravity-runtime.ts`
-- **Profile**: `HumanGravityRuntimeProfile` — scene-scoped weights, consequence lines, burden lines, POV/scene/closure summaries, `promptInstructionLines`, `runtimeInfluenceTruth`.
-- **Validation**: `HumanGravityValidationBundle` — drift report, shallow heuristic flag, and `humanGravityTruth` (no-reset validity).
+- **Profile**: `HumanGravityRuntimeProfile` — scene-scoped weights, consequence lines, burden lines, POV/scene/closure summaries, `relationalForegroundSummary`, `bondModeSummary`, `promptInstructionLines`, `runtimeInfluenceTruth`.
+- **Validation**: `HumanGravityValidationBundle` — flattened no-reset and drift mirrors (`sceneOutputValidUnderNoResetRules`, warning arrays, `suggestedHardeningActions`, `humanGravityScore`, `validationFlags`) **plus** nested `driftReport` and `humanGravityTruth` for backward-compatible consumers.
 
 ## Derivation pipeline
 
-1. **AttachmentRuntimeBiasService** — attachment weights, POV bias text, fear/desire/vulnerability ids for the scene/chapter window.
-2. **RelationalStakesRuntimeBiasService** — relational threat map and foreground summary from `RelationalStakeProfile`.
-3. **ConsequencePersistenceRuntimeService** — irreversibility markers, identity fractures, loss ledger, repair difficulty strings scoped to chapter/scene/participants.
-4. **GenerationalBurdenRuntimeService** — burden labels, transmitted warnings, silence mechanics.
+1. **AttachmentRuntimeBiasService** — attachment weights, POV bias text, dominant **reader bond modes** and scene-role hints, fear/desire/vulnerability ids for the scene/chapter window.
+2. **RelationalStakesRuntimeBiasService** — relational threat map (threats, break risk, repair difficulty, dependency asymmetry, shame cost) and foreground summary (obligation, unspoken need, shame, dependency, repair texture).
+3. **ConsequencePersistenceRuntimeService** — irreversibility markers, identity fractures, loss ledger, no-return thresholds in chapter window, repair difficulty strings scoped to chapter/scene/participants.
+4. **GenerationalBurdenRuntimeService** — burden labels, gift/burden confusion lines, burden mutations, transmitted warnings, silence mechanics.
 5. **HumanGravityRuntimeDerivationService** — composes the profile, `humanGravityScore`, and CLUSTER6 prompt block.
 
 ## Integration points

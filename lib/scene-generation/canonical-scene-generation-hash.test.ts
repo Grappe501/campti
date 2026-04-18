@@ -198,6 +198,38 @@ describe("computeSceneGenerationInputHash", () => {
     });
     assert.notEqual(computeSceneGenerationInputHash(a, null), computeSceneGenerationInputHash(b, null));
   });
+
+  it("changing character simulation runtime changes hash", () => {
+    const a = minimalSceneGenerationInput();
+    const b = minimalSceneGenerationInput({
+      characterSimulationRuntime: {
+        contractVersion: "1",
+        clusterTag: "cluster8_character_simulation_runtime",
+        sceneId: "scene1",
+        chapterId: "ch1",
+        mindProfiles: [],
+        cognitiveStates: [],
+        voiceProfiles: [],
+        voiceStates: [],
+        relationshipProfiles: [],
+        relationshipStates: [],
+        sceneEmergenceDigest: {
+          sceneId: "scene1",
+          sceneNecessityReasons: ["x"],
+          conflictSources: ["y"],
+          povCandidates: [{ personId: "p1", weight: 1, rationale: "r" }],
+          scenePurposeFromPressure: "purpose",
+          dominantPressureIds: ["d1"],
+          validationFlags: [],
+        },
+        constraintFlags: [],
+        evolutionStamp: { sceneOrderIndex: 0, residueNotes: [], noResetAligned: true },
+        promptInstructionLines: ["line-a"],
+        validationFlags: [],
+      } as SceneGenerationInput["characterSimulationRuntime"],
+    });
+    assert.notEqual(computeSceneGenerationInputHash(a, null), computeSceneGenerationInputHash(b, null));
+  });
 });
 
 describe("serializeCanonicalSceneGenerationHashInput", () => {

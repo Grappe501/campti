@@ -15,7 +15,10 @@
  * already filtered upstream by canonical world-state chronology via `getSourcesForWorldState`),
  * `proseQaContext`, routing (`generationMode` / `purpose`), prose basis selection, a digest
  * of baseline prose when rewrite/repair uses it, Cluster 4 `canonicalPreGeneration` when present,
- * Cluster 5 `proseRealismLayer` when present, and Cluster 6 `humanGravityRuntime` when present.
+ * Cluster 5 `proseRealismLayer` when present, Cluster 6 `humanGravityRuntime` when present,
+ * Cluster 9 `persistedCharacterSimulationProfiles` when present (author DB bundle merged before C8),
+ * RICRE `ricreAcceptedCanonKnowledge` when present (author-accepted research canon lines), and
+ * Cluster 8 `characterSimulationRuntime` when present.
  *
  * **What must be excluded**
  * Observability-only payloads: full `narrativeShapingResolution` trace (`fieldSources`, `layers`,
@@ -98,6 +101,12 @@ export type CanonicalSceneGenerationHashInputV1 = {
   proseRealismLayer?: unknown;
   /** Cluster 6 — human-gravity runtime profile when wired (stable-sorted JSON). Omitted when absent. */
   humanGravityRuntime?: unknown;
+  /** Cluster 8 — character simulation runtime artifact when wired (stable-sorted JSON). Omitted when absent. */
+  characterSimulationRuntime?: unknown;
+  /** Cluster 9 — author DB simulation profiles merged before C8 derive; omitted when absent. */
+  persistedCharacterSimulationProfiles?: unknown;
+  /** RICRE — accepted canon knowledge bundle for prompts; omitted when absent. */
+  ricreAcceptedCanonKnowledge?: unknown;
 };
 
 export function sha256Utf8Hex(data: string): string {
@@ -190,6 +199,20 @@ export function buildCanonicalSceneGenerationHashInputV1(
       : {}),
     ...(input.humanGravityRuntime != null
       ? { humanGravityRuntime: stableDeepSort(input.humanGravityRuntime as unknown) }
+      : {}),
+    ...(input.characterSimulationRuntime != null
+      ? { characterSimulationRuntime: stableDeepSort(input.characterSimulationRuntime as unknown) }
+      : {}),
+    ...(input.persistedCharacterSimulationProfiles != null &&
+    Object.keys(input.persistedCharacterSimulationProfiles).length > 0
+      ? {
+          persistedCharacterSimulationProfiles: stableDeepSort(
+            input.persistedCharacterSimulationProfiles as unknown
+          ),
+        }
+      : {}),
+    ...(input.ricreAcceptedCanonKnowledge != null
+      ? { ricreAcceptedCanonKnowledge: stableDeepSort(input.ricreAcceptedCanonKnowledge as unknown) }
       : {}),
   };
 }

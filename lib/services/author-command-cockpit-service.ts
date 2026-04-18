@@ -132,6 +132,9 @@ export function buildAuthorCommandCockpitBundle(input: {
   cluster3RuntimeActivationTruth?: Cluster3RuntimeActivationTruth;
   runtimeConvergenceTruth?: import("@/lib/domain/canonical-scene-generation-governance").RuntimeGovernanceConvergenceTruth;
   certificationHardening?: import("@/lib/domain/author-command-cockpit").CockpitCertificationHardeningSummary;
+  characterSimulation?: AuthorCommandCockpitBundle["characterSimulation"];
+  operatorExecutionSummary?: AuthorCommandCockpitBundle["operatorExecutionSummary"];
+  ricreResearchCanon?: AuthorCommandCockpitBundle["ricreResearchCanon"];
 }): AuthorCommandCockpitBundle {
   const runtimeAuthority = createRuntimeAuthorityStamp(input.runtimeId);
   const centered = deriveCenteredSurfaceTitle({
@@ -182,6 +185,9 @@ export function buildAuthorCommandCockpitBundle(input: {
     cluster3RuntimeActivationTruth: input.cluster3RuntimeActivationTruth,
     runtimeConvergenceTruth: input.runtimeConvergenceTruth,
     certificationHardening: input.certificationHardening,
+    characterSimulation: input.characterSimulation,
+    operatorExecutionSummary: input.operatorExecutionSummary,
+    ricreResearchCanon: input.ricreResearchCanon,
     enforcementSemanticTruth,
     bounded: true,
     explainable: true,
