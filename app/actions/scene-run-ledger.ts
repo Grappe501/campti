@@ -10,6 +10,7 @@ import {
   intentForReplayFromEntry,
   loadSceneRunLedgerEntry,
 } from "@/lib/services/scene-run-ledger-service";
+import { recordRecommendationServerFollowup } from "@/lib/services/scene-recommendation-learning-log-service";
 
 export type ReplaySceneRunActionResult =
   | { ok: true; run: Awaited<ReturnType<typeof import("@/lib/services/scene-generation-service").runSceneGeneration>> }
@@ -158,6 +159,8 @@ export async function replaySceneRunAction(raw: unknown): Promise<ReplaySceneRun
       cluster7RunId: guarded.run.cluster7RuntimeTruth?.runId ?? null,
     },
   });
+
+  await recordRecommendationServerFollowup(sceneId, "replay_requested");
 
   revalidatePath(`/admin/scenes/${sceneId}`);
   revalidatePath(`/admin/scenes/${sceneId}`, "page");

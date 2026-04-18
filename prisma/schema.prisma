@@ -3897,6 +3897,9 @@ model Scene {
   /// Durable per-run prose snapshots (ledgerRunKey correlation).
   runGenerationOutputs SceneRunGenerationOutput[]
 
+  /// Append-only recommendation effectiveness / learning loop (observational only).
+  recommendationEvents SceneRecommendationEvent[]
+
   @@index([chapterId])
   @@index([orderInChapter])
   @@index([writingMode])
@@ -3972,6 +3975,43 @@ model SceneRunGenerationOutput {
 
   @@index([sceneId])
   @@index([sceneId, createdAt])
+}
+
+/// Append-only log: recommendation display, user follow-up signals, and bounded outcome linkage (no autopilot).
+model SceneRecommendationEvent {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  sceneId String
+  scene   Scene  @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+
+  /// Assist context when opened from a ledger row.
+  ledgerRunKey String?
+
+  /// recommendation_shown | recommendation_action_taken | recommendation_outcome_linked | recommendation_outcome_evaluated
+  eventType String
+
+  /// replay_requested | repair_requested | opened_preflight | opened_research | opened_simulation | opened_diff | launched_new_run | no_observed_followup
+  actionType String?
+
+  recommendationIds        Json?
+  recommendationCategories Json?
+
+  linkedLaunchAuditId String?
+  linkedLedgerRunKey  String?
+
+  /// Optional pointer to a prior `recommendation_shown` row for this scene.
+  parentEventId String?
+
+  /// Groups multiple logical emits from one assist render if needed.
+  displayBatchId String?
+
+  contextSummary String? @db.VarChar(500)
+  meta           Json?
+
+  @@index([sceneId, createdAt])
+  @@index([sceneId, eventType])
+  @@index([parentEventId])
 }
 
 /// Draft-Scene planning beats (distinct from `SceneBeat` on MetaScene). Drives scene generation and ordering.

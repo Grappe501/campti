@@ -4,6 +4,10 @@
  */
 
 import type { SceneRunOutputChurnHint } from "@/lib/domain/scene-run-output-linkage";
+import type {
+  SceneRecommendationEffectivenessViewModel,
+  SceneRecommendationLearningAugmentation,
+} from "@/lib/domain/scene-recommendation-learning";
 
 export const SCENE_DECISION_ASSIST_CONTRACT_VERSION = "1" as const;
 
@@ -80,6 +84,11 @@ export type SceneDecisionRecommendation = {
   suppressionOrCautionNotes: string[];
   /** Downstream strength cap when history is thin or partial. */
   confidenceCapReasons: SceneDecisionAssistSuppressionReason[];
+  /**
+   * Observational learning layer — bounded notes and at most one-step strength nudges.
+   * Does not replace `basis`; may align `strength` with `learningAugmentation.effectiveStrength`.
+   */
+  learningAugmentation?: SceneRecommendationLearningAugmentation;
 };
 
 export type SceneDecisionRecommendationSet = {
@@ -111,6 +120,8 @@ export type SceneDecisionAssistViewModel = {
   recommendations: SceneDecisionRecommendationSet;
   suppressionsApplied: SceneDecisionAssistSuppressionReason[];
   runFocus: SceneDecisionAssistRunFocus | null;
+  /** Scene-scoped bounded effectiveness (optional when logging disabled or empty). */
+  effectivenessSummary: SceneRecommendationEffectivenessViewModel | null;
 };
 
 /** Compact summary for cockpit / rails (no full evidence payload). */

@@ -14,6 +14,7 @@ import type {
   SceneDecisionRecommendationStrength,
   SceneDecisionRecommendationTrigger,
 } from "@/lib/domain/scene-decision-assist";
+import type { SceneRecommendationEffectivenessViewModel } from "@/lib/domain/scene-recommendation-learning";
 import { SCENE_DECISION_ASSIST_CONTRACT_VERSION } from "@/lib/domain/scene-decision-assist";
 import type { SceneResearchTabViewModel } from "@/lib/domain/scene-research-tab";
 import type { SceneRunLedgerEntry, SceneRunLedgerViewModel } from "@/lib/domain/scene-run-ledger";
@@ -24,6 +25,11 @@ import { buildCharacterSimulationWorkbenchSceneRollup } from "@/lib/services/cha
 import { loadSceneResearchTab } from "@/lib/services/scene-research-tab-loader-service";
 import { buildSceneRunDiffViewModel } from "@/lib/services/scene-run-diff-service";
 import { loadSceneRunOutputChurnHints } from "@/lib/services/scene-run-output-churn-hints-service";
+import { applyEffectivenessToRecommendationSet, buildSceneRecommendationEffectivenessViewModel } from "@/lib/services/scene-recommendation-effectiveness-service";
+import {
+  buildShownPayloadFromRecommendationSet,
+  logRecommendationShownFromAssistInput,
+} from "@/lib/services/scene-recommendation-learning-log-service";
 import { loadSceneRunLedger } from "@/lib/services/scene-run-ledger-service";
 import { buildSceneRunOutcomeAnalytics } from "@/lib/services/scene-run-outcome-analytics-service";
 
@@ -676,7 +682,19 @@ export async function buildSceneDecisionAssistViewModel(
 
   const { set, suppressions } = applySceneDecisionRecommendationSuppression(sceneId, candidates);
 
-  const headline = set.primary?.title ?? "No primary recommendation";
+  const shownPayload = buildShownPayloadFromRecommendationSet(sceneId, set, opts?.ledgerRunKey ?? null);
+  await logRecommendationShownFromAssistInput(shownPayload);
+
+  let effectivenessSummary: SceneRecommendationEffectivenessViewModel | null = null;
+  let recommendations = set;
+  try {
+    effectivenessSummary = await buildSceneRecommendationEffectivenessViewModel(sceneId);
+    recommendations = applyEffectivenessToRecommendationSet(set, effectivenessSummary.stats.categoryCorrelations);
+  } catch {
+    /* Effectiveness layer is optional — rule-based recommendations still apply. */
+  }
+
+  const headline = recommendations.primary?.title ?? "No primary recommendation";
   const honestyParts = [
     "Advisory only — does not change guard, preflight, or replay policy.",
     "Facts cite preflight, research tab, simulation rollup, and ledger; heuristics are labeled.",
@@ -695,8 +713,9 @@ export async function buildSceneDecisionAssistViewModel(
       partialHistoryCodes,
       outputChurnHints,
     },
-    recommendations: set,
+    recommendations,
     suppressionsApplied: suppressions,
     runFocus: buildRunFocus(sceneId, opts?.ledgerRunKey ?? undefined, ledger.entries),
+    effectivenessSummary,
   };
 }

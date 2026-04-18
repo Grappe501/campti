@@ -233,9 +233,12 @@ async function main() {
   const svc = read("lib/services/scene-decision-assist-service.ts");
   assert.ok(svc.includes("buildSceneDecisionAssistViewModel"), "service entry");
   assert.ok(svc.includes("applySceneDecisionRecommendationSuppression"), "suppression");
+  assert.ok(svc.includes("logRecommendationShownFromAssistInput"), "recommendation learning log");
+  assert.ok(svc.includes("applyEffectivenessToRecommendationSet"), "recommendation effectiveness merge");
 
   const domain = read("lib/domain/scene-decision-assist.ts");
   assert.ok(domain.includes("SceneDecisionRecommendationCategory"), "taxonomy");
+  assert.ok(domain.includes("learningAugmentation"), "learning augmentation on recommendations");
 
   const action = read("app/actions/scene-decision-assist.ts");
   assert.ok(action.includes("loadSceneDecisionAssistAction"), "server action");

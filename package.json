@@ -29,6 +29,7 @@
     "verify:run-diff-analytics": "tsx scripts/verify-run-diff-outcome-analytics.ts && tsx --test lib/services/scene-run-diff-service.test.ts && tsx --test lib/services/scene-run-outcome-analytics-service.test.ts",
     "verify:durable-run-output-linkage": "tsx scripts/verify-durable-run-output-linkage.ts && tsx --test lib/services/scene-run-output-delta-service.test.ts && tsx --test lib/services/scene-run-diff-service.test.ts && tsx --test lib/services/scene-run-ledger-assembly.test.ts",
     "verify:author-decision-assist": "tsx scripts/verify-author-decision-assist.ts && tsx --test lib/services/scene-decision-assist-service.test.ts",
+    "verify:recommendation-effectiveness-learning-loop": "tsx scripts/verify-recommendation-effectiveness-learning-loop.ts && tsx --test lib/services/scene-recommendation-effectiveness-service.test.ts",
     "verify:ricre": "tsx --test lib/services/ricre-pipeline.test.ts",
     "verify:generation-hash": "tsx --test lib/scene-generation/canonical-scene-generation-hash.test.ts",
     "verify:revision-job-policy": "tsx --test lib/services/revision-job-runner.policy.test.ts",

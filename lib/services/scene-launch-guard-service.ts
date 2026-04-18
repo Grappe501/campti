@@ -32,6 +32,7 @@ import { buildSceneGenerationPreflight } from "@/lib/services/scene-generation-p
 import { runSceneGeneration, type RunSceneGenerationParams } from "@/lib/services/scene-generation-service";
 import { writeSceneLaunchAudit } from "@/lib/services/scene-launch-audit-service";
 import { persistSceneRunGenerationOutputRecord } from "@/lib/services/scene-run-generation-output-persist-service";
+import { recordLaunchOutcomeForRecommendationLearning } from "@/lib/services/scene-recommendation-outcome-linking-service";
 import { computeSceneLedgerRunKey } from "@/lib/utils/scene-ledger-run-key";
 
 function digestPrefix(d: string): string {
@@ -528,6 +529,18 @@ export async function executeGuardedSceneLaunch(
       });
     }
 
+    if (ledgerRunKey && startAudit && endAudit) {
+      await recordLaunchOutcomeForRecommendationLearning({
+        sceneId: request.sceneId,
+        startAuditCreatedAt: startAudit.createdAt,
+        startAuditId: startAudit.id,
+        endAuditId: endAudit.id,
+        ledgerRunKey,
+        launchAllowance: vm.summary.launchAllowance,
+        generationSucceeded: true,
+      });
+    }
+
     return {
       ok: true,
       run,
@@ -535,7 +548,7 @@ export async function executeGuardedSceneLaunch(
     };
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
-    await writeSceneLaunchAudit({
+    const failAudit = await writeSceneLaunchAudit({
       sceneId: request.sceneId,
       eventType: "launch_generation_failed",
       launchAllowance: vm.summary.launchAllowance,
@@ -545,6 +558,17 @@ export async function executeGuardedSceneLaunch(
       errorMessage: msg.slice(0, 4000),
       ...auditClassFields(request, confirmationMode, policyMode),
     });
+    if (ledgerRunKey && startAudit) {
+      await recordLaunchOutcomeForRecommendationLearning({
+        sceneId: request.sceneId,
+        startAuditCreatedAt: startAudit.createdAt,
+        startAuditId: startAudit.id,
+        endAuditId: failAudit?.id ?? null,
+        ledgerRunKey,
+        launchAllowance: vm.summary.launchAllowance,
+        generationSucceeded: false,
+      });
+    }
     return { ok: false, code: "generation_failed", message: msg, classification: classificationSummary(request, confirmationMode, policyMode) };
   }
 }
