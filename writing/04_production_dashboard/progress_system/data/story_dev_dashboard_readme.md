@@ -14,6 +14,20 @@ Canon status: PROPOSED
 4. Optional lists: **`top_active_symbols`**, **`top_active_arcs`**, **`symbolic_blockers`** — keep tight; rotate as work shifts.
 5. Do **not** paste unverified history into `summary` fields — keep **PROPOSED** language.
 
+## Rich dashboard fields (V1)
+
+The `/story-dev` page reads these **optional** blocks for a one-screen build picture (edit in JSON; keep strings concise):
+
+- **`build_lens`** — epic/book labels, one-paragraph build summary, Native-only + Great Raft guardrails.
+- **`movements_thirds`** — Third I / II / III blurbs (movement shape before raid).
+- **`symbols_detailed`** — table rows: symbol name, Book 01 job, density note.
+- **`arcs_detailed`** — table rows: arc name, Book 01 touch, status.
+- **`plot_tracks`** — binding, daughter spine, provider/Campti, raid, craft braid (thread + units + doc paths).
+- **`prose_review_queue`** — every prose sample / Rev with role, status, file path, gate path.
+- **`spine_fifteen`** — `readme` path to full spine table + `units[]` with `id`, `third`, `one_line`.
+- **`post_fill_gate`** — rows `{ gate, status, notes }` mirrored from refinement Post-Fill Gate.
+- **`chapter_candidates.recommendation_summary`** — path to recommendation summary.
+
 Optional keys may include **`epic_war_conflict_engine`**, **`literary_control`** (path map), and **`symbol_series_seeds`** — see live JSON for the current shape.
 
 ## Source of truth hierarchy

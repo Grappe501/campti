@@ -15,7 +15,7 @@ Define the first active epic and first active book well enough to build a chapte
 **Numbering note:**  
 This may later be renamed to `epic_01_red_river_matrilineage` once template numbering is standardized. See `writing/04_production_dashboard/numbering_decision.md` (OPEN).
 
-**Current focus:** **Book 01 Chapter Candidate Refinement Pass 01** (`book01_chapter_candidates_v0/refinement_pass_01/` — **15** proposed units V0 from **22** candidates; **no `ch_###`**; **no `01_canon/`**; Native-only firewall active)
+**Current focus:** **Sample 002 Light Revision + Binding Partner / Provider Fill Pass** (`draft_lab/prose_sample_002_*revA*`, `binding_partner_packet.md`, `native_male_leader_provider_packet.md`, `refinement_pass_01/proposed_12_to_16_chapter_spine.md` dependency overlay, `recommendation_summary.md` Post-Fill Gate — **no `ch_###`**; **no `01_canon/`**; Native-only firewall active)
 
 **Epic build queue:** `writing/03_epics/epic_02_red_river_matrilineage/epic_build_queue/`
 
@@ -32,7 +32,7 @@ This may later be renamed to `epic_01_red_river_matrilineage` once template numb
 
 **Prose doctrine:** `…/books/book_01_world_before_disruption/prose_doctrine/`
 
-**Draft lab:** `…/books/book_01_world_before_disruption/draft_lab/` (Sample **002** + RevB provisional tonal model per `draft_lab/prose_sample_001_tonal_model_decision.md`)
+**Draft lab:** `…/books/book_01_world_before_disruption/draft_lab/` (Sample **002 RevA** + V0 archive + **RevB** provisional tonal model per `draft_lab/prose_sample_001_tonal_model_decision.md`)
 
 **Progress system:** `writing/04_production_dashboard/progress_system/`
 
@@ -50,7 +50,7 @@ Ordered for **Burt + Ernie**. Tick items in Git or move them to `intake/intake_l
 ## 1 — Scaffold the real spine (no prose)
 
 2. Review story-dev dashboard MVP (`/story-dev`), `writing/08_alignment_sweeps/alignment_sweep_001/`, `writing/03_epics/epic_02_red_river_matrilineage/research/sassafras_gumbo/`, and `writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_next_story_moves/next_10_story_build_moves.md` while continuing Sample **002** review and Book **01** character packet development.
-3. Review `writing/04_production_dashboard/progress_system/`, `writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_character_packets/`, `writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_chapter_candidates_v0/`, `writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_symbol_braid_v0/`, and Sample **002** review files (`draft_lab/prose_sample_002_granddaughter_first_image.md`, `draft_lab/prose_sample_002_notes.md`, `draft_lab/prose_sample_002_review_gate.md`, `draft_lab/prose_sample_002_revision_plan.md`) before creating any final `ch_###` chapter folders.
+3. Review `writing/04_production_dashboard/progress_system/`, `writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_character_packets/`, `writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_chapter_candidates_v0/`, `writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_symbol_braid_v0/`, and Sample **002** (`draft_lab/prose_sample_002_granddaughter_first_image.md`, **`draft_lab/prose_sample_002_granddaughter_first_image_revA.md`**, `draft_lab/prose_sample_002_revA_review_gate.md`, `draft_lab/prose_sample_002_notes.md`, `draft_lab/prose_sample_002_revision_plan.md`) before creating any final `ch_###` chapter folders.
 4. Review `draft_lab/prose_sample_001_opening_matriarch_first_image_revA.md`, `draft_lab/prose_sample_001_revA_notes.md`, and `draft_lab/prose_sample_001_revA_review_gate.md` before deciding whether to revise again or draft Sample 002.
 5. Review `draft_lab/prose_sample_001_notes.md`, `draft_lab/prose_sample_001_revision_plan.md`, and `draft_lab/book01_voice_calibration.md` before revising the first prose sample or drafting Sample 002.
 6. Review `book01_manifest_v0/movement_packets/`, especially `book01_manifest_v0/movement_packets/I-A_opening_matriarch_living_world.md`, `book01_manifest_v0/movement_packets/opening_images.md`, and `book01_manifest_v0/movement_packets/prose_readiness_gate.md` before drafting the first prose sample.

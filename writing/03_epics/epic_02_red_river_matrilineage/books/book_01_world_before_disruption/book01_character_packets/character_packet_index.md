@@ -8,7 +8,8 @@ Canon status: PROPOSED
 | `daughter_mother_generation_packet.md` | **center bridge** + household permanence | mother / daughter | II-A–II-C, I-A | **Fill pass 01** — middle-gen strengthened |
 | `granddaughter_young_heroine_packet.md` | child attachment | granddaughter | III-A–III-B | **Fill pass 01** — Sample 002 alignment |
 | `child_cohort_packet.md` | pack realism | ensemble | III-A | **Expanded pass 01** — five OPEN slots |
-| `binding_partner_packet.md` | union pressure | partner (OPEN) | III-B | **PARTIAL pass 01** — Native-only locked |
+| `binding_partner_packet.md` | union pressure | partner (OPEN) | III-B | **Deepened pass 02** — name/gender OPEN; Native-only locked |
+| `native_male_leader_provider_packet.md` | provider / male-interface / **Campti carrier (PROPOSED)** | provider (OPEN) | II–III | **NEW — pass 02** — **Campti thread remains PROPOSED / intentional historical stretch pending verification** |
 | `village_ensemble_packet.md` | distributed power | ensemble | I-B, I-A | **Expanded pass 01** |
 
 ## Status rollup
@@ -19,5 +20,6 @@ Canon status: PROPOSED
 | Daughter / mother generation | **FILLED — pass 01** (PROPOSED) |
 | Granddaughter / young heroine | **FILLED — pass 01** (PROPOSED) |
 | Child cohort | **EXPANDED — pass 01** |
-| Binding partner | **PARTIAL — pass 01** |
+| Binding partner | **PARTIAL — stronger pass 02** (human + research still OPEN) |
+| Native male leader / provider | **PARTIAL — pass 02** |
 | Village ensemble | **EXPANDED — pass 01** |

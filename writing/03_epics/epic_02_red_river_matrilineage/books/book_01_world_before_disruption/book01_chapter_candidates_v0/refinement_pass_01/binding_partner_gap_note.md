@@ -2,9 +2,9 @@
 
 Canon status: OPEN / PROPOSED
 
-## Current problem
+## Current problem (updated — fill pass 02)
 
-`binding_partner_packet.md` is **PARTIAL — pass 01**. UNIT-013 merges **public binding visibility** with **partner as person**—the spine assumes a **credible Native-world partner** before prose exists.
+`binding_partner_packet.md` is **no longer a thin placeholder** — **deepened pass 02** with story function, multi-POV meaning layers, raid break, Native-only compliance, and research flags. **Name / gender / historical composite** remain **OPEN** until human + research lock.
 
 ## Why it matters
 
@@ -21,6 +21,6 @@ III-B union engine needs **sympathy without fantasy** and **no French-system** l
 
 ## What to build next
 
-1. Elevate `binding_partner_packet.md` to **FILLED** (identity, wound, web, first image).  
-2. Human pass: partner **must** satisfy `native_only_compliance_check.md` **CONDITIONAL** row.  
+1. **Human gate:** partner + UNIT-013 satisfy `native_only_compliance_check.md` **CONDITIONAL** row.  
+2. Binding / marriage **cultural form** research to replace **PROPOSED** composite beats where needed.  
 3. Optional: split UNIT-013 back into two units **only if** page budget + packet weight demand it (would return spine toward **16**).

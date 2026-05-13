@@ -16,14 +16,14 @@ Canon status: PROPOSED
 
 ## Weakest units
 
-- **UNIT-013** (CAND-019+020) — partner packet **PARTIAL**; highest integration risk.  
+- **UNIT-013** (CAND-019+020) — integration risk **lowered** after `binding_partner_packet.md` **pass 02**; still needs **human** + union research before lock.  
 - **UNIT-004** (CAND-006 alone) — must be written as **real** daughter chapter, not interstitial.  
 - **UNIT-015** (CAND-022) — **UNKNOWN** history; highest craft/ethics risk.
 
 ## Must-fill character gaps
 
-- Binding partner → **FILLED** packet.  
-- Provider / **Campti** → packet or explicit “offstage discipline” choice.
+- Binding partner → **deepened**; name/history still **OPEN**.  
+- Provider / **Campti** → **packet created** (`native_male_leader_provider_packet.md`, **PARTIAL**); **Campti thread remains PROPOSED / intentional historical stretch pending verification** — human decides on-page vs offstage load.
 
 ## Must-fill research gaps
 
@@ -43,13 +43,27 @@ All units **PASS** or **conditional pass** — see `native_only_compliance_check
 
 Implicit in **UNIT-002, 006, 012, 015** only as needed; **never** Shreve/Shreveport/port thesis — `great_raft_landscape_check.md`.
 
+## Post-Fill Gate
+
+Before creating final `ch_###` folders, confirm:
+
+| Gate | Status | Notes |
+|---|---|---|
+| Sample 002 RevA reviewed | OPEN | TBD — `draft_lab/prose_sample_002_revA_review_gate.md` |
+| Binding partner packet filled enough | OPEN | TBD — pass 02 deepened; human + research |
+| Native male leader/provider packet filled enough | OPEN | TBD — PARTIAL packet exists; on-page load undecided |
+| Campti thread still marked PROPOSED | OPEN | TBD — **Campti thread remains PROPOSED / intentional historical stretch pending verification** |
+| 15-unit spine reviewed by human | OPEN | TBD — `proposed_12_to_16_chapter_spine.md` |
+| Native-only firewall preserved | OPEN | TBD |
+| Great Raft remains landscape-only | OPEN | TBD |
+
 ## Is Book 01 ready for final chapter folders?
 
 **Not yet.**
 
 ## Next move
 
-1. Human review this pass (`recommendation_summary.md` + spine table).  
-2. **LIGHT REVISE** Sample 002 or accept as-is per author.  
-3. Deepen **binding partner** + decide **provider/Campti** handling.  
+1. Human review **Post-Fill Gate** table + `proposed_12_to_16_chapter_spine.md` dependency overlay.  
+2. Human sign-off on **Sample 002 RevA** (`prose_sample_002_revA_review_gate.md`) or request micro-edits.  
+3. Lock **binding** research slices + **provider / Campti** on-page discipline.  
 4. Only then consider mapping units → provisional `ch_###` **plan** (still not folders until manifest gate passes).

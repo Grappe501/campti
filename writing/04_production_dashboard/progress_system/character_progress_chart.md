@@ -6,8 +6,10 @@ Canon status: PROPOSED
 |---|---|---|---:|---|---|---|---|---|
 | Opening matriarch | 01 | [████████████░░░░░░░░] 62% | 62 | FILLED pass 01 | PARTIAL | PARTIAL | fictional / open | human + research; optional LIGHT REVISE alignment |
 | Daughter / mother generation | 01 | [██████████░░░░░░░░░░] 52% | 52 | FILLED pass 01 | PARTIAL | PARTIAL | Campti thread OPEN | scene-owning beats in II; provider interface OPEN |
-| Granddaughter / young heroine | 01–02 | [███████████░░░░░░░░░] 58% | 58 | FILLED pass 01 | PARTIAL | PARTIAL | Marie Therese anchor OPEN | execute Sample 002 **LIGHT REVISE** when authorized |
-| Book 01 character map (architecture) | 01 | [████████████░░░░░░░░] 56% | 56 | EXPANDED | EXPANDED | OPEN | refinement pass alignment | `refinement_pass_01/character_coverage_check.md` |
+| Granddaughter / young heroine | 01–02 | [████████████░░░░░░░░] 60% | 60 | FILLED pass 01 | PARTIAL | PARTIAL | Marie Therese anchor OPEN | human gate **Sample 002 RevA**; V0 in `draft_lab/archive/prose_sample_002_original.md` |
+| Binding partner (Book 01) | 01 | [█████████░░░░░░░░░░░] 44% | 44 | **Deepened pass 02** | PARTIAL | PARTIAL | fictional / open | `binding_partner_packet.md` — name/gender OPEN; UNIT-013 human pass |
+| Native male leader / provider (Book 01) | 01 | [████████░░░░░░░░░░░░] 38% | 38 | **Packet pass 02** | PARTIAL | PARTIAL | **Campti PROPOSED** — stretch pending verification | `native_male_leader_provider_packet.md`; decide on-page vs offstage |
+| Book 01 character map (architecture) | 01 | [████████████░░░░░░░░] 60% | 60 | EXPANDED | EXPANDED | OPEN | refinement pass alignment | provider + binding packets linked in `relationship_web.md` |
 | Marie Therese de la Grande Terre | 02 | [██████░░░░░░░░░░░░░░] 30% | 30 | PARTIAL | PARTIAL | PARTIAL | selected / pending docs | source packet |
 | Marie Louise Marguerite Guedon | 03 | [████░░░░░░░░░░░░░░░░] 20% | 20 | PARTIAL | PARTIAL | OPEN | pending docs | Besson/Alexis research |
 | Jacques Guedon | 02 | [███░░░░░░░░░░░░░░░░░] 15% | 15 | PARTIAL | PARTIAL | OPEN | pending docs | research |

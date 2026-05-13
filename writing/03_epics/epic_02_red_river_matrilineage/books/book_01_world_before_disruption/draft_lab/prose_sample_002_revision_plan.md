@@ -70,6 +70,16 @@ Sample 002 succeeds as a **controlled child-world test**: attachment, misread bi
 
 ## Next execution step (when human authorizes prose edit)
 
-1. Micro-pass voice literalism + cousin lock.
-2. Re-run `prose_sample_002_review_gate.md`.
+1. Micro-pass voice literalism + cousin lock.  
+2. Re-run `prose_sample_002_review_gate.md`.  
 3. If gate clean → **ACCEPT AS SAMPLE (post-revise)**.
+
+---
+
+## Execution log — Fill pass 02 (operator)
+
+- **V0 preserved:** `draft_lab/archive/prose_sample_002_original.md` (snapshot of `prose_sample_002_granddaughter_first_image.md` at pass start).  
+- **RevA created:** `draft_lab/prose_sample_002_granddaughter_first_image_revA.md` — LIGHT REVISE per this plan (cousin lock, wise-child trim, child-literal ending).  
+- **Working V0:** `draft_lab/prose_sample_002_granddaughter_first_image.md` **unchanged** for baseline diff.  
+- **RevA artifacts:** `draft_lab/prose_sample_002_revA_notes.md`, `draft_lab/prose_sample_002_revA_review_gate.md`.  
+- **Human:** sign off RevA gate before treating RevA as manuscript reference.

@@ -27,3 +27,29 @@ No `ch_###` folders should be created from this yet.
 | UNIT-013 | Third III | CAND-019 + CAND-020 | Public prep visibility + partner as person | Daughter + partner (OPEN) | split | empathy without fantasy; awe/anxiety | visible prep / body at edge | partner packet + union research | PROPOSED |
 | UNIT-014 | Third III | CAND-021 | Pre-rupture ordinary brace | Opening matriarch | ensemble | dread without thriller | weather / discipline | none | PROPOSED |
 | UNIT-015 | Third III | CAND-022 | Raid / carrying away | TBD child terror center | **child-forward preferred** | survival attachment | **withhold symbol pile** | raid verification HI | PROPOSED |
+
+## Dependency overlay (15 units unchanged)
+
+Planning columns for **UNIT-001–015** — counts and unit IDs are **not** altered.
+
+| Unit | Binding partner dependency | Provider / Campti dependency | Sample 002 dependency | Native-only compliance | Great Raft (landscape-only) |
+|---|---|---|---|---|---|
+| UNIT-001 | LOW | LOW | LOW | PASS | PASS — river sense |
+| UNIT-002 | LOW | LOW | LOW (child bank seed) | PASS | PASS — bank / path |
+| UNIT-003 | LOW | LOW | LOW | PASS | LOW — texture only |
+| UNIT-004 | LOW | LOW | LOW | PASS | LOW |
+| UNIT-005 | LOW | LOW | LOW (child “hands” seed) | PASS | LOW |
+| UNIT-006 | LOW | **MED** — river labor / provider beats | LOW | PASS | PASS — water work |
+| UNIT-007 | LOW | LOW | LOW | PASS | LOW |
+| UNIT-008 | LOW | LOW | LOW | PASS | LOW |
+| UNIT-009 | LOW | **MED** — smoke / kin edge | LOW | PASS | LOW |
+| UNIT-010 | LOW | **MED** — three-gen / measure day | **MED** — cord / measuring DNA | PASS | LOW |
+| UNIT-011 | **MED** — binding misread / cohort | LOW | **HIGH** — child-world + misread | PASS | LOW |
+| UNIT-012 | LOW | LOW | **HIGH** — bank / shell / solitude | PASS | PASS — bank |
+| UNIT-013 | **HIGH** — partner as person | **MED** — path / kin interface | **MED** — prep visibility echo | CONDITIONAL — human + packet | LOW |
+| UNIT-014 | LOW | LOW | LOW | PASS | LOW |
+| UNIT-015 | **MED** — future rupture | **MED** — protector buffer loss | **MED** — attachment payoff | CONDITIONAL — ethics | PASS — river terror texture only |
+
+**Campti reminder:** any **Campti** activation in II–III remains **PROPOSED / intentional historical stretch pending verification** — see `../book01_character_packets/native_male_leader_provider_packet.md` + `provider_campti_gap_note.md`.
+
+**Sample 002:** primary DNA in **UNIT-011 / 012**; echoes in **UNIT-010 / 013**; emotional IOU into **UNIT-015**.

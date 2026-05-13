@@ -13,11 +13,11 @@ Opening matriarch ↔ **daughter / mother** ↔ granddaughter
 
 ## Extensions (OPEN / PROPOSED)
 
-- **Matriarch ↔ skilled provider** — alliance + friction; **Campti thread PROPOSED** lands here more than in child mouth.
+- **Matriarch ↔ skilled provider** — alliance + friction; **Campti thread remains PROPOSED / intentional historical stretch pending verification** — lands here more than in child mouth (`../book01_character_packets/native_male_leader_provider_packet.md`).
 - **Daughter ↔ binding partner** — watchfulness + prep politeness + **public visibility** (III-B); not romance-first.
 - **Granddaughter ↔ cohort slots** — cousin, mischief, rival, younger tether, other-household child (`child_cohort_map.md`).
 - **Daughter ↔ village women** — peer side-eye + cooperation; **mother’s political work** extends into public prep (CAND-019).
-- **Binding partner ↔ provider** — **OPEN** (kin labor split, obligation chain)—keep **Native-only**.
+- **Binding partner ↔ provider** — **OPEN** (kin labor split, obligation chain)—keep **Native-only**; see `binding_partner_packet.md` + `native_male_leader_provider_packet.md`.
 
 ## Trade / visitor edges (texture only)
 

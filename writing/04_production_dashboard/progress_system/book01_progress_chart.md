@@ -9,14 +9,14 @@ Canon status: PROPOSED
 | Three-thirds manifest | [██████████████░░░░░░] 70% | 70 | REVIEWED / IN PROGRESS | movement fill | review manifest V0 |
 | Movement packets | [███████████░░░░░░░░░] 57% | 57 | FILLED V0 | only I-A expanded | expand II/III packets |
 | Prose doctrine | [███████████████████░] 95% | 95 | READY FOR USE | none | apply to all samples |
-| Draft lab | [██████░░░░░░░░░░░░░░] 33% | 33 | IN PROGRESS | human sign-off on Sample 002 | human chooses accept vs light revise |
+| Draft lab | [████████░░░░░░░░░░░░] 42% | 42 | IN PROGRESS | human sign-off on **Sample 002 RevA** | `draft_lab/prose_sample_002_*revA*` + `archive/prose_sample_002_original.md` |
 | Historical worldbuilding | [███████████░░░░░░░░░] 55% | 55 | FILLED V0 | many research needs | prioritize trade/binding |
-| Character architecture | [███████████░░░░░░░░░] 58% | 58 | IN PROGRESS — **Fill pass 01** | names OPEN; binding partner **PARTIAL**; human: Sample 002 light revise | `../book01_character_packets/` + `../book01_character_map/` — execute **LIGHT REVISE** when authorized |
+| Character architecture | [█████████████░░░░░░░] 62% | 62 | IN PROGRESS — **Fill pass 02** | names OPEN; binding **deepened**; provider packet **PARTIAL** | `../book01_character_packets/` + `native_male_leader_provider_packet.md` |
 | Binding plot | [████████░░░░░░░░░░░░] 40% | 40 | IN PROGRESS | cultural form open | research binding/marriage |
 | Red River pressure | [████████░░░░░░░░░░░░] 40% | 40 | IN PROGRESS | trade details open | build source-backed dossier |
-| Chapter candidates V0 (no folders) | [█████████░░░░░░░░░░░] 48% | 48 | REFINEMENT PASS 01 — PROPOSED | spine not locked | `book01_chapter_candidates_v0/refinement_pass_01/` + `candidate_review_gate.md` |
+| Chapter candidates V0 (no folders) | [██████████░░░░░░░░░░] 52% | 52 | REFINEMENT PASS 01 — PROPOSED | spine not locked | `refinement_pass_01/` + spine **dependency overlay** |
 | Book 01 Native-only firewall | [████████████░░░░░░░░] 60% | 60 | PROPOSED | execution discipline in drafts | `../book01_native_only_firewall.md` |
-| Book 01 character map | [███████████░░░░░░░░░] 56% | 56 | EXPANDED — pass 01 | still PROPOSED labels | align to `refinement_pass_01/character_coverage_check.md` |
+| Book 01 character map | [████████████░░░░░░░░] 60% | 60 | EXPANDED — pass 02 | still PROPOSED labels | `relationship_web.md` + provider/binding packets |
 | Great Raft research + Book 01 landscape seed | [██████░░░░░░░░░░░░░░] 30% | 30 | OPEN / PROPOSED | corroborate GR-001–004 | `research/red_river_great_raft/` (epic folder) |
 | Symbol braid V0 | [████████░░░░░░░░░░░░] 40% | 40 | IN PROGRESS | avoid over-read | `book01_symbol_braid_v0/symbol_review_gate.md` + `chapter_symbol_plan_book01.md` |
 | Story dev dashboard lane (`/story-dev`) | [██████░░░░░░░░░░░░░░] 32% | 32 | MVP | JSON manual | `story_dev_dashboard/` + `data/story_dev_dashboard.json` |

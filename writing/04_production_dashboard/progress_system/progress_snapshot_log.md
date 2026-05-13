@@ -2,6 +2,31 @@
 
 Canon status: PROPOSED
 
+## 2026-05-12 — Sample 002 Light Revision + Binding Partner / Provider Fill Pass
+
+### Current focus
+
+`Sample 002 Light Revision + Binding Partner / Provider Fill Pass`
+
+### Delivered
+
+- **Sample 002:** `draft_lab/archive/prose_sample_002_original.md` (V0 freeze); `draft_lab/prose_sample_002_granddaughter_first_image_revA.md`; `draft_lab/prose_sample_002_revA_notes.md`; `draft_lab/prose_sample_002_revA_review_gate.md`; execution note in `prose_sample_002_revision_plan.md`. Working V0 prose file unchanged.
+- **Packets:** `binding_partner_packet.md` deepened (story function, layered meanings, raid break, Native-only, research); **new** `native_male_leader_provider_packet.md` (**PARTIAL**). **Campti thread remains PROPOSED / intentional historical stretch pending verification** (repeated in packet + gap notes + maps).
+- **Spine:** `proposed_12_to_16_chapter_spine.md` — **dependency overlay** table (15 units unchanged).
+- **Refinement:** `recommendation_summary.md` — **Post-Fill Gate** table; gap notes updated.
+- **Maps / index:** `character_packet_index.md`, `primary_character_map.md`, `relationship_web.md`, `character_usage_by_candidate.md`, `provider_campti_gap_note.md`, `binding_partner_gap_note.md`, `draft_lab/README.md`.
+- **Progress:** `prose_progress_chart.md`, `character_progress_chart.md`, `chapter_manifest_progress_chart.md`, `book01_progress_chart.md`, `blockers_and_next_moves.md`, `story_dev_dashboard.json`, `next_actions.md`, `book_status.md`, `epic_status.md`.
+
+### Not done
+
+- No `ch_###` folders. **Post-Fill Gate** rows OPEN until human review. RevA gate **PENDING HUMAN**.
+
+### Next best moves
+
+1. Human: **Post-Fill Gate** + **RevA review gate**.  
+2. Lock binding research slices + provider/Campti **on-page vs offstage** discipline.  
+3. Then revisit `ch_###` **plan** only (still not folders until manifest gate).
+
 ## 2026-05-12 — Book 01 chapter candidate refinement pass 01
 
 ### Current focus

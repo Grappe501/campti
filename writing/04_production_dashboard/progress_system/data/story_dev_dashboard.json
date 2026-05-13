@@ -1,6 +1,190 @@
 {
-  "current_focus": "Book 01 Chapter Candidate Refinement Pass 01",
+  "current_focus": "Sample 002 Light Revision + Binding Partner / Provider Fill Pass",
   "updated": "2026-05-12",
+  "build_lens": {
+    "epic_label": "Epic 02 — Red River matrilineage (working folder: epic_02_red_river_matrilineage)",
+    "book_label": "Book 01 — World before disruption (Native-only firewall; no final ch_### yet)",
+    "one_paragraph": "We are building a women-centered, Native-only Book 01 'before the raid' on the Red River: matriarchal authority, daughter-generation trade and household systems, granddaughter child-world and binding prep, then rupture. Series scaffolding (symbol map, arc braid, war engine, language doctrine) supports later books; Book 01 keeps the Great Raft as lived landscape only and holds French-system cast in reserve.",
+    "native_only_note": "Developed cast and POV stay Native — see book01_native_only_firewall.md and characters_to_hold_back.md.",
+    "great_raft_note": "River choke, mud, navigation texture — not Shreve/Shreveport port thesis in Book 01 prose."
+  },
+  "movements_thirds": [
+    {
+      "third": "Third I — Opening village (I-A–I-C)",
+      "focus": "Living world under the opening matriarch: labor sound, gates, children at the edges, continuity fear without thriller countdown.",
+      "anchor": "Samples: 001 RevB tonal model"
+    },
+    {
+      "third": "Third II — Daughter spine (II-A–II-C)",
+      "focus": "Mother-line as political work: trade-facing courage, storeroom permanence, smoke-hour rhythm, measuring / prep systems she owns.",
+      "anchor": "UNIT-006–010; provider interface beats"
+    },
+    {
+      "third": "Third III — Child + binding + raid (III-A–III-C)",
+      "focus": "Granddaughter misread, cohort pack ethics, binding visibility + partner as person, ordinary brace, then child-forward raid carrying-away.",
+      "anchor": "Sample 002 RevA; UNIT-011–015"
+    }
+  ],
+  "symbols_detailed": [
+    {
+      "name": "Cord / knot",
+      "book01_job": "Measuring, binding prep, matrilineal teaching through hands; false comfort before rupture.",
+      "density": "Peak discipline ~UNIT-010; sparse elsewhere"
+    },
+    {
+      "name": "River",
+      "book01_job": "Sense, bank play, work sound, trade edge — lived geography.",
+      "density": "Thread through I–III; no colonial exposition dump"
+    },
+    {
+      "name": "Great Raft (landscape seed)",
+      "book01_job": "Choked channel, delays, mud habit — shared household knowledge only.",
+      "density": "Implicit UNIT-002, 006, 012, 015 as needed"
+    },
+    {
+      "name": "Sassafras / filé (pre-gumbo)",
+      "book01_job": "Optional series food symbol — ethnobotany gate before strong claims.",
+      "density": "Default restrained / absent early"
+    },
+    {
+      "name": "War on household (engine)",
+      "book01_job": "Pressure model from epic_war_conflict_engine — Book 01 pays off as rupture, not battle inventory.",
+      "density": "Do not dramatize unsourced battles"
+    },
+    {
+      "name": "Color + season (restrained)",
+      "book01_job": "Literary control via color_season_symbol_system — avoid formula openings.",
+      "density": "Operator / doctrine"
+    },
+    {
+      "name": "Child pocket-object",
+      "book01_job": "Private attachment (shell, cord shadow) — anti–wise-child discipline.",
+      "density": "Sample 002 DNA → UNIT-012"
+    },
+    {
+      "name": "Smoke / hearth rhythm",
+      "book01_job": "Communal realism, fatigue, women's time (II-B–C).",
+      "density": "UNIT-009"
+    },
+    {
+      "name": "Trade object / visitor silence",
+      "book01_job": "Objects stay objects; matriarch gate holds manners at the edge.",
+      "density": "UNIT-003–005"
+    }
+  ],
+  "arcs_detailed": [
+    {
+      "name": "Matriarchal power",
+      "book01_touch": "Opening matriarch law through action; public weigh; III-B approval cost.",
+      "status": "ACTIVE — planning + Sample 001 RevB"
+    },
+    {
+      "name": "Wedding / binding false ending",
+      "book01_touch": "Binding prep as craft + politics; child misread; partner visibility (UNIT-013).",
+      "status": "ACTIVE — research OPEN on cultural form"
+    },
+    {
+      "name": "War / conflict engine → book arcs",
+      "book01_touch": "Raid as household rupture (UNIT-015); timeline rows stay sourced.",
+      "status": "SCAFFOLDED engine; HI-003 OPEN"
+    },
+    {
+      "name": "Food as memory",
+      "book01_touch": "Light / deferred until sassafras+gumbo verification.",
+      "status": "OPEN / PROPOSED"
+    },
+    {
+      "name": "Marriage volatility / partnership",
+      "book01_touch": "Binding partner + provider interfaces — sympathy without romance cliché.",
+      "status": "PARTIAL packets — human gate"
+    }
+  ],
+  "plot_tracks": [
+    {
+      "thread": "Binding / union engine (social geometry, not bridal fantasy)",
+      "spine_or_units": "UNIT-010 (measuring) → UNIT-011–012 (child misread + bank) → UNIT-013 (partner as person)",
+      "key_docs": "prose_doctrine/destined_union_engine.md · binding_partner_packet.md · refinement_pass_01/recommendation_summary.md"
+    },
+    {
+      "thread": "Daughter trade-face + household permanence",
+      "spine_or_units": "UNIT-006–009 (river work, kin correction, storeroom, smoke)",
+      "key_docs": "daughter_mother_generation_packet.md · book01_character_map/character_usage_by_candidate.md (CAND-009–013)"
+    },
+    {
+      "thread": "Provider / Native male leader interface (+ Campti PROPOSED thread)",
+      "spine_or_units": "UNIT-006 edge; UNIT-010/015 kin buffer — on-page load TBD",
+      "key_docs": "native_male_leader_provider_packet.md · provider_campti_gap_note.md (Campti = PROPOSED stretch pending verification)"
+    },
+    {
+      "thread": "Raid / carrying away (III-C)",
+      "spine_or_units": "UNIT-015 — child terror center; symbol pile withheld",
+      "key_docs": "human_inputs HI-003 · CAND-022 · book01_native_only_firewall.md"
+    },
+    {
+      "thread": "Three-generation craft braid",
+      "spine_or_units": "UNIT-005, 008, 010 (archive feel, teaching chain, measuring day)",
+      "key_docs": "movement_packets · chapter_symbol_plan_book01.md"
+    }
+  ],
+  "prose_review_queue": [
+    {
+      "title": "Prose Sample 001 RevB",
+      "role": "Provisional Book 01 tonal model — opening matriarch first image (authority + living world).",
+      "status": "ACCEPTED provisional (not final manuscript)",
+      "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/draft_lab/prose_sample_001_opening_matriarch_first_image_revB.md",
+      "gate_path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/draft_lab/prose_sample_001_revB_review_gate.md"
+    },
+    {
+      "title": "Prose Sample 001 RevA (archived)",
+      "role": "Historical snapshot on path to RevB — keep for diff.",
+      "status": "ARCHIVED",
+      "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/draft_lab/archive/prose_sample_001_revA.md",
+      "gate_path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/draft_lab/prose_sample_001_revA_review_gate.md"
+    },
+    {
+      "title": "Prose Sample 002 V0 (working baseline)",
+      "role": "Granddaughter / Third III child-world: binding misread, matriarchal hands, cousin rivalry.",
+      "status": "Baseline preserved — LIGHT REVISE superseded by RevA",
+      "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/draft_lab/prose_sample_002_granddaughter_first_image.md",
+      "gate_path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/draft_lab/prose_sample_002_review_gate.md"
+    },
+    {
+      "title": "Prose Sample 002 RevA",
+      "role": "LIGHT REVISE line: cousin boy-lock, wise-child trim, sensory ending — Third III reference candidate.",
+      "status": "PENDING HUMAN gate",
+      "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/draft_lab/prose_sample_002_granddaughter_first_image_revA.md",
+      "gate_path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/draft_lab/prose_sample_002_revA_review_gate.md"
+    }
+  ],
+  "spine_fifteen": {
+    "readme": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_chapter_candidates_v0/refinement_pass_01/proposed_12_to_16_chapter_spine.md",
+    "units": [
+      { "id": "UNIT-001", "third": "I", "one_line": "Opening matriarch + living village work" },
+      { "id": "UNIT-002", "third": "I", "one_line": "Bank / path / child curiosity + visitor edge" },
+      { "id": "UNIT-003", "third": "I", "one_line": "Dispute + visitor gate manners" },
+      { "id": "UNIT-004", "third": "I", "one_line": "Mother discipline; children's lines" },
+      { "id": "UNIT-005", "third": "I", "one_line": "Continuity fear + teaching tomorrow's hands" },
+      { "id": "UNIT-006", "third": "II", "one_line": "Daughter power charge + trade-facing test" },
+      { "id": "UNIT-007", "third": "II", "one_line": "Matriarch corrects daughter before kin" },
+      { "id": "UNIT-008", "third": "II", "one_line": "Storeroom / ledger permanence" },
+      { "id": "UNIT-009", "third": "II", "one_line": "Smoke-hour consolidation" },
+      { "id": "UNIT-010", "third": "II", "one_line": "Measuring day + three-generation carry-weight" },
+      { "id": "UNIT-011", "third": "III", "one_line": "Cohort day + binding misread" },
+      { "id": "UNIT-012", "third": "III", "one_line": "Pocket-object solitude bank" },
+      { "id": "UNIT-013", "third": "III", "one_line": "Public prep visibility + partner as person" },
+      { "id": "UNIT-014", "third": "III", "one_line": "Pre-rupture ordinary brace" },
+      { "id": "UNIT-015", "third": "III", "one_line": "Raid / carrying away (child terror lens)" }
+    ]
+  },
+  "post_fill_gate": [
+    { "gate": "Sample 002 RevA reviewed", "status": "OPEN", "notes": "prose_sample_002_revA_review_gate.md" },
+    { "gate": "Binding partner packet filled enough", "status": "OPEN", "notes": "Deepened; name/history still OPEN" },
+    { "gate": "Native male leader/provider packet filled enough", "status": "OPEN", "notes": "PARTIAL; on-page vs offstage TBD" },
+    { "gate": "Campti thread still marked PROPOSED", "status": "OPEN", "notes": "Intentional stretch pending verification" },
+    { "gate": "15-unit spine reviewed by human", "status": "OPEN", "notes": "proposed_12_to_16_chapter_spine.md" },
+    { "gate": "Native-only firewall preserved", "status": "OPEN", "notes": "Execution discipline in all drafts" },
+    { "gate": "Great Raft remains landscape-only", "status": "OPEN", "notes": "No port thesis in Book 01 voice" }
+  ],
   "alignment_sweep": {
     "id": "alignment_sweep_001",
     "status": "IN PROGRESS — pass 002 symbolism table",
@@ -8,7 +192,7 @@
   },
   "story_dev_lane": {
     "route": "/story-dev",
-    "status": "MVP",
+    "status": "V1 — high-contrast operator dashboard",
     "source_spec": "story_dev_dashboard/"
   },
   "epic_symbol_map": {
@@ -55,10 +239,10 @@
     "summary": "Symbol map + misdirection + color/season + paragraph placement; war/conflict engine timeline; literary opening doctrine; Books 05–07 women centers still OPEN."
   },
   "book01": {
-    "score": 81,
-    "bar": "[████████████████░░░░]",
+    "score": 82,
+    "bar": "[█████████████████░░░]",
     "status": "IN PROGRESS",
-    "summary": "Chapter refinement pass 01: 15 proposed units (5+5+5 thirds) from 22 candidates; binding/provider gaps flagged; Sample 002 still LIGHT REVISE; spine PROPOSED not locked."
+    "summary": "Fill pass 02: Sample 002 RevA + archive; binding partner packet deepened; native_male_leader_provider_packet PARTIAL; spine dependency overlay; Post-Fill Gate OPEN; Campti still PROPOSED."
   },
   "book01_native_only_firewall": {
     "status": "PROPOSED",
@@ -94,16 +278,19 @@
     "count": 22,
     "status": "REFINEMENT PASS 01 — PROPOSED 15 units",
     "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_chapter_candidates_v0/",
-    "refinement_pass_01": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_chapter_candidates_v0/refinement_pass_01/"
+    "refinement_pass_01": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_chapter_candidates_v0/refinement_pass_01/",
+    "recommendation_summary": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_chapter_candidates_v0/refinement_pass_01/recommendation_summary.md"
   },
   "prose": {
     "tonal_model": "Sample 001 RevB (provisional)",
     "tonal_model_path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/draft_lab/prose_sample_001_opening_matriarch_first_image_revB.md",
-    "sample_002_status": "REVIEW PASS 01 — LIGHT REVISE (prose file unchanged)",
-    "sample_002_path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/draft_lab/prose_sample_002_granddaughter_first_image.md"
+    "sample_002_status": "RevA PENDING HUMAN — V0 archived",
+    "sample_002_path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/draft_lab/prose_sample_002_granddaughter_first_image.md",
+    "sample_002_revA_path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/draft_lab/prose_sample_002_granddaughter_first_image_revA.md",
+    "sample_002_archive_path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/draft_lab/archive/prose_sample_002_original.md"
   },
   "character_packets": {
-    "status": "V0 FILL PASS 01 — primary FILLED; cohort+village EXPANDED; binding PARTIAL",
+    "status": "V0 FILL PASS 01 + pass 02: primary FILLED; binding DEEPENED; provider PACKET PARTIAL (Campti PROPOSED)",
     "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_character_packets/"
   },
   "symbol_braid": {
@@ -149,10 +336,9 @@
     "Great Raft in Book 01: landscape + navigation only — no Shreve / Shreveport / port-loss thesis in-text"
   ],
   "next_actions": [
-    "Human review: `refinement_pass_01/recommendation_summary.md` + `proposed_12_to_16_chapter_spine.md` (15 units V0)",
-    "Authorize + execute Sample 002 LIGHT REVISE (cousin lock, optional wise-child trim); re-run prose_sample_002_review_gate",
-    "Advance binding partner packet from PARTIAL to FILLED once III-B obligations + research allow",
-    "Deepen provider / Campti per `refinement_pass_01/provider_campti_gap_note.md` before treating spine as locked",
+    "Human: Post-Fill Gate in refinement_pass_01/recommendation_summary.md + prose_sample_002_revA_review_gate.md",
+    "Human review: proposed_12_to_16_chapter_spine.md dependency overlay (15 units unchanged)",
+    "Lock binding research + provider/Campti on-page vs offstage per native_male_leader_provider_packet.md",
     "Corroborate Great Raft + Red River trade; keep Book 01 on book01_landscape_seed guardrails",
     "Binding / marriage cultural form research (visible Book 01 plot)"
   ],
@@ -182,6 +368,7 @@
     { "label": "Great Raft symbol", "path": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/great_raft_symbol.md" },
     { "label": "Characters to hold back (Book 01)", "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_character_map/characters_to_hold_back.md" },
     { "label": "Character progress chart", "path": "writing/04_production_dashboard/progress_system/character_progress_chart.md" },
+    { "label": "Prose progress chart", "path": "writing/04_production_dashboard/progress_system/prose_progress_chart.md" },
     { "label": "Next actions (production dashboard)", "path": "writing/04_production_dashboard/next_actions.md" }
   ]
 }

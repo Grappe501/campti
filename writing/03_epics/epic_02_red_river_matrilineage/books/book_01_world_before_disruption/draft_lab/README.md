@@ -9,7 +9,7 @@ Isolated **prose experiments** for voice, scale, sensory density, and women-cent
 ## Rules
 
 - Each sample links to a **movement packet** and **`../prose_doctrine/`**.
-- Pass **`prose_sample_review_gate.md`** / **`prose_sample_001_revA_review_gate.md`** / **`prose_sample_001_revB_review_gate.md`** / **`prose_sample_002_review_gate.md`** (and `../book01_manifest_v0/movement_packets/prose_readiness_gate.md` where relevant) before treating text as manuscript-ready.
+- Pass **`prose_sample_review_gate.md`** / **`prose_sample_001_revA_review_gate.md`** / **`prose_sample_001_revB_review_gate.md`** / **`prose_sample_002_review_gate.md`** / **`prose_sample_002_revA_review_gate.md`** (and `../book01_manifest_v0/movement_packets/prose_readiness_gate.md` where relevant) before treating text as manuscript-ready.
 - Flag uncertain history/culture in **`prose_sample_*_notes.md`**; do not assert verified canon in prose.
 - **Snapshots (do not edit):** `archive/prose_sample_001_original.md` (first draft), `archive/prose_sample_001_revA.md` (RevA freeze). **Working files:** `prose_sample_001_opening_matriarch_first_image.md` (001 baseline, unchanged), `…_revA.md`, **`…_revB.md`** (**provisional tonal model** for Book 01). **Tonal model decision:** `prose_sample_001_tonal_model_decision.md` (**ACCEPTED AS PROVISIONAL TONAL MODEL** — not final manuscript).
 
@@ -30,10 +30,14 @@ Isolated **prose experiments** for voice, scale, sensory density, and women-cent
 | `prose_sample_001_revA_review_gate.md` | — | Gates — **RevA** |
 | `prose_sample_001_revB_review_gate.md` | — | Gates — **RevB** |
 | `prose_sample_001_tonal_model_decision.md` | — | Human decision: tonal model (**ACCEPTED AS PROVISIONAL**) |
-| `prose_sample_002_granddaughter_first_image.md` | III-A | **Sample 002** — granddaughter / child-world entry |
+| `prose_sample_002_granddaughter_first_image.md` | III-A | **Sample 002** — granddaughter / child-world entry (**V0 baseline**) |
+| `prose_sample_002_granddaughter_first_image_revA.md` | III-A | **Sample 002 RevA** — LIGHT REVISE working line |
+| `archive/prose_sample_002_original.md` | — | Snapshot: **002** V0 before RevA |
 | `prose_sample_002_notes.md` | — | Critique — **002** |
-| `prose_sample_002_review_gate.md` | — | Gates — **002** |
-| `prose_sample_002_revision_plan.md` | — | Revision options — **002** (planning only) |
+| `prose_sample_002_review_gate.md` | — | Gates — **002** (V0) |
+| `prose_sample_002_revision_plan.md` | — | Revision options — **002** + execution log |
+| `prose_sample_002_revA_notes.md` | — | RevA vs **V0** |
+| `prose_sample_002_revA_review_gate.md` | — | Gates — **002 RevA** |
 | `book01_voice_calibration.md` | — | Voice bar for Book 01 drafts |
 
 ## Upstream
