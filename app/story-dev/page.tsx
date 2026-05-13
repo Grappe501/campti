@@ -92,6 +92,12 @@ type StoryDevDashboard = {
   top_blockers: string[];
   next_actions: string[];
   links: { label: string; path: string }[];
+  chapter_folder_readiness_gate?: {
+    status: string;
+    readme: string;
+    where_to_review: string;
+    next_human_action: string;
+  };
 };
 
 function loadDashboard(): StoryDevDashboard {
@@ -154,6 +160,28 @@ export default function StoryDevPage() {
           </span>
         </div>
       </header>
+
+      {data.chapter_folder_readiness_gate ? (
+        <Section
+          title="Chapter folder readiness gate (repo)"
+          subtitle={data.chapter_folder_readiness_gate.next_human_action}
+        >
+          <p className="text-sm text-zinc-300">
+            Status: <span className="font-medium text-amber-200/95">{data.chapter_folder_readiness_gate.status}</span>
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-zinc-200">
+            Fill human tables in the repo (not only on this page). Start with the <strong className="text-white">where-to-review map</strong>, then spine + RevA + folder-name tables.
+          </p>
+          <ul className="mt-4 space-y-2 font-mono text-[11px] leading-relaxed text-amber-200/90 break-all">
+            <li>
+              <span className="text-zinc-500">README:</span> {data.chapter_folder_readiness_gate.readme}
+            </li>
+            <li>
+              <span className="text-zinc-500">Review map:</span> {data.chapter_folder_readiness_gate.where_to_review}
+            </li>
+          </ul>
+        </Section>
+      ) : null}
 
       {lens ? (
         <Section title="What we are building" subtitle="Epic + Book 01 contract (PROPOSED — not canon until promoted).">

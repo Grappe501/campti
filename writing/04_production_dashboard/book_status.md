@@ -4,7 +4,7 @@
 
 | Epic | Book | Status | Current Focus | Notes |
 |------|------|--------|----------------|-------|
-| epic_02_red_river_matrilineage | book_01_world_before_disruption | Book spine started | **Sample 002 Light Revision + Binding Partner / Provider Fill Pass** | RevA + archive; `binding_partner_packet.md` deepened; **`native_male_leader_provider_packet.md`**; spine **dependency overlay**; `recommendation_summary.md` **Post-Fill Gate**; **no `ch_###`**; no `01_canon/` |
+| epic_02_red_river_matrilineage | book_01_world_before_disruption | Book spine started | **Book 01 Chapter Folder Readiness Gate** | `chapter_folder_readiness_gate/` + `/story-dev` rollup; **no `ch_###`**; no `01_canon/` |
 
 **Spine packet:** `writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/spine_packet/`
 
@@ -51,7 +51,7 @@
 | Book path | Working title (PROPOSED ok) | Chapters (planned) | Manifest | Notes | Last dashboard update |
 |-----------|------------------------------|--------------------|-----------|-------|------------------------|
 | `03_epics/epic_01_placeholder/books/book_01_placeholder` | Placeholder | `ch_001_placeholder` (sample) | `book_chapter_manifest.md` | **TEMPLATE ONLY** | |
-| `03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption` | Book 1 — world before disruption (PROPOSED) | TBD — `spine_packet/chapter_manifest_v0.md` + **`book01_manifest_v0/movement_packets/`** | `book_chapter_manifest.md` | **`/story-dev`** + `story_dev_dashboard/` + **`epic_symbol_map/`** + **`epic_war_conflict_engine/`** + **`epic_arc_braid/`** + **`language_doctrine/`** + **`writing/08_alignment_sweeps/alignment_sweep_001/`** + **`research/sassafras_gumbo/`** + **`series_symbols/`** + **`book01_next_story_moves/`** + **`epic_build_queue/`** + **`writing/04_production_dashboard/progress_system/`**; `book01_character_packets/` + **`native_male_leader_provider_packet.md`** + `book01_chapter_candidates_v0/` + `book01_symbol_braid_v0/` (incl. `chapter_symbol_plan_book01.md` + micro maps + opening/alliteration/war-pressure planning); `draft_lab/prose_sample_002_*` + **RevA** + `archive/prose_sample_002_original.md` + `prose_sample_001_tonal_model_decision.md` (**RevB** provisional); **no `ch_###`** | 2026-05-12 |
+| `03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption` | Book 1 — world before disruption (PROPOSED) | TBD — `spine_packet/chapter_manifest_v0.md` + **`book01_manifest_v0/movement_packets/`** | `book_chapter_manifest.md` | **`/story-dev`** + **`chapter_folder_readiness_gate/`** + `story_dev_dashboard/` + **`epic_symbol_map/`** + **`epic_war_conflict_engine/`** + **`epic_arc_braid/`** + **`language_doctrine/`** + **`writing/08_alignment_sweeps/alignment_sweep_001/`** + **`research/sassafras_gumbo/`** + **`series_symbols/`** + **`book01_next_story_moves/`** + **`epic_build_queue/`** + **`writing/04_production_dashboard/progress_system/`**; `book01_character_packets/` + **`native_male_leader_provider_packet.md`** + `book01_chapter_candidates_v0/` + `book01_symbol_braid_v0/` (incl. `chapter_symbol_plan_book01.md` + micro maps + opening/alliteration/war-pressure planning); `draft_lab/prose_sample_002_*` + **RevA** + `archive/prose_sample_002_original.md` + `prose_sample_001_tonal_model_decision.md` (**RevB** provisional); **no `ch_###`** | 2026-05-14 |
 
 ## Book pipeline (coarse)
 

@@ -14,7 +14,7 @@ Canon status: PROPOSED
 | Character architecture | [█████████████░░░░░░░] 62% | 62 | IN PROGRESS — **Fill pass 02** | names OPEN; binding **deepened**; provider packet **PARTIAL** | `../book01_character_packets/` + `native_male_leader_provider_packet.md` |
 | Binding plot | [████████░░░░░░░░░░░░] 40% | 40 | IN PROGRESS | cultural form open | research binding/marriage |
 | Red River pressure | [████████░░░░░░░░░░░░] 40% | 40 | IN PROGRESS | trade details open | build source-backed dossier |
-| Chapter candidates V0 (no folders) | [██████████░░░░░░░░░░] 52% | 52 | REFINEMENT PASS 01 — PROPOSED | spine not locked | `refinement_pass_01/` + spine **dependency overlay** |
+| Chapter candidates V0 (no folders) | [███████████░░░░░░░░░] 54% | 54 | READINESS GATE — PROPOSED | human spine + RevA tables | `chapter_folder_readiness_gate/` + `refinement_pass_01/` |
 | Book 01 Native-only firewall | [████████████░░░░░░░░] 60% | 60 | PROPOSED | execution discipline in drafts | `../book01_native_only_firewall.md` |
 | Book 01 character map | [████████████░░░░░░░░] 60% | 60 | EXPANDED — pass 02 | still PROPOSED labels | `relationship_web.md` + provider/binding packets |
 | Great Raft research + Book 01 landscape seed | [██████░░░░░░░░░░░░░░] 30% | 30 | OPEN / PROPOSED | corroborate GR-001–004 | `research/red_river_great_raft/` (epic folder) |
@@ -25,4 +25,4 @@ Canon status: PROPOSED
 | Epic symbol map + arc braid + language doctrine | [████░░░░░░░░░░░░░░░░] 22% | 22 | SCAFFOLDED | operator upkeep | `epic_symbol_map/`, `epic_arc_braid/`, `language_doctrine/` |
 | Book 01 symbol micro maps (color/silence/nature/eggs/chapter plan) | [███░░░░░░░░░░░░░░░░░] 20% | 20 | SCAFFOLDED | align to **15-unit** spine when locked | `book01_symbol_braid_v0/chapter_symbol_plan_book01.md` + `refinement_pass_01/symbol_coverage_check.md` |
 | Literary control on candidates (season/color/opening) | [██░░░░░░░░░░░░░░░░░░] 12% | 12 | SCAFFOLDED | human schema | `language_doctrine/chapter_opening_paragraph_doctrine.md` + candidates README |
-| Chapter folders | [░░░░░░░░░░░░░░░░░░░░] 0% | 0 | NOT STARTED | manifest not locked | **do not create `ch_###` yet** |
+| Chapter folders | [░░░░░░░░░░░░░░░░░░░░] 0% | 0 | NOT STARTED | `chapter_folder_readiness_gate/do_not_create_yet_notice.md` | **do not create `ch_###` yet** |

@@ -49,13 +49,13 @@ Before creating final `ch_###` folders, confirm:
 
 | Gate | Status | Notes |
 |---|---|---|
-| Sample 002 RevA reviewed | OPEN | TBD — `draft_lab/prose_sample_002_revA_review_gate.md` |
-| Binding partner packet filled enough | OPEN | TBD — pass 02 deepened; human + research |
-| Native male leader/provider packet filled enough | OPEN | TBD — PARTIAL packet exists; on-page load undecided |
-| Campti thread still marked PROPOSED | OPEN | TBD — **Campti thread remains PROPOSED / intentional historical stretch pending verification** |
-| 15-unit spine reviewed by human | OPEN | TBD — `proposed_12_to_16_chapter_spine.md` |
-| Native-only firewall preserved | OPEN | TBD |
-| Great Raft remains landscape-only | OPEN | TBD |
+| Sample 002 RevA reviewed | OPEN | TBD — `draft_lab/prose_sample_002_revA_review_gate.md` + `chapter_folder_readiness_gate/revA_sample002_review.md` |
+| Binding partner packet filled enough | PARTIAL | TBD — pass 02 deepened; human + research; may allow OPEN if flagged |
+| Native male leader/provider packet filled enough | PARTIAL | TBD — PARTIAL packet; on-page load undecided |
+| Campti thread still marked PROPOSED | PASS | Keep marked PROPOSED until verification |
+| 15-unit spine reviewed by human | OPEN | TBD — `chapter_folder_readiness_gate/fifteen_unit_spine_review.md` |
+| Native-only firewall preserved | PASS | Keep active |
+| Great Raft remains landscape-only | PASS | Keep active |
 
 ## Is Book 01 ready for final chapter folders?
 

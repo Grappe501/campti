@@ -10,6 +10,6 @@ Canon status: PROPOSED
 | II-A Daughter receives power | [██████░░░░░░░░░░░░░░] 32% | 32 | SCAFFOLDED + **refinement** | NO | UNIT-006–007 |
 | II-B Daughter builds permanence | [██████░░░░░░░░░░░░░░] 32% | 32 | SCAFFOLDED + **refinement** | NO | UNIT-008–009 |
 | II-C Daughter prepares granddaughter | [████████░░░░░░░░░░░░] 36% | 36 | SCAFFOLDED + **refinement** | PARTIAL | UNIT-010 |
-| III-A Granddaughter child-world | [██████████░░░░░░░░░░] 50% | 50 | PROSE SAMPLE RevA + refinement | PARTIAL | UNIT-011–012; **RevA** pending human |
-| III-B Binding momentum | [████████░░░░░░░░░░░░] 38% | 38 | SCAFFOLDED + **refinement** | PARTIAL | UNIT-013 merge; partner packet **deepened** |
-| III-C Raid / carrying away | [██████░░░░░░░░░░░░░░] 32% | 32 | SCAFFOLDED + **refinement** | NO | UNIT-015 firewall |
+| III-A Granddaughter child-world | [██████████░░░░░░░░░░] 50% | 50 | PROSE SAMPLE RevA + refinement | PARTIAL | UNIT-011–012; **RevA** + `chapter_folder_readiness_gate/revA_sample002_review.md` |
+| III-B Binding momentum | [████████░░░░░░░░░░░░] 38% | 38 | SCAFFOLDED + **refinement** | PARTIAL | UNIT-013 merge; partner packet + **readiness gate** |
+| III-C Raid / carrying away | [██████░░░░░░░░░░░░░░] 32% | 32 | SCAFFOLDED + **refinement** | NO | UNIT-015 firewall + **readiness gate** |

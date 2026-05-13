@@ -1,6 +1,12 @@
 {
-  "current_focus": "Sample 002 Light Revision + Binding Partner / Provider Fill Pass",
-  "updated": "2026-05-12",
+  "current_focus": "Book 01 Chapter Folder Readiness Gate",
+  "updated": "2026-05-14",
+  "chapter_folder_readiness_gate": {
+    "status": "OPEN — pending human",
+    "readme": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/chapter_folder_readiness_gate/README.md",
+    "where_to_review": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/chapter_folder_readiness_gate/where_to_review_prose_and_gates.md",
+    "next_human_action": "Human review of chapter_folder_readiness_gate/, especially fifteen_unit_spine_review.md, revA_sample002_review.md, and recommended_chapter_folder_names.md."
+  },
   "build_lens": {
     "epic_label": "Epic 02 — Red River matrilineage (working folder: epic_02_red_river_matrilineage)",
     "book_label": "Book 01 — World before disruption (Native-only firewall; no final ch_### yet)",
@@ -177,13 +183,13 @@
     ]
   },
   "post_fill_gate": [
-    { "gate": "Sample 002 RevA reviewed", "status": "OPEN", "notes": "prose_sample_002_revA_review_gate.md" },
-    { "gate": "Binding partner packet filled enough", "status": "OPEN", "notes": "Deepened; name/history still OPEN" },
-    { "gate": "Native male leader/provider packet filled enough", "status": "OPEN", "notes": "PARTIAL; on-page vs offstage TBD" },
-    { "gate": "Campti thread still marked PROPOSED", "status": "OPEN", "notes": "Intentional stretch pending verification" },
-    { "gate": "15-unit spine reviewed by human", "status": "OPEN", "notes": "proposed_12_to_16_chapter_spine.md" },
-    { "gate": "Native-only firewall preserved", "status": "OPEN", "notes": "Execution discipline in all drafts" },
-    { "gate": "Great Raft remains landscape-only", "status": "OPEN", "notes": "No port thesis in Book 01 voice" }
+    { "gate": "Sample 002 RevA reviewed", "status": "OPEN", "notes": "chapter_folder_readiness_gate/revA_sample002_review.md" },
+    { "gate": "Binding partner packet filled enough", "status": "PARTIAL", "notes": "Pass 02 deepened; name/history OPEN — human may allow OPEN while minting folders if flagged" },
+    { "gate": "Native male leader/provider packet filled enough", "status": "PARTIAL", "notes": "Packet exists; on-page vs offstage TBD" },
+    { "gate": "Campti thread still marked PROPOSED", "status": "PASS", "notes": "Keep PROPOSED until verification" },
+    { "gate": "15-unit spine reviewed by human", "status": "OPEN", "notes": "chapter_folder_readiness_gate/fifteen_unit_spine_review.md" },
+    { "gate": "Native-only firewall preserved", "status": "PASS", "notes": "Keep active — execution discipline" },
+    { "gate": "Great Raft remains landscape-only", "status": "PASS", "notes": "Keep active — no port thesis in Book 01 voice" }
   ],
   "alignment_sweep": {
     "id": "alignment_sweep_001",
@@ -239,10 +245,10 @@
     "summary": "Symbol map + misdirection + color/season + paragraph placement; war/conflict engine timeline; literary opening doctrine; Books 05–07 women centers still OPEN."
   },
   "book01": {
-    "score": 82,
+    "score": 83,
     "bar": "[█████████████████░░░]",
     "status": "IN PROGRESS",
-    "summary": "Fill pass 02: Sample 002 RevA + archive; binding partner packet deepened; native_male_leader_provider_packet PARTIAL; spine dependency overlay; Post-Fill Gate OPEN; Campti still PROPOSED."
+    "summary": "Chapter folder readiness packet: chapter_folder_readiness_gate/ for Ernie + human; 15-unit review table + RevA review + proposed ch slugs; no ch_### until explicit approval; binding/provider still PARTIAL."
   },
   "book01_native_only_firewall": {
     "status": "PROPOSED",
@@ -336,7 +342,8 @@
     "Great Raft in Book 01: landscape + navigation only — no Shreve / Shreveport / port-loss thesis in-text"
   ],
   "next_actions": [
-    "Human: Post-Fill Gate in refinement_pass_01/recommendation_summary.md + prose_sample_002_revA_review_gate.md",
+    "Human review of chapter_folder_readiness_gate/, especially fifteen_unit_spine_review.md, revA_sample002_review.md, and recommended_chapter_folder_names.md.",
+    "Human: Post-Fill rows in chapter_folder_readiness_gate/post_fill_gate_status.md + draft_lab/prose_sample_002_revA_review_gate.md",
     "Human review: proposed_12_to_16_chapter_spine.md dependency overlay (15 units unchanged)",
     "Lock binding research + provider/Campti on-page vs offstage per native_male_leader_provider_packet.md",
     "Corroborate Great Raft + Red River trade; keep Book 01 on book01_landscape_seed guardrails",
@@ -369,6 +376,10 @@
     { "label": "Characters to hold back (Book 01)", "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_character_map/characters_to_hold_back.md" },
     { "label": "Character progress chart", "path": "writing/04_production_dashboard/progress_system/character_progress_chart.md" },
     { "label": "Prose progress chart", "path": "writing/04_production_dashboard/progress_system/prose_progress_chart.md" },
-    { "label": "Next actions (production dashboard)", "path": "writing/04_production_dashboard/next_actions.md" }
+    { "label": "Next actions (production dashboard)", "path": "writing/04_production_dashboard/next_actions.md" },
+    { "label": "Book 01 chapter folder readiness gate (README)", "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/chapter_folder_readiness_gate/README.md" },
+    { "label": "Where to review prose + gates", "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/chapter_folder_readiness_gate/where_to_review_prose_and_gates.md" },
+    { "label": "Fifteen-unit spine review (human table)", "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/chapter_folder_readiness_gate/fifteen_unit_spine_review.md" },
+    { "label": "Do not create ch folders yet", "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/chapter_folder_readiness_gate/do_not_create_yet_notice.md" }
   ]
 }

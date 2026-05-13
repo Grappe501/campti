@@ -2,6 +2,28 @@
 
 Canon status: PROPOSED
 
+## 2026-05-14 — Book 01 Chapter Folder Readiness Gate
+
+### Current focus
+
+`Book 01 Chapter Folder Readiness Gate`
+
+### Delivered
+
+- `books/book_01_world_before_disruption/chapter_folder_readiness_gate/` — README, readiness summary, fifteen-unit spine review table, RevA review worksheet, post-fill gate status, remaining open decisions, folder creation plan (non-executing), recommended `ch_###` slugs, do-not-create notice, **`where_to_review_prose_and_gates.md`** (local **`/story-dev`** + Netlify same path + repo tables).
+- Dashboards: `next_actions.md`, `book_status.md`, `epic_status.md`, `book01_progress_chart.md`, `chapter_manifest_progress_chart.md`, `blockers_and_next_moves.md`, `story_dev_dashboard.json` (+ `recommendation_summary.md` Post-Fill alignment).
+- `/story-dev` page: new **Chapter folder readiness gate** section when JSON block present.
+
+### Not done
+
+- No `ch_###` folders. Human fills **APPROVE / REVISE / HOLD** and Post-Fill **Human Decision** columns.
+
+### Next best moves
+
+1. Human: `chapter_folder_readiness_gate/fifteen_unit_spine_review.md`, `revA_sample002_review.md`, `recommended_chapter_folder_names.md`.  
+2. Close Post-Fill rows in `post_fill_gate_status.md` when satisfied.  
+3. Only then authorize folder mint per `chapter_folder_creation_plan.md`.
+
 ## 2026-05-12 — Sample 002 Light Revision + Binding Partner / Provider Fill Pass
 
 ### Current focus
