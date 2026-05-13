@@ -2,6 +2,8 @@
 
 Canon status: PROPOSED
 
+Planning boundaries: **Native-only** + **Great Raft landscape seed** + **symbol sparsity** — see `chapter_candidate_index.md`.
+
 | Third | Movements | Candidate IDs | Count |
 |---|---|---|---|
 | Third I | I-A, I-B, I-C | CAND-001 – CAND-008 | 8 |

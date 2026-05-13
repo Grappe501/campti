@@ -17,6 +17,8 @@ Canon status: PROPOSED
 | Grappe gumbo “Crash” convergence model | 01–09 | [██░░░░░░░░░░░░░░░░░░] 12% | 12 | late-series collision staging | Book 09 emphasis | `series_symbols/grappe_gumbo_crash_convergence_model.md` | independent angles first |
 | Gumbo ingredient constellation | 01–09 | [███░░░░░░░░░░░░░░░░░] 16% | 16 | each ingredient earns solo meaning; pot compounds | kitchens | `series_symbols/gumbo_ingredient_constellation_symbols.md` | era + research gates |
 | Epic symbol map (operator) | 01–09 | [████░░░░░░░░░░░░░░░░] 22% | 22 | cross-book recurrence + depth rules | author / continuity | `epic_symbol_map/master_symbol_index.md` | fill rows as manuscript grows |
+| Sparse symbol doctrine + recurrence tracker | 01–09 | [██████░░░░░░░░░░░░░░] 32% | 32 | placement > frequency; seed/echo/dormancy | author / continuity | `epic_symbol_map/symbol_depth_rules.md` + `sparse_symbol_recurrence_tracker.md` | do not treat table as quota |
+| Great Raft / logjam (symbol + research) | 01–09 | [████░░░░░░░░░░░░░░░░] 22% | 22 | obstruction → later civic fate | river life; later family economics | `epic_symbol_map/great_raft_symbol.md` + `research/red_river_great_raft/` | Book 01: `book01_landscape_seed.md` only |
 | Epic arc braid (operator) | 01–09 | [████░░░░░░░░░░░░░░░░] 22% | 22 | long arcs + transfers | author / continuity | `epic_arc_braid/master_arc_index.md` | tie arcs to packets |
 | Language doctrine (operator) | 01–09 | [█████░░░░░░░░░░░░░░░] 28% | 28 | restraint + pace + trust | voice | `language_doctrine/README.md` | apply to samples + candidates |
 | Chapter opening paragraph doctrine | 01–09 | [████░░░░░░░░░░░░░░░░] 20% | 20 | first paragraph hides whole chapter | voice | `language_doctrine/chapter_opening_paragraph_doctrine.md` | track per candidate/chapter |
@@ -26,4 +28,5 @@ Canon status: PROPOSED
 | Paragraph symbol placement | 01–09 | [███░░░░░░░░░░░░░░░░░] 16% | 16 | where density may cluster | craft | `epic_symbol_map/paragraph_symbol_placement_rules.md` | avoid stacking |
 | War as symbol (map + engine) | 01–09 | [████░░░░░░░░░░░░░░░░] 22% | 22 | household cost of history | family | `epic_war_conflict_engine/` + `epic_symbol_map/war_as_symbol_map.md` | verify timeline |
 | Series seeds (fig, bees, farm scale, hunting) | 01–09 | [██░░░░░░░░░░░░░░░░░░] 12% | 12 | inheritance / labor identity | line | `epic_symbol_map/fig_tree_symbol.md` + siblings | Book 01 default off |
+| Book 01 chapter spine symbol pass (15 units V0) | 01 | [███░░░░░░░░░░░░░░░░░] 18% | 18 | sparse placement per unit | planning | `writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_chapter_candidates_v0/refinement_pass_01/symbol_coverage_check.md` | human review before prose |
 | Missing arm / bodily survival | 08 | [██░░░░░░░░░░░░░░░░░░] 10% | 10 | survival / public persona | Buford | Book 08 | verify history |

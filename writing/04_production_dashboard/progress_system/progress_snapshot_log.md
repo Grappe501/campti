@@ -2,6 +2,70 @@
 
 Canon status: PROPOSED
 
+## 2026-05-12 — Book 01 chapter candidate refinement pass 01
+
+### Current focus
+
+`Book 01 Chapter Candidate Refinement Pass 01`
+
+### Delivered
+
+- `book01_chapter_candidates_v0/refinement_pass_01/` — strength matrix (22), merge map, cut/hold map, **15-unit** proposed spine, thirds balance, character/symbol/native-only/Great Raft checks, gap notes (binding, provider/Campti), Sample 002 dependency, recommendation summary.
+- Progress: `chapter_manifest_progress_chart.md`, `book01_progress_chart.md`, `character_progress_chart.md` (+ CSV), `symbolism_progress_chart.md`, `blockers_and_next_moves.md`, `story_dev_dashboard.json`, `next_actions.md`, `book_status.md`, `epic_status.md`.
+
+### Not done
+
+- No `ch_###` folders. Spine **PROPOSED** — human review. Sample 002 prose still unedited.
+
+### Next best moves
+
+1. Human sign-off on 15-unit merge plan (or adjust HOLD rows).  
+2. FILLED binding partner packet before locking UNIT-013.  
+3. Execute Sample 002 light revise or accept.
+
+## 2026-05-12 — Book 01 Character Development Fill Pass 01
+
+### Current focus
+
+`Book 01 Character Development Fill Pass 01`
+
+### Delivered
+
+- **Packets:** `opening_matriarch_packet.md`, `daughter_mother_generation_packet.md`, `granddaughter_young_heroine_packet.md` expanded with full attachment engine sections + **Native-only / Great Raft / symbol sparsity** subsections. `child_cohort_packet.md` (five OPEN slots), `village_ensemble_packet.md` expanded; `binding_partner_packet.md` brought to **PARTIAL** (Native-world union pressure, not French romance vehicle).
+- **Character map:** `primary_character_map.md`, `matriarchal_generation_map.md`, `child_cohort_map.md`, `household_map.md`, `relationship_web.md`, `reader_attachment_strategy.md`, `character_usage_by_candidate.md` (II-heavy rows), `character_development_gate.md` (middle-gen + sparsity gates).
+- **Sample 002:** `prose_sample_002_notes.md`, `prose_sample_002_review_gate.md`, `prose_sample_002_revision_plan.md` — disposition **LIGHT REVISE**; **no prose edits** to sample file.
+- **Progress:** `character_progress_chart.md`, `character_progress.csv`, `book01_progress_chart.md`, `prose_progress_chart.md`, `blockers_and_next_moves.md`, `story_dev_dashboard.json`, dashboards (`next_actions`, `book_status`, `epic_status`).
+
+### Gaps remaining
+
+- Binding partner still **PARTIAL**; provider + Campti thread still **OPEN**; names/research; execute Sample 002 micro-revise when authorized.
+
+### Next best moves
+
+1. Human authorizes Sample 002 light revise execution (or overrides disposition).
+2. Fill binding partner to FILLED once III-B + binding research firm.
+3. Begin chapter-candidate spine merge (12–16) using updated character gates.
+
+## 2026-05-12 — Book 01 Native-only + character map + Great Raft seed phase
+
+### Current focus
+
+`Book 01 Character Map + Native-Only Firewall + Great Raft Landscape Seed`
+
+### Delivered (planning)
+
+- `book01_native_only_firewall.md` + links from manifest / character packets / draft lab / symbol braid / chapter candidates (index, README, review gate, I-A … III-C movements).
+- `book01_character_map/` (overview, primary map, generations, cohort, household, relationships, attachment, usage-by-third, usage-by-candidate CAND-001–022, hold-backs, development gate).
+- Epic: `sparse_symbol_recurrence_tracker.md`, `great_raft_symbol.md`, sparse doctrine in `symbol_depth_rules.md`, Great Raft row in `master_symbol_index.md`, Book 01 braid README + `symbol_braid_index.md` + per-candidate `chapter_symbol_plan_book01.md`.
+- Research bundle `research/red_river_great_raft/` (README, source inventory GR-001–004, history, landscape, navigation, Campti port ambition, Shreve/Shreveport shift, Grappe consequence hypothesis, Book 01 landscape seed, questions).
+- Dashboard JSON + progress charts + `next_10_story_build_moves.md` aligned to new focus.
+
+### Next best moves
+
+1. Human decision on Sample 002.
+2. Fill three core character packets using the character map.
+3. Source corroboration for Great Raft + trade (GR-004, Campti ambition).
+
 ## 2026-05-12 — Initial Progress System + KPI Dashboard Created
 
 ### Current Focus

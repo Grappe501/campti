@@ -2,6 +2,22 @@
 
 Canon status: PROPOSED
 
+## Book 01 boundary
+
+Book 01 is **Native-centered** and **Native-only** in developed character perspective.
+
+No developed French / non-Native characters appear.
+
+The Great Raft / river obstruction may be seeded only as **landscape and navigation reality**, not future port exposition.
+
+**Firewall:** `../book01_native_only_firewall.md`. **Sparse doctrine:** `../../../epic_symbol_map/symbol_depth_rules.md`. **Great Raft seed:** `../../../research/red_river_great_raft/book01_landscape_seed.md`.
+
+**Planning metadata (add to passes):**
+
+- Native-only compliance:
+- Great Raft / river geography seed:
+- Symbol sparsity check:
+
 ## Purpose
 
 Hold **18–24** non-final **chapter candidates** mapped to **movement packets** — **not** `ch_###` folders, **not** final numbering.
@@ -10,6 +26,7 @@ Hold **18–24** non-final **chapter candidates** mapped to **movement packets**
 
 | File | Contents |
 |------|----------|
+| `refinement_pass_01/` | **Pass 01** — 15-unit spine proposal, merge matrix, compliance checks (`README.md`) |
 | `chapter_candidate_index.md` | Master table (all candidates) |
 | `thirds_to_candidate_map.md` | Third I / II / III → candidate ID ranges |
 | `I-A_candidate_movements.md` … `III-C_candidate_movements.md` | Per-movement candidate lists |

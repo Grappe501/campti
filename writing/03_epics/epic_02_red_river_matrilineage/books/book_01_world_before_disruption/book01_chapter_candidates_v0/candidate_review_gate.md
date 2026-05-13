@@ -2,6 +2,10 @@
 
 Canon status: PROPOSED
 
+## Book 01 boundary
+
+Native-centered / **Native-only** for developed characters — `../book01_native_only_firewall.md`. Great Raft / logjam: **landscape + navigation seed only** — `../../../research/red_river_great_raft/book01_landscape_seed.md` (no Shreve / Shreveport / port-loss exposition in Book 01). Symbol **sparsity** — `../../../epic_symbol_map/sparse_symbol_recurrence_tracker.md`.
+
 ## Before Creating Real Chapter Folders
 
 | Gate | Status | Notes |
@@ -16,3 +20,6 @@ Canon status: PROPOSED
 | Raid breakage / survival distinction preserved | OPEN | TBD — HI-006 alignment when drafting |
 | Research blockers are marked | PARTIAL | TBD — see `progress_system/research_progress_chart.md` |
 | Candidate count is manageable | PASS | TBD — 22 candidates within 18–24 target |
+| Native-only firewall satisfied (no developed non-Native cast) | PARTIAL | verify every candidate + movement + samples — `../book01_native_only_firewall.md` |
+| Great Raft stays landscape-only in Book 01 | PARTIAL | no named future port machinery — `../../../research/red_river_great_raft/book01_landscape_seed.md` |
+| Symbol sparsity discipline | PARTIAL | `../../../epic_symbol_map/symbol_depth_rules.md` + `chapter_symbol_plan_book01.md` |

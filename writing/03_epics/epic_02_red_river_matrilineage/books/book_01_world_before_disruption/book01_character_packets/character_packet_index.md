@@ -4,20 +4,20 @@ Canon status: PROPOSED
 
 | Packet | Primary story job | Center POV candidate | Links to movements | Notes |
 |---|---|---|---|---|
-| `opening_matriarch_packet.md` | authority + world entry | matriarch / external close | I-A, I-B, I-C | aligns to RevB |
-| `daughter_mother_generation_packet.md` | bridge generation | mother / daughter | II-A–II-C, I-A | prevent middle collapse |
-| `granddaughter_young_heroine_packet.md` | child attachment | granddaughter | III-A–III-B | Sample 002 |
-| `child_cohort_packet.md` | pack realism | ensemble | III-A | rivals + cousins |
-| `binding_partner_packet.md` | union pressure | partner (OPEN) | III-B | **NO** readiness |
-| `village_ensemble_packet.md` | distributed power | ensemble | I-B, I-A | systems |
+| `opening_matriarch_packet.md` | authority + world entry | matriarch / external close | I-A, I-B, I-C | **Fill pass 01** |
+| `daughter_mother_generation_packet.md` | **center bridge** + household permanence | mother / daughter | II-A–II-C, I-A | **Fill pass 01** — middle-gen strengthened |
+| `granddaughter_young_heroine_packet.md` | child attachment | granddaughter | III-A–III-B | **Fill pass 01** — Sample 002 alignment |
+| `child_cohort_packet.md` | pack realism | ensemble | III-A | **Expanded pass 01** — five OPEN slots |
+| `binding_partner_packet.md` | union pressure | partner (OPEN) | III-B | **PARTIAL pass 01** — Native-only locked |
+| `village_ensemble_packet.md` | distributed power | ensemble | I-B, I-A | **Expanded pass 01** |
 
 ## Status rollup
 
 | Packet | Draft readiness |
 |---|---|
-| Opening matriarch | PARTIAL |
-| Daughter / mother generation | PARTIAL |
-| Granddaughter / young heroine | PARTIAL |
-| Child cohort | PARTIAL |
-| Binding partner | NO |
-| Village ensemble | PARTIAL |
+| Opening matriarch | **FILLED — pass 01** (PROPOSED) |
+| Daughter / mother generation | **FILLED — pass 01** (PROPOSED) |
+| Granddaughter / young heroine | **FILLED — pass 01** (PROPOSED) |
+| Child cohort | **EXPANDED — pass 01** |
+| Binding partner | **PARTIAL — pass 01** |
+| Village ensemble | **EXPANDED — pass 01** |

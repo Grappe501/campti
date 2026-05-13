@@ -11,7 +11,8 @@ Canon status: PROPOSED
 | Medium | Book 05–07 women centers TBD | series | MEDIUM | yes | `epic_build_queue/books_05_to_07_gap_map.md` |
 | Medium | Besson/Alexis research thin | Books 03–04 | MEDIUM | yes | research packets |
 | Medium | Sassafras / gumbo specificity unverified | Book 01 + series symbol | MEDIUM | yes, as PROPOSED only | `research/sassafras_gumbo/` before scenes |
-| Medium | Chapter candidates need human merge decisions | Book 01 structure | MEDIUM | yes | review `book01_chapter_candidates_v0/` gate |
+| Medium | Great Raft / port history could leak into Book 01 exposition | Book 01 voice + symbol | MEDIUM | yes | enforce `research/red_river_great_raft/book01_landscape_seed.md` |
+| Medium | Binding partner packet still PARTIAL | III-B union engine | MEDIUM | yes | `binding_partner_gap_note.md` in `book01_chapter_candidates_v0/refinement_pass_01/` |
+| Medium | Chapter candidate spine needs human sign-off | Book 01 structure | MEDIUM | yes | review `refinement_pass_01/recommendation_summary.md` + `candidate_review_gate.md` |
 | Low | Alliteration / death-signal craft must not leak into exposition | epic craft | LOW | yes | track only in `alliteration_death_foreshadowing_map.md` |
 | Low | Symbol maps + arc braids need steady upkeep (operator-only) | epic + Book 01 | LOW | yes | `epic_symbol_map/`, `epic_arc_braid/`, `language_doctrine/`, `chapter_symbol_plan_book01.md` |
-| Low | Binding partner packet unfilled | Book 01 union engine | LOW | yes | keep OPEN until research |

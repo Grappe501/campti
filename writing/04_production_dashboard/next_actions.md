@@ -15,7 +15,7 @@ Define the first active epic and first active book well enough to build a chapte
 **Numbering note:**  
 This may later be renamed to `epic_01_red_river_matrilineage` once template numbering is standardized. See `writing/04_production_dashboard/numbering_decision.md` (OPEN).
 
-**Current focus:** **Epic Symbol Map Expansion + War/Conflict Engine + Literary Control System** (`epic_symbol_map/` expansions + `epic_war_conflict_engine/` + `language_doctrine/chapter_opening_paragraph_doctrine.md` + Book 01 candidate/manifest hooks; **no `ch_###`**; **no `01_canon/`**)
+**Current focus:** **Book 01 Chapter Candidate Refinement Pass 01** (`book01_chapter_candidates_v0/refinement_pass_01/` — **15** proposed units V0 from **22** candidates; **no `ch_###`**; **no `01_canon/`**; Native-only firewall active)
 
 **Epic build queue:** `writing/03_epics/epic_02_red_river_matrilineage/epic_build_queue/`
 

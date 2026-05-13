@@ -2,9 +2,26 @@
 
 Canon status: PROPOSED
 
+## Fill pass 01 (character development) — 2026-05-12
+
+Operator read against `../book01_character_packets/granddaughter_young_heroine_packet.md`, `daughter_mother_generation_packet.md`, `opening_matriarch_packet.md`, `child_cohort_packet.md`, and `../book01_native_only_firewall.md`. **No prose edits** this pass—notes only.
+
+### Alignment check
+
+- **Granddaughter** matches packet: pride, wrong binding read, tactile world, cousin pack, grandmother weigh, mother wrist + coil marker.
+- **Mother line** reads as **strong bridge** in this sample (wrist catch, thumb instruction, coil flag)—good evidence Pass 01 can build **attachment** on her.
+- **Native-only:** visitors = sugar/cloth/joke texture—**no** developed non-Native cast. **PASS** for sample scope.
+- **Great Raft:** not explicit; river is **sound, bank, mud, shell**—acceptable **landscape seed** density for this slice.
+
+### Disposition (see review gate + revision plan)
+
+**LIGHT REVISE** — keep sample as **voice + attachment proof**; queue **small** literalism pass (cousin gender lock, optional trim of meta “straight lines” paragraph), not rebuild.
+
+---
+
 ## What worked
 
-- **Child POV** stays embodied: unfairness, pride, half-knowledge, and tactile attention (cord, shell, hands).
+- **Child POV** stays embodied: unfairness, pride, half-knowledge, tactile attention (cord, shell, hands).
 - **Matriarchal inheritance without speechifying**: grandmother uses pause, tap, two-finger correction; mother uses wrist catch and softening eyes.
 - **Binding future** arrives as **prep rhythm + adult silence**, not a wedding brochure.
 - **Cohort reality** via cousin rivalry and “underfoot” social risk.
@@ -12,23 +29,23 @@ Canon status: PROPOSED
 
 ## What felt too thin
 
-- **Village ensemble** beyond the immediate line (only glimpses).
-- **Binding partner / male-interface politics** intentionally absent — fine for this sample, but it limits “full world” claims.
+- **Village ensemble** beyond the immediate line (only glimpses)—expected for length; chapter scale still needs `village_ensemble_packet.md` faces.
+- **Binding partner** absent—appropriate for this sample; III-B still needs partner packet execution later.
 
 ## What felt too modern
 
-- A few abstractions (“something sweet burned down to seriousness”) — still poetic-epic, but watch density in a longer chapter.
-- “Thinking in straight lines” is a **meta** child insight — borderline; may be slightly wise; optional trim on revise.
+- A few abstractions (“something sweet burned down to seriousness”) — watch density in a longer chapter.
+- “Thinking in straight lines” — **meta** child insight; **borderline wise-child**; trim candidate on light revise.
 
 ## What felt culturally risky
 
-- Any future **proper-noun ceremony** insertion would be risky — current draft stays generic on binding mechanics (good).
-- **Fish on a line** simile near river: monitor for accidental violence read; currently non-lethal.
+- Future **proper-noun ceremony** insertion would be risky — draft stays generic on binding mechanics (**good**).
+- **Fish on a line** simile: monitor for accidental violence read; currently non-lethal.
 
 ## What needs research
 
 - Binding-year **material culture** and age band norms (notes only; avoid hard claims in prose until sourced).
-- Kin terms and **cousin gender mix** consistency with wider cohort map.
+- Kin terms and **cousin gender mix** consistency with cohort map + **LIGHT REVISE** lock.
 
 ## What should be kept
 
@@ -36,12 +53,12 @@ Canon status: PROPOSED
 - Grandmother’s **“Again, before you brag”** — humor + authority.
 - **Shell in pocket** + cord shadow — echo-ready child object.
 
-## What should be cut
+## What should be cut (on revise, not mandatory now)
 
-- Nothing mandatory yet; optional micro-cut on the “straight lines” paragraph if human wants less “wise child.”
+- Optional micro-cut: “straight lines” paragraph if human wants stricter child literalism.
 
 ## Questions for human review
 
-1. Is the cousin’s voice the right **gender/age** for the cohort you want long-term?
-2. Do you want **more ensemble**, or keep Sample 002 as a tight triad + cousin?
-3. Should Sample 002 explicitly seed **trade names/objects**, or stay deliberately generic until dossier work lands?
+1. Confirm **LIGHT REVISE** vs override to **ACCEPT AS SAMPLE** or **REBUILD**.
+2. Lock **cousin gender/name** vs keep OPEN through early drafting.
+3. More **ensemble** in next sample vs keep triad+cousin tightness?

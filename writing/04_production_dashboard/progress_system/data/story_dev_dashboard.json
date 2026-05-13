@@ -1,6 +1,6 @@
 {
-  "current_focus": "Epic Symbol Map Expansion + War/Conflict Engine + Literary Control System",
-  "updated": "2026-05-14",
+  "current_focus": "Book 01 Chapter Candidate Refinement Pass 01",
+  "updated": "2026-05-12",
   "alignment_sweep": {
     "id": "alignment_sweep_001",
     "status": "IN PROGRESS — pass 002 symbolism table",
@@ -41,6 +41,7 @@
     "paragraph_symbol_placement_rules": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/paragraph_symbol_placement_rules.md"
   },
   "symbol_series_seeds": {
+    "great_raft": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/great_raft_symbol.md",
     "fig_tree": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/fig_tree_symbol.md",
     "hunting_fishing_marksman": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/hunting_fishing_marksman_symbol.md",
     "honey_bee": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/honey_bee_symbol.md",
@@ -54,24 +55,55 @@
     "summary": "Symbol map + misdirection + color/season + paragraph placement; war/conflict engine timeline; literary opening doctrine; Books 05–07 women centers still OPEN."
   },
   "book01": {
-    "score": 75,
-    "bar": "[███████████████░░░░░]",
+    "score": 81,
+    "bar": "[████████████████░░░░]",
     "status": "IN PROGRESS",
-    "summary": "Sample 002 + packets + chapter_symbol_plan; add season/color/opening fields to candidates; war pressure notes; fig/bees/farm default series seeds."
+    "summary": "Chapter refinement pass 01: 15 proposed units (5+5+5 thirds) from 22 candidates; binding/provider gaps flagged; Sample 002 still LIGHT REVISE; spine PROPOSED not locked."
+  },
+  "book01_native_only_firewall": {
+    "status": "PROPOSED",
+    "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_native_only_firewall.md"
+  },
+  "book01_character_map": {
+    "status": "EXPANDED — pass 01",
+    "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_character_map/README.md",
+    "hold_back_list": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_character_map/characters_to_hold_back.md"
+  },
+  "sparse_symbol_recurrence_tracker": {
+    "status": "PROPOSED",
+    "path": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/sparse_symbol_recurrence_tracker.md"
+  },
+  "great_raft_research": {
+    "status": "OPEN / PROPOSED",
+    "path": "writing/03_epics/epic_02_red_river_matrilineage/research/red_river_great_raft/",
+    "book01_landscape_seed": "writing/03_epics/epic_02_red_river_matrilineage/research/red_river_great_raft/book01_landscape_seed.md"
+  },
+  "great_raft_symbol": {
+    "status": "PROPOSED pending research",
+    "path": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/great_raft_symbol.md"
+  },
+  "campti_port_ambition_research": {
+    "status": "OPEN / PROPOSED",
+    "path": "writing/03_epics/epic_02_red_river_matrilineage/research/red_river_great_raft/campti_port_ambition.md"
+  },
+  "characters_to_hold_back": {
+    "status": "PROPOSED",
+    "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_character_map/characters_to_hold_back.md"
   },
   "chapter_candidates": {
     "count": 22,
-    "status": "V0 SCAFFOLDED",
-    "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_chapter_candidates_v0/"
+    "status": "REFINEMENT PASS 01 — PROPOSED 15 units",
+    "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_chapter_candidates_v0/",
+    "refinement_pass_01": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_chapter_candidates_v0/refinement_pass_01/"
   },
   "prose": {
     "tonal_model": "Sample 001 RevB (provisional)",
     "tonal_model_path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/draft_lab/prose_sample_001_opening_matriarch_first_image_revB.md",
-    "sample_002_status": "STRUCTURAL REVIEW DONE — human sign-off pending",
+    "sample_002_status": "REVIEW PASS 01 — LIGHT REVISE (prose file unchanged)",
     "sample_002_path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/draft_lab/prose_sample_002_granddaughter_first_image.md"
   },
   "character_packets": {
-    "status": "V0 PARTIAL",
+    "status": "V0 FILL PASS 01 — primary FILLED; cohort+village EXPANDED; binding PARTIAL",
     "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_character_packets/"
   },
   "symbol_braid": {
@@ -87,6 +119,7 @@
   "top_active_symbols": [
     "Cord / knot",
     "River",
+    "Great Raft (Book 01 landscape seed only)",
     "Sassafras / filé (pre-gumbo)",
     "War on household (engine)",
     "Color + season (restrained)",
@@ -111,13 +144,17 @@
     "War timeline rows OPEN until sourced — do not dramatize unverified battles",
     "Alliteration-death device: track only in operator map; do not mechanical-repeat",
     "Fig / bees / large farm: default OFF for Book 01 unless research invites",
-    "First-paragraph doctrine must not become formula openings"
+    "First-paragraph doctrine must not become formula openings",
+    "Sparse symbols: do not force recurrence to match planning tables",
+    "Great Raft in Book 01: landscape + navigation only — no Shreve / Shreveport / port-loss thesis in-text"
   ],
   "next_actions": [
-    "Human pass on Sample 002 + three character packets",
-    "Extend chapter_symbol_plan + candidate README fields (season/color/opening/alliteration/war note)",
-    "Run war_research_queue against HI logs; promote timeline rows cautiously",
-    "Apply chapter_opening_paragraph_doctrine to next drafted samples only (no full chapters yet)"
+    "Human review: `refinement_pass_01/recommendation_summary.md` + `proposed_12_to_16_chapter_spine.md` (15 units V0)",
+    "Authorize + execute Sample 002 LIGHT REVISE (cousin lock, optional wise-child trim); re-run prose_sample_002_review_gate",
+    "Advance binding partner packet from PARTIAL to FILLED once III-B obligations + research allow",
+    "Deepen provider / Campti per `refinement_pass_01/provider_campti_gap_note.md` before treating spine as locked",
+    "Corroborate Great Raft + Red River trade; keep Book 01 on book01_landscape_seed guardrails",
+    "Binding / marriage cultural form research (visible Book 01 plot)"
   ],
   "book01_next_story_moves": {
     "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_next_story_moves/"
@@ -136,7 +173,15 @@
     { "label": "Symbolism progress chart", "path": "writing/04_production_dashboard/progress_system/symbolism_progress_chart.md" },
     { "label": "Arc progress chart", "path": "writing/04_production_dashboard/progress_system/arc_progress_chart.md" },
     { "label": "Research progress chart", "path": "writing/04_production_dashboard/progress_system/research_progress_chart.md" },
-    { "label": "Book 01 progress chart", "path": "writing/04_production_dashboard/progress_system/book01_progress_chart.md" },
+    { "label": "Book 01 chapter refinement pass 01", "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_chapter_candidates_v0/refinement_pass_01/README.md" },
+    { "label": "Chapter manifest progress chart", "path": "writing/04_production_dashboard/progress_system/chapter_manifest_progress_chart.md" },
+    { "label": "Book 01 Native-only firewall", "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_native_only_firewall.md" },
+    { "label": "Book 01 character map", "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_character_map/README.md" },
+    { "label": "Sparse symbol recurrence tracker", "path": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/sparse_symbol_recurrence_tracker.md" },
+    { "label": "Great Raft research bundle", "path": "writing/03_epics/epic_02_red_river_matrilineage/research/red_river_great_raft/README.md" },
+    { "label": "Great Raft symbol", "path": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/great_raft_symbol.md" },
+    { "label": "Characters to hold back (Book 01)", "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_character_map/characters_to_hold_back.md" },
+    { "label": "Character progress chart", "path": "writing/04_production_dashboard/progress_system/character_progress_chart.md" },
     { "label": "Next actions (production dashboard)", "path": "writing/04_production_dashboard/next_actions.md" }
   ]
 }

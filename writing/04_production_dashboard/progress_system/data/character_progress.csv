@@ -1,7 +1,7 @@
 character,books,progress_bar,score,role_defined,relationships_defined,arc_defined,research_status,next_action
-Opening matriarch,01,[███████████░░░░░░░░░],55,PARTIAL,PARTIAL,PARTIAL,fictional / open,human review packet + name decision
-Daughter / mother generation,01,[███████░░░░░░░░░░░░░],38,PARTIAL,PARTIAL,PARTIAL,Campti thread open,human review packet
-Granddaughter / young heroine,01-02,[█████████░░░░░░░░░░░],45,PARTIAL,PARTIAL,PARTIAL,Marie Therese anchor,human sign-off Sample 002
+Opening matriarch,01,[████████████░░░░░░░░],62,FILLED pass 01,PARTIAL,PARTIAL,fictional / open,human + research; LIGHT REVISE optional
+Daughter / mother generation,01,[██████████░░░░░░░░░░],52,FILLED pass 01,PARTIAL,PARTIAL,Campti thread OPEN,II scene ownership; provider OPEN
+Granddaughter / young heroine,01-02,[███████████░░░░░░░░░],58,FILLED pass 01,PARTIAL,PARTIAL,Marie Therese anchor OPEN,Sample 002 LIGHT REVISE when authorized
 Marie Therese de la Grande Terre,02,[██████░░░░░░░░░░░░░░],30,PARTIAL,PARTIAL,PARTIAL,selected / pending docs,source packet
 Marie Louise Marguerite Guedon,03,[████░░░░░░░░░░░░░░░░],20,PARTIAL,PARTIAL,OPEN,pending docs,Besson/Alexis research
 Jacques Guedon,02,[███░░░░░░░░░░░░░░░░░],15,PARTIAL,PARTIAL,OPEN,pending docs,research
@@ -9,3 +9,4 @@ Jean Baptiste Besson,03,[██░░░░░░░░░░░░░░░░�
 Alexis Grappe,03-04,[██░░░░░░░░░░░░░░░░░░],10,PLACEHOLDER,PARTIAL,OPEN,pending docs,research
 Bobby / Barbara,08,[██░░░░░░░░░░░░░░░░░░],10,HUMAN DIRECTION,PARTIAL,OPEN,pending docs,build research packet
 Kelly Grappe,09,[███░░░░░░░░░░░░░░░░░],15,HUMAN DIRECTION,PARTIAL,OPEN,current public,handle neutrally
+Book 01 character map (architecture),01,[████████████░░░░░░░░],56,EXPANDED,EXPANDED,OPEN,refinement pass alignment,character_coverage_check

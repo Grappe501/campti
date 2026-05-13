@@ -2,6 +2,11 @@
 
 Canon status: PROPOSED
 
+## Book 01 guardrails
+
+- **Native-only (developed cast):** `../book01_native_only_firewall.md`
+- **Character architecture (map):** `../book01_character_map/README.md`
+
 ## Purpose
 
 First **Book 01** manifest at **third / movement** level: visible binding engine, hidden Red River pressure, raid rupture, survival-of-power seeding. **Not** final chapter numbers. **Not** `ch_###` folders. **Not** `writing/01_canon/`.

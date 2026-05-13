@@ -38,6 +38,8 @@ Isolated **prose experiments** for voice, scale, sensory density, and women-cent
 
 ## Upstream
 
+- `../book01_native_only_firewall.md` — Book 01 **Native-only** rule for any new prose in this lab
+- `../book01_character_map/README.md` — attachment / candidate alignment
 - `../book01_manifest_v0/movement_packets/I-A_opening_matriarch_living_world.md`
 - `../book01_manifest_v0/movement_packets/III-A_granddaughter_child_world.md`
 - `../book01_manifest_v0/movement_packets/opening_images.md`

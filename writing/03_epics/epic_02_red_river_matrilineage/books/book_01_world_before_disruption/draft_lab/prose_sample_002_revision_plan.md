@@ -1,11 +1,22 @@
 # Prose Sample 002 Revision Plan
 
 Canon status: PROPOSED  
-Draft status: revision planning only
+Draft status: revision planning only — **Fill pass 01 locked disposition**
+
+## Official outcome (Fill pass 01)
+
+**LIGHT REVISE**
+
+- **Not** ACCEPT AS SAMPLE: one borderline **wise-child** beat and a few **ensemble-width** flags merit a later micro-pass.
+- **Not** REBUILD: core attachment engine, binding misread, triad+cousin dynamic, and Native-only texture are **sound**.
+
+**Prose file:** unchanged this pass (`prose_sample_002_granddaughter_first_image.md`).
+
+---
 
 ## Current Assessment
 
-Sample 002 succeeds as a **controlled child-world test**: attachment, misread binding stakes, and matriarchal teaching-through-action. It stays **non-thriller** and avoids raid countdown. Remaining issues are **ensemble width**, **one borderline-wise child line**, and **long-form cultural verification** outside the sample itself.
+Sample 002 succeeds as a **controlled child-world test**: attachment, misread binding stakes, and matriarchal teaching-through-action. It stays **non-thriller** and avoids raid countdown. Remaining issues are **ensemble width at chapter scale**, **one borderline-wise child line**, and **long-form cultural verification** outside the sample itself.
 
 ## Granddaughter Strengths
 
@@ -28,11 +39,11 @@ Sample 002 succeeds as a **controlled child-world test**: attachment, misread bi
 - Binding as **measured cord + adult silence + prep rhythm**, not bridal fantasy.
 - Child misread remains plausible and productive.
 
-## Weaknesses To Address
+## Weaknesses To Address (on light revise)
 
-- **Ensemble** is narrow — fine for a sample, but chapter-scale will need more faces.
-- **One meta insight** risks “wise child” if repeated across scenes.
-- **Partner pressure** absent by design — not a flaw here, but limits Book 01 completeness claims.
+- **Ensemble** narrow for chapter scale—not broken in sample.
+- **“Thinking in straight lines”** paragraph: optional trim for stricter child literalism.
+- **Partner pressure** absent by design—address in III-B drafting, not here.
 
 ## Modernity / Voice Risks
 
@@ -42,10 +53,10 @@ Sample 002 succeeds as a **controlled child-world test**: attachment, misread bi
 
 - Binding mechanics, kin terms, material culture: **research notes**, not asserted canon in prose.
 
-## Relationship Improvements Needed
+## Relationship Improvements Needed (planning)
 
-- Decide long-term **cousin roster** consistency (gender/age/names) against cohort map.
-- Optionally add **one** additional child-world beat if widening ensemble without bloating.
+- Lock **cousin roster** consistency (gender/age/names) against `../book01_character_packets/child_cohort_packet.md`.
+- Optionally add **one** additional child-world beat in a **future** sample if widening ensemble without bloating.
 
 ## Details To Keep
 
@@ -53,19 +64,12 @@ Sample 002 succeeds as a **controlled child-world test**: attachment, misread bi
 - “Again, before you brag.”
 - Shell + cord shadow ending listen.
 
-## Details To Cut
+## Details To Cut (optional on revise)
 
-- Optional trim: “Thinking in straight lines…” paragraph if human wants stricter child literalism.
+- “Thinking in straight lines…” paragraph if human wants stricter child literalism.
 
-## Recommended Next Step
+## Next execution step (when human authorizes prose edit)
 
-Status: **PARTIAL — HUMAN CHOICE**
-
-- **ACCEPT AS SAMPLE (V0)** if the goal is to freeze voice proof while moving packets forward, **or**
-- **Light REVISE** if the human wants tighter child literalism + cousin consistency pass.
-
-## Human Review Questions
-
-1. Accept as sample baseline, or schedule light line edit?
-2. Cousin gender/name: lock now or keep open?
-3. Should trade references stay generic through early Book 01 drafts?
+1. Micro-pass voice literalism + cousin lock.
+2. Re-run `prose_sample_002_review_gate.md`.
+3. If gate clean → **ACCEPT AS SAMPLE (post-revise)**.

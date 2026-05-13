@@ -4,12 +4,12 @@ Canon status: PROPOSED
 
 | Movement | Progress | Score | Status | Draft Readiness | Biggest Need |
 |---|---|---:|---|---|---|
-| I-A Opening matriarch living world | [██████████████░░░░░░] 72% | 72 | PARTIAL / PROSE TESTED | PARTIAL | human merge candidates + RevB model |
-| I-B Leadership in action | [█████░░░░░░░░░░░░░░░] 28% | 28 | SCAFFOLDED + CANDIDATES | NO | fill packet + test leadership sample later |
-| I-C Continuity stakes | [█████░░░░░░░░░░░░░░░] 28% | 28 | SCAFFOLDED + CANDIDATES | NO | fill packet |
-| II-A Daughter receives power | [█████░░░░░░░░░░░░░░░] 28% | 28 | SCAFFOLDED + CANDIDATES | NO | fill packet |
-| II-B Daughter builds permanence | [█████░░░░░░░░░░░░░░░] 28% | 28 | SCAFFOLDED + CANDIDATES | NO | fill packet |
-| II-C Daughter prepares granddaughter | [██████░░░░░░░░░░░░░░] 32% | 32 | SCAFFOLDED + CANDIDATES | PARTIAL | align with character packets |
-| III-A Granddaughter child-world | [████████░░░░░░░░░░░░] 44% | 44 | PROSE SAMPLE + CANDIDATES | PARTIAL | human sign-off Sample 002 |
-| III-B Binding momentum | [█████░░░░░░░░░░░░░░░] 28% | 28 | SCAFFOLDED + CANDIDATES | NO | fill packet + partner packet |
-| III-C Raid / carrying away | [█████░░░░░░░░░░░░░░░] 28% | 28 | SCAFFOLDED + CANDIDATES | NO | historical/cultural locks |
+| I-A Opening matriarch living world | [███████████████░░░░░] 76% | 76 | PARTIAL + **refinement** | PARTIAL | merge plan UNIT-001–002; keep UNIT-002 bank |
+| I-B Leadership in action | [██████░░░░░░░░░░░░░░] 32% | 32 | SCAFFOLDED + **refinement** | NO | UNIT-003–004 mapping |
+| I-C Continuity stakes | [██████░░░░░░░░░░░░░░] 32% | 32 | SCAFFOLDED + **refinement** | NO | UNIT-005 merge |
+| II-A Daughter receives power | [██████░░░░░░░░░░░░░░] 32% | 32 | SCAFFOLDED + **refinement** | NO | UNIT-006–007 |
+| II-B Daughter builds permanence | [██████░░░░░░░░░░░░░░] 32% | 32 | SCAFFOLDED + **refinement** | NO | UNIT-008–009 |
+| II-C Daughter prepares granddaughter | [████████░░░░░░░░░░░░] 36% | 36 | SCAFFOLDED + **refinement** | PARTIAL | UNIT-010 |
+| III-A Granddaughter child-world | [█████████░░░░░░░░░░░] 46% | 46 | PROSE SAMPLE + **refinement** | PARTIAL | UNIT-011–012; Sample 002 |
+| III-B Binding momentum | [██████░░░░░░░░░░░░░░] 34% | 34 | SCAFFOLDED + **refinement** | NO | UNIT-013 merge; partner gap |
+| III-C Raid / carrying away | [██████░░░░░░░░░░░░░░] 32% | 32 | SCAFFOLDED + **refinement** | NO | UNIT-015 firewall |

@@ -2,6 +2,22 @@
 
 Canon status: PROPOSED
 
+## Book 01 boundary
+
+Book 01 is **Native-centered** and **Native-only** in developed character perspective.
+
+No developed French / non-Native characters appear.
+
+The Great Raft / river obstruction may be seeded only as **landscape and navigation reality**, not future port exposition.
+
+**Firewall:** `../book01_native_only_firewall.md`. **Landscape seed:** `../../../research/red_river_great_raft/book01_landscape_seed.md`. **Symbol sparsity:** `../../../epic_symbol_map/sparse_symbol_recurrence_tracker.md`.
+
+**Planning metadata (per candidate / movement pass):**
+
+- Native-only compliance:
+- Great Raft / river geography seed:
+- Symbol sparsity check:
+
 ## Purpose
 
 Map possible future chapters without creating final chapter folders or final numbering.

@@ -4,7 +4,7 @@
 
 | Epic | Book | Status | Current Focus | Notes |
 |------|------|--------|----------------|-------|
-| epic_02_red_river_matrilineage | book_01_world_before_disruption | Book spine started | **Epic Symbol Map Expansion + War/Conflict Engine + Literary Control** | `epic_symbol_map/` + `epic_war_conflict_engine/` + `language_doctrine/` + Book 01 hooks + `/story-dev` + sweep + `series_symbols/` + `book01_next_story_moves/`; **no `ch_###`**; no `01_canon/` |
+| epic_02_red_river_matrilineage | book_01_world_before_disruption | Book spine started | **Book 01 Chapter Candidate Refinement Pass 01** | `refinement_pass_01/` (**15** units V0) + character packets + Native-only firewall + Sample 002 **LIGHT REVISE**; **no `ch_###`**; no `01_canon/` |
 
 **Spine packet:** `writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/spine_packet/`
 

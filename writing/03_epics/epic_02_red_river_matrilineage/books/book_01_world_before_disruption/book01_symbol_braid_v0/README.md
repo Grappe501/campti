@@ -6,6 +6,12 @@ Canon status: PROPOSED
 
 Track **recurring objects and motifs** for Book 01 with **use-first** discipline — not a decoder ring.
 
+**Sparse symbols:** placement + change beat frequency — `../../../epic_symbol_map/symbol_depth_rules.md`, `../../../epic_symbol_map/sparse_symbol_recurrence_tracker.md`.
+
+**Book 01 Native-only (developed characters):** `../book01_native_only_firewall.md`.
+
+**Great Raft (Book 01):** landscape + navigation seed only — `../../../research/red_river_great_raft/book01_landscape_seed.md`; epic symbol file `../../../epic_symbol_map/great_raft_symbol.md`.
+
 **Series (gumbo ingredients):** each pot component can be its own long-arc symbol; see `../../../series_symbols/gumbo_ingredient_constellation_symbols.md` (Book 01 only adopts what the timeline and research allow).
 
 **Literary control + hidden machinery (operator):** first-paragraph doctrine `../../../language_doctrine/chapter_opening_paragraph_doctrine.md`; alliteration-death signal map `../../../epic_symbol_map/alliteration_death_foreshadowing_map.md` (never explained in prose); subplot misdirection `../../../epic_symbol_map/subplot_misdirection_symbol_rules.md`; color/season system `../../../epic_symbol_map/color_season_symbol_system.md`; paragraph placement `../../../epic_symbol_map/paragraph_symbol_placement_rules.md`. **War / conflict engine** `../../../epic_war_conflict_engine/` for pressure into household. **Series seeds (fig, bees, farm scale, hunting/fishing as survival skill):** `../../../epic_symbol_map/` symbol files — default **off** for Book 01 unless research invites them.
@@ -27,7 +33,7 @@ Track **recurring objects and motifs** for Book 01 with **use-first** discipline
 | `nature_mood_map_book01.md` | land/water/weather vs doctrine |
 | `foreshadowing_restraint_book01.md` | fair plants vs forbidden machinery |
 | `easter_egg_map_book01.md` | optional micro-echoes |
-| `chapter_symbol_plan_book01.md` | candidates ↔ symbols ↔ mood |
+| `chapter_symbol_plan_book01.md` | candidates ↔ symbols ↔ mood + Native-only / Great Raft / sparsity metadata |
 | `symbol_review_gate.md` | Human gate |
 
 ## Rules

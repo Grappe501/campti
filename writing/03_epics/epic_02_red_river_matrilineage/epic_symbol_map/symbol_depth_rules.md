@@ -2,6 +2,35 @@
 
 Canon status: PROPOSED
 
+## Sparse symbol placement rule
+
+Symbols do **not** need to appear everywhere.
+
+A symbol may appear:
+
+- once in a book
+- twice in a book
+- not at all for one or two books
+- quietly in the background before becoming legible later
+- three times across five books before the reader recognizes it
+
+**Strategic absence is allowed.**
+
+A symbol becomes powerful because of **placement**, **change**, and **delayed recognition** — not frequency.
+
+### Symbol recurrence types
+
+| Recurrence type | Meaning |
+|---|---|
+| Seed | first appearance, not explained |
+| Echo | later recurrence with slightly changed meaning |
+| Dormancy | symbol disappears for a span |
+| Return | symbol reappears with emotional force |
+| Reveal | reader realizes earlier appearances mattered |
+| Transformation | symbol changes meaning across eras |
+
+**Tracker:** `sparse_symbol_recurrence_tracker.md`.
+
 ## Governing rules
 
 1. **Earn depth:** one vivid, embodied beat beats three explanatory sentences.

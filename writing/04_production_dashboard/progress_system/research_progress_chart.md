@@ -10,6 +10,7 @@ Canon status: PROPOSED
 | HI-003 lineage + raid verification | [████████████░░░░░░░░] 60% | 60 | IN PROGRESS | dates/spellings OPEN | `human_inputs/HI-003_*.md` + verification passes |
 | D-002 timeline scope | [████████░░░░░░░░░░░░] 40% | 40 | BLOCKED / OPEN | compat with raid dating | `decision_pass_01/D-002_timeline_scope.md` |
 | Red River trade dossier | [████████░░░░░░░░░░░░] 40% | 40 | IN PROGRESS | specifics thin | `spine_packet/historical_worldbuilding/` |
+| Great Raft / logjam / port-shift dossier | [██████░░░░░░░░░░░░░░] 30% | 30 | OPEN / PROPOSED | GR-004 + Campti ambition docs | `research/red_river_great_raft/` + trade spine |
 | Binding / marriage cultural questions | [████████░░░░░░░░░░░░] 40% | 40 | IN PROGRESS | form not verified | research carefully; notes not prose claims |
 | Besson / Alexis / Francois threads | [████░░░░░░░░░░░░░░░░] 20% | 20 | SCAFFOLDED | sparse records | HI-006 + targeted packets |
 | Books 06–07 Civil War / Reconstruction | [██░░░░░░░░░░░░░░░░░░] 10% | 10 | PLACEHOLDER | anchors missing | descendant + regional anchors |
