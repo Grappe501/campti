@@ -32,6 +32,7 @@ import { buildSceneGenerationPreflight } from "@/lib/services/scene-generation-p
 import { runSceneGeneration, type RunSceneGenerationParams } from "@/lib/services/scene-generation-service";
 import { writeSceneLaunchAudit } from "@/lib/services/scene-launch-audit-service";
 import { persistSceneRunGenerationOutputRecord } from "@/lib/services/scene-run-generation-output-persist-service";
+import { recordRecommendationServerFollowup } from "@/lib/services/scene-recommendation-learning-log-service";
 import { recordLaunchOutcomeForRecommendationLearning } from "@/lib/services/scene-recommendation-outcome-linking-service";
 import { computeSceneLedgerRunKey } from "@/lib/utils/scene-ledger-run-key";
 
@@ -484,6 +485,10 @@ export async function executeGuardedSceneLaunch(
 
   const ledgerRunKey =
     startAudit != null ? computeSceneLedgerRunKey(request.sceneId, startAudit.id, startAudit.createdAt.getTime()) : null;
+
+  if (startAudit) {
+    void recordRecommendationServerFollowup(request.sceneId, "launched_new_run");
+  }
 
   try {
     const run = await runSceneGeneration(params);

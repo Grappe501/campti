@@ -44,6 +44,9 @@ export type SceneRecommendationConfidenceAdjustmentKind =
   | "insufficient_history"
   | "historical_note_only";
 
+/** How bounded learning shifted the displayed strength vs rule output (operator explainer). */
+export type SceneRecommendationStrengthShiftPolarity = "stronger" | "weaker" | "unchanged";
+
 /** Bounded correlation for one category in one scene window (not causal). */
 export type SceneRecommendationOutcomeCorrelation = {
   category: SceneDecisionRecommendationCategory;
@@ -63,6 +66,26 @@ export type SceneRecommendationOutcomeCorrelation = {
   linkStatus: SceneRecommendationOutcomeLinkStatus;
   sparseData: boolean;
   historyStatus: SceneRecommendationHistoryStatus;
+  /**
+   * Operator-facing bullets for the analytics panel — aligned with bounded learning thresholds, observational only.
+   * Present on rows produced by `buildSceneRecommendationEffectivenessViewModel`.
+   */
+  operatorInsightLines?: string[];
+};
+
+/** Highlight row for operator analytics — replay vs repair-first follow-through in the same window. */
+export type SceneReplayRepairEffectivenessSnapshot = {
+  replayNow: {
+    shownCount: number;
+    followedCount: number;
+    /** Follow-up logs / shown when shown > 0; null when no shows. */
+    followRatePercent: number | null;
+  };
+  repairInstead: {
+    shownCount: number;
+    followedCount: number;
+    followRatePercent: number | null;
+  };
 };
 
 export type SceneRecommendationEffectivenessStats = {
@@ -70,6 +93,7 @@ export type SceneRecommendationEffectivenessStats = {
   windowDays: number;
   totalShownEvents: number;
   totalOutcomeLinkedEvents: number;
+  replayRepairSnapshot: SceneReplayRepairEffectivenessSnapshot;
 };
 
 export type SceneRecommendationLearningNote = {
@@ -114,4 +138,19 @@ export type SceneRecommendationLearningAugmentation = {
   /** Strength after bounded learning tweak (same or one step). */
   effectiveStrength: SceneDecisionRecommendationStrength;
   historyStatus: SceneRecommendationHistoryStatus;
+  /**
+   * Single operator-facing sentence: why displayed strength differs from rule strength, or why it did not change.
+   */
+  strengthShiftHeadline: string;
+  /** Polarity for UI emphasis — aligns with `strengthShiftHeadline`. */
+  strengthShiftPolarity: SceneRecommendationStrengthShiftPolarity;
+  /**
+   * Optional second line (e.g. linked-output persistence when it reinforces the narrative).
+   */
+  strengthShiftSubline: string | null;
+  /**
+   * Inspectable bullets for “why strength changed” (Phase C.9).
+   * Empty when strength matches rule-based or history was insufficient.
+   */
+  strengthChangeExplanationLines: string[];
 };

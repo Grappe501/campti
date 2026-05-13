@@ -8,6 +8,7 @@ import { describe, it } from "node:test";
 import type { SceneDecisionRecommendationSet } from "@/lib/domain/scene-decision-assist";
 import {
   applyEffectivenessToRecommendationSet,
+  buildOperatorInsightLines,
   computeCategoryCorrelationsFromEvents,
   type RecommendationEventSnapshot,
 } from "@/lib/services/scene-recommendation-effectiveness-service";
@@ -68,6 +69,16 @@ describe("computeCategoryCorrelationsFromEvents", () => {
   });
 });
 
+describe("buildOperatorInsightLines", () => {
+  it("flags sparse replay history", () => {
+    const rows = computeCategoryCorrelationsFromEvents([shown(["replay_now"])]);
+    const replay = rows.find((c) => c.category === "replay_now");
+    assert.ok(replay);
+    const lines = buildOperatorInsightLines("replay_now", replay!);
+    assert.ok(lines.some((l) => l.toLowerCase().includes("sparse") || l.toLowerCase().includes("provisional")));
+  });
+});
+
 describe("applyEffectivenessToRecommendationSet", () => {
   it("preserves rule-based title and basis while adjusting strength only when history supports it", () => {
     const set: SceneDecisionRecommendationSet = {
@@ -95,5 +106,10 @@ describe("applyEffectivenessToRecommendationSet", () => {
     assert.ok(out.primary?.learningAugmentation);
     assert.equal(out.primary?.learningAugmentation?.confidenceAdjustment.kind, "confidence_adjusted_down");
     assert.equal(out.primary?.strength, "light");
+    assert.equal(out.primary?.learningAugmentation?.strengthShiftPolarity, "weaker");
+    assert.ok(out.primary?.learningAugmentation?.strengthShiftHeadline?.toLowerCase().includes("weaker"));
+    const explain = out.primary?.learningAugmentation?.strengthChangeExplanationLines ?? [];
+    assert.ok(explain.length >= 1);
+    assert.ok(explain.some((l) => l.includes("Learning adjusted") || l.includes("→")));
   });
 });

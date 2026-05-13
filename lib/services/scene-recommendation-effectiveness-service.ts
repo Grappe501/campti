@@ -14,6 +14,8 @@ import {
   type SceneRecommendationLearningNote,
   type SceneRecommendationOutcomeCorrelation,
   type SceneRecommendationOutcomeLinkStatus,
+  type SceneReplayRepairEffectivenessSnapshot,
+  type SceneRecommendationStrengthShiftPolarity,
 } from "@/lib/domain/scene-recommendation-learning";
 import { prisma } from "@/lib/prisma";
 
@@ -183,10 +185,106 @@ function strengthUp(s: SceneDecisionRecommendation["strength"]): SceneDecisionRe
   return s;
 }
 
+function followRatePercent(shown: number, followed: number): number | null {
+  if (shown <= 0) return null;
+  return Math.round((followed / shown) * 1000) / 10;
+}
+
+/**
+ * Operator analytics copy — uses the same observational thresholds as `buildAdjustment` (no policy side effects).
+ */
+export function buildOperatorInsightLines(
+  category: SceneDecisionRecommendationCategory,
+  row: SceneRecommendationOutcomeCorrelation,
+): string[] {
+  const lines: string[] = [];
+  const dist = row.subsequentAllowanceDistribution;
+  const churn = row.churnPressureShare;
+  const cleanShare = row.outcomeLinkedCount > 0 ? dist.allowed / row.outcomeLinkedCount : 0;
+
+  if (row.shownCount === 0 && row.outcomeLinkedCount === 0 && row.followedCount === 0) {
+    lines.push("No logged shows or linked outcomes for this category in the window — nothing to infer yet.");
+    return lines;
+  }
+
+  if (row.shownCount < MIN_SHOWN_FOR_PATTERN) {
+    lines.push(
+      `Fewer than ${MIN_SHOWN_FOR_PATTERN} logged shows for this category (${row.shownCount}) — treat rankings below as provisional.`,
+    );
+  }
+
+  if (row.outcomeLinkedCount < MIN_OUTCOMES_FOR_ADJUST || row.sparseData) {
+    lines.push("Sparse data: linked outcome count or show volume is below the bar for confident pattern reads.");
+  }
+
+  if (row.outcomeLinkedCount >= 1) {
+    lines.push(
+      `Subsequent ledger-linked launches: ${dist.allowed} clean, ${dist.allowed_with_risk} risky, ${dist.blocked} blocked, ${dist.failed_generation} failed generation, ${dist.unknown} unknown.`,
+    );
+  }
+
+  if (churn !== null && row.outcomeLinkedCount >= 2) {
+    lines.push(
+      `Churn-pressure share (non-clean linked outcomes): ${Math.round(churn * 100)}% — lower tends to align with calmer follow-on launches in the log.`,
+    );
+  }
+
+  if (!row.sparseData && row.outcomeLinkedCount >= MIN_OUTCOMES_FOR_ADJUST) {
+    if (category === "replay_now" && churn !== null && churn >= CHURN_DOWN_THRESHOLD) {
+      lines.push(
+        `Stronger “watch replay” caution in learning: replay-oriented advice here often preceded elevated non-clean share (≥${Math.round(CHURN_DOWN_THRESHOLD * 100)}%).`,
+      );
+    } else if (category === "repair_instead_of_replay" && churn !== null && churn <= CHURN_UP_THRESHOLD && cleanShare >= 0.35) {
+      lines.push(
+        `Stronger repair-first signal in learning: non-clean share ≤${Math.round(CHURN_UP_THRESHOLD * 100)}% with clean allowance ≥35% among linked outcomes.`,
+      );
+    } else if (category === "replay_now" || category === "repair_instead_of_replay") {
+      lines.push("No automatic strength nudge from this history window — pattern did not cross bounded learning thresholds.");
+    }
+  } else if (category === "replay_now" || category === "repair_instead_of_replay") {
+    lines.push("Learning keeps strength unchanged: insufficient shows or linked outcomes for a bounded nudge.");
+  }
+
+  if (row.linkStatus === "ambiguous_followup") {
+    lines.push("Some pairings used ambiguous timing between advice and launch — interpret correlations cautiously.");
+  }
+
+  if (!lines.length) {
+    lines.push("Gather more logged shows and ledger-linked launches to tighten this row.");
+  }
+  return lines;
+}
+
+function buildReplayRepairSnapshot(rows: SceneRecommendationOutcomeCorrelation[]): SceneReplayRepairEffectivenessSnapshot {
+  const replay = rows.find((r) => r.category === "replay_now");
+  const repair = rows.find((r) => r.category === "repair_instead_of_replay");
+  const rs = replay ?? { shownCount: 0, followedCount: 0 };
+  const rp = repair ?? { shownCount: 0, followedCount: 0 };
+  return {
+    replayNow: {
+      shownCount: rs.shownCount,
+      followedCount: rs.followedCount,
+      followRatePercent: followRatePercent(rs.shownCount, rs.followedCount),
+    },
+    repairInstead: {
+      shownCount: rp.shownCount,
+      followedCount: rp.followedCount,
+      followRatePercent: followRatePercent(rp.shownCount, rp.followedCount),
+    },
+  };
+}
+
+/** Optional scene facts that tune explainer copy (no policy effect). */
+export type ApplyEffectivenessContext = {
+  /** When true, explainer may cite linked-output persistence from the assist spine. */
+  outputChurnPersistentDrift?: boolean;
+};
+
 function buildAdjustment(
   category: SceneDecisionRecommendationCategory,
   row: SceneRecommendationOutcomeCorrelation | undefined,
   ruleStrength: SceneDecisionRecommendation["strength"],
+  ctx?: ApplyEffectivenessContext,
 ): SceneRecommendationLearningAugmentation {
   const emptyAdjustment: SceneRecommendationConfidenceAdjustment = {
     kind: "insufficient_history",
@@ -201,6 +299,13 @@ function buildAdjustment(
       ruleBasedStrength: ruleStrength,
       effectiveStrength: ruleStrength,
       historyStatus: "insufficient_history",
+      strengthShiftPolarity: "unchanged",
+      strengthShiftHeadline:
+        "Unchanged — fewer than three logged shows for this category in the window, so learning cannot move the strength label.",
+      strengthShiftSubline: null,
+      strengthChangeExplanationLines: [
+        "Strength unchanged: fewer than three logged shows for this category in the window, or no row — learning cannot nudge confidence.",
+      ],
     };
   }
 
@@ -222,6 +327,11 @@ function buildAdjustment(
       ruleBasedStrength: ruleStrength,
       effectiveStrength,
       historyStatus,
+      strengthShiftPolarity: "unchanged",
+      strengthShiftHeadline:
+        "Unchanged — linked outcomes are too sparse or ambiguous here for a bounded confidence nudge from history.",
+      strengthShiftSubline: null,
+      strengthChangeExplanationLines: ["Strength unchanged: sparse or ambiguous outcome history — only informational note applied."],
     };
   }
 
@@ -261,24 +371,90 @@ function buildAdjustment(
     historyStatus = "ambiguous_followup";
   }
 
+  let strengthShiftPolarity: SceneRecommendationStrengthShiftPolarity;
+  let strengthShiftHeadline: string;
+  let strengthShiftSubline: string | null = null;
+
+  if (kind === "confidence_adjusted_down") {
+    strengthShiftPolarity = "weaker";
+    strengthShiftHeadline =
+      "Weaker now — similar replay-oriented advice in this scene often preceded non-clean linked launches (risky, blocked, or failed); observational only.";
+    if (ctx?.outputChurnPersistentDrift) {
+      strengthShiftSubline =
+        "Linked outputs also show persistent movement across durable snapshots — bounded diffs matter before another relaunch.";
+    }
+  } else if (kind === "confidence_adjusted_up") {
+    strengthShiftPolarity = "stronger";
+    strengthShiftHeadline =
+      "Stronger now — repair-first guidance here has more often preceded cleaner linked launches in the bounded log; observational only.";
+    if (ctx?.outputChurnPersistentDrift) {
+      strengthShiftSubline =
+        "Output is still drifting across snapshots — pair repair work with bounded diff review when triaging.";
+    }
+  } else {
+    strengthShiftPolarity = "unchanged";
+    if (historyStatus === "ambiguous_followup" && kind === "historical_note_only") {
+      strengthShiftHeadline =
+        "Unchanged — bounded learning did not change strength; some ledger-linked outcomes were tied to advice with ambiguous timing.";
+    } else {
+      strengthShiftHeadline =
+        "Unchanged — observational outcomes for this category did not cross thresholds for a one-step strength nudge.";
+    }
+    if (ctx?.outputChurnPersistentDrift) {
+      if (category === "inspect_run_diff_first" || category === "pause_relaunch_churn") {
+        strengthShiftSubline =
+          "Persistent linked-output movement remains visible across snapshots — bounded run comparison is the direct stability read.";
+      } else if (category === "replay_now") {
+        strengthShiftSubline =
+          "Linked prose is still moving across snapshots — replay alone may not settle output until bounded diffs are reviewed.";
+      }
+    }
+  }
+
+  const strengthChangeExplanationLines: string[] = [];
+  if (effectiveStrength !== ruleStrength) {
+    strengthChangeExplanationLines.push(
+      `Learning adjusted the displayed strength one step: ${ruleStrength} → ${effectiveStrength} (bounded, observational — does not change guard policy).`,
+    );
+    if (kind === "confidence_adjusted_down") {
+      strengthChangeExplanationLines.push(
+        `Trigger: non-clean share of ledger-linked outcomes after this category was shown was at least ${Math.round(CHURN_DOWN_THRESHOLD * 100)}% (see effectiveness panel for counts).`,
+      );
+    }
+    if (kind === "confidence_adjusted_up") {
+      strengthChangeExplanationLines.push(
+        `Trigger: non-clean outcome share ≤ ${Math.round(CHURN_UP_THRESHOLD * 100)}% and clean allowance share ≥ 35% among linked outcomes.`,
+      );
+    }
+  } else if (kind === "historical_note_only" && historicalNote) {
+    strengthChangeExplanationLines.push("Strength unchanged — observational distribution only; see note above.");
+  } else {
+    strengthChangeExplanationLines.push("Strength unchanged after learning pass.");
+  }
+
   return {
     historicalNote,
     confidenceAdjustment: { kind, explanation, notes },
     ruleBasedStrength: ruleStrength,
     effectiveStrength,
     historyStatus,
+    strengthShiftPolarity,
+    strengthShiftHeadline,
+    strengthShiftSubline,
+    strengthChangeExplanationLines,
   };
 }
 
 export function applyEffectivenessToRecommendationSet(
   set: SceneDecisionRecommendationSet,
   correlations: SceneRecommendationOutcomeCorrelation[],
+  ctx?: ApplyEffectivenessContext,
 ): SceneDecisionRecommendationSet {
   const byCat = new Map(correlations.map((c) => [c.category, c]));
 
   const aug = (r: SceneDecisionRecommendation): SceneDecisionRecommendation => {
     const row = byCat.get(r.category);
-    const learning = buildAdjustment(r.category, row, r.strength);
+    const learning = buildAdjustment(r.category, row, r.strength, ctx);
     return {
       ...r,
       strength: learning.effectiveStrength,
@@ -317,7 +493,10 @@ export async function buildSceneRecommendationEffectivenessViewModel(
     createdAt: e.createdAt,
   }));
 
-  const categoryCorrelations = computeCategoryCorrelationsFromEvents(snapshots);
+  const categoryCorrelations = computeCategoryCorrelationsFromEvents(snapshots).map((row) => ({
+    ...row,
+    operatorInsightLines: buildOperatorInsightLines(row.category, row),
+  }));
   const totalShown = events.filter((e) => e.eventType === "recommendation_shown").length;
   const totalOutcomes = events.filter((e) => e.eventType === "recommendation_outcome_linked").length;
 
@@ -333,6 +512,7 @@ export async function buildSceneRecommendationEffectivenessViewModel(
     windowDays,
     totalShownEvents: totalShown,
     totalOutcomeLinkedEvents: totalOutcomes,
+    replayRepairSnapshot: buildReplayRepairSnapshot(categoryCorrelations),
   };
 
   const honestyBanner =

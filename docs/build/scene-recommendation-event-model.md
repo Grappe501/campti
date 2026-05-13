@@ -9,7 +9,7 @@ Append-only rows. Fields (see `prisma/schema.prisma`):
 | `sceneId` | Scene scope |
 | `ledgerRunKey` | Optional assist context when opened from a run |
 | `eventType` | `recommendation_shown` \| `recommendation_action_taken` \| `recommendation_outcome_linked` \| `recommendation_outcome_evaluated` |
-| `actionType` | For action events: `replay_requested`, `opened_research`, … |
+| `actionType` | For `recommendation_action_taken`: `replay_requested`, `repair_requested`, `opened_research`, `opened_simulation`, `opened_diff`, `opened_preflight`, `launched_new_run` (server-side guarded launch after assist exposure), … |
 | `recommendationIds` | JSON array of string ids |
 | `recommendationCategories` | JSON array of taxonomy categories |
 | `linkedLaunchAuditId` / `linkedLedgerRunKey` | Outcome correlation |
@@ -28,3 +28,5 @@ Append-only rows. Fields (see `prisma/schema.prisma`):
 ## Instrumentation limits
 
 Not every navigation is logged. Documented gaps are intentional to avoid overcollection; the UI states when follow-up history is empty.
+
+**Replay vs launch:** a successful replay path may emit both `replay_requested` (replay intent) and `launched_new_run` (guarded terminal launch). They are distinct facts; effectiveness aggregation treats both as follow-up signals where applicable.

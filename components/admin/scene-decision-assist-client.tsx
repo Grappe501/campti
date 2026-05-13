@@ -3,13 +3,17 @@
 import Link from "next/link";
 import { useState } from "react";
 
+import { RecommendationEffectivenessAnalyticsPanel } from "@/components/admin/recommendation-effectiveness-analytics-panel";
 import { logRecommendationFollowupAction } from "@/app/actions/scene-recommendation-learning";
 import type {
   SceneDecisionAssistViewModel,
   SceneDecisionRecommendation,
   SceneDecisionRecommendationAction,
 } from "@/lib/domain/scene-decision-assist";
-import type { SceneRecommendationActionType } from "@/lib/domain/scene-recommendation-learning";
+import type {
+  SceneRecommendationActionType,
+  SceneRecommendationStrengthShiftPolarity,
+} from "@/lib/domain/scene-recommendation-learning";
 
 function strengthClass(s: SceneDecisionRecommendation["strength"]): string {
   if (s === "strong") return "bg-rose-100 text-rose-950 border-rose-300";
@@ -35,6 +39,18 @@ function followupActionForHref(href: string): SceneRecommendationActionType | nu
   return null;
 }
 
+function shiftPolarityBadgeClass(p: SceneRecommendationStrengthShiftPolarity): string {
+  if (p === "stronger") return "border-emerald-400 bg-emerald-100 text-emerald-950";
+  if (p === "weaker") return "border-amber-500 bg-amber-100 text-amber-950";
+  return "border-stone-400 bg-stone-100 text-stone-900";
+}
+
+function shiftSectionBorderClass(p: SceneRecommendationStrengthShiftPolarity): string {
+  if (p === "stronger") return "border-emerald-300 bg-emerald-50/90";
+  if (p === "weaker") return "border-amber-300 bg-amber-50/90";
+  return "border-slate-300 bg-slate-50/90";
+}
+
 function RecommendationCard({
   r,
   sceneId,
@@ -56,41 +72,74 @@ function RecommendationCard({
         </div>
         <span className="rounded-full border border-stone-400/50 bg-white/80 px-2 py-0.5 text-[11px] font-medium capitalize">{r.strength}</span>
       </div>
-      {learn && learn.ruleBasedStrength !== r.strength ? (
-        <p className="mt-2 text-[11px] text-stone-800">
-          Rule-based strength was <span className="font-medium capitalize">{learn.ruleBasedStrength}</span> — effective label now{" "}
-          <span className="font-medium capitalize">{learn.effectiveStrength}</span> after bounded historical adjustment (transparent, not a hidden
-          policy change).
-        </p>
-      ) : null}
-      {learn?.historicalNote ? (
-        <div className="mt-2 rounded-lg border border-violet-200 bg-violet-50/70 p-2 text-[11px] text-violet-950">
-          <p className="font-semibold text-violet-950">Historical pattern (observational)</p>
-          <p className="mt-1">{learn.historicalNote}</p>
-          <p className="mt-1 text-violet-900">
-            Confidence signal: <span className="font-mono">{learn.confidenceAdjustment.kind}</span>
-            {learn.confidenceAdjustment.explanation ? ` — ${learn.confidenceAdjustment.explanation}` : null}
-          </p>
-          {learn.confidenceAdjustment.notes.length ? (
-            <ul className="mt-1 list-inside list-disc text-violet-900">
-              {learn.confidenceAdjustment.notes.map((n) => (
-                <li key={n.text}>
-                  ({n.derivation}) {n.text}
-                </li>
-              ))}
-            </ul>
+
+      <div className="mt-3 rounded-lg border border-stone-200 bg-white/70 p-3 text-[11px] text-stone-900">
+        <p className="text-[10px] font-semibold uppercase tracking-wide text-stone-600">Why this recommendation</p>
+        <p className="mt-1 leading-snug">{r.basis.summary}</p>
+      </div>
+
+      {learn ? (
+        <div className={`mt-3 rounded-xl border p-3 text-[11px] leading-snug ${shiftSectionBorderClass(learn.strengthShiftPolarity)}`}>
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="text-[10px] font-semibold uppercase tracking-wide text-stone-700">Why this confidence label changed</p>
+            <span
+              className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold capitalize ${shiftPolarityBadgeClass(learn.strengthShiftPolarity)}`}
+            >
+              {learn.strengthShiftPolarity}
+            </span>
+          </div>
+          <p className="mt-2 font-medium text-stone-950">{learn.strengthShiftHeadline}</p>
+          {learn.strengthShiftSubline ? <p className="mt-2 text-stone-800">{learn.strengthShiftSubline}</p> : null}
+          {learn.ruleBasedStrength !== learn.effectiveStrength ? (
+            <p className="mt-2 text-[11px] text-stone-800">
+              Rules emitted <span className="font-medium capitalize">{learn.ruleBasedStrength}</span> — displayed label is{" "}
+              <span className="font-medium capitalize">{learn.effectiveStrength}</span> after bounded learning (does not change guard policy).
+            </p>
+          ) : (
+            <p className="mt-2 text-[11px] text-stone-700">
+              Displayed strength matches rule output after the learning pass (same label, observational notes may still apply).
+            </p>
+          )}
+          {learn.historicalNote ? (
+            <div className="mt-3 rounded-lg border border-violet-200/80 bg-violet-50/60 p-2 text-[11px] text-violet-950">
+              <p className="font-semibold text-violet-950">Log pattern (observational)</p>
+              <p className="mt-1">{learn.historicalNote}</p>
+              {learn.confidenceAdjustment.explanation ? (
+                <p className="mt-1 text-violet-900">{learn.confidenceAdjustment.explanation}</p>
+              ) : null}
+              {learn.confidenceAdjustment.notes.length ? (
+                <ul className="mt-1 list-inside list-disc text-violet-900">
+                  {learn.confidenceAdjustment.notes.map((n) => (
+                    <li key={n.text}>
+                      ({n.derivation}) {n.text}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+              <p className="mt-1 text-[10px] text-violet-800">
+                Adjustment kind: <span className="font-mono">{learn.confidenceAdjustment.kind}</span> · History:{" "}
+                {learn.historyStatus.replaceAll("_", " ")}
+              </p>
+            </div>
+          ) : learn.historyStatus === "insufficient_history" ? (
+            <p className="mt-2 text-[11px] text-stone-600">
+              Not enough category-specific history to add a log pattern note — the headline above is the full learning signal for this card.
+            </p>
           ) : null}
-          <p className="mt-1 text-[10px] text-violet-800">History status: {learn.historyStatus.replaceAll("_", " ")}</p>
+          {learn.strengthChangeExplanationLines.length ? (
+            <details className="mt-3 rounded-lg border border-stone-200 bg-white/80 p-2 text-stone-900">
+              <summary className="cursor-pointer text-[11px] font-semibold text-stone-900">Thresholds and technical detail</summary>
+              <ul className="mt-2 list-inside list-disc text-[11px] text-stone-800">
+                {learn.strengthChangeExplanationLines.map((line, i) => (
+                  <li key={i}>{line}</li>
+                ))}
+              </ul>
+            </details>
+          ) : null}
         </div>
-      ) : learn && learn.historyStatus === "insufficient_history" ? (
-        <p className="mt-2 text-[11px] text-stone-600">
-          Not enough logged history for this category to summarize patterns — the rule-based basis above is the full signal.
-        </p>
       ) : null}
-      <p className="mt-2 text-sm text-stone-900">{r.recommendationText}</p>
-      <p className="mt-2 text-xs text-stone-800">
-        <span className="font-medium">Basis:</span> {r.basis.summary}
-      </p>
+
+      <p className="mt-3 text-sm text-stone-900">{r.recommendationText}</p>
       {r.suppressionOrCautionNotes.length ? (
         <ul className="mt-2 list-inside list-disc text-xs text-stone-800">
           {r.suppressionOrCautionNotes.map((n, i) => (
@@ -201,13 +250,27 @@ type Props = {
 };
 
 export function SceneDecisionAssistClient({ sceneId, initial, compact }: Props) {
-  const { recommendations, summary, suppressionsApplied, runFocus, effectivenessSummary } = initial;
+  const {
+    recommendations,
+    summary,
+    suppressionsApplied,
+    runFocus,
+    effectivenessSummary,
+    sceneOperatingMode,
+    stabilityForecasts,
+    stabilityMemory,
+  } = initial;
 
   if (compact) {
     const top = recommendations.primary;
     return (
       <div className="rounded-lg border border-teal-200 bg-teal-50/80 p-3 text-xs text-teal-950">
         <p className="font-semibold text-teal-950">Decision assist (this selection)</p>
+        {sceneOperatingMode ? (
+          <p className="mt-1 text-[11px] text-teal-900">
+            Scene mode: <span className="font-medium">{sceneOperatingMode.mode.replaceAll("_", " ")}</span> — {sceneOperatingMode.headline}
+          </p>
+        ) : null}
         {runFocus ? (
           <p className="mt-1 text-[11px] text-teal-900">
             Run focus · eligibility: <span className="font-mono">{runFocus.replayEligibility}</span>
@@ -271,6 +334,68 @@ export function SceneDecisionAssistClient({ sceneId, initial, compact }: Props) 
         ) : null}
       </header>
 
+      {sceneOperatingMode ? (
+        <section className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-4 text-xs text-indigo-950">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-indigo-900">Scene operating mode (summary)</p>
+          <p className="mt-2 text-sm font-semibold text-indigo-950">
+            <span className="rounded-full border border-indigo-400 bg-white px-2 py-0.5 capitalize">{sceneOperatingMode.mode.replaceAll("_", " ")}</span>
+          </p>
+          <p className="mt-2 text-indigo-950">{sceneOperatingMode.headline}</p>
+          <ul className="mt-2 list-inside list-disc text-[11px] text-indigo-900">
+            {sceneOperatingMode.trace.map((t, i) => (
+              <li key={i}>{t}</li>
+            ))}
+          </ul>
+          {sceneOperatingMode.uncertaintyNote ? (
+            <p className="mt-2 text-[11px] text-indigo-800">{sceneOperatingMode.uncertaintyNote}</p>
+          ) : null}
+          <p className="mt-2 text-[10px] text-indigo-800">
+            Modes are advisory labels derived from ledger, preflight, research, simulation, and output hints — they do not change launch guard policy.
+          </p>
+        </section>
+      ) : null}
+
+      {stabilityForecasts.length ? (
+        <section className="rounded-xl border border-amber-200 bg-amber-50/60 p-4 text-xs text-amber-950">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-amber-900">Early warnings (bounded forecast)</p>
+          <ul className="mt-2 space-y-2">
+            {stabilityForecasts.map((f) => (
+              <li key={f.code} className="rounded-lg border border-amber-200 bg-white/80 p-2">
+                <span className="font-medium">{f.label}</span>{" "}
+                <span className="text-[10px] text-amber-800">({f.derivation})</span>
+                <p className="mt-1 text-[11px] text-amber-950">{f.description}</p>
+                <ul className="mt-1 list-inside list-disc text-[10px] text-amber-900">
+                  {f.basis.map((b, i) => (
+                    <li key={i}>{b}</li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {stabilityMemory ? (
+        <details className="rounded-xl border border-stone-200 bg-stone-50/80 p-3 text-xs text-stone-800">
+          <summary className="cursor-pointer font-medium text-stone-900">Scene stability memory (compact)</summary>
+          <p className="mt-2 text-[11px]">
+            Window runs: {stabilityMemory.windowRunCount} · Risky: {stabilityMemory.riskyLaunchCount} · Blocked: {stabilityMemory.blockedLaunchCount}{" "}
+            · Replays: {stabilityMemory.replayAuditCount} · Repairs/revisions: {stabilityMemory.repairOrRevisionCount} · Failed gens:{" "}
+            {stabilityMemory.failedGenerationCount}
+          </p>
+          <p className="mt-1 text-[11px]">
+            Research blocking: {stabilityMemory.researchBlockingContradictions ?? "—"} · Sim blocked people:{" "}
+            {stabilityMemory.simulationBlockedPersons ?? "—"} · Preflight blockers/risks: {stabilityMemory.preflightPrimaryBlockers}/
+            {stabilityMemory.preflightPrimaryRisks}
+          </p>
+          <p className="mt-1 text-[11px]">
+            Output oscillation: {stabilityMemory.outputLengthOscillation ? "yes" : "no"} · Opening/ending shift:{" "}
+            {stabilityMemory.outputOpeningEndingShift ? "yes" : "no"} · Repeated blocked saves:{" "}
+            {stabilityMemory.repeatedBlockedSaveOutputs ? "yes" : "no"}
+          </p>
+        </details>
+      ) : null}
+
       {recommendations.primary ? (
         <div>
           <p className="mb-2 text-xs font-medium text-stone-700">Primary</p>
@@ -291,45 +416,7 @@ export function SceneDecisionAssistClient({ sceneId, initial, compact }: Props) 
         </div>
       ) : null}
 
-      {effectivenessSummary ? (
-        <section className="rounded-xl border border-slate-200 bg-slate-50/80 p-4 text-xs text-slate-900">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-700">Scene learning loop (bounded)</p>
-          <p className="mt-2 text-[11px] leading-relaxed text-slate-800">{effectivenessSummary.honestyBanner}</p>
-          <p className="mt-2 text-[11px]">
-            Window: last {effectivenessSummary.stats.windowDays} days · Shown events: {effectivenessSummary.stats.totalShownEvents} · Outcome-linked
-            launches: {effectivenessSummary.stats.totalOutcomeLinkedEvents} · Overall history:{" "}
-            <span className="font-medium">{effectivenessSummary.overallHistoryStatus.replaceAll("_", " ")}</span>
-          </p>
-          {effectivenessSummary.followup.lastActionAtIso ? (
-            <p className="mt-2 text-[11px] text-slate-800">
-              Recent follow-up actions logged: {effectivenessSummary.followup.recentActionTypes.slice(-6).join(", ").replaceAll("_", " ") || "—"} ·
-              last at {effectivenessSummary.followup.lastActionAtIso.slice(0, 19)}Z
-            </p>
-          ) : (
-            <p className="mt-2 text-[11px] text-slate-600">No follow-up navigation events logged yet for this scene in the window.</p>
-          )}
-          <details className="mt-3 rounded-lg border border-slate-200 bg-white/90 p-2">
-            <summary className="cursor-pointer text-[11px] font-medium text-slate-900">Per-category observational counts</summary>
-            <ul className="mt-2 max-h-48 space-y-1 overflow-y-auto text-[11px] text-slate-800">
-              {effectivenessSummary.stats.categoryCorrelations
-                .filter((c) => c.shownCount > 0 || c.outcomeLinkedCount > 0 || c.followedCount > 0)
-                .map((c) => (
-                  <li key={c.category}>
-                    <span className="font-medium">{c.category.replaceAll("_", " ")}</span>: shown {c.shownCount}, follow-up logs {c.followedCount},
-                    linked outcomes {c.outcomeLinkedCount}
-                    {c.sparseData ? " · sparse / low confidence" : ""}
-                    {c.linkStatus === "ambiguous_followup" ? " · some ambiguous timing" : ""}
-                  </li>
-                ))}
-            </ul>
-            {effectivenessSummary.stats.categoryCorrelations.every(
-              (c) => c.shownCount === 0 && c.outcomeLinkedCount === 0 && c.followedCount === 0,
-            ) ? (
-              <p className="mt-1 text-[11px] text-slate-600">No category activity in this window yet.</p>
-            ) : null}
-          </details>
-        </section>
-      ) : null}
+      {effectivenessSummary ? <RecommendationEffectivenessAnalyticsPanel vm={effectivenessSummary} /> : null}
     </div>
   );
 }

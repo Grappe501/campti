@@ -42,6 +42,7 @@ async function main() {
 
   const ui = read("components/admin/scene-decision-assist-client.tsx");
   assert.ok(ui.includes("effectivenessSummary"), "UI surfaces effectiveness");
+  assert.ok(ui.includes("RecommendationEffectivenessAnalyticsPanel"), "operator effectiveness analytics panel");
   assert.ok(ui.includes("logRecommendationFollowupAction"), "UI instruments follow-up");
 
   const corr = computeCategoryCorrelationsFromEvents([]);

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState, useTransition } from "react";
+import { useMemo, useState, useTransition } from "react";
 
 import { evaluateSceneLaunchGuardAction } from "@/app/actions/scene-launch-guard";
 import { recomputeSceneGenerationPreflightAction } from "@/app/actions/scene-generation-preflight";
@@ -65,24 +65,36 @@ function subsystemCardBorder(s: SceneGenerationSubsystemStatus): string {
   return "border-emerald-100";
 }
 
+function preflightServerSyncKey(
+  m: SceneGenerationPreflightViewModel,
+  g: SceneLaunchGuardResult,
+): string {
+  return `${m.summary.evaluatedAtIso}|${g.freshnessDigest}`;
+}
+
 export function ScenePreflightTabClient({ initial, initialGuard, sceneId, sceneTitle }: Props) {
   const router = useRouter();
   const [model, setModel] = useState(initial);
   const [guard, setGuard] = useState(initialGuard);
+  const [lastServerSyncKey, setLastServerSyncKey] = useState(() =>
+    preflightServerSyncKey(initial, initialGuard),
+  );
   const [pending, start] = useTransition();
   const [actionError, setActionError] = useState<string | null>(null);
   const [advancedOpen, setAdvancedOpen] = useState(false);
   const [detailKey, setDetailKey] = useState<SceneGenerationSubsystemKey | null>(null);
 
+  const serverSyncKey = preflightServerSyncKey(initial, initialGuard);
+  if (serverSyncKey !== lastServerSyncKey) {
+    setLastServerSyncKey(serverSyncKey);
+    setModel(initial);
+    setGuard(initialGuard);
+  }
+
   const detailSubsystem = useMemo(
     () => (detailKey ? model.subsystems.find((s) => s.subsystemKey === detailKey) ?? null : null),
     [detailKey, model.subsystems],
   );
-
-  useEffect(() => {
-    setModel(initial);
-    setGuard(initialGuard);
-  }, [initial, initialGuard]);
 
   function rerun() {
     setActionError(null);

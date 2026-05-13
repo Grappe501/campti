@@ -28,7 +28,7 @@
     "verify:run-ledger-replay": "tsx scripts/verify-run-ledger-replay-panel.ts && tsx --test lib/services/scene-run-ledger-assembly.test.ts && tsx --test lib/domain/scene-run-replay-policy.test.ts && tsx --test lib/services/scene-run-comparison-service.test.ts",
     "verify:run-diff-analytics": "tsx scripts/verify-run-diff-outcome-analytics.ts && tsx --test lib/services/scene-run-diff-service.test.ts && tsx --test lib/services/scene-run-outcome-analytics-service.test.ts",
     "verify:durable-run-output-linkage": "tsx scripts/verify-durable-run-output-linkage.ts && tsx --test lib/services/scene-run-output-delta-service.test.ts && tsx --test lib/services/scene-run-diff-service.test.ts && tsx --test lib/services/scene-run-ledger-assembly.test.ts",
-    "verify:author-decision-assist": "tsx scripts/verify-author-decision-assist.ts && tsx --test lib/services/scene-decision-assist-service.test.ts",
+    "verify:author-decision-assist": "tsx scripts/verify-author-decision-assist.ts && tsx --test lib/services/scene-decision-assist-service.test.ts && tsx --test lib/services/scene-decision-assist-material-signals-service.test.ts && tsx --test lib/services/scene-run-output-linkage-learning.integration.test.ts",
     "verify:recommendation-effectiveness-learning-loop": "tsx scripts/verify-recommendation-effectiveness-learning-loop.ts && tsx --test lib/services/scene-recommendation-effectiveness-service.test.ts",
     "verify:ricre": "tsx --test lib/services/ricre-pipeline.test.ts",
     "verify:generation-hash": "tsx --test lib/scene-generation/canonical-scene-generation-hash.test.ts",

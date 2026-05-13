@@ -17,19 +17,26 @@ import type {
 import type { SceneRecommendationEffectivenessViewModel } from "@/lib/domain/scene-recommendation-learning";
 import { SCENE_DECISION_ASSIST_CONTRACT_VERSION } from "@/lib/domain/scene-decision-assist";
 import type { SceneResearchTabViewModel } from "@/lib/domain/scene-research-tab";
+import type { SceneRunBoundedOutputDiff, SceneRunOutputChurnHint } from "@/lib/domain/scene-run-output-linkage";
 import type { SceneRunLedgerEntry, SceneRunLedgerViewModel } from "@/lib/domain/scene-run-ledger";
 import type { SceneRunOutcomeAnalyticsViewModel } from "@/lib/domain/scene-run-diff-analytics";
 import { prisma } from "@/lib/prisma";
 import { buildSceneGenerationPreflight } from "@/lib/services/scene-generation-preflight-service";
 import { buildCharacterSimulationWorkbenchSceneRollup } from "@/lib/services/character-simulation-workbench-scene-aggregate-service";
 import { loadSceneResearchTab } from "@/lib/services/scene-research-tab-loader-service";
-import { buildSceneRunDiffViewModel } from "@/lib/services/scene-run-diff-service";
 import { loadSceneRunOutputChurnHints } from "@/lib/services/scene-run-output-churn-hints-service";
+import { computeAssistMaterialSignals } from "@/lib/services/scene-decision-assist-material-signals-service";
+import { computeLinkedOutputChurnPersistence } from "@/lib/services/scene-run-output-churn-persistence-service";
 import { applyEffectivenessToRecommendationSet, buildSceneRecommendationEffectivenessViewModel } from "@/lib/services/scene-recommendation-effectiveness-service";
 import {
   buildShownPayloadFromRecommendationSet,
   logRecommendationShownFromAssistInput,
 } from "@/lib/services/scene-recommendation-learning-log-service";
+import {
+  buildSceneStabilityMemorySummary,
+  buildStabilityForecasts,
+  deriveSceneOperatingMode,
+} from "@/lib/services/scene-stability-operating-service";
 import { loadSceneRunLedger } from "@/lib/services/scene-run-ledger-service";
 import { buildSceneRunOutcomeAnalytics } from "@/lib/services/scene-run-outcome-analytics-service";
 
@@ -53,6 +60,12 @@ export type SceneDecisionAssistRuleContext = {
   ledger: SceneRunLedgerViewModel;
   simRollup: CharacterSimulationWorkbenchSceneRollup | null;
   materialRunDiff: boolean;
+  boundedLatestPairDiff: SceneRunBoundedOutputDiff | null;
+  outputChurnMaterial: boolean;
+  /** Several consecutive durable snapshots show material length/fingerprint movement. */
+  outputChurnPersistentDrift: boolean;
+  /** Single inspectable line for linked-output facts (latest pair + optional persistence). */
+  boundedOutputEvidenceLine: string | null;
   failedRunsInWindow: number;
   replayFailedPattern: boolean;
   partialHistoryCodes: SceneDecisionAssistSummary["partialHistoryCodes"];
@@ -73,6 +86,33 @@ function action(
 
 function trigger(code: string, label: string, detail: string, kind: SceneDecisionRecommendationTrigger["kind"]): SceneDecisionRecommendationTrigger {
   return { code, label, detail, kind };
+}
+
+/**
+ * Extra linked-output spine line for cards — avoids duplicating `e-df-2` signal codes on inspect_run_diff_first.
+ * Covers persistence across snapshots and hint-only churn when the latest pair is not fully diff-loaded here.
+ */
+function formatBoundedOutputEvidenceLine(
+  bounded: SceneRunBoundedOutputDiff | null,
+  outputChurnPersistentDrift: boolean,
+  hints: SceneRunOutputChurnHint[],
+): string | null {
+  const segments: string[] = [];
+  if (outputChurnPersistentDrift) {
+    segments.push(
+      "Several consecutive linked snapshots show bounded length or fingerprint movement — output churn is persisting, not a one-off hop.",
+    );
+  }
+  if (!bounded?.signals.length && hints.length) {
+    segments.push(
+      `Recent linked outputs: churn hints ${hints
+        .map((h) => h.code)
+        .slice(0, 5)
+        .join(", ")} — open Runs for bounded diff when both legs are linked.`,
+    );
+  }
+  if (!segments.length) return null;
+  return segments.join(" ");
 }
 
 function rec(
@@ -258,6 +298,15 @@ export function collectSceneDecisionRecommendations(ctx: SceneDecisionAssistRule
             evidence("e-ch-1", `Repair/revision-sourced runs: ${a.repairOrRevisionRunCount}.`, "fact"),
             evidence("e-ch-2", `Replay-tagged audits (scene): ${a.replayAttemptCount}.`, "fact"),
             evidence("e-ch-3", `Failed generation terminals: ${a.failedGenerationCount}.`, "fact"),
+            ...(ctx.outputChurnPersistentDrift
+              ? [
+                  evidence(
+                    "e-ch-out",
+                    "Linked outputs: multiple consecutive durable snapshots show bounded length or fingerprint drift — churn is visible in stored prose snapshots, not only governance counters.",
+                    "fact",
+                  ),
+                ]
+              : []),
           ],
           heuristicNotes: [
             {
@@ -283,17 +332,42 @@ export function collectSceneDecisionRecommendations(ctx: SceneDecisionAssistRule
   }
 
   if (ctx.materialRunDiff && (highChurn || a.failedGenerationCount >= 1) && !preflightBlocked) {
+    const bd = ctx.boundedLatestPairDiff;
+    const gov = bd ? "Governance/preflight/execution and/or durable output churn detected between newest pair." : "Material change detected (governance/execution and/or linked output signals).";
     out.push(
       rec(
         ctx.sceneId,
         "inspect_run_diff_first",
         "Compare the latest two runs before choosing replay vs repair",
-        "Latest runs differ materially on governance, execution, or proxies — inspect the structured diff to see what actually changed.",
+        bd
+          ? "Latest runs differ materially — including bounded linked-output signals (length/opening/ending/structure where available). Inspect the structured diff before another launch."
+          : "Latest runs differ materially on governance, execution, or proxies — inspect the structured diff to see what actually changed.",
         "moderate",
         {
-          summary: "Structured diff between two most recent ledger entries shows non-trivial delta.",
+          summary: gov,
           factualEvidence: [
             evidence("e-df-1", "Structured run diff: material change detected between newest pair.", ctx.ledger.entries.length >= 2 ? "fact" : "partial"),
+            ...(bd?.signals.length
+              ? [
+                  evidence(
+                    "e-df-2",
+                    `Linked output signals: ${bd.signals.map((s) => s.code).join(", ")} (bounded, not literary judgment).`,
+                    "fact",
+                  ),
+                ]
+              : []),
+            ...(ctx.outputChurnMaterial && !bd
+              ? [evidence("e-df-3", "Output churn inferred from snapshot hints (fingerprints/length) — see linked output section in Runs.", "heuristic")]
+              : []),
+            ...(ctx.boundedOutputEvidenceLine
+              ? [
+                  evidence(
+                    "e-df-bo",
+                    ctx.boundedOutputEvidenceLine,
+                    ctx.outputChurnPersistentDrift ? "fact" : "heuristic",
+                  ),
+                ]
+              : []),
           ],
           heuristicNotes: [],
           triggers: [trigger("t-diff", "Material diff", "Diff headline non-empty change categories.", "fact")],
@@ -361,6 +435,15 @@ export function collectSceneDecisionRecommendations(ctx: SceneDecisionAssistRule
           factualEvidence: [
             evidence("e-rq-1", `Preflight allowance: ${s.launchAllowance}.`, "fact"),
             evidence("e-rq-2", `Recent failures in window: ${ctx.failedRunsInWindow}.`, "fact"),
+            ...(ctx.outputChurnPersistentDrift
+              ? [
+                  evidence(
+                    "e-rq-out",
+                    "Linked prose snapshots have been moving across several consecutive runs (bounded drift) — replay may churn text further; compare diffs first if unsure.",
+                    "fact",
+                  ),
+                ]
+              : []),
           ],
           heuristicNotes: ctx.replayFailedPattern
             ? [
@@ -446,19 +529,6 @@ export function collectSceneDecisionRecommendations(ctx: SceneDecisionAssistRule
   }
 
   return out;
-}
-
-function materialDiffForLatestPair(entries: SceneRunLedgerEntry[]): boolean {
-  if (entries.length < 2) return false;
-  const a = entries[0];
-  const b = entries[1];
-  const d = buildSceneRunDiffViewModel(a, b);
-  if (!d) return false;
-  const changedSlices =
-    (d.diff.governance.fields.some((f) => f.changed) ? 1 : 0) +
-    (d.diff.preflight.fields.some((f) => f.changed) ? 1 : 0) +
-    (d.diff.execution.fields.some((f) => f.changed) ? 1 : 0);
-  return changedSlices >= 2;
 }
 
 function failedRunsCount(entries: SceneRunLedgerEntry[]): number {
@@ -610,13 +680,15 @@ function partialCodes(ctx: {
   analytics: SceneRunOutcomeAnalyticsViewModel;
   ledger: SceneRunLedgerViewModel;
   research: SceneResearchTabViewModel | null;
+  hasLinkedOutputSignals: boolean;
+  outputChurnHintCount: number;
 }): SceneDecisionAssistSummary["partialHistoryCodes"] {
   const codes: SceneDecisionAssistSummary["partialHistoryCodes"] = [];
   const a = ctx.analytics.summary;
   if (a.legacyOrPartialRunCount > 0) codes.push("legacy_run_history");
   if ((a.totalRunsInWindow ?? 0) < 3) codes.push("insufficient_recent_runs");
   if (!ctx.research) codes.push("partial_history_limits_confidence");
-  codes.push("output_linkage_unavailable");
+  if (!ctx.hasLinkedOutputSignals && ctx.outputChurnHintCount === 0) codes.push("output_linkage_unavailable");
   return codes;
 }
 
@@ -642,11 +714,40 @@ export async function buildSceneDecisionAssistViewModel(
 
   if (!preflight) return null;
 
-  const materialRunDiff = materialDiffForLatestPair(ledger.entries);
+  const [materialSignals, outputChurnPersistence] = await Promise.all([
+    computeAssistMaterialSignals(sceneId, ledger.entries, outputChurnHints),
+    computeLinkedOutputChurnPersistence(sceneId),
+  ]);
   const failedRunsInWindow = failedRunsCount(ledger.entries);
   const replayFailedPattern = replayFailurePattern(ledger.entries);
 
-  const partialHistoryCodes = partialCodes({ analytics, ledger, research });
+  const partialHistoryCodes = partialCodes({
+    analytics,
+    ledger,
+    research,
+    hasLinkedOutputSignals: materialSignals.boundedLatestPairDiff !== null,
+    outputChurnHintCount: outputChurnHints.length,
+  });
+
+  const stabilityMemory = buildSceneStabilityMemorySummary({
+    sceneId,
+    preflight,
+    analytics,
+    ledger,
+    research,
+    simRollup,
+    outputChurnHints,
+    boundedLatestPairDiff: materialSignals.boundedLatestPairDiff,
+    outputChurnPersistence,
+  });
+  const stabilityForecasts = buildStabilityForecasts(stabilityMemory, analytics);
+  const sceneOperatingMode = deriveSceneOperatingMode(stabilityMemory, preflight, stabilityForecasts);
+
+  const boundedOutputEvidenceLine = formatBoundedOutputEvidenceLine(
+    materialSignals.boundedLatestPairDiff,
+    outputChurnPersistence.persistentDrift,
+    outputChurnHints,
+  );
 
   const ruleCtx: SceneDecisionAssistRuleContext = {
     sceneId,
@@ -655,7 +756,11 @@ export async function buildSceneDecisionAssistViewModel(
     analytics,
     ledger,
     simRollup,
-    materialRunDiff,
+    materialRunDiff: materialSignals.materialRunDiffCombined,
+    boundedLatestPairDiff: materialSignals.boundedLatestPairDiff,
+    outputChurnMaterial: materialSignals.outputChurnMaterial,
+    outputChurnPersistentDrift: outputChurnPersistence.persistentDrift,
+    boundedOutputEvidenceLine,
     failedRunsInWindow,
     replayFailedPattern,
     partialHistoryCodes,
@@ -689,7 +794,9 @@ export async function buildSceneDecisionAssistViewModel(
   let recommendations = set;
   try {
     effectivenessSummary = await buildSceneRecommendationEffectivenessViewModel(sceneId);
-    recommendations = applyEffectivenessToRecommendationSet(set, effectivenessSummary.stats.categoryCorrelations);
+    recommendations = applyEffectivenessToRecommendationSet(set, effectivenessSummary.stats.categoryCorrelations, {
+      outputChurnPersistentDrift: outputChurnPersistence.persistentDrift,
+    });
   } catch {
     /* Effectiveness layer is optional — rule-based recommendations still apply. */
   }
@@ -701,6 +808,13 @@ export async function buildSceneDecisionAssistViewModel(
   ];
   if (partialHistoryCodes.length) {
     honestyParts.push(`History / linkage notes: ${partialHistoryCodes.join(", ")}.`);
+  }
+  if (boundedOutputEvidenceLine) {
+    honestyParts.push(boundedOutputEvidenceLine);
+  } else if (materialSignals.boundedLatestPairDiff?.signals.length) {
+    honestyParts.push(
+      `Latest linked-output pair (bounded): ${materialSignals.boundedLatestPairDiff.signals.map((s) => s.code).join(", ")}.`,
+    );
   }
 
   return {
@@ -717,5 +831,8 @@ export async function buildSceneDecisionAssistViewModel(
     suppressionsApplied: suppressions,
     runFocus: buildRunFocus(sceneId, opts?.ledgerRunKey ?? undefined, ledger.entries),
     effectivenessSummary,
+    stabilityMemory,
+    stabilityForecasts,
+    sceneOperatingMode,
   };
 }

@@ -8,6 +8,11 @@ import type {
   SceneRecommendationEffectivenessViewModel,
   SceneRecommendationLearningAugmentation,
 } from "@/lib/domain/scene-recommendation-learning";
+import type {
+  SceneOperatingModeSummary,
+  SceneStabilityForecast,
+  SceneStabilityMemorySummary,
+} from "@/lib/domain/scene-stability-operating";
 
 export const SCENE_DECISION_ASSIST_CONTRACT_VERSION = "1" as const;
 
@@ -122,6 +127,12 @@ export type SceneDecisionAssistViewModel = {
   runFocus: SceneDecisionAssistRunFocus | null;
   /** Scene-scoped bounded effectiveness (optional when logging disabled or empty). */
   effectivenessSummary: SceneRecommendationEffectivenessViewModel | null;
+  /** Derived scene stability memory (no separate persistence in v1). */
+  stabilityMemory: SceneStabilityMemorySummary | null;
+  /** Advisory early warnings — conservative, traceable. */
+  stabilityForecasts: SceneStabilityForecast[];
+  /** Legible operating posture; does not override guard policy. */
+  sceneOperatingMode: SceneOperatingModeSummary | null;
 };
 
 /** Compact summary for cockpit / rails (no full evidence payload). */

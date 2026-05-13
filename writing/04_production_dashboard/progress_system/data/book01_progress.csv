@@ -1,0 +1,17 @@
+area,progress_bar,score,status,blocker,next_action
+Spine packet,[██████████████████░░],90,READY FOR NEXT PHASE,historical verification,use v8/v9 as series context
+Core storyline,[██████████████████░░],90,READY FOR NEXT PHASE,human review,use three-thirds structure
+Three-thirds manifest,[██████████████░░░░░░],70,REVIEWED / IN PROGRESS,movement fill,review manifest V0
+Movement packets,[███████████░░░░░░░░░],57,FILLED V0,only I-A expanded,expand II/III packets
+Prose doctrine,[███████████████████░],95,READY FOR USE,none,apply to all samples
+Draft lab,[██████░░░░░░░░░░░░░░],33,IN PROGRESS,human sign-off on Sample 002,human chooses accept vs light revise
+Historical worldbuilding,[███████████░░░░░░░░░],55,FILLED V0,many research needs,prioritize trade/binding
+Character architecture,[█████████░░░░░░░░░░░],45,IN PROGRESS,names OPEN; partner packet NO,human review packets
+Binding plot,[████████░░░░░░░░░░░░],40,IN PROGRESS,cultural form open,research binding/marriage
+Red River pressure,[████████░░░░░░░░░░░░],40,IN PROGRESS,trade details open,build source-backed dossier
+Chapter candidates V0 (no folders),[████████░░░░░░░░░░░░],40,SCAFFOLDED,not numbered / not final,book01_chapter_candidates_v0/candidate_review_gate.md
+Symbol braid V0,[████████░░░░░░░░░░░░],40,IN PROGRESS,avoid over-read,book01_symbol_braid_v0/symbol_review_gate.md
+Story dev dashboard lane (/story-dev),[██████░░░░░░░░░░░░░░],32,MVP,JSON manual,story_dev_dashboard/ + data/story_dev_dashboard.json
+Alignment sweep 001,[██████░░░░░░░░░░░░░░],30,IN PROGRESS,deepen grep passes,writing/08_alignment_sweeps/alignment_sweep_001/
+Sassafras / gumbo research lane,[█████░░░░░░░░░░░░░░░],28,OPEN,ethnobotany + locality,research/sassafras_gumbo/
+Chapter folders,[░░░░░░░░░░░░░░░░░░░░],0,NOT STARTED,manifest not locked,do not create ch_### yet
