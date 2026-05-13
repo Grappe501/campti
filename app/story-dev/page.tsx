@@ -15,6 +15,18 @@ type StoryDevDashboard = {
   updated: string;
   alignment_sweep?: { id: string; status: string; path: string };
   story_dev_lane?: { route: string; status: string; source_spec: string };
+  epic_symbol_map?: { status: string; path: string; index?: string };
+  epic_arc_braid?: { status: string; path: string; index?: string };
+  language_doctrine?: { status: string; path: string; index?: string };
+  epic_war_conflict_engine?: {
+    status: string;
+    path: string;
+    timeline?: string;
+    doctrine?: string;
+    research_queue?: string;
+  };
+  literary_control?: Record<string, string>;
+  symbol_series_seeds?: Record<string, string>;
   epic: { score: number; bar?: string; status: string; summary: string };
   book01: { score: number; bar?: string; status: string; summary: string };
   chapter_candidates?: { count: number; status: string; path: string };
@@ -25,9 +37,17 @@ type StoryDevDashboard = {
     sample_002_path?: string;
   };
   character_packets?: { status: string; path: string };
-  symbol_braid?: { status: string; path: string; series_symbols_path?: string };
+  symbol_braid?: {
+    status: string;
+    path: string;
+    series_symbols_path?: string;
+    chapter_symbol_plan?: string;
+  };
   sassafras_gumbo_research?: { status: string; path: string };
   book01_next_story_moves?: { path: string };
+  top_active_symbols?: string[];
+  top_active_arcs?: string[];
+  symbolic_blockers?: string[];
   top_blockers: string[];
   next_actions: string[];
   links: { label: string; path: string }[];
@@ -99,6 +119,102 @@ export default function StoryDevPage() {
         </section>
       ) : null}
 
+      <section className="grid gap-6 lg:grid-cols-3">
+        {data.epic_symbol_map ? (
+          <div className="rounded-lg border border-stone-800 bg-stone-900/25 p-5">
+            <h2 className="text-sm font-semibold text-stone-300">Epic symbol map</h2>
+            <p className="mt-2 text-sm text-stone-400">{data.epic_symbol_map.status}</p>
+            <p className="mt-1 font-mono text-xs text-stone-500">{data.epic_symbol_map.path}</p>
+            {data.epic_symbol_map.index ? (
+              <p className="mt-2 font-mono text-xs text-amber-100/70">{data.epic_symbol_map.index}</p>
+            ) : null}
+          </div>
+        ) : null}
+        {data.epic_arc_braid ? (
+          <div className="rounded-lg border border-stone-800 bg-stone-900/25 p-5">
+            <h2 className="text-sm font-semibold text-stone-300">Epic arc braid</h2>
+            <p className="mt-2 text-sm text-stone-400">{data.epic_arc_braid.status}</p>
+            <p className="mt-1 font-mono text-xs text-stone-500">{data.epic_arc_braid.path}</p>
+            {data.epic_arc_braid.index ? (
+              <p className="mt-2 font-mono text-xs text-amber-100/70">{data.epic_arc_braid.index}</p>
+            ) : null}
+          </div>
+        ) : null}
+        {data.language_doctrine ? (
+          <div className="rounded-lg border border-stone-800 bg-stone-900/25 p-5">
+            <h2 className="text-sm font-semibold text-stone-300">Language doctrine</h2>
+            <p className="mt-2 text-sm text-stone-400">{data.language_doctrine.status}</p>
+            <p className="mt-1 font-mono text-xs text-stone-500">{data.language_doctrine.path}</p>
+            {data.language_doctrine.index ? (
+              <p className="mt-2 font-mono text-xs text-amber-100/70">{data.language_doctrine.index}</p>
+            ) : null}
+          </div>
+        ) : null}
+      </section>
+
+      {data.epic_war_conflict_engine ? (
+        <section className="rounded-lg border border-stone-800 bg-stone-900/25 p-5">
+          <h2 className="text-sm font-semibold text-stone-300">War / conflict engine</h2>
+          <p className="mt-2 text-sm text-stone-400">{data.epic_war_conflict_engine.status}</p>
+          <p className="mt-1 font-mono text-xs text-stone-500">{data.epic_war_conflict_engine.path}</p>
+          <div className="mt-3 space-y-1 font-mono text-xs text-amber-100/70">
+            {data.epic_war_conflict_engine.timeline ? <p>{data.epic_war_conflict_engine.timeline}</p> : null}
+            {data.epic_war_conflict_engine.doctrine ? <p>{data.epic_war_conflict_engine.doctrine}</p> : null}
+            {data.epic_war_conflict_engine.research_queue ? (
+              <p>{data.epic_war_conflict_engine.research_queue}</p>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
+
+      {data.literary_control ? (
+        <section className="rounded-lg border border-stone-800 bg-stone-900/25 p-5">
+          <h2 className="text-sm font-semibold text-stone-300">Literary control (paths)</h2>
+          <ul className="mt-3 space-y-2 font-mono text-xs text-amber-100/70">
+            {Object.entries(data.literary_control).map(([k, v]) => (
+              <li key={k}>
+                <span className="text-stone-500">{k}:</span> {v}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {data.symbol_series_seeds ? (
+        <section className="rounded-lg border border-stone-800 bg-stone-900/25 p-5">
+          <h2 className="text-sm font-semibold text-stone-300">Series symbol seeds (paths)</h2>
+          <ul className="mt-3 space-y-2 font-mono text-xs text-amber-100/70">
+            {Object.entries(data.symbol_series_seeds).map(([k, v]) => (
+              <li key={k}>
+                <span className="text-stone-500">{k}:</span> {v}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {data.top_active_symbols?.length ? (
+        <section className="rounded-lg border border-stone-800 bg-stone-900/25 p-5">
+          <h2 className="text-sm font-semibold text-stone-300">Top active symbols</h2>
+          <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-stone-300">
+            {data.top_active_symbols.map((s) => (
+              <li key={s}>{s}</li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {data.top_active_arcs?.length ? (
+        <section className="rounded-lg border border-stone-800 bg-stone-900/25 p-5">
+          <h2 className="text-sm font-semibold text-stone-300">Top active arcs</h2>
+          <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-stone-300">
+            {data.top_active_arcs.map((a) => (
+              <li key={a}>{a}</li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
       {data.chapter_candidates ? (
         <section className="rounded-lg border border-stone-800 bg-stone-900/25 p-5">
           <h2 className="text-sm font-semibold text-stone-300">Chapter candidates</h2>
@@ -141,6 +257,9 @@ export default function StoryDevPage() {
             {data.symbol_braid.series_symbols_path ? (
               <p className="mt-2 font-mono text-xs text-stone-500">{data.symbol_braid.series_symbols_path}</p>
             ) : null}
+            {data.symbol_braid.chapter_symbol_plan ? (
+              <p className="mt-2 font-mono text-xs text-amber-100/70">{data.symbol_braid.chapter_symbol_plan}</p>
+            ) : null}
           </div>
         ) : null}
       </section>
@@ -168,6 +287,17 @@ export default function StoryDevPage() {
           ))}
         </ul>
       </section>
+
+      {data.symbolic_blockers?.length ? (
+        <section className="rounded-lg border border-stone-800 bg-stone-900/25 p-5">
+          <h2 className="text-sm font-semibold text-stone-300">Symbolic / craft blockers</h2>
+          <ul className="mt-3 list-decimal space-y-2 pl-5 text-sm text-stone-300">
+            {data.symbolic_blockers.map((b) => (
+              <li key={b}>{b}</li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       <section className="rounded-lg border border-stone-800 bg-stone-900/25 p-5">
         <h2 className="text-sm font-semibold text-stone-300">Next actions</h2>

@@ -109,3 +109,41 @@ Story Development Lane + Full Alignment Sweep + Sassafras / Gumbo Symbol Build
 
 - Gumbo/sassafras must stay **research-gated** for community specificity.
 - Novel lane continues in parallel (packets, candidates, Sample 002 human pass).
+
+## 2026-05-13 — Symbol Map + Arc Braid + Language Doctrine
+
+### Current Focus
+
+Symbol Map + Arc Braid System + Intentional Language Control
+
+### Delivered (agent)
+
+- `epic_symbol_map/` (master index + maps + depth/research/deprecation logs).
+- `epic_arc_braid/` (master arc index + marriage / injury / women-forward / family-vs-history braids + transfer + foreshadowing plan).
+- `language_doctrine/` (word purpose, restraint, voice, information-once, pace design, silence/color/egg rules).
+- Book 01 braid extensions: `color_map_book01.md`, `silence_map_book01.md`, `nature_mood_map_book01.md`, `foreshadowing_restraint_book01.md`, `easter_egg_map_book01.md`, `chapter_symbol_plan_book01.md`.
+- Alignment sweep `symbolism_inventory.md` — **Symbol expansion pass 002** (keyword inventory table).
+- Progress charts + `story_dev_dashboard.json` updated for operator lanes.
+
+### Notes
+
+- No `ch_###`, no `01_canon/` promotion; architecture only.
+- Reader-earned depth: maps are **not** on-page explanations.
+
+## 2026-05-14 — Epic symbol expansion + war/conflict engine + literary control
+
+### Current Focus
+
+Epic Symbol Map Expansion + War/Conflict Engine + Literary Control System
+
+### Delivered (agent)
+
+- `epic_symbol_map/` additions: alliteration-death map, subplot misdirection, color/season system, fig tree, hunting/fishing, bees, farm/livestock, education/peacemaker, `war_as_symbol_map.md`, `paragraph_symbol_placement_rules.md`.
+- `epic_war_conflict_engine/` (README, master timeline, doctrine, Red River + foreign impact maps, service + women-at-home maps, war→book map, research queue, conflict mood/symbol map).
+- `language_doctrine/chapter_opening_paragraph_doctrine.md` + README / `every_word_has_purpose.md` / `foreshadowing_without_giving_away.md` cross-links.
+- Book 01 hooks: `book01_manifest_v0/README.md`, `book01_chapter_candidates_v0/README.md`, `book01_symbol_braid_v0/README.md` + `symbol_braid_index.md`, `book01_next_story_moves/README.md` + reordered `next_10_story_build_moves.md`.
+- Dashboard: `story_dev_dashboard.json`, progress charts + CSV mirrors, `blockers_and_next_moves.md`.
+
+### Notes
+
+- Book 01 remains on **Sample 002**, **packets**, **chapter plan**; fig/bees/large farm default **series seeds**.

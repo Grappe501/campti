@@ -15,7 +15,7 @@ Define the first active epic and first active book well enough to build a chapte
 **Numbering note:**  
 This may later be renamed to `epic_01_red_river_matrilineage` once template numbering is standardized. See `writing/04_production_dashboard/numbering_decision.md` (OPEN).
 
-**Current focus:** **Story Development Lane + Full Alignment Sweep + Sassafras / Gumbo Symbol System** (`/story-dev` + `story_dev_dashboard/` + `writing/08_alignment_sweeps/alignment_sweep_001/` + `research/sassafras_gumbo/` + `series_symbols/` + ongoing Book **01** moves in `book01_next_story_moves/`; **no `ch_###`**; **no `01_canon/`**)
+**Current focus:** **Epic Symbol Map Expansion + War/Conflict Engine + Literary Control System** (`epic_symbol_map/` expansions + `epic_war_conflict_engine/` + `language_doctrine/chapter_opening_paragraph_doctrine.md` + Book 01 candidate/manifest hooks; **no `ch_###`**; **no `01_canon/`**)
 
 **Epic build queue:** `writing/03_epics/epic_02_red_river_matrilineage/epic_build_queue/`
 

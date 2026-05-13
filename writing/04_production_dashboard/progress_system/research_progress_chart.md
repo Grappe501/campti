@@ -13,6 +13,7 @@ Canon status: PROPOSED
 | Binding / marriage cultural questions | [████████░░░░░░░░░░░░] 40% | 40 | IN PROGRESS | form not verified | research carefully; notes not prose claims |
 | Besson / Alexis / Francois threads | [████░░░░░░░░░░░░░░░░] 20% | 20 | SCAFFOLDED | sparse records | HI-006 + targeted packets |
 | Books 06–07 Civil War / Reconstruction | [██░░░░░░░░░░░░░░░░░░] 10% | 10 | PLACEHOLDER | anchors missing | descendant + regional anchors |
+| War / conflict engine (timeline + doctrine) | [████░░░░░░░░░░░░░░░░] 22% | 22 | SCAFFOLDED | verify rows + ethics | `epic_war_conflict_engine/war_research_queue.md` |
 | Book 08 Buford / Bobby | [████░░░░░░░░░░░░░░░░] 20% | 20 | HUMAN DIRECTION | documentation | records packet; ethics |
 | Book 09 contemporary | [████░░░░░░░░░░░░░░░░] 20% | 20 | HUMAN DIRECTION | living-person handling | neutral sourcing |
 | Source hierarchy + chunk intake | [████████████░░░░░░░░] 60% | 60 | IN PROGRESS | sorting backlog | `02_source_chunks/` + `intake/` |

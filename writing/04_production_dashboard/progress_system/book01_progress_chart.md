@@ -19,4 +19,7 @@ Canon status: PROPOSED
 | Story dev dashboard lane (`/story-dev`) | [██████░░░░░░░░░░░░░░] 32% | 32 | MVP | JSON manual | `story_dev_dashboard/` + `data/story_dev_dashboard.json` |
 | Alignment sweep 001 | [██████░░░░░░░░░░░░░░] 30% | 30 | IN PROGRESS | deepen grep passes | `writing/08_alignment_sweeps/alignment_sweep_001/` |
 | Sassafras / gumbo research lane | [█████░░░░░░░░░░░░░░░] 28% | 28 | OPEN | ethnobotany + locality | `research/sassafras_gumbo/` |
+| Epic symbol map + arc braid + language doctrine | [████░░░░░░░░░░░░░░░░] 22% | 22 | SCAFFOLDED | operator upkeep | `epic_symbol_map/`, `epic_arc_braid/`, `language_doctrine/` |
+| Book 01 symbol micro maps (color/silence/nature/eggs/chapter plan) | [███░░░░░░░░░░░░░░░░░] 18% | 18 | SCAFFOLDED | align to 22 candidates | `book01_symbol_braid_v0/chapter_symbol_plan_book01.md` + maps |
+| Literary control on candidates (season/color/opening) | [██░░░░░░░░░░░░░░░░░░] 12% | 12 | SCAFFOLDED | human schema | `language_doctrine/chapter_opening_paragraph_doctrine.md` + candidates README |
 | Chapter folders | [░░░░░░░░░░░░░░░░░░░░] 0% | 0 | NOT STARTED | manifest not locked | **do not create `ch_###` yet** |

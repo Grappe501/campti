@@ -8,10 +8,13 @@ Canon status: PROPOSED
 
 ## How to update
 
-1. Edit **`story_dev_dashboard.json`** after meaningful moves (samples, gates, sweep status, symbol research, chapter candidates).
+1. Edit **`story_dev_dashboard.json`** after meaningful moves (samples, gates, sweep status, symbol research, chapter candidates, **epic_symbol_map**, **epic_war_conflict_engine**, **epic_arc_braid**, **language_doctrine** status).
 2. Keep **`updated`** as an ISO date (`YYYY-MM-DD`).
 3. **`top_blockers`** and **`next_actions`** should stay short strings (human-scannable).
-4. Do **not** paste unverified history into `summary` fields — keep **PROPOSED** language.
+4. Optional lists: **`top_active_symbols`**, **`top_active_arcs`**, **`symbolic_blockers`** — keep tight; rotate as work shifts.
+5. Do **not** paste unverified history into `summary` fields — keep **PROPOSED** language.
+
+Optional keys may include **`epic_war_conflict_engine`**, **`literary_control`** (path map), and **`symbol_series_seeds`** — see live JSON for the current shape.
 
 ## Source of truth hierarchy
 

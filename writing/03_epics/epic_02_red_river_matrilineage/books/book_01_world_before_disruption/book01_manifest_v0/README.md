@@ -15,6 +15,12 @@ First **Book 01** manifest at **third / movement** level: visible binding engine
 - `../spine_packet/human_inputs/` (**HI-001**–**HI-005**)
 - **`../prose_doctrine/`** — craft / pacing / union engine / scene texture (**PROPOSED**; read before drafting prose)
 
+## Literary / symbol / war engines (series + Book 01 hooks)
+
+- **Epic symbol map:** `../../epic_symbol_map/` — includes alliteration-death signal (operator), color/season system, misdirection rules, paragraph placement, fig/hunt/bees/farm/education symbols (**many series seeds**, not all for Book 01).
+- **Language doctrine:** `../../language_doctrine/` — especially `chapter_opening_paragraph_doctrine.md` for first-paragraph passes on every future chapter.
+- **War / conflict engine:** `../../epic_war_conflict_engine/` — timeline + doctrine; Book 01 uses **pressure and rumor** more than battle spectacle unless sourced.
+
 ## Files
 
 | File | Role |

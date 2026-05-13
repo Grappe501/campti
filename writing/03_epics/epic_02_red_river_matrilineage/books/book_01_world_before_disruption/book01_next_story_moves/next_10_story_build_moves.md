@@ -3,12 +3,12 @@
 Canon status: PROPOSED
 
 1. Review Sample 002 and decide light revise vs accept as sample.
-2. Fill `granddaughter_young_heroine_packet.md` (cohort consistency + age band flags).
-3. Fill `opening_matriarch_packet.md` with name/status placeholders and authority beats.
-4. Fill `daughter_mother_generation_packet.md` so the middle generation does not vanish.
-5. Expand sassafras / filé / gumbo symbol into Book 01 braid + `series_symbols/` (research-first).
-6. Review 22 chapter candidates and identify the strongest 12–16 possible chapter spine.
-7. Expand I-B and I-C movement packets.
-8. Research binding / marriage cultural form.
-9. Expand Red River trade route dossier.
-10. Build character relationship web around the three women and child cohort.
+2. Fill `granddaughter_young_heroine_packet.md`.
+3. Fill `opening_matriarch_packet.md`.
+4. Fill `daughter_mother_generation_packet.md`.
+5. Build Book 01 chapter symbol plan against the 22 candidates.
+6. Add color/season/first-paragraph pass fields to chapter candidates.
+7. Add alliteration-death-signal tracking to future chapter planning.
+8. Build war/conflict research queue for Books 01–09.
+9. Expand sassafras/gumbo and food-memory symbols.
+10. Refine chapter candidate spine from 22 candidates toward 12–16 likely chapters.

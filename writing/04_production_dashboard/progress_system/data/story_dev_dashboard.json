@@ -1,9 +1,9 @@
 {
-  "current_focus": "Story Development Lane + Full Alignment Sweep + Sassafras / Gumbo Symbol System",
-  "updated": "2026-05-12",
+  "current_focus": "Epic Symbol Map Expansion + War/Conflict Engine + Literary Control System",
+  "updated": "2026-05-14",
   "alignment_sweep": {
     "id": "alignment_sweep_001",
-    "status": "SCAFFOLDED / IN PROGRESS",
+    "status": "IN PROGRESS — pass 002 symbolism table",
     "path": "writing/08_alignment_sweeps/alignment_sweep_001/"
   },
   "story_dev_lane": {
@@ -11,17 +11,53 @@
     "status": "MVP",
     "source_spec": "story_dev_dashboard/"
   },
+  "epic_symbol_map": {
+    "status": "EXPANDED SCAFFOLD",
+    "path": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/",
+    "index": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/master_symbol_index.md"
+  },
+  "epic_arc_braid": {
+    "status": "SCAFFOLDED",
+    "path": "writing/03_epics/epic_02_red_river_matrilineage/epic_arc_braid/",
+    "index": "writing/03_epics/epic_02_red_river_matrilineage/epic_arc_braid/master_arc_index.md"
+  },
+  "language_doctrine": {
+    "status": "EXPANDED SCAFFOLD",
+    "path": "writing/03_epics/epic_02_red_river_matrilineage/language_doctrine/",
+    "index": "writing/03_epics/epic_02_red_river_matrilineage/language_doctrine/README.md"
+  },
+  "epic_war_conflict_engine": {
+    "status": "SCAFFOLDED",
+    "path": "writing/03_epics/epic_02_red_river_matrilineage/epic_war_conflict_engine/",
+    "timeline": "writing/03_epics/epic_02_red_river_matrilineage/epic_war_conflict_engine/war_conflict_master_timeline.md",
+    "doctrine": "writing/03_epics/epic_02_red_river_matrilineage/epic_war_conflict_engine/war_as_symbol_doctrine.md",
+    "research_queue": "writing/03_epics/epic_02_red_river_matrilineage/epic_war_conflict_engine/war_research_queue.md"
+  },
+  "literary_control": {
+    "chapter_opening_paragraph_doctrine": "writing/03_epics/epic_02_red_river_matrilineage/language_doctrine/chapter_opening_paragraph_doctrine.md",
+    "alliteration_death_foreshadowing_map": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/alliteration_death_foreshadowing_map.md",
+    "color_season_symbol_system": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/color_season_symbol_system.md",
+    "subplot_misdirection_symbol_rules": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/subplot_misdirection_symbol_rules.md",
+    "paragraph_symbol_placement_rules": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/paragraph_symbol_placement_rules.md"
+  },
+  "symbol_series_seeds": {
+    "fig_tree": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/fig_tree_symbol.md",
+    "hunting_fishing_marksman": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/hunting_fishing_marksman_symbol.md",
+    "honey_bee": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/honey_bee_symbol.md",
+    "farm_land_livestock": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/farm_land_livestock_symbol.md",
+    "education_interpreter_peacemaker": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/education_interpreter_peacemaker_symbol.md"
+  },
   "epic": {
-    "score": 78,
-    "bar": "[███████████████░░░░░]",
+    "score": 82,
+    "bar": "[█████████████████░░░]",
     "status": "IN PROGRESS",
-    "summary": "Series 01–09 container strong; Books 05–07 women centers still OPEN; epic_build_queue documents gaps."
+    "summary": "Symbol map + misdirection + color/season + paragraph placement; war/conflict engine timeline; literary opening doctrine; Books 05–07 women centers still OPEN."
   },
   "book01": {
-    "score": 72,
-    "bar": "[██████████████░░░░░░]",
+    "score": 75,
+    "bar": "[███████████████░░░░░]",
     "status": "IN PROGRESS",
-    "summary": "Spine + three-thirds strong; movement packets partial; 22 chapter candidates V0; character packets V0; no ch_### yet."
+    "summary": "Sample 002 + packets + chapter_symbol_plan; add season/color/opening fields to candidates; war pressure notes; fig/bees/farm default series seeds."
   },
   "chapter_candidates": {
     "count": 22,
@@ -39,14 +75,30 @@
     "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_character_packets/"
   },
   "symbol_braid": {
-    "status": "V0 IN PROGRESS",
+    "status": "V0 IN PROGRESS + micro maps",
     "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_symbol_braid_v0/",
-    "series_symbols_path": "writing/03_epics/epic_02_red_river_matrilineage/series_symbols/"
+    "series_symbols_path": "writing/03_epics/epic_02_red_river_matrilineage/series_symbols/",
+    "chapter_symbol_plan": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_symbol_braid_v0/chapter_symbol_plan_book01.md"
   },
   "sassafras_gumbo_research": {
     "status": "OPEN / PROPOSED",
     "path": "writing/03_epics/epic_02_red_river_matrilineage/research/sassafras_gumbo/"
   },
+  "top_active_symbols": [
+    "Cord / knot",
+    "River",
+    "Sassafras / filé (pre-gumbo)",
+    "War on household (engine)",
+    "Color + season (restrained)",
+    "Child pocket-object"
+  ],
+  "top_active_arcs": [
+    "Matriarchal power",
+    "Wedding / binding false ending",
+    "War / conflict engine → book arcs",
+    "Food as memory",
+    "Marriage volatility / partnership"
+  ],
   "top_blockers": [
     "Wedding/binding cultural form unresolved (Book 01 visible plot)",
     "Exact raid date / age unresolved (HI-003 + verification)",
@@ -55,24 +107,36 @@
     "Books 05–07 women centers TBD",
     "Sassafras / filé / gumbo claims require ethnobotany + community-specific verification"
   ],
+  "symbolic_blockers": [
+    "War timeline rows OPEN until sourced — do not dramatize unverified battles",
+    "Alliteration-death device: track only in operator map; do not mechanical-repeat",
+    "Fig / bees / large farm: default OFF for Book 01 unless research invites",
+    "First-paragraph doctrine must not become formula openings"
+  ],
   "next_actions": [
-    "Review /story-dev dashboard MVP while continuing novel lane work",
-    "Review alignment_sweep_001 inventories + drift log",
-    "Review sassafras_gumbo research folder before any on-page specificity",
-    "Review book01_next_story_moves/next_10_story_build_moves.md",
-    "Human sign-off on Sample 002 (accept vs light revise)",
-    "Merge 22 chapter candidates toward strongest 12–16 spine"
+    "Human pass on Sample 002 + three character packets",
+    "Extend chapter_symbol_plan + candidate README fields (season/color/opening/alliteration/war note)",
+    "Run war_research_queue against HI logs; promote timeline rows cautiously",
+    "Apply chapter_opening_paragraph_doctrine to next drafted samples only (no full chapters yet)"
   ],
   "book01_next_story_moves": {
     "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_next_story_moves/"
   },
   "links": [
     { "label": "Story dev spec (repo)", "path": "story_dev_dashboard/README.md" },
-    { "label": "Progress rollup", "path": "writing/04_production_dashboard/progress_system/progress_rollup.md" },
+    { "label": "Epic symbol map README", "path": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/README.md" },
+    { "label": "Epic war / conflict engine README", "path": "writing/03_epics/epic_02_red_river_matrilineage/epic_war_conflict_engine/README.md" },
+    { "label": "War master timeline", "path": "writing/03_epics/epic_02_red_river_matrilineage/epic_war_conflict_engine/war_conflict_master_timeline.md" },
+    { "label": "Chapter opening paragraph doctrine", "path": "writing/03_epics/epic_02_red_river_matrilineage/language_doctrine/chapter_opening_paragraph_doctrine.md" },
+    { "label": "Alliteration / death foreshadowing map", "path": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/alliteration_death_foreshadowing_map.md" },
+    { "label": "Epic arc braid README", "path": "writing/03_epics/epic_02_red_river_matrilineage/epic_arc_braid/README.md" },
+    { "label": "Language doctrine README", "path": "writing/03_epics/epic_02_red_river_matrilineage/language_doctrine/README.md" },
+    { "label": "Master symbol index", "path": "writing/03_epics/epic_02_red_river_matrilineage/epic_symbol_map/master_symbol_index.md" },
+    { "label": "Chapter symbol plan (Book 01)", "path": "writing/03_epics/epic_02_red_river_matrilineage/books/book_01_world_before_disruption/book01_symbol_braid_v0/chapter_symbol_plan_book01.md" },
+    { "label": "Symbolism progress chart", "path": "writing/04_production_dashboard/progress_system/symbolism_progress_chart.md" },
+    { "label": "Arc progress chart", "path": "writing/04_production_dashboard/progress_system/arc_progress_chart.md" },
+    { "label": "Research progress chart", "path": "writing/04_production_dashboard/progress_system/research_progress_chart.md" },
     { "label": "Book 01 progress chart", "path": "writing/04_production_dashboard/progress_system/book01_progress_chart.md" },
-    { "label": "Chapter manifest progress", "path": "writing/04_production_dashboard/progress_system/chapter_manifest_progress_chart.md" },
-    { "label": "Blockers", "path": "writing/04_production_dashboard/progress_system/blockers_and_next_moves.md" },
-    { "label": "Next actions (production dashboard)", "path": "writing/04_production_dashboard/next_actions.md" },
-    { "label": "Alignment sweep 001", "path": "writing/08_alignment_sweeps/alignment_sweep_001/README.md" }
+    { "label": "Next actions (production dashboard)", "path": "writing/04_production_dashboard/next_actions.md" }
   ]
 }

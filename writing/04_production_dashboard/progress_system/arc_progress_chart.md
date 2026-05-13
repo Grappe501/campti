@@ -14,3 +14,10 @@ Canon status: PROPOSED
 | Civil War/Reconstruction | 06–07 | [██░░░░░░░░░░░░░░░░░░] 10% | 10 | PLACEHOLDER | anchors missing | identify descendants |
 | Buford/Bobby | 08 | [████░░░░░░░░░░░░░░░░] 20% | 20 | HUMAN DIRECTION | documentation | build records packet |
 | Steve/Kelly modern arc | 09 | [████░░░░░░░░░░░░░░░░] 20% | 20 | HUMAN DIRECTION | living-person handling | source neutrally |
+| Epic arc braid system (maps + indices) | 01–09 | [████░░░░░░░░░░░░░░░░] 22% | 22 | IN PROGRESS | operator discipline | `epic_arc_braid/README.md` |
+| Injury / endurance (cross-book men) | 04–09 | [███░░░░░░░░░░░░░░░░░] 18% | 18 | PROPOSED | verify + ethics | `epic_arc_braid/injury_hardship_overcoming_arc.md` |
+| Marriage volatility / partnership | 02–09 | [████░░░░░░░░░░░░░░░░] 22% | 22 | PROPOSED | conflict craft | `epic_arc_braid/marriage_volatility_partnership_arc.md` |
+| Women push culture forward | 01–09 | [█████░░░░░░░░░░░░░░░] 26% | 26 | PROPOSED | avoid flattening | `epic_arc_braid/women_push_culture_forward_arc.md` |
+| Men public power / women continuity | 01–09 | [███░░░░░░░░░░░░░░░░░] 18% | 18 | PROPOSED | stereotype guard | `epic_arc_braid/men_public_power_women_continuity_arc.md` |
+| Family vs history | 01–09 | [████░░░░░░░░░░░░░░░░] 22% | 22 | PROPOSED | economics first | `epic_arc_braid/family_against_history_arc.md` |
+| Epic war / conflict engine | 01–09 | [████░░░░░░░░░░░░░░░░] 22% | 22 | SCAFFOLDED | timeline verification | `epic_war_conflict_engine/README.md` |

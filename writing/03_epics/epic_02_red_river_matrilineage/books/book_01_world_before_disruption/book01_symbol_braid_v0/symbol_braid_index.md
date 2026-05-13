@@ -15,3 +15,7 @@ Canon status: PROPOSED
 ## Series symbols
 
 See `../../series_symbols/README.md` (Grappe gumbo emblem + *Crash*-style convergence model).
+
+**Gumbo ingredients (series):** each component can earn meaning **outside** the stew first; see `../../series_symbols/gumbo_ingredient_constellation_symbols.md` (Book 01 uses only what the timeline and research allow).
+
+**Epic operator maps:** `../../../epic_symbol_map/`, `../../../epic_arc_braid/`, `../../../language_doctrine/`, `../../../epic_war_conflict_engine/` — Book 01 micro maps: `color_map_book01.md`, `silence_map_book01.md`, `nature_mood_map_book01.md`, `chapter_symbol_plan_book01.md` (add season/color/opening/alliteration/war-pressure columns as candidates firm up).

@@ -12,5 +12,6 @@ Canon status: PROPOSED
 | Medium | Besson/Alexis research thin | Books 03–04 | MEDIUM | yes | research packets |
 | Medium | Sassafras / gumbo specificity unverified | Book 01 + series symbol | MEDIUM | yes, as PROPOSED only | `research/sassafras_gumbo/` before scenes |
 | Medium | Chapter candidates need human merge decisions | Book 01 structure | MEDIUM | yes | review `book01_chapter_candidates_v0/` gate |
-| Low | Symbol recurrence underbuilt | Book 01 | LOW | yes | `book01_symbol_braid_v0/` started — keep grounded |
+| Low | Alliteration / death-signal craft must not leak into exposition | epic craft | LOW | yes | track only in `alliteration_death_foreshadowing_map.md` |
+| Low | Symbol maps + arc braids need steady upkeep (operator-only) | epic + Book 01 | LOW | yes | `epic_symbol_map/`, `epic_arc_braid/`, `language_doctrine/`, `chapter_symbol_plan_book01.md` |
 | Low | Binding partner packet unfilled | Book 01 union engine | LOW | yes | keep OPEN until research |

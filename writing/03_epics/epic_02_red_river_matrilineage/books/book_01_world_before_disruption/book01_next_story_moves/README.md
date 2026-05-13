@@ -6,6 +6,8 @@ Canon status: PROPOSED
 
 Keep **novel-forward** tasks visible without turning the dashboard into the main work.
 
+Upstream operator lanes: `../../../epic_symbol_map/` (incl. alliteration-death, color/season, misdirection, war-as-symbol), `../../../epic_war_conflict_engine/`, `../../../language_doctrine/chapter_opening_paragraph_doctrine.md`. Book 01 stays on **Sample 002**, **character packets**, **chapter_symbol_plan** + candidate merge — see `next_10_story_build_moves.md`.
+
 ## Files
 
 | File | Role |

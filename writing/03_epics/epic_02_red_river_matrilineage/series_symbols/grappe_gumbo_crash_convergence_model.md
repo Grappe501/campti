@@ -23,6 +23,18 @@ Develop **independent angles** now, allow them to **accelerate separately**, the
 | Archive vs pot | records lie; the pot tells | late collision |
 | Survival technology | food as infrastructure | war/reconstruction |
 | Grief / celebration | funeral pot vs wedding pot | careful separation from “wedding fantasy” in Book 01 |
+| **Onion** (independent) | layers, weeping, disclosure, cheap abundance | gardens, markets, chopping under stress |
+| **Bell pepper** (independent) | sweetness under heat, color as hope | trade, jars, child preference |
+| **Celery** (independent) | fibrous truth, discipline, “string music” | trimming labor, crunch as care |
+| **Holy trinity chord** | three voices / three obligations in one aroma covenant | any scene where three unlike things must share one heat |
+| **Stock** | time as liquid; waste vs thrift; care infrastructure | sickbed, saved jars, argument under solids |
+| **Roux** | danger + devotion; transformation at the burn edge | who holds the spoon; wheat/fat history |
+| **Okra** | thickness without apology; African continuity | garden, fry, child texture memory |
+| **Rice** | plate politics; stretch arithmetic; who gets seconds | sacks, measuring, bed for the stew |
+| **Protein** | feast/fast; catch vs purchase; optional honor | ethics of meat/fish; class truth |
+| **Small laws** (salt, pepper, bay, heat timing) | fine-print emotion; discipline | “enough,” warning pleasure, remove-before-serving truths |
+
+Full ingredient braid: `gumbo_ingredient_constellation_symbols.md`.
 
 ## Collision design rules (late epic)
 

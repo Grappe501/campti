@@ -32,3 +32,7 @@ Gumbo becomes:
 - survival technology
 - blended history
 - a way the family carries what records forget
+
+## Ingredient-level symbols
+
+The three influences are **macro layers**. Under that law, **each ingredient** (holy trinity, stock, roux, okra, rice, protein, small seasonings, pot/spoon) can still be its **own symbol** with its own epic runway; together in the pot, meaning **compounds** rather than merely adds. See `gumbo_ingredient_constellation_symbols.md`.
